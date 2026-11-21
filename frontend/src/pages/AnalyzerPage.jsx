@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import {
   ShieldAlert, ShieldCheck, AlertTriangle, Link as LinkIcon,
   MessageSquare, Image as ImageIcon, Upload, Check, Copy,
-  Share2, Sparkles, BookOpen, ExternalLink, Flag, Info
+  Share2, Sparkles, BookOpen, ExternalLink, Flag, Info,
+  CreditCard, ThumbsUp, Layers, HelpCircle
 } from 'lucide-react';
 import { useTranslation } from '../i18n/useTranslation';
 import ScoreGauge from '../components/ScoreGauge';
@@ -10,11 +11,18 @@ import EvidenceList from '../components/EvidenceList';
 import ActionBox from '../components/ActionBox';
 import ReportModal from '../components/ReportModal';
 import VoiceInput from '../components/VoiceInput';
+import TokenHighlighter from '../components/TokenHighlighter';
+import ScoreWaterfall from '../components/ScoreWaterfall';
+import ScamTimeline from '../components/ScamTimeline';
+import PreFilled1930Modal from '../components/PreFilled1930Modal';
+import FeedbackModal from '../components/FeedbackModal';
+import VpaCheckTab from '../components/VpaCheckTab';
+import FamilyElderMode from '../components/FamilyElderMode';
 import { analyzeText, analyzeUrl, analyzeImage } from '../api/client';
 
 export default function AnalyzerPage() {
   const { language, t } = useTranslation();
-  const [activeInputTab, setActiveInputTab] = useState('text'); // 'text', 'url', 'image'
+  const [activeInputTab, setActiveInputTab] = useState('text'); // 'text', 'url', 'image', 'vpa'
   const [textInput, setTextInput] = useState('');
   const [urlInput, setUrlInput] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
@@ -26,6 +34,23 @@ export default function AnalyzerPage() {
   const [copied, setCopied] = useState(false);
   const [demoExamples, setDemoExamples] = useState([]);
   const [reportModalOpen, setReportModalOpen] = useState(false);
+  const [modal1930Open, setModal1930Open] = useState(false);
+  const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
+  const [isElderMode, setIsElderMode] = useState(false);
+
+  // Handle PWA Web Share Target params
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const sharedText = params.get('text') || params.get('title');
+    const sharedUrl = params.get('url');
+    if (sharedUrl) {
+      setActiveInputTab('url');
+      setUrlInput(sharedUrl);
+    } else if (sharedText) {
+      setActiveInputTab('text');
+      setTextInput(sharedText);
+    }
+  }, []);
 
   // Load demo examples from public JSON
   useEffect(() => {
@@ -104,7 +129,7 @@ export default function AnalyzerPage() {
   };
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-8 space-y-8 animate-fade-in">
+    <div className={`max-w-5xl mx-auto px-4 py-8 space-y-8 animate-fade-in ${isElderMode ? 'text-base font-medium' : ''}`}>
       
       {/* Hero Header */}
       <div className="text-center space-y-3">
@@ -112,7 +137,7 @@ export default function AnalyzerPage() {
           <Sparkles className="w-3.5 h-3.5" />
           <span>{t('hero.badge')}</span>
         </div>
-        <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+        <h1 className={`font-extrabold tracking-tight text-slate-900 dark:text-white ${isElderMode ? 'text-4xl sm:text-5xl' : 'text-3xl sm:text-4xl'}`}>
           {t('hero.title')}
         </h1>
         <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
@@ -120,14 +145,14 @@ export default function AnalyzerPage() {
         </p>
       </div>
 
-      {/* Input Workspace Card */}
-      <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl shadow-slate-100 dark:shadow-none p-6 sm:p-8 space-y-6">
+      {/* Main Analyzer Card */}
+      <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl p-6 sm:p-8 space-y-6">
         
         {/* Workspace Mode Tabs */}
-        <div className="flex items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-4">
+        <div className="flex items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-4 overflow-x-auto scrollbar-none">
           <button
             onClick={() => setActiveInputTab('text')}
-            className={`px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 transition ${
+            className={`px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 transition shrink-0 ${
               activeInputTab === 'text'
                 ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/20'
                 : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
@@ -139,7 +164,7 @@ export default function AnalyzerPage() {
 
           <button
             onClick={() => setActiveInputTab('url')}
-            className={`px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 transition ${
+            className={`px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 transition shrink-0 ${
               activeInputTab === 'url'
                 ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/20'
                 : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
@@ -151,7 +176,7 @@ export default function AnalyzerPage() {
 
           <button
             onClick={() => setActiveInputTab('image')}
-            className={`px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 transition ${
+            className={`px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 transition shrink-0 ${
               activeInputTab === 'image'
                 ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/20'
                 : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
@@ -160,9 +185,21 @@ export default function AnalyzerPage() {
             <ImageIcon className="w-4 h-4" />
             {t('tabs.image')}
           </button>
+
+          <button
+            onClick={() => setActiveInputTab('vpa')}
+            className={`px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 transition shrink-0 ${
+              activeInputTab === 'vpa'
+                ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/20'
+                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
+            }`}
+          >
+            <CreditCard className="w-4 h-4" />
+            UPI ID Safe-Check
+          </button>
         </div>
 
-        {/* Input Controls */}
+        {/* Tab 1: Text Input */}
         {activeInputTab === 'text' && (
           <div className="space-y-2">
             <div className="flex items-center justify-between">
@@ -179,32 +216,34 @@ export default function AnalyzerPage() {
               value={textInput}
               onChange={(e) => setTextInput(e.target.value)}
               placeholder={t('analyzer.textPlaceholder')}
-              className="w-full p-4 text-sm rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:outline-hidden transition"
+              className={`w-full rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 p-4 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition ${isElderMode ? 'text-base' : 'text-sm'}`}
             />
           </div>
         )}
 
+        {/* Tab 2: URL Input */}
         {activeInputTab === 'url' && (
           <div className="space-y-2">
             <label className="text-xs font-semibold text-slate-600 dark:text-slate-300">
-              Suspicious Link (Static Analysis only — Never opened or executed)
+              Suspicious Website / Payment Link URL
             </label>
             <input
               type="text"
               value={urlInput}
               onChange={(e) => setUrlInput(e.target.value)}
-              placeholder={t('analyzer.urlPlaceholder')}
-              className="w-full p-4 text-sm rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:outline-hidden transition"
+              placeholder="e.g. https://sbi-card-kyc-update.xyz or http://192.168.1.10/pay"
+              className={`w-full rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 px-4 py-3 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 font-mono transition ${isElderMode ? 'text-base' : 'text-sm'}`}
             />
           </div>
         )}
 
+        {/* Tab 3: Image / QR Input */}
         {activeInputTab === 'image' && (
           <div className="space-y-4">
-            <label className="text-xs font-semibold text-slate-600 dark:text-slate-300">
-              Payment Screenshot or QR Code
+            <label className="text-xs font-semibold text-slate-600 dark:text-slate-300 block">
+              Upload Payment Screenshot or QR Code Image
             </label>
-            <div className="border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-2xl p-6 text-center hover:bg-slate-50/50 dark:hover:bg-slate-950/50 transition cursor-pointer relative">
+            <div className="relative border-2 border-dashed border-slate-300 dark:border-slate-700 hover:border-indigo-500 rounded-2xl p-6 text-center cursor-pointer transition">
               <input
                 type="file"
                 accept="image/png, image/jpeg, image/jpg, image/webp"
@@ -212,21 +251,21 @@ export default function AnalyzerPage() {
                 className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
               />
               {filePreview ? (
-                <div className="flex flex-col items-center gap-3">
-                  <img src={filePreview} alt="Upload preview" className="max-h-48 rounded-xl object-contain shadow-md" />
-                  <p className="text-xs font-semibold text-indigo-600 dark:text-indigo-400">
-                    {selectedFile?.name} (Click to replace)
-                  </p>
+                <div className="space-y-3">
+                  <img
+                    src={filePreview}
+                    alt="Uploaded preview"
+                    className="max-h-48 mx-auto rounded-xl object-contain border border-slate-700 shadow"
+                  />
+                  <p className="text-xs text-slate-500">{selectedFile?.name}</p>
                 </div>
               ) : (
-                <div className="flex flex-col items-center gap-2">
-                  <div className="p-3 rounded-full bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400">
-                    <Upload className="w-6 h-6" />
-                  </div>
-                  <p className="text-sm font-bold text-slate-800 dark:text-slate-200">
-                    {t('analyzer.uploadPrompt')}
+                <div className="space-y-2">
+                  <Upload className="w-8 h-8 text-slate-400 mx-auto" />
+                  <p className="text-sm font-semibold text-slate-700 dark:text-slate-300">
+                    Click to browse or drag and drop image here
                   </p>
-                  <p className="text-xs text-slate-500">
+                  <p className="text-xs text-slate-400">
                     {t('analyzer.uploadHint')}
                   </p>
                 </div>
@@ -235,8 +274,13 @@ export default function AnalyzerPage() {
           </div>
         )}
 
-        {/* Demo Chips Section */}
-        {demoExamples.length > 0 && (
+        {/* Tab 4: VPA Safe-Check */}
+        {activeInputTab === 'vpa' && (
+          <VpaCheckTab />
+        )}
+
+        {/* Demo Chips Section (only for text/url/image tabs) */}
+        {activeInputTab !== 'vpa' && demoExamples.length > 0 && (
           <div className="space-y-2.5 pt-2">
             <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
               {t('analyzer.sampleChipsTitle')}
@@ -262,36 +306,38 @@ export default function AnalyzerPage() {
           </div>
         )}
 
-        {/* Bottom Actions Bar */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-slate-100 dark:border-slate-800">
-          <label className="flex items-center gap-2 cursor-pointer text-xs font-medium text-slate-600 dark:text-slate-400">
-            <input
-              type="checkbox"
-              checked={saveHistory}
-              onChange={(e) => setSaveHistory(e.target.checked)}
-              className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
-            />
-            <span>{t('analyzer.saveHistoryLabel')}</span>
-          </label>
+        {/* Bottom Actions Bar (for text/url/image tabs) */}
+        {activeInputTab !== 'vpa' && (
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-slate-100 dark:border-slate-800">
+            <label className="flex items-center gap-2 cursor-pointer text-xs font-medium text-slate-600 dark:text-slate-400">
+              <input
+                type="checkbox"
+                checked={saveHistory}
+                onChange={(e) => setSaveHistory(e.target.checked)}
+                className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
+              />
+              <span>{t('analyzer.saveHistoryLabel')}</span>
+            </label>
 
-          <button
-            onClick={handleAnalyze}
-            disabled={loading}
-            className="w-full sm:w-auto px-8 py-3.5 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-sm tracking-wide shadow-lg shadow-indigo-600/30 flex items-center justify-center gap-2 transition transform active:scale-95 disabled:opacity-50"
-          >
-            {loading ? (
-              <>
-                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                <span>{t('analyzer.analyzing')}</span>
-              </>
-            ) : (
-              <>
-                <ShieldAlert className="w-4 h-4" />
-                <span>{t('analyzer.analyzeBtn')}</span>
-              </>
-            )}
-          </button>
-        </div>
+            <button
+              onClick={handleAnalyze}
+              disabled={loading}
+              className="w-full sm:w-auto px-8 py-3.5 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-sm tracking-wide shadow-lg shadow-indigo-600/30 flex items-center justify-center gap-2 transition transform active:scale-95 disabled:opacity-50"
+            >
+              {loading ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  <span>{t('analyzer.analyzing')}</span>
+                </>
+              ) : (
+                <>
+                  <ShieldAlert className="w-4 h-4" />
+                  <span>{t('analyzer.analyzeBtn')}</span>
+                </>
+              )}
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Safety Report Output Card */}
@@ -302,14 +348,23 @@ export default function AnalyzerPage() {
           <div className="flex flex-col lg:flex-row items-center gap-6 pb-6 border-b border-slate-100 dark:border-slate-800">
             <ScoreGauge score={report.risk_score} verdict={report.verdict} />
             
-            <div className="space-y-2.5 flex-1 text-center lg:text-left">
-              <div className="inline-block px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wider bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
-                {report.detected_category.replace(/_/g, ' ')}
+            <div className="space-y-3 flex-1 text-center lg:text-left">
+              <div className="flex items-center justify-center lg:justify-start gap-2 flex-wrap">
+                <div className="px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wider bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+                  {report.detected_category.replace(/_/g, ' ')}
+                </div>
+                <FamilyElderMode
+                  explanationText={report.plain_language_explanation}
+                  language={report.language || language}
+                  isElderMode={isElderMode}
+                  setIsElderMode={setIsElderMode}
+                />
               </div>
-              <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white">
+
+              <h2 className={`font-extrabold text-slate-900 dark:text-white ${isElderMode ? 'text-2xl sm:text-3xl' : 'text-xl sm:text-2xl'}`}>
                 {report.verdict === 'HIGH RISK' ? '🚨 High Risk Digital Payment Scam Detected' : (report.verdict === 'SUSPICIOUS' ? '⚠️ Suspicious Threat Signals Found' : '✅ No Strong Scam Patterns Found')}
               </h2>
-              <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
+              <p className={`text-slate-600 dark:text-slate-300 leading-relaxed font-medium ${isElderMode ? 'text-base sm:text-lg' : 'text-sm'}`}>
                 {report.plain_language_explanation}
               </p>
             </div>
@@ -325,6 +380,15 @@ export default function AnalyzerPage() {
               </button>
 
               <button
+                onClick={() => setFeedbackModalOpen(true)}
+                className="px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 flex items-center gap-1.5 transition"
+                title="Help retrain UPI Rakshak AI"
+              >
+                <ThumbsUp className="w-3.5 h-3.5 text-indigo-400" />
+                <span>Feedback</span>
+              </button>
+
+              <button
                 onClick={() => setReportModalOpen(true)}
                 className="px-3.5 py-2 rounded-xl text-xs font-bold bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800 hover:bg-rose-100 dark:hover:bg-rose-900/40 flex items-center gap-1.5 transition"
               >
@@ -333,6 +397,20 @@ export default function AnalyzerPage() {
               </button>
             </div>
           </div>
+
+          {/* Token-Level Explainability Highlighting */}
+          {report.highlight_spans && report.highlight_spans.length > 0 && (
+            <div className="space-y-2">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
+                <AlertTriangle className="w-4 h-4 text-amber-400" />
+                Suspicious Tokens & Phishing Signals Highlighted
+              </h3>
+              <TokenHighlighter
+                text={report.masked_input || textInput || urlInput}
+                highlightSpans={report.highlight_spans}
+              />
+            </div>
+          )}
 
           {/* Evidence and Recommended Actions 2-Column Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -351,9 +429,24 @@ export default function AnalyzerPage() {
                 <ShieldCheck className="w-4 h-4 text-emerald-500" />
                 {t('report.actionsTitle')}
               </h3>
-              <ActionBox actions={report.recommended_actions} verdict={report.verdict} />
+              <ActionBox
+                actions={report.recommended_actions}
+                verdict={report.verdict}
+                prefilled1930={report.prefilled_1930_summary}
+                onOpen1930Modal={() => setModal1930Open(true)}
+              />
             </div>
           </div>
+
+          {/* Score Waterfall Breakdown */}
+          {report.waterfall && report.waterfall.length > 0 && (
+            <ScoreWaterfall waterfall={report.waterfall} />
+          )}
+
+          {/* Localized Scam Story Timeline */}
+          {report.scam_story && (
+            <ScamTimeline story={report.scam_story} />
+          )}
 
           {/* RAG Knowledge Citations Box */}
           {report.citations && report.citations.length > 0 && (
@@ -367,7 +460,12 @@ export default function AnalyzerPage() {
                   <div key={i} className="p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-indigo-100 dark:border-slate-800 text-xs space-y-1.5">
                     <p className="font-bold text-slate-900 dark:text-white">{c.title}</p>
                     <p className="text-slate-600 dark:text-slate-400 line-clamp-3">{c.content}</p>
-                    <p className="text-[10px] font-semibold text-indigo-600 dark:text-indigo-400">
+                    {c.actionable_guidance && (
+                      <p className="text-emerald-400 font-medium text-[11px] pt-1">
+                        👉 Guidance: {c.actionable_guidance}
+                      </p>
+                    )}
+                    <p className="text-[10px] font-semibold text-indigo-600 dark:text-indigo-400 pt-0.5">
                       Source: {c.source}
                     </p>
                   </div>
@@ -392,6 +490,21 @@ export default function AnalyzerPage() {
         inputType={activeInputTab}
         defaultContent={report?.masked_input || textInput || urlInput}
         defaultCategory={report?.detected_category || 'general_fraud'}
+      />
+
+      {/* Pre-Filled 1930 Cybercrime Complaint Modal */}
+      <PreFilled1930Modal
+        isOpen={modal1930Open}
+        onClose={() => setModal1930Open(false)}
+        summary={report?.prefilled_1930_summary}
+      />
+
+      {/* Model Accuracy Feedback Modal */}
+      <FeedbackModal
+        isOpen={feedbackModalOpen}
+        onClose={() => setFeedbackModalOpen(false)}
+        report={report}
+        rawInput={textInput || urlInput}
       />
     </div>
   );

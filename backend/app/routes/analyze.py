@@ -2,12 +2,18 @@ import json
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form, Request, status
 from sqlalchemy.orm import Session
 from ..database import get_db
-from ..models.db_models import AnalysisHistory
-from ..models.schemas import TextAnalysisRequest, UrlAnalysisRequest, SafetyReport
+from ..models.db_models import AnalysisHistory, Feedback
+from ..models.schemas import (
+    TextAnalysisRequest, UrlAnalysisRequest, SafetyReport,
+    VpaAnalysisRequest, VpaAnalysisResponse,
+    BatchAnalysisRequest, BatchAnalysisResponse,
+    UserFeedbackRequest, UserFeedbackResponse
+)
 from ..detectors.nlp_classifier import nlp_classifier
 from ..detectors.rule_engine import rule_engine
 from ..detectors.url_scanner import url_scanner
 from ..detectors.ocr_pipeline import ocr_pipeline
+from ..core.vpa_verifier import vpa_verifier
 from ..fusion.risk_engine import risk_engine
 from ..core.masking import mask_sensitive_data
 from ..core.security import sanitize_text, rate_limiter, ALLOWED_IMAGE_TYPES, MAX_FILE_SIZE_BYTES
@@ -163,3 +169,69 @@ async def analyze_image(
         report.id = record.id
 
     return report
+
+@router.post("/vpa", response_model=VpaAnalysisResponse, dependencies=[Depends(rate_limiter)])
+def analyze_vpa(req: VpaAnalysisRequest):
+    """
+    Analyzes a UPI VPA (UPI ID), checking handle provider validity,
+    brand impersonation, collect request trick indicators, and high amount risks.
+    """
+    return vpa_verifier.analyze(
+        vpa=req.vpa,
+        payee_name=req.payee_name,
+        amount=req.amount,
+        is_collect=req.is_collect
+    )
+
+@router.post("/batch", response_model=BatchAnalysisResponse, dependencies=[Depends(rate_limiter)])
+def analyze_batch(req: BatchAnalysisRequest, db: Session = Depends(get_db)):
+    """
+    Batch processes up to 50 text items concurrently, returning individual safety reports.
+    """
+    reports = []
+    for item in req.items:
+        raw_text = item.text.strip()
+        if not raw_text:
+            continue
+        nlp_res = nlp_classifier.predict(raw_text)
+        rule_res = rule_engine.evaluate(raw_text)
+        url_res = url_scanner.scan_all_urls(raw_text)
+        rep = risk_engine.fuse(
+            input_type="text",
+            text=raw_text,
+            nlp_result=nlp_res,
+            rule_result=rule_res,
+            url_results=url_res,
+            language_override=item.language
+        )
+        rep.masked_input = mask_sensitive_data(raw_text)
+        reports.append(rep)
+
+    return BatchAnalysisResponse(
+        total_processed=len(reports),
+        reports=reports
+    )
+
+@router.post("/feedback", response_model=UserFeedbackResponse, dependencies=[Depends(rate_limiter)])
+def submit_feedback(req: UserFeedbackRequest, db: Session = Depends(get_db)):
+    """
+    Submits user correction/validation feedback for continuous improvement and retrain audits.
+    """
+    masked_text = mask_sensitive_data(req.input_text) if req.input_text else None
+    feedback_record = Feedback(
+        analysis_id=req.analysis_id,
+        input_text_masked=masked_text,
+        reported_verdict=req.reported_verdict,
+        is_correct=req.is_correct,
+        correct_category=req.correct_category,
+        feedback_notes=req.feedback_notes
+    )
+    db.add(feedback_record)
+    db.commit()
+    db.refresh(feedback_record)
+
+    return UserFeedbackResponse(
+        id=feedback_record.id,
+        status="success",
+        message="Feedback logged successfully. Thank you for making UPI Rakshak AI stronger."
+    )

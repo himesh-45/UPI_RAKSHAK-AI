@@ -104,3 +104,56 @@ export async function getAdminMe(token) {
   }
   return res.json();
 }
+
+export async function analyzeVpa(vpa, payeeName = '', amount = null, isCollect = false) {
+  const res = await fetch(`${BASE_URL}/analyze/vpa`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      vpa,
+      payee_name: payeeName,
+      amount: amount ? parseFloat(amount) : null,
+      is_collect: isCollect
+    })
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.detail || 'VPA analysis failed');
+  }
+  return res.json();
+}
+
+export async function analyzeBatch(items) {
+  const res = await fetch(`${BASE_URL}/analyze/batch`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ items })
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.detail || 'Batch analysis failed');
+  }
+  return res.json();
+}
+
+export async function submitFeedback(feedbackData) {
+  const res = await fetch(`${BASE_URL}/feedback`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(feedbackData)
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.detail || 'Failed to submit feedback');
+  }
+  return res.json();
+}
+
+export async function getHealth() {
+  const res = await fetch(`${BASE_URL}/health`);
+  if (!res.ok) {
+    throw new Error('Health check failed');
+  }
+  return res.json();
+}
+

@@ -56,6 +56,14 @@ class OCRPipeline:
     def is_ocr_available(self) -> bool:
         return self.active_engine != "none"
 
+    @property
+    def ocr_available(self) -> bool:
+        return self.is_ocr_available
+
+    @property
+    def ocr_engine(self) -> str:
+        return self.active_engine
+
     def preprocess_image(self, image: Image.Image) -> np.ndarray:
         # Convert PIL to BGR OpenCV format
         cv_img = cv2.cvtColor(np.array(image.convert("RGB")), cv2.COLOR_RGB2BGR)

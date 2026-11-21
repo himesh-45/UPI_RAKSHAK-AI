@@ -27,6 +27,21 @@ class AnalysisHistory(Base):
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
 
     reports = relationship("ThreatReport", back_populates="analysis")
+    feedbacks = relationship("Feedback", back_populates="analysis")
+
+class Feedback(Base):
+    __tablename__ = "feedbacks"
+
+    id = Column(Integer, primary_key=True, index=True)
+    analysis_id = Column(Integer, ForeignKey("analysis_history.id"), nullable=True)
+    input_text_masked = Column(Text, nullable=True)
+    reported_verdict = Column(String, nullable=False)
+    is_correct = Column(Boolean, nullable=False)
+    correct_category = Column(String, nullable=True)
+    feedback_notes = Column(Text, nullable=True)
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+
+    analysis = relationship("AnalysisHistory", back_populates="feedbacks")
 
 class ThreatReport(Base):
     __tablename__ = "threat_reports"

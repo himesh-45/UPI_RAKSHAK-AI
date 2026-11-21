@@ -1,8 +1,23 @@
-import React from 'react';
-import { PhoneCall, CheckCircle, XCircle, AlertOctagon } from 'lucide-react';
+import React, { useState } from 'react';
+import { PhoneCall, CheckCircle, XCircle, AlertOctagon, ShieldAlert, FileText, ChevronDown, ChevronUp } from 'lucide-react';
 
-export default function ActionBox({ actions = [], verdict = 'SAFE' }) {
-  const isHighRisk = verdict === 'HIGH RISK';
+const BANK_FRAUD_DESKS = [
+  { bank: 'State Bank of India (SBI)', phone: '1800111109', sms: 'BLOCK to 567676' },
+  { bank: 'HDFC Bank', phone: '18002026161', sms: 'Freeze via NetBanking' },
+  { bank: 'ICICI Bank', phone: '18001080', sms: 'BLOCK to 9215667788' },
+  { bank: 'Axis Bank', phone: '18004190068', sms: 'BLOCK to 56161600' },
+  { bank: 'Punjab National Bank (PNB)', phone: '18001802222', sms: 'HOT to 5607040' },
+  { bank: 'Bank of Baroda', phone: '18002584455', sms: 'BLOCK to 8422009988' },
+];
+
+export default function ActionBox({
+  actions = [],
+  verdict = 'SAFE',
+  prefilled1930 = null,
+  onOpen1930Modal = null
+}) {
+  const [showEmergencyChecklist, setShowEmergencyChecklist] = useState(false);
+  const isHighRisk = verdict === 'HIGH RISK' || verdict === 'SUSPICIOUS';
 
   return (
     <div className="space-y-4">
@@ -22,13 +37,22 @@ export default function ActionBox({ actions = [], verdict = 'SAFE' }) {
             </div>
           </div>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-wrap">
           <a
             href="tel:1930"
             className="px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs uppercase tracking-wider shadow transition"
           >
             Call 1930
           </a>
+          {prefilled1930 && onOpen1930Modal && (
+            <button
+              onClick={onOpen1930Modal}
+              className="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs transition inline-flex items-center gap-1 shadow"
+            >
+              <FileText className="w-3.5 h-3.5" />
+              Pre-Filled 1930 Report
+            </button>
+          )}
           <a
             href="https://cybercrime.gov.in"
             target="_blank"
@@ -40,22 +64,77 @@ export default function ActionBox({ actions = [], verdict = 'SAFE' }) {
         </div>
       </div>
 
+      {/* Emergency Golden-Hour Mode Toggle */}
+      {isHighRisk && (
+        <div className="border border-rose-800/40 rounded-xl bg-rose-950/20 overflow-hidden">
+          <button
+            onClick={() => setShowEmergencyChecklist(!showEmergencyChecklist)}
+            className="w-full p-3.5 flex items-center justify-between text-left text-xs font-bold text-rose-300 hover:bg-rose-950/30 transition-colors"
+          >
+            <div className="flex items-center gap-2">
+              <ShieldAlert className="w-4 h-4 text-rose-400" />
+              <span>EMERGENCY PROTOCOL: "I already entered my PIN or sent money"</span>
+            </div>
+            {showEmergencyChecklist ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+          </button>
+
+          {showEmergencyChecklist && (
+            <div className="p-4 border-t border-rose-900/40 space-y-4 text-xs text-rose-100">
+              <div className="bg-rose-950/40 p-3 rounded-lg border border-rose-900/60 leading-relaxed">
+                <strong>The Golden Hour (First 2-3 Hours):</strong> Money transferred via UPI lands in a scammer's mule bank account before being laundered through ATM withdrawals. Calling <strong>1930</strong> immediately enables police to freeze the beneficiary account.
+              </div>
+
+              <div className="space-y-2">
+                <span className="font-bold text-slate-200 block">Immediate Golden Hour Steps:</span>
+                <ol className="list-decimal pl-5 space-y-1.5 text-slate-300">
+                  <li><strong>Call 1930 right now:</strong> Provide the 12-digit UPI UTR number from your bank debit SMS.</li>
+                  <li><strong>Block your debit card and NetBanking:</strong> Call your bank's 24x7 fraud desk below.</li>
+                  <li><strong>Do not delete chats or SMS:</strong> Take screenshots showing caller phone numbers and timestamps.</li>
+                  <li><strong>File formal report:</strong> Use our 1-click pre-filled complaint on cybercrime.gov.in.</li>
+                </ol>
+              </div>
+
+              {/* Bank Fraud Desk Quick Contacts */}
+              <div className="space-y-2">
+                <span className="font-bold text-slate-200 block">Bank 24x7 Emergency Fraud Numbers:</span>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  {BANK_FRAUD_DESKS.map((b, idx) => (
+                    <div key={idx} className="p-2.5 rounded-lg bg-slate-900/80 border border-slate-800 flex items-center justify-between">
+                      <div>
+                        <span className="font-semibold text-slate-200 block text-[11px]">{b.bank}</span>
+                        <span className="text-[10px] text-slate-400">{b.sms}</span>
+                      </div>
+                      <a
+                        href={`tel:${b.phone}`}
+                        className="px-2 py-1 rounded bg-rose-600 hover:bg-rose-500 text-white font-bold text-[10px]"
+                      >
+                        Call {b.phone}
+                      </a>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
       {/* Action items list */}
-      <div className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
-        <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-3 flex items-center gap-1.5">
-          <AlertOctagon className="w-4 h-4 text-indigo-500" />
+      <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 shadow-sm">
+        <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-1.5">
+          <AlertOctagon className="w-4 h-4 text-indigo-400" />
           Recommended Immediate Action Steps
         </h4>
 
         <div className="space-y-2.5">
           {actions.map((act, idx) => {
-            const isNegative = act.toLowerCase().includes('not') || act.toLowerCase().includes('न करें') || act.toLowerCase().includes('వద్దు');
+            const isNegative = act.toLowerCase().includes('not') || act.toLowerCase().includes('never') || act.toLowerCase().includes('न करें') || act.toLowerCase().includes('వద్దు');
             return (
-              <div key={idx} className="flex items-start gap-2.5 text-sm text-slate-700 dark:text-slate-300">
+              <div key={idx} className="flex items-start gap-2.5 text-xs text-slate-300">
                 {isNegative ? (
-                  <XCircle className="w-4 h-4 text-rose-500 shrink-0 mt-0.5" />
+                  <XCircle className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
                 ) : (
-                  <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                  <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                 )}
                 <span>{act}</span>
               </div>

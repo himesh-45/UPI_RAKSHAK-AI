@@ -148,6 +148,10 @@ class StaticURLScanner:
     Features strict registered-domain matching and 88 Indian brand definitions.
     """
 
+    @property
+    def all_legitimate_domains(self) -> set:
+        return ALL_OFFICIAL_DOMAINS
+
     def extract_urls(self, text: str) -> List[str]:
         if not text:
             return []

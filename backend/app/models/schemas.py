@@ -7,6 +7,32 @@ class EvidenceItem(BaseModel):
     weight: float
     severity: str = "MEDIUM"  # "INFO", "LOW", "MEDIUM", "HIGH", "CRITICAL"
 
+class HighlightSpan(BaseModel):
+    start: int
+    end: int
+    text: str
+    label: str  # e.g., "CREDENTIAL_THEFT", "SUSPICIOUS_LINK", "URGENCY_THREAT", "COLLECT_TRICK", "PHONE_NUMBER"
+    severity: str = "MEDIUM"
+
+class WaterfallStep(BaseModel):
+    component: str
+    points: float
+    running_total: float
+    explanation: str
+
+class ScamStoryStep(BaseModel):
+    step_number: int
+    stage: str  # e.g., "Initial Contact", "Psychological Coercion", "Financial Execution"
+    title: str
+    description: str
+    warning_sign: str
+
+class ScamStoryTimeline(BaseModel):
+    category: str
+    category_name: str
+    overview: str
+    steps: List[ScamStoryStep] = []
+
 class RAGCitation(BaseModel):
     title: str
     content: str
@@ -21,6 +47,10 @@ class SafetyReport(BaseModel):
     language: str = "en"
     confidence: float = 0.0
     evidence: List[EvidenceItem] = []
+    highlight_spans: List[HighlightSpan] = []
+    waterfall: List[WaterfallStep] = []
+    scam_story: Optional[ScamStoryTimeline] = None
+    prefilled_1930_summary: Optional[Dict[str, Any]] = None
     recommended_actions: List[str] = []
     citations: List[RAGCitation] = []
     plain_language_explanation: str = ""
@@ -41,6 +71,44 @@ class TextAnalysisRequest(BaseModel):
 class UrlAnalysisRequest(BaseModel):
     url: str = Field(min_length=3, max_length=2048)
     save_history: bool = True
+
+class BatchAnalysisRequest(BaseModel):
+    items: List[TextAnalysisRequest] = Field(min_length=1, max_length=50)
+
+class BatchAnalysisResponse(BaseModel):
+    total_processed: int
+    reports: List[SafetyReport]
+
+class VpaAnalysisRequest(BaseModel):
+    vpa: str = Field(min_length=3, max_length=100)
+    payee_name: Optional[str] = ""
+    amount: Optional[float] = None
+    note: Optional[str] = ""
+    is_collect: bool = False
+
+class VpaAnalysisResponse(BaseModel):
+    vpa: str
+    handle: str
+    provider: str
+    is_valid_format: bool
+    is_collect_request: bool
+    risk_score: int
+    verdict: str
+    reasons: List[str]
+    warning_notice: str
+
+class UserFeedbackRequest(BaseModel):
+    analysis_id: Optional[int] = None
+    input_text: Optional[str] = ""
+    reported_verdict: str
+    is_correct: bool
+    correct_category: Optional[str] = None
+    feedback_notes: Optional[str] = ""
+
+class UserFeedbackResponse(BaseModel):
+    id: int
+    status: str
+    message: str
 
 class AssistantChatRequest(BaseModel):
     message: str = Field(min_length=1, max_length=4000)

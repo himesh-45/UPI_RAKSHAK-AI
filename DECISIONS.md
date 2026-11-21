@@ -60,3 +60,31 @@ This document records technical and design decisions made to keep the system rob
 ## 15. 88 Official Indian Brands with Strict Registered-Domain Matching
 - **Decision**: Expanded official entities to 88 Indian public/private banks, state DISCOMs, government portals, and payment apps. The URL scanner uses `tldextract` registered-domain verification to ensure subdomain tricks (e.g. `sbi.co.in.evil.xyz`) are flagged as critical brand impersonation while genuine subdomains (`retail.onlinesbi.sbi`) remain safe.
 - **Rationale**: Defends against the most prevalent modern phishing evasion tactic in Indian digital banking.
+
+### Decision 16: Localized 3-Stage Attack Anatomy Timeline (Scam Story Engine)
+- **Choice**: Implemented deterministic, localized 3-stage timelines (`scam_story_engine`) in English, Hindi, and Telugu covering all 15 fraud categories.
+- **Rationale**: LLM generation in production introduces latency, hallucinations, and non-deterministic advice. Deterministic playbooks based on real-world cybercrime telemetry provide instant, authoritative step-by-step guidance.
+
+### Decision 17: Token-Level Highlighting & Score Waterfall Decomposition
+- **Choice**: Computed character offsets (`HighlightSpan`) for acute threat tokens and an additive/subtractive step-by-step points decomposition (`WaterfallStep`).
+- **Rationale**: Solves the black-box AI criticism by showing judges and users exactly which detector contributed how many points and which specific phrases triggered alerts.
+
+### Decision 18: Pre-Filled 1930 Citizen Cybercrime Complaint Generator
+- **Choice**: Automatically structured extracted telephone numbers, suspect URLs, and payee VPAs into a standardized CFCFRMS formal complaint template.
+- **Rationale**: Victims reporting to `cybercrime.gov.in` during panic struggle to articulate technical details. Pre-formatting the narrative with UTR placeholders maximizes the chance of freezing mule accounts during the Golden Hour.
+
+### Decision 19: Offline RAG Expansion to 89 Verified Regulatory Entries
+- **Choice**: Expanded knowledge base from 8 to 89 authoritative entries covering NPCI circulars, RBI customer protection frameworks, top 10 Indian bank emergency hotlines, and cyber law provisions.
+- **Rationale**: Replaces superficial tips with legally cited actionable guidance while maintaining sub-millisecond offline TF-IDF retrieval speed.
+
+### Decision 20: Pre-Payment UPI ID (VPA) Safe-Check Engine
+- **Choice**: Built dedicated VPA validator evaluating handle PSP registry, retail vs. institutional brand spoofing, and collect-request trick flags.
+- **Rationale**: Shifts scam defense left—preventing transfers before authorization occurs rather than merely diagnosing fraud after financial loss.
+
+### Decision 21: Continuous Improvement Feedback Loop
+- **Choice**: Added `/api/feedback` endpoint persisting user corrections to SQLite and an automated retrain staging script (`retrain_from_feedback.py`).
+- **Rationale**: Enables judges to inspect how real-world false positives/negatives are audited and incorporated into subsequent training iterations.
+
+### Decision 22: Family/Elder Mode with Web Speech API Audio Synthesis
+- **Choice**: Integrated high-contrast large font toggle and browser-native SpeechSynthesisUtterance in `en-IN`, `hi-IN`, and `te-IN`.
+- **Rationale**: Addresses critical accessibility needs for senior citizens and low-literacy users without requiring heavy third-party audio API keys.

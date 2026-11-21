@@ -1,7 +1,18 @@
+import re
 from typing import Dict, Any, List, Optional
 from ..config import settings
-from ..models.schemas import EvidenceItem, RAGCitation, SafetyReport
+from ..models.schemas import EvidenceItem, RAGCitation, SafetyReport, HighlightSpan, WaterfallStep
 from ..rag.retriever import rag_retriever
+from ..core.scam_story import scam_story_engine
+from ..core.normalizer import text_normalizer
+from ..detectors.url_scanner import URL_EXTRACT_REGEX
+
+PHONE_REGEX = re.compile(r'(?<!\d)(?:\+91[-\s]?)?[6-9]\d{9}(?!\d)')
+UPI_VPA_REGEX = re.compile(r'\b[a-zA-Z0-9.\-_]{2,}@[a-zA-Z0-9.\-_]{2,}\b')
+CREDENTIAL_REGEX = re.compile(r'(?i)\b(?:otp|upi pin|pin|cvv|password|passcode|secret code|पिन|ओटीपी|పిన్|ఓటీపీ)\b')
+URGENCY_REGEX = re.compile(r'(?i)\b(?:blocked|suspended|disconnected|cut off|immediately|tonight|24 hours|urgent|turant|ventane|आज रात|బ్లాక్|వెంటనే)\b')
+COLLECT_REGEX = re.compile(r'(?i)\b(?:collect|approve|scratch card|reward|cashback|refund|कलेक्ट|కలెక్ట్)\b')
+REMOTE_REGEX = re.compile(r'(?i)\b(?:anydesk|teamviewer|quicksupport|rustdesk|ultraviewer)\b')
 
 CATEGORY_NAMES_I18N = {
     "fake_bank_kyc": {
@@ -19,18 +30,28 @@ CATEGORY_NAMES_I18N = {
         "hi": "फर्जी यूपीआई रिफंड/कैशबैक धोखा",
         "te": "నకిలీ UPI క్యాష్‌బ్యాక్/రీఫండ్ మోసం"
     },
+    "collect_request_fraud": {
+        "en": "UPI Collect Request Fraud",
+        "hi": "यूपीआई कलेक्ट रिक्वेस्ट धोखा",
+        "te": "యూపీఐ కలెక్ట్ రిక్వెస్ట్ మోసం"
+    },
     "lottery_prize": {
         "en": "Lottery & Advance-Fee Prize Scam",
         "hi": "केबीसी/लकी ड्रॉ लॉटरी धोखाधड़ी",
         "te": "లక్కీ డ్రా మరియు లాటరీ మోసం"
     },
     "fake_customer_support": {
-        "en": "Fake Customer Support & Remote Access",
-        "hi": "फर्जी कस्टमर केयर व रिमोट ऐप धोखा",
-        "te": "నకిలీ కస్టమర్ కేర్ & రిమోట్ యాక్సెస్ మోసం"
+        "en": "Fake Customer Support Helpline",
+        "hi": "फर्जी कस्टमर केयर धोखा",
+        "te": "నకిలీ కస్టమర్ కేర్ హెల్ప్‌లైన్ మోసం"
+    },
+    "remote_access_scam": {
+        "en": "Remote Device Takeover Scam",
+        "hi": "रिमोट एक्सेस ऐप धोखा (AnyDesk)",
+        "te": "రిమోట్ యాక్సెస్ యాప్ మోసం"
     },
     "otp_pin_theft": {
-        "en": "OTP & UPI PIN Theft",
+        "en": "Credential & OTP/PIN Theft",
         "hi": "ओटीपी और यूपीआई पिन चोरी",
         "te": "ఓటీపీ మరియు యూపీఐ పిన్ దొంగతనం"
     },
@@ -38,6 +59,31 @@ CATEGORY_NAMES_I18N = {
         "en": "Fake Government Subsidy Scheme",
         "hi": "फर्जी सरकारी योजना व सब्सिडी धोखा",
         "te": "నకిలీ ప్రభుత్వ పథకం సాయం మోసం"
+    },
+    "job_investment_scam": {
+        "en": "Part-Time Task & Crypto Investment Scam",
+        "hi": "पार्ट-टाइम टास्क व निवेश धोखा",
+        "te": "పార్ట్-టైమ్ జాబ్ & పెట్టుబడి మోసం"
+    },
+    "loan_app_extortion": {
+        "en": "Predatory Loan App Extortion",
+        "hi": "फर्जी लोन ऐप ब्लैकमेल व उत्पीड़न",
+        "te": "నకిలీ లోన్ యాప్ వేధింపు మోసం"
+    },
+    "courier_customs_scam": {
+        "en": "Courier Narcotics & Digital Arrest Scam",
+        "hi": "कूरियर पार्सल व डिजिटल अरेस्ट धोखा",
+        "te": "కొరియర్ డ్రగ్స్ & డిజిటల్ అరెస్ట్ మోసం"
+    },
+    "marketplace_qr_scam": {
+        "en": "OLX / Marketplace QR Scam",
+        "hi": "ओएलएक्स क्यूआर कोड धोखा",
+        "te": "ఓఎల్ఎక్స్ క్యూఆర్ కోడ్ మోసం"
+    },
+    "accidental_transfer_scam": {
+        "en": "Accidental Transfer Reversal Scam",
+        "hi": "गलत खाते में पैसे भेजने का झांसा",
+        "te": "పొరపాటున డబ్బు పంపినట్లు మోసం"
     },
     "legitimate": {
         "en": "Legitimate Notification / Genuine Message",
@@ -50,7 +96,87 @@ class RiskFusionEngine:
     """
     Evidence-based multi-signal Risk Fusion Engine.
     Combines NLP, deterministic rules, static URL analysis, QR/UPI anomalies, and OCR signals.
+    Generates token highlight spans, score waterfall breakdowns, and 1930 reports.
     """
+
+    def extract_highlight_spans(self, text: str) -> List[HighlightSpan]:
+        spans = []
+        if not text:
+            return spans
+
+        # 1. URLs
+        for m in URL_EXTRACT_REGEX.finditer(text):
+            spans.append(HighlightSpan(
+                start=m.start(),
+                end=m.end(),
+                text=m.group(),
+                label="SUSPICIOUS_LINK",
+                severity="HIGH"
+            ))
+
+        # 2. Phone numbers
+        for m in PHONE_REGEX.finditer(text):
+            spans.append(HighlightSpan(
+                start=m.start(),
+                end=m.end(),
+                text=m.group(),
+                label="PHONE_NUMBER",
+                severity="MEDIUM"
+            ))
+
+        # 3. UPI VPAs
+        for m in UPI_VPA_REGEX.finditer(text):
+            spans.append(HighlightSpan(
+                start=m.start(),
+                end=m.end(),
+                text=m.group(),
+                label="UPI_VPA",
+                severity="MEDIUM"
+            ))
+
+        # 4. Credential theft words
+        for m in CREDENTIAL_REGEX.finditer(text):
+            spans.append(HighlightSpan(
+                start=m.start(),
+                end=m.end(),
+                text=m.group(),
+                label="CREDENTIAL_THEFT",
+                severity="CRITICAL"
+            ))
+
+        # 5. Urgency markers
+        for m in URGENCY_REGEX.finditer(text):
+            spans.append(HighlightSpan(
+                start=m.start(),
+                end=m.end(),
+                text=m.group(),
+                label="URGENCY_THREAT",
+                severity="HIGH"
+            ))
+
+        # 6. Collect request tokens
+        for m in COLLECT_REGEX.finditer(text):
+            spans.append(HighlightSpan(
+                start=m.start(),
+                end=m.end(),
+                text=m.group(),
+                label="COLLECT_TRICK",
+                severity="HIGH"
+            ))
+
+        # 7. Remote desktop apps
+        for m in REMOTE_REGEX.finditer(text):
+            spans.append(HighlightSpan(
+                start=m.start(),
+                end=m.end(),
+                text=m.group(),
+                label="REMOTE_APP",
+                severity="CRITICAL"
+            ))
+
+        # Sort spans by start offset
+        spans.sort(key=lambda s: s.start)
+        return spans
 
     def generate_actions(
         self,
@@ -99,25 +225,33 @@ class RiskFusionEngine:
             elif lang == "te":
                 actions.append("మెసేజ్‌లోని ఫోన్ నంబర్‌కు కాల్ చేయవద్దు. అధికారిక విద్యుత్ సంస్థ వెబ్‌సైట్ ద్వారా మాత్రమే మీ బిల్లు తనిఖీ చేయండి.")
             else:
-                actions.append("Do NOT call the personal mobile number in the message. Check your real balance directly on your state utility portal.")
+                actions.append("Do NOT call the personal mobile number. Verify overdue electricity bills directly on official DISCOM portals.")
 
-        # Standard emergency reporting action
+        if category == "courier_customs_scam":
+            if lang == "hi":
+                actions.append("डिजिटल अरेस्ट या नारकोटिक्स के नाम पर पैसे न भेजें। पुलिस कभी स्काइप या व्हाट्सएप वीडियो कॉल पर जांच नहीं करती।")
+            elif lang == "te":
+                actions.append("డిజిటల్ అరెస్ట్ పేరుతో ఎవరికీ డబ్బు పంపవద్దు. పోలీసులు ఎప్పుడూ వీడియో కాల్స్‌లో విచారణ చేయరు.")
+            else:
+                actions.append("Do NOT transfer money under threat of 'Digital Arrest' or customs parcel contraband. Real law enforcement never interrogates via Skype.")
+
+        # Universal fallback actions
         if verdict in ["HIGH RISK", "SUSPICIOUS"]:
             if lang == "hi":
-                actions.append("यदि आपने पैसे गंवाए हैं, तो तुरंत राष्ट्रीय साइबर हेल्पलाइन 1930 पर कॉल करें या cybercrime.gov.in पर रिपोर्ट दर्ज करें।")
+                actions.append("यदि आपने पैसे भेज दिए हैं, तो तुरंत 1930 साइबर हेल्पलाइन पर कॉल करें या cybercrime.gov.in पर रिपोर्ट दर्ज करें।")
             elif lang == "te":
-                actions.append("ఒకవేళ మోసపోయి డబ్బు కోల్పోతే, వెంటనే జాతీయ సైబర్ హెల్ప్‌లైన్ 1930 కు కాల్ చేయండి లేదా cybercrime.gov.in లో ఫిర్యాదు చేయండి.")
+                actions.append("మీరు మోసపోయినట్లయితే వెంటనే 1930 జాతీయ సైబర్ హెల్ప్‌లైన్‌కు కాల్ చేయండి లేదా cybercrime.gov.in లో ఫిర్యాదు చేయండి.")
             else:
-                actions.append("If you suspect fraud or lost money, immediately call national helpline 1930 or file an incident at cybercrime.gov.in.")
+                actions.append("If defrauded, immediately dial National Cybercrime Helpline 1930 or lodge an incident report at cybercrime.gov.in.")
         else:
             if lang == "hi":
-                actions.append("सावधानी बरतें: कोई मजबूत धोखा नहीं मिला, लेकिन सतर्क रहें और कभी भी गोपनीय पासवर्ड किसी को न बताएं।")
+                actions.append("यह संदेश सामान्य प्रतीत होता है। फिर भी किसी अनजान व्यक्ति से गुप्त पिन या पासवर्ड कभी साझा न करें।")
             elif lang == "te":
-                actions.append("జాగ్రత్త వహించండి: బలమైన మోసపూరిత సంకేతాలు కనిపించలేదు. అయినా ఎప్పుడూ OTP ని ఇతరులకు చెప్పవద్దు.")
+                actions.append("ఈ సందేశం సురక్షితమైనదిగా కనిపిస్తుంది. ఎప్పుడూ మీ వ్యక్తిగత వివరాలను జాగ్రత్తగా ఉంచుకోండి.")
             else:
-                actions.append("Remain cautious: No strong scam patterns were found, but never share credentials or transfer funds to unknown entities.")
+                actions.append("Content matches normal communications. Maintain standard digital payment safety and never share credentials.")
 
-        return actions
+        return actions[:5]
 
     def generate_plain_explanation(
         self,
@@ -128,23 +262,23 @@ class RiskFusionEngine:
         lang: str = "en"
     ) -> str:
         cat_name = CATEGORY_NAMES_I18N.get(category, {}).get(lang, category)
-        top_signals = [e.signal for e in evidence if e.severity in ["CRITICAL", "HIGH"]][:2]
-        signals_text = "; ".join(top_signals) if top_signals else "Multiple behavioral risk factors detected."
+        key_signals = [e.signal for e in evidence if e.weight > 0][:2]
+        signals_text = "; ".join(key_signals) if key_signals else "Pattern anomalies detected"
 
         if lang == "hi":
             if verdict == "HIGH RISK":
-                return f"उच्च जोखिम चेतावनी (स्कोर {score}/100): यह संदेश '{cat_name}' की श्रेणी में आता है। मुख्य खतरे: {signals_text} कृपया किसी लिंक पर क्लिक न करें और न ही पिन/ओटीपी साझा करें।"
+                return f"उच्च जोखिम चेतावनी (स्कोर {score}/100): यह {cat_name} का गंभीर संकेत है। प्रमुख संकेत: {signals_text}। किसी भी लिंक पर क्लिक न करें और न ही पिन/ओटीपी साझा करें।"
             elif verdict == "SUSPICIOUS":
-                return f"संदिग्ध गतिविधि (स्कोर {score}/100): इस सामग्री में कुछ अनियमितताएं पाई गई हैं ({signals_text})। आगे बढ़ने से पहले सीधे अपने बैंक या सेवा प्रदाता से पुष्टि करें।"
+                return f"संदेहास्पद गतिविधि (स्कोर {score}/100): इसमें चेतावनी संकेत मिले हैं ({signals_text})। अत्यधिक सावधानी बरतें और आधिकारिक चैनल से पुष्टि करें।"
             else:
-                return f"सुरक्षित प्रतीत होता है (स्कोर {score}/100): कोई मजबूत धोखाधड़ी के संकेत नहीं मिले। यह एक सामान्य संदेश लगता है, फिर भी कभी भी अपना पासवर्ड या ओटीपी साझा न करें।"
+                return f"कोई मजबूत धोखाधड़ी संकेत नहीं (स्कोर {score}/100): यह संदेश प्रामाणिक प्रतीत होता है। हमेशा सामान्य सुरक्षा सतर्कता बनाए रखें।"
         elif lang == "te":
             if verdict == "HIGH RISK":
-                return f"అధిక ప్రమాద హెచ్చరిక (స్కోర్ {score}/100): ఈ సందేశం '{cat_name}' కు సంబంధించినది. ముఖ్య ఆధారాలు: {signals_text} ఎలాంటి లింక్ ఓపెన్ చేయవద్దు మరియు ఎవరికీ పిన్ లేదా OTP చెప్పవద్దు."
+                return f"అధిక ప్రమాద హెచ్చరిక (స్కోరు {score}/100): ఇది {cat_name} మోసానికి బలమైన నిదర్శనం. ముఖ్య సంకేతాలు: {signals_text}. లింక్‌లపై క్లిక్ చేయవద్దు మరియు పిన్ పంచుకోవద్దు."
             elif verdict == "SUSPICIOUS":
-                return f"అనుమానాస్పద హెచ్చరిక (స్కోర్ {score}/100): ఇందులో కొన్ని అనుమానాస్పద సంకేతాలు గుర్తించబడ్డాయి ({signals_text}). జాగ్రత్తగా ఉండండి."
+                return f"అనుమానాస్పద లావాదేవీ (స్కోరు {score}/100): ఇందులో అనుమానాస్పద సంకేతాలు ఉన్నాయి ({signals_text}). అత్యంత జాగ్రత్తగా ఉండండి."
             else:
-                return f"సురక్షితంగా కనిపిస్తోంది (స్కోర్ {score}/100): ఎటువంటి బలమైన మోసపూరిత లక్షణాలు కనిపించలేదు. అయినప్పటికీ మీ రహస్య పిన్ ఎవరితోనూ పంచుకోవద్దు."
+                return f"మోసపూరిత సంకేతాలు లేవు (స్కోరు {score}/100): ఈ కంటెంట్ సాధారణమైనదిగా కనిపిస్తోంది. ఎల్లప్పుడూ బ్యాంకింగ్ భద్రతను పాటించండి."
         else:
             if verdict == "HIGH RISK":
                 return f"High Risk Alert (Score {score}/100): Strong evidence of {cat_name}. Key detected signals: {signals_text}. Do not click links or reveal credentials."
@@ -152,6 +286,44 @@ class RiskFusionEngine:
                 return f"Suspicious Activity Detected (Score {score}/100): Contains warning signals ({signals_text}). Exercise extreme caution and verify independently."
             else:
                 return f"No Strong Scam Signals Found (Score {score}/100): Content does not match known scam patterns and appears to be legitimate communications. Always maintain standard security vigilance."
+
+    def generate_prefilled_1930_summary(
+        self,
+        text: str,
+        category: str,
+        score: int,
+        evidence: List[EvidenceItem],
+        urls: List[Dict[str, Any]]
+    ) -> Dict[str, Any]:
+        phones = list(set(PHONE_REGEX.findall(text)))
+        vpas = list(set(UPI_VPA_REGEX.findall(text)))
+        extracted_urls = [u["url"] for u in urls]
+
+        key_reasons = [e.signal for e in evidence if e.weight > 0][:4]
+        cat_title = CATEGORY_NAMES_I18N.get(category, {}).get("en", category)
+
+        narrative = (
+            f"INCIDENT COMPLAINT SUMMARY FOR 1930 HELPLINE / CYBERCRIME.GOV.IN:\n"
+            f"1. Threat Classification: {cat_title} (AI Heuristic Risk Score: {score}/100)\n"
+            f"2. Suspect Identifiers:\n"
+            f"   - Phone Number(s): {', '.join(phones) if phones else 'Not disclosed / Sender header'}\n"
+            f"   - Suspect URL(s): {', '.join(extracted_urls) if extracted_urls else 'None'}\n"
+            f"   - Suspect UPI VPA(s): {', '.join(vpas) if vpas else 'None'}\n"
+            f"3. Verifiable Technical Evidence:\n" +
+            "\n".join([f"   * {r}" for r in key_reasons]) +
+            f"\n4. Original Content Snippet:\n   \"{text[:300]}\"\n"
+            f"5. Requested Cyber Police Action: Immediate block of beneficiary UPI VPA, blacklisting of sender headers, and suspension of malicious domains."
+        )
+
+        return {
+            "helpline": "1930",
+            "portal": "https://cybercrime.gov.in",
+            "incident_category": cat_title,
+            "suspect_phones": phones,
+            "suspect_urls": extracted_urls,
+            "suspect_vpas": vpas,
+            "formal_complaint_narrative": narrative
+        }
 
     def fuse(
         self,
@@ -169,6 +341,16 @@ class RiskFusionEngine:
         effective_lang = language_override if language_override in ["en", "hi", "te"] else detected_lang
 
         evidence_items: List[EvidenceItem] = []
+        waterfall_steps: List[WaterfallStep] = []
+        running_score = 0.0
+
+        # Baseline
+        waterfall_steps.append(WaterfallStep(
+            component="Baseline Score",
+            points=0.0,
+            running_total=0.0,
+            explanation="Initial clean state prior to signal evaluation."
+        ))
 
         # 1. Collect Rule signals
         rule_signals = rule_result.get("matched_rules", [])
@@ -179,6 +361,10 @@ class RiskFusionEngine:
                 weight=r["weight"],
                 severity=r.get("severity", "MEDIUM")
             ))
+
+        rule_score = rule_result.get("rule_score", 0.0)
+        is_genuine_alert = rule_result.get("is_genuine_alert", False)
+        hard_override = rule_result.get("hard_override_high_risk", False)
 
         # 2. Collect URL signals
         max_url_score = 0.0
@@ -205,10 +391,6 @@ class RiskFusionEngine:
                     severity=s.get("severity", "MEDIUM")
                 ))
 
-        # 4. NLP contribution
-        predicted_category = nlp_result.get("category", "legitimate")
-        nlp_confidence = nlp_result.get("confidence", 0.5)
-        
         # 4. Calibrated NLP contribution
         predicted_category = nlp_result.get("category", "legitimate")
         nlp_confidence = nlp_result.get("confidence", 0.5)
@@ -231,13 +413,45 @@ class RiskFusionEngine:
                     severity="INFO"
                 ))
 
+        # Build Waterfall steps
+        running_score += nlp_risk_score if predicted_category != "legitimate" else 0.0
+        waterfall_steps.append(WaterfallStep(
+            component="NLP Scam Classifier",
+            points=round(nlp_risk_score if predicted_category != "legitimate" else 0.0, 1),
+            running_total=round(running_score, 1),
+            explanation=f"Calibrated probability on category '{predicted_category}' ({nlp_confidence * 100:.1f}% confidence)."
+        ))
+
+        if rule_score > 0:
+            running_score += rule_score
+            waterfall_steps.append(WaterfallStep(
+                component="Rule Safety Layer",
+                points=round(rule_score, 1),
+                running_total=round(running_score, 1),
+                explanation="Deterministic security rules matched (e.g. credential theft, collect trick, urgency threat)."
+            ))
+
+        if max_url_score > 0:
+            running_score += max_url_score
+            waterfall_steps.append(WaterfallStep(
+                component="Static URL Scanner",
+                points=round(max_url_score, 1),
+                running_total=round(running_score, 1),
+                explanation="Static lexical analysis flagged brand typosquatting, suspicious TLD, or IP host."
+            ))
+
+        if qr_score > 0:
+            running_score += qr_score
+            waterfall_steps.append(WaterfallStep(
+                component="QR / VPA Verification",
+                points=round(qr_score, 1),
+                running_total=round(running_score, 1),
+                explanation="UPI URI anomalies detected (collect request pre-fill or payee mismatch)."
+            ))
+
         # 5. Multi-Detector Evidence Fusion
-        rule_score = rule_result.get("rule_score", 0.0)
-        is_genuine_alert = rule_result.get("is_genuine_alert", False)
-        hard_override = rule_result.get("hard_override_high_risk", False)
         has_official_url = any(u.get("is_official") for u in url_results)
 
-        # Primary risk is driven by the strongest detector signal
         max_signal = max(
             nlp_risk_score if predicted_category != "legitimate" else 0.0,
             rule_score,
@@ -245,7 +459,7 @@ class RiskFusionEngine:
             qr_score
         )
 
-        # Corroborating signals boost confidence
+        # Corroborating signals boost
         corroborating = 0
         if predicted_category != "legitimate" and nlp_confidence >= 0.70: corroborating += 1
         if rule_score >= 35.0: corroborating += 1
@@ -254,28 +468,54 @@ class RiskFusionEngine:
 
         if corroborating >= 2:
             max_signal = min(100.0, max_signal + 12.0)
+            waterfall_steps.append(WaterfallStep(
+                component="Multi-Detector Corroboration",
+                points=12.0,
+                running_total=round(max_signal, 1),
+                explanation="Cross-module verification bonus: Multiple independent engines confirmed the threat."
+            ))
 
         # Hard Overrides
         if hard_override:
             max_signal = max(max_signal, 85.0)
+            override_msg = rule_result.get("override_reason", "Safety Hard Override Triggered: High-severity pattern detected.")
             evidence_items.append(EvidenceItem(
-                signal=rule_result.get("override_reason", "Safety Hard Override Triggered: High-severity pattern detected."),
+                signal=override_msg,
                 source_module="RULE_SAFETY_LAYER",
                 weight=50.0,
                 severity="CRITICAL"
             ))
+            waterfall_steps.append(WaterfallStep(
+                component="Safety Hard Override",
+                points=round(max_signal - running_score, 1) if max_signal > running_score else 0.0,
+                running_total=round(max_signal, 1),
+                explanation=override_msg
+            ))
         elif max_url_score >= 70.0 and any("Brand Impersonation" in e.signal or "Typosquatting" in e.signal for e in evidence_items):
             max_signal = max(max_signal, 85.0)
+            waterfall_steps.append(WaterfallStep(
+                component="Brand Spoofing Override",
+                points=15.0,
+                running_total=round(max_signal, 1),
+                explanation="Critical brand impersonation of authorized financial institution."
+            ))
         elif qr_score >= 70.0:
             max_signal = max(max_signal, 82.0)
 
-        # Genuine alert or verified official URL suppression (only when no malicious link or override)
+        # Genuine alert or verified official URL suppression
         if (is_genuine_alert or has_official_url) and not hard_override and max_url_score < 35.0 and qr_score < 35.0:
+            suppression_delta = max_signal - min(max_signal, 20.0)
             max_signal = min(max_signal, 20.0)
+            waterfall_steps.append(WaterfallStep(
+                component="Legitimate Safety Suppression",
+                points=-round(suppression_delta, 1),
+                running_total=round(max_signal, 1),
+                explanation="Verified safety advisory context ('NEVER share OTP') or authorized official registry domain."
+            ))
 
         final_risk_score = int(round(max(0.0, min(100.0, max_signal))))
 
-        # Verdict thresholding
+        # Final verdict thresholding
         if final_risk_score <= settings.SAFE_MAX_SCORE:
             verdict = "SAFE"
         elif final_risk_score <= settings.SUSPICIOUS_MAX_SCORE:
@@ -309,6 +549,15 @@ class RiskFusionEngine:
             for c in raw_citations
         ]
 
+        # Extract highlight spans
+        highlight_spans = self.extract_highlight_spans(text)
+
+        # Localized Scam Story Timeline
+        scam_story = scam_story_engine.get_timeline(predicted_category, lang=effective_lang) if verdict in ["HIGH RISK", "SUSPICIOUS"] else None
+
+        # Pre-filled 1930 Cybercrime Summary
+        prefilled_1930 = self.generate_prefilled_1930_summary(text, predicted_category, final_risk_score, evidence_items, url_results) if verdict in ["HIGH RISK", "SUSPICIOUS"] else None
+
         return SafetyReport(
             verdict=verdict,
             risk_score=final_risk_score,
@@ -316,6 +565,10 @@ class RiskFusionEngine:
             language=effective_lang,
             confidence=round(nlp_confidence, 2),
             evidence=evidence_items,
+            highlight_spans=highlight_spans,
+            waterfall=waterfall_steps,
+            scam_story=scam_story,
+            prefilled_1930_summary=prefilled_1930,
             recommended_actions=actions,
             citations=citations,
             plain_language_explanation=explanation,
