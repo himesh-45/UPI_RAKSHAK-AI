@@ -5,17 +5,16 @@ import numpy as np
 import pandas as pd
 from typing import List, Dict, Any
 from sklearn.base import BaseEstimator, TransformerMixin
-from sklearn.model_selection import GroupShuffleSplit
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.pipeline import FeatureUnion, Pipeline
 from sklearn.linear_model import LogisticRegression
 from sklearn.calibration import CalibratedClassifierCV
 from sklearn.metrics import classification_report, accuracy_score, confusion_matrix
 from sklearn.preprocessing import label_binarize
-from scipy.sparse import csr_matrix
 
-from ..core.normalizer import text_normalizer
-from ..core.feature_extractor import EngineeredTextFeatures
+from backend.app.core.normalizer import text_normalizer
+from backend.app.core.feature_extractor import EngineeredTextFeatures
+from backend.app.core.hierarchical_classifier import HierarchicalScamClassifier
 
 def compute_multiclass_brier(y_true, y_prob, classes: List[str]) -> float:
     y_onehot = label_binarize(y_true, classes=classes)
@@ -39,36 +38,52 @@ def compute_multiclass_ece(y_true, y_prob, classes: List[str], n_bins: int = 10)
             ece += np.abs(avg_confidence_in_bin - accuracy_in_bin) * prop_in_bin
     return float(ece)
 
-def remove_near_duplicates(df: pd.DataFrame) -> pd.DataFrame:
-    """Removes near-duplicate samples to prevent memorization leakage."""
-    print("Deduplicating training corpus...")
-    initial_count = len(df)
-    # Deduplicate on normalized text
-    df["norm_text"] = df["text"].apply(text_normalizer.normalize)
-    df = df.drop_duplicates(subset=["norm_text", "category"]).reset_index(drop=True)
-    print(f"Deduplication complete: {initial_count} -> {len(df)} samples ({initial_count - len(df)} duplicates removed).")
-    return df
+def build_feature_union():
+    word_vectorizer = TfidfVectorizer(
+        analyzer="word",
+        ngram_range=(1, 2),
+        min_df=2,
+        max_features=18000,
+        sublinear_tf=True
+    )
+    char_vectorizer = TfidfVectorizer(
+        analyzer="char_wb",
+        ngram_range=(3, 5),
+        min_df=2,
+        max_features=25000,
+        sublinear_tf=True
+    )
+    eng_features = EngineeredTextFeatures()
+
+    return FeatureUnion([
+        ("word", word_vectorizer),
+        ("char", char_vectorizer),
+        ("domain", eng_features)
+    ])
 
 def train_and_evaluate():
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     data_path = os.path.join(base_dir, "data", "synthetic_scam_dataset.csv")
-    gold_path = os.path.join(base_dir, "data", "gold_test_set.json")
+    gold_v1_path = os.path.join(base_dir, "data", "gold_v1.json")
+    gold_v2_path = os.path.join(base_dir, "data", "gold_v2.json")
     model_save_path = os.path.join(base_dir, "data", "nlp_scam_model.pkl")
-    docs_dir = os.path.join(os.path.dirname(base_dir), "docs")
-    os.makedirs(docs_dir, exist_ok=True)
-    report_path = os.path.join(docs_dir, "EVALUATION_REPORT.md")
 
     if not os.path.exists(data_path):
         raise FileNotFoundError(f"Dataset not found at {data_path}. Run generate_dataset.py first.")
 
+    print("=" * 65)
+    print("  UPI RAKSHAK AI — HIERARCHICAL NLP MODEL TRAINING")
+    print("=" * 65)
+
     df = pd.read_csv(data_path)
-    df = remove_near_duplicates(df)
+    df["norm_text"] = df["text"].apply(text_normalizer.normalize)
+    df = df.drop_duplicates(subset=["norm_text", "category"]).reset_index(drop=True)
+    print(f"Corpus size after normalization & deduplication: {len(df)} samples.")
 
     X = df["norm_text"].astype(str)
     y = df["category"]
-    groups = df["template_id"].astype(str)
 
-    # 1. Leakage-free Stratified Group Split by template_id within each category
+    # Stratified Group Split by template_id within each category
     train_indices = []
     val_indices = []
     rng = np.random.RandomState(42)
@@ -92,222 +107,110 @@ def train_and_evaluate():
         train_indices.extend(cat_df[cat_df["template_id"].isin(train_tpls)].index)
         val_indices.extend(cat_df[cat_df["template_id"].isin(val_tpls)].index)
 
-    X_train, X_val = X.iloc[train_indices], X.iloc[val_indices]
-    y_train, y_val = y.iloc[train_indices], y.iloc[val_indices]
+    X_train, X_val = X.iloc[train_indices].reset_index(drop=True), X.iloc[val_indices].reset_index(drop=True)
+    y_train, y_val = y.iloc[train_indices].reset_index(drop=True), y.iloc[val_indices].reset_index(drop=True)
 
-    train_groups = set(groups.iloc[train_indices])
-    val_groups = set(groups.iloc[val_indices])
-    # Verify group isolation for categories with >1 template
-    overlap = train_groups.intersection(val_groups)
     print(f"Stratified Group Split: {len(X_train)} train samples, {len(X_val)} validation samples.")
 
-    # 2. Build Hybrid Model Pipeline
-    word_vectorizer = TfidfVectorizer(
-        analyzer="word",
-        ngram_range=(1, 2),
-        min_df=2,
-        max_features=16000,
-        sublinear_tf=True
-    )
-    char_vectorizer = TfidfVectorizer(
-        analyzer="char_wb",
-        ngram_range=(3, 5),
-        min_df=3,
-        max_features=22000,
-        sublinear_tf=True
-    )
-    eng_features = EngineeredTextFeatures()
-
-    union = FeatureUnion([
-        ("word", word_vectorizer),
-        ("char", char_vectorizer),
-        ("domain", eng_features)
-    ])
-
-    base_lr = LogisticRegression(
-        C=2.5,
-        max_iter=1000,
-        random_state=42,
-        class_weight="balanced"
-    )
-
-    # Wrap in CalibratedClassifierCV for reliable probability outputs (Platt scaling)
-    calibrated_clf = CalibratedClassifierCV(
-        estimator=base_lr,
+    # Test Flat Calibrated Pipeline vs Hierarchical
+    flat_clf = CalibratedClassifierCV(
+        estimator=LogisticRegression(
+            C=3.0,
+            max_iter=1000,
+            class_weight="balanced",
+            random_state=42
+        ),
         method="sigmoid",
         cv=3
     )
-
-    full_pipeline = Pipeline([
-        ("features", union),
-        ("clf", calibrated_clf)
+    flat_pipeline = Pipeline([
+        ("features", build_feature_union()),
+        ("clf", flat_clf)
     ])
 
-    print("\nFitting Calibrated Hybrid NLP Pipeline...")
-    full_pipeline.fit(X_train, y_train)
+    print("\nFitting Flat Calibrated NLP Pipeline...")
+    flat_pipeline.fit(X_train, y_train)
 
-    # 3. Evaluate on Validation Set (Template-Held-Out)
-    print("\nEvaluating on Validation Set (Group-Split)...")
-    val_preds = full_pipeline.predict(X_val)
-    val_probs = full_pipeline.predict_proba(X_val)
-    classes = list(full_pipeline.classes_)
+    print("\n[Flat Model Validation Evaluation]")
+    val_preds = flat_pipeline.predict(X_val)
+    val_probs = flat_pipeline.predict_proba(X_val)
+    classes = list(flat_pipeline.classes_)
 
     val_acc = accuracy_score(y_val, val_preds)
-    val_report = classification_report(y_val, val_preds, output_dict=True)
-    val_report_str = classification_report(y_val, val_preds, digits=4)
-    val_brier = compute_multiclass_brier(y_val, val_probs, classes)
-    val_ece = compute_multiclass_ece(y_val, val_probs, classes)
+    val_report = classification_report(y_val, val_preds, digits=4, zero_division=0)
+    print(f"  Validation Accuracy:    {val_acc * 100:.2f}%")
+    print("\nValidation Classification Report:\n", val_report)
 
-    print(f"Validation Accuracy: {val_acc:.4f}")
-    print(f"Validation Brier Score: {val_brier:.4f}")
-    print(f"Validation ECE (Calibration Error): {val_ece:.4f}")
-    print("\nValidation Classification Report:\n", val_report_str)
+    # Load Gold v1
+    with open(gold_v1_path, "r", encoding="utf-8") as f:
+        gold_v1_data = json.load(f)
+    g1_df = pd.DataFrame(gold_v1_data)
+    g1_df["norm_text"] = g1_df["text"].apply(text_normalizer.normalize)
+    g1_X = g1_df["norm_text"]
+    g1_y = g1_df["category"]
 
-    # 4. Strictly Isolated Hand-Crafted GOLD TEST SET Evaluation
-    print("\nEvaluating on Independent Hand-Curated GOLD TEST SET (306 samples)...")
-    with open(gold_path, "r", encoding="utf-8") as f:
-        gold_data = json.load(f)
+    # Load Gold v2
+    with open(gold_v2_path, "r", encoding="utf-8") as f:
+        gold_v2_data = json.load(f)
+    g2_df = pd.DataFrame(gold_v2_data)
+    g2_df["norm_text"] = g2_df["text"].apply(text_normalizer.normalize)
+    g2_X = g2_df["norm_text"]
+    g2_y = g2_df["category"]
 
-    gold_df = pd.DataFrame(gold_data)
-    gold_df["norm_text"] = gold_df["text"].apply(text_normalizer.normalize)
+    # Evaluate Flat on Gold v1
+    g1_preds = flat_pipeline.predict(g1_X)
+    g1_probs = flat_pipeline.predict_proba(g1_X)
+    g1_report_dict = classification_report(g1_y, g1_preds, output_dict=True, zero_division=0)
+    g1_macro_f1 = g1_report_dict["macro avg"]["f1-score"]
+    g1_ece = compute_multiclass_ece(g1_y, g1_probs, classes)
 
-    gold_X = gold_df["norm_text"].astype(str)
-    gold_y = gold_df["category"]
+    g1_is_scam = (g1_y != "legitimate").astype(int)
+    g1_pred_scam = (pd.Series(g1_preds) != "legitimate").astype(int)
+    tp1 = int(((g1_is_scam == 1) & (g1_pred_scam == 1)).sum())
+    fn1 = int(((g1_is_scam == 1) & (g1_pred_scam == 0)).sum())
+    tn1 = int(((g1_is_scam == 0) & (g1_pred_scam == 0)).sum())
+    fp1 = int(((g1_is_scam == 0) & (g1_pred_scam == 1)).sum())
+    recall1 = tp1 / (tp1 + fn1) if (tp1 + fn1) > 0 else 0.0
+    fpr1 = fp1 / (fp1 + tn1) if (fp1 + tn1) > 0 else 0.0
 
-    gold_preds = full_pipeline.predict(gold_X)
-    gold_probs = full_pipeline.predict_proba(gold_X)
+    print("\n" + "=" * 65)
+    print("  FLAT MODEL ON FROZEN GOLD SET v1")
+    print("=" * 65)
+    print(f"  Gold v1 15-Class Macro-F1: {g1_macro_f1:.4f}")
+    print(f"  Gold v1 Binary Scam Recall: {recall1 * 100:.2f}% ({tp1}/{tp1 + fn1})")
+    print(f"  Gold v1 Legitimate FPR:    {fpr1 * 100:.2f}% ({fp1}/{fp1 + tn1})")
+    print(f"  Gold v1 ECE:               {g1_ece:.4f}")
+    print("\nGold v1 Classification Report:\n", classification_report(g1_y, g1_preds, digits=4, zero_division=0))
 
-    gold_acc = accuracy_score(gold_y, gold_preds)
-    gold_report = classification_report(gold_y, gold_preds, output_dict=True)
-    gold_report_str = classification_report(gold_y, gold_preds, digits=4)
-    gold_brier = compute_multiclass_brier(gold_y, gold_probs, classes)
-    gold_ece = compute_multiclass_ece(gold_y, gold_probs, classes)
+    # Evaluate Flat on Gold v2
+    g2_preds = flat_pipeline.predict(g2_X)
+    g2_probs = flat_pipeline.predict_proba(g2_X)
+    g2_report_dict = classification_report(g2_y, g2_preds, output_dict=True, zero_division=0)
+    g2_macro_f1 = g2_report_dict["macro avg"]["f1-score"]
+    g2_ece = compute_multiclass_ece(g2_y, g2_probs, classes)
 
-    labels = sorted(classes)
-    gold_cm = confusion_matrix(gold_y, gold_preds, labels=labels)
+    g2_is_scam = (g2_y != "legitimate").astype(int)
+    g2_pred_scam = (pd.Series(g2_preds) != "legitimate").astype(int)
+    tp2 = int(((g2_is_scam == 1) & (g2_pred_scam == 1)).sum())
+    fn2 = int(((g2_is_scam == 1) & (g2_pred_scam == 0)).sum())
+    tn2 = int(((g2_is_scam == 0) & (g2_pred_scam == 0)).sum())
+    fp2 = int(((g2_is_scam == 0) & (g2_pred_scam == 1)).sum())
+    recall2 = tp2 / (tp2 + fn2) if (tp2 + fn2) > 0 else 0.0
+    fpr2 = fp2 / (fp2 + tn2) if (fp2 + tn2) > 0 else 0.0
 
-    # Calculate Scam Recall vs Legitimate FPR on Gold Set
-    gold_is_scam_true = (gold_y != "legitimate").astype(int)
-    gold_is_scam_pred = (pd.Series(gold_preds) != "legitimate").astype(int)
-    
-    # Legitimate FPR: predicted scam when actually legitimate
-    legit_mask = (gold_is_scam_true == 0)
-    legit_fpr = float(gold_is_scam_pred[legit_mask].mean()) if legit_mask.sum() > 0 else 0.0
+    print("\n" + "=" * 65)
+    print("  FLAT MODEL ON NEW GOLD SET v2")
+    print("=" * 65)
+    print(f"  Gold v2 15-Class Macro-F1: {g2_macro_f1:.4f}")
+    print(f"  Gold v2 Binary Scam Recall: {recall2 * 100:.2f}% ({tp2}/{tp2 + fn2})")
+    print(f"  Gold v2 Legitimate FPR:    {fpr2 * 100:.2f}% ({fp2}/{fp2 + tn2})")
+    print(f"  Gold v2 ECE:               {g2_ece:.4f}")
+    print("\nGold v2 Classification Report:\n", classification_report(g2_y, g2_preds, digits=4, zero_division=0))
 
-    # Scam Recall: predicted scam when actually scam
-    scam_mask = (gold_is_scam_true == 1)
-    scam_recall = float(gold_is_scam_pred[scam_mask].mean()) if scam_mask.sum() > 0 else 0.0
-
-    print(f"\n--- GOLD TEST SET RESULTS ---")
-    print(f"Gold Accuracy:     {gold_acc:.4f}")
-    print(f"Gold Macro-F1:     {gold_report['macro avg']['f1-score']:.4f}")
-    print(f"Scam Recall:       {scam_recall * 100:.2f}% (Target: >= 95%)")
-    print(f"Legitimate FPR:    {legit_fpr * 100:.2f}% (Target: <= 3%)")
-    print(f"Gold Brier Score:  {gold_brier:.4f}")
-    print(f"Gold ECE:          {gold_ece:.4f}")
-    print("\nGold Classification Report:\n", gold_report_str)
-
-    # Save trained model
-    joblib.dump(full_pipeline, model_save_path)
-    print(f"\nSaved calibrated model pipeline to {model_save_path}")
-
-    # 5. Generate Comprehensive EVALUATION_REPORT.md
-    cm_header = "| True \\ Pred | " + " | ".join(labels) + " |"
-    cm_divider = "| :--- | " + " | ".join([":---:"] * len(labels)) + " |"
-    cm_rows = []
-    for i, row in enumerate(gold_cm):
-        r_str = f"| **{labels[i]}** | " + " | ".join(str(val) for val in row) + " |"
-        cm_rows.append(r_str)
-    cm_table = "\n".join([cm_header, cm_divider] + cm_rows)
-
-    metrics_rows = []
-    for lbl in labels:
-        if lbl in gold_report:
-            p = gold_report[lbl]["precision"]
-            r = gold_report[lbl]["recall"]
-            f1 = gold_report[lbl]["f1-score"]
-            sup = int(gold_report[lbl]["support"])
-            metrics_rows.append(f"| `{lbl}` | {p:.4f} | {r:.4f} | {f1:.4f} | {sup} |")
-    metrics_table = "\n".join(metrics_rows)
-
-    # Error analysis table (first 8 mistakes on Gold Set if any)
-    error_rows = []
-    for idx, (t, pred, prob_arr) in enumerate(zip(gold_y, gold_preds, gold_probs)):
-        if t != pred:
-            conf = float(np.max(prob_arr))
-            sample_txt = gold_df.iloc[idx]["text"][:60].replace("\n", " ") + "..."
-            error_rows.append(f"| `{t}` | `{pred}` | {conf:.3f} | {sample_txt} |")
-    
-    error_table = "\n".join(error_rows[:10]) if error_rows else "| None | None | 1.000 | Zero errors on benchmark set! |"
-
-    report_markdown = f"""# UPI Rakshak AI: Model Evaluation & Benchmark Report
-
-> [!IMPORTANT]
-> **Audit & Credibility Standard**:
-> Previous iterations reported 100% accuracy due to standard random splitting across synthetic templates (template memorization).
-> This report replaces all legacy metrics with **leakage-free evaluation** using `GroupShuffleSplit` on template IDs and an independent, hand-crafted **Gold Test Set** (306 samples, 110 hard negatives, 75 Indic language samples, 45 natural human messages).
-
----
-
-## 1. Key Performance Indicators
-
-| Metric | Validation Set (Template-Held-Out) | Gold Test Set (Unseen Real-Style) | Target Benchmark |
-| :--- | :---: | :---: | :---: |
-| **Accuracy** | **{val_acc * 100:.2f}%** | **{gold_acc * 100:.2f}%** | >= 90.0% |
-| **Macro F1-Score** | **{val_report['macro avg']['f1-score']:.4f}** | **{gold_report['macro avg']['f1-score']:.4f}** | >= 0.9000 |
-| **Scam Recall (Sensitivity)** | - | **{scam_recall * 100:.2f}%** | **>= 95.0%** |
-| **Legitimate False Positive Rate (FPR)** | - | **{legit_fpr * 100:.2f}%** | **<= 3.0%** |
-| **Brier Score (Multi-class)** | **{val_brier:.4f}** | **{gold_brier:.4f}** | Lower is better |
-| **Expected Calibration Error (ECE)** | **{val_ece:.4f}** | **{gold_ece:.4f}** | < 0.1000 |
-
----
-
-## 2. Per-Class Performance on Gold Test Set
-
-| Category | Precision | Recall | F1-Score | Support |
-| :--- | :---: | :---: | :---: | :---: |
-{metrics_table}
-| **Macro Average** | **{gold_report['macro avg']['precision']:.4f}** | **{gold_report['macro avg']['recall']:.4f}** | **{gold_report['macro avg']['f1-score']:.4f}** | **{len(gold_df)}** |
-| **Weighted Average** | **{gold_report['weighted avg']['precision']:.4f}** | **{gold_report['weighted avg']['recall']:.4f}** | **{gold_report['weighted avg']['f1-score']:.4f}** | **{len(gold_df)}** |
-
----
-
-## 3. Confusion Matrix (Gold Test Set)
-
-{cm_table}
-
----
-
-## 4. Error Analysis & Edge Cases
-
-The table below catalogs classification discrepancies observed on the unseen Gold Test Set:
-
-| True Category | Predicted Category | Confidence | Sample Text Snippet |
-| :--- | :--- | :---: | :--- |
-{error_table}
-
----
-
-## 5. Architectural Specifications
-
-- **Feature Pipeline**:
-  - Word N-grams: `(1, 2)`, Sublinear TF, 16,000 features
-  - Character N-grams: `(3, 5)` char-wb, Sublinear TF, 22,000 features
-  - Engineered Features: Length, digit density, URL flag, phone flag, urgency keywords, credential keywords, collect markers, remote access tokens, money tokens, leetspeak obfuscation
-- **Classifier**: Calibrated Logistic Regression (`C=2.5`, `class_weight='balanced'`) with Platt Sigmoid Scaling (`CalibratedClassifierCV`, 3-fold).
-- **Inference Speed**: ~4.2 ms per message on standard CPU (zero GPU required).
-"""
-
-    with open(report_path, "w", encoding="utf-8") as f:
-        f.write(report_markdown)
-    print(f"Generated comprehensive evaluation report at {report_path}")
-
-    # Remove old MODEL_REPORT.md if present
-    old_report = os.path.join(docs_dir, "MODEL_REPORT.md")
-    if os.path.exists(old_report):
-        with open(old_report, "w", encoding="utf-8") as f:
-            f.write("# Model Report (Superseded)\n\nThis legacy report has been superseded by `docs/EVALUATION_REPORT.md`. Please refer to `EVALUATION_REPORT.md` for leakage-free metrics.\n")
-        print(f"Updated legacy {old_report} with disclaimer.")
+    # Save flat pipeline
+    os.makedirs(os.path.dirname(model_save_path), exist_ok=True)
+    joblib.dump(flat_pipeline, model_save_path)
+    print(f"\nSuccessfully saved trained Flat Calibrated Model to {model_save_path}")
 
 if __name__ == "__main__":
     train_and_evaluate()

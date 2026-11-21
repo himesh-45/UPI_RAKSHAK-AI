@@ -1,53 +1,29 @@
-# UPI Rakshak AI — NLP Model Report & Evaluation
+# UPI Rakshak AI — NLP Model Report & Evaluation History
 
-> [!CAUTION]
-> **SYNTHETIC DATASET DISCLAIMER**:
-> This model was trained on a synthetic dataset generated via algorithmic templates, slot filling, and perturbation.
-> The reported performance metrics reflect validation on this synthetic distribution and **do NOT represent real-world fraud detection accuracy or guarantees**.
-> Real-world threat actors constantly vary their phrasing, domains, and evasion tactics.
+> [!IMPORTANT]
+> **Superseded by Leakage-Free Gold Benchmark**:
+> This document is retained for historical auditability and model provenance tracking.
+> An early prototype version evaluated a naive random stratified split of synthetic templates, yielding an artificial 100.00% accuracy due to identical template sentence skeletons appearing in both train and test splits (template memorization).
+>
+> That evaluation has been completely replaced with an honest, leakage-free benchmark on an independent, hand-crafted **Gold Test Set** evaluated via `backend.app.scripts.evaluate_models`.
+>
+> **For current, verified benchmark metrics, see: [EVALUATION_REPORT.md](EVALUATION_REPORT.md)**.
 
-## 1. Executive Summary
-- **Architecture**: Dual Feature Extraction (Word n-grams (1, 2) + Char-wb n-grams (3, 5)) + Multiclass Logistic Regression
-- **Training Samples**: 2880
-- **Test Samples**: 720 (20% stratified holdout)
-- **Overall Accuracy**: 100.00%
-- **Inference Latency**: < 4ms per sample (CPU, single-threaded)
-- **Supported Languages**: English, Hindi (Devanagari), Telugu (Telugu Script), Hinglish, Romanized Telugu
+---
 
-## 2. Per-Class Performance Metrics
+## 1. Provenance & Evolution History
 
-| Category | Precision | Recall | F1-Score | Support |
-| --- | --- | --- | --- | --- |
-| `electricity_disconnection` | 1.0000 | 1.0000 | 1.0000 | 90 |
-| `fake_bank_kyc` | 1.0000 | 1.0000 | 1.0000 | 90 |
-| `fake_customer_support` | 1.0000 | 1.0000 | 1.0000 | 90 |
-| `fake_govt_scheme` | 1.0000 | 1.0000 | 1.0000 | 90 |
-| `fake_upi_refund_cashback` | 1.0000 | 1.0000 | 1.0000 | 90 |
-| `legitimate` | 1.0000 | 1.0000 | 1.0000 | 90 |
-| `lottery_prize` | 1.0000 | 1.0000 | 1.0000 | 90 |
-| `otp_pin_theft` | 1.0000 | 1.0000 | 1.0000 | 90 |
+| Milestone | Architecture | Evaluation Methodology | Resulting Metric | Status |
+| :--- | :--- | :--- | :--- | :--- |
+| **v1.0 (Prototype)** | 8-Class TF-IDF + Logistic Regression | Random stratified 80/20 train/test split on synthetic templates | 100.00% Accuracy (Defective: template memorization) | **DEPRECATED** |
+| **v2.0 (Phase 1 Audit)** | 15-Class Calibrated TF-IDF + Linear Classifier | GroupShuffleSplit by template family + Gold Test Set v1 (306 samples) | 78.52% Macro-F1, 95.41% Scam Recall, 2.73% Legit FPR | **ACTIVE** |
+| **v2.1 (Current Release)** | Hierarchical Dual-Stage / Stacked Ensemble + Calibrated Probabilities | GroupShuffleSplit + Expanded Gold Test Set v2 (messy human phrasings) | Programmatically verified via `evaluate_models.py` | **CURRENT** |
 
-- **Macro Average F1**: 1.0000
-- **Weighted Average F1**: 1.0000
+---
 
-## 3. Confusion Matrix
+## 2. Why the 100% Metric Was Invalid
 
-| True \ Pred | electricity_disconnection | fake_bank_kyc | fake_customer_support | fake_govt_scheme | fake_upi_refund_cashback | legitimate | lottery_prize | otp_pin_theft |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| **electricity_disconnection** | 90 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| **fake_bank_kyc** | 0 | 90 | 0 | 0 | 0 | 0 | 0 | 0 |
-| **fake_customer_support** | 0 | 0 | 90 | 0 | 0 | 0 | 0 | 0 |
-| **fake_govt_scheme** | 0 | 0 | 0 | 90 | 0 | 0 | 0 | 0 |
-| **fake_upi_refund_cashback** | 0 | 0 | 0 | 0 | 90 | 0 | 0 | 0 |
-| **legitimate** | 0 | 0 | 0 | 0 | 0 | 90 | 0 | 0 |
-| **lottery_prize** | 0 | 0 | 0 | 0 | 0 | 0 | 90 | 0 |
-| **otp_pin_theft** | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 90 |
+1. **Synthetic Template Leakage**: When templates such as *"Dear user, your {bank} account is blocked, update KYC at {url}"* exist in both train and test splits with only slot variables changing, classifiers memorize the template structure rather than learning true semantic indicators of fraud.
+2. **Gold Benchmark Protocol**: Current evaluation uses strictly isolated gold evaluation datasets (`gold_v1.json` and `gold_v2.json`) containing human-written, messy phrasings, forwarded WhatsApp style messages, typos, and 100+ hard negatives that are never trained or tuned on.
 
-## 4. Hard Negatives & Safety Guardrails
-The dataset explicitly incorporates hard negative samples to prevent false positives on genuine banking communications:
-- Bank transaction SMS with "Do not share OTP" notices.
-- Login two-factor authentication alerts.
-- Legitimate utility bills with standard payment deadlines.
-- Real e-commerce package tracking alerts.
-
-Combined with our **Deterministic Rule Safety Layer**, any message that instructs a user to "enter UPI PIN to receive money" or share CVV/OTP triggers an immediate high-severity safety flag regardless of ML model confidence.
+Please refer to [EVALUATION_REPORT.md](EVALUATION_REPORT.md) for full programmatic metrics, confusion matrices, and bootstrap confidence intervals.

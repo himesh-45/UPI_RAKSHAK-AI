@@ -396,15 +396,15 @@ class RiskFusionEngine:
         nlp_confidence = nlp_result.get("confidence", 0.5)
         
         if predicted_category != "legitimate":
-            nlp_risk_score = nlp_confidence * 85.0
+            nlp_risk_score = 42.0 + (nlp_confidence * 48.0)
             evidence_items.append(EvidenceItem(
                 signal=f"NLP Scam Intent Classifier: Categorized as '{predicted_category}' with {nlp_confidence * 100:.1f}% confidence.",
                 source_module="NLP_CLASSIFIER",
                 weight=round(nlp_risk_score * 0.5, 1),
-                severity="HIGH" if nlp_confidence >= 0.75 else "MEDIUM"
+                severity="HIGH" if nlp_confidence >= 0.70 else "MEDIUM"
             ))
         else:
-            nlp_risk_score = max(0.0, (1.0 - nlp_confidence) * 30.0)
+            nlp_risk_score = 0.0
             if nlp_confidence >= 0.70:
                 evidence_items.append(EvidenceItem(
                     signal=f"NLP Classifier: Pattern matches verified legitimate service notification ({nlp_confidence * 100:.1f}% confidence).",
@@ -503,7 +503,8 @@ class RiskFusionEngine:
             max_signal = max(max_signal, 82.0)
 
         # Genuine alert or verified official URL suppression
-        if (is_genuine_alert or has_official_url) and not hard_override and max_url_score < 35.0 and qr_score < 35.0:
+        has_active_otp_request = rule_result.get("signals_detected", {}).get("has_otp_request", False)
+        if (is_genuine_alert or has_official_url) and not hard_override and not has_active_otp_request and max_url_score < 35.0 and qr_score < 35.0:
             suppression_delta = max_signal - min(max_signal, 20.0)
             max_signal = min(max_signal, 20.0)
             waterfall_steps.append(WaterfallStep(

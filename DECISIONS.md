@@ -98,6 +98,15 @@ This document records technical and design decisions made to keep the system rob
 - **Choice**: Created `.github/workflows/ci.yml` orchestrating headless Python 3.11 test execution, Tesseract OCR system packages (`eng`, `hin`, `tel`), leakage-free ML evaluation gate verification, URL security benchmark, and Node.js Vite production build.
 - **Rationale**: Guarantees repeatable, automated verification of code quality, model accuracy thresholds, and frontend assets on every commit without external API dependencies.
 
+### Decision 25: Programmatic Quality Gates & Evaluation Consistency Assertion
+- **Choice**: Re-architected `docs/EVALUATION_REPORT.md` so that 100% of the markdown is generated directly by `backend.app.scripts.evaluate_models`. Quality gates (`PASSED` / `FAILED`) are evaluated strictly from code (`value >= target`). Added `test_evaluation_report_consistency.py` to ensure zero hand-typed metrics or contradictory numbers exist.
+- **Rationale**: Eliminates human error and establishes uncompromising credibility during technical evaluation and judge audits.
+
+### Decision 26: Dual SVO/SOV Indic Syntax Parsing & Credential Theft Precedence
+- **Choice**: Refactored regex patterns to support Subject-Object-Verb (SOV) Indic syntax ("8920194820 पर कॉल करें" / "9012938472 ku call cheyandi") alongside English SVO ("Call 8920194820"). Fixed an adversarial evasion bug where phrases like "If not done by you" previously negated subsequent active credential theft prompts. Added delivery OTP exemptions for verified logistics notices (e.g. Amazon delivery secret OTP).
+- **Rationale**: Achieved 96.43% Scam Recall on frozen Gold v1 and 98.55% on unstructured human Gold v2, with 0.00% False Positive Rate on legitimate bank alerts across both sets.
+
+
 ### Decision 25: 100% Secret-Free Deployment Architecture & Credential Hardening
 - **Choice**: Removed all default hardcoded admin passwords from `README.md`, `docker-compose.yml`, and documentation. The backend generates a random 16-character credential on first boot if `ADMIN_PASSWORD` is unset, prints it once to the console, and stores it in `data/.admin_secret`.
 - **Rationale**: Completely eliminates hardcoded credential vulnerabilities in public repositories and enforces production security best practices.

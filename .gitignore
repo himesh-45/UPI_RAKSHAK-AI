@@ -36,6 +36,8 @@ frontend/dist/
 frontend/.vite/
 node_modules/
 dist/
+*.zip
+upi_rakshak_submission.zip
 
 # System / OS
 .DS_Store

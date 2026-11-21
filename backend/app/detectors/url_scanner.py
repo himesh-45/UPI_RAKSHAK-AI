@@ -3,6 +3,7 @@ import urllib.parse
 import tldextract
 from typing import List, Dict, Any, Optional, Set
 from rapidfuzz import distance
+from .url_classifier_model import url_classifier_model
 
 # 88 Verified Official Indian Banking, UPI, Government, Utility, and E-Commerce Domains
 OFFICIAL_ENTITIES = [
@@ -83,7 +84,7 @@ OFFICIAL_ENTITIES = [
     {"name": "UPPCL (Uttar Pradesh Power)", "brand": "uppcl", "domains": ["upenergy.in"]},
     {"name": "TNEB / TANGEDCO (Tamil Nadu Power)", "brand": "tneb", "domains": ["tangedco.gov.in"]},
     {"name": "MSEDCL (Maharashtra Mahavitaran)", "brand": "msedcl", "domains": ["mahadiscom.in"]},
-    {"name": "Tata Power", "brand": "tatapower", "domains": ["tatapower.com"]},
+    {"name": "Tata Power", "brand": "tatapower", "domains": ["tatapower.com", "tatapower-ddl.com"]},
     {"name": "Adani Electricity Mumbai", "brand": "adanielectricity", "domains": ["adanielectricity.com"]},
     {"name": "BSES Delhi (Yamuna & Rajdhani)", "brand": "bses", "domains": ["bsesdelhi.com"]},
     {"name": "PSPCL (Punjab State Power)", "brand": "pspcl", "domains": ["pspcl.in"]},
@@ -94,7 +95,7 @@ OFFICIAL_ENTITIES = [
     {"name": "CESC (Calcutta Electricity)", "brand": "cesc", "domains": ["cesc.co.in"]},
 
     # 6. E-Commerce & Logistics / Couriers
-    {"name": "Amazon India", "brand": "amazon", "domains": ["amazon.in"]},
+    {"name": "Amazon India", "brand": "amazon", "domains": ["amazon.in", "amazon.com", "amazonaws.com", "amazonpay.in"]},
     {"name": "Flipkart", "brand": "flipkart", "domains": ["flipkart.com"]},
     {"name": "Meesho", "brand": "meesho", "domains": ["meesho.com"]},
     {"name": "OLX India", "brand": "olx", "domains": ["olx.in"]},
@@ -198,11 +199,11 @@ class StaticURLScanner:
 
         # 2. URL shortener
         if registered_domain in SHORTENER_DOMAINS:
-            score += 25.0
+            score += 35.0
             signals.append({
                 "signal": f"URL Shortener Cloaking: '{registered_domain}' conceals the true destination host.",
                 "source_module": "URL_SCANNER",
-                "weight": 25.0,
+                "weight": 35.0,
                 "severity": "HIGH"
             })
 
@@ -256,19 +257,29 @@ class StaticURLScanner:
                     })
                     break
                 elif len(domain) >= 3 and len(brand) >= 3:
-                    # Check Levenshtein distance on domain stem
+                    # Check Levenshtein distance on domain stem with length-scaled threshold
+                    GENERIC_STEMS = {"bank", "web", "pay", "nha", "portal", "retail", "online", "net", "org", "gov"}
                     for off in official_domains:
-                        off_stem = off.split(".")[0]
+                        off_stem = off.split(".")[0].lower()
+                        if off_stem in GENERIC_STEMS or len(off_stem) < 3:
+                            continue
+                        
+                        stem_len = len(off_stem)
+                        dom_len = len(domain)
+                        max_allowed_dist = 1 if stem_len <= 4 else 2
                         dist = distance.Levenshtein.distance(domain, off_stem)
-                        if 0 < dist <= 2 and len(domain) > 2 and len(off_stem) > 2:
-                            score += 45.0
-                            signals.append({
-                                "signal": f"Typosquatting Detected: Domain '{domain}' is {dist} character edit distance from official '{off_stem}' ({entity['name']}).",
-                                "source_module": "URL_SCANNER",
-                                "weight": 45.0,
-                                "severity": "CRITICAL"
-                            })
-                            break
+                        
+                        if 0 < dist <= max_allowed_dist and abs(dom_len - stem_len) <= max_allowed_dist:
+                            sim_ratio = 1.0 - (dist / max(dom_len, stem_len))
+                            if sim_ratio >= 0.70:
+                                score += 45.0
+                                signals.append({
+                                    "signal": f"Typosquatting Detected: Domain '{domain}' is {dist} character edit distance from official '{off_stem}' ({entity['name']}).",
+                                    "source_module": "URL_SCANNER",
+                                    "weight": 45.0,
+                                    "severity": "CRITICAL"
+                                })
+                                break
                     if signals and signals[-1]["severity"] == "CRITICAL":
                         break
 
@@ -337,6 +348,19 @@ class StaticURLScanner:
                 "weight": 10.0,
                 "severity": "LOW"
             })
+
+        # 12. Statistical Machine Learning Phishing Detection (Static lexical/n-gram analysis)
+        if not is_official:
+            ml_prob = url_classifier_model.predict_phishing_probability(raw_url)
+            if ml_prob >= 0.50:
+                ml_weight = min(40.0, ml_prob * 40.0)
+                score += ml_weight
+                signals.append({
+                    "signal": f"Statistical Phishing Classifier: Lexical and n-gram patterns indicate {int(ml_prob * 100)}% phishing probability.",
+                    "source_module": "URL_SCANNER",
+                    "weight": round(ml_weight, 1),
+                    "severity": "HIGH" if ml_prob >= 0.70 else "MEDIUM"
+                })
 
         # Verified Official Domain recognition
         if is_official and score == 0.0:

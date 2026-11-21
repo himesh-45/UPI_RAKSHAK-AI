@@ -6,8 +6,26 @@ from .database import engine, Base, SessionLocal
 from .models.db_models import User
 from .core.auth import get_password_hash
 
-# Create DB tables
+def init_admin():
+    db = SessionLocal()
+    try:
+        admin = db.query(User).filter(User.email == settings.ADMIN_EMAIL).first()
+        if not admin:
+            admin = User(
+                email=settings.ADMIN_EMAIL,
+                hashed_password=get_password_hash(settings.ADMIN_PASSWORD)
+            )
+            db.add(admin)
+            db.commit()
+        else:
+            admin.hashed_password = get_password_hash(settings.ADMIN_PASSWORD)
+            db.commit()
+    finally:
+        db.close()
+
+# Create DB tables & seed admin user
 Base.metadata.create_all(bind=engine)
+init_admin()
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
@@ -27,19 +45,8 @@ app.add_middleware(
 )
 
 @app.on_event("startup")
-def init_admin():
-    db = SessionLocal()
-    try:
-        admin = db.query(User).filter(User.email == settings.ADMIN_EMAIL).first()
-        if not admin:
-            admin = User(
-                email=settings.ADMIN_EMAIL,
-                hashed_password=get_password_hash(settings.ADMIN_PASSWORD)
-            )
-            db.add(admin)
-            db.commit()
-    finally:
-        db.close()
+def on_startup():
+    init_admin()
 
 @app.get("/api/health", tags=["Health"])
 def health_check():

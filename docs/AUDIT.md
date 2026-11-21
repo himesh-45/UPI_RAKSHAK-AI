@@ -18,13 +18,13 @@ This audit documents each finding, root cause, severity, and the remediation roa
 
 ### 2.1 Machine Learning, Data & Evaluation Gaps
 - **Finding 1.1: Artificial 100% Accuracy from Template Memorization (CRITICAL)**
-  - *Location*: [`docs/MODEL_REPORT.md`](file:///c:/Users/user/Documents/antigravity/fearless-planck/docs/MODEL_REPORT.md), [`backend/app/scripts/train_model.py`](file:///c:/Users/user/Documents/antigravity/fearless-planck/backend/app/scripts/train_model.py)
+  - *Location*: [`docs/MODEL_REPORT.md`](MODEL_REPORT.md), [`backend/app/scripts/train_model.py`](../backend/app/scripts/train_model.py)
   - *Root Cause*: Random stratified train/test split on ~3,600 template-generated synthetic samples. Identical template sentence skeletons existed across both train and test partitions. The model memorized template boilerplate rather than learning generalizable semantic fraud signals.
   - *Impact*: In a live hackathon demo or tough judge cross-examination, claiming "100% accuracy" immediately destroys technical credibility.
   - *Remediation*: Implement leakage-free `GroupShuffleSplit` grouping by template ID and MinHash/cosine near-duplicate deduplication. Introduce a completely independent, hand-crafted **Gold Test Set** of 300+ samples (including 100+ hard negatives and 40 natural messy human messages) that is never trained or tuned on.
 
 - **Finding 1.2: 100% Synthetic Data & Narrow Category Taxonomy (HIGH)**
-  - *Location*: [`backend/app/scripts/generate_dataset.py`](file:///c:/Users/user/Documents/antigravity/fearless-planck/backend/app/scripts/generate_dataset.py)
+  - *Location*: [`backend/app/scripts/generate_dataset.py`](../backend/app/scripts/generate_dataset.py)
   - *Root Cause*: Data is solely synthetically generated across only 8 legacy categories, omitting the most rampant UPI and digital payment scams in India today.
   - *Missing Categories*:
     1. Collect-request / "enter PIN to receive money" fraud (`collect_request_fraud`)
@@ -37,13 +37,13 @@ This audit documents each finding, root cause, severity, and the remediation roa
   - *Remediation*: Ingest real public SMS corpora (UCI SMS Spam, smishing feeds) and expand synthetic generation to 10,000+ samples from 60+ varied templates per category with typos, leetspeak, emoji padding, and mixed scripts.
 
 - **Finding 1.3: Lack of Probability Calibration & Text Normalization (HIGH)**
-  - *Location*: [`backend/app/detectors/nlp_classifier.py`](file:///c:/Users/user/Documents/antigravity/fearless-planck/backend/app/detectors/nlp_classifier.py)
+  - *Location*: [`backend/app/detectors/nlp_classifier.py`](../backend/app/detectors/nlp_classifier.py)
   - *Root Cause*: Raw classifier probabilities were uncalibrated, with no reporting of Expected Calibration Error (ECE) or Brier score. Simple adversarial evasions (e.g., "O T P", "cl1ck", zero-width spaces, Cyrillic homoglyphs) bypassed word-level tokenizers. Language detection relied solely on small keyword heuristics.
   - *Remediation*: Add NFKC normalization, zero-width space removal, leetspeak de-obfuscation, character-ngram language detection, and Platt/isotonic probability calibration.
 
 ### 2.2 Security & Credential Hygiene
 - **Finding 2.1: Hardcoded Admin Password in Public Documentation (CRITICAL)**
-  - *Location*: [`README.md`](file:///c:/Users/user/Documents/antigravity/fearless-planck/README.md), [`frontend/src/components/LoginModal.jsx`](file:///c:/Users/user/Documents/antigravity/fearless-planck/frontend/src/components/LoginModal.jsx), [`backend/app/config.py`](file:///c:/Users/user/Documents/antigravity/fearless-planck/backend/app/config.py)
+  - *Location*: [`README.md`](../README.md), [`frontend/src/components/LoginModal.jsx`](../frontend/src/components/LoginModal.jsx), [`backend/app/config.py`](../backend/app/config.py)
   - *Root Cause*: Default demo credentials `admin@upirakshak.ai` / `AdminRakshak#2026` were hardcoded in multiple docs and components.
   - *Remediation*: Purge all plaintext passwords from documentation. Read admin credentials strictly from `.env`. On first run if `ADMIN_PASSWORD` is unset, generate a cryptographically secure random password via `secrets.token_urlsafe(16)`, output it once to stdout, and persist a salted bcrypt hash.
 
@@ -54,19 +54,19 @@ This audit documents each finding, root cause, severity, and the remediation roa
 
 ### 2.3 URL Scanner Evaluation & Coverage Gaps
 - **Finding 3.1: No Measured Performance on Held-Out Domain Feeds (HIGH)**
-  - *Location*: [`backend/app/detectors/url_scanner.py`](file:///c:/Users/user/Documents/antigravity/fearless-planck/backend/app/detectors/url_scanner.py)
+  - *Location*: [`backend/app/detectors/url_scanner.py`](../backend/app/detectors/url_scanner.py)
   - *Root Cause*: URL scanner rules had unit tests for a few examples, but lacked empirical measurement (Precision, Recall, F1) against held-out phishing URLs and benign domain lists.
   - *Remediation*: Build a benchmark dataset of 500+ phishing URLs and 500+ benign domains (from OpenPhish/PhishTank and Tranco) with domain-level train/test splits. Add 80+ Indian banking, UPI, NBFC, and government entity domains to the impersonation registry with strict registered-domain matching (e.g., ensuring `sbi.co.in.evil.com` is flagged while `sbi.co.in` is safe).
 
 ### 2.4 OCR Reliability & Honesty
 - **Finding 4.1: Silent Empty Result on Host OCR Absence (HIGH)**
-  - *Location*: [`backend/app/detectors/ocr_pipeline.py`](file:///c:/Users/user/Documents/antigravity/fearless-planck/backend/app/detectors/ocr_pipeline.py)
+  - *Location*: [`backend/app/detectors/ocr_pipeline.py`](../backend/app/detectors/ocr_pipeline.py)
   - *Root Cause*: When Tesseract binaries were absent on the host OS, text extraction silently failed and returned `""`, leading the backend to evaluate an empty string without informing the user.
   - *Remediation*: Provide honest OCR state reporting in the API and UI (`ocr_available: false`, `"OCR engine unavailable on host; paste text or deploy via Docker"`). Integrate RapidOCR / EasyOCR as a pip-installable fallback that works without host C++ packages, while ensuring Dockerfile installs Tesseract with `eng`, `hin`, and `tel` traineddata.
 
 ### 2.5 RAG Knowledge Base Breadth
 - **Finding 5.1: Small Knowledge Base (8 Entries) (MEDIUM)**
-  - *Location*: [`backend/app/rag/knowledge_base.json`](file:///c:/Users/user/Documents/antigravity/fearless-planck/backend/app/rag/knowledge_base.json)
+  - *Location*: [`backend/app/rag/knowledge_base.json`](../backend/app/rag/knowledge_base.json)
   - *Root Cause*: The knowledge base had only 8 entries, lacking coverage for courier scams, loan harassment, SIM swapping, mule accounts, chargebacks, and state-specific utility boards.
   - *Remediation*: Expand to 60+ concise, factual entries citing NPCI, RBI Master Circulars, SEBI advisories, CERT-In, and the 1930 Golden Hour protocol.
 
