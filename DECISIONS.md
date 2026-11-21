@@ -28,3 +28,24 @@ This document records technical and design decisions made to keep the system rob
 
 ## 7. Multilingual Grounding
 - **Decision**: The Assistant and explanations strictly support English, Hindi (`hi-IN`), and Telugu (`te-IN`). All i18n strings are maintained in synchronized JSON bundles, and explanations cite factual RAG passages and 1930 Cybercrime Helpline protocols.
+
+
+## 8. Group-Level Splits & Independent Gold Test Set
+- **Decision**: All model evaluation uses `GroupShuffleSplit` on template/source IDs combined with MinHash near-duplicate deduplication. A hand-curated **Gold Test Set** of 300+ samples (including 100+ hard negatives and 40 natural messy human messages) is strictly isolated and never trained or tuned on.
+- **Rationale**: Eliminates template memorization and data leakage, delivering true generalizability and defensible metrics during technical evaluation.
+
+## 9. Integration of Real Public Data
+- **Decision**: Supplement synthetic data with real public corpora (UCI SMS Spam Collection, open smishing sets, Tranco benign domains, public phishing feeds). Document all sources, licenses, and collection methodology in `docs/DATA_SOURCES.md`.
+- **Rationale**: Grounds the model in real-world human phrasing, typos, and SMS conventions alongside controlled synthetic attack patterns.
+
+## 10. Honest OCR Availability Reporting
+- **Decision**: Eliminate any mock/silent OCR fallbacks. If Tesseract and fallback OCR engines are unavailable on the host, the backend honestly surfaces `ocr_available: false` and instructs the user to paste text. Integrate a pure/pip-installable fallback and equip the Docker image with Tesseract language packs (`eng`, `hin`, `tel`).
+- **Rationale**: Absolute transparency is critical for cybersecurity tools. Fabricating or guessing OCR results violates core hackathon trust criteria.
+
+## 11. Ephemeral Admin Password Generation
+- **Decision**: Remove all default passwords from documentation, `.env.example`, and frontend source code. If `ADMIN_PASSWORD` is not configured in `.env`, the server generates a cryptographically random 16-character string on first startup, prints it to stdout once, and stores a salted bcrypt hash.
+- **Rationale**: Eliminates default credential vulnerabilities.
+
+## 12. Extended Taxonomy to 15 Categories
+- **Decision**: Expand scam classification from 8 legacy categories to 15 comprehensive categories reflecting modern digital fraud in India (collect requests, AnyDesk remote access, loan app harassment, courier/customs parcels, marketplace QR scams, accidental transfer scams, job/crypto tasks).
+- **Rationale**: Matches real-world threat intelligence reported to 1930 / MHA.

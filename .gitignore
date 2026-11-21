@@ -1,10 +1,40 @@
+# Virtual environments
 .venv/
+venv/
+ENV/
+
+# Python caches and bytecode
+**/__pycache__/
 __pycache__/
 *.py[cod]
 *$py.class
-*.db
-backend/data/*.db
-frontend/dist/
-frontend/node_modules/
+*.pyd
+
+# Testing & Coverage
 .pytest_cache/
+.coverage
+htmlcov/
+
+# Environment files and credentials
 .env
+.env.local
+*.pem
+*.key
+
+# SQLite Databases & logs
+*.db
+*.sqlite
+*.sqlite3
+backend/data/*.db
+*.log
+
+# Frontend build & dependencies
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+node_modules/
+dist/
+
+# System / OS
+.DS_Store
+Thumbs.db
