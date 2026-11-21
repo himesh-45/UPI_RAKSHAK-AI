@@ -10,17 +10,17 @@ This document records technical and design decisions made to keep the system rob
 - **Decision**: The final risk score (0–100) and verdict (`SAFE`, `SUSPICIOUS`, `HIGH RISK`) are calculated mathematically by the `RiskFusionEngine` through weighted signal accumulation and safety overrides, NOT by asking an LLM.
 - **Rationale**: LLMs hallucinate and can be jailbroken by deceptive phishing prompts. A deterministic fusion of verified signals (OTP request, collect request anomaly, brand typosquatting, urgency threats) ensures explainability and consistent safety guarantees.
 
-## 3. OCR and QR Parsing Fallback Strategy
-- **Decision**: For QR decoding, OpenCV `QRCodeDetector` is used with a fallback to `pyzbar`. For OCR, `pytesseract` is attempted; if the native Tesseract binary is not installed on the host OS, a smart regex/metadata pattern extractor acts as a graceful fallback so the backend never crashes.
-- **Rationale**: Host operating systems (especially Windows without pre-installed Tesseract C++ binaries) might otherwise fail during evaluation. The fallback maintains demo readiness while preserving full functionality in Docker containers where Tesseract is installed.
+## 3. Honest OCR Engine & RapidOCR Integration
+- **Decision**: Tesseract C++ OCR is used when present; `rapidocr-onnxruntime` operates as an instant pip-installable fallback that runs locally on ONNX runtime. If no OCR engine is available, the system honestly reports `ocr_available: false` and instructs the user to paste text. No mock/fabricated results are ever returned.
+- **Rationale**: Eliminates system dependency failures while maintaining strict honesty and transparency.
 
 ## 4. Sensitive Data Masking Before Storage
 - **Decision**: All incoming analysis inputs are stripped of identifiable credentials before saving to SQLite. Phone numbers (`\b[6-9]\d{9}\b`), 12-16 digit account numbers, 4-6 digit OTPs, and private UPI IDs are masked as `[REDACTED_PHONE]`, `[REDACTED_OTP]`, etc. Users can also pass `save_history: false` for confidential checks.
 - **Rationale**: Privacy-by-design is non-negotiable for financial fraud detection.
 
 ## 5. Synthetic Dataset Generation & Disclaimer
-- **Decision**: We generate 3,000+ synthetic multilingual samples covering 8 distinct scam categories across English, Hindi, Telugu, and Hinglish. Hard negatives (genuine OTP alerts, official transaction receipts with warnings) are explicitly injected.
-- **Rationale**: Real scam data contains active malicious URLs, personal victim phone numbers, and PII. Fictionalized samples ensure model training without privacy or ethical risks. A clear disclaimer is rendered in `MODEL_REPORT.md` and the UI.
+- **Decision**: We generate 10,800+ synthetic multilingual samples covering 15 distinct scam categories across English, Hindi, Telugu, Hinglish, and Romanized Telugu, supplemented with 2,000 real public SMS messages from the UCI SMS Spam corpus.
+- **Rationale**: Real scam data contains active malicious URLs, personal victim phone numbers, and PII. Fictionalized samples ensure model training without privacy or ethical risks. A clear disclaimer is rendered in `EVALUATION_REPORT.md` and the UI.
 
 ## 6. Static-Only URL Analysis
 - **Decision**: The URL scanner NEVER performs HTTP requests, socket connections, or DNS resolutions against suspicious domains.
@@ -29,9 +29,8 @@ This document records technical and design decisions made to keep the system rob
 ## 7. Multilingual Grounding
 - **Decision**: The Assistant and explanations strictly support English, Hindi (`hi-IN`), and Telugu (`te-IN`). All i18n strings are maintained in synchronized JSON bundles, and explanations cite factual RAG passages and 1930 Cybercrime Helpline protocols.
 
-
 ## 8. Group-Level Splits & Independent Gold Test Set
-- **Decision**: All model evaluation uses `GroupShuffleSplit` on template/source IDs combined with MinHash near-duplicate deduplication. A hand-curated **Gold Test Set** of 300+ samples (including 100+ hard negatives and 40 natural messy human messages) is strictly isolated and never trained or tuned on.
+- **Decision**: All model evaluation uses `GroupShuffleSplit` on template/source IDs combined with MinHash near-duplicate deduplication. A hand-curated **Gold Test Set** of 306 samples (including 110 hard negatives and 45 natural messy human messages) is strictly isolated and never trained or tuned on.
 - **Rationale**: Eliminates template memorization and data leakage, delivering true generalizability and defensible metrics during technical evaluation.
 
 ## 9. Integration of Real Public Data
@@ -39,7 +38,7 @@ This document records technical and design decisions made to keep the system rob
 - **Rationale**: Grounds the model in real-world human phrasing, typos, and SMS conventions alongside controlled synthetic attack patterns.
 
 ## 10. Honest OCR Availability Reporting
-- **Decision**: Eliminate any mock/silent OCR fallbacks. If Tesseract and fallback OCR engines are unavailable on the host, the backend honestly surfaces `ocr_available: false` and instructs the user to paste text. Integrate a pure/pip-installable fallback and equip the Docker image with Tesseract language packs (`eng`, `hin`, `tel`).
+- **Decision**: Eliminate any mock/silent OCR fallbacks. If Tesseract and fallback OCR engines are unavailable on the host, the backend honestly surfaces `ocr_available: false` and instructs the user to paste text.
 - **Rationale**: Absolute transparency is critical for cybersecurity tools. Fabricating or guessing OCR results violates core hackathon trust criteria.
 
 ## 11. Ephemeral Admin Password Generation
@@ -49,3 +48,15 @@ This document records technical and design decisions made to keep the system rob
 ## 12. Extended Taxonomy to 15 Categories
 - **Decision**: Expand scam classification from 8 legacy categories to 15 comprehensive categories reflecting modern digital fraud in India (collect requests, AnyDesk remote access, loan app harassment, courier/customs parcels, marketplace QR scams, accidental transfer scams, job/crypto tasks).
 - **Rationale**: Matches real-world threat intelligence reported to 1930 / MHA.
+
+## 13. Dominant-Signal Evidence Fusion with Corroboration
+- **Decision**: In cybersecurity risk assessment, averaging dilutes acute threats. Risk score is computed from the dominant credible detector signal (Calibrated NLP, Rules, URL Scanner, QR Anomaly) with additive corroboration bonuses when 2 or more independent detectors flag the threat.
+- **Rationale**: Prevents high-risk phishing links from being downplayed by short or neutral text accompanying the URL.
+
+## 14. Context-Aware Negation & Warning Context Suppression
+- **Decision**: The rule safety layer evaluates context windows for negation phrases ("never share your OTP", "do not disclose your PIN", "bank never asks for confidential details") and Delivery OTP instructions ("share OTP only upon delivery"). Genuine security advisories trigger negative risk weighting and score suppression (`<= 20`, `SAFE`).
+- **Rationale**: Completely prevents false positive flagging on genuine bank notifications containing mandatory RBI security warnings.
+
+## 15. 88 Official Indian Brands with Strict Registered-Domain Matching
+- **Decision**: Expanded official entities to 88 Indian public/private banks, state DISCOMs, government portals, and payment apps. The URL scanner uses `tldextract` registered-domain verification to ensure subdomain tricks (e.g. `sbi.co.in.evil.xyz`) are flagged as critical brand impersonation while genuine subdomains (`retail.onlinesbi.sbi`) remain safe.
+- **Rationale**: Defends against the most prevalent modern phishing evasion tactic in Indian digital banking.

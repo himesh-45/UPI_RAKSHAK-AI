@@ -1,6 +1,7 @@
 import os
 import json
 import random
+import secrets
 import datetime
 from sqlalchemy.orm import Session
 from ..database import SessionLocal, Base, engine
@@ -13,7 +14,7 @@ def seed_database():
     db: Session = SessionLocal()
 
     try:
-        # 1. Seed Admin User
+        # 1. Seed or Update Admin User
         admin = db.query(User).filter(User.email == settings.ADMIN_EMAIL).first()
         if not admin:
             admin = User(
@@ -21,7 +22,11 @@ def seed_database():
                 hashed_password=get_password_hash(settings.ADMIN_PASSWORD)
             )
             db.add(admin)
-            print(f"Created default admin user: {settings.ADMIN_EMAIL}")
+            db.commit()
+            print(f"Admin user registered: {settings.ADMIN_EMAIL}")
+        else:
+            admin.hashed_password = get_password_hash(settings.ADMIN_PASSWORD)
+            db.commit()
 
         # Check existing simulated records
         existing_sim = db.query(AnalysisHistory).filter(AnalysisHistory.is_simulated == True).count()

@@ -209,67 +209,71 @@ class RiskFusionEngine:
         predicted_category = nlp_result.get("category", "legitimate")
         nlp_confidence = nlp_result.get("confidence", 0.5)
         
-        nlp_score_component = 0.0
+        # 4. Calibrated NLP contribution
+        predicted_category = nlp_result.get("category", "legitimate")
+        nlp_confidence = nlp_result.get("confidence", 0.5)
+        
         if predicted_category != "legitimate":
-            nlp_score_component = nlp_confidence * 45.0
+            nlp_risk_score = nlp_confidence * 85.0
             evidence_items.append(EvidenceItem(
                 signal=f"NLP Scam Intent Classifier: Categorized as '{predicted_category}' with {nlp_confidence * 100:.1f}% confidence.",
                 source_module="NLP_CLASSIFIER",
-                weight=round(nlp_score_component, 1),
+                weight=round(nlp_risk_score * 0.5, 1),
                 severity="HIGH" if nlp_confidence >= 0.75 else "MEDIUM"
             ))
         else:
+            nlp_risk_score = max(0.0, (1.0 - nlp_confidence) * 30.0)
             if nlp_confidence >= 0.70:
-                nlp_score_component = -20.0
                 evidence_items.append(EvidenceItem(
                     signal=f"NLP Classifier: Pattern matches verified legitimate service notification ({nlp_confidence * 100:.1f}% confidence).",
                     source_module="NLP_CLASSIFIER",
-                    weight=-20.0,
+                    weight=-25.0,
                     severity="INFO"
                 ))
 
-        # 5. Compute combined weighted risk score
+        # 5. Multi-Detector Evidence Fusion
         rule_score = rule_result.get("rule_score", 0.0)
         is_genuine_alert = rule_result.get("is_genuine_alert", False)
         hard_override = rule_result.get("hard_override_high_risk", False)
+        has_official_url = any(u.get("is_official") for u in url_results)
 
-        # Base calculation: Corroborating signals accumulate risk additively
-        accumulated_score = (
-            (rule_score * 0.55) +
-            (nlp_score_component * 0.40) +
-            (max_url_score * 0.35) +
-            (qr_score * 0.40)
+        # Primary risk is driven by the strongest detector signal
+        max_signal = max(
+            nlp_risk_score if predicted_category != "legitimate" else 0.0,
+            rule_score,
+            max_url_score,
+            qr_score
         )
 
-        # Boost if multiple independent modules agree
-        modules_flagging = 0
-        if rule_score >= 25.0: modules_flagging += 1
-        if nlp_score_component >= 25.0: modules_flagging += 1
-        if max_url_score >= 35.0: modules_flagging += 1
-        if qr_score >= 35.0: modules_flagging += 1
-        
-        if modules_flagging >= 2:
-            accumulated_score += 15.0
+        # Corroborating signals boost confidence
+        corroborating = 0
+        if predicted_category != "legitimate" and nlp_confidence >= 0.70: corroborating += 1
+        if rule_score >= 35.0: corroborating += 1
+        if max_url_score >= 35.0: corroborating += 1
+        if qr_score >= 35.0: corroborating += 1
+
+        if corroborating >= 2:
+            max_signal = min(100.0, max_signal + 12.0)
 
         # Hard Overrides
         if hard_override:
-            accumulated_score = max(accumulated_score, 85.0)
+            max_signal = max(max_signal, 85.0)
             evidence_items.append(EvidenceItem(
                 signal=rule_result.get("override_reason", "Safety Hard Override Triggered: High-severity pattern detected."),
                 source_module="RULE_SAFETY_LAYER",
                 weight=50.0,
                 severity="CRITICAL"
             ))
-        elif max_url_score >= 70.0 and any("Brand Typosquatting" in e.signal for e in evidence_items):
-            accumulated_score = max(accumulated_score, 80.0)
+        elif max_url_score >= 70.0 and any("Brand Impersonation" in e.signal or "Typosquatting" in e.signal for e in evidence_items):
+            max_signal = max(max_signal, 85.0)
         elif qr_score >= 70.0:
-            accumulated_score = max(accumulated_score, 82.0)
+            max_signal = max(max_signal, 82.0)
 
-        # Genuine alert suppression (only if no hard override)
-        if is_genuine_alert and not hard_override and max_url_score < 40.0 and qr_score < 40.0:
-            accumulated_score = min(accumulated_score, 20.0)
+        # Genuine alert or verified official URL suppression (only when no malicious link or override)
+        if (is_genuine_alert or has_official_url) and not hard_override and max_url_score < 35.0 and qr_score < 35.0:
+            max_signal = min(max_signal, 20.0)
 
-        final_risk_score = int(round(max(0.0, min(100.0, accumulated_score))))
+        final_risk_score = int(round(max(0.0, min(100.0, max_signal))))
 
         # Verdict thresholding
         if final_risk_score <= settings.SAFE_MAX_SCORE:

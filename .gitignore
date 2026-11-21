@@ -18,6 +18,8 @@ htmlcov/
 # Environment files and credentials
 .env
 .env.local
+.admin_secret
+backend/data/.admin_secret
 *.pem
 *.key
 

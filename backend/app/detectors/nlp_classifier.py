@@ -1,21 +1,8 @@
 import os
-import re
 import joblib
 from typing import Dict, Any, Tuple
-
-# Unicode script ranges
-DEVANAGARI_REGEX = re.compile(r'[\u0900-\u097F]')
-TELUGU_REGEX = re.compile(r'[\u0C00-\u0C7F]')
-
-# Romanized keyword sets
-HINGLISH_KEYWORDS = {
-    "aapka", "kare", "karo", "turant", "paise", "aaya", "hoga", "rupaye",
-    "band", "khata", "bheje", "dekh", "liye", "batao", "bijli", "gaya"
-}
-ROMAN_TELUGU_KEYWORDS = {
-    "meeku", "cheyandi", "vachindi", "dabbulu", "kinda", "chudandi",
-    "aagadaniki", "lekapothe", "undalante", "kottandi", "ravali", "chesukondi"
-}
+from ..core.normalizer import text_normalizer
+from ..core.language_detector import language_detector
 
 class NLPClassifier:
     def __init__(self, model_path: str = None):
@@ -41,35 +28,18 @@ class NLPClassifier:
         """
         Detects primary language: en, hi, te (including Hinglish and Romanized Telugu).
         """
-        if not text:
-            return "en"
-
-        # Check native scripts first
-        devanagari_count = len(DEVANAGARI_REGEX.findall(text))
-        telugu_count = len(TELUGU_REGEX.findall(text))
-
-        if telugu_count >= 3:
-            return "te"
-        if devanagari_count >= 3:
-            return "hi"
-
-        # Check Romanized patterns
-        words = set(re.findall(r'\b[a-zA-Z]{3,}\b', text.lower()))
-        hinglish_hits = len(words.intersection(HINGLISH_KEYWORDS))
-        telugu_hits = len(words.intersection(ROMAN_TELUGU_KEYWORDS))
-
-        if telugu_hits > hinglish_hits and telugu_hits >= 1:
-            return "te"
-        if hinglish_hits >= 1:
-            return "hi"
-
-        return "en"
+        det = language_detector.detect(text)
+        return det["language"]
 
     def predict(self, text: str) -> Dict[str, Any]:
         """
-        Predicts scam category and confidence.
+        Predicts scam category and confidence with text normalization and calibration.
         """
-        lang = self.detect_language(text)
+        det_meta = language_detector.detect(text)
+        lang = det_meta["language"]
+
+        normalized_text = text_normalizer.normalize(text)
+        obfuscation_info = text_normalizer.analyze_obfuscation(text)
         
         if self.model is None:
             # Fallback if model not loaded
@@ -77,11 +47,13 @@ class NLPClassifier:
                 "category": "legitimate",
                 "confidence": 0.5,
                 "language": lang,
+                "language_meta": det_meta,
+                "obfuscation_info": obfuscation_info,
                 "probabilities": {"legitimate": 0.5}
             }
 
         try:
-            probs = self.model.predict_proba([text])[0]
+            probs = self.model.predict_proba([normalized_text])[0]
             classes = self.model.classes_
             prob_dict = {cls: float(prob) for cls, prob in zip(classes, probs)}
             best_cat = max(prob_dict, key=prob_dict.get)
@@ -91,6 +63,9 @@ class NLPClassifier:
                 "category": best_cat,
                 "confidence": round(best_prob, 4),
                 "language": lang,
+                "language_meta": det_meta,
+                "normalized_text": normalized_text,
+                "obfuscation_info": obfuscation_info,
                 "probabilities": prob_dict
             }
         except Exception as e:
@@ -99,8 +74,9 @@ class NLPClassifier:
                 "category": "legitimate",
                 "confidence": 0.5,
                 "language": lang,
+                "language_meta": det_meta,
+                "obfuscation_info": obfuscation_info,
                 "probabilities": {"legitimate": 0.5}
             }
 
-# Global singleton
 nlp_classifier = NLPClassifier()
