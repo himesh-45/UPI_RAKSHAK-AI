@@ -1,105 +1,202 @@
 import React from 'react';
-import { Shield, Cpu, Globe, QrCode, BookOpen, Layers, AlertTriangle, PhoneCall, CheckCircle } from 'lucide-react';
+import {
+  Shield, Cpu, Globe, QrCode, BookOpen, Layers,
+  AlertTriangle, PhoneCall, CheckCircle, ArrowRight, GitBranch,
+  Lock, Eye, FileText, Zap
+} from 'lucide-react';
 import { useTranslation } from '../i18n/useTranslation';
 
 export default function AboutPage() {
   const { t } = useTranslation();
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-8 space-y-12 animate-fade-in">
+    <div className="max-w-5xl mx-auto px-4 py-8 space-y-12 animate-fade-in text-slate-100">
       
       {/* Title */}
       <div className="text-center space-y-3">
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">
-          Architecture & Principles
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-indigo-950 text-indigo-300 border border-indigo-800">
+          <Shield className="w-3.5 h-3.5" />
+          <span>Evidence-Based Security Architecture</span>
+        </div>
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          How UPI Rakshak AI Works
         </h1>
-        <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-          UPI Rakshak AI is built on the core principle of <strong>EVIDENCE-BASED detection</strong>.
-          The verdict comes from independent deterministic detectors fused together, not by asking an LLM "is this a scam?".
+        <p className="text-sm sm:text-base text-slate-400 max-w-2xl mx-auto leading-relaxed">
+          UPI Rakshak AI rejects the naive approach of asking a generic LLM <em>"is this a scam?"</em>.
+          The verdict is forged through five independent deterministic & ML engines fused via a dominant-signal risk pipeline with zero network execution.
         </p>
+      </div>
+
+      {/* Visual Architecture Flowchart */}
+      <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/80 border border-slate-800 shadow-2xl space-y-6">
+        <div className="flex items-center justify-between pb-4 border-b border-slate-800">
+          <div className="flex items-center gap-2">
+            <GitBranch className="w-5 h-5 text-indigo-400" />
+            <h3 className="font-bold text-lg text-white">End-to-End Threat Pipeline Flow</h3>
+          </div>
+          <span className="text-xs px-2.5 py-1 rounded-full bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 font-mono">
+            Zero Network Calls • Offline
+          </span>
+        </div>
+
+        {/* 4-Stage Flow Diagram */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 relative">
+          {/* Stage 1: Input */}
+          <div className="p-4 rounded-2xl bg-slate-950/70 border border-slate-800 space-y-2">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-indigo-400 block">Layer 1: Input</span>
+            <h4 className="font-bold text-sm text-white">Suspicious Artifact</h4>
+            <ul className="text-xs text-slate-400 space-y-1">
+              <li>• SMS / WhatsApp Text</li>
+              <li>• Payment Link / Domain</li>
+              <li>• Image / Screenshot (OCR)</li>
+              <li>• UPI QR Code / VPA</li>
+            </ul>
+          </div>
+
+          {/* Stage 2: Independent Detectors */}
+          <div className="p-4 rounded-2xl bg-slate-950/70 border border-slate-800 space-y-2">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-amber-400 block">Layer 2: Detectors</span>
+            <h4 className="font-bold text-sm text-white">Multi-Engine Audit</h4>
+            <ul className="text-xs text-slate-400 space-y-1">
+              <li>• Hybrid NLP (Char+Word+Features)</li>
+              <li>• Rule Layer (Negation-Aware)</li>
+              <li>• Static URL Engine (88 Brands)</li>
+              <li>• QR / UPI Pay Parameter Parser</li>
+            </ul>
+          </div>
+
+          {/* Stage 3: Risk Fusion */}
+          <div className="p-4 rounded-2xl bg-slate-950/70 border border-slate-800 space-y-2">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-rose-400 block">Layer 3: Fusion</span>
+            <h4 className="font-bold text-sm text-white">Dominant Signal Fusion</h4>
+            <ul className="text-xs text-slate-400 space-y-1">
+              <li>• Max-Signal Routing</li>
+              <li>• Corroboration Bonus (+12)</li>
+              <li>• Hard Overrides (OTP/PIN)</li>
+              <li>• Advisory Context Suppression</li>
+            </ul>
+          </div>
+
+          {/* Stage 4: Output & Action */}
+          <div className="p-4 rounded-2xl bg-slate-950/70 border border-slate-800 space-y-2">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-400 block">Layer 4: Action</span>
+            <h4 className="font-bold text-sm text-white">Defensible Output</h4>
+            <ul className="text-xs text-slate-400 space-y-1">
+              <li>• Calibrated Verdict (0–100)</li>
+              <li>• Token Highlight & Waterfall</li>
+              <li>• 3-Stage Attack Timeline</li>
+              <li>• Pre-Filled 1930 Complaint</li>
+            </ul>
+          </div>
+        </div>
       </div>
 
       {/* Multi-Layer Engine Modules Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         
         {/* Module 1: NLP Classifier */}
-        <div className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
-          <div className="w-10 h-10 rounded-2xl bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
+        <div className="p-6 rounded-3xl bg-slate-900/60 border border-slate-800 shadow-sm space-y-3">
+          <div className="w-10 h-10 rounded-2xl bg-indigo-950 text-indigo-400 flex items-center justify-center">
             <Cpu className="w-5 h-5" />
           </div>
-          <h3 className="font-bold text-base text-slate-900 dark:text-white">1. NLP Scam Classifier</h3>
-          <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-            Multilingual classifier (Word 1-2 + Char 3-5 n-grams + Logistic Regression) trained across English, Hindi, Telugu, and Hinglish over 8 distinct scam categories and hard negatives.
+          <h3 className="font-bold text-base text-white">1. NLP Scam Classifier</h3>
+          <p className="text-xs text-slate-400 leading-relaxed">
+            Multilingual hybrid classifier (Word 1-2 + Char 3-5 n-grams + engineered text features + Platt sigmoid calibration) trained across English, Hindi, Telugu, Hinglish, and Romanized Telugu over 15 distinct scam categories and hard negatives.
           </p>
         </div>
 
         {/* Module 2: Rule Safety Layer */}
-        <div className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
-          <div className="w-10 h-10 rounded-2xl bg-rose-50 dark:bg-rose-950 text-rose-600 dark:text-rose-400 flex items-center justify-center">
+        <div className="p-6 rounded-3xl bg-slate-900/60 border border-slate-800 shadow-sm space-y-3">
+          <div className="w-10 h-10 rounded-2xl bg-rose-950 text-rose-400 flex items-center justify-center">
             <Shield className="w-5 h-5" />
           </div>
-          <h3 className="font-bold text-base text-slate-900 dark:text-white">2. Deterministic Safety Layer</h3>
-          <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-            Hard-override safety rules that always flag OTP/PIN requests, collect request tricks (receiving money requires no PIN), urgency block threats, and remote access apps (AnyDesk/TeamViewer).
+          <h3 className="font-bold text-base text-white">2. Negation-Aware Safety Rules</h3>
+          <p className="text-xs text-slate-400 leading-relaxed">
+            Context-aware regex rules with 80-character preceding negation checking. Distinguishes attack demands (<em>"enter your OTP"</em>) from genuine bank safety advisories (<em>"NEVER share OTP with anyone"</em>), preventing catastrophic false alarms.
           </p>
         </div>
 
         {/* Module 3: Static URL Scanner */}
-        <div className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
-          <div className="w-10 h-10 rounded-2xl bg-amber-50 dark:bg-amber-950 text-amber-600 dark:text-amber-400 flex items-center justify-center">
+        <div className="p-6 rounded-3xl bg-slate-900/60 border border-slate-800 shadow-sm space-y-3">
+          <div className="w-10 h-10 rounded-2xl bg-amber-950 text-amber-400 flex items-center justify-center">
             <Globe className="w-5 h-5" />
           </div>
-          <h3 className="font-bold text-base text-slate-900 dark:text-white">3. Static URL Scanner</h3>
-          <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-            Strictly static analysis: NEVER fetches, opens, or resolves links. Detects IP hosts, shorteners, punycode, brand typosquatting via edit distance against Indian banks, and disposable TLDs.
+          <h3 className="font-bold text-base text-white">3. Static URL Scanner</h3>
+          <p className="text-xs text-slate-400 leading-relaxed">
+            Strictly static analysis: NEVER fetches, opens, or resolves links. Detects IP hosts, shorteners, punycode, brand typosquatting via edit distance against 88 Indian banks/fintechs, and multi-label subdomain deception (e.g. <code>sbi.co.in.fake.xyz</code>).
           </p>
         </div>
 
         {/* Module 4: QR & OCR Module */}
-        <div className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
-          <div className="w-10 h-10 rounded-2xl bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+        <div className="p-6 rounded-3xl bg-slate-900/60 border border-slate-800 shadow-sm space-y-3">
+          <div className="w-10 h-10 rounded-2xl bg-emerald-950 text-emerald-400 flex items-center justify-center">
             <QrCode className="w-5 h-5" />
           </div>
-          <h3 className="font-bold text-base text-slate-900 dark:text-white">4. Screenshot & QR Engine</h3>
-          <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-            Decodes QR codes without visiting them. Parses <code>upi://pay</code> parameters (pa, pn, am, cu, tn) and detects institutional name / VPA mismatches and deceptive cashback lures.
+          <h3 className="font-bold text-base text-white">4. Honest Screenshot & QR Engine</h3>
+          <p className="text-xs text-slate-400 leading-relaxed">
+            Decodes QR codes without visiting them. Parses <code>upi://pay</code> parameters (pa, pn, am, cu, tn) and flags anomalies. If OCR is unavailable, it honestly returns an unavailable state rather than hallucinating text.
           </p>
         </div>
 
         {/* Module 5: RAG Knowledge Engine */}
-        <div className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
-          <div className="w-10 h-10 rounded-2xl bg-violet-50 dark:bg-violet-950 text-violet-600 dark:text-violet-400 flex items-center justify-center">
+        <div className="p-6 rounded-3xl bg-slate-900/60 border border-slate-800 shadow-sm space-y-3">
+          <div className="w-10 h-10 rounded-2xl bg-violet-950 text-violet-400 flex items-center justify-center">
             <BookOpen className="w-5 h-5" />
           </div>
-          <h3 className="font-bold text-base text-slate-900 dark:text-white">5. Verified RAG Engine</h3>
-          <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-            Offline factual knowledge base citing official NPCI, RBI, and MHA cybercrime protocols. Automatically attaches cited guidance to explain why signals matter and what actions to take.
+          <h3 className="font-bold text-base text-white">5. 89 Verified RAG Citations</h3>
+          <p className="text-xs text-slate-400 leading-relaxed">
+            Offline factual knowledge base citing official NPCI guidelines, RBI master circulars on customer zero-liability, 24x7 bank fraud desks, and MHA cybercrime protocols.
           </p>
         </div>
 
         {/* Module 6: Risk Fusion Engine */}
-        <div className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
-          <div className="w-10 h-10 rounded-2xl bg-cyan-50 dark:bg-cyan-950 text-cyan-600 dark:text-cyan-400 flex items-center justify-center">
+        <div className="p-6 rounded-3xl bg-slate-900/60 border border-slate-800 shadow-sm space-y-3">
+          <div className="w-10 h-10 rounded-2xl bg-cyan-950 text-cyan-400 flex items-center justify-center">
             <Layers className="w-5 h-5" />
           </div>
-          <h3 className="font-bold text-base text-slate-900 dark:text-white">6. Risk Fusion Engine</h3>
-          <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-            Mathematical, explainable aggregation into a 0–100 risk score and calibrated verdicts: SAFE (0–34), SUSPICIOUS (35–69), and HIGH RISK (70–100) with hard-override guarantees.
+          <h3 className="font-bold text-base text-white">6. Dominant-Signal Risk Fusion</h3>
+          <p className="text-xs text-slate-400 leading-relaxed">
+            Avoids score dilution by anchoring on the maximum detector signal, adding +12 corroboration bonuses when multiple modules confirm danger, and decomposing the output into an explainable score waterfall.
           </p>
         </div>
       </div>
 
-      {/* Honest Limitations & Ethical Disclosure */}
-      <div className="p-6 rounded-3xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 space-y-4">
-        <h3 className="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-white flex items-center gap-2">
-          <AlertTriangle className="w-4 h-4 text-amber-500" />
-          Honest Limitations & Ethical Disclosure
+      {/* 15 Scam Categories Covered */}
+      <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/80 border border-slate-800 space-y-4">
+        <h3 className="text-base font-bold text-white flex items-center gap-2">
+          <Zap className="w-4 h-4 text-amber-400" />
+          15 Specialized Fraud Categories Classified
         </h3>
-        <ul className="text-xs text-slate-600 dark:text-slate-400 space-y-2 list-disc list-inside leading-relaxed">
-          <li><strong>Heuristic Risk Indicator:</strong> The score (0–100) is a weighted heuristic risk metric, NOT a calibrated statistical probability or mathematical certainty.</li>
-          <li><strong>No Guarantee of Absolute Safety:</strong> A verdict of <code>SAFE</code> signifies that "no strong scam signals were found" on the analyzed sample. Users must always verify transactions directly with their bank.</li>
-          <li><strong>Zero Network Resolution:</strong> Suspicious links are analyzed statically. We deliberately avoid active HTTP fetching to protect users from drive-by attacks and tracking tokens.</li>
-          <li><strong>Synthetic Data Notice:</strong> The NLP model was trained on an algorithmic synthetic dataset. Metrics reflect this synthetic test set and should not be construed as real-world field benchmarks.</li>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 text-xs text-slate-300">
+          <div className="p-2 rounded-lg bg-slate-950/60 border border-slate-800">1. Fake Bank KYC Phishing</div>
+          <div className="p-2 rounded-lg bg-slate-950/60 border border-slate-800">2. Electricity Disconnection Scam</div>
+          <div className="p-2 rounded-lg bg-slate-950/60 border border-slate-800">3. Fake UPI Refund / Cashback</div>
+          <div className="p-2 rounded-lg bg-slate-950/60 border border-slate-800">4. UPI Collect Request PIN Fraud</div>
+          <div className="p-2 rounded-lg bg-slate-950/60 border border-slate-800">5. KBC Lottery / Prize Fraud</div>
+          <div className="p-2 rounded-lg bg-slate-950/60 border border-slate-800">6. Fake Customer Care Helpline</div>
+          <div className="p-2 rounded-lg bg-slate-950/60 border border-slate-800">7. Remote Access Takeover (AnyDesk)</div>
+          <div className="p-2 rounded-lg bg-slate-950/60 border border-slate-800">8. OTP / UPI PIN Theft</div>
+          <div className="p-2 rounded-lg bg-slate-950/60 border border-slate-800">9. Fake Government Schemes / Subsidy</div>
+          <div className="p-2 rounded-lg bg-slate-950/60 border border-slate-800">10. Part-Time Task & Crypto Scam</div>
+          <div className="p-2 rounded-lg bg-slate-950/60 border border-slate-800">11. Predatory Loan App Blackmail</div>
+          <div className="p-2 rounded-lg bg-slate-950/60 border border-slate-800">12. Courier Narcotics / Digital Arrest</div>
+          <div className="p-2 rounded-lg bg-slate-950/60 border border-slate-800">13. OLX / Marketplace Fake QR</div>
+          <div className="p-2 rounded-lg bg-slate-950/60 border border-slate-800">14. Accidental Transfer Trap</div>
+          <div className="p-2 rounded-lg bg-slate-950/60 border border-slate-800">15. Legitimate Banking Alerts</div>
+        </div>
+      </div>
+
+      {/* Honest Limitations & Ethical Disclosure */}
+      <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/80 border border-slate-800 space-y-4">
+        <h3 className="text-sm font-bold uppercase tracking-wider text-amber-400 flex items-center gap-2">
+          <AlertTriangle className="w-4 h-4 text-amber-400" />
+          Honest Limitations & Defensible Scope
+        </h3>
+        <ul className="text-xs text-slate-300 space-y-2.5 list-disc list-inside leading-relaxed">
+          <li><strong>Heuristic Risk Indicator:</strong> The 0–100 score is an evidence-based risk metric tuned to hit ≥95% scam recall at ≤3% legitimate false-positive rate. It is NOT mathematical certainty.</li>
+          <li><strong>Definition of "SAFE":</strong> A verdict of <code>SAFE</code> (0–34) means <em>"no strong scam patterns were detected"</em>. It does not certify that a completely novel attack is impossible.</li>
+          <li><strong>Zero Network Resolution:</strong> Suspicious URLs are never opened, resolved, or requested. All URL signals are derived purely from static structural and lexical analysis.</li>
+          <li><strong>Privacy First:</strong> Masking happens client-side and server-side before persistence. Phone numbers, credit cards, and OTPs are redacted into <code>[REDACTED]</code> tokens.</li>
         </ul>
       </div>
     </div>

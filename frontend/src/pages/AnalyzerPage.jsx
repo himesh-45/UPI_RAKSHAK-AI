@@ -340,6 +340,25 @@ export default function AnalyzerPage() {
         )}
       </div>
 
+      {/* Loading Skeleton Loader */}
+      {loading && (
+        <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl p-6 sm:p-8 space-y-6 animate-pulse">
+          <div className="flex flex-col lg:flex-row items-center gap-6 pb-6 border-b border-slate-100 dark:border-slate-800">
+            <div className="w-36 h-36 rounded-2xl bg-slate-200 dark:bg-slate-800 shrink-0" />
+            <div className="flex-1 space-y-3 w-full">
+              <div className="h-5 w-32 bg-slate-200 dark:bg-slate-800 rounded-lg" />
+              <div className="h-8 w-3/4 bg-slate-200 dark:bg-slate-800 rounded-lg" />
+              <div className="h-4 w-full bg-slate-200 dark:bg-slate-800 rounded-lg" />
+              <div className="h-4 w-2/3 bg-slate-200 dark:bg-slate-800 rounded-lg" />
+            </div>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="h-48 bg-slate-200 dark:bg-slate-800 rounded-2xl" />
+            <div className="h-48 bg-slate-200 dark:bg-slate-800 rounded-2xl" />
+          </div>
+        </div>
+      )}
+
       {/* Safety Report Output Card */}
       {report && (
         <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl p-6 sm:p-8 space-y-8 animate-fade-in">

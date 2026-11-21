@@ -85,6 +85,15 @@ export default function Navbar({ activeTab, setActiveTab, darkMode, setDarkMode,
 
         {/* Right Controls: Language Selector, Theme Toggle, Admin Button */}
         <div className="flex items-center gap-2">
+          {/* Emergency 1930 Direct Call Button */}
+          <a
+            href="tel:1930"
+            className="px-2.5 py-1 rounded-lg bg-rose-600 hover:bg-rose-500 text-white font-black text-xs uppercase tracking-wider flex items-center gap-1 shadow transition animate-pulse"
+            title="Call National Cybercrime Helpline 1930"
+          >
+            <span>1930</span>
+          </a>
+
           {/* Language Switcher */}
           <div className="flex items-center bg-slate-100 dark:bg-slate-900 p-0.5 rounded-lg border border-slate-200 dark:border-slate-800 text-[11px] font-bold">
             <button
