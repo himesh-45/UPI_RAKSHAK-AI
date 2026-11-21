@@ -47,7 +47,9 @@ VERIFY_CREDENTIAL_WORDS = [
     re.compile(r'(?i)\b(?:केवाईसी|अपडेट|वेबसाइट|లింక్|నవీకరించండి|సమర్పించండి)\b')
 ]
 
-# 6. Lottery / Advance-Fee Scam Patterns
+# 7. Disconnection / Block threat with personal phone contact or link
+PHONE_CONTACT_PATTERN = re.compile(r'(?i)(?:call|contact|संपर्क|कॉल|సంప్రదించండి|ఫోన్).*?(?:\+91[-\s]?)?[6-9]\d{2,5}[-\s]?\d{3,5}')
+
 LOTTERY_FEE_PATTERNS = [
     re.compile(r'(?i)\b(?:won|winner|lottery|lucky draw|prize|kbc|giveaway)\b.*?\b(?:lakh|crore|car|iphone)\b'),
     re.compile(r'(?i)\b(?:registration fee|processing fee|tax|shipping fee|refundable)\b.*?\b(?:pay|deposit|upi|transfer)\b')
@@ -154,12 +156,28 @@ class RuleSafetyEngine:
                 })
                 break
 
+        # 7. Disconnection / Block threat with personal phone contact
+        has_phone_threat = False
+        if has_urgency and PHONE_CONTACT_PATTERN.search(text):
+            has_phone_threat = True
+            matched_rules.append({
+                "signal": "Coercive Threat with Personal Phone Contact: Urgency ultimatum directing victim to call a personal mobile number.",
+                "source_module": "RULE_SAFETY_LAYER",
+                "weight": 35.0,
+                "severity": "HIGH"
+            })
+
         # Hard Override evaluation:
         # OTP request + Urgency => Immediate HIGH RISK override
         # Collect request PIN trick => Immediate HIGH RISK override
         # Remote app + urgency/refund => Immediate HIGH RISK override
+        # Utility power disconnection threat + phone/link => Immediate HIGH RISK override
         hard_override_high_risk = False
         override_reason = None
+
+        is_utility_threat = has_urgency and (has_phone_threat or has_link) and any(
+            kw in text.lower() for kw in ["बिजली", "electricity", "power", "విద్యుత్", "bill", "disconnect", "कट", "బిల్లు"]
+        )
 
         if has_otp_request and (has_urgency or has_link):
             hard_override_high_risk = True
@@ -170,6 +188,9 @@ class RuleSafetyEngine:
         elif has_remote_app:
             hard_override_high_risk = True
             override_reason = "Hard Override Triggered: Remote access application installation request."
+        elif is_utility_threat:
+            hard_override_high_risk = True
+            override_reason = "Hard Override Triggered: Utility disconnection threat directing contact to unauthorized mobile/link."
 
         # Compute rule sub-score
         base_rule_score = sum(r["weight"] for r in matched_rules)
