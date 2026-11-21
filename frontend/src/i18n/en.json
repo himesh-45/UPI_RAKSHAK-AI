@@ -1,0 +1,78 @@
+{
+  "appName": "UPI Rakshak AI",
+  "appTagline": "Real-Time Evidence-Based Digital-Payment Scam Detection & Prevention Platform",
+  "nav": {
+    "analyzer": "Threat Analyzer",
+    "assistant": "AI Assistant",
+    "dashboard": "Admin Intelligence",
+    "about": "How It Works"
+  },
+  "hero": {
+    "badge": "Offline-First • Evidence-Based • Multilingual (EN / HI / TE)",
+    "title": "Protecting Every Indian From Digital Payment Scams",
+    "subtitle": "Instant verification for suspicious SMS, WhatsApp messages, payment links, screenshots, and UPI QR codes."
+  },
+  "tabs": {
+    "text": "Message / SMS",
+    "url": "Suspicious Link",
+    "image": "Screenshot / QR"
+  },
+  "analyzer": {
+    "textPlaceholder": "Paste suspicious SMS, WhatsApp message, or payment notification here...",
+    "urlPlaceholder": "Enter suspicious URL (e.g., http://sbi-kyc-update.top/login)...",
+    "uploadPrompt": "Click or drag & drop a payment screenshot or QR code image",
+    "uploadHint": "PNG, JPG, or WEBP up to 10MB. We decode QR codes without opening links.",
+    "saveHistoryLabel": "Log masked analysis to audit history",
+    "analyzeBtn": "Analyze Threat",
+    "analyzing": "Running Multi-Layer Intelligence Engine...",
+    "sampleChipsTitle": "Try Demo Scenarios (Fictionalized Samples):"
+  },
+  "report": {
+    "safetyScore": "Safety Risk Score",
+    "heuristicDisclaimer": "Heuristic indicator based on independent pattern detectors, not a calibrated statistical probability. SAFE denotes no strong scam signals found. Always verify with your bank.",
+    "detectedCategory": "Detected Scam Category",
+    "evidenceTitle": "Ranked Evidence & Detection Signals",
+    "actionsTitle": "Recommended Immediate Actions",
+    "citationsTitle": "Verified Security Guidance & Authorities",
+    "reportScamBtn": "Report This Threat",
+    "copySummaryBtn": "Copy Summary",
+    "copied": "Copied to Clipboard!",
+    "helplineNotice": "If you lost money or shared credentials, immediately call 1930 (National Cyber Crime Helpline) or visit cybercrime.gov.in."
+  },
+  "assistant": {
+    "title": "Multilingual Safety Assistant",
+    "subtitle": "Ask questions in English, Hindi, or Telugu. Speak or type.",
+    "placeholder": "Ask: 'I got this message. Is this real?' or paste a message...",
+    "send": "Send",
+    "listening": "Listening... Speak now",
+    "voiceNotSupported": "Web Speech API is not supported in this browser. Please type your query.",
+    "disclaimer": "Assistant answers are grounded strictly in detector evidence and official NPCI/RBI security guidelines."
+  },
+  "dashboard": {
+    "title": "Fraud Intelligence Dashboard",
+    "simulatedNotice": "SIMULATED DEMO DATA – Seeded historical patterns alongside live analyses for evaluation purposes.",
+    "totalAnalyses": "Total Analyses",
+    "safeCount": "Safe Verdicts",
+    "suspiciousCount": "Suspicious Alerts",
+    "highRiskCount": "High Risk Blocked",
+    "categoryDist": "Scam Category Distribution",
+    "languageBreakdown": "Language Breakdown",
+    "riskScoreDist": "Risk Score Distribution",
+    "recentHistory": "Recent Threat Analyses",
+    "threatReports": "User Threat Reports",
+    "filterLive": "Live Real-Time Data",
+    "filterSimulated": "Simulated Seed Data",
+    "filterAll": "All Data"
+  },
+  "auth": {
+    "adminLogin": "Admin Login",
+    "email": "Email Address",
+    "password": "Password",
+    "loginBtn": "Sign In",
+    "logout": "Sign Out",
+    "demoCredentialsNotice": "Demo Credentials: admin@upirakshak.ai / AdminRakshak#2026"
+  },
+  "footer": {
+    "disclaimer": "UPI Rakshak AI is an open-source educational prototype for consumer protection. National Cyber Crime Helpline: 1930 • cybercrime.gov.in"
+  }
+}
