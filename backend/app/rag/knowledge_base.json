@@ -1,0 +1,74 @@
+[
+  {
+    "id": "kb_upi_pin_receiving",
+    "category": "fake_upi_refund_cashback",
+    "title": "UPI Architecture: Receiving Money Never Requires a PIN or Collect Request",
+    "source": "NPCI Guidelines on Unified Payments Interface (UPI) Security",
+    "tags": ["upi", "pin", "receive", "cashback", "refund", "collect", "qr"],
+    "content": "In the UPI architecture governed by the National Payments Corporation of India (NPCI), entering your UPI PIN is STRICTLY an authorization to DEBIT funds from your account. Receiving money, refunds, cashback, or rewards NEVER requires entering a UPI PIN, scanning a QR code, or accepting a collect request. If any person or app requests your UPI PIN to credit money, it is guaranteed to be an unauthorized attempt to siphon funds.",
+    "actionable_guidance": "Decline all collect requests immediately. Never enter your UPI PIN unless you intend to transfer money out. Report unauthorized collect handles in your UPI app."
+  },
+  {
+    "id": "kb_helpline_1930",
+    "category": "general",
+    "title": "Reporting Cyber Fraud: National Helpline 1930 & Golden Hour Freezing",
+    "source": "Ministry of Home Affairs (MHA) — Citizen Financial Cyber Fraud Reporting System",
+    "tags": ["1930", "helpline", "cybercrime", "report", "freeze", "police", "golden hour"],
+    "content": "If you have accidentally entered your PIN, shared an OTP, or transferred money to a scammer, immediately call the National Cyber Crime Helpline number '1930' (formerly 155260) or register an incident at https://cybercrime.gov.in. Under the Citizen Financial Cyber Fraud Reporting and Management System (CFCFRMS), if an incident is reported within the 'Golden Hour' (first 2-3 hours), police and financial intermediaries can coordinate to freeze the illicit funds in the beneficiary mule account before withdrawal.",
+    "actionable_guidance": "1. Call 1930 immediately. 2. Contact your bank's 24x7 fraud desk to block your debit card and NetBanking access. 3. Lodge a formal complaint at cybercrime.gov.in with transaction UTR numbers."
+  },
+  {
+    "id": "kb_fake_kyc_block",
+    "category": "fake_bank_kyc",
+    "title": "Bank KYC Expiry & Account Block Phishing Protection",
+    "source": "Reserve Bank of India (RBI) Master Circular on Customer Protection",
+    "tags": ["kyc", "bank", "block", "freeze", "aadhaar", "pan", "sbi", "hdfc", "icici"],
+    "content": "Banks in India NEVER send SMS or WhatsApp messages containing clickable links demanding immediate KYC updates or threatening account suspension within hours. Official KYC re-verification is conducted in-person at the home branch or through certified Video-KYC within official, authenticated banking applications downloaded from Google Play Store or Apple App Store.",
+    "actionable_guidance": "Never click links received via SMS claiming to update KYC. Delete the message, do not enter PAN or Aadhaar details, and verify your account status by logging into your official bank mobile app."
+  },
+  {
+    "id": "kb_electricity_bill_scam",
+    "category": "electricity_disconnection",
+    "title": "Electricity Disconnection & Utility Bill Scam Advisory",
+    "source": "State Power Distribution Companies & CERT-In Cyber Threat Advisory",
+    "tags": ["electricity", "bill", "power", "disconnection", "bescom", "tsspdcl", "tneb", "uppcl"],
+    "content": "Fraudsters send deceptive SMS warnings claiming electricity power will be disconnected at '9:30 PM tonight' due to unpaid previous month bills. They provide a personal 10-digit mobile number claiming to be the 'Electricity Officer' or a link to a fake bill portal. Electricity distribution companies never disconnect power overnight without serving statutory written notices, nor do they instruct consumers to call personal mobile numbers.",
+    "actionable_guidance": "Do not call the phone number in the SMS. Check your actual electricity bill balance exclusively on your state utility's official consumer portal or through your authorized bill payment app (BBPS)."
+  },
+  {
+    "id": "kb_remote_access_apps",
+    "category": "fake_customer_support",
+    "title": "Remote Access Device Takeover Scam (AnyDesk / TeamViewer / QuickSupport)",
+    "source": "Cyber Crime Investigation Cell & RBI Advisory on Social Engineering",
+    "tags": ["anydesk", "teamviewer", "quicksupport", "rustdesk", "support", "remote", "screen"],
+    "content": "Scammers posing as bank customer support, courier helpdesks, or telecom executives trick victims into downloading remote desktop applications (e.g., AnyDesk, TeamViewer QuickSupport, RustDesk). Once installed, they ask for the 9-digit session code, granting full visual screen access and remote touch controls. This allows attackers to view incoming 2FA SMS and steal OTPs in real-time.",
+    "actionable_guidance": "Never install remote desktop software upon unsolicited advice from callers. If already installed, immediately turn on Airplane Mode, uninstall the remote application, and change all banking passwords from a separate clean device."
+  },
+  {
+    "id": "kb_lottery_advance_fee",
+    "category": "lottery_prize",
+    "title": "KBC Lucky Draw & Advance-Fee Fraud Detection",
+    "source": "Telecom Regulatory Authority of India (TRAI) & National Consumer Helpline",
+    "tags": ["lottery", "kbc", "prize", "lucky draw", "tax", "fee", "advance"],
+    "content": "Advance-fee fraud involves notifications congratulating the recipient on winning tens of lakhs in a lottery (e.g. KBC, Jio, automotive contests) they never entered. The scammer insists that before the prize money can be released, the winner must transfer an upfront 'refundable registration fee', 'GST tax', or 'processing charge'. Legitimate lotteries never demand upfront fees from winners via UPI.",
+    "actionable_guidance": "No genuine lottery asks for money to release winnings. Block the sender number immediately and report the message on TRAI's Chakshu portal (sancharsaathi.gov.in)."
+  },
+  {
+    "id": "kb_otp_pin_protection",
+    "category": "otp_pin_theft",
+    "title": "Two-Factor Authentication (OTP) and CVV Protection Rules",
+    "source": "RBI Mandate on Digital Payment Security & Fair Practices Code",
+    "tags": ["otp", "pin", "cvv", "password", "security", "two-factor"],
+    "content": "One-Time Passwords (OTPs) and Card Verification Values (CVV) are cryptographic security secrets intended solely for the customer. Bank employees, payment gateway representatives, police officers, and government agents are strictly prohibited by law from requesting your OTP or PIN under any circumstances.",
+    "actionable_guidance": "Never disclose OTPs, PINs, or CVVs over phone calls, SMS, WhatsApp, or third-party web forms. Read the entire SMS text: verify whether the OTP is authorizing a debit rather than a cancellation."
+  },
+  {
+    "id": "kb_official_domain_verification",
+    "category": "general",
+    "title": "Verifying Official Domains & Identifying Typosquatting",
+    "source": "National Internet Exchange of India (NIXI) & Indian Computer Emergency Response Team (CERT-In)",
+    "tags": ["domain", "url", "typosquatting", "phishing", "tld", "official"],
+    "content": "Official Indian banking websites operate strictly on authentic registered domains such as .bank, .co.in, or verified .com domains (e.g. sbi.co.in, onlinesbi.sbi, hdfcbank.com, icicibank.com). Government services exclusively utilize .gov.in or .nic.in domains. Fraudulent websites consistently deploy disposable high-risk TLDs (.top, .xyz, .click, .site) or insert hyphens and misspelled brand names.",
+    "actionable_guidance": "Examine the root domain before entering any credentials. Bookmark official banking portals directly rather than clicking links in SMS, emails, or search engine ads."
+  }
+]
