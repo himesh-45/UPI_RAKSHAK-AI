@@ -1,122 +1,82 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import React, { useState, useEffect } from 'react';
+import Navbar from './components/Navbar';
+import AnalyzerPage from './pages/AnalyzerPage';
+import AssistantPage from './pages/AssistantPage';
+import DashboardPage from './pages/DashboardPage';
+import AboutPage from './pages/AboutPage';
+import LoginModal from './components/LoginModal';
+import { TranslationProvider } from './i18n/useTranslation';
 
-function App() {
-  const [count, setCount] = useState(0)
+function AppContent() {
+  const [activeTab, setActiveTab] = useState('analyzer'); // 'analyzer', 'assistant', 'dashboard', 'about'
+  const [darkMode, setDarkMode] = useState(() => {
+    return localStorage.getItem('theme') === 'dark';
+  });
+  const [token, setToken] = useState(() => localStorage.getItem('upi_rakshak_token') || null);
+  const [loginModalOpen, setLoginModalOpen] = useState(false);
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+  }, [darkMode]);
+
+  const handleLoginSuccess = (newToken) => {
+    setToken(newToken);
+    localStorage.setItem('upi_rakshak_token', newToken);
+  };
+
+  const handleLogout = () => {
+    setToken(null);
+    localStorage.removeItem('upi_rakshak_token');
+  };
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors">
+      <Navbar
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        darkMode={darkMode}
+        setDarkMode={setDarkMode}
+        token={token}
+        onOpenLogin={() => setLoginModalOpen(true)}
+        onLogout={handleLogout}
+      />
 
-      <div className="ticks"></div>
+      <main className="flex-1">
+        {activeTab === 'analyzer' && <AnalyzerPage />}
+        {activeTab === 'assistant' && <AssistantPage />}
+        {activeTab === 'dashboard' && (
+          <DashboardPage token={token} onOpenLogin={() => setLoginModalOpen(true)} />
+        )}
+        {activeTab === 'about' && <AboutPage />}
+      </main>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+      <footer className="border-t border-slate-200 dark:border-slate-800 py-6 px-4 bg-white dark:bg-slate-950 text-center text-xs text-slate-500">
+        <p className="max-w-3xl mx-auto leading-relaxed">
+          <strong>UPI Rakshak AI</strong> is an offline-first, evidence-based digital payment scam detection system.
+          Prototype for consumer protection. Always confirm suspicious transactions with your bank.
+          National Cyber Crime Reporting Helpline: <strong>1930</strong> • <strong>cybercrime.gov.in</strong>
+        </p>
+      </footer>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      <LoginModal
+        isOpen={loginModalOpen}
+        onClose={() => setLoginModalOpen(false)}
+        onLoginSuccess={handleLoginSuccess}
+      />
+    </div>
+  );
 }
 
-export default App
+export default function App() {
+  return (
+    <TranslationProvider>
+      <AppContent />
+    </TranslationProvider>
+  );
+}
