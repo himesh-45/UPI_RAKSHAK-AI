@@ -92,3 +92,16 @@ This document records technical and design decisions made to keep the system rob
 ### Decision 23: Security Hardening & Zero-Network Guarantee
 - **Choice**: Enforced 5MB maximum file upload cap, sliding-window rate limiting with 5-minute stale IP prune, and pure static offline analysis with 0 socket connections to scanned URLs.
 - **Rationale**: Prevents DoS memory exhaustion, SSRF vulnerabilities, and malicious link detonation while protecting user privacy.
+
+
+### Decision 24: Comprehensive Zero-Network CI/CD Pipeline & Automated Verification Gate
+- **Choice**: Created `.github/workflows/ci.yml` orchestrating headless Python 3.11 test execution, Tesseract OCR system packages (`eng`, `hin`, `tel`), leakage-free ML evaluation gate verification, URL security benchmark, and Node.js Vite production build.
+- **Rationale**: Guarantees repeatable, automated verification of code quality, model accuracy thresholds, and frontend assets on every commit without external API dependencies.
+
+### Decision 25: 100% Secret-Free Deployment Architecture & Credential Hardening
+- **Choice**: Removed all default hardcoded admin passwords from `README.md`, `docker-compose.yml`, and documentation. The backend generates a random 16-character credential on first boot if `ADMIN_PASSWORD` is unset, prints it once to the console, and stores it in `data/.admin_secret`.
+- **Rationale**: Completely eliminates hardcoded credential vulnerabilities in public repositories and enforces production security best practices.
+
+### Decision 26: Complete 3-Minute Live Judge Presentation Script & 20-Point Technical Defense Matrix
+- **Choice**: Authored comprehensive evaluation documentation (`docs/DEMO_SCRIPT.md`, `docs/JUDGE_QA.md`, and `docs/PITCH_OUTLINE.md`) detailing the 3-minute live presentation flow, answers to 20 tough technical judge questions, and slide-by-slide pitch deck alignment.
+- **Rationale**: Equips the team with rigorous empirical defense points, code citations, and live demo choreography targeting maximum scoring across all hackathon evaluation criteria.

@@ -68,7 +68,7 @@ docker compose up --build
 
 - **Frontend Web UI**: [http://localhost:3000](http://localhost:3000)
 - **Backend API Docs**: [http://localhost:8000/docs](http://localhost:8000/docs)
-- **Admin Login**: `admin@upirakshak.ai` / `AdminRakshak#2026`
+- **Admin Login**: `admin@upirakshak.ai` (Password is configured via `ADMIN_PASSWORD` in `.env`. If unset, a secure random key is auto-generated on startup, printed once to the console, and stored in `data/.admin_secret`).
 
 ---
 

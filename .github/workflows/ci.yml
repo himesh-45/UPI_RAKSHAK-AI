@@ -1,0 +1,74 @@
+name: UPI Rakshak CI Pipeline
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test-and-verify:
+    name: Backend Tests, ML Evaluation & Frontend Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install System Dependencies (Tesseract OCR)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y tesseract-ocr tesseract-ocr-hin tesseract-ocr-tel libgl1 libglib2.0-0
+
+      - name: Install Python Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r backend/requirements.txt
+          pip install playwright pytest-playwright
+          python -m playwright install --with-deps chromium
+
+      - name: Verify Model Artifacts & Seed Database
+        run: |
+          python -m backend.app.scripts.generate_dataset
+          python -m backend.app.scripts.train_model
+          python -m backend.app.scripts.expand_knowledge_base
+          python -m backend.app.scripts.generate_demo_assets
+          python -m backend.app.scripts.seed_db
+
+      - name: Run Full Pytest Suite (104 Tests)
+        env:
+          DATABASE_URL: sqlite:///./data/upi_rakshak.db
+          JWT_SECRET: test_ci_jwt_secret_key_12345
+          ADMIN_EMAIL: admin@upirakshak.ai
+          ADMIN_PASSWORD: TestPassword#123
+        run: |
+          pytest backend/tests -v --durations=10
+
+      - name: Run ML Model Evaluation Gate (Leakage-Free Benchmark)
+        run: |
+          python -m backend.app.scripts.evaluate_models
+
+      - name: Run URL Scanner Security Benchmark
+        run: |
+          python -m backend.app.scripts.evaluate_url_scanner
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install Frontend Dependencies
+        working-directory: ./frontend
+        run: npm ci
+
+      - name: Verify Frontend Production Build
+        working-directory: ./frontend
+        run: npm run build

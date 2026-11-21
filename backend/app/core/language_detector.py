@@ -17,7 +17,9 @@ ROMAN_TELUGU_CHAR_NGRAMS = {
     "mee", "meeku", "chey", "cheya", "yandi", "vach", "vachi", "chindi", "dabb",
     "dabbul", "kott", "kottan", "undal", "aagad", "leka", "pothe", "chesu",
     "raval", "chuda", "ippud", "ippude", "vent", "ventan", "kinda", "gurin",
-    "telusu", "chala", "chesi", "padat", "padath", "avvaku", "evarik"
+    "telusu", "chala", "chesi", "padat", "padath", "avvaku", "evarik",
+    "katt", "katta", "kattaledu", "roju", "chesth", "chestharu", "ledu", "kaadu",
+    "undhi", "undi", "pamp", "pampin", "choodu", "chusth", "avuthundi"
 }
 
 ENGLISH_COMMON_WORDS = {
@@ -109,5 +111,7 @@ class NgramLanguageDetector:
             "sub_type": "standard_en",
             "confidence": 0.90 if english_score > 0 else 0.75
         }
+
+    detect_language = detect
 
 language_detector = NgramLanguageDetector()

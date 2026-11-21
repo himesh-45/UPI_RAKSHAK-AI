@@ -10,9 +10,9 @@ services:
       - "8000:8000"
     environment:
       - DATABASE_URL=sqlite:///./data/upi_rakshak.db
-      - JWT_SECRET=upi_rakshak_demo_jwt_secret_key_2026_super_safe
-      - ADMIN_EMAIL=admin@upirakshak.ai
-      - ADMIN_PASSWORD=AdminRakshak#2026
+      - JWT_SECRET=${JWT_SECRET:-upi_rakshak_demo_jwt_secret_key_2026_super_safe}
+      - ADMIN_EMAIL=${ADMIN_EMAIL:-admin@upirakshak.ai}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-}
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/health')"]
       interval: 10s
