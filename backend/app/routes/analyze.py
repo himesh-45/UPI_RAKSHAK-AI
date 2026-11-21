@@ -122,7 +122,7 @@ async def analyze_image(
 
     image_bytes = await file.read()
     if len(image_bytes) > MAX_FILE_SIZE_BYTES:
-        raise HTTPException(status_code=400, detail="File size exceeds maximum 10MB limit")
+        raise HTTPException(status_code=400, detail="File size exceeds maximum 5MB limit")
 
     # OCR & QR Pipeline
     ocr_res = ocr_pipeline.process_image(image_bytes)

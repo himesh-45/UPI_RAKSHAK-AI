@@ -88,3 +88,7 @@ This document records technical and design decisions made to keep the system rob
 ### Decision 22: Family/Elder Mode with Web Speech API Audio Synthesis
 - **Choice**: Integrated high-contrast large font toggle and browser-native SpeechSynthesisUtterance in `en-IN`, `hi-IN`, and `te-IN`.
 - **Rationale**: Addresses critical accessibility needs for senior citizens and low-literacy users without requiring heavy third-party audio API keys.
+
+### Decision 23: Security Hardening & Zero-Network Guarantee
+- **Choice**: Enforced 5MB maximum file upload cap, sliding-window rate limiting with 5-minute stale IP prune, and pure static offline analysis with 0 socket connections to scanned URLs.
+- **Rationale**: Prevents DoS memory exhaustion, SSRF vulnerabilities, and malicious link detonation while protecting user privacy.
