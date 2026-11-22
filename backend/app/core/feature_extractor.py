@@ -5,7 +5,9 @@ from .normalizer import text_normalizer
 # Domain keywords for engineered features
 URGENCY_WORDS = [
     "blocked", "suspended", "disconnected", "tonight", "immediately", "urgent",
-    "24 hours", "closed", "hold", "कट", "काट", "काट दी जाएगी", "ब्लॉक", "నిలిపివేయబడుతుంది", "బ్లాక్"
+    "24 hours", "closed", "hold", "काट दी जाएगी", "काट दिया जाएगा", "कट जाएगा",
+    "बिजली काट", "कनेक्शन काट", "आज रात", "ई-बिल", "ब्लॉक", "నిలిపివేయబడుతుంది",
+    "ఈ రాత్రి", "విద్యుత్ నిలిపివేత", "బ్లాక్"
 ]
 CREDENTIAL_WORDS = [
     "otp", "pin", "cvv", "password", "netbanking", "passcode", "पिन", "ओटीपी", "పిన్", "ఓటీపీ"

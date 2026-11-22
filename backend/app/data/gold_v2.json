@@ -1382,5 +1382,565 @@
     "language": "te",
     "is_hard_negative": false,
     "style": "rythu_bandhu_scam"
+  },
+  {
+    "id": "gold_v2_legit_036",
+    "text": "HDFC Bank: 849201 is your OTP for transaction of Rs 1,899.00 at AMAZON PAY. Valid for 10 mins. NEVER share OTP with anyone, even bank officials. Bank never calls asking for OTP.",
+    "category": "legitimate",
+    "language": "en",
+    "is_hard_negative": true,
+    "style": "bank_otp_warning"
+  },
+  {
+    "id": "gold_v2_legit_037",
+    "text": "ICICI Bank: Rs 5,420.00 debited from A/c XX4109 on 22-Nov-26 10:14:22. Info: UPI/532918291021/Zomato. Avail Bal: Rs 42,109.12. If not done by you, SMS BLOCK 4109 to 9215676766.",
+    "category": "legitimate",
+    "language": "en",
+    "is_hard_negative": true,
+    "style": "bank_debit_alert"
+  },
+  {
+    "id": "gold_v2_legit_038",
+    "text": "Axis Bank: Your A/c no. XX9921 has been credited with Rs 45,000.00 on 22-Nov-26 by NEFT-TCS LTD-SALARY. Net available balance: Rs 58,340.20.",
+    "category": "legitimate",
+    "language": "en",
+    "is_hard_negative": false,
+    "style": "salary_credit"
+  },
+  {
+    "id": "gold_v2_legit_039",
+    "text": "Kotak Bank: Dear Customer, 391802 is your Secret OTP for NetBanking login. Do NOT disclose this OTP to anyone over call or SMS. We never call to verify your credentials.",
+    "category": "legitimate",
+    "language": "en",
+    "is_hard_negative": true,
+    "style": "netbanking_otp_warning"
+  },
+  {
+    "id": "gold_v2_legit_040",
+    "text": "State Bank of India: Your request for cheque book of A/c No. ...5812 has been received and processed. Tracking ID: SBICHQ4910291 via Speed Post.",
+    "category": "legitimate",
+    "language": "en",
+    "is_hard_negative": false,
+    "style": "bank_service_notice"
+  },
+  {
+    "id": "gold_v2_legit_041",
+    "text": "Canara Bank: Rs 2,500.00 withdrawn from ATM ID S1NA0049 on 22-Nov-26 09:30 AM from card ending 8812. Available balance: Rs 14,290.00. Call 18004250018 if not done by you.",
+    "category": "legitimate",
+    "language": "en",
+    "is_hard_negative": true,
+    "style": "atm_withdrawal"
+  },
+  {
+    "id": "gold_v2_legit_042",
+    "text": "Bank of Baroda: Mandate of Rs 499.00 towards NETFLIX ENTERTAINMENT processed successfully from A/c XX7219 on 22-Nov-26. Next auto-debit on 22-Dec-26.",
+    "category": "legitimate",
+    "language": "en",
+    "is_hard_negative": false,
+    "style": "mandate_debit"
+  },
+  {
+    "id": "gold_v2_legit_043",
+    "text": "Security Alert: PNB never sends SMS or WhatsApp asking you to update KYC via APK files or external links. Update KYC only at your home branch or official pnbindia.in portal.",
+    "category": "legitimate",
+    "language": "en",
+    "is_hard_negative": true,
+    "style": "bank_security_advisory"
+  },
+  {
+    "id": "gold_v2_legit_044",
+    "text": "SBI Card: Rs. 14,999.00 spent on your Credit Card ending 3012 at CROMA RETAIL on 22-Nov-26. Avail credit limit: Rs 1,45,001.00. If unauthorized, SMS NO to 5676791.",
+    "category": "legitimate",
+    "language": "en",
+    "is_hard_negative": true,
+    "style": "credit_card_alert"
+  },
+  {
+    "id": "gold_v2_legit_045",
+    "text": "Union Bank of India: Rs 350.00 credited to A/c XX3312 on 22-Nov-26 by UPI refund from SWIGGY. Ref no 632190821910.",
+    "category": "legitimate",
+    "language": "en",
+    "is_hard_negative": true,
+    "style": "genuine_refund_credit"
+  },
+  {
+    "id": "gold_v2_legit_046",
+    "text": "Flipkart: Your delivery associate Ramesh is out for delivery with order OD392019201. Share delivery PIN 5921 only when the package is handed over to you.",
+    "category": "legitimate",
+    "language": "en",
+    "is_hard_negative": true,
+    "style": "delivery_pin_instruction"
+  },
+  {
+    "id": "gold_v2_legit_047",
+    "text": "Amazon: Your package with order #402-8192019-39102 is arriving today by 8 PM. Track your package live in the Amazon App. Share delivery code 4821 with driver upon arrival.",
+    "category": "legitimate",
+    "language": "en",
+    "is_hard_negative": true,
+    "style": "amazon_delivery_code"
+  },
+  {
+    "id": "gold_v2_legit_048",
+    "text": "BlueDart: AWB #3910291039 shipped by Apple India is scheduled for delivery today. Signature or OTP required at doorstep. Our courier staff will never ask for payment online.",
+    "category": "legitimate",
+    "language": "en",
+    "is_hard_negative": true,
+    "style": "courier_status_legit"
+  },
+  {
+    "id": "gold_v2_legit_049",
+    "text": "Zepto: Your order #ZP-94821 has been delivered in 8 mins! Total paid Rs 342 via UPI. View invoice in your app. Rate your delivery partner.",
+    "category": "legitimate",
+    "language": "en",
+    "is_hard_negative": false,
+    "style": "quick_commerce_delivered"
+  },
+  {
+    "id": "gold_v2_legit_050",
+    "text": "Blinkit: Order delivered at flat 402, Sunshine Apts. Delivery partner Vikram verified OTP 9210. Thank you for shopping with Blinkit!",
+    "category": "legitimate",
+    "language": "en",
+    "is_hard_negative": true,
+    "style": "grocery_delivery_receipt"
+  },
+  {
+    "id": "gold_v2_legit_051",
+    "text": "Delhivery: Shipment #DLHV8391021 from Myntra is out for delivery. Share OTP 7412 only at the time of accepting the parcel. Do not pay any extra delivery fee.",
+    "category": "legitimate",
+    "language": "en",
+    "is_hard_negative": true,
+    "style": "courier_otp_safety"
+  },
+  {
+    "id": "gold_v2_legit_052",
+    "text": "IRCTC: PNR 4829104921, Train 12723 TELANGANA EXP, 24-Nov-26, SL, Confirmed (S4, 42). Have a safe journey! Official IRCTC SMS.",
+    "category": "legitimate",
+    "language": "en",
+    "is_hard_negative": false,
+    "style": "irctc_ticket_confirmation"
+  },
+  {
+    "id": "gold_v2_legit_053",
+    "text": "Uber: Your ride with driver Suresh (KA03AB1234) has completed. Trip fare Rs 284.00 was paid via UPI (PhonePe). Receipt sent to your email.",
+    "category": "legitimate",
+    "language": "en",
+    "is_hard_negative": false,
+    "style": "cab_trip_receipt"
+  },
+  {
+    "id": "gold_v2_legit_054",
+    "text": "Zomato: Order #ZM-49102 confirmed with Burger King! Estimated delivery time 32 mins. Track live in the Zomato app.",
+    "category": "legitimate",
+    "language": "en",
+    "is_hard_negative": false,
+    "style": "food_order_update"
+  },
+  {
+    "id": "gold_v2_legit_055",
+    "text": "BookMyShow: Booking confirmed! 2 tickets for Inception at PVR Forum Koramangala, Audi 3, Seats F12, F13 on 23-Nov 7:30 PM. Show booking QR code at entrance.",
+    "category": "legitimate",
+    "language": "en",
+    "is_hard_negative": false,
+    "style": "movie_ticket_confirmation"
+  },
+  {
+    "id": "gold_v2_legit_056",
+    "text": "Apollo Pharmacy: Bill No. AP84910 generated for Rs 620.00. Prescriptions delivered. Thank you for choosing Apollo 24/7.",
+    "category": "legitimate",
+    "language": "en",
+    "is_hard_negative": false,
+    "style": "pharmacy_invoice"
+  },
+  {
+    "id": "gold_v2_legit_057",
+    "text": "Airtel: Recharge of Rs 299 successful for 9845012345. Unlimited calls + 1.5GB/day valid for 28 days. Check balance anytime on Airtel Thanks App.",
+    "category": "legitimate",
+    "language": "en",
+    "is_hard_negative": false,
+    "style": "telecom_recharge_success"
+  },
+  {
+    "id": "gold_v2_legit_058",
+    "text": "Jio: You have used 90% of your high-speed daily data quota of 2GB. Speed will be reduced to 64 Kbps after 100%. Recharge data booster on MyJio app.",
+    "category": "legitimate",
+    "language": "en",
+    "is_hard_negative": false,
+    "style": "telecom_data_alert"
+  },
+  {
+    "id": "gold_v2_legit_059",
+    "text": "Bescom: Payment of Rs 1,420.00 received against Consumer Account #04920193 on 22-Nov-26 via BBPS UPI. Transaction ID: BBPS4910291. Thank you.",
+    "category": "legitimate",
+    "language": "en",
+    "is_hard_negative": true,
+    "style": "electricity_bill_receipt"
+  },
+  {
+    "id": "gold_v2_legit_060",
+    "text": "Indane Gas: Refill booking order #749102 confirmed for consumer #1092491. Delivery scheduled within 2 working days. Cash or UPI at delivery.",
+    "category": "legitimate",
+    "language": "en",
+    "is_hard_negative": false,
+    "style": "lpg_refill_receipt"
+  },
+  {
+    "id": "gold_v2_legit_061",
+    "text": "भारतीय स्टेट बैंक: आपके खाते XX9012 से रु 1,500.00 का यूपीआई भुगतान सफल रहा। शेष राशि: रु 8,430.00। यदि यह आपने नहीं किया तो 1800111109 पर संपर्क करें।",
+    "category": "legitimate",
+    "language": "hi",
+    "is_hard_negative": true,
+    "style": "hindi_bank_debit"
+  },
+  {
+    "id": "gold_v2_legit_062",
+    "text": "पंजाब नेशनल बैंक: आपके खाते में रु 25,000.00 वेतन क्रेडिट हुआ है। दिनांक 22-11-26। उपलब्ध शेष: रु 31,450.00।",
+    "category": "legitimate",
+    "language": "hi",
+    "is_hard_negative": false,
+    "style": "hindi_salary_credit"
+  },
+  {
+    "id": "gold_v2_legit_063",
+    "text": "सावधानी: बैंक कभी भी फोन या व्हाट्सएप पर ओटीपी, यूपीआई पिन या पासवर्ड नहीं मांगता। किसी भी अनजान व्यक्ति के साथ विवरण साझा न करें।",
+    "category": "legitimate",
+    "language": "hi",
+    "is_hard_negative": true,
+    "style": "hindi_security_advisory"
+  },
+  {
+    "id": "gold_v2_legit_064",
+    "text": "बैंक ऑफ बड़ौदा: आपका वन टाइम पासवर्ड (OTP) 749201 है। यह 5 मिनट के लिए वैध है। कृपया इसे किसी के साथ साझा न करें।",
+    "category": "legitimate",
+    "language": "hi",
+    "is_hard_negative": true,
+    "style": "hindi_otp_warning"
+  },
+  {
+    "id": "gold_v2_legit_065",
+    "text": "उत्तर प्रदेश पावर कॉर्पोरेशन (UPPCL): आपके बिल खाता सं. 1928374 का भुगतान रु 850.00 सफलतापूर्वक प्राप्त हुआ। रसीद सं. 4910291। धन्यवाद।",
+    "category": "legitimate",
+    "language": "hi",
+    "is_hard_negative": true,
+    "style": "hindi_electricity_receipt"
+  },
+  {
+    "id": "gold_v2_legit_066",
+    "text": "फ्लिपकार्ट: आपका पार्सल आज डिलीवरी के लिए निकल चुका है। पार्सल मिलने पर डिलीवरी पार्टनर को पिन 4812 बताएं।",
+    "category": "legitimate",
+    "language": "hi",
+    "is_hard_negative": true,
+    "style": "hindi_delivery_pin"
+  },
+  {
+    "id": "gold_v2_legit_067",
+    "text": "अमेज़न इंडिया: आपका ऑर्डर #402-918231 सफलतापूर्वक डिलीवर हो गया है। खरीदारी के लिए धन्यवाद।",
+    "category": "legitimate",
+    "language": "hi",
+    "is_hard_negative": false,
+    "style": "hindi_delivery_delivered"
+  },
+  {
+    "id": "gold_v2_legit_068",
+    "text": "जियो: आपके मोबाइल 9876543210 का रु 239 का रिचार्ज सफल रहा। 28 दिन के लिए 1.5GB प्रतिदिन और असीमित कॉल।",
+    "category": "legitimate",
+    "language": "hi",
+    "is_hard_negative": false,
+    "style": "hindi_recharge_receipt"
+  },
+  {
+    "id": "gold_v2_legit_069",
+    "text": "आईआरसीटीसी: पीएनआर 2481920182, ट्रेन 12424 राजधानी एक्सप्रेस, सीट बी4-18, यात्रा 25 नवंबर। शुभ यात्रा!",
+    "category": "legitimate",
+    "language": "hi",
+    "is_hard_negative": false,
+    "style": "hindi_railway_ticket"
+  },
+  {
+    "id": "gold_v2_legit_070",
+    "text": "ईपीएफओ: आपके यूएएन 1012948210 पर नियोक्ता द्वारा माह अक्टूबर का अंशदान रु 3,600 जमा कर दिया गया है।",
+    "category": "legitimate",
+    "language": "hi",
+    "is_hard_negative": false,
+    "style": "hindi_epfo_credit"
+  },
+  {
+    "id": "gold_v2_legit_071",
+    "text": "जोमैटो: आपका ऑर्डर #84910 रेस्तरां द्वारा तैयार किया जा रहा है। डिलीवरी पार्टनर जल्द ही आपके पते पर पहुंचेगा।",
+    "category": "legitimate",
+    "language": "hi",
+    "is_hard_negative": false,
+    "style": "hindi_food_order"
+  },
+  {
+    "id": "gold_v2_legit_072",
+    "text": "एचडीएफसी बैंक: प्रिय ग्राहक, आपने क्रेडिट कार्ड बिल रु 4,200.00 का भुगतान किया है। धन्यवाद। उपलब्ध सीमा: रु 85,000.00।",
+    "category": "legitimate",
+    "language": "hi",
+    "is_hard_negative": false,
+    "style": "hindi_credit_card_bill"
+  },
+  {
+    "id": "gold_v2_legit_073",
+    "text": "Bhai maine Google Pay se 1200 bhej diye dinner ke. Check kar lena account me aa gaye kya.",
+    "category": "legitimate",
+    "language": "hi",
+    "is_hard_negative": true,
+    "style": "hinglish_p2p_chat"
+  },
+  {
+    "id": "gold_v2_legit_074",
+    "text": "Mummy maine electricity ka bill pay kar diya online, Rs 1450 the. Receipt WhatsApp kar di hai.",
+    "category": "legitimate",
+    "language": "hi",
+    "is_hard_negative": true,
+    "style": "hinglish_family_bill"
+  },
+  {
+    "id": "gold_v2_legit_075",
+    "text": "Arey rent transfer ho gaya broker ko. 15000 ka screenshot bhej diya hai group me.",
+    "category": "legitimate",
+    "language": "hi",
+    "is_hard_negative": false,
+    "style": "hinglish_rent_chat"
+  },
+  {
+    "id": "gold_v2_legit_076",
+    "text": "Cab wale bhaiya ko 250 cash de diya tha, ride complete ho gayi. Ghar pahunch gaya safe.",
+    "category": "legitimate",
+    "language": "hi",
+    "is_hard_negative": false,
+    "style": "hinglish_travel_chat"
+  },
+  {
+    "id": "gold_v2_legit_077",
+    "text": "Swiggy ka refund account me aa gaya Rs 220 jo item missing tha uska. Issue resolve ho gaya.",
+    "category": "legitimate",
+    "language": "hi",
+    "is_hard_negative": true,
+    "style": "hinglish_refund_chat"
+  },
+  {
+    "id": "gold_v2_legit_078",
+    "text": "Delivery boy ka call aaya tha, usne bola 10 min me packet dega. OTP maine dekh liya hai 4921.",
+    "category": "legitimate",
+    "language": "hi",
+    "is_hard_negative": true,
+    "style": "hinglish_delivery_chat"
+  },
+  {
+    "id": "gold_v2_legit_079",
+    "text": "Papa mediclaim ka premium pay ho gaya policybazaar se, receipt download kar li hai maine.",
+    "category": "legitimate",
+    "language": "hi",
+    "is_hard_negative": false,
+    "style": "hinglish_insurance_chat"
+  },
+  {
+    "id": "gold_v2_legit_080",
+    "text": "Bhai tu splitwise pe add kar de movie tickets ka, mai PhonePe pe settle kar dunga shaam ko.",
+    "category": "legitimate",
+    "language": "hi",
+    "is_hard_negative": false,
+    "style": "hinglish_splitwise_chat"
+  },
+  {
+    "id": "gold_v2_legit_081",
+    "text": "Sir, society maintenance charges Rs 3,000 for Nov month credit ho gaye hain. Official receipt attached.",
+    "category": "legitimate",
+    "language": "hi",
+    "is_hard_negative": false,
+    "style": "hinglish_maintenance_receipt"
+  },
+  {
+    "id": "gold_v2_legit_082",
+    "text": "Amazon parcel aa gaya security guard ke paas drop kar diya hai usne.",
+    "category": "legitimate",
+    "language": "hi",
+    "is_hard_negative": false,
+    "style": "hinglish_courier_drop"
+  },
+  {
+    "id": "gold_v2_legit_083",
+    "text": "స్టేట్ బ్యాంక్ ఆఫ్ ఇండియా: మీ ఖాతా XX4912 నుండి రూ. 2,400.00 డెబిట్ చేయబడింది. అందుబాటులో ఉన్న నిల్వ: రూ. 16,320.00. ఎవరితోనూ మీ పిన్ లేదా ఓటీపీ పంచుకోవద్దు.",
+    "category": "legitimate",
+    "language": "te",
+    "is_hard_negative": true,
+    "style": "telugu_bank_debit"
+  },
+  {
+    "id": "gold_v2_legit_084",
+    "text": "ఆంధ్రా బ్యాంక్ / యూనియన్ బ్యాంక్: మీ ఖాతాలో జీతం రూ. 38,000.00 జమ చేయబడింది. తేదీ 22-11-2026. ధన్యవాదాలు.",
+    "category": "legitimate",
+    "language": "te",
+    "is_hard_negative": false,
+    "style": "telugu_salary_credit"
+  },
+  {
+    "id": "gold_v2_legit_085",
+    "text": "హెచ్‌డిఎఫ్‌సి బ్యాంక్: మీ నెట్‌బ్యాంకింగ్ లాగిన్ కోసం ఓటీపీ 582910. ఇది 3 నిమిషాలు మాత్రమే చెల్లుతుంది. ఈ ఓటీపీని ఎవరికీ చెప్పవద్దు.",
+    "category": "legitimate",
+    "language": "te",
+    "is_hard_negative": true,
+    "style": "telugu_otp_warning"
+  },
+  {
+    "id": "gold_v2_legit_086",
+    "text": "టిఎస్‌ఎస్‌పిడిసిఎల్ (TSSPDCL): మీ విద్యుత్ బిల్లు సర్వీస్ నెం. 10294821 రూ. 780.00 చెల్లింపు విజయవంతమైంది. రశీదు నెం. 692019.",
+    "category": "legitimate",
+    "language": "te",
+    "is_hard_negative": true,
+    "style": "telugu_electricity_receipt"
+  },
+  {
+    "id": "gold_v2_legit_087",
+    "text": "ఫ్లిప్‌కార్ట్: మీ ఆర్డర్ ఈరోజు డెలివరీ చేయబడుతుంది. డెలివరీ బాయ్‌కి పిన్ 3819 మాత్రమే చెప్పండి.",
+    "category": "legitimate",
+    "language": "te",
+    "is_hard_negative": true,
+    "style": "telugu_delivery_pin"
+  },
+  {
+    "id": "gold_v2_legit_088",
+    "text": "భారత్ గ్యాస్: మీ గ్యాస్ సిలిండర్ బుకింగ్ నెం. 491029 విజయవంతమైంది. డెలివరీ 2 రోజుల్లో జరుగుతుంది. డెలివరీ సమయంలో నగదు లేదా యూపీఐ ద్వారా చెల్లించండి.",
+    "category": "legitimate",
+    "language": "te",
+    "is_hard_negative": false,
+    "style": "telugu_gas_booking"
+  },
+  {
+    "id": "gold_v2_legit_089",
+    "text": "ఎయిర్‌టెల్: మీ మొబైల్ నంబర్ 9848012345 కు రూ. 299 రీఛార్జ్ విజయవంతమైంది. 28 రోజుల చెల్లుబాటు.",
+    "category": "legitimate",
+    "language": "te",
+    "is_hard_negative": false,
+    "style": "telugu_recharge_receipt"
+  },
+  {
+    "id": "gold_v2_legit_090",
+    "text": "ఆర్టీసీ / టిఎస్‌ఆర్‌టిసి: మీ బస్సు టికెట్ నెం. TS94819 నిర్ధారించబడింది. హైదరాబాద్ నుండి విజయవాడ, సీటు 14, సమయం రాత్రి 9:00. శుభ ప్రయాణం.",
+    "category": "legitimate",
+    "language": "te",
+    "is_hard_negative": false,
+    "style": "telugu_bus_ticket"
+  },
+  {
+    "id": "gold_v2_legit_091",
+    "text": "ఐసిఐసిఐ బ్యాంక్ భద్రతా హెచ్చరిక: బ్యాంక్ ఎప్పుడూ ఏపికె (APK) ఫైల్ డౌన్‌లోడ్ చేయమని లింకులు పంపదు. మోసపూరిత కాల్స్ నమ్మవద్దు.",
+    "category": "legitimate",
+    "language": "te",
+    "is_hard_negative": true,
+    "style": "telugu_security_warning"
+  },
+  {
+    "id": "gold_v2_legit_092",
+    "text": "స్విగ్గీ: మీ ఆహార ఆర్డర్ విజయవంతంగా డెలివరీ చేయబడింది. మా సేవలను ఉపయోగించినందుకు ధన్యవాదాలు.",
+    "category": "legitimate",
+    "language": "te",
+    "is_hard_negative": false,
+    "style": "telugu_food_delivered"
+  },
+  {
+    "id": "gold_v2_legit_093",
+    "text": "Amma nenu room rent kosam landlord ki PhonePe chesesanu 12,000. Receipt screenshot pampanu chudu.",
+    "category": "legitimate",
+    "language": "te",
+    "is_hard_negative": false,
+    "style": "roman_telugu_rent_chat"
+  },
+  {
+    "id": "gold_v2_legit_094",
+    "text": "Anna niku Google Pay lo 500 pampanu petrol kosam. Account lo chusuko vachindo ledo.",
+    "category": "legitimate",
+    "language": "te",
+    "is_hard_negative": true,
+    "style": "roman_telugu_p2p_chat"
+  },
+  {
+    "id": "gold_v2_legit_095",
+    "text": "Current bill pay chesesanu online lo, 650 rs aindi. Mee phone ki message vachinda?",
+    "category": "legitimate",
+    "language": "te",
+    "is_hard_negative": true,
+    "style": "roman_telugu_bill_chat"
+  },
+  {
+    "id": "gold_v2_legit_096",
+    "text": "Bava Amazon delivery boy vachadu, intlo evaru lerani call chesadu. Pakka intlo ivvamani cheppanu.",
+    "category": "legitimate",
+    "language": "te",
+    "is_hard_negative": false,
+    "style": "roman_telugu_delivery_chat"
+  },
+  {
+    "id": "gold_v2_legit_097",
+    "text": "Nenu supermarket bill 1850 pay chesa UPI dwara. D-Mart nunchi bayaluderuthunnanu.",
+    "category": "legitimate",
+    "language": "te",
+    "is_hard_negative": false,
+    "style": "roman_telugu_shopping_chat"
+  },
+  {
+    "id": "gold_v2_legit_098",
+    "text": "College exam fee 2500 SBI collect portal lo kattanu. Challan download cheskunna.",
+    "category": "legitimate",
+    "language": "te",
+    "is_hard_negative": false,
+    "style": "roman_telugu_fee_receipt"
+  },
+  {
+    "id": "gold_v2_legit_099",
+    "text": "Swiggy order cancel aindi, amount 350 bank account ki refund vachesindi ani message vachindi.",
+    "category": "legitimate",
+    "language": "te",
+    "is_hard_negative": true,
+    "style": "roman_telugu_refund_chat"
+  },
+  {
+    "id": "gold_v2_legit_100",
+    "text": "Repu tirupati ticket booking open avtundi, 300 rs darsanam tickets book cheddama?",
+    "category": "legitimate",
+    "language": "te",
+    "is_hard_negative": false,
+    "style": "roman_telugu_travel_chat"
+  },
+  {
+    "id": "gold_v2_legit_101",
+    "text": "Doctor consultation fee 600 Practo lo pay chesa. Appointment time 5:30 PM confirmed.",
+    "category": "legitimate",
+    "language": "te",
+    "is_hard_negative": false,
+    "style": "roman_telugu_doctor_chat"
+  },
+  {
+    "id": "gold_v2_legit_102",
+    "text": "Bhaiya wifi recharge 799 aipoindi, JioFiber active ayyindi malli. Net speed bagundi.",
+    "category": "legitimate",
+    "language": "te",
+    "is_hard_negative": false,
+    "style": "roman_telugu_wifi_chat"
+  },
+  {
+    "id": "gold_v2_legit_103",
+    "text": "Bike servicing bill 1400 showroom lo GPay chesa. Gaadi pick cheskuntunna ippude.",
+    "category": "legitimate",
+    "language": "te",
+    "is_hard_negative": false,
+    "style": "roman_telugu_bike_service"
+  },
+  {
+    "id": "gold_v2_legit_104",
+    "text": "Akka grocery list lo unnavi anni Blinkit lo order chesa, 10 minutes lo vastundi chusuko.",
+    "category": "legitimate",
+    "language": "te",
+    "is_hard_negative": false,
+    "style": "roman_telugu_grocery_chat"
+  },
+  {
+    "id": "gold_v2_legit_105",
+    "text": "Mee SBI debit card PIN evariki share cheyavaddani bank nunchi awareness message vachindi.",
+    "category": "legitimate",
+    "language": "te",
+    "is_hard_negative": true,
+    "style": "roman_telugu_security_advisory"
   }
 ]

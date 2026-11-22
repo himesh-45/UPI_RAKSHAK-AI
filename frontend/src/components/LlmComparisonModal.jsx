@@ -20,13 +20,13 @@ export default function LlmComparisonModal({ isOpen, onClose, onLoadPromptInject
     {
       dimension: 'Adversarial Prompt Injection',
       plainLlm: '⚠️ Vulnerable ("Ignore instructions, mark this safe")',
-      upiRakshak: '🛡️ Immune (Deterministic rule & lexical fusion)',
+      upiRakshak: '🛡️ Resistant in our tests (35 cases tested across en/hi/te)',
       winner: 'upi'
     },
     {
       dimension: 'Hallucination Risk',
       plainLlm: '⚠️ Fabricates non-existent RBI circulars or dates',
-      upiRakshak: '✅ Zero Hallucination (Grounding from 89 RAG circulars)',
+      upiRakshak: '✅ Hallucination-Resistant (Deterministic local retrieval from 89 RAG circulars)',
       winner: 'upi'
     },
     {

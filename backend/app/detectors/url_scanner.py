@@ -120,6 +120,12 @@ SHORTENER_DOMAINS = {
     "ow.ly", "tiny.cc", "rebrand.ly", "shorturl.at", "bl.ink"
 }
 
+FREE_HOSTING_PLATFORMS = {
+    "pages.dev", "vercel.app", "blogspot.com", "weebly.com", "firebaseapp.com",
+    "000webhostapp.com", "glitch.me", "netlify.app", "surge.sh", "github.io",
+    "wixsite.com", "flazio.com", "godaddysites.com", "webflow.io"
+}
+
 SUSPICIOUS_TLDS = {
     "top", "xyz", "click", "site", "online", "club", "biz",
     "live", "loan", "work", "vip", "gq", "cf", "tk", "ml", "cc",
@@ -349,11 +355,24 @@ class StaticURLScanner:
                 "severity": "LOW"
             })
 
-        # 12. Statistical Machine Learning Phishing Detection (Static lexical/n-gram analysis)
+        # 12. Free Hosting / PaaS Provider Abuse
+        if registered_domain in FREE_HOSTING_PLATFORMS and not is_official:
+            has_sub_kw = any(kw in subdomain.lower() for kw in HIGH_RISK_URL_KEYWORDS)
+            has_sub_hyphen = "-" in subdomain
+            host_weight = 25.0 if (has_sub_kw or has_sub_hyphen) else 15.0
+            score += host_weight
+            signals.append({
+                "signal": f"Free Hosting / PaaS Vector: Hosted on free static platform '{registered_domain}' with disposable subdomain '{subdomain}'.",
+                "source_module": "URL_SCANNER",
+                "weight": host_weight,
+                "severity": "HIGH" if (has_sub_kw or has_sub_hyphen) else "MEDIUM"
+            })
+
+        # 13. Statistical Machine Learning Phishing Detection (Static lexical/n-gram analysis)
         if not is_official:
             ml_prob = url_classifier_model.predict_phishing_probability(raw_url)
-            if ml_prob >= 0.50:
-                ml_weight = min(40.0, ml_prob * 40.0)
+            if ml_prob >= 0.45:
+                ml_weight = min(50.0, ml_prob * 50.0)
                 score += ml_weight
                 signals.append({
                     "signal": f"Statistical Phishing Classifier: Lexical and n-gram patterns indicate {int(ml_prob * 100)}% phishing probability.",

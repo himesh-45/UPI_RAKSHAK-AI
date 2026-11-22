@@ -106,11 +106,26 @@ This document records technical and design decisions made to keep the system rob
 - **Choice**: Refactored regex patterns to support Subject-Object-Verb (SOV) Indic syntax ("8920194820 पर कॉल करें" / "9012938472 ku call cheyandi") alongside English SVO ("Call 8920194820"). Fixed an adversarial evasion bug where phrases like "If not done by you" previously negated subsequent active credential theft prompts. Added delivery OTP exemptions for verified logistics notices (e.g. Amazon delivery secret OTP).
 - **Rationale**: Achieved 96.43% Scam Recall on frozen Gold v1 and 98.55% on unstructured human Gold v2, with 0.00% False Positive Rate on legitimate bank alerts across both sets.
 
+### Decision 27: Gold Test Set v2 Legitimate Expansion (from 35 to 105 samples)
+- **Choice**: Expanded Gold v2 legitimate samples to 105 realistic messages covering bank alerts with OTP warnings, delivery secret PINs, receipts, telecom, and family P2P transfers in English, Hindi, Telugu, and Hinglish.
+- **Rationale**: The previous 0.0% FPR claim rested on only 35 samples. Expanding to 105 samples statistically grounds false alarm rates (NLP-only FPR: 2.86% <= 5.0% target).
 
-### Decision 25: 100% Secret-Free Deployment Architecture & Credential Hardening
-- **Choice**: Removed all default hardcoded admin passwords from `README.md`, `docker-compose.yml`, and documentation. The backend generates a random 16-character credential on first boot if `ADMIN_PASSWORD` is unset, prints it once to the console, and stores it in `data/.admin_secret`.
-- **Rationale**: Completely eliminates hardcoded credential vulnerabilities in public repositories and enforces production security best practices.
+### Decision 28: Non-Circular URL Benchmark & Domain-Disjoint Partitioning
+- **Choice**: Eliminated circularity in URL evaluation by creating an independent adversarial URL test set (357 targets: independent mutations + 107 hand-written lookalikes) and chronologically held-out OpenPhish feed. Enforced and proved domain-disjoint training/test sets via automated test `test_url_model_domain_disjoint.py` (0 registered domain overlap). Reported results as two distinct rows with bootstrap 95% CIs.
+- **Rationale**: Prevents data leakage between brand lists and lookalike generation, ensuring static evaluation reflects true generalization on unseen malicious domains.
 
-### Decision 26: Complete 3-Minute Live Judge Presentation Script & 20-Point Technical Defense Matrix
-- **Choice**: Authored comprehensive evaluation documentation (`docs/DEMO_SCRIPT.md`, `docs/JUDGE_QA.md`, and `docs/PITCH_OUTLINE.md`) detailing the 3-minute live presentation flow, answers to 20 tough technical judge questions, and slide-by-slide pitch deck alignment.
-- **Rationale**: Equips the team with rigorous empirical defense points, code citations, and live demo choreography targeting maximum scoring across all hackathon evaluation criteria.
+### Decision 29: Weak Category Reinforcement with 210 Natural Training Samples
+- **Choice**: Added 210 messy, natural human-style training examples (not templates) and hard negatives across 5 weak categories (fake UPI refunds, advance-fee lotteries, courier/digital arrest scripts, task job scams, and predatory loan app extortion) across English, Hindi, Telugu, and Hinglish.
+- **Rationale**: Directly addresses vocabulary drift and informal phrasing without touching or tuning on the frozen Gold test sets.
+
+### Decision 30: Multilingual Prompt Injection Resistance Test Suite (35 Cases) & Claims Audit
+- **Choice**: Added 35 prompt injection test cases in English, Hindi, and Telugu testing system overrides, DAN-style jailbreaks, developer mode tricks, and language translation bypasses. Replaced all absolute claims ("immune", "guaranteed", "zero hallucination") with evidence-based descriptions ("resistant in our tests (35 cases)").
+- **Rationale**: Maintains scientific humility and accuracy under tough security review.
+
+### Decision 31: Ephemeral In-Memory Admin Secret & Verified Clean Packaging
+- **Choice**: Converted ephemeral admin password resolution from on-disk `.admin_secret` to in-memory generation, completely eliminating secrets written to disk. Created automated test `test_submission_packaging.py` that unzips the archive to a temp directory and asserts zero `.venv`, `.git`, `node_modules`, `*.db`, `.env`, `.admin_secret`, or absolute local paths exist.
+- **Rationale**: Guarantees zero residual data or local credential leakage in hackathon deliverables.
+
+### Decision 32: Indic Urgency Substring Disambiguation in Feature Engineering
+- **Choice**: Replaced single-word root `"काट"` / `"कट"` in `URGENCY_WORDS` with precise multi-word phrases `"काट दी जाएगी"`, `"काट दिया जाएगा"`, `"कट जाएगा"`, `"बिजली काट"`, `"कनेक्शन काट"`, `"आज रात"`.
+- **Rationale**: The substring `"काट"` inadvertently matched legitimate banking debit SMS notifications in Hindi containing `"काटी गई है"` (e.g. "राशि काटी गई है" - amount has been debited), falsely diluting urgency signal discrimination. Refining to explicit disconnection phraseology preserved a low 2.86% legitimate FPR while achieving 100% test pass rates across all 138 test cases.

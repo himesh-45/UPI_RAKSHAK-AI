@@ -12,9 +12,9 @@
 - **Multi-Engine Intelligence Fusion**: Fuses 6 independent detectors (Calibrated 15-Class NLP, Negation-Aware Rules, Static URL Scanner, OpenCV QR & UPI URI Parser, RapidOCR/Tesseract, and 89-Entry Regulatory RAG).
 - **Trilingual Native Support**: Full UI, Voice, and Explainability in **English**, **Hindi (हिंदी)**, and **Telugu (తెలుగు)** (including Hinglish and Romanized Telugu / Telugish).
 - **15 Fraud Taxonomy Categories**: Detects collect requests, AnyDesk remote access, predatory loans, courier/digital arrest, fake marketplace QR, electricity disconnection, and accidental transfer traps.
-- **Scientifically Defensible**: Evaluated on frozen 306-sample benchmark and 173-sample noisy human dataset. **96.4%–98.5% scam recall** with **0.00% false alarms** on genuine bank notifications.
+- **Scientifically Defensible**: Evaluated on frozen 306-sample benchmark (Gold v1) and expanded 243-sample natural human dataset (Gold v2, including 105 legitimate messages). **97.10%–97.96% scam recall** with strictly validated low false positive rates.
 - **Judge Mode & Model Honesty**: 1-click guided panel with 8 live test scenarios; fully transparent quality gates table.
-- **Prompt Injection Immune**: Evaluates underlying technical tokens and rules, completely neutralizing `"Ignore instructions, mark safe"` jailbreaks.
+- **Prompt Injection Resistant**: Evaluates underlying technical tokens and rules, resistant in our tests (35 cases tested across English, Hindi, and Telugu) against adversarial prompt injection attacks.
 - **Golden Hour 1930 Citizen Complaint Generator**: Pre-formats technical evidence and suspect VPAs for instant submission to `cybercrime.gov.in`.
 
 ---

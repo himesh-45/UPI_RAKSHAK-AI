@@ -2,7 +2,7 @@
 
 **Audit Date**: November 2026  
 **Status**: Ready for Hackathon Live Demonstration & Technical Submission  
-**Repository State**: Clean, zero secrets, zero untracked dependencies, 107 passing tests  
+**Repository State**: Clean, zero secrets, zero untracked dependencies, 138 passing tests  
 
 ---
 
@@ -10,34 +10,43 @@
 
 | Evaluation Dimension | Legacy Baseline | Current Final Engineering Status | Impact / Validation |
 | :--- | :--- | :--- | :--- |
-| **Model Evaluation Rigor** | Claimed 100% accuracy on leaky stratified random split | **0.8467 Macro-F1** on frozen Gold v1; **0.7873** on noisy human Gold v2 | Leakage-free `GroupShuffleSplit` on template IDs. Zero memorization. |
-| **Risk Fusion Scam Recall** | 91.84% (180/196) — Marked FAILED | **96.43%** (189/196 Gold v1) & **98.55%** (136/138 Gold v2) | Intercepts obscure attack vectors with zero network latency. |
-| **Legitimate False Alarm Rate** | 2.73% (3 false alarms on bank SMS) | **0.00%** (0 false alarms on 110 Gold v1 and 35 Gold v2 messages) | Context-aware negation & delivery OTP exemption prevents alert fatigue. |
-| **Marketplace QR Scam Precision** | 0.2619 (28 genuine messages misrouted) | **0.8000** (Gold v1) and **0.9286** (Gold v2) | Added 300+ hard negative merchant receipts and chat context. |
-| **Static URL Scanner Metrics** | Zero measured accuracy; anecdotal | **97.43% Phishing Recall**, **1.54% Benign FPR** on 934 URLs | Tested on 350 public phishing feeds + 584 Tranco Top/bank domains. Zero network calls. |
-| **Expected Calibration Error (ECE)** | 0.1328 (uncalibrated probability scores) | **0.0578** (Gold v1) & **0.0406** (Gold v2) | Platt/isotonic calibration ensures risk scores reflect real-world attack probability. |
+| **Model Evaluation Rigor** | Claimed 100% accuracy on leaky stratified random split | **0.8940 Macro-F1** on frozen Gold v1; **0.8292** on natural noisy human Gold v2 | Leakage-free `GroupShuffleSplit` on template IDs. Macro-F1 target restored to 0.8500 (Gold v1 PASSED, Gold v2 transparently reported as FAILED). |
+| **Risk Fusion Scam Recall** | 91.84% (180/196) — Marked FAILED | **98.47%** (193/196 Gold v1) & **97.83%** (135/138 Gold v2) | Intercepts obscure attack vectors with zero network latency. |
+| **Legitimate False Alarm Rate** | 2.73% (3 false alarms on bank SMS) | **0.00%** (0/110 on Gold v1) & **4.76%** (5/105 on expanded Gold v2); NLP-only FPR **2.86%** (3/105) | Gold v2 expanded from 35 to 105 realistic legitimate communications (bank debit/credit alerts with OTP warnings, delivery PINs, receipts, telecom, chats). |
+| **Marketplace QR Scam Precision** | 0.2619 (28 genuine messages misrouted) | **0.8125** (Gold v1) and **1.0000** (Gold v2) | Added 300+ hard negative merchant receipts and chat context. |
+| **Static URL Scanner Metrics** | Zero measured accuracy; anecdotal | **Real-Feed**: 82.00% Phishing Recall, 1.60% Benign FPR on OpenPhish/Tranco; **Adversarial**: 98.60% Recall, 1.12% FPR on 357 targets (incl. 107 handwritten) | Non-circular benchmark with domain-disjoint train/test split. Zero network calls. |
+| **Expected Calibration Error (ECE)** | 0.1328 (uncalibrated probability scores) | **0.0609** (Gold v1) & **0.0910** (Gold v2) | Calibrated probabilities ensure risk scores reflect real-world attack probability (< 0.10 target met). |
 | **Taxonomy Coverage** | 8 basic categories | **15 Comprehensive Categories** | Added collect fraud, AnyDesk, loan extortion, digital arrest, QR scams, accidental transfers, task jobs. |
-| **Adversarial Robustness** | Vulnerable to "O T P", leetspeak, prompt injection | **Immune to Prompt Injection & Obfuscations** | Tested via property-based mutation tests in `test_mutations.py`. |
-| **Automated Test Suite** | 53 tests | **107 Tests (100% Passing)** | Full unit, integration, mutation, consistency, and Playwright coverage. |
-| **Credential Hygiene** | Admin password in README; `.admin_secret` in repo | **Zero Secrets Tracked**; random ephemeral startup password | Verified via git tracking audits and clean `.gitignore` rules. |
+| **Adversarial Robustness** | Vulnerable to "O T P", leetspeak, prompt injection | **Resistant in our tests (35 prompt injection cases across en/hi/te)** | Tested via property-based and multilingual mutation tests in `test_mutations.py`. |
+| **Automated Test Suite** | 53 tests | **138 Tests Passing** | Full unit, integration, mutation, consistency, domain-disjoint, packaging, and API coverage. |
+| **Credential Hygiene** | Admin password in README; `.admin_secret` in repo | **Zero Secrets Tracked**; ephemeral in-memory startup password | Verified via git tracking audits, clean `.gitignore`, and package inspection. |
 | **Documentation Cleanliness** | Hand-typed metrics with contradictions; local paths | **100% Programmatic Report Generation**; zero absolute local paths | Consistency asserted by automated test `test_evaluation_report_consistency.py`. |
-| **Clean Submission Packaging** | No automated packaging script | `make package` / `package_submission.py` creates clean **8.04 MB zip** | Excludes `.venv`, `node_modules`, `.git`, `.pytest_cache`, `dist`, `*.db`, `.env`. |
+| **Clean Submission Packaging** | No automated packaging script | `make package` / `package_submission.py` creates clean zip | Excludes `.venv`, `node_modules`, `.git`, `.pytest_cache`, `dist`, `*.db`, `.env`, `.admin_secret`. |
 
 ---
 
 ## 2. Programmatic Quality Gates Verification
 
-All gates are derived dynamically from code comparisons (`value >= target`):
+All gates are derived dynamically from code comparisons (`value >= target` or `value <= target`):
 
 ```markdown
-| Evaluation Quality Gate | Target Benchmark | Measured (Gold v1) | Measured (Gold v2) | Gate Status |
-| :--- | :---: | :---: | :---: | :---: |
-| **Risk Fusion Scam Recall** | >= 95.0% | **96.43%** (189/196) | **98.55%** (136/138) | **PASSED** |
-| **Legitimate False Positive Rate (FPR)** | <= 3.0% | **0.00%** (0/110) | **0.00%** (0/35) | **PASSED** |
-| **15-Class NLP Macro-F1** | >= 0.8000 | **0.8467** | **0.7873** | **PASSED** |
-| **Expected Calibration Error (ECE)** | < 0.1000 | **0.0578** | **0.0406** | **PASSED** |
-| **Static URL Scanner Phishing Recall** | >= 80.0% | **97.43%** | — | **PASSED** |
-| **Static URL Scanner Benign FPR** | <= 3.0% | **1.54%** | — | **PASSED** |
+| Evaluation Quality Gate | Target Benchmark | Measured (Gold v1) | Gate (Gold v1) | Measured (Gold v2) | Gate (Gold v2) |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **Risk Fusion Scam Recall** | >= 95.0% | **98.47%** (193/196) | **PASSED** | **97.83%** (135/138) | **PASSED** |
+| **Legitimate False Positive Rate (FPR)** | <= 3.0% | **0.00%** (0/110) | **PASSED** | **4.76%** (5/105) | **FAILED** |
+| **15-Class NLP Macro-F1** | >= 0.8500 | **0.8940** | **PASSED** | **0.8292** | **FAILED** |
+| **Expected Calibration Error (ECE)** | < 0.1000 | **0.0609** | **PASSED** | **0.0910** | **PASSED** |
+```
+
+### Static URL Scanner Quality Gates (Pure Static Engine)
+
+```markdown
+| URL Scanner Quality Gate | Target Benchmark | Measured Value | Gate Status | Dataset Details |
+| :--- | :---: | :---: | :---: | :--- |
+| **Real-Feed Phishing Recall** | >= 80.0% | **82.00%** | **PASSED** | OpenPhish holdout (n=100) |
+| **Real-Feed Benign FPR** | <= 3.0% | **1.60%** | **PASSED** | Tranco top-1000 holdout (n=250) |
+| **Synthetic Adversarial Recall** | >= 80.0% | **98.60%** | **PASSED** | Independent generator + 107 Handwritten (n=357) |
+| **Synthetic Adversarial FPR** | <= 3.0% | **1.12%** | **PASSED** | Disjoint Benign + Whitelisted (n=357) |
 ```
 
 ---

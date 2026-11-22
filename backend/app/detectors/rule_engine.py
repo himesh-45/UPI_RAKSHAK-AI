@@ -21,22 +21,22 @@ NEGATION_PREFIX_REGEX = re.compile(
 # 1. Credential / OTP / PIN Theft Patterns (Active requests, both SVO and SOV Indic order)
 OTP_REQUEST_PATTERNS = [
     re.compile(r'(?i)\b(?:share|send|submit|tell|provide|verify|enter|forward|input)\b\s+(?:the\s+|your\s+|this\s+|received\s+)?(?:[a-zA-Z0-9-]+\s+){0,3}\b(?:otp|upi pin|atm pin|pin|cvv|password|passcode|secret code)\b'),
-    re.compile(r'(?i)\b(?:enter|put|submit|type|enter cheyandi|dale|bataye|cheppandi)\b.*?\b(?:otp|upi pin|atm pin|pin|cvv|password)\b.*?\b(?:to (?:authenticate|cancel|stop|freeze|claim|verify|reactivate)|par|lo)\b'),
-    re.compile(r'(?i)\b(?:otp|upi pin|pin|cvv|password)\b.*?\b(?:batao|bataye|bheje|share kare|cheppandi|share cheyandi|enter cheyandi|dale|darj kare)\b'),
+    re.compile(r'(?i)\b(?:enter|put|submit|type|enter cheyandi|dale|dalo|bataye|cheppandi)\b.*?\b(?:otp|upi pin|atm pin|pin|cvv|password)\b.*?\b(?:to (?:authenticate|cancel|stop|freeze|claim|verify|reactivate)|par|lo)\b'),
+    re.compile(r'(?i)\b(?:otp|upi pin|pin|cvv|password)\b.*?\b(?:batao|bataye|bheje|share kare|cheppandi|share cheyandi|enter cheyandi|dale|dalo|darj kare|kottu|enter karo)\b'),
     re.compile(r'(?i)\b(?:share\s+otp\s+received|send\s+otp\s+to|otp\s+manager|provide\s+(?:the\s+)?.*?otp)\b'),
-    re.compile(r'(?i)(?:ఓటీపీ నమోదు చేయండి|పిన్ నమోదు చేయండి|ఓటీపీ చెప్పండి|పిన నమోదు|ఓటీపీ ఎంటర్|పిన ఎంటర్|పిన కొట్టండి|पिन दर्ज करें|ओटीपी बताएं|ओटीपी साझा करें|ओटीपी दर्ज करें)')
+    re.compile(r'(?i)(?:ఓటీపీ నమోదు చేయండి|పిన్ నమోదు చేయండి|ఓటీపీ చెప్పండి|పిన నమోదు|ఓటీపీ ఎంటర్|పిన ఎంటర్|పిన కొట్టండి|पिन दर्ज करें|पिन डालें|पिन डालो|ओटीपी बताएं|ओटीपी साझा करें|ओटीपी दर्ज करें)')
 ]
 
 # 2. Collect Request Trick (Receiving money NEVER requires PIN)
 COLLECT_PIN_PATTERNS = [
-    re.compile(r'(?i)\b(?:enter|put|type|kottandi|dale|darj kare)\b.*?\b(?:pin|upi pin)\b.*?\b(?:to (?:receive|claim|collect|get|credit)|paise lene|dabbulu pondadaniki|paise paane)\b'),
+    re.compile(r'(?i)\b(?:enter|put|type|kottandi|dale|dalo|darj kare)\b.*?\b(?:pin|upi pin)\b.*?\b(?:to (?:receive|claim|collect|get|credit)|paise lene|dabbulu pondadaniki|paise paane)\b'),
     re.compile(r'(?i)\b(?:accept|approve)\b.*?\b(?:collect request|payment request|request|mandate)\b.*?\b(?:to (?:claim|receive|get|credit)|cashback|reward|refund|balance|instantly|pin|upi pin)\b'),
     re.compile(r'(?i)\b(?:receive|get|claim)\b.*?\b(?:cashback|refund|money|reward|advance|token|balance)\b.*?\b(?:enter|approve|accept|scan)\b.*?\b(?:upi pin|pin|qr)\b'),
     re.compile(r'(?i)\b(?:scan|qr\s*code)\b.*?\b(?:receive|get|claim|collect|credit)\b.*?\b(?:balance|money|funds|refund|cashback|bank|account|payment|advance|rs)\b'),
     re.compile(r'(?i)\b(?:olx|quikr|soldier|army)\b.*?\b(?:scan|qr|code)\b.*?\b(?:receive|payment|advance)\b'),
     re.compile(r'(?i)(?:కలెక్ట్ రిక్వెస్ట్|డబ్బులు పొందడానికి|రివార్డ్ పొందడానికి|క్రెడిట్ అవ్వాలంటే|అకౌంట్ లో పడతాయి).*?(?:పిన్|pin|upi pin|ఆమోద|అప్రూవ్)'),
     re.compile(r'(?i)(?:qr\s*(?:code|కోడ్|కోడ్|कोड)|స్కాన్|स्कैन).*?(?:పిన్|pin|upi pin).*?(?:డబ్బులు|పడతాయి|पैसे|credit|receive|account)'),
-    re.compile(r'(?i)(?:पैसे पाने के लिए|रिफंड पाने के लिए|कैशबैक पाने के लिए).*?(?:पिन दर्ज करें|पिन डालें|pin|कलेक्ट|स्वीकार)')
+    re.compile(r'(?i)(?:पैसे|रिफंड|कैशबैक|इनाम)\s*(?:पाने|प्राप्त करने|लेने)\s*के\s*लिए.*?(?:पिन दर्ज करें|पिन डालें|पिन डालो|pin|upi pin|कलेक्ट|स्वीकार)')
 ]
 
 # 3. Urgency & Account-Block Threat Patterns
@@ -68,9 +68,9 @@ PHONE_CONTACT_PATTERN = re.compile(
 # 7. Advance-fee lottery patterns
 LOTTERY_FEE_PATTERNS = [
     re.compile(r'(?i)\b(?:won|winner|lottery|lucky draw|prize|kbc|giveaway|crorepati|amitabh)\b.*?\b(?:lakh|crore|car|iphone|ticket)\b'),
-    re.compile(r'(?i)\b(?:registration fee|processing fee|tax|shipping fee|refundable|file charge)\b.*?\b(?:pay|deposit|upi|transfer)\b'),
-    re.compile(r'(?i)(?:केबीसी|लकी ड्रॉ|लॉटरी|इनाम|బహుమతి|లక్కీ డ్రా|లాటరీ|crorepati).*?(?:लाख|करोड़|lakh|crore|\d+\s*(?:लाख|crore|లక్షలు)|ticket|whatsapp)'),
-    re.compile(r'(?i)(?:lottery|lucky draw|लॉटरी|लकी ड्रॉ|లాటరీ|లక్కీ డ్రా).*?(?:call|कॉल|సంప్రదించండి|संपर्क|contact|manager|మేनेజర్)')
+    re.compile(r'(?i)\b(?:registration fee|processing fee|tax|shipping fee|refundable|file charge|फ़ाइल चार्ज)\b.*?\b(?:pay|deposit|upi|transfer|करें|करे)\b'),
+    re.compile(r'(?i)(?:(?:केबीसी|लकी ड्रॉ|लॉटरी|इनाम|బహుమతి|లక్కీ డ్రా|లాటరీ|crorepati).*?(?:लाख|करोड़|lakh|crore|\d+\s*(?:लाख|crore|లక్షలు)|ticket|whatsapp)|(?:लाख|करोड़|lakh|crore|\d+\s*(?:लाख|crore|లక్షలు)).*?(?:केबीसी|लकी ड्रॉ|लॉटरी|इनाम|బహుమతి|లక్కీ డ్రా|లాటరీ|crorepati))'),
+    re.compile(r'(?i)(?:lottery|lucky draw|लॉटरी|लकी ड्रॉ|లాటరీ|లక్కీ డ్రా).*?(?:call|कॉल|సంప్రదించండి|संपर्क|contact|manager|మేనేజర్)')
 ]
 
 # 8. Digital Arrest / Customs / Police threat
@@ -96,8 +96,8 @@ JOB_INVESTMENT_PATTERNS = [
 
 # 11. Accidental Transfer Scams
 ACCIDENTAL_TRANSFER_PATTERNS = [
-    re.compile(r'(?i)\b(?:mistake|accidentally|by mistake|galti se|porapatuna)\b.*?\b(?:transferred|sent|credited|refund|return|bheja)\b'),
-    re.compile(r'(?i)\b(?:refund|return|send back|wapas|return kijiye|wapas kijiye)\b.*?\b(?:different upi|another number|other vpa|alag number|warna|varna|police|fir)\b'),
+    re.compile(r'(?i)\b(?:mistake|accidentally|by mistake|galti se|porapatuna)\b.*?\b(?:transferred|sent|credited|refund|return|bhej\w*|pamp\w*|wapas)\b'),
+    re.compile(r'(?i)\b(?:refund|return|send back|wapas|return kijiye|wapas kijiye|wapas kar)\b.*?\b(?:different upi|another number|other vpa|alag number|warna|varna|police|fir|qr|qr code)\b'),
     re.compile(r'(?i)\b(?:credited to your account).*?\b(?:refund|return|different upi)\b')
 ]
 
