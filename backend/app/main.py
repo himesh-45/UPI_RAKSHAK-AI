@@ -70,7 +70,7 @@ def health_check():
         "timestamp": datetime.datetime.utcnow().isoformat() + "Z"
     }
 
-from .routes import analyze, assistant, report, dashboard, history, auth, study
+from .routes import analyze, assistant, report, dashboard, history, auth, study, reputation
 from .channels.telegram import router as telegram_router
 from .channels.whatsapp import router as whatsapp_router
 from .database import get_db
@@ -88,5 +88,6 @@ app.include_router(dashboard.router, prefix=settings.API_PREFIX)
 app.include_router(history.router, prefix=settings.API_PREFIX)
 app.include_router(auth.router, prefix=settings.API_PREFIX)
 app.include_router(study.router, prefix=settings.API_PREFIX)
+app.include_router(reputation.router, prefix=settings.API_PREFIX)
 app.include_router(telegram_router, prefix=settings.API_PREFIX)
 app.include_router(whatsapp_router, prefix=settings.API_PREFIX)

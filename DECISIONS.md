@@ -161,3 +161,19 @@ This document records technical and design decisions made to keep the system rob
 ### Decision 40: Right-to-be-Forgotten via `/delete_data` & Auto-Pruning
 - **Choice**: Implemented `/delete_data` bot command and `delete_user_channel_data()` removing all historical scans for a hashed sender ID, alongside `purge_old_channel_history(days=30)` for rolling retention.
 - **Rationale**: Provides verifiable user autonomy over data privacy, addressing tough security reviewer questions regarding auditability and data minimization.
+
+### Decision 41: Community Scam Reputation Architecture with Recency Decay & Agreement Gating
+- **Choice**: Created `backend/app/core/community_reputation.py` and routes in `backend/app/routes/reputation.py`. Normalizes phone numbers, VPAs, and URLs into deterministic SHA-256 hashes (`hash_entity()`). Enforces a strict consensus gate: reports from at least 2 distinct salted reporter hashes are required before an entity affects reputation scores or risk fusion. Applied an exponential half-life recency decay ($T_{1/2} = 30$ days) so stale reports naturally diminish.
+- **Rationale**: Prevents single-user bias or trolling from impacting live detection while surfacing recurring threat actors.
+
+### Decision 42: Anti-Poisoning Whitelist Immunity & Reporter Rate Limiting
+- **Choice**: Implemented strict whitelist immunity (`is_immune_entity()`) covering official commercial banks (SBI, HDFC, ICICI, Axis, PNB, etc.), regulatory bodies (NPCI, RBI, UIDAI), and critical government domains (`.gov.in`, `.nic.in`), plus verified public charity handles (e.g. `pmcares@sbi`). Added a 24-hour rate limit restricting each reporter to at most 1 report per entity per day.
+- **Rationale**: Defends against adversarial reporting attacks intended to take down legitimate banking handles or government helplines.
+
+### Decision 43: Strictly Capped Community Fusion Weight (+15 Max)
+- **Choice**: In `backend/app/fusion/risk_engine.py`, capped community reputation contribution to at most $+15.0$ points. Added an architectural rule that community reputation alone can NEVER escalate a benign or clean message into HIGH RISK ($\ge 70$); it can at most raise clean messages to 49 (SUSPICIOUS).
+- **Rationale**: Upholds the evidence-based principle: community sentiment corroborates technical evidence, but does not substitute for mathematical signals (NLP, lexical rules, static URL structure).
+
+### Decision 44: Public Dispute Workflow & Administrative Moderation
+- **Choice**: Implemented public dispute submission (`POST /api/reputation/dispute`) for merchants and consumers, along with authenticated administrative moderation (`/api/reputation/admin/pending`, `/api/reputation/admin/resolve`) to dismiss false flags or confirm validated threats.
+- **Rationale**: Protects legitimate small businesses and fintech operators against frivolous flags, creating an auditable dispute lifecycle.

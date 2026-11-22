@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { ShieldCheck, ShieldAlert, AlertTriangle, ArrowRight, CheckCircle2, Info } from 'lucide-react';
-import { analyzeVpa } from '../api/client';
+import { ShieldCheck, ShieldAlert, AlertTriangle, ArrowRight, CheckCircle2, Info, Users } from 'lucide-react';
+import { analyzeVpa, lookupReputation } from '../api/client';
 
 export default function VpaCheckTab() {
   const [vpa, setVpa] = useState('');
@@ -22,8 +22,11 @@ export default function VpaCheckTab() {
     setResult(null);
 
     try {
-      const data = await analyzeVpa(vpa.trim(), payeeName.trim(), amount, isCollect);
-      setResult(data);
+      const [data, repData] = await Promise.all([
+        analyzeVpa(vpa.trim(), payeeName.trim(), amount, isCollect),
+        lookupReputation('vpa', vpa.trim()).catch(() => null)
+      ]);
+      setResult({ ...data, community_reputation: repData });
     } catch (err) {
       setError(err.message || 'Verification failed');
     } finally {
@@ -209,6 +212,29 @@ export default function VpaCheckTab() {
             )}
             <span>{result.warning_notice}</span>
           </div>
+
+          {/* Community Consensus Reputation Banner */}
+          {result.community_reputation && (
+            <div className="mt-3 p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between text-xs">
+              <div className="flex items-center gap-2">
+                <span className="text-slate-400 font-semibold">Community Reputation:</span>
+                <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase ${
+                  result.community_reputation.reputation_status === 'KNOWN_SCAM'
+                    ? 'bg-rose-500/20 text-rose-300 border border-rose-500/40'
+                    : result.community_reputation.reputation_status === 'WHITELISTED'
+                    ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'
+                    : result.community_reputation.reputation_status === 'PENDING_CONSENSUS'
+                    ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40'
+                    : 'bg-slate-800 text-slate-300'
+                }`}>
+                  {result.community_reputation.reputation_status}
+                </span>
+              </div>
+              <span className="text-[11px] text-slate-400">
+                {result.community_reputation.distinct_reporters || 0} distinct reporters
+              </span>
+            </div>
+          )}
 
           {/* Reasons List */}
           <div className="mt-4 space-y-2">

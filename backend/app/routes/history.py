@@ -10,7 +10,7 @@ router = APIRouter(prefix="/history", tags=["History & Audit"])
 
 @router.get("")
 def get_history(
-    filter_type: str = Query("all", regex="^(all|live|simulated)$"),
+    filter_type: str = Query("all", pattern="^(all|live|simulated)$"),
     limit: int = Query(25, ge=1, le=100),
     offset: int = Query(0, ge=0),
     db: Session = Depends(get_db)

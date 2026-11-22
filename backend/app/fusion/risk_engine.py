@@ -5,6 +5,7 @@ from ..models.schemas import EvidenceItem, RAGCitation, SafetyReport, HighlightS
 from ..rag.retriever import rag_retriever
 from ..core.scam_story import scam_story_engine
 from ..core.normalizer import text_normalizer
+from ..core.community_reputation import lookup_community_reputation
 from ..detectors.url_scanner import URL_EXTRACT_REGEX
 
 PHONE_REGEX = re.compile(r'(?<!\d)(?:\+91[-\s]?)?[6-9]\d{9}(?!\d)')
@@ -449,6 +450,43 @@ class RiskFusionEngine:
                 explanation="UPI URI anomalies detected (collect request pre-fill or payee mismatch)."
             ))
 
+        # 4b. Community Reputation Consensus Check (Strictly Capped)
+        community_bonus = 0.0
+        candidate_entities = []
+        if text:
+            for ph in PHONE_REGEX.findall(text):
+                candidate_entities.append(("phone", ph))
+            for vpa in UPI_VPA_REGEX.findall(text):
+                candidate_entities.append(("vpa", vpa))
+        for u in url_results:
+            if u.get("url"):
+                candidate_entities.append(("url", u["url"]))
+
+        for ent_type, ent_val in candidate_entities[:5]:
+            try:
+                rep = lookup_community_reputation(ent_type, ent_val)
+                if rep.get("consensus_reached") and rep.get("fusion_points", 0) > 0:
+                    pts = min(15.0, rep["fusion_points"])
+                    if pts > community_bonus:
+                        community_bonus = pts
+                    evidence_items.append(EvidenceItem(
+                        signal=f"Community Reputation Consensus: Entity '{rep['masked_display']}' confirmed suspicious by {rep['distinct_reporters']} independent reporters.",
+                        source_module="COMMUNITY_REPUTATION",
+                        weight=pts,
+                        severity="HIGH" if pts >= 10 else "MEDIUM"
+                    ))
+            except Exception:
+                pass
+
+        if community_bonus > 0:
+            running_score += community_bonus
+            waterfall_steps.append(WaterfallStep(
+                component="Community Reputation Consensus",
+                points=round(community_bonus, 1),
+                running_total=round(running_score, 1),
+                explanation="Entity flagged by verified independent community reporters."
+            ))
+
         # 5. Multi-Detector Evidence Fusion
         has_official_url = any(u.get("is_official") for u in url_results)
 
@@ -458,6 +496,12 @@ class RiskFusionEngine:
             max_url_score,
             qr_score
         )
+        if community_bonus > 0:
+            # Strictly cap community reputation: can never push a safe message to HIGH RISK on its own
+            if max_signal <= settings.SAFE_MAX_SCORE:
+                max_signal = min(49.0, max_signal + community_bonus)
+            else:
+                max_signal = min(100.0, max_signal + community_bonus)
 
         # Corroborating signals boost
         corroborating = 0

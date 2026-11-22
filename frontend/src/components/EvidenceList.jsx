@@ -1,5 +1,5 @@
 import React from 'react';
-import { AlertCircle, CheckCircle2, ShieldAlert, Cpu, Globe, QrCode, FileText } from 'lucide-react';
+import { AlertCircle, CheckCircle2, ShieldAlert, Cpu, Globe, QrCode, FileText, Users } from 'lucide-react';
 
 export default function EvidenceList({ evidence = [] }) {
   if (!evidence || evidence.length === 0) {
@@ -16,6 +16,7 @@ export default function EvidenceList({ evidence = [] }) {
       case 'NLP_CLASSIFIER': return <Cpu className="w-3.5 h-3.5" />;
       case 'URL_SCANNER': return <Globe className="w-3.5 h-3.5" />;
       case 'QR_PARSER': return <QrCode className="w-3.5 h-3.5" />;
+      case 'COMMUNITY_REPUTATION': return <Users className="w-3.5 h-3.5" />;
       default: return <FileText className="w-3.5 h-3.5" />;
     }
   };

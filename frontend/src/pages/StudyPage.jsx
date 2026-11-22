@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Shield, AlertTriangle, CheckCircle, HelpCircle, ArrowRight, RotateCcw, Star, Award, BookOpen } from 'lucide-react';
-import axios from 'axios';
 
 const API_BASE = '/api';
 
@@ -31,8 +30,10 @@ export default function StudyPage() {
     setSessionId(newSessionId);
     setLoading(true);
     try {
-      const res = await axios.get(`${API_BASE}/study/items`);
-      setItems(res.data);
+      const res = await fetch(`${API_BASE}/study/items`);
+      if (!res.ok) throw new Error('Failed to load items');
+      const data = await res.json();
+      setItems(data);
       setCurrentIndex(0);
       setCollectedResponses([]);
       setHasConsented(true);
@@ -51,10 +52,16 @@ export default function StudyPage() {
     const currentItem = items[currentIndex];
     setEvaluating(true);
     try {
-      const res = await axios.post(`${API_BASE}/study/evaluate-item`, { text: currentItem.text });
-      setAnalysisResult(res.data);
+      const res = await fetch(`${API_BASE}/study/evaluate-item`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: currentItem.text })
+      });
+      if (!res.ok) throw new Error('Evaluation failed');
+      const data = await res.json();
+      setAnalysisResult(data);
       // Auto default wouldChange based on alignment
-      const toolIsScam = res.data.verdict === 'HIGH RISK' || res.data.verdict === 'SUSPICIOUS';
+      const toolIsScam = data.verdict === 'HIGH RISK' || data.verdict === 'SUSPICIOUS';
       const userIsScam = userGuess === 'scam';
       if (toolIsScam === userIsScam) {
         setWouldChange('already_agreed');
@@ -100,9 +107,13 @@ export default function StudyPage() {
       // Completed all items, submit to backend
       setSubmitting(true);
       try {
-        await axios.post(`${API_BASE}/study/submit`, {
-          session_id: sessionId,
-          responses: updatedResponses
+        await fetch(`${API_BASE}/study/submit`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            session_id: sessionId,
+            responses: updatedResponses
+          })
         });
       } catch (e) {
         console.error('Study submission background notice:', e);

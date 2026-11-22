@@ -12,7 +12,7 @@ router = APIRouter(prefix="/dashboard", tags=["Admin Intelligence"])
 
 @router.get("/stats", response_model=DashboardStatsResponse)
 def get_dashboard_stats(
-    scope: str = Query("all", regex="^(all|live|simulated)$"),
+    scope: str = Query("all", pattern="^(all|live|simulated)$"),
     db: Session = Depends(get_db)
 ):
     query = db.query(AnalysisHistory)

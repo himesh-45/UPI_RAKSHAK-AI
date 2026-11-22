@@ -157,3 +157,39 @@ export async function getHealth() {
   return res.json();
 }
 
+export async function lookupReputation(entityType, entityValue) {
+  const params = new URLSearchParams({ entity_type: entityType, entity_value: entityValue });
+  const res = await fetch(`${BASE_URL}/reputation/lookup?${params.toString()}`);
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.detail || 'Reputation lookup failed');
+  }
+  return res.json();
+}
+
+export async function submitCommunityReport(reportData) {
+  const res = await fetch(`${BASE_URL}/reputation/report`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(reportData)
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.detail || 'Failed to submit community report');
+  }
+  return res.json();
+}
+
+export async function submitReputationDispute(disputeData) {
+  const res = await fetch(`${BASE_URL}/reputation/dispute`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(disputeData)
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.detail || 'Failed to submit dispute');
+  }
+  return res.json();
+}
+

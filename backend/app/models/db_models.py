@@ -103,3 +103,16 @@ class CommunityReport(Base):
     evidence_text = Column(Text, nullable=True)
     status = Column(String, default="ACTIVE")            # "ACTIVE", "CONFIRMED", "DISMISSED", "DISPUTED"
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
+
+class CommunityDispute(Base):
+    __tablename__ = "community_disputes"
+
+    id = Column(Integer, primary_key=True, index=True)
+    report_id = Column(Integer, ForeignKey("community_reports.id"), nullable=True)
+    entity_hash = Column(String, index=True, nullable=False)
+    claimant_email_masked = Column(String, nullable=False)
+    claimant_hash = Column(String, index=True, nullable=False)
+    dispute_reason = Column(Text, nullable=False)
+    proof_url = Column(String, nullable=True)
+    status = Column(String, default="PENDING") # "PENDING", "APPROVED", "REJECTED"
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)
