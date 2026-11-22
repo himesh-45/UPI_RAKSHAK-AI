@@ -17,10 +17,10 @@ This audit documents each finding, root cause, severity, and the remediation roa
 ## 2. Detailed Findings by Area
 
 ### 2.1 Machine Learning, Data & Evaluation Gaps
-- **Finding 1.1: Artificial 100% Accuracy from Template Memorization (CRITICAL)**
+- **Finding 1.1: Artificial Score from Template Memorization (CRITICAL)**
   - *Location*: [`docs/MODEL_REPORT.md`](MODEL_REPORT.md), [`backend/app/scripts/train_model.py`](../backend/app/scripts/train_model.py)
   - *Root Cause*: Random stratified train/test split on ~3,600 template-generated synthetic samples. Identical template sentence skeletons existed across both train and test partitions. The model memorized template boilerplate rather than learning generalizable semantic fraud signals.
-  - *Impact*: In a live hackathon demo or tough judge cross-examination, claiming "100% accuracy" immediately destroys technical credibility.
+  - *Impact*: In a live hackathon demo or tough judge cross-examination, claiming an artificial near-perfect score immediately destroys technical credibility.
   - *Remediation*: Implement leakage-free `GroupShuffleSplit` grouping by template ID and MinHash/cosine near-duplicate deduplication. Introduce a completely independent, hand-crafted **Gold Test Set** of 300+ samples (including 100+ hard negatives and 40 natural messy human messages) that is never trained or tuned on.
 
 - **Finding 1.2: 100% Synthetic Data & Narrow Category Taxonomy (HIGH)**

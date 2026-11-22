@@ -19,6 +19,27 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
 
+def ensure_schema_migrations():
+    if "sqlite" in settings.DATABASE_URL:
+        db_path = settings.DATABASE_URL.replace("sqlite:///", "")
+        if os.path.exists(db_path):
+            import sqlite3
+            try:
+                conn = sqlite3.connect(db_path)
+                cur = conn.cursor()
+                cur.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='analysis_history'")
+                if cur.fetchone():
+                    cur.execute("PRAGMA table_info(analysis_history)")
+                    cols = [r[1] for r in cur.fetchall()]
+                    if "channel" not in cols:
+                        cur.execute("ALTER TABLE analysis_history ADD COLUMN channel VARCHAR(50) DEFAULT 'web'")
+                        conn.commit()
+                conn.close()
+            except Exception:
+                pass
+
+ensure_schema_migrations()
+
 def get_db():
     db = SessionLocal()
     try:

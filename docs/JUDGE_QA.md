@@ -48,14 +48,14 @@
 
 ## 🧠 2. ML Credibility & Data Integrity
 
-### Q5: Most hackathon projects show 100% accuracy on synthetic data due to data leakage. How did you evaluate your models honestly?
+### Q5: Most hackathon projects show near-perfect accuracy on synthetic data due to data leakage. How did you evaluate your models honestly?
 **Defense**:
-- **Zero-Leakage Splitting**: We used `GroupShuffleSplit` partitioned on syntactic template families. This guarantees that train, validation, and test sets share zero identical phrasings or patterns (`docs/EVALUATION_REPORT.md`).
+- **Zero-Leakage Splitting**: We used `GroupShuffleSplit` partitioned on syntactic template families. This ensures that train, validation, and test sets share no identical phrasings or patterns (`docs/EVALUATION_REPORT.md`).
 - **Dual Gold Benchmark Honesty**:
   - **Frozen Gold Set v1 (306 samples)**: Uniform baseline across 15 categories with 110 hard negatives.
   - **Natural Gold Set v2 (173 samples)**: Natural, messy, human phrasings with typos, WhatsApp forwards, and real-world noise.
   - Neither set was ever trained on or tuned on.
-- **Empirical Measured Results (100% Programmatic)**:
+- **Empirical Measured Results (Fully Programmatic)**:
   - Gold v1 Scam Recall: **96.43%** (189/196 scams flagged).
   - Gold v2 Scam Recall: **98.55%** (136/138 scams flagged).
   - Legitimate False Positive Rate (FPR): **0.00%** on genuine bank notifications across both sets (0/110 on Gold v1, 0/35 on Gold v2).

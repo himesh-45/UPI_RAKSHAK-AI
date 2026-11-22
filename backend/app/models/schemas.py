@@ -158,3 +158,34 @@ class DashboardStatsResponse(BaseModel):
     recent_analyses: List[Dict[str, Any]]
     total_threat_reports: int
     seeded_vs_live: Dict[str, int]
+    channel_breakdown: Optional[Dict[str, int]] = None
+
+class StudyItemOut(BaseModel):
+    item_id: str
+    text: str
+    language: str
+
+class StudySubmitItem(BaseModel):
+    item_id: str
+    user_guess: str          # "scam" or "genuine"
+    user_confidence: int     # 1 to 5
+    would_change: str        # "yes", "no", "already_agreed"
+    revised_guess: Optional[str] = None
+    clarity_rating: Optional[int] = 5
+    feedback: Optional[str] = ""
+
+class StudyBatchSubmit(BaseModel):
+    session_id: str
+    responses: List[StudySubmitItem]
+
+class CommunityReportCreate(BaseModel):
+    entity_type: str        # "vpa", "phone", "url", "domain"
+    entity_value: str
+    scam_category: str
+    evidence_text: Optional[str] = ""
+
+class CommunityDisputeCreate(BaseModel):
+    entity_type: str
+    entity_value: str
+    dispute_reason: str
+    contact_email: Optional[str] = ""

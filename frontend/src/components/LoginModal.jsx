@@ -5,8 +5,8 @@ import { useTranslation } from '../i18n/useTranslation';
 
 export default function LoginModal({ isOpen, onClose, onLoginSuccess }) {
   const { t } = useTranslation();
-  const [email, setEmail] = useState('admin@upirakshak.ai');
-  const [password, setPassword] = useState('AdminRakshak#2026');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -64,6 +64,7 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }) {
             <input
               type="email"
               required
+              placeholder="admin@upirakshak.ai"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full px-3 py-2 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:outline-hidden"
@@ -77,16 +78,17 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }) {
             <input
               type="password"
               required
+              placeholder="Enter admin password from .env or console"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full px-3 py-2 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:outline-hidden"
             />
           </div>
 
-          <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-[11px] text-slate-500 space-y-0.5">
-            <p className="font-semibold text-slate-700 dark:text-slate-300">Quick Demo Access:</p>
-            <p className="font-mono text-[10px]">admin@upirakshak.ai</p>
-            <p className="font-mono text-[10px]">AdminRakshak#2026</p>
+          <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-[11px] text-slate-500">
+            <p className="font-medium text-slate-600 dark:text-slate-400">
+              Admin credentials are read securely from your environment (<code className="font-mono text-[10px]">.env</code>) or printed once to the console on first startup.
+            </p>
           </div>
 
           <button

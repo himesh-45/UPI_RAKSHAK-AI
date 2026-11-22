@@ -96,7 +96,7 @@
      - User feedback audit pipeline: False positives reported by users are staged into a retraining queue (`backend/app/scripts/retrain_from_feedback.py`) with full provenance tracking.
 
 2. **Closing Statement**:
-   > *"UPI Rakshak AI is production-ready today. It operates without cloud latency, guarantees complete data privacy with air-gapped zero-network URL analysis, protects vernacular users across India, and provides victims with instant Golden-Hour legal recovery. Thank you, and we welcome your questions!"*
+   > *"UPI Rakshak AI is field-ready today. It operates without cloud latency, protects user data privacy with air-gapped zero-network URL analysis, protects vernacular users across India, and provides victims with instant Golden-Hour legal recovery. Thank you, and we welcome your questions!"*
 
 ---
 

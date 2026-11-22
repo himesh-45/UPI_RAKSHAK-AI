@@ -70,7 +70,7 @@ def health_check():
         "timestamp": datetime.datetime.utcnow().isoformat() + "Z"
     }
 
-from .routes import analyze, assistant, report, dashboard, history, auth
+from .routes import analyze, assistant, report, dashboard, history, auth, study
 from .database import get_db
 from fastapi import Depends
 
@@ -85,3 +85,4 @@ app.include_router(report.router, prefix=settings.API_PREFIX)
 app.include_router(dashboard.router, prefix=settings.API_PREFIX)
 app.include_router(history.router, prefix=settings.API_PREFIX)
 app.include_router(auth.router, prefix=settings.API_PREFIX)
+app.include_router(study.router, prefix=settings.API_PREFIX)

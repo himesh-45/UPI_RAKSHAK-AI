@@ -15,7 +15,8 @@ class AnalysisHistory(Base):
     __tablename__ = "analysis_history"
 
     id = Column(Integer, primary_key=True, index=True)
-    input_type = Column(String, nullable=False)  # "text", "url", "image", "qr"
+    input_type = Column(String, nullable=False)  # "text", "url", "image", "qr", "audio"
+    channel = Column(String, default="web")       # "web", "telegram", "whatsapp"
     raw_input_masked = Column(Text, nullable=False)
     verdict = Column(String, nullable=False)      # "SAFE", "SUSPICIOUS", "HIGH RISK"
     risk_score = Column(Integer, nullable=False)   # 0 to 100
@@ -58,3 +59,46 @@ class ThreatReport(Base):
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
 
     analysis = relationship("AnalysisHistory", back_populates="reports")
+
+class StudyResponse(Base):
+    __tablename__ = "study_responses"
+
+    id = Column(Integer, primary_key=True, index=True)
+    session_id = Column(String, index=True, nullable=False)
+    item_id = Column(String, nullable=False)
+    message_text = Column(Text, nullable=False)
+    ground_truth_category = Column(String, nullable=False)
+    ground_truth_is_scam = Column(Boolean, nullable=False)
+    language = Column(String, default="en")
+
+    # Phase 1: Pre-tool human intuition
+    user_guess = Column(String, nullable=False)          # "scam" or "genuine"
+    user_confidence = Column(Integer, nullable=False)     # 1 to 5
+    user_initial_correct = Column(Boolean, nullable=False)
+
+    # Tool evaluation revealed
+    tool_verdict = Column(String, nullable=False)         # "SAFE", "SUSPICIOUS", "HIGH RISK"
+    tool_risk_score = Column(Integer, nullable=False)
+    tool_is_scam = Column(Boolean, nullable=False)
+    tool_correct = Column(Boolean, nullable=False)
+
+    # Phase 2: Post-tool human perception & willingness to revise
+    would_change_decision = Column(String, nullable=False) # "yes", "no", "already_agreed"
+    user_revised_guess = Column(String, nullable=True)    # "scam" or "genuine"
+    explanation_clarity = Column(Integer, nullable=True)  # 1 to 5
+    feedback_notes = Column(Text, nullable=True)
+
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+
+class CommunityReport(Base):
+    __tablename__ = "community_reports"
+
+    id = Column(Integer, primary_key=True, index=True)
+    entity_type = Column(String, nullable=False)         # "vpa", "phone", "url", "domain"
+    entity_hash = Column(String, index=True, nullable=False) # Salted SHA-256
+    masked_display = Column(String, nullable=False)      # e.g., "98765*****" or "sbi-***@ybl"
+    reporter_hash = Column(String, index=True, nullable=False) # Salted SHA-256
+    scam_category = Column(String, nullable=False)
+    evidence_text = Column(Text, nullable=True)
+    status = Column(String, default="ACTIVE")            # "ACTIVE", "CONFIRMED", "DISMISSED", "DISPUTED"
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)

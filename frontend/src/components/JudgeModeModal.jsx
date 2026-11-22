@@ -74,7 +74,7 @@ export const JUDGE_SCENARIOS = [
   },
   {
     id: 'genuine_bank_alert',
-    title: '8. Genuine Bank Alert (Zero False Positive)',
+    title: '8. Genuine Bank Alert (Benign Negative)',
     lang: 'English / Hard Negative',
     expectedVerdict: 'SAFE',
     badgeColor: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300',

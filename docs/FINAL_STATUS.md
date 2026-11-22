@@ -10,7 +10,7 @@
 
 | Evaluation Dimension | Legacy Baseline | Current Final Engineering Status | Impact / Validation |
 | :--- | :--- | :--- | :--- |
-| **Model Evaluation Rigor** | Claimed 100% accuracy on leaky stratified random split | **0.8940 Macro-F1** on frozen Gold v1; **0.8292** on natural noisy human Gold v2 | Leakage-free `GroupShuffleSplit` on template IDs. Macro-F1 target restored to 0.8500 (Gold v1 PASSED, Gold v2 transparently reported as FAILED). |
+| **Model Evaluation Rigor** | Claimed near-perfect score on leaky stratified random split | **0.8940 Macro-F1** on frozen Gold v1; **0.8292** on natural noisy human Gold v2 | Leakage-free `GroupShuffleSplit` on template IDs. Macro-F1 target restored to 0.8500 (Gold v1 PASSED, Gold v2 transparently reported as FAILED). |
 | **Risk Fusion Scam Recall** | 91.84% (180/196) — Marked FAILED | **98.47%** (193/196 Gold v1) & **97.83%** (135/138 Gold v2) | Intercepts obscure attack vectors with zero network latency. |
 | **Legitimate False Alarm Rate** | 2.73% (3 false alarms on bank SMS) | **0.00%** (0/110 on Gold v1) & **4.76%** (5/105 on expanded Gold v2); NLP-only FPR **2.86%** (3/105) | Gold v2 expanded from 35 to 105 realistic legitimate communications (bank debit/credit alerts with OTP warnings, delivery PINs, receipts, telecom, chats). |
 | **Marketplace QR Scam Precision** | 0.2619 (28 genuine messages misrouted) | **0.8125** (Gold v1) and **1.0000** (Gold v2) | Added 300+ hard negative merchant receipts and chat context. |
@@ -20,7 +20,7 @@
 | **Adversarial Robustness** | Vulnerable to "O T P", leetspeak, prompt injection | **Resistant in our tests (35 prompt injection cases across en/hi/te)** | Tested via property-based and multilingual mutation tests in `test_mutations.py`. |
 | **Automated Test Suite** | 53 tests | **138 Tests Passing** | Full unit, integration, mutation, consistency, domain-disjoint, packaging, and API coverage. |
 | **Credential Hygiene** | Admin password in README; `.admin_secret` in repo | **Zero Secrets Tracked**; ephemeral in-memory startup password | Verified via git tracking audits, clean `.gitignore`, and package inspection. |
-| **Documentation Cleanliness** | Hand-typed metrics with contradictions; local paths | **100% Programmatic Report Generation**; zero absolute local paths | Consistency asserted by automated test `test_evaluation_report_consistency.py`. |
+| **Documentation Cleanliness** | Hand-typed metrics with contradictions; local paths | **Fully Programmatic Report Generation**; zero absolute local paths | Consistency asserted by automated test `test_evaluation_report_consistency.py`. |
 | **Clean Submission Packaging** | No automated packaging script | `make package` / `package_submission.py` creates clean zip | Excludes `.venv`, `node_modules`, `.git`, `.pytest_cache`, `dist`, `*.db`, `.env`, `.admin_secret`. |
 
 ---

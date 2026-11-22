@@ -1,0 +1,86 @@
+[
+  {
+    "item_id": "study_01",
+    "text": "SBI Alert: Your NetBanking account access has been suspended due to pending PAN KYC. Update immediately at http://sbi-kyc-auth.top or branch will freeze your funds.",
+    "category": "fake_bank_kyc",
+    "is_scam": true,
+    "language": "en"
+  },
+  {
+    "item_id": "study_02",
+    "text": "HDFC Bank: Rs 1,450.00 debited from A/c XX4910 on 21-Nov-26 14:15 via UPI to SWIGGY. UPI Ref 632190849201. Avail Bal: Rs 28,490.50. Call 18002583838 if not authorized.",
+    "category": "legitimate",
+    "is_scam": false,
+    "language": "en"
+  },
+  {
+    "item_id": "study_03",
+    "text": "प्रिय ग्राहक, आपके बिजली का बिल जमा न होने के कारण आज रात 9:30 बजे बिजली काट दी जाएगी। तुरंत अधिकारी से बात करें: 9876543210",
+    "category": "electricity_disconnection",
+    "is_scam": true,
+    "language": "hi"
+  },
+  {
+    "item_id": "study_04",
+    "text": "Flipkart Delivery: Associate Rahul is out for delivery with order OD392019482. Share delivery PIN 4910 only upon physically receiving package.",
+    "category": "legitimate",
+    "is_scam": false,
+    "language": "en"
+  },
+  {
+    "item_id": "study_05",
+    "text": "I am sending you QR code for OLX sofa purchase. Scan in PhonePe and enter your 6-digit UPI PIN to receive Rs 15,000 advance payment into your bank account.",
+    "category": "marketplace_qr_scam",
+    "is_scam": true,
+    "language": "en"
+  },
+  {
+    "item_id": "study_06",
+    "text": "Aapka 2,500 Rs ka cashback reward PhonePe me pending hai. Niche link open karke UPI PIN dalo aur instant transfer karo: http://cashback-reward-claim.site",
+    "category": "fake_upi_refund_cashback",
+    "is_scam": true,
+    "language": "hi"
+  },
+  {
+    "item_id": "study_07",
+    "text": "ఇండియా పోస్ట్: మీ స్పీడ్ పోస్ట్ పార్శిల్ ED849201928IN డెలివరీ కోసం పోస్ట్‌మ్యాన్ బయలుదేరారు. ఎటువంటి అదనపు రుసుము చెల్లించాల్సిన అవసరం లేదు.",
+    "category": "legitimate",
+    "is_scam": false,
+    "language": "te"
+  },
+  {
+    "item_id": "study_08",
+    "text": "Congratulations! You won Rs 25,00,000 in KBC Lucky Draw! Call manager Rajesh Sharma on WhatsApp 9820194820 to release winning cheque.",
+    "category": "lottery_prize",
+    "is_scam": true,
+    "language": "en"
+  },
+  {
+    "item_id": "study_09",
+    "text": "Google Pay: Your electricity bill payment of Rs 1,840 to BESCOM was successful. Biller Ref #948201948. Transaction ID: CICAgOD492019.",
+    "category": "legitimate",
+    "is_scam": false,
+    "language": "en"
+  },
+  {
+    "item_id": "study_10",
+    "text": "పార్ట్ టైమ్ జాబ్ ఆఫర్! యూట్యూబ్ వీడియోలు లైక్ చేసి రోజుకు రూ. 3,500 సంపాదించండి. ఎటువంటి పెట్టుబడి లేదు. టెలిగ్రామ్ లింక్ ద్వారా సంప్రదించండి: t.me/rating_job_vip",
+    "category": "job_investment_scam",
+    "is_scam": true,
+    "language": "te"
+  },
+  {
+    "item_id": "study_11",
+    "text": "Customer Care Desk: Your refund of Rs 4,999 is stuck. Download AnyDesk or QuickSupport app from PlayStore and share 9-digit session code to clear settlement.",
+    "category": "remote_access_scam",
+    "is_scam": true,
+    "language": "en"
+  },
+  {
+    "item_id": "study_12",
+    "text": "ICICI Bank: OTP for transaction of Rs 850.00 at Swiggy is 392014. Valid for 5 mins. NEVER share OTP with anyone, bank staff never calls for OTP.",
+    "category": "legitimate",
+    "is_scam": false,
+    "language": "en"
+  }
+]

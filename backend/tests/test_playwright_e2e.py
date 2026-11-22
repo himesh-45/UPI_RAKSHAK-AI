@@ -1,8 +1,17 @@
 import pytest
+import urllib.request
 from playwright.sync_api import sync_playwright
 
 FRONTEND_URL = "http://127.0.0.1:5173"
 
+def is_frontend_running() -> bool:
+    try:
+        urllib.request.urlopen(FRONTEND_URL, timeout=1)
+        return True
+    except Exception:
+        return False
+
+@pytest.mark.skipif(not is_frontend_running(), reason="Frontend dev server not running on localhost:5173")
 def test_playwright_full_demo_flow():
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)

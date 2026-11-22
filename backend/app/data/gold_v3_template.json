@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GoldV3BlindDataset",
+  "description": "Standard schema and sample format for external, human-collected Gold v3 blind evaluation submissions.",
+  "taxonomies": [
+    "legitimate",
+    "fake_bank_kyc",
+    "electricity_disconnection",
+    "fake_upi_refund_cashback",
+    "collect_request_fraud",
+    "lottery_prize",
+    "fake_customer_support",
+    "fake_govt_scheme",
+    "otp_pin_theft",
+    "remote_access_scam",
+    "job_investment_scam",
+    "loan_app_extortion",
+    "courier_customs_scam",
+    "marketplace_qr_scam",
+    "accidental_transfer_scam"
+  ],
+  "languages": ["en", "hi", "te", "hinglish", "romanized_telugu"],
+  "format_example": [
+    {
+      "id": "gold_v3_sample_001",
+      "text": "[Paste user-received SMS, WhatsApp text, or OCR transcript here]",
+      "category": "electricity_disconnection",
+      "language": "hi",
+      "source_type": "sms_forward",
+      "donor_consent_verified": true,
+      "date_received": "2026-11-20"
+    },
+    {
+      "id": "gold_v3_sample_002",
+      "text": "[Paste legitimate bank debit or OTP advisory here]",
+      "category": "legitimate",
+      "language": "en",
+      "source_type": "official_bank_alert",
+      "donor_consent_verified": true,
+      "date_received": "2026-11-21"
+    }
+  ]
+}

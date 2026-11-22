@@ -5,12 +5,14 @@ from typing import List, Dict, Any, Tuple
 GENUINE_ADVISORY_PATTERNS = [
     re.compile(r'(?i)\b(?:never|do not|don\'t|should not|must not|cannot)\s+(?:share|disclose|give|tell|reveal)\b.*?\b(?:otp|pin|cvv|password|passcode)\b'),
     re.compile(r'(?i)\b(?:bank|staff|employee|official|executive)\s+(?:never|does not|will never|never asks?)\s+(?:for|to ask|call for)\b.*?\b(?:otp|pin|cvv|password)\b'),
-    re.compile(r'(?i)\b(?:share|give)\s+(?:the\s+)?otp\b.*?\b(?:only\s+(?:upon|after|at|when)|physically received|at time of delivery|delivery agent)\b'),
-    re.compile(r'(?i)\b(?:delivery|package|order|courier)\b.*?\b(?:share\s+otp\s+only|valid\s+upon\s+receipt)\b'),
+    re.compile(r'(?i)\b(?:share|give)\s+(?:the\s+)?(?:otp|pin|delivery pin)\b.*?\b(?:only\s+(?:upon|after|at|when)|physically received|at\s+(?:the\s+)?time\s+of\s+(?:delivery|accepting)|delivery agent|handed over)\b'),
+    re.compile(r'(?i)\b(?:delivery|package|order|courier)\b.*?\b(?:share\s+(?:otp|pin|delivery pin)\s+only|valid\s+upon\s+receipt|out for delivery)\b'),
     re.compile(r'(?i)(?:kabhi bhi apna otp|otp kisi se sajha na kare|kisi ko na bataye|kisi ke sath share na kare|kisi se share na kare|evaritho share cheyavoddu|evariki cheppavaddu)'),
     re.compile(r'(?i)(?:ఎవరితోనూ పంచుకోవద్దు|ఎవరికీ చెప్పవద్దు|ఓటీపీ పంచుకోవద్దు|ఎవరితోనూ పంచుకోకండి|ఓటీపీ ఎవరికీ చెప్పకండి)'),
     re.compile(r'(?i)(?:किसी\s*(?:से|के\s+साथ)\s*(?:साझा|शेयर)\s*(?:न|मत)\s*करें|साझा\s+(?:न|मत)\s+करें|शेयर\s+(?:न|मत)\s+करें|किसी को न बताएं|बैंक\s+कभी.*?नहीं\s+मांगता|बैंक कभी ओटीपी नहीं मांगता|बैंक कभी पिन नहीं मांगता)'),
-    re.compile(r'(?i)\b(?:if not done by you|report fraud to|sms block to)\b.*?\b(?:call 1800|toll free|visit branch|never share)\b')
+    re.compile(r'(?i)(?:(?:if not done by you|if not authorized|report fraud to|sms block to).*?(?:call 1800|toll free|visit branch|never share)|(?:call 1800|toll free|visit branch).*?(?:if not done by you|if not you|if not authorized|report fraud))'),
+    re.compile(r'(?i)(?:रिचार्ज\s+सफल|recharge\s+(?:successful|of)|असीमित\s+कॉल|प्रतिदिन\s+और\s+असीमित|\b(?:gb|mb)\s+प्रतिदिन)'),
+    re.compile(r'(?i)(?:account\s+me\s+aa\s+gaya|mil\s+gaya|paise\s+aa\s+gaye|resolve\s+ho\s+gaya|refund\s+aa\s+gaya|credit\s+aipoindi|khate\s+me\s+aa\s+gaya|wapas\s+mil\s+gaya)')
 ]
 
 # Negation prefixes within 6 words of credential action
@@ -44,7 +46,7 @@ URGENCY_BLOCK_PATTERNS = [
     re.compile(r'(?i)\b(?:will be|is|will|account)\s*(?:blocked|suspended|deactivated|closed|frozen|hold|disconnected?|cut off)\b.*?\b(?:tonight|today|immediately|within \d+ hours|in \d+ hours|turant|ventane|now)\b'),
     re.compile(r'(?i)\b(?:electricity|power|power line|current|power supply)\b.*?\b(?:disconnect(?:ed)?|cut|band|katt)\b.*?\b(?:tonight|today|9:30|immediate|turant|ratridi|now)\b'),
     re.compile(r'(?i)\b(?:turant|ventane|urgent|immediately|now)\b.*?\b(?:update|verify|call|contact|unblock|clear bill|disconnect)\b'),
-    re.compile(r'(?i)(?:आज रात|24 घंटे|10 बजे|9:30|निलिपिవేయబడుతుంది|బ్లాక్ చేయబడుతుంది|ఈ రాత్రి|రద్దు|వెంటనే|నిలిపివేయబడింది|తక్షణమే|काट दी जाएगी)')
+    re.compile(r'(?i)(?:आज रात|24 घंटे|10 बजे|(?:आज रात|रात|today|tonight).*?9:30|9:30\s*(?:pm|बजे|గంటలకు)|निलिपिవేయబడుతుంది|బ్లాక్ చేయబడుతుంది|ఈ రాత్రి|రద్దు|వెంటనే|నిలిపివేయబడింది|తక్షణమే|काट दी जाएगी)')
 ]
 
 # 4. Remote-Access Application Requests
@@ -62,7 +64,7 @@ VERIFY_CREDENTIAL_WORDS = [
 
 # 6. Disconnection / Block threat with personal phone contact or link (English & Indic syntax)
 PHONE_CONTACT_PATTERN = re.compile(
-    r'(?i)(?:(?:call|contact|संपर्क|कॉल|సంప్రదించండి|ఫోన్|supervisor|officer|अधिकारी|అధికారి).*?(?:\+91[-\s]?)?[6-9]\d{2,5}[-\s]?\d{3,5}|(?:\+91[-\s]?)?[6-9]\d{9}.*?(?:par call|ku call|ki call|call chey|call kare|par sampark|me sampark|कॉल|సంప్రదించండి))'
+    r'(?i)(?:(?:call|contact|संपर्क|कॉल|సంప్రదించండి|ఫోన్|supervisor|officer|अधिकारी|అధికారి).*?(?:\+91[-\s]?)?(?<!1800)(?<!1860)(?<!1930)[6-9]\d{9}|(?:\+91[-\s]?)?(?<!1800)(?<!1860)(?<!1930)[6-9]\d{9}.*?(?:par call|ku call|ki call|call chey|call kare|par sampark|me sampark|कॉल|సంప్రదించండి))'
 )
 
 # 7. Advance-fee lottery patterns
@@ -134,9 +136,17 @@ class RuleSafetyEngine:
         has_digital_arrest = False
         has_loan_extortion = False
 
-        # Check delivery OTP context (legitimate delivery verification upon parcel arrival)
+        # Contextual check for legitimate delivery OTP, telecom recharge, or official bank debit
         is_delivery_otp = bool(re.search(
-            r'(?i)\b(?:delivery\s+(?:agent|boy|executive|person)|upon\s+(?:delivery|physical)|at\s+time\s+of\s+delivery|handover\s+package)\b',
+            r'(?i)\b(?:delivery\s+(?:associate|agent|boy|executive|person)|out\s+for\s+delivery|upon\s+(?:delivery|physical)|at\s+(?:the\s+)?time\s+of\s+(?:delivery|accepting)|handed\s+over|handover|accepting\s+(?:the\s+)?parcel|receiving\s+(?:the\s+)?package|delivery\s+PIN)\b',
+            text
+        ))
+        is_telecom_recharge = bool(re.search(
+            r'(?i)(?:रिचार्ज\s+सफल|recharge\s+(?:successful|of)|असीमित\s+कॉल|प्रतिदिन\s+और\s+असीमित|\b(?:gb|mb)\s+प्रतिदिन)',
+            text
+        ))
+        is_bank_debit_alert = bool(re.search(
+            r'(?i)\b(?:withdrawn\s+from\s+atm|debited\s+from\s+a/c|credited\s+to\s+a/c|available\s+bal(?:ance)?|avail\s+bal)\b',
             text
         ))
 
@@ -156,10 +166,10 @@ class RuleSafetyEngine:
 
         # Advisory check: ONLY genuine if NO active OTP theft request is present
         advisory_matches = [p for p in GENUINE_ADVISORY_PATTERNS if p.search(text)]
-        if (advisory_matches or is_delivery_otp) and not has_otp_request:
+        if (advisory_matches or is_delivery_otp or is_telecom_recharge or is_bank_debit_alert) and not has_otp_request:
             is_genuine_alert = True
             matched_rules.append({
-                "signal": "Legitimate Safety Advisory: Message explicitly warns NEVER to share OTP/PIN, or is verified delivery-only verification.",
+                "signal": "Legitimate Safety Advisory: Message explicitly warns NEVER to share OTP/PIN, or is verified delivery/bank/telecom notice.",
                 "source_module": "RULE_SAFETY_LAYER",
                 "weight": -40.0,
                 "severity": "INFO"
@@ -264,16 +274,17 @@ class RuleSafetyEngine:
 
         # 10. Job & Task Investment Scams
         has_job_scam = False
-        for p in JOB_INVESTMENT_PATTERNS:
-            if p.search(text):
-                has_job_scam = True
-                matched_rules.append({
-                    "signal": "Part-Time Task & Investment Fraud: Promises unreal daily returns, rating tasks, or Telegram VIP group deposits.",
-                    "source_module": "RULE_SAFETY_LAYER",
-                    "weight": 40.0,
-                    "severity": "HIGH"
-                })
-                break
+        if not is_telecom_recharge:
+            for p in JOB_INVESTMENT_PATTERNS:
+                if p.search(text):
+                    has_job_scam = True
+                    matched_rules.append({
+                        "signal": "Part-Time Task & Investment Fraud: Promises unreal daily returns, rating tasks, or Telegram VIP group deposits.",
+                        "source_module": "RULE_SAFETY_LAYER",
+                        "weight": 40.0,
+                        "severity": "HIGH"
+                    })
+                    break
 
         # 11. Accidental Transfer Scams
         has_accidental_transfer = False

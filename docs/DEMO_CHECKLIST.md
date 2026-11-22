@@ -1,6 +1,6 @@
 # UPI Rakshak AI — Hackathon Live Demo Pre-Flight Checklist
 
-This checklist guarantees a zero-glitch, bulletproof live technical demonstration under hackathon presentation conditions.
+This checklist provides a structured protocol for a smooth, resilient live technical demonstration under hackathon presentation conditions.
 
 ---
 

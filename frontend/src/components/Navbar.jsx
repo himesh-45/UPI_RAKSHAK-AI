@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shield, Sparkles, BarChart3, HelpCircle, Sun, Moon, Lock, LogOut } from 'lucide-react';
+import { Shield, Sparkles, BarChart3, HelpCircle, Sun, Moon, Lock, LogOut, BookOpen } from 'lucide-react';
 import { useTranslation } from '../i18n/useTranslation';
 
 export default function Navbar({ activeTab, setActiveTab, darkMode, setDarkMode, token, onOpenLogin, onLogout }) {
@@ -68,6 +68,18 @@ export default function Navbar({ activeTab, setActiveTab, darkMode, setDarkMode,
           >
             <BarChart3 className="w-3.5 h-3.5" />
             {t('nav.dashboard')}
+          </button>
+
+          <button
+            onClick={() => setActiveTab('study')}
+            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 ${
+              activeTab === 'study'
+                ? 'bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 shadow-sm'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+            }`}
+          >
+            <BookOpen className="w-3.5 h-3.5" />
+            Study
           </button>
 
           <button

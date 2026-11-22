@@ -49,6 +49,26 @@ class Settings(BaseSettings):
     GOOGLE_SAFE_BROWSING_KEY: Optional[str] = os.getenv("GOOGLE_SAFE_BROWSING_KEY", None)
     VIRUSTOTAL_API_KEY: Optional[str] = os.getenv("VIRUSTOTAL_API_KEY", None)
 
+    # Channel bot configuration (Telegram & WhatsApp)
+    TELEGRAM_BOT_TOKEN: Optional[str] = os.getenv("TELEGRAM_BOT_TOKEN", None)
+    TELEGRAM_WEBHOOK_SECRET: Optional[str] = os.getenv("TELEGRAM_WEBHOOK_SECRET", None)
+
+    WHATSAPP_PROVIDER: str = os.getenv("WHATSAPP_PROVIDER", "twilio")  # "twilio" or "meta"
+    TWILIO_ACCOUNT_SID: Optional[str] = os.getenv("TWILIO_ACCOUNT_SID", None)
+    TWILIO_AUTH_TOKEN: Optional[str] = os.getenv("TWILIO_AUTH_TOKEN", None)
+    TWILIO_WHATSAPP_NUMBER: Optional[str] = os.getenv("TWILIO_WHATSAPP_NUMBER", None)
+
+    META_WHATSAPP_TOKEN: Optional[str] = os.getenv("META_WHATSAPP_TOKEN", None)
+    META_PHONE_NUMBER_ID: Optional[str] = os.getenv("META_PHONE_NUMBER_ID", None)
+    META_VERIFY_TOKEN: Optional[str] = os.getenv("META_VERIFY_TOKEN", None)
+
+    # Optional Speech-To-Text for channel voice notes
+    ENABLE_OFFLINE_STT: bool = os.getenv("ENABLE_OFFLINE_STT", "false").lower() == "true"
+
+    # Model architecture selection: Classical TF-IDF Ensemble (default) vs Fine-Tuned Transformer
+    USE_TRANSFORMER_NLP: bool = os.getenv("USE_TRANSFORMER_NLP", "false").lower() == "true"
+    TRANSFORMER_MODEL_PATH: str = os.getenv("TRANSFORMER_MODEL_PATH", "backend/app/data/indic_transformer_model")
+
     class Config:
         env_file = ".env"
         extra = "ignore"

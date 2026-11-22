@@ -48,3 +48,33 @@ def mask_sensitive_data(text: str) -> str:
     masked = PHONE_REGEX.sub(mask_phone_number, masked)
 
     return masked
+
+NAME_SALUTATION_REGEX = re.compile(r'(?i)\b(?:dear|mr\.|mrs\.|ms\.|shri|smt\.|dr\.)\s+([A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)')
+
+def mask_blind_set_pii(text: str) -> str:
+    """
+    Strips phone numbers, bank account numbers, debit/credit cards, OTPs,
+    personal names, and personal UPI VPAs from raw external submissions
+    prior to benchmark evaluation.
+    """
+    if not text:
+        return text
+
+    # 1. Mask sensitive financial & contact tokens
+    masked = mask_sensitive_data(text)
+
+    # 2. Mask personal names following salutations
+    def replace_name(m):
+        full_match = m.group(0)
+        target_name = m.group(1)
+        return full_match.replace(target_name, "[NAME_REDACTED]")
+    masked = NAME_SALUTATION_REGEX.sub(replace_name, masked)
+
+    # 3. Mask personal usernames in UPI VPAs (e.g., john.doe@okhdfcbank -> [USER]@okhdfcbank)
+    def replace_vpa_user(m):
+        user = m.group(1)
+        handle = m.group(2)
+        return f"[USER_REDACTED]@{handle}"
+    masked = UPI_VPA_REGEX.sub(replace_vpa_user, masked)
+
+    return masked

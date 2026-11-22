@@ -4,11 +4,17 @@ import AnalyzerPage from './pages/AnalyzerPage';
 import AssistantPage from './pages/AssistantPage';
 import DashboardPage from './pages/DashboardPage';
 import AboutPage from './pages/AboutPage';
+import StudyPage from './pages/StudyPage';
 import LoginModal from './components/LoginModal';
 import { TranslationProvider } from './i18n/useTranslation';
 
 function AppContent() {
-  const [activeTab, setActiveTab] = useState('analyzer'); // 'analyzer', 'assistant', 'dashboard', 'about'
+  const [activeTab, setActiveTab] = useState(() => {
+    if (typeof window !== 'undefined' && window.location.pathname === '/study') {
+      return 'study';
+    }
+    return 'analyzer';
+  });
   const [darkMode, setDarkMode] = useState(() => {
     return localStorage.getItem('theme') === 'dark';
   });
@@ -53,6 +59,7 @@ function AppContent() {
         {activeTab === 'dashboard' && (
           <DashboardPage token={token} onOpenLogin={() => setLoginModalOpen(true)} />
         )}
+        {activeTab === 'study' && <StudyPage />}
         {activeTab === 'about' && <AboutPage />}
       </main>
 

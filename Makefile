@@ -1,16 +1,19 @@
-.PHONY: help install test evaluate seed run docker-up docker-down package demo-offline
+.PHONY: help install test evaluate evaluate-blind study-report demo-video-script seed run docker-up docker-down package demo-offline
 
 help:
 	@echo "Available commands:"
-	@echo "  make install      Install backend and frontend dependencies"
-	@echo "  make seed         Generate dataset, train model, and seed SQLite DB"
-	@echo "  make evaluate     Run benchmark suite and generate docs/EVALUATION_REPORT.md"
-	@echo "  make test         Run all automated unit, property, and integration tests"
-	@echo "  make package      Build clean submission ZIP excluding venv/secrets/node_modules"
-	@echo "  make demo-offline Launch app with pre-seeded data in offline mode"
-	@echo "  make run          Start backend (:8000) and frontend (:5173)"
-	@echo "  make docker-up    Build and start containers with docker-compose"
-	@echo "  make docker-down  Stop docker containers"
+	@echo "  make install         Install backend and frontend dependencies"
+	@echo "  make seed            Generate dataset, train model, and seed SQLite DB"
+	@echo "  make evaluate        Run benchmark suite and generate docs/EVALUATION_REPORT.md"
+	@echo "  make evaluate-blind  Run blind evaluation on external dataset (FILE=path/to/data.json)"
+	@echo "  make study-report    Generate user study statistical report in docs/USER_STUDY_REPORT.md"
+	@echo "  make demo-video-script Generate shot-by-shot demo video script in docs/DEMO_VIDEO.md"
+	@echo "  make test            Run all automated unit, property, and integration tests"
+	@echo "  make package         Build clean submission ZIP excluding venv/secrets/node_modules"
+	@echo "  make demo-offline    Launch app with pre-seeded data in offline mode"
+	@echo "  make run             Start backend (:8000) and frontend (:5173)"
+	@echo "  make docker-up       Build and start containers with docker-compose"
+	@echo "  make docker-down     Stop docker containers"
 
 install:
 	python3 -m venv .venv
@@ -28,6 +31,15 @@ test:
 
 evaluate:
 	python3 -m backend.app.scripts.evaluate_models
+
+evaluate-blind:
+	python3 -m backend.app.scripts.evaluate_blind --file "$(FILE)"
+
+study-report:
+	python3 -m backend.app.scripts.generate_study_report
+
+demo-video-script:
+	python3 -m backend.app.scripts.generate_demo_video_script
 
 run:
 	./run.sh

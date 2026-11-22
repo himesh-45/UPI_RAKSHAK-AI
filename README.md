@@ -1,6 +1,6 @@
 # 🛡️ UPI Rakshak AI (यूपीआई रक्षक / యూపీఐ రక్షక్)
 
-> **Real-Time, Multilingual (English, Hindi, Telugu), 100% Offline Digital Payment Scam Detection & Golden-Hour Prevention Platform.**
+> **Real-Time, Multilingual (English, Hindi, Telugu), Fully Offline Digital Payment Scam Detection & Golden-Hour Prevention Platform.**
 >
 > ⚡ **Zero Cloud Dependency**: Fully operational offline with no external API keys or network latency. Runs in ~12ms on commodity CPU.  
 > ⚖️ **Evidence-Based Multi-Signal Fusion**: Verdicts stem from independent mathematical detectors, NOT by asking an LLM "is this a scam?".
@@ -19,17 +19,43 @@
 
 ---
 
-## 🚀 3-Command Quickstart
+## 🚀 Quickstart (Cross-Platform)
 
-```bash
+### Option A: Windows (PowerShell)
+```powershell
 # 1. Setup virtual environment and dependencies
-python -m venv .venv && .\.venv\Scripts\activate && pip install -r backend/requirements.txt
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r backend/requirements.txt
 
 # 2. Start FastAPI Backend (Port 8000)
 .\.venv\Scripts\uvicorn.exe backend.app.main:app --host 127.0.0.1 --port 8000
 
 # 3. Start React+Vite Frontend (Port 5173, in a second terminal)
-cd frontend && npm install && npm run dev
+cd frontend
+npm install
+npm run dev
+```
+
+### Option B: Linux / macOS (Bash / Zsh)
+```bash
+# 1. Setup virtual environment and dependencies
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r backend/requirements.txt
+
+# 2. Start FastAPI Backend (Port 8000)
+uvicorn backend.app.main:app --host 127.0.0.1 --port 8000
+
+# 3. Start React+Vite Frontend (Port 5173, in a second terminal)
+cd frontend
+npm install
+npm run dev
+```
+
+### Option C: Docker (Single Command)
+```bash
+docker compose up --build
 ```
 
 - **Web UI**: [http://localhost:5173](http://localhost:5173)
