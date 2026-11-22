@@ -1,83 +1,81 @@
 import React, { useState } from 'react';
-import { ChevronDown, ChevronUp, CheckCircle2, ShieldCheck, Activity, Cpu, Database, AlertCircle } from 'lucide-react';
+import {
+  ChevronDown, ChevronUp, CheckCircle2, ShieldCheck, Activity,
+  Cpu, Database, AlertCircle, HelpCircle, BookOpen, Sparkles
+} from 'lucide-react';
+import { useTranslation } from '../i18n/useTranslation';
+import reportData from '../data/evaluation_report.json';
 
-export default function ModelHonestyPanel() {
-  const [isOpen, setIsOpen] = useState(false);
+const GLOSSARY_I18N = {
+  en: {
+    title: 'What does this mean?',
+    recall_term: 'Scam Recall (Detection Rate)',
+    recall_def: 'Recall measures the percentage of actual scam attacks that the tool successfully catches without missing them.',
+    fpr_term: 'False Alarms (Legitimate False Positive Rate)',
+    fpr_def: 'False alarms measure how often genuine, safe messages or transactions are mistakenly flagged as suspicious.',
+    calib_term: 'Calibration (Confidence Alignment / ECE)',
+    calib_def: 'Calibration measures whether a stated risk score genuinely matches real-world likelihood, so an 80% score truly reflects an 80% chance of fraud.'
+  },
+  hi: {
+    title: 'इसका क्या मतलब है? (शब्दावली)',
+    recall_term: 'स्कैम रिकॉल (पकड़ने की दर)',
+    recall_def: 'रिकॉल यह मापता है कि यह टूल कितने प्रतिशत वास्तविक धोखाधड़ी हमलों को बिना छूटे सफलतापूर्वक पकड़ लेता है।',
+    fpr_term: 'फाल्स अलार्म (गलत चेतावनी दर)',
+    fpr_def: 'फाल्स अलार्म यह मापते हैं कि सुरक्षित और प्रामाणिक संदेशों को गलती से कितनी बार संदिग्ध माना गया।',
+    calib_term: 'कैलिब्रेशन (आत्मविश्वास संरेखण / ECE)',
+    calib_def: 'कैलिब्रेशन यह मापता है कि क्या प्रदर्शित जोखिम स्कोर वास्तव में वास्तविक दुनिया के जोखिम से मेल खाता है (जैसे 80% स्कोर का मतलब 80% खतरा हो)।'
+  },
+  te: {
+    title: 'దీని అర్థం ఏమిటి? (పదకోశం)',
+    recall_term: 'స్కామ్ రీకాల్ (గుర్తించే రేటు)',
+    recall_def: 'రీకాల్ అనేది ఈ సాధనం ఎన్ని శాతం నిజమైన మోసపూరిత దాడులను తప్పిపోకుండా విజయవంతంగా గుర్తిస్తుందో కొలుస్తుంది.',
+    fpr_term: 'ఫాల్స్ అలారమ్స్ (తప్పుడు హెచ్చరికల రేటు)',
+    fpr_def: 'ఫాల్స్ అలారమ్స్ అనేది సురక్షితమైన మరియు నిజమైన సందేశాలను పొరపాటున ఎన్నిసార్లు అనుమానాస్పదంగా గుర్తించారో కొలుస్తుంది.',
+    calib_term: 'క్యాలిబ్రేషన్ (విశ్వాస సమలేఖనం / ECE)',
+    calib_def: 'క్యాలిబ్రేషన్ అనేది చూపించిన ప్రమాద స్కోరు వాస్తవ సంభావ్యతకు అనుగుణంగా ఉందో లేదో కొలుస్తుంది (80% స్కోరు నిజంగా 80% ప్రమాదాన్ని సూచిస్తుంది).'
+  }
+};
 
-  const gates = [
-    {
-      name: 'Risk Fusion Scam Recall',
-      benchmark: '>= 95.0%',
-      goldV1: '99.49%',
-      goldV2: '98.55%',
-      status: 'PASSED',
-      desc: 'Sensitivity in capturing fraudulent vector attacks'
-    },
-    {
-      name: 'Legitimate False Alarm Rate (FPR)',
-      benchmark: '<= 3.0%',
-      goldV1: '0.00%',
-      goldV2: '1.90%',
-      status: 'PASSED',
-      desc: '0.00% on Gold v1 (0/110) and 1.90% on Gold v2 (2/105) across 215 genuine communications'
-    },
-    {
-      name: '15-Class NLP Macro-F1',
-      benchmark: '>= 0.8500',
-      goldV1: '0.8994',
-      goldV2: '0.8624',
-      status: 'PASSED',
-      desc: 'Attribution accuracy across all 15 fraud taxonomy classes'
-    },
-    {
-      name: 'Expected Calibration Error (ECE)',
-      benchmark: '< 0.1000',
-      goldV1: '0.0992',
-      goldV2: '0.1206',
-      status: 'v1: PASS / v2: FAIL',
-      desc: 'Calibrated confidence alignment (over-confident on colloquial Indic slang)'
-    },
-    {
-      name: 'Static URL Phishing Recall',
-      benchmark: '>= 80.0%',
-      goldV1: '82.00%',
-      goldV2: '98.60%',
-      status: 'PASSED',
-      desc: 'Real-feed OpenPhish (82.00%) & Synthetic adversarial holdout (98.60%)'
-    },
-    {
-      name: 'Static URL Benign FPR',
-      benchmark: '<= 3.0%',
-      goldV1: '1.60%',
-      goldV2: '1.12%',
-      status: 'PASSED',
-      desc: 'Real-feed Tranco-1000 (1.60%) & Disjoint benign domains (1.12%)'
-    }
-  ];
+export default function ModelHonestyPanel({ defaultOpen = false, className = '' }) {
+  const { language } = useTranslation();
+  const [isOpen, setIsOpen] = useState(defaultOpen);
+  const [glossaryOpen, setGlossaryOpen] = useState(false);
+  const [glossaryLang, setGlossaryLang] = useState(language && ['hi', 'te'].includes(language) ? language : 'en');
+
+  const gates = reportData?.gates || [];
+  const passedCount = reportData?.passed_checks ?? gates.filter(g => g.status === 'PASSED').length;
+  const totalCount = reportData?.total_checks ?? gates.length;
+  const badgeText = reportData?.badge_text || `Passed ${passedCount} of ${totalCount} internal checks`;
+  const title = reportData?.title || 'How reliable is this tool?';
+  const subtitle = reportData?.subtitle || 'Computed from our evaluation report. Blind test: Pending External Human Data Collection.';
+  const eceExplanation = reportData?.ece_explanation || 'Confidence scores are not yet perfectly calibrated.';
+
+  const currentGlossary = GLOSSARY_I18N[glossaryLang] || GLOSSARY_I18N.en;
 
   return (
-    <div className="bg-slate-50 dark:bg-slate-900/60 rounded-3xl border border-slate-200 dark:border-slate-800 p-5 sm:p-6 transition">
+    <div className={`bg-slate-50 dark:bg-slate-900/60 rounded-3xl border border-slate-200 dark:border-slate-800 p-5 sm:p-6 transition ${className}`}>
       
       {/* Header Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="w-full flex items-center justify-between gap-4 text-left group"
+        aria-expanded={isOpen}
       >
         <div className="flex items-center gap-3">
           <div className="p-2 rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20">
             <Activity className="w-5 h-5" />
           </div>
           <div>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <h3 className="text-sm font-extrabold text-slate-900 dark:text-white group-hover:text-indigo-500 transition">
-                Engine Transparency & Programmatic Benchmark
+                {title}
               </h3>
               <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300 border border-amber-300 dark:border-amber-800">
-                5/6 Gates Passed (ECE Honest Disclosure)
+                {badgeText}
               </span>
             </div>
-            <p className="text-xs text-slate-500 dark:text-slate-400">
-              Programmatic benchmark. Derived directly from frozen Gold Test Set benchmarks.
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+              {subtitle}
             </p>
           </div>
         </div>
@@ -91,14 +89,13 @@ export default function ModelHonestyPanel() {
       {isOpen && (
         <div className="pt-5 mt-4 border-t border-slate-200 dark:border-slate-800 space-y-5 animate-fade-in">
           
-          {/* Honest Disclosure Banner */}
+          {/* Plain Language Calibration Disclosure Banner */}
           <div className="p-3.5 rounded-2xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900/40 text-xs text-amber-900 dark:text-amber-300 flex items-start gap-2.5">
             <AlertCircle className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
             <div>
               <p className="font-bold">Honest Machine Learning Disclosure:</p>
-              <p className="text-amber-800 dark:text-amber-400/90 text-[11px] leading-relaxed">
-                Trained on synthetic multilingual attack templates and real public SMS spam corpora.
-                Evaluated against hand-curated frozen gold test sets (Gold v1 = uniform 306-sample baseline; Gold v2 = messy human phrasings with typos and WhatsApp forwards). Real-world accuracy may vary on novel attack topologies.
+              <p className="text-amber-800 dark:text-amber-400/90 text-[11px] leading-relaxed mt-0.5">
+                {eceExplanation} Evaluated across frozen Gold Test Set v1 (untouched baseline benchmark) and Gold Test Set v2 (development set used for error analysis). High-confidence predictions on colloquial vernacular phrasing currently exhibit slight over-confidence.
               </p>
             </div>
           </div>
@@ -111,13 +108,13 @@ export default function ModelHonestyPanel() {
                   <th className="p-3">Metric Dimension</th>
                   <th className="p-3 text-center">Benchmark Gate</th>
                   <th className="p-3 text-center">Frozen Gold v1</th>
-                  <th className="p-3 text-center">Natural Gold v2</th>
+                  <th className="p-3 text-center">Gold v2 (Dev Set)</th>
                   <th className="p-3 text-center">Status</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-200 dark:divide-slate-800/60 font-medium text-slate-700 dark:text-slate-300">
                 {gates.map((g, i) => (
-                  <tr key={i} className="hover:bg-slate-100/50 dark:hover:bg-slate-800/40 transition">
+                  <tr key={g.id || i} className="hover:bg-slate-100/50 dark:hover:bg-slate-800/40 transition">
                     <td className="p-3">
                       <div className="font-bold text-slate-900 dark:text-white">{g.name}</div>
                       <div className="text-[11px] text-slate-400">{g.desc}</div>
@@ -144,12 +141,95 @@ export default function ModelHonestyPanel() {
             </table>
           </div>
 
+          {/* Multilingual "What does this mean?" Accordion */}
+          <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 overflow-hidden">
+            <button
+              onClick={() => setGlossaryOpen(!glossaryOpen)}
+              className="w-full p-3.5 flex items-center justify-between text-left hover:bg-slate-50 dark:hover:bg-slate-900/50 transition"
+              aria-expanded={glossaryOpen}
+            >
+              <div className="flex items-center gap-2">
+                <HelpCircle className="w-4 h-4 text-indigo-500" />
+                <span className="text-xs font-bold text-slate-900 dark:text-white">
+                  {currentGlossary.title}
+                </span>
+                <span className="text-[10px] text-slate-400 font-normal">
+                  (Recall, False Alarms, Calibration in EN / HI / TE)
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-[10px] font-mono uppercase text-slate-400">
+                  {glossaryLang}
+                </span>
+                {glossaryOpen ? <ChevronUp className="w-3.5 h-3.5 text-slate-400" /> : <ChevronDown className="w-3.5 h-3.5 text-slate-400" />}
+              </div>
+            </button>
+
+            {glossaryOpen && (
+              <div className="p-4 pt-1 border-t border-slate-100 dark:border-slate-800/80 space-y-3.5 animate-fade-in">
+                
+                {/* Language Switcher Buttons */}
+                <div className="flex items-center gap-1.5 pt-1">
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mr-1">Language:</span>
+                  {[
+                    { id: 'en', label: 'English' },
+                    { id: 'hi', label: 'हिंदी (Hindi)' },
+                    { id: 'te', label: 'తెలుగు (Telugu)' }
+                  ].map(lang => (
+                    <button
+                      key={lang.id}
+                      onClick={() => setGlossaryLang(lang.id)}
+                      className={`px-2 py-0.5 rounded text-[10px] font-bold transition ${
+                        glossaryLang === lang.id
+                          ? 'bg-indigo-600 text-white shadow-xs'
+                          : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
+                      }`}
+                    >
+                      {lang.label}
+                    </button>
+                  ))}
+                </div>
+
+                {/* 3 Concepts: Recall, False Alarms, Calibration */}
+                <div className="space-y-2.5 text-xs">
+                  <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-100 dark:border-slate-800/60">
+                    <span className="font-bold text-slate-900 dark:text-white block text-[11px] text-indigo-600 dark:text-indigo-400 mb-0.5">
+                      1. {currentGlossary.recall_term}:
+                    </span>
+                    <p className="text-slate-600 dark:text-slate-300 text-[11px] leading-relaxed">
+                      {currentGlossary.recall_def}
+                    </p>
+                  </div>
+
+                  <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-100 dark:border-slate-800/60">
+                    <span className="font-bold text-slate-900 dark:text-white block text-[11px] text-emerald-600 dark:text-emerald-400 mb-0.5">
+                      2. {currentGlossary.fpr_term}:
+                    </span>
+                    <p className="text-slate-600 dark:text-slate-300 text-[11px] leading-relaxed">
+                      {currentGlossary.fpr_def}
+                    </p>
+                  </div>
+
+                  <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-100 dark:border-slate-800/60">
+                    <span className="font-bold text-slate-900 dark:text-white block text-[11px] text-amber-600 dark:text-amber-400 mb-0.5">
+                      3. {currentGlossary.calib_term}:
+                    </span>
+                    <p className="text-slate-600 dark:text-slate-300 text-[11px] leading-relaxed">
+                      {currentGlossary.calib_def}
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+            )}
+          </div>
+
           {/* Performance & Footprint Stats */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 text-xs">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1 text-xs">
             <div className="p-3 rounded-2xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center gap-3">
               <Cpu className="w-5 h-5 text-indigo-500 shrink-0" />
               <div>
-                <p className="font-extrabold text-slate-900 dark:text-white">~32 ms (p50)</p>
+                <p className="font-extrabold text-slate-900 dark:text-white">{reportData?.latency_p50_ms || '~32 ms (p50)'}</p>
                 <p className="text-[11px] text-slate-400">Multi-detector CPU latency</p>
               </div>
             </div>
@@ -157,7 +237,7 @@ export default function ModelHonestyPanel() {
             <div className="p-3 rounded-2xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center gap-3">
               <Database className="w-5 h-5 text-emerald-500 shrink-0" />
               <div>
-                <p className="font-extrabold text-slate-900 dark:text-white">&lt; 45 MB RAM</p>
+                <p className="font-extrabold text-slate-900 dark:text-white">{reportData?.ram_mb || '< 45 MB RAM'}</p>
                 <p className="text-[11px] text-slate-400">Lightweight offline footprint</p>
               </div>
             </div>
@@ -165,7 +245,7 @@ export default function ModelHonestyPanel() {
             <div className="p-3 rounded-2xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center gap-3">
               <ShieldCheck className="w-5 h-5 text-indigo-500 shrink-0" />
               <div>
-                <p className="font-extrabold text-slate-900 dark:text-white">Zero Socket Calls</p>
+                <p className="font-extrabold text-slate-900 dark:text-white">{reportData?.network_calls || 'Zero Socket Calls'}</p>
                 <p className="text-[11px] text-slate-400">Offline static analysis (runs without internet)</p>
               </div>
             </div>

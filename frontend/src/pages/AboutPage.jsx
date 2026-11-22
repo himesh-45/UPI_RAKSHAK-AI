@@ -5,6 +5,7 @@ import {
   Lock, Eye, FileText, Zap
 } from 'lucide-react';
 import { useTranslation } from '../i18n/useTranslation';
+import ModelHonestyPanel from '../components/ModelHonestyPanel';
 
 export default function AboutPage() {
   const { t } = useTranslation();
@@ -185,6 +186,9 @@ export default function AboutPage() {
           <div className="p-2 rounded-lg bg-slate-950/60 border border-slate-800">15. Legitimate Banking Alerts</div>
         </div>
       </div>
+
+      {/* Model Reliability & Quality Gates Panel */}
+      <ModelHonestyPanel defaultOpen={true} />
 
       {/* Honest Limitations & Ethical Disclosure */}
       <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/80 border border-slate-800 space-y-4">

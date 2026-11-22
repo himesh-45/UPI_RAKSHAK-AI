@@ -79,3 +79,55 @@ def test_no_contradictory_metric_values():
         assert len(set(leg_v2_fpr_fractions)) == 1, (
             f"Contradictory legitimate FPR counts found for Gold v2: {set(leg_v2_fpr_fractions)}"
         )
+
+
+def test_model_honesty_panel_configuration():
+    """
+    Validates that ModelHonestyPanel:
+    1. Uses data directly from evaluation report JSON (passed 5 of 6 checks).
+    2. Has updated title 'How reliable is this tool?' and plain ECE explanation.
+    3. Is removed from the home page main view, replaced with 'How accurate is this?' text link.
+    4. Is rendered in AboutPage and JudgeTryPage ('For judges' area).
+    5. Includes multilingual recall, false alarms, and calibration explanations in EN, HI, and TE.
+    """
+    repo_root = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+    json_path = os.path.join(repo_root, "frontend", "src", "data", "evaluation_report.json")
+    assert os.path.exists(json_path), f"Missing {json_path}"
+
+    import json
+    with open(json_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    assert data["title"] == "How reliable is this tool?"
+    assert data["badge_text"] == "Passed 5 of 6 internal checks"
+    assert data["ece_explanation"] == "Confidence scores are not yet perfectly calibrated."
+    assert "Pending External Human Data Collection" in data["subtitle"]
+    assert data["passed_checks"] == 5
+    assert data["total_checks"] == 6
+
+    # Verify AnalyzerPage has "How accurate is this?" text link and does not render raw inline panel
+    analyzer_path = os.path.join(repo_root, "frontend", "src", "pages", "AnalyzerPage.jsx")
+    with open(analyzer_path, "r", encoding="utf-8") as f:
+        analyzer_code = f.read()
+    assert "How accurate is this?" in analyzer_code
+    assert "\n      <ModelHonestyPanel />" not in analyzer_code
+
+    # Verify AboutPage and JudgeTryPage render ModelHonestyPanel
+    about_path = os.path.join(repo_root, "frontend", "src", "pages", "AboutPage.jsx")
+    with open(about_path, "r", encoding="utf-8") as f:
+        about_code = f.read()
+    assert "<ModelHonestyPanel" in about_code
+
+    judge_path = os.path.join(repo_root, "frontend", "src", "pages", "JudgeTryPage.jsx")
+    with open(judge_path, "r", encoding="utf-8") as f:
+        judge_code = f.read()
+    assert "<ModelHonestyPanel" in judge_code
+
+    # Verify ModelHonestyPanel has multilingual definitions for recall, false alarms, calibration
+    panel_path = os.path.join(repo_root, "frontend", "src", "components", "ModelHonestyPanel.jsx")
+    with open(panel_path, "r", encoding="utf-8") as f:
+        panel_code = f.read()
+    assert "Confidence scores are not yet perfectly calibrated." in panel_code
+    assert "GLOSSARY_I18N" in panel_code
+    for lang in ["en:", "hi:", "te:"]:
+        assert lang in panel_code

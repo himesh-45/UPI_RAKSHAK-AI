@@ -1,0 +1,72 @@
+{
+  "title": "How reliable is this tool?",
+  "subtitle": "Computed from our evaluation report. Blind test: Pending External Human Data Collection.",
+  "blind_test_status": "Pending External Human Data Collection",
+  "passed_checks": 5,
+  "total_checks": 6,
+  "badge_text": "Passed 5 of 6 internal checks",
+  "ece_explanation": "Confidence scores are not yet perfectly calibrated.",
+  "gates": [
+    {
+      "id": "fusion_recall",
+      "name": "Risk Fusion Scam Recall",
+      "benchmark": ">= 95.0%",
+      "goldV1": "99.49%",
+      "goldV2": "98.55%",
+      "status": "PASSED",
+      "desc": "Sensitivity in capturing fraudulent vector attacks"
+    },
+    {
+      "id": "legit_fpr",
+      "name": "Legitimate False Alarm Rate (FPR)",
+      "benchmark": "<= 3.0%",
+      "goldV1": "0.00%",
+      "goldV2": "1.90%",
+      "status": "PASSED",
+      "desc": "0.00% on Gold v1 (0/110) and 1.90% on Gold v2 (2/105) across 215 genuine communications"
+    },
+    {
+      "id": "macro_f1",
+      "name": "15-Class NLP Macro-F1",
+      "benchmark": ">= 0.8500",
+      "goldV1": "0.8994",
+      "goldV2": "0.8624",
+      "status": "PASSED",
+      "desc": "Attribution accuracy across all 15 fraud taxonomy classes"
+    },
+    {
+      "id": "ece",
+      "name": "Expected Calibration Error (ECE)",
+      "benchmark": "< 0.1000",
+      "goldV1": "0.0992",
+      "goldV2": "0.1206",
+      "status": "v1: PASS / v2: FAIL",
+      "desc": "Calibrated confidence alignment (over-confident on colloquial Indic slang)"
+    },
+    {
+      "id": "url_recall",
+      "name": "Static URL Phishing Recall",
+      "benchmark": ">= 80.0%",
+      "goldV1": "82.00%",
+      "goldV2": "98.60%",
+      "status": "PASSED",
+      "desc": "Real-feed OpenPhish (82.00%) & Synthetic adversarial holdout (98.60%)"
+    },
+    {
+      "id": "url_fpr",
+      "name": "Static URL Benign FPR",
+      "benchmark": "<= 3.0%",
+      "goldV1": "1.60%",
+      "goldV2": "1.12%",
+      "status": "PASSED",
+      "desc": "Real-feed Tranco-1000 (1.60%) & Disjoint benign domains (1.12%)"
+    }
+  ],
+  "latency_p50_ms": "~32 ms (p50)",
+  "ram_mb": "< 45 MB RAM",
+  "network_calls": "Zero Socket Calls",
+  "dataset_notes": {
+    "gold_v1": "Gold Test Set v1 (Frozen Benchmark): Untouched baseline benchmark preserved for comparison.",
+    "gold_v2": "Gold Test Set v2 (Development Set — Used for Error Analysis): 243 samples with natural human phrasing and typos."
+  }
+}
