@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import {
   ShieldAlert, ShieldCheck, AlertTriangle, Link as LinkIcon,
   MessageSquare, Image as ImageIcon, Upload, Check, Copy,
-  Share2, Sparkles, BookOpen, ExternalLink, Flag, Info,
-  CreditCard, ThumbsUp, Layers, HelpCircle, Zap
+  Sparkles, BookOpen, Flag, Info, CreditCard, ThumbsUp,
+  Layers, HelpCircle, Zap, Activity, Trash2, ArrowRight,
+  Shield, TrendingUp, Clock, Lightbulb
 } from 'lucide-react';
 import { useTranslation } from '../i18n/useTranslation';
 import ScoreGauge from '../components/ScoreGauge';
@@ -97,6 +98,14 @@ export default function AnalyzerPage() {
     }
   };
 
+  const handleClear = () => {
+    setTextInput('');
+    setUrlInput('');
+    setSelectedFile(null);
+    setFilePreview(null);
+    setError('');
+  };
+
   const handleAnalyze = async () => {
     setLoading(true);
     setError('');
@@ -135,270 +144,720 @@ export default function AnalyzerPage() {
   };
 
   return (
-    <div className={`max-w-5xl mx-auto px-4 py-8 space-y-8 animate-fade-in ${isElderMode ? 'text-base font-medium' : ''}`}>
+    <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 animate-fade-in ${isElderMode ? 'text-base font-medium' : ''}`}>
       
-      {/* Hero Header */}
-      <div className="text-center space-y-3">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">
-          <Sparkles className="w-3.5 h-3.5" />
-          <span>{t('hero.badge')}</span>
+      {/* ------------------------------------------------------------------ */}
+      {/* 1. TOP HERO BANNER: "Stop scams before they strike." + CYBER SHIELD */}
+      {/* ------------------------------------------------------------------ */}
+      <div className="relative overflow-hidden rounded-3xl p-6 sm:p-10 cyber-glass border border-cyan-500/20 shadow-[0_10px_40px_rgba(0,0,0,0.6)]">
+        {/* Ambient Radial Background Glows */}
+        <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-cyan-500/10 blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-blue-600/15 blur-3xl pointer-events-none" />
+
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          
+          {/* Left Hero Content */}
+          <div className="lg:col-span-7 space-y-4 text-left">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-black tracking-wider uppercase bg-cyan-500/20 text-cyan-300 border border-cyan-400/40 shadow-[0_0_15px_rgba(6,182,212,0.25)]">
+              <Sparkles className="w-3.5 h-3.5 text-cyan-300 animate-pulse" />
+              <span>AI Cyber Shield Active • Edge Inference</span>
+            </div>
+
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-tight">
+              {t('hero.title')}
+            </h1>
+
+            <p className="text-sm sm:text-base text-slate-300 font-medium max-w-xl leading-relaxed">
+              {t('hero.subtitle')}
+            </p>
+
+            <div className="pt-2 flex flex-wrap items-center gap-3">
+              <button
+                onClick={() => setLlmModalOpen(true)}
+                className="px-4 py-2 rounded-2xl bg-indigo-500/20 hover:bg-indigo-500/30 border border-indigo-400/40 hover:border-indigo-400 text-indigo-300 font-extrabold text-xs flex items-center gap-2 shadow-[0_0_15px_rgba(99,102,241,0.2)] transition hover:scale-105 active:scale-95"
+              >
+                <Zap className="w-4 h-4 text-indigo-400" />
+                <span>Why Not Just Use an LLM?</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setHonestyModalOpen(true)}
+                className="px-4 py-2 rounded-2xl bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 hover:border-cyan-400 text-cyan-300 font-extrabold text-xs flex items-center gap-2 shadow-[0_0_15px_rgba(6,182,212,0.15)] transition hover:scale-105 active:scale-95"
+              >
+                <HelpCircle className="w-4 h-4 text-cyan-400" />
+                <span>How accurate is this?</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Right Hero Graphic: Holographic Shield & Cyber Matrix */}
+          <div className="lg:col-span-5 flex justify-center lg:justify-end">
+            <div className="relative w-64 h-56 sm:w-72 sm:h-64 flex items-center justify-center">
+              {/* Outer Pulse Rings */}
+              <div className="absolute inset-0 rounded-full border border-cyan-500/20 animate-ping opacity-25" style={{ animationDuration: '3s' }} />
+              <div className="absolute w-52 h-52 rounded-full border border-cyan-400/30 shadow-[0_0_30px_rgba(6,182,212,0.2)]" />
+              <div className="absolute w-40 h-40 rounded-full border border-blue-500/40 animate-spin" style={{ animationDuration: '16s' }} />
+              
+              {/* Central Glowing Cyber Shield Hologram */}
+              <div className="relative z-10 w-32 h-36 rounded-3xl bg-gradient-to-b from-cyan-400/30 via-blue-600/40 to-indigo-900/60 backdrop-blur-md border border-cyan-300/60 shadow-[0_0_40px_rgba(6,182,212,0.55)] flex flex-col items-center justify-center text-center p-3">
+                <Shield className="w-14 h-14 text-cyan-300 drop-shadow-[0_0_15px_rgba(0,242,254,0.8)] fill-cyan-400/20" />
+                <div className="mt-2 px-2 py-0.5 rounded-full bg-cyan-950/80 border border-cyan-400/50 text-[10px] font-black uppercase tracking-wider text-cyan-300 shadow-[0_0_10px_rgba(6,182,212,0.4)]">
+                  PROTECTED
+                </div>
+              </div>
+
+              {/* Threat Alert Hexagon (Right Corner) */}
+              <div className="absolute top-4 right-2 w-11 h-11 rounded-2xl bg-rose-500/20 border border-rose-500/50 shadow-[0_0_20px_rgba(244,63,94,0.4)] flex items-center justify-center text-rose-300 animate-bounce" style={{ animationDuration: '4s' }}>
+                <AlertTriangle className="w-5 h-5 text-rose-400 drop-shadow-[0_0_8px_rgba(239,68,68,0.7)]" />
+              </div>
+
+              {/* Status Pill Indicator (Bottom Left) */}
+              <div className="absolute bottom-4 left-2 px-3 py-1 rounded-full bg-[#080d22]/90 border border-emerald-400/40 text-[11px] font-bold text-emerald-300 shadow-[0_0_15px_rgba(16,185,129,0.3)] flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                <span>Live Guard Active</span>
+              </div>
+            </div>
+          </div>
+
         </div>
-        <h1 className={`font-extrabold tracking-tight text-slate-900 dark:text-white ${isElderMode ? 'text-4xl sm:text-5xl' : 'text-3xl sm:text-4xl'}`}>
-          {t('hero.title')}
-        </h1>
-        <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-          {t('hero.subtitle')}
-        </p>
       </div>
 
-      {/* Architect Live Demo Bar */}
-      <div className="flex flex-wrap items-center justify-center gap-3">
-        <button
-          onClick={() => setLlmModalOpen(true)}
-          className="px-4 py-2 rounded-2xl bg-indigo-500/10 hover:bg-indigo-500/20 border border-indigo-500/30 hover:border-indigo-500 text-indigo-700 dark:text-indigo-300 font-extrabold text-xs flex items-center gap-2 shadow-sm transition hover:scale-105 active:scale-95"
-        >
-          <Zap className="w-4 h-4 text-indigo-500" />
-          <span>Why Not Just Use an LLM?</span>
-        </button>
-      </div>
-
-      {/* Main Analyzer Card */}
-      <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl p-6 sm:p-8 space-y-6">
+      {/* ------------------------------------------------------------------ */}
+      {/* 2. MAIN WORKSPACE: SIDE-BY-SIDE INTERACTIVE ANALYZER & RESULT      */}
+      {/* ------------------------------------------------------------------ */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
         
-        {/* Workspace Mode Tabs */}
-        <div className="flex items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-4 overflow-x-auto scrollbar-none">
-          <button
-            onClick={() => setActiveInputTab('text')}
-            className={`px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 transition shrink-0 ${
-              activeInputTab === 'text'
-                ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/20'
-                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
-            }`}
-          >
-            <MessageSquare className="w-4 h-4" />
-            {t('tabs.text')}
-          </button>
-
-          <button
-            onClick={() => setActiveInputTab('url')}
-            className={`px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 transition shrink-0 ${
-              activeInputTab === 'url'
-                ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/20'
-                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
-            }`}
-          >
-            <LinkIcon className="w-4 h-4" />
-            {t('tabs.url')}
-          </button>
-
-          <button
-            onClick={() => setActiveInputTab('image')}
-            className={`px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 transition shrink-0 ${
-              activeInputTab === 'image'
-                ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/20'
-                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
-            }`}
-          >
-            <ImageIcon className="w-4 h-4" />
-            {t('tabs.image')}
-          </button>
-
-          <button
-            onClick={() => setActiveInputTab('vpa')}
-            className={`px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 transition shrink-0 ${
-              activeInputTab === 'vpa'
-                ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/20'
-                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
-            }`}
-          >
-            <CreditCard className="w-4 h-4" />
-            UPI ID Safe-Check
-          </button>
-        </div>
-
-        {/* Tab 1: Text Input */}
-        {activeInputTab === 'text' && (
-          <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <label className="text-xs font-semibold text-slate-600 dark:text-slate-300">
-                Suspicious SMS / WhatsApp / Message Body
-              </label>
-              <VoiceInput
-                onTranscript={(txt) => setTextInput((prev) => (prev ? prev + ' ' + txt : txt))}
-                selectedLang={language === 'hi' ? 'hi-IN' : (language === 'te' ? 'te-IN' : 'en-IN')}
-              />
-            </div>
-            <textarea
-              rows="5"
-              value={textInput}
-              onChange={(e) => setTextInput(e.target.value)}
-              placeholder={t('analyzer.textPlaceholder')}
-              className={`w-full rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 p-4 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition ${isElderMode ? 'text-base' : 'text-sm'}`}
-            />
-          </div>
-        )}
-
-        {/* Tab 2: URL Input */}
-        {activeInputTab === 'url' && (
-          <div className="space-y-2">
-            <label className="text-xs font-semibold text-slate-600 dark:text-slate-300">
-              Suspicious Website / Payment Link URL
-            </label>
-            <input
-              type="text"
-              value={urlInput}
-              onChange={(e) => setUrlInput(e.target.value)}
-              placeholder="e.g. https://sbi-card-kyc-update.xyz or http://192.168.1.10/pay"
-              className={`w-full rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 px-4 py-3 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 font-mono transition ${isElderMode ? 'text-base' : 'text-sm'}`}
-            />
-          </div>
-        )}
-
-        {/* Tab 3: Image / QR Input */}
-        {activeInputTab === 'image' && (
+        {/* LEFT COLUMN (7 COLS): "Scan a Suspicious Message" Card */}
+        <div className="lg:col-span-7 cyber-glass rounded-3xl p-6 sm:p-7 space-y-5 border border-cyan-500/25 flex flex-col justify-between">
           <div className="space-y-4">
-            <label className="text-xs font-semibold text-slate-600 dark:text-slate-300 block">
-              Upload Payment Screenshot or QR Code Image
-            </label>
-            <div className="relative border-2 border-dashed border-slate-300 dark:border-slate-700 hover:border-indigo-500 rounded-2xl p-6 text-center cursor-pointer transition">
-              <input
-                type="file"
-                accept="image/png, image/jpeg, image/jpg, image/webp"
-                onChange={handleFileChange}
-                className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
-              />
-              {filePreview ? (
-                <div className="space-y-3">
-                  <img
-                    src={filePreview}
-                    alt="Uploaded preview"
-                    className="max-h-48 mx-auto rounded-xl object-contain border border-slate-700 shadow"
+            {/* Header: Activity Wave + Title */}
+            <div className="flex items-center gap-3">
+              <div className="p-2.5 rounded-2xl bg-cyan-500/20 text-cyan-300 border border-cyan-400/40 shadow-[0_0_15px_rgba(6,182,212,0.3)]">
+                <Activity className="w-5 h-5 animate-pulse" />
+              </div>
+              <div>
+                <h2 className="text-base sm:text-lg font-black tracking-tight text-white">
+                  Scan a Suspicious Message
+                </h2>
+                <p className="text-xs text-slate-400 font-medium">
+                  Paste the message, link or upload a screenshot for analysis.
+                </p>
+              </div>
+            </div>
+
+            {/* Input Mode Pills: [SMS] [URL] [UPI] [Image] */}
+            <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+              <button
+                type="button"
+                onClick={() => setActiveInputTab('text')}
+                className={`px-4 py-2 rounded-full text-xs font-black flex items-center gap-2 transition ${
+                  activeInputTab === 'text'
+                    ? 'bg-gradient-to-r from-cyan-500/30 to-blue-500/30 text-cyan-300 border border-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.35)]'
+                    : 'bg-[#060919]/70 text-slate-400 border border-slate-800 hover:text-white hover:border-slate-700'
+                }`}
+              >
+                <MessageSquare className="w-3.5 h-3.5" />
+                <span>SMS</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setActiveInputTab('url')}
+                className={`px-4 py-2 rounded-full text-xs font-black flex items-center gap-2 transition ${
+                  activeInputTab === 'url'
+                    ? 'bg-gradient-to-r from-cyan-500/30 to-blue-500/30 text-cyan-300 border border-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.35)]'
+                    : 'bg-[#060919]/70 text-slate-400 border border-slate-800 hover:text-white hover:border-slate-700'
+                }`}
+              >
+                <LinkIcon className="w-3.5 h-3.5" />
+                <span>URL</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setActiveInputTab('vpa')}
+                className={`px-4 py-2 rounded-full text-xs font-black flex items-center gap-2 transition ${
+                  activeInputTab === 'vpa'
+                    ? 'bg-gradient-to-r from-cyan-500/30 to-blue-500/30 text-cyan-300 border border-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.35)]'
+                    : 'bg-[#060919]/70 text-slate-400 border border-slate-800 hover:text-white hover:border-slate-700'
+                }`}
+              >
+                <CreditCard className="w-3.5 h-3.5" />
+                <span>UPI</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setActiveInputTab('image')}
+                className={`px-4 py-2 rounded-full text-xs font-black flex items-center gap-2 transition ${
+                  activeInputTab === 'image'
+                    ? 'bg-gradient-to-r from-cyan-500/30 to-blue-500/30 text-cyan-300 border border-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.35)]'
+                    : 'bg-[#060919]/70 text-slate-400 border border-slate-800 hover:text-white hover:border-slate-700'
+                }`}
+              >
+                <ImageIcon className="w-3.5 h-3.5" />
+                <span>Image</span>
+              </button>
+            </div>
+
+            {/* Input Box: SMS / Text Area */}
+            {activeInputTab === 'text' && (
+              <div className="relative rounded-2xl bg-[#060919]/90 border border-cyan-500/25 focus-within:border-cyan-400 focus-within:shadow-[0_0_20px_rgba(6,182,212,0.25)] p-4 transition space-y-2">
+                <div className="flex items-center justify-between pb-1 border-b border-cyan-500/10">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                    Message Body
+                  </span>
+                  <VoiceInput
+                    onTranscript={(txt) => setTextInput((prev) => (prev ? prev + ' ' + txt : txt))}
+                    selectedLang={language === 'hi' ? 'hi-IN' : (language === 'te' ? 'te-IN' : 'en-IN')}
                   />
-                  <p className="text-xs text-slate-500">{selectedFile?.name}</p>
                 </div>
-              ) : (
-                <div className="space-y-2">
-                  <Upload className="w-8 h-8 text-slate-400 mx-auto" />
-                  <p className="text-sm font-semibold text-slate-700 dark:text-slate-300">
-                    Click to browse or drag and drop image here
-                  </p>
-                  <p className="text-xs text-slate-400">
-                    {t('analyzer.uploadHint')}
-                  </p>
+                <textarea
+                  rows="4"
+                  value={textInput}
+                  onChange={(e) => setTextInput(e.target.value)}
+                  placeholder="Your account will be blocked today. Verify KYC now: secure-kyc-check.example"
+                  className="w-full bg-transparent text-white placeholder:text-slate-500 focus:outline-none text-sm font-sans resize-none"
+                />
+                <div className="flex items-center justify-end pt-1">
+                  <span className="text-[11px] font-mono text-slate-400">
+                    {textInput.length}/500
+                  </span>
                 </div>
-              )}
-            </div>
+              </div>
+            )}
+
+            {/* Input Box: URL */}
+            {activeInputTab === 'url' && (
+              <div className="relative rounded-2xl bg-[#060919]/90 border border-cyan-500/25 focus-within:border-cyan-400 focus-within:shadow-[0_0_20px_rgba(6,182,212,0.25)] p-4 transition space-y-2">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                  Suspicious Website / Payment Link URL
+                </span>
+                <input
+                  type="text"
+                  value={urlInput}
+                  onChange={(e) => setUrlInput(e.target.value)}
+                  placeholder="e.g. https://sbi-kyc-verification.top/login or http://192.168.1.10/pay"
+                  className="w-full bg-transparent text-white placeholder:text-slate-500 focus:outline-none text-sm font-mono"
+                />
+              </div>
+            )}
+
+            {/* Input Box: Image / QR */}
+            {activeInputTab === 'image' && (
+              <div className="relative border-2 border-dashed border-cyan-500/30 hover:border-cyan-400 rounded-2xl p-6 text-center cursor-pointer transition bg-[#060919]/70">
+                <input
+                  type="file"
+                  accept="image/png, image/jpeg, image/jpg, image/webp"
+                  onChange={handleFileChange}
+                  className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
+                />
+                {filePreview ? (
+                  <div className="space-y-2">
+                    <img
+                      src={filePreview}
+                      alt="Uploaded preview"
+                      className="max-h-40 mx-auto rounded-xl object-contain border border-cyan-500/40 shadow-[0_0_15px_rgba(6,182,212,0.3)]"
+                    />
+                    <p className="text-xs text-cyan-300 font-mono">{selectedFile?.name}</p>
+                  </div>
+                ) : (
+                  <div className="space-y-2">
+                    <Upload className="w-8 h-8 text-cyan-400 mx-auto" />
+                    <p className="text-sm font-bold text-white">
+                      Click to browse or drag & drop payment screenshot
+                    </p>
+                    <p className="text-xs text-slate-400">
+                      PNG, JPG, or WEBP. Decodes QR codes safely offline.
+                    </p>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Input Box: VPA Tab */}
+            {activeInputTab === 'vpa' && (
+              <div className="rounded-2xl bg-[#060919]/90 border border-cyan-500/25 p-4">
+                <VpaCheckTab />
+              </div>
+            )}
+
+            {/* Demo Sample Chips */}
+            {activeInputTab !== 'vpa' && demoExamples.length > 0 && (
+              <div className="space-y-1.5 pt-1">
+                <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+                  Try Fictional Samples:
+                </span>
+                <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+                  {demoExamples.slice(0, 5).map((chip) => (
+                    <button
+                      key={chip.id}
+                      type="button"
+                      onClick={() => handleApplyChip(chip)}
+                      className="px-2.5 py-1 rounded-full text-[11px] font-bold whitespace-nowrap bg-[#0a102b] hover:bg-cyan-500/20 text-slate-300 hover:text-cyan-300 border border-cyan-500/20 hover:border-cyan-400/50 transition"
+                    >
+                      {chip.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Error Banner */}
+            {error && (
+              <div className="p-3 rounded-xl bg-rose-950/60 border border-rose-500/50 text-rose-300 text-xs font-bold shadow-[0_0_15px_rgba(244,63,94,0.3)]">
+                {error}
+              </div>
+            )}
           </div>
-        )}
 
-        {/* Tab 4: VPA Safe-Check */}
-        {activeInputTab === 'vpa' && (
-          <VpaCheckTab />
-        )}
+          {/* Action Footer: [Upload Screenshot] [Clear] [Analyze Threat ->] */}
+          {activeInputTab !== 'vpa' && (
+            <div className="pt-4 border-t border-cyan-500/15 flex flex-wrap items-center justify-between gap-3">
+              <div className="flex items-center gap-2">
+                <label className="px-3 py-1.5 rounded-full bg-[#060919] hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700/60 text-xs font-bold flex items-center gap-1.5 cursor-pointer transition">
+                  <Upload className="w-3.5 h-3.5 text-cyan-400" />
+                  <span>Upload Screenshot</span>
+                  <input
+                    type="file"
+                    accept="image/png, image/jpeg, image/jpg, image/webp"
+                    onChange={(e) => {
+                      setActiveInputTab('image');
+                      handleFileChange(e);
+                    }}
+                    className="hidden"
+                  />
+                </label>
 
-        {/* Demo Chips Section (only for text/url/image tabs) */}
-        {activeInputTab !== 'vpa' && demoExamples.length > 0 && (
-          <div className="space-y-2.5 pt-2">
-            <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-              {t('analyzer.sampleChipsTitle')}
-            </span>
-            <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
-              {demoExamples.slice(0, 8).map((chip) => (
                 <button
-                  key={chip.id}
-                  onClick={() => handleApplyChip(chip)}
-                  className="px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap bg-slate-100 dark:bg-slate-800 hover:bg-indigo-50 dark:hover:bg-indigo-950/60 hover:text-indigo-600 dark:hover:text-indigo-400 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition"
+                  type="button"
+                  onClick={handleClear}
+                  className="px-3 py-1.5 rounded-full bg-[#060919] hover:bg-slate-800 text-slate-400 hover:text-rose-400 border border-slate-800 text-xs font-bold flex items-center gap-1.5 transition"
+                  title="Clear inputs"
                 >
-                  {chip.label}
+                  <Trash2 className="w-3.5 h-3.5" />
+                  <span>Clear</span>
                 </button>
-              ))}
+              </div>
+
+              <button
+                type="button"
+                onClick={handleAnalyze}
+                disabled={loading}
+                className="px-6 py-2.5 rounded-full bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-slate-950 font-black text-xs uppercase tracking-wider shadow-[0_0_20px_rgba(6,182,212,0.45)] hover:shadow-[0_0_30px_rgba(6,182,212,0.7)] flex items-center gap-2 transition hover:scale-105 active:scale-95 disabled:opacity-50"
+              >
+                {loading ? (
+                  <>
+                    <div className="w-3.5 h-3.5 border-2 border-slate-950/30 border-t-slate-950 rounded-full animate-spin" />
+                    <span>Analyzing...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>Analyze Threat</span>
+                    <ArrowRight className="w-4 h-4 stroke-[3]" />
+                  </>
+                )}
+              </button>
             </div>
-          </div>
-        )}
+          )}
+        </div>
 
-        {/* Error message banner */}
-        {error && (
-          <div className="p-3.5 rounded-xl bg-rose-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-800 text-rose-700 dark:text-rose-300 text-xs font-semibold">
-            {error}
-          </div>
-        )}
+        {/* RIGHT COLUMN (5 COLS): Threat Detection Card */}
+        <div className="lg:col-span-5 cyber-glass rounded-3xl p-6 sm:p-7 space-y-5 border border-cyan-500/25 flex flex-col justify-between">
+          {report ? (
+            <div className="space-y-5">
+              {/* Top Row Badges: Fraud Risk Detected + AI Analysis Complete */}
+              <div className="flex items-center justify-between gap-2 flex-wrap pb-3 border-b border-cyan-500/15">
+                <div className={`px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider flex items-center gap-1.5 border shadow-sm ${
+                  report.verdict === 'HIGH RISK'
+                    ? 'bg-rose-500/20 text-rose-300 border-rose-500/50 shadow-[0_0_12px_rgba(239,68,68,0.4)]'
+                    : (report.verdict === 'SUSPICIOUS'
+                      ? 'bg-amber-500/20 text-amber-300 border-amber-500/50 shadow-[0_0_12px_rgba(245,158,11,0.35)]'
+                      : 'bg-emerald-500/20 text-emerald-300 border-emerald-500/50 shadow-[0_0_12px_rgba(16,185,129,0.3)]')
+                }`}>
+                  <AlertTriangle className="w-3.5 h-3.5" />
+                  <span>
+                    {report.verdict === 'HIGH RISK' ? 'Fraud Risk Detected' : (report.verdict === 'SUSPICIOUS' ? 'Suspicious Risk' : 'Likely Safe Content')}
+                  </span>
+                </div>
 
-        {/* Bottom Actions Bar (for text/url/image tabs) */}
-        {activeInputTab !== 'vpa' && (
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-slate-100 dark:border-slate-800">
-            <label className="flex items-center gap-2 cursor-pointer text-xs font-medium text-slate-600 dark:text-slate-400">
-              <input
-                type="checkbox"
-                checked={saveHistory}
-                onChange={(e) => setSaveHistory(e.target.checked)}
-                className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
-              />
-              <span>{t('analyzer.saveHistoryLabel')}</span>
-            </label>
+                <div className="px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 text-xs font-black flex items-center gap-1 shadow-[0_0_10px_rgba(16,185,129,0.25)]">
+                  <Activity className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>AI Analysis Complete ✓</span>
+                </div>
+              </div>
 
-            <button
-              onClick={handleAnalyze}
-              disabled={loading}
-              className="w-full sm:w-auto px-8 py-3.5 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-sm tracking-wide shadow-lg shadow-indigo-600/30 flex items-center justify-center gap-2 transition transform active:scale-95 disabled:opacity-50"
-            >
-              {loading ? (
-                <>
-                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                  <span>{t('analyzer.analyzing')}</span>
-                </>
-              ) : (
-                <>
-                  <ShieldAlert className="w-4 h-4" />
-                  <span>{t('analyzer.analyzeBtn')}</span>
-                </>
-              )}
-            </button>
-          </div>
-        )}
+              {/* Gauge and "Why was this flagged?" */}
+              <div className="grid grid-cols-1 sm:grid-cols-12 gap-5 items-center">
+                <div className="sm:col-span-5 flex justify-center">
+                  <ScoreGauge score={report.risk_score} verdict={report.verdict} />
+                </div>
+                <div className="sm:col-span-7 space-y-2">
+                  <h4 className="text-xs font-black uppercase tracking-wider text-white">
+                    Why was this flagged?
+                  </h4>
+                  <ul className="space-y-1.5 text-xs text-slate-300 font-medium">
+                    {report.evidence && report.evidence.length > 0 ? (
+                      report.evidence.slice(0, 4).map((ev, i) => (
+                        <li key={i} className="flex items-start gap-1.5 leading-snug">
+                          <span className="w-2 h-2 rounded-full bg-rose-500 mt-1.5 shrink-0 shadow-[0_0_6px_rgba(239,68,68,0.8)]" />
+                          <span className="line-clamp-2">{ev.signal}</span>
+                        </li>
+                      ))
+                    ) : (
+                      <li className="text-slate-400 text-xs">No overt high-risk threat indicators matched.</li>
+                    )}
+                  </ul>
+                </div>
+              </div>
+
+              {/* AI Recommendation Box with Purple Glow */}
+              <div className="p-4 rounded-2xl bg-purple-950/40 border border-purple-500/30 text-purple-200 shadow-[0_0_20px_rgba(168,85,247,0.15)] flex items-start justify-between gap-3">
+                <div className="space-y-1 text-left">
+                  <div className="flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-purple-300">
+                    <Lightbulb className="w-3.5 h-3.5 text-purple-400" />
+                    <span>AI Recommendation</span>
+                  </div>
+                  <p className="text-xs text-purple-200/90 leading-relaxed font-medium">
+                    {report.recommended_actions?.[0] || 'Never enter your UPI PIN or scan QR codes to receive money.'}
+                  </p>
+                </div>
+                <div className="p-2 rounded-xl bg-purple-900/40 border border-purple-400/40 text-purple-300 shrink-0 shadow-[0_0_10px_rgba(168,85,247,0.3)]">
+                  <ShieldCheck className="w-5 h-5 text-purple-300" />
+                </div>
+              </div>
+
+              {/* Action Buttons: Copy, Feedback, Report */}
+              <div className="pt-2 flex items-center justify-between gap-2 border-t border-cyan-500/10">
+                <button
+                  type="button"
+                  onClick={handleCopySummary}
+                  className="px-3 py-1.5 rounded-xl text-xs font-bold bg-[#060919] hover:bg-slate-800 text-slate-300 border border-slate-700/60 flex items-center gap-1 transition"
+                >
+                  {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                  <span>{copied ? 'Copied' : 'Share'}</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setFeedbackModalOpen(true)}
+                  className="px-3 py-1.5 rounded-xl text-xs font-bold bg-[#060919] hover:bg-slate-800 text-slate-300 border border-slate-700/60 flex items-center gap-1 transition"
+                >
+                  <ThumbsUp className="w-3.5 h-3.5 text-cyan-400" />
+                  <span>Feedback</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setReportModalOpen(true)}
+                  className="px-3 py-1.5 rounded-xl text-xs font-black bg-rose-500/20 text-rose-300 border border-rose-500/40 hover:bg-rose-500/30 flex items-center gap-1 transition shadow-[0_0_10px_rgba(244,63,94,0.3)]"
+                >
+                  <Flag className="w-3.5 h-3.5" />
+                  <span>Report</span>
+                </button>
+              </div>
+            </div>
+          ) : (
+            /* Idle Preview State Matching Screenshot Layout */
+            <div className="space-y-5 my-auto py-2">
+              <div className="flex items-center justify-between pb-3 border-b border-cyan-500/15">
+                <div className="px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-400/40 text-xs font-black flex items-center gap-1.5 shadow-[0_0_10px_rgba(6,182,212,0.25)]">
+                  <ShieldCheck className="w-3.5 h-3.5" />
+                  <span>Threat Radar Ready</span>
+                </div>
+                <div className="px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 text-xs font-black flex items-center gap-1">
+                  <Activity className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>7 Engines Active</span>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-12 gap-5 items-center">
+                <div className="sm:col-span-5 flex justify-center">
+                  <ScoreGauge score={0} verdict="Awaiting Input" />
+                </div>
+                <div className="sm:col-span-7 space-y-2 text-left">
+                  <h4 className="text-xs font-black uppercase tracking-wider text-white">
+                    Detection Coverage
+                  </h4>
+                  <ul className="space-y-1.5 text-xs text-slate-300 font-medium">
+                    <li className="flex items-center gap-2 text-cyan-300">
+                      <span className="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_6px_rgba(6,182,212,0.8)]" />
+                      <span>15-Class Vernacular NLP Engine</span>
+                    </li>
+                    <li className="flex items-center gap-2 text-cyan-300">
+                      <span className="w-2 h-2 rounded-full bg-blue-400 shadow-[0_0_6px_rgba(14,165,233,0.8)]" />
+                      <span>Zero-Network URL & Phishing Scanner</span>
+                    </li>
+                    <li className="flex items-center gap-2 text-cyan-300">
+                      <span className="w-2 h-2 rounded-full bg-purple-400 shadow-[0_0_6px_rgba(168,85,247,0.8)]" />
+                      <span>Digital Arrest Extortion Interceptor</span>
+                    </li>
+                    <li className="flex items-center gap-2 text-cyan-300">
+                      <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(16,185,129,0.8)]" />
+                      <span>Statutory CrPC 41 / BNSS 35 Grounding</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-purple-950/40 border border-purple-500/30 text-purple-200 shadow-[0_0_20px_rgba(168,85,247,0.15)] flex items-start justify-between gap-3">
+                <div className="space-y-1 text-left">
+                  <div className="flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-purple-300">
+                    <Lightbulb className="w-3.5 h-3.5 text-purple-400" />
+                    <span>AI Recommendation</span>
+                  </div>
+                  <p className="text-xs text-purple-200/90 leading-relaxed font-medium">
+                    Paste a suspicious message or tap any sample on the left to inspect real-time risk scores.
+                  </p>
+                </div>
+                <div className="p-2 rounded-xl bg-purple-900/40 border border-purple-400/40 text-purple-300 shrink-0">
+                  <Shield className="w-5 h-5 text-purple-300" />
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+
       </div>
 
-      {/* Small "How accurate is this?" text link on home page */}
-      <div className="flex items-center justify-end px-1 -mt-2 mb-2">
-        <button
-          type="button"
-          onClick={() => setHonestyModalOpen(true)}
-          className="text-xs text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 underline font-medium inline-flex items-center gap-1 transition"
-        >
-          <HelpCircle className="w-3.5 h-3.5" />
-          <span>How accurate is this?</span>
-        </button>
+      {/* ------------------------------------------------------------------ */}
+      {/* 3. QUICK STAT COUNTERS (ROW OF 4 MATCHING MOCKUP)                   */}
+      {/* ------------------------------------------------------------------ */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* Card 1: Messages Scanned */}
+        <div className="cyber-glass rounded-2xl p-4 border border-cyan-500/20 flex items-center justify-between gap-3">
+          <div className="space-y-1">
+            <span className="text-2xl font-black text-white font-mono">1,248</span>
+            <p className="text-xs text-slate-400 font-semibold">Messages Scanned</p>
+            <span className="text-[11px] font-bold text-cyan-400 flex items-center gap-0.5">
+              <TrendingUp className="w-3 h-3" /> ↑ 12%
+            </span>
+          </div>
+          {/* Mini Sparkline SVG */}
+          <svg className="w-16 h-8 text-cyan-400 stroke-current shrink-0" fill="none" viewBox="0 0 64 32">
+            <path d="M0 24 Q16 10 32 18 T64 6" strokeWidth="2.5" strokeLinecap="round" />
+          </svg>
+        </div>
+
+        {/* Card 2: Threats Detected */}
+        <div className="cyber-glass rounded-2xl p-4 border border-cyan-500/20 flex items-center justify-between gap-3">
+          <div className="space-y-1">
+            <span className="text-2xl font-black text-rose-400 font-mono">92</span>
+            <p className="text-xs text-slate-400 font-semibold">Threats Detected</p>
+            <span className="text-[11px] font-bold text-rose-400 flex items-center gap-0.5">
+              <TrendingUp className="w-3 h-3" /> ↑ 8%
+            </span>
+          </div>
+          {/* Mini Sparkline SVG */}
+          <svg className="w-16 h-8 text-rose-400 stroke-current shrink-0" fill="none" viewBox="0 0 64 32">
+            <path d="M0 28 Q16 20 32 12 T64 4" strokeWidth="2.5" strokeLinecap="round" />
+          </svg>
+        </div>
+
+        {/* Card 3: Links Analysed */}
+        <div className="cyber-glass rounded-2xl p-4 border border-cyan-500/20 flex items-center justify-between gap-3">
+          <div className="space-y-1">
+            <span className="text-2xl font-black text-sky-400 font-mono">421</span>
+            <p className="text-xs text-slate-400 font-semibold">Links Analysed</p>
+            <span className="text-[11px] font-bold text-sky-400 flex items-center gap-0.5">
+              <TrendingUp className="w-3 h-3" /> ↑ 15%
+            </span>
+          </div>
+          {/* Mini Sparkline SVG */}
+          <svg className="w-16 h-8 text-sky-400 stroke-current shrink-0" fill="none" viewBox="0 0 64 32">
+            <path d="M0 26 Q16 8 32 20 T64 8" strokeWidth="2.5" strokeLinecap="round" />
+          </svg>
+        </div>
+
+        {/* Card 4: Safety Score */}
+        <div className="cyber-glass rounded-2xl p-4 border border-cyan-500/20 flex items-center justify-between gap-3">
+          <div className="space-y-1">
+            <span className="text-2xl font-black text-emerald-400 font-mono">95%</span>
+            <p className="text-xs text-slate-400 font-semibold">Safety Score</p>
+            <span className="text-[11px] font-bold text-emerald-400 flex items-center gap-1">
+              <ShieldCheck className="w-3 h-3" /> Verified Healthy
+            </span>
+          </div>
+          {/* Mini Sparkline SVG */}
+          <svg className="w-16 h-8 text-emerald-400 stroke-current shrink-0" fill="none" viewBox="0 0 64 32">
+            <path d="M0 22 Q16 16 32 10 T64 2" strokeWidth="2.5" strokeLinecap="round" />
+          </svg>
+        </div>
       </div>
 
-      {/* Loading Skeleton Loader */}
-      {loading && (
-        <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl p-6 sm:p-8 space-y-6 animate-pulse">
-          <div className="flex flex-col lg:flex-row items-center gap-6 pb-6 border-b border-slate-100 dark:border-slate-800">
-            <div className="w-36 h-36 rounded-2xl bg-slate-200 dark:bg-slate-800 shrink-0" />
-            <div className="flex-1 space-y-3 w-full">
-              <div className="h-5 w-32 bg-slate-200 dark:bg-slate-800 rounded-lg" />
-              <div className="h-8 w-3/4 bg-slate-200 dark:bg-slate-800 rounded-lg" />
-              <div className="h-4 w-full bg-slate-200 dark:bg-slate-800 rounded-lg" />
-              <div className="h-4 w-2/3 bg-slate-200 dark:bg-slate-800 rounded-lg" />
+      {/* ------------------------------------------------------------------ */}
+      {/* 4. BOTTOM 3 CYBER GRID CARDS (RECENT SCANS, SCAM TYPES, TIP)       */}
+      {/* ------------------------------------------------------------------ */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        {/* Card 1: Recent Scans */}
+        <div className="cyber-glass rounded-3xl p-5 border border-cyan-500/20 space-y-4">
+          <div className="flex items-center justify-between pb-2 border-b border-cyan-500/10">
+            <div className="flex items-center gap-2">
+              <Clock className="w-4 h-4 text-cyan-400" />
+              <h3 className="text-xs font-black uppercase tracking-wider text-white">Recent Scans</h3>
             </div>
+            <span className="text-[11px] font-bold text-cyan-400 hover:text-cyan-300 cursor-pointer">
+              View All →
+            </span>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div className="h-48 bg-slate-200 dark:bg-slate-800 rounded-2xl" />
-            <div className="h-48 bg-slate-200 dark:bg-slate-800 rounded-2xl" />
+
+          <div className="space-y-2.5">
+            <div className="p-2.5 rounded-xl bg-[#060919]/70 border border-slate-800 flex items-center justify-between gap-2">
+              <div className="truncate">
+                <p className="text-xs font-bold text-slate-200 truncate">Win ₹50,000 Prize! Click here</p>
+                <span className="text-[10px] text-slate-400">2 min ago</span>
+              </div>
+              <span className="px-2 py-0.5 rounded-md text-[10px] font-black uppercase bg-rose-500/20 text-rose-300 border border-rose-500/40">
+                Blocked
+              </span>
+            </div>
+
+            <div className="p-2.5 rounded-xl bg-[#060919]/70 border border-slate-800 flex items-center justify-between gap-2">
+              <div className="truncate">
+                <p className="text-xs font-bold text-slate-200 truncate">https://bit.ly/upi-offer</p>
+                <span className="text-[10px] text-slate-400">12 min ago</span>
+              </div>
+              <span className="px-2 py-0.5 rounded-md text-[10px] font-black uppercase bg-amber-500/20 text-amber-300 border border-amber-500/40">
+                Suspicious
+              </span>
+            </div>
+
+            <div className="p-2.5 rounded-xl bg-[#060919]/70 border border-slate-800 flex items-center justify-between gap-2">
+              <div className="truncate">
+                <p className="text-xs font-bold text-slate-200 truncate">Your account will be blocked...</p>
+                <span className="text-[10px] text-slate-400">1 hour ago</span>
+              </div>
+              <span className="px-2 py-0.5 rounded-md text-[10px] font-black uppercase bg-red-500/20 text-red-300 border border-red-500/40">
+                Fraud
+              </span>
+            </div>
           </div>
         </div>
-      )}
 
-      {/* Safety Report Output Card */}
+        {/* Card 2: Common Scam Types Donut Breakdown */}
+        <div className="cyber-glass rounded-3xl p-5 border border-cyan-500/20 space-y-4">
+          <div className="flex items-center gap-2 pb-2 border-b border-cyan-500/10">
+            <Activity className="w-4 h-4 text-cyan-400" />
+            <h3 className="text-xs font-black uppercase tracking-wider text-white">Common Scam Types</h3>
+          </div>
+
+          <div className="flex items-center justify-between gap-4">
+            {/* SVG Donut Chart */}
+            <div className="relative w-24 h-24 shrink-0 flex items-center justify-center">
+              <svg className="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+                <path
+                  d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                  fill="none"
+                  stroke="#161f3d"
+                  strokeWidth="4"
+                />
+                <path
+                  d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                  fill="none"
+                  stroke="#a855f7"
+                  strokeWidth="4"
+                  strokeDasharray="38, 100"
+                />
+                <path
+                  d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                  fill="none"
+                  stroke="#ec4899"
+                  strokeWidth="4"
+                  strokeDasharray="32, 100"
+                  strokeDashoffset="-38"
+                />
+                <path
+                  d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                  fill="none"
+                  stroke="#f59e0b"
+                  strokeWidth="4"
+                  strokeDasharray="18, 100"
+                  strokeDashoffset="-70"
+                />
+                <path
+                  d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                  fill="none"
+                  stroke="#06b6d4"
+                  strokeWidth="4"
+                  strokeDasharray="12, 100"
+                  strokeDashoffset="-88"
+                />
+              </svg>
+              <div className="absolute inset-0 flex items-center justify-center text-[10px] font-black text-white">
+                100%
+              </div>
+            </div>
+
+            {/* Legend */}
+            <div className="space-y-1.5 flex-1 text-xs">
+              <div className="flex items-center justify-between text-slate-300">
+                <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-purple-500" /> UPI Fraud</span>
+                <span className="font-bold text-white">38%</span>
+              </div>
+              <div className="flex items-center justify-between text-slate-300">
+                <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-pink-500" /> Phishing</span>
+                <span className="font-bold text-white">32%</span>
+              </div>
+              <div className="flex items-center justify-between text-slate-300">
+                <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-amber-500" /> Lottery</span>
+                <span className="font-bold text-white">18%</span>
+              </div>
+              <div className="flex items-center justify-between text-slate-300">
+                <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-cyan-400" /> Others</span>
+                <span className="font-bold text-white">12%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Card 3: Safety Tip of the Day */}
+        <div className="cyber-glass rounded-3xl p-5 border border-cyan-500/20 space-y-3 flex flex-col justify-between">
+          <div className="space-y-2">
+            <div className="flex items-center gap-2 pb-2 border-b border-cyan-500/10">
+              <Lightbulb className="w-4 h-4 text-amber-400" />
+              <h3 className="text-xs font-black uppercase tracking-wider text-white">Safety Tip of the Day</h3>
+            </div>
+            <p className="text-xs text-slate-300 font-medium leading-relaxed">
+              Never share your UPI PIN or OTP with anyone, even if they claim to be calling from your bank or government agencies.
+            </p>
+          </div>
+
+          <div className="pt-2 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <div className="p-1.5 rounded-lg bg-cyan-500/20 text-cyan-300 border border-cyan-400/40">
+                <ShieldCheck className="w-4 h-4" />
+              </div>
+              <span className="text-[11px] font-bold text-slate-400">PIN is ONLY for sending</span>
+            </div>
+            <a
+              href="https://cybercrime.gov.in"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs font-black text-cyan-400 hover:text-cyan-300 flex items-center gap-1"
+            >
+              <span>Learn More</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      {/* ------------------------------------------------------------------ */}
+      {/* 5. DETAILED FORENSIC AUDIT REPORT (WHEN REPORT AVAILABLE)           */}
+      {/* ------------------------------------------------------------------ */}
       {report && (
-        <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl p-6 sm:p-8 space-y-8 animate-fade-in">
+        <div className="cyber-glass rounded-3xl p-6 sm:p-8 space-y-8 border border-cyan-500/30 shadow-[0_10px_40px_rgba(0,0,0,0.6)] animate-fade-in">
           
           {/* Top Verdict Row */}
-          <div className="flex flex-col lg:flex-row items-center gap-6 pb-6 border-b border-slate-100 dark:border-slate-800">
+          <div className="flex flex-col lg:flex-row items-center gap-6 pb-6 border-b border-cyan-500/20">
             <ScoreGauge score={report.risk_score} verdict={report.verdict} />
             
             <div className="space-y-3 flex-1 text-center lg:text-left">
               <div className="flex items-center justify-center lg:justify-start gap-2 flex-wrap">
-                <div className="px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wider bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+                <div className="px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-cyan-500/20 text-cyan-300 border border-cyan-400/40 shadow-[0_0_10px_rgba(6,182,212,0.25)]">
                   {report.detected_category.replace(/_/g, ' ')}
                 </div>
                 <FamilyElderMode
@@ -409,10 +868,10 @@ export default function AnalyzerPage() {
                 />
               </div>
 
-              <h2 className={`font-extrabold text-slate-900 dark:text-white ${isElderMode ? 'text-2xl sm:text-3xl' : 'text-xl sm:text-2xl'}`}>
+              <h2 className="font-extrabold text-xl sm:text-2xl text-white">
                 {report.verdict === 'HIGH RISK' ? '🚨 High Risk Digital Payment Scam Detected' : (report.verdict === 'SUSPICIOUS' ? '⚠️ Suspicious Threat Signals Found' : '✅ No Strong Scam Patterns Found')}
               </h2>
-              <p className={`text-slate-600 dark:text-slate-300 leading-relaxed font-medium ${isElderMode ? 'text-base sm:text-lg' : 'text-sm'}`}>
+              <p className="text-slate-300 leading-relaxed font-medium text-sm">
                 {report.plain_language_explanation}
               </p>
             </div>
@@ -421,15 +880,15 @@ export default function AnalyzerPage() {
             <div className="flex lg:flex-col gap-2 shrink-0">
               <button
                 onClick={handleCopySummary}
-                className="px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 flex items-center gap-1.5 transition"
+                className="px-3.5 py-2 rounded-xl text-xs font-bold border border-cyan-500/20 bg-[#060919] hover:bg-slate-800 text-slate-300 flex items-center gap-1.5 transition"
               >
-                {copied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
+                {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5 text-cyan-400" />}
                 <span>{copied ? t('report.copied') : t('report.copySummaryBtn')}</span>
               </button>
 
               <button
                 onClick={() => setFeedbackModalOpen(true)}
-                className="px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 flex items-center gap-1.5 transition"
+                className="px-3.5 py-2 rounded-xl text-xs font-bold border border-cyan-500/20 bg-[#060919] hover:bg-slate-800 text-slate-300 flex items-center gap-1.5 transition"
                 title="Help retrain UPI Rakshak AI"
               >
                 <ThumbsUp className="w-3.5 h-3.5 text-indigo-400" />
@@ -438,7 +897,7 @@ export default function AnalyzerPage() {
 
               <button
                 onClick={() => setReportModalOpen(true)}
-                className="px-3.5 py-2 rounded-xl text-xs font-bold bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800 hover:bg-rose-100 dark:hover:bg-rose-900/40 flex items-center gap-1.5 transition"
+                className="px-3.5 py-2 rounded-xl text-xs font-black bg-rose-500/20 text-rose-300 border border-rose-500/40 hover:bg-rose-500/30 flex items-center gap-1.5 transition shadow-[0_0_10px_rgba(244,63,94,0.3)]"
               >
                 <Flag className="w-3.5 h-3.5" />
                 <span>{t('report.reportScamBtn')}</span>
@@ -449,7 +908,7 @@ export default function AnalyzerPage() {
           {/* Token-Level Explainability Highlighting */}
           {report.highlight_spans && report.highlight_spans.length > 0 && (
             <div className="space-y-2">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
+              <h3 className="text-xs font-black uppercase tracking-wider text-cyan-300 flex items-center gap-2">
                 <AlertTriangle className="w-4 h-4 text-amber-400" />
                 Suspicious Tokens & Phishing Signals Highlighted
               </h3>
@@ -462,19 +921,17 @@ export default function AnalyzerPage() {
 
           {/* Evidence and Recommended Actions 2-Column Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Left: Ranked Evidence List */}
             <div className="space-y-3">
-              <h3 className="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-white flex items-center gap-2">
-                <ShieldAlert className="w-4 h-4 text-indigo-500" />
+              <h3 className="text-sm font-black uppercase tracking-wider text-white flex items-center gap-2">
+                <ShieldAlert className="w-4 h-4 text-cyan-400" />
                 {t('report.evidenceTitle')}
               </h3>
               <EvidenceList evidence={report.evidence} />
             </div>
 
-            {/* Right: Recommended Actions Box */}
             <div className="space-y-3">
-              <h3 className="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-white flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-emerald-500" />
+              <h3 className="text-sm font-black uppercase tracking-wider text-white flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-emerald-400" />
                 {t('report.actionsTitle')}
               </h3>
               <ActionBox
@@ -498,22 +955,22 @@ export default function AnalyzerPage() {
 
           {/* RAG Knowledge Citations Box */}
           {report.citations && report.citations.length > 0 && (
-            <div className="p-5 rounded-2xl bg-indigo-50/50 dark:bg-indigo-950/20 border border-indigo-100 dark:border-indigo-900/50 space-y-3">
-              <h4 className="text-xs font-extrabold uppercase tracking-wider text-indigo-900 dark:text-indigo-300 flex items-center gap-1.5">
+            <div className="p-5 rounded-2xl bg-cyan-950/20 border border-cyan-500/25 space-y-3">
+              <h4 className="text-xs font-black uppercase tracking-wider text-cyan-300 flex items-center gap-1.5">
                 <BookOpen className="w-4 h-4" />
                 {t('report.citationsTitle')}
               </h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {report.citations.map((c, i) => (
-                  <div key={i} className="p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-indigo-100 dark:border-slate-800 text-xs space-y-1.5">
-                    <p className="font-bold text-slate-900 dark:text-white">{c.title}</p>
-                    <p className="text-slate-600 dark:text-slate-400 line-clamp-3">{c.content}</p>
+                  <div key={i} className="p-3.5 rounded-xl bg-[#060919] border border-cyan-500/20 text-xs space-y-1.5">
+                    <p className="font-bold text-white">{c.title}</p>
+                    <p className="text-slate-300 line-clamp-3">{c.content}</p>
                     {c.actionable_guidance && (
-                      <p className="text-emerald-400 font-medium text-[11px] pt-1">
+                      <p className="text-emerald-400 font-semibold text-[11px] pt-1">
                         👉 Guidance: {c.actionable_guidance}
                       </p>
                     )}
-                    <p className="text-[10px] font-semibold text-indigo-600 dark:text-indigo-400 pt-0.5">
+                    <p className="text-[10px] font-semibold text-cyan-400 pt-0.5">
                       Source: {c.source}
                     </p>
                   </div>
@@ -523,8 +980,8 @@ export default function AnalyzerPage() {
           )}
 
           {/* Heuristic Disclaimer */}
-          <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400 flex items-start gap-2.5">
-            <Info className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
+          <div className="p-4 rounded-xl bg-[#060919] border border-cyan-500/20 text-xs text-slate-400 flex items-start gap-2.5">
+            <Info className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
             <p>{report.disclaimer}</p>
           </div>
         </div>
@@ -584,15 +1041,15 @@ export default function AnalyzerPage() {
 
       {/* Model Reliability & Honesty Modal (triggered by "How accurate is this?") */}
       {honestyModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs animate-fade-in">
-          <div className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-white dark:bg-slate-900 rounded-3xl p-6 shadow-2xl border border-slate-200 dark:border-slate-800 space-y-4">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fade-in">
+          <div className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-[#0a0f26] rounded-3xl p-6 shadow-2xl border border-cyan-500/30 space-y-4">
+            <div className="flex items-center justify-between pb-3 border-b border-cyan-500/20">
+              <span className="text-xs font-black uppercase tracking-wider text-cyan-300">
                 Model Reliability & Evaluation Report
               </span>
               <button
                 onClick={() => setHonestyModalOpen(false)}
-                className="w-7 h-7 flex items-center justify-center rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition text-sm font-bold"
+                className="w-7 h-7 flex items-center justify-center rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition text-sm font-bold"
               >
                 ✕
               </button>
