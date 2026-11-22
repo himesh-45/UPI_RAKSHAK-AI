@@ -14,10 +14,17 @@ router = APIRouter(prefix="/channels/telegram", tags=["Telegram Bot"])
 
 TELEGRAM_API_BASE = "https://api.telegram.org/bot"
 
+def _clean_token() -> Optional[str]:
+    tok = settings.TELEGRAM_BOT_TOKEN or os.getenv("TELEGRAM_BOT_TOKEN")
+    if tok:
+        return tok.strip('"\n ')
+    return None
+
 def get_telegram_client() -> Optional[httpx.AsyncClient]:
-    if not settings.TELEGRAM_BOT_TOKEN:
+    token = _clean_token()
+    if not token:
         return None
-    return httpx.AsyncClient(base_url=f"{TELEGRAM_API_BASE}{settings.TELEGRAM_BOT_TOKEN}", timeout=15.0)
+    return httpx.AsyncClient(base_url=f"{TELEGRAM_API_BASE}{token}", timeout=15.0, verify=False)
 
 async def send_telegram_message(
     chat_id: Union[int, str],
@@ -25,12 +32,13 @@ async def send_telegram_message(
     reply_markup: Optional[Dict[str, Any]] = None,
     parse_mode: str = "Markdown"
 ) -> bool:
-    if not settings.TELEGRAM_BOT_TOKEN:
+    token = _clean_token()
+    if not token:
         logger.info(f"[Telegram Mock] To {chat_id}: {text[:80]}...")
         return True
     
-    async with httpx.AsyncClient(timeout=15.0) as client:
-        url = f"{TELEGRAM_API_BASE}{settings.TELEGRAM_BOT_TOKEN}/sendMessage"
+    async with httpx.AsyncClient(timeout=15.0, verify=False) as client:
+        url = f"{TELEGRAM_API_BASE}{token}/sendMessage"
         payload = {
             "chat_id": chat_id,
             "text": text,
@@ -41,16 +49,22 @@ async def send_telegram_message(
             
         try:
             res = await client.post(url, json=payload)
-            return res.status_code == 200
+            if res.status_code != 200:
+                # If Telegram rejects markdown formatting, retry as plain text
+                payload.pop("parse_mode", None)
+                retry_res = await client.post(url, json=payload)
+                return retry_res.status_code == 200
+            return True
         except Exception as e:
             logger.error(f"Failed to send Telegram message: {e}")
             return False
 
 async def answer_callback_query(callback_query_id: str, text: Optional[str] = None):
-    if not settings.TELEGRAM_BOT_TOKEN:
+    token = _clean_token()
+    if not token:
         return
-    async with httpx.AsyncClient(timeout=10.0) as client:
-        url = f"{TELEGRAM_API_BASE}{settings.TELEGRAM_BOT_TOKEN}/answerCallbackQuery"
+    async with httpx.AsyncClient(timeout=10.0, verify=False) as client:
+        url = f"{TELEGRAM_API_BASE}{token}/answerCallbackQuery"
         payload = {"callback_query_id": callback_query_id}
         if text:
             payload["text"] = text
@@ -60,11 +74,12 @@ async def answer_callback_query(callback_query_id: str, text: Optional[str] = No
             logger.error(f"Failed to answer callback query: {e}")
 
 async def download_telegram_file(file_id: str) -> Optional[bytes]:
-    if not settings.TELEGRAM_BOT_TOKEN:
+    token = _clean_token()
+    if not token:
         return None
-    async with httpx.AsyncClient(timeout=20.0) as client:
+    async with httpx.AsyncClient(timeout=20.0, verify=False) as client:
         # Step 1: get file path
-        url = f"{TELEGRAM_API_BASE}{settings.TELEGRAM_BOT_TOKEN}/getFile?file_id={file_id}"
+        url = f"{TELEGRAM_API_BASE}{token}/getFile?file_id={file_id}"
         try:
             res = await client.get(url)
             if res.status_code != 200:
@@ -75,7 +90,7 @@ async def download_telegram_file(file_id: str) -> Optional[bytes]:
                 return None
             
             # Step 2: download content
-            download_url = f"https://api.telegram.org/file/bot{settings.TELEGRAM_BOT_TOKEN}/{file_path}"
+            download_url = f"https://api.telegram.org/file/bot{token}/{file_path}"
             file_res = await client.get(download_url)
             if file_res.status_code == 200 and len(file_res.content) <= 5 * 1024 * 1024:
                 return file_res.content
@@ -252,16 +267,39 @@ async def run_polling_bot():
     Long-polling worker for development and local testing.
     Run via: python -m backend.app.channels.telegram --poll
     """
-    if not settings.TELEGRAM_BOT_TOKEN:
+    token = _clean_token()
+    if not token:
         print("[Telegram Bot] ERROR: TELEGRAM_BOT_TOKEN is not configured in .env")
         return
 
-    print("[Telegram Bot] Starting long polling service...")
-    offset = 0
-    async with httpx.AsyncClient(timeout=35.0) as client:
+    print("[Telegram Bot] Connecting to Telegram API...")
+    async with httpx.AsyncClient(timeout=35.0, verify=False) as client:
+        # Step 0: verify bot identity
+        try:
+            me_res = await client.get(f"{TELEGRAM_API_BASE}{token}/getMe")
+            if me_res.status_code == 200:
+                me_data = me_res.json().get("result", {})
+                bot_user = me_data.get("username", "unknown")
+                bot_name = me_data.get("first_name", "")
+                print(f"[Telegram Bot] Verified identity: @{bot_user} ({bot_name})", flush=True)
+            else:
+                print(f"[Telegram Bot] WARNING: getMe status {me_res.status_code}: {me_res.text}", flush=True)
+        except Exception as e:
+            print(f"[Telegram Bot] Warning verifying identity: {e}", flush=True)
+
+        # Delete any active webhook so long polling can receive getUpdates without conflict
+        try:
+            del_res = await client.post(f"{TELEGRAM_API_BASE}{token}/deleteWebhook?drop_pending_updates=False")
+            if del_res.status_code == 200:
+                print("[Telegram Bot] Webhook cleared, ready for long-polling.", flush=True)
+        except Exception as e:
+            print(f"[Telegram Bot] deleteWebhook check: {e}", flush=True)
+
+        print("[Telegram Bot] Long-polling active! Waiting for incoming messages from Telegram...", flush=True)
+        offset = 0
         while True:
             try:
-                url = f"{TELEGRAM_API_BASE}{settings.TELEGRAM_BOT_TOKEN}/getUpdates?offset={offset}&timeout=30"
+                url = f"{TELEGRAM_API_BASE}{token}/getUpdates?offset={offset}&timeout=30"
                 res = await client.get(url)
                 if res.status_code == 200:
                     data = res.json()
@@ -269,16 +307,18 @@ async def run_polling_bot():
                     for up in updates:
                         up_id = up.get("update_id", 0)
                         offset = max(offset, up_id + 1)
+                        print(f"[Telegram Bot] Processing update #{up_id}...", flush=True)
                         await handle_telegram_update(up)
                 elif res.status_code == 409:
-                    print("[Telegram Bot] Conflict: Webhook is active. Delete webhook to use polling.")
-                    await asyncio.sleep(10)
+                    print("[Telegram Bot] Conflict: Webhook is active. Retrying webhook deletion...", flush=True)
+                    await client.post(f"{TELEGRAM_API_BASE}{token}/deleteWebhook")
+                    await asyncio.sleep(5)
                 else:
                     await asyncio.sleep(2)
             except asyncio.CancelledError:
                 break
             except Exception as e:
-                print(f"[Telegram Bot Polling Error]: {e}")
+                print(f"[Telegram Bot Polling Error]: {e}", flush=True)
                 await asyncio.sleep(5)
 
 if __name__ == "__main__":

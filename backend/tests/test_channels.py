@@ -19,11 +19,16 @@ from backend.app.channels.core import (
 
 client = TestClient(app)
 
+async def _mock_send_telegram(*args, **kwargs):
+    return True
+
 @pytest.fixture(autouse=True)
-def clean_channel_state():
+def clean_channel_state(monkeypatch):
     """Reset rate limiter and deduplication buckets between tests."""
     _RATE_LIMIT_BUCKET.clear()
     _SEEN_UPDATES.clear()
+    monkeypatch.setattr(settings, "CHANNEL_RATE_LIMIT_PER_HOUR", 20)
+    monkeypatch.setattr("backend.app.channels.telegram.send_telegram_message", _mock_send_telegram)
     yield
     _RATE_LIMIT_BUCKET.clear()
     _SEEN_UPDATES.clear()
