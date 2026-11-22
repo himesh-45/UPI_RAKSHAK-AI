@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { useTranslation } from '../i18n/useTranslation';
 import { getDashboardStats } from '../api/client';
+import AdminModerationPanel from '../components/AdminModerationPanel';
 
 export default function DashboardPage({ token, onOpenLogin }) {
   const { t } = useTranslation();
@@ -134,6 +135,29 @@ export default function DashboardPage({ token, onOpenLogin }) {
           </button>
         </div>
       </div>
+
+      {/* Admin Governance & Dispute Moderation Panel (Visible when Admin signed in or login prompt) */}
+      {token ? (
+        <AdminModerationPanel token={token} />
+      ) : (
+        <div className="p-4 rounded-2xl bg-indigo-50/70 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-900/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+          <div className="flex items-center gap-2.5">
+            <Lock className="w-5 h-5 text-indigo-500 shrink-0" />
+            <div>
+              <span className="font-extrabold text-slate-900 dark:text-white">Admin Dispute Moderation & Research Export:</span>{' '}
+              <span className="text-slate-600 dark:text-slate-300">
+                Sign in as Admin to review community VPA reports, adjudicate merchant false positive appeals, and export study telemetry.
+              </span>
+            </div>
+          </div>
+          <button
+            onClick={onOpenLogin}
+            className="px-3.5 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs uppercase tracking-wider shrink-0 transition shadow-xs"
+          >
+            Sign In as Admin
+          </button>
+        </div>
+      )}
 
       {/* KPI Cards Row */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">

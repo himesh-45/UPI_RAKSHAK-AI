@@ -31,6 +31,10 @@ class ModerationActionRequest(BaseModel):
     report_id: int
     action: str = Field(..., description="'DISMISS' or 'CONFIRM'")
 
+class DisputeResolutionRequest(BaseModel):
+    dispute_id: int
+    action: str = Field(..., description="'APPROVE' or 'REJECT'")
+
 @router.post("/report")
 def report_scam_entity(
     req: ReputationReportRequest,
@@ -126,3 +130,62 @@ def resolve_moderation_action(
     if not success:
         raise HTTPException(status_code=404, detail="Report not found")
     return {"success": True, "report_id": req.report_id, "new_status": req.action}
+
+@router.post("/admin/resolve-dispute")
+def resolve_dispute_action(
+    req: DisputeResolutionRequest,
+    current_admin: User = Depends(get_current_admin),
+    db: Session = Depends(get_db)
+):
+    """
+    Admin-only moderation action to APPROVE or REJECT a merchant dispute appeal.
+    """
+    if req.action not in ["APPROVE", "REJECT"]:
+        raise HTTPException(status_code=400, detail="Invalid action. Must be 'APPROVE' or 'REJECT'")
+    
+    dispute = db.query(CommunityDispute).filter(CommunityDispute.id == req.dispute_id).first()
+    if not dispute:
+        raise HTTPException(status_code=404, detail="Dispute not found")
+    
+    dispute.status = "APPROVED" if req.action == "APPROVE" else "REJECTED"
+    if req.action == "APPROVE" and dispute.report_id:
+        report = db.query(CommunityReport).filter(CommunityReport.id == dispute.report_id).first()
+        if report:
+            report.status = "DISMISSED"
+    db.commit()
+    return {"success": True, "dispute_id": req.dispute_id, "new_status": dispute.status}
+
+@router.post("/admin/seed-demo")
+def seed_demo_moderation_items(
+    current_admin: User = Depends(get_current_admin),
+    db: Session = Depends(get_db)
+):
+    """
+    Seeds demo community report and merchant dispute for live judging verification.
+    """
+    from ..core.community_reputation import hash_entity, hash_reporter
+
+    rep = CommunityReport(
+        entity_type="vpa",
+        entity_hash=hash_entity("vpa", "fake-sbi-refund@paytm"),
+        masked_display="fake-sbi-refund@paytm",
+        reporter_hash=hash_reporter("demo_reporter_1"),
+        scam_category="collect_request_fraud",
+        evidence_text="User received unexpected ₹25,000 collect request claiming to be SBI refund",
+        status="ACTIVE"
+    )
+    db.add(rep)
+    db.flush()
+
+    disp = CommunityDispute(
+        report_id=rep.id,
+        entity_hash=hash_entity("vpa", "sharma.kirana.store@okhdfcbank"),
+        claimant_email_masked="s***@sharmakiranastore.in",
+        claimant_hash=hash_reporter("sharma_merchant"),
+        dispute_reason="Legitimate registered grocery merchant in Bengaluru falsely reported by competing vendor",
+        proof_url="https://gst.gov.in/verify/29ABCDE1234F1Z5",
+        status="PENDING"
+    )
+    db.add(disp)
+    db.commit()
+    return {"success": True, "seeded_report_id": rep.id, "seeded_dispute_id": disp.id}

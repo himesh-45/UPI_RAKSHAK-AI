@@ -193,3 +193,76 @@ export async function submitReputationDispute(disputeData) {
   return res.json();
 }
 
+export async function getPendingModeration(token) {
+  const res = await fetch(`${BASE_URL}/reputation/admin/pending`, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.detail || 'Failed to fetch moderation queue');
+  }
+  return res.json();
+}
+
+export async function resolveModerationReport(reportId, action, token) {
+  const res = await fetch(`${BASE_URL}/reputation/admin/resolve`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify({ report_id: reportId, action })
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.detail || 'Failed to resolve report');
+  }
+  return res.json();
+}
+
+export async function resolveModerationDispute(disputeId, action, token) {
+  const res = await fetch(`${BASE_URL}/reputation/admin/resolve-dispute`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify({ dispute_id: disputeId, action })
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.detail || 'Failed to resolve dispute');
+  }
+  return res.json();
+}
+
+export async function seedDemoModeration(token) {
+  const res = await fetch(`${BASE_URL}/reputation/admin/seed-demo`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.detail || 'Failed to seed demo moderation items');
+  }
+  return res.json();
+}
+
+export async function exportStudyCsv(token) {
+  const res = await fetch(`${BASE_URL}/study/export`, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.detail || 'Failed to export study CSV');
+  }
+  return res.blob();
+}
+
+
