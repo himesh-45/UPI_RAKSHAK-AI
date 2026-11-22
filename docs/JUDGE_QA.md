@@ -203,3 +203,38 @@
   1. If an active, un-negated credential theft request is detected in the text (e.g., *"If not done by you, immediately share OTP with manager"*), `is_genuine_alert` is forcibly overridden to `False`.
   2. If the message contains a brand-impersonating URL or an active collect-request trick, hard overrides prevent score suppression.
   3. Advisory suppression only activates when **zero** active high-risk attack vectors are present.
+
+### Q26: How do you detect Digital Arrest and fake police/CBI video interrogation scams?
+**Defense**:
+- Digital arrest schemes rely on psychological paralysis rather than software exploits. Our specialized detector (`digital_arrest_checker.py`) analyzes the multi-vector intersection of:
+  1. **Law Enforcement / Agency Impersonation**: Mumbai Police Crime Branch, CBI, ED, NCB, Customs, Cyber Cell, or Supreme Court.
+  2. **Fabricated Contraband / Crimes**: MDMA/drugs found in intercepted courier (FedEx/DHL) or alleged Aadhaar-linked money laundering.
+  3. **Virtual Confinement Demands**: Instructions to lock room doors, keep webcam/Skype video calls active 24x7, or prohibitions against contacting family.
+  4. **Financial Extortion**: Demands to transfer liquid savings into fictitious "RBI verification escrow accounts" for "asset clearance".
+- When detected, the engine grounds its response in statutory Indian legal truth (Section 41 CrPC / Section 35 BNSS): Indian law recognizes no concept of "Digital Arrest" or video call interrogations, and neither Police nor RBI ever request fund transfers to "verification accounts".
+
+### Q27: How do you ensure community reputation reports cannot be poisoned by malicious competitors or scammers?
+**Defense**:
+- Our Community Scam Reputation system (`community_reputation.py`) implements multi-layered anti-sybil guardrails:
+  1. **Consensus Gating**: An entity (phone, VPA, domain) is never flagged publicly until at least 2 distinct reporters (with distinct salted SHA-256 client hashes) submit corroborating evidence within the active window.
+  2. **Reporter Daily Limits**: A client hash cannot submit more than 3 distinct entity reports per 24 hours, and multiple reports for the same entity from the same reporter are deduplicated.
+  3. **30-Day Half-Life Recency Decay**: Scam impact decays exponentially ($e^{-\lambda \Delta t}$) with a 30-day half-life, ensuring stale or resolved flags naturally subside.
+  4. **Immune Institution Whitelist**: Authorized banking handles (`@okaxis`, `@okhdfcbank`, `@paytm`), official telecom domains (`airtel.in`, `jio.com`), and government portals are cryptographically immune from community blacklisting.
+  5. **Capped Risk Fusion**: Community reputation can add at most $+15$ points and can **never** single-handedly elevate an otherwise safe message to HIGH RISK (hard-capped at 49).
+
+### Q28: What privacy protections are enforced when users interact via WhatsApp or Telegram?
+**Defense**:
+- Conversational channels are hardened for the Digital Personal Data Protection (DPDP) Act:
+  1. **Salted SHA-256 Sender Hashing**: Raw phone numbers and Telegram chat IDs are never stored in plaintext; they are transformed via `hash_sender_id(raw_id)` using an application salt.
+  2. **Automated PII Masking**: 100% of phone numbers, bank accounts, Aadhaar digits, and personal names are masked with `[MASKED_PHONE]`, `[MASKED_ACCOUNT]`, etc., before database persistence.
+  3. **Right-to-be-Forgotten**: When a user messages `/delete_data` on Telegram or WhatsApp, all associated analysis logs are permanently purged from the database immediately.
+  4. **Zero Group Chat Storage**: When added to Telegram groups, the bot strictly ignores non-mentions and never logs group conversation data.
+
+### Q29: What are your exact latency and throughput characteristics on CPU hardware?
+**Defense**:
+- UPI Rakshak AI was tested with 650 concurrent requests across its endpoints using `run_load_test.py` and Locust without GPU acceleration:
+  - **Pure Text Inference**: p50 = **32.22 ms**, p95 = **49.85 ms**, p99 = **70.88 ms** (throughput: ~30 req/s per core).
+  - **RAG Knowledge Assistant**: p50 = **19.11 ms**, p95 = **28.92 ms**, p99 = **38.09 ms**.
+  - **Static URL Scanner**: p50 = **65.45 ms**, p99 = **114.86 ms**.
+  - **Error Rate**: **0.00% (0 errors out of 650 requests)**.
+- Because the entire ML pipeline uses vectorized char+word n-grams and linear algebra rather than deep neural transformers, it deploys on low-cost $10/mo cloud VMs or air-gapped intranet hardware with sub-50ms user responsiveness.

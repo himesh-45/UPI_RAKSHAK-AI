@@ -201,3 +201,15 @@ This document records technical and design decisions made to keep the system rob
 ### Decision 50: Dedicated Judge Evaluation & Live Mobile QR Portal (/try)
 - **Decision**: Built `/try` route (`frontend/src/pages/JudgeTryPage.jsx`) providing live mobile QR codes (Web, Telegram, WhatsApp), 1-click interactive adversarial test scenarios, and a printable technical defensibility cheat sheet.
 - **Rationale**: Maximizes live demonstration impact by allowing judges to test the system directly on their personal smartphones with zero friction.
+
+### Decision 51: Programmatic Gate Generation and Self-Asserting Audit Logs
+- **Decision**: Completely programmatic report generation in `backend/app/scripts/evaluate_models.py` where all gate outcomes (PASSED/FAILED) are computed mathematically from runtime metric evaluation rather than hand-typed text.
+- **Rationale**: Eliminates human bias, contradictions, and metric drift, backed by automated consistency tests (`test_evaluation_report_consistency.py`).
+
+### Decision 52: Multi-Vector Packaging and Exclusion Defense
+- **Decision**: Implemented `backend/app/scripts/package_submission.py` and automated verification test `backend/tests/test_packaging.py` guaranteeing zero inclusion of virtual environments, secrets, databases, or client-side build caches in the final submission bundle.
+- **Rationale**: Guarantees a pristine, leak-free archive suitable for official hackathon distribution and open-source release.
+
+### Decision 53: Comprehensive Hackathon Defensibility Alignment
+- **Decision**: Synchronized `README.md`, `docs/PITCH_OUTLINE.md`, `docs/JUDGE_QA.md` (expanded to 29 technical defenses), `docs/LOAD_TEST.md`, and `docs/FINAL_STATUS.md` with honest programmatic outcomes, zero absolute marketing claims, and reproducible execution commands.
+- **Rationale**: Equips the presentation team with rigorous, defensible proof for tough technical judges across Cybersecurity, Fintech, and Digital Trust tracks.

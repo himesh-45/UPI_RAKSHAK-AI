@@ -59,12 +59,14 @@
     - **Frozen Gold Set v1 (306 samples)**: Uniform baseline across 15 categories with 110 hard negatives.
     - **Natural Gold Set v2 (173 samples)**: Natural, messy, human phrasings with typos, WhatsApp forwards, and real-world noise.
 - **Empirical Measured Performance (100% Programmatic)**:
-  - **96.43% Risk Fusion Recall** (Gold v1) / **98.55% Recall** (Gold v2).
-  - **0.00% False Positive Rate** on real bank alerts across both test sets (0/110 and 0/35).
-  - **0.8467 15-Class NLP Macro-F1** (Gold v1) / **0.7873** (Gold v2).
-  - **97.43% Static URL Phishing Recall** & **1.54% Benign FPR** with 0 network calls.
-  - **12.39 ms p50 CPU inference latency** (&lt; 25 MB RAM footprint).
-  - 107 passing unit, integration, mutation, and end-to-end tests.
+  - **96.43% Risk Fusion Recall** (Gold v1) / **97.83% Recall** (Gold v2).
+  - **0.00% False Positive Rate** on real bank alerts across both test sets (0/110 on Gold v1 and 0/105 on Gold v2).
+  - **0.8994 15-Class NLP Macro-F1** (Gold v1) / **0.8624** (Gold v2).
+  - **Sub-35ms CPU Latency**: 32.22 ms p50, 70.88 ms p99 across 650 sustained concurrent requests (0 errors).
+  - **165+ passing unit, integration, property, security, and packaging tests**.
+  - **Omnichannel Protection**: Live Telegram Bot (`@upi_rakshak_bot`) and WhatsApp webhook with salted SHA-256 privacy.
+  - **Digital Arrest Extortion Engine**: Multi-factor coercion detection with CrPC 41 / BNSS 35 legal truth grounding.
+  - **Live Mobile Judge Bench (`/try`)**: Instant QR codes for smartphones and 1-click adversary scenarios.
 
 ---
 

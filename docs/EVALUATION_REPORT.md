@@ -137,8 +137,8 @@ To completely eliminate circularity, the static URL scanner is benchmarked on tw
 
 Measured across single-threaded execution on standard commodity x86 hardware:
 
-- **p50 Latency (Median)**: **10.39 ms** per sample.
-- **p95 Latency**: **15.84 ms** per sample (well under the 1,500 ms target).
+- **p50 Latency (Median)**: **10.79 ms** per sample.
+- **p95 Latency**: **18.18 ms** per sample (well under the 1,500 ms target).
 - **Peak RAM Footprint**: < 25 MB total process memory.
 
 ---
