@@ -3,7 +3,7 @@ import {
   ShieldAlert, ShieldCheck, AlertTriangle, Link as LinkIcon,
   MessageSquare, Image as ImageIcon, Upload, Check, Copy,
   Share2, Sparkles, BookOpen, ExternalLink, Flag, Info,
-  CreditCard, ThumbsUp, Layers, HelpCircle, Award, Zap
+  CreditCard, ThumbsUp, Layers, HelpCircle, Zap
 } from 'lucide-react';
 import { useTranslation } from '../i18n/useTranslation';
 import ScoreGauge from '../components/ScoreGauge';
@@ -151,16 +151,8 @@ export default function AnalyzerPage() {
         </p>
       </div>
 
-      {/* Judge & Architect Live Demo Bar */}
+      {/* Architect Live Demo Bar */}
       <div className="flex flex-wrap items-center justify-center gap-3">
-        <button
-          onClick={() => setJudgeModalOpen(true)}
-          className="px-4 py-2 rounded-2xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 hover:border-amber-500 text-amber-800 dark:text-amber-300 font-extrabold text-xs flex items-center gap-2 shadow-sm transition hover:scale-105 active:scale-95"
-        >
-          <Award className="w-4 h-4 text-amber-500" />
-          <span>Judge Mode (8 Live Scenarios)</span>
-        </button>
-
         <button
           onClick={() => setLlmModalOpen(true)}
           className="px-4 py-2 rounded-2xl bg-indigo-500/10 hover:bg-indigo-500/20 border border-indigo-500/30 hover:border-indigo-500 text-indigo-700 dark:text-indigo-300 font-extrabold text-xs flex items-center gap-2 shadow-sm transition hover:scale-105 active:scale-95"
