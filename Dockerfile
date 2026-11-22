@@ -3,15 +3,12 @@
 # Multi-stage: Node.js (Vite React) + Python 3.11 (FastAPI)
 # ==========================================
 
-# Stage 1: Build React Frontend
+# Stage 1: Build React Frontend (or use pre-built dist)
 FROM node:20-alpine AS frontend-builder
 WORKDIR /app/frontend
 
-COPY frontend/package*.json ./
-RUN npm install
-
 COPY frontend/ ./
-RUN npm run build
+RUN if [ ! -f dist/index.html ]; then npm install --include=optional && npm run build; fi
 
 # Stage 2: Python Backend Runtime
 FROM python:3.11-slim AS runner

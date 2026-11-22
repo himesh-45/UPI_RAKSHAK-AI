@@ -30,12 +30,12 @@ backend/data/.admin_secret
 backend/data/*.db
 *.log
 
-# Frontend build & dependencies
+# Frontend dependencies & build artifacts
 frontend/node_modules/
-frontend/dist/
 frontend/.vite/
 node_modules/
-dist/
+/dist/
+!frontend/dist/
 *.zip
 upi_rakshak_submission.zip
 

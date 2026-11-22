@@ -1,0 +1,149 @@
+[
+  {
+    "id": "ex_classic_otp",
+    "type": "text",
+    "category": "otp_pin_theft",
+    "language": "en",
+    "label": "Classic OTP / Block Threat",
+    "input": "Your UPI account will be blocked. Click here to verify immediately and enter your OTP: http://sbi-kyc-verify.top/verify",
+    "expected_verdict": "HIGH RISK"
+  },
+  {
+    "id": "ex_collect_cashback",
+    "type": "text",
+    "category": "fake_upi_refund_cashback",
+    "language": "en",
+    "label": "Collect Request PIN Scam",
+    "input": "Congratulations! You have received a cashback refund of Rs. 3,500 on PhonePe. Enter your UPI PIN to claim money into your account.",
+    "expected_verdict": "HIGH RISK"
+  },
+  {
+    "id": "ex_hindi_electricity",
+    "type": "text",
+    "category": "electricity_disconnection",
+    "language": "hi",
+    "label": "Hindi Electricity Threat (हिंदी)",
+    "input": "प्रिय उपभोक्ता, आपके बिजली का बिल अपडेट नहीं होने के कारण आज रात 9:30 बजे बिजली काट दी जाएगी। तुरंत हमारे बिजली अधिकारी से संपर्क करें या यहां भुगतान करें: http://bijli-bill-pay.online/auth",
+    "expected_verdict": "HIGH RISK"
+  },
+  {
+    "id": "ex_telugu_kyc",
+    "type": "text",
+    "category": "fake_bank_kyc",
+    "language": "te",
+    "label": "Telugu Bank KYC Scam (తెలుగు)",
+    "input": "ప్రియమైన వినియోగదారుడా, మీ SBI ఖాతా కేవైసీ పెండింగ్ ఉన్నందున ఈ రాత్రి బ్లాక్ చేయబడుతుంది. వెంటనే నవీకరించండి: http://sbi-kyc-update-portal.top",
+    "expected_verdict": "HIGH RISK"
+  },
+  {
+    "id": "ex_remote_support",
+    "type": "text",
+    "category": "fake_customer_support",
+    "language": "en",
+    "label": "AnyDesk Remote Takeover",
+    "input": "Dear user, for your pending UPI refund on HDFC, please install AnyDesk app from Play Store and share the 9-digit remote access code with our support officer.",
+    "expected_verdict": "HIGH RISK"
+  },
+  {
+    "id": "ex_kbc_lottery",
+    "type": "text",
+    "category": "lottery_prize",
+    "language": "en",
+    "label": "KBC 25 Lakh Lottery",
+    "input": "KBC Jio Lucky Draw: Congratulations! Your mobile number won 25 Lakh Rupees in lottery. Deposit registration fee of Rs. 4,999 to claim prize: http://kbc-lucky-claim.xyz",
+    "expected_verdict": "HIGH RISK"
+  },
+  {
+    "id": "ex_fake_pm_yojana",
+    "type": "text",
+    "category": "fake_govt_scheme",
+    "language": "hi",
+    "label": "Fake PM Yojana Scheme (Hinglish)",
+    "input": "Govt of India update: PM Kisan Yojana ke tahat sabhi nagrik ko Rs. 6,000 mil rahe hain. Abhi form bhare: http://pm-kisan-subsidy.site",
+    "expected_verdict": "HIGH RISK"
+  },
+  {
+    "id": "ex_safe_bank_debit",
+    "type": "text",
+    "category": "legitimate",
+    "language": "en",
+    "label": "Genuine Bank Alert (Safe)",
+    "input": "HDFC Bank: An amount of Rs. 1,450.00 is debited from account ending 4821 on 21-Nov-2026 for UPI/Swiggy. Available balance: Rs. 24,190.00. NEVER share your OTP or PIN with anyone.",
+    "expected_verdict": "SAFE"
+  },
+  {
+    "id": "ex_safe_login_otp",
+    "type": "text",
+    "category": "legitimate",
+    "language": "en",
+    "label": "Genuine Login 2FA OTP (Safe)",
+    "input": "SBI Security Alert: OTP for login to Internet Banking is 482910. Valid for 10 minutes. Do NOT share OTP or password with anyone, including bank staff.",
+    "expected_verdict": "SAFE"
+  },
+  {
+    "id": "ex_safe_utility_bill",
+    "type": "text",
+    "category": "legitimate",
+    "language": "en",
+    "label": "Genuine Electricity Bill (Safe)",
+    "input": "Dear Customer, your BESCOM electricity bill for account 1092837 is Rs. 1,280. Due date is 28-Nov-2026. Pay safely at official portal https://bescom.karnataka.gov.in",
+    "expected_verdict": "SAFE"
+  },
+  {
+    "id": "ex_url_ip_phishing",
+    "type": "url",
+    "category": "fake_bank_kyc",
+    "language": "en",
+    "label": "IP-Address Phishing URL",
+    "input": "http://103.22.18.9/sbi-netbanking-login/verify",
+    "expected_verdict": "HIGH RISK"
+  },
+  {
+    "id": "ex_url_typosquatting",
+    "type": "url",
+    "category": "fake_bank_kyc",
+    "language": "en",
+    "label": "Brand Typosquatting URL",
+    "input": "http://sbi-kyc-update-login.top/auth?ref=9182",
+    "expected_verdict": "HIGH RISK"
+  },
+  {
+    "id": "ex_url_safe_official",
+    "type": "url",
+    "category": "legitimate",
+    "language": "en",
+    "label": "Official Bank Domain (Safe)",
+    "input": "https://www.onlinesbi.sbi",
+    "expected_verdict": "SAFE"
+  },
+  {
+    "id": "ex_qr_fake_cashback",
+    "type": "image",
+    "category": "fake_upi_refund_cashback",
+    "language": "en",
+    "label": "Fake Cashback QR Image",
+    "image_filename": "qr_fake_cashback.png",
+    "input": "demo_assets/qr_fake_cashback.png",
+    "expected_verdict": "HIGH RISK"
+  },
+  {
+    "id": "ex_qr_electricity",
+    "type": "image",
+    "category": "electricity_disconnection",
+    "language": "en",
+    "label": "Electricity Bill Threat QR Image",
+    "image_filename": "qr_electricity_scam.png",
+    "input": "demo_assets/qr_electricity_scam.png",
+    "expected_verdict": "HIGH RISK"
+  },
+  {
+    "id": "ex_qr_safe_merchant",
+    "type": "image",
+    "category": "legitimate",
+    "language": "en",
+    "label": "Safe IRCTC Merchant QR Image",
+    "image_filename": "qr_safe_merchant.png",
+    "input": "demo_assets/qr_safe_merchant.png",
+    "expected_verdict": "SAFE"
+  }
+]

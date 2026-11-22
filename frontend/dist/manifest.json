@@ -1,0 +1,27 @@
+{
+  "name": "UPI Rakshak AI — Digital Payment Scam Protection",
+  "short_name": "UPI Rakshak",
+  "description": "Multilingual real-time digital-payment scam detection and prevention platform for India.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#4f46e5",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "share_target": {
+    "action": "/",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  }
+}
