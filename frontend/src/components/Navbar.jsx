@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shield, Sparkles, BarChart3, HelpCircle, Sun, Moon, Lock, LogOut, BookOpen } from 'lucide-react';
+import { Shield, Sparkles, BarChart3, HelpCircle, Sun, Moon, Lock, LogOut, BookOpen, Scale } from 'lucide-react';
 import { useTranslation } from '../i18n/useTranslation';
 
 export default function Navbar({ activeTab, setActiveTab, darkMode, setDarkMode, token, onOpenLogin, onLogout }) {
@@ -80,6 +80,18 @@ export default function Navbar({ activeTab, setActiveTab, darkMode, setDarkMode,
           >
             <BookOpen className="w-3.5 h-3.5" />
             Study
+          </button>
+
+          <button
+            onClick={() => setActiveTab('arrest')}
+            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 ${
+              activeTab === 'arrest'
+                ? 'bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 shadow-sm border border-rose-200 dark:border-rose-900/60'
+                : 'text-slate-600 dark:text-slate-400 hover:text-rose-600 dark:hover:text-rose-400'
+            }`}
+          >
+            <Scale className="w-3.5 h-3.5 text-rose-500" />
+            <span>Digital Arrest</span>
           </button>
 
           <button
@@ -181,6 +193,13 @@ export default function Navbar({ activeTab, setActiveTab, darkMode, setDarkMode,
         >
           <BarChart3 className="w-4 h-4" />
           <span>Dashboard</span>
+        </button>
+        <button
+          onClick={() => setActiveTab('arrest')}
+          className={`text-xs font-bold flex flex-col items-center gap-1 ${activeTab === 'arrest' ? 'text-rose-600 dark:text-rose-400' : 'text-slate-500'}`}
+        >
+          <Scale className="w-4 h-4" />
+          <span>Arrest</span>
         </button>
         <button
           onClick={() => setActiveTab('about')}

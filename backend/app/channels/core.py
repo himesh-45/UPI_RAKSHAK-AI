@@ -284,6 +284,22 @@ async def process_channel_submission(
                 "buttons": []
             }
 
+        if cmd in ["/arrest", "digital arrest", "/digital_arrest"]:
+            return {
+                "text": (
+                    "🚨 *Digital Arrest Threat Checker / डिजिटल अरेस्ट जांच*\n\n"
+                    "⚠️ *LEGAL FACT*: Indian Law, the CrPC, and BNSS do NOT recognize 'Digital Arrest'.\n\n"
+                    "• Real police officers, CBI, ED, or judges NEVER place citizens under arrest via Skype or WhatsApp video calls.\n"
+                    "• Real agencies NEVER demand money transfers to 'RBI verification accounts'.\n\n"
+                    "👉 Paste what the caller or message claimed right now, and I will audit the coercion tactics."
+                ),
+                "verdict": "INFO",
+                "risk_score": 0,
+                "buttons": [
+                    {"id": "call_1930", "label": "🚨 Dial 1930 Cyber Helpline", "action": "dial_1930"}
+                ]
+            }
+
     # 3. Detect Language
     target_language = language_hint if language_hint in ["hi", "te", "en"] else "en"
 

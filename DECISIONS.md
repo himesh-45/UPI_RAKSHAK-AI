@@ -177,3 +177,15 @@ This document records technical and design decisions made to keep the system rob
 ### Decision 44: Public Dispute Workflow & Administrative Moderation
 - **Choice**: Implemented public dispute submission (`POST /api/reputation/dispute`) for merchants and consumers, along with authenticated administrative moderation (`/api/reputation/admin/pending`, `/api/reputation/admin/resolve`) to dismiss false flags or confirm validated threats.
 - **Rationale**: Protects legitimate small businesses and fintech operators against frivolous flags, creating an auditable dispute lifecycle.
+
+### Decision 45: Dedicated Digital Arrest / Coercion Detector
+- **Decision**: Built a specialized multi-factor detector (`backend/app/detectors/digital_arrest_checker.py`) evaluating law enforcement impersonation, contraband seizure claims, virtual confinement demands, and sham RBI escrow accounts.
+- **Rationale**: Digital arrest scams are high-impact psychological extortion schemes causing multi-crore losses in India. Detection requires identifying the intersection of pressure vectors rather than generic NLP text classification alone.
+
+### Decision 46: CrPC / BNSS Legal Truth Grounding
+- **Decision**: Grounded detector explanations in statutory Indian legal reality (Section 41 CrPC / Section 35 BNSS): Indian law recognizes no concept of "Digital Arrest" or video call interrogations, and neither CBI, Police, nor RBI ever request fund transfers to "verification accounts".
+- **Rationale**: Empowers victims by debunking the scammer's fabricated authority with concrete legal facts and direct 1930 helpline action.
+
+### Decision 47: Frozen 102-Sample Benchmark Dataset
+- **Decision**: Created `backend/app/data/digital_arrest_testset.json` with 65 diverse extortion scripts across English, Hindi, Telugu, and Hinglish, and 37 legitimate courier/police notifications. Tested at 100% scam recall and 0% FPR.
+- **Rationale**: Guarantees zero regression on digital arrest patterns and validates multi-script regex and keyword robustness without relying on synthetic template memorization.

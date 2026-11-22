@@ -5,13 +5,15 @@ import AssistantPage from './pages/AssistantPage';
 import DashboardPage from './pages/DashboardPage';
 import AboutPage from './pages/AboutPage';
 import StudyPage from './pages/StudyPage';
+import DigitalArrestPage from './pages/DigitalArrestPage';
 import LoginModal from './components/LoginModal';
 import { TranslationProvider } from './i18n/useTranslation';
 
 function AppContent() {
   const [activeTab, setActiveTab] = useState(() => {
-    if (typeof window !== 'undefined' && window.location.pathname === '/study') {
-      return 'study';
+    if (typeof window !== 'undefined') {
+      if (window.location.pathname === '/study') return 'study';
+      if (window.location.pathname === '/arrest') return 'arrest';
     }
     return 'analyzer';
   });
@@ -60,6 +62,7 @@ function AppContent() {
           <DashboardPage token={token} onOpenLogin={() => setLoginModalOpen(true)} />
         )}
         {activeTab === 'study' && <StudyPage />}
+        {activeTab === 'arrest' && <DigitalArrestPage />}
         {activeTab === 'about' && <AboutPage />}
       </main>
 

@@ -249,6 +249,19 @@ class RuleSafetyEngine:
                 })
                 break
 
+        if not has_digital_arrest:
+            from .digital_arrest_checker import digital_arrest_checker
+            da_eval = digital_arrest_checker.evaluate(text)
+            if da_eval.get("is_digital_arrest"):
+                has_digital_arrest = True
+                tactics_str = "; ".join(da_eval.get("coercion_tactics", [])[:2])
+                matched_rules.append({
+                    "signal": f"Digital Arrest Coercion Extortion: {tactics_str}",
+                    "source_module": "RULE_SAFETY_LAYER",
+                    "weight": 50.0,
+                    "severity": "CRITICAL"
+                })
+
         # 8. Loan Extortion & Harassment
         for p in LOAN_EXTORTION_PATTERNS:
             if p.search(text):
