@@ -42,3 +42,5 @@ upi_rakshak_submission.zip
 # System / OS
 .DS_Store
 Thumbs.db
+cloudflared.exe
+*.exe

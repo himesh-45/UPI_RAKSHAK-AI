@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: upi-rakshak-ai
+    runtime: python
+    buildCommand: "pip install -r backend/requirements.txt && cd frontend && npm install && npm run build && cd .."
+    startCommand: "uvicorn backend.app.main:app --host 0.0.0.0 --port $PORT"
+    plan: free
+    envVars:
+      - key: DATABASE_URL
+        value: sqlite:///./data/upi_rakshak.db
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ADMIN_EMAIL
+        value: admin@upirakshak.ai
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: SENDER_HASH_SALT
+        generateValue: true

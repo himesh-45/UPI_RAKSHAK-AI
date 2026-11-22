@@ -91,3 +91,28 @@ app.include_router(study.router, prefix=settings.API_PREFIX)
 app.include_router(reputation.router, prefix=settings.API_PREFIX)
 app.include_router(telegram_router, prefix=settings.API_PREFIX)
 app.include_router(whatsapp_router, prefix=settings.API_PREFIX)
+
+# Serve production frontend if frontend/dist exists
+import os
+_FRONTEND_DIST = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
+    "frontend",
+    "dist"
+)
+if os.path.exists(_FRONTEND_DIST):
+    from fastapi.staticfiles import StaticFiles
+    from starlette.responses import FileResponse
+
+    _assets_dir = os.path.join(_FRONTEND_DIST, "assets")
+    if os.path.exists(_assets_dir):
+        app.mount("/assets", StaticFiles(directory=_assets_dir), name="static_assets")
+
+    @app.get("/{full_path:path}", include_in_schema=False)
+    async def serve_spa_frontend(full_path: str):
+        target = os.path.join(_FRONTEND_DIST, full_path)
+        if full_path and os.path.exists(target) and os.path.isfile(target):
+            return FileResponse(target)
+        index_file = os.path.join(_FRONTEND_DIST, "index.html")
+        if os.path.exists(index_file):
+            return FileResponse(index_file)
+        return {"error": "Frontend build not found"}
