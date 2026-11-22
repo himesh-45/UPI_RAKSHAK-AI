@@ -61,6 +61,11 @@ class Settings(BaseSettings):
     META_WHATSAPP_TOKEN: Optional[str] = os.getenv("META_WHATSAPP_TOKEN", None)
     META_PHONE_NUMBER_ID: Optional[str] = os.getenv("META_PHONE_NUMBER_ID", None)
     META_VERIFY_TOKEN: Optional[str] = os.getenv("META_VERIFY_TOKEN", None)
+    WHATSAPP_APP_SECRET: Optional[str] = os.getenv("WHATSAPP_APP_SECRET", None)
+
+    # Channel privacy & rate limiting
+    SENDER_HASH_SALT: str = os.getenv("SENDER_HASH_SALT", "upi_rakshak_salt_2026_demo")
+    CHANNEL_RATE_LIMIT_PER_HOUR: int = int(os.getenv("CHANNEL_RATE_LIMIT_PER_HOUR", "20"))
 
     # Optional Speech-To-Text for channel voice notes
     ENABLE_OFFLINE_STT: bool = os.getenv("ENABLE_OFFLINE_STT", "false").lower() == "true"

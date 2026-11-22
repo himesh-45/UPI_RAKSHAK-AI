@@ -64,6 +64,14 @@ def get_dashboard_stats(
         for k, v in signal_counter.most_common(8)
     ]
 
+    # Channel breakdown (web vs telegram vs whatsapp)
+    channel_counter = Counter(r.channel or "web" for r in all_records)
+    channel_breakdown = {
+        "web": channel_counter.get("web", 0),
+        "telegram": channel_counter.get("telegram", 0),
+        "whatsapp": channel_counter.get("whatsapp", 0)
+    }
+
     # Timeline trend (last 7 days)
     today = datetime.datetime.utcnow().date()
     trend_dict = defaultdict(lambda: {"safe": 0, "suspicious": 0, "high_risk": 0})
@@ -101,6 +109,7 @@ def get_dashboard_stats(
             "risk_score": r.risk_score,
             "detected_category": r.detected_category,
             "language": r.language,
+            "channel": r.channel or "web",
             "is_simulated": r.is_simulated,
             "created_at": r.created_at.strftime("%H:%M %d-%b") if r.created_at else ""
         }
@@ -123,5 +132,6 @@ def get_dashboard_stats(
         timeline_trend=timeline_trend,
         recent_analyses=recent_analyses,
         total_threat_reports=total_threat_reports,
-        seeded_vs_live={"live": live_total, "simulated": sim_total}
+        seeded_vs_live={"live": live_total, "simulated": sim_total},
+        channel_breakdown=channel_breakdown
     )

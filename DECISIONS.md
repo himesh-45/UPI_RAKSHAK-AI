@@ -143,5 +143,21 @@ This document records technical and design decisions made to keep the system rob
 - **Rationale**: Proves through empirical benchmarking that the classical calibrated ensemble provides 44x lower CPU latency (4.2ms vs 185ms), 99% smaller artifact footprint (9.6MB vs 950MB), and offline execution on consumer hardware with comparable macro-F1.
 
 ### Decision 36: Automated SQLite In-Place Schema Migration & Playwright Headless Resiliency
-- **Choice**: Added `ensure_schema_migrations()` in `backend/app/database.py` to transparently upgrade SQLite schemas (e.g., adding `channel` column to `analysis_history`) across test and runtime invocations without data wipe. Conditioned Playwright E2E browser tests to skip when frontend dev server is offline.
+- **Choice**: Added `ensure_schema_migrations()` in `backend/app/database.py` to transparently upgrade SQLite schemas (e.g., adding `channel` and `sender_hash` columns to `analysis_history`) across test and runtime invocations without data wipe. Conditioned Playwright E2E browser tests to skip when frontend dev server is offline.
 - **Rationale**: Guarantees seamless backward compatibility and test suite stability across development and CI/CD environments.
+
+### Decision 37: Channel-Agnostic Core Architecture with Privacy Salted Hashing
+- **Choice**: Created `backend/app/channels/core.py` with `process_channel_submission()`. Standardized input processing across Telegram and WhatsApp for text, images, and voice notes. Sender IDs are strictly converted to salted SHA-256 hashes (`hash_sender_id()`), with zero storage of raw phone numbers or Telegram user handles.
+- **Rationale**: Delivers unified threat fusion while strictly adhering to DPDP (Digital Personal Data Protection) privacy guidelines.
+
+### Decision 38: Dual-Mode Telegram Bot with Group Privacy Filtering
+- **Choice**: Implemented `backend/app/channels/telegram.py` supporting local long-polling (`--poll`) and production webhooks with secret token validation (`X-Telegram-Bot-Api-Secret-Token`). Integrated interactive inline keyboards (1930 Helpline, Hindi/Telugu explanation, Report Scam, Delete Data). Added strict group chat filtering: the bot only responds when mentioned or replied to, and group chat messages are strictly never persisted to the database.
+- **Rationale**: Enables zero-configuration local evaluation for hackathon judges while upholding privacy principles in group settings.
+
+### Decision 39: Omnichannel WhatsApp Adapter Supporting Twilio Sandbox & Meta Cloud API
+- **Choice**: Created `backend/app/channels/whatsapp.py` supporting dual providers: Twilio Sandbox (TwiML responses + signature verification) and Meta WhatsApp Cloud API (verification challenge handshake + interactive button replies). Added media download handling up to 5MB and deduplication by message SID/ID.
+- **Rationale**: Allows instant testing in developer sandboxes and seamless production scaling on official Business Solution Provider (BSP) infrastructure.
+
+### Decision 40: Right-to-be-Forgotten via `/delete_data` & Auto-Pruning
+- **Choice**: Implemented `/delete_data` bot command and `delete_user_channel_data()` removing all historical scans for a hashed sender ID, alongside `purge_old_channel_history(days=30)` for rolling retention.
+- **Rationale**: Provides verifiable user autonomy over data privacy, addressing tough security reviewer questions regarding auditability and data minimization.

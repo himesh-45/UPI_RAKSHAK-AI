@@ -178,6 +178,42 @@ export default function DashboardPage({ token, onOpenLogin }) {
         </div>
       </div>
 
+      {/* Omnichannel Distribution Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
+          <div>
+            <div className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Web Portal Scans</div>
+            <div className="text-2xl font-extrabold text-slate-900 dark:text-white mt-0.5">
+              {stats?.channel_breakdown?.web || 0}
+            </div>
+            <div className="text-[10px] text-slate-400">Desktop & Mobile Web</div>
+          </div>
+          <span className="text-2xl p-3 bg-white dark:bg-slate-800 rounded-xl shadow-xs border border-slate-200 dark:border-slate-700">🌐</span>
+        </div>
+
+        <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
+          <div>
+            <div className="text-[11px] font-bold text-sky-600 dark:text-sky-400 uppercase tracking-wider">Telegram Bot</div>
+            <div className="text-2xl font-extrabold text-slate-900 dark:text-white mt-0.5">
+              {stats?.channel_breakdown?.telegram || 0}
+            </div>
+            <div className="text-[10px] text-slate-400">Salted SHA-256 Privacy</div>
+          </div>
+          <span className="text-2xl p-3 bg-sky-50 dark:bg-sky-950/60 text-sky-500 rounded-xl shadow-xs border border-sky-200 dark:border-sky-800">✈️</span>
+        </div>
+
+        <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
+          <div>
+            <div className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">WhatsApp Bot</div>
+            <div className="text-2xl font-extrabold text-slate-900 dark:text-white mt-0.5">
+              {stats?.channel_breakdown?.whatsapp || 0}
+            </div>
+            <div className="text-[10px] text-slate-400">Twilio Sandbox & Meta Cloud API</div>
+          </div>
+          <span className="text-2xl p-3 bg-emerald-50 dark:bg-emerald-950/60 text-emerald-500 rounded-xl shadow-xs border border-emerald-200 dark:border-emerald-800">💬</span>
+        </div>
+      </div>
+
       {/* Analytics Charts Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         
@@ -326,6 +362,7 @@ export default function DashboardPage({ token, onOpenLogin }) {
                 <th className="py-2.5 px-3">Category</th>
                 <th className="py-2.5 px-3">Masked Input</th>
                 <th className="py-2.5 px-3">Type</th>
+                <th className="py-2.5 px-3">Channel</th>
                 <th className="py-2.5 px-3">Origin</th>
                 <th className="py-2.5 px-3 text-right">Time</th>
               </tr>
@@ -344,6 +381,17 @@ export default function DashboardPage({ token, onOpenLogin }) {
                   <td className="py-3 px-3 text-slate-600 dark:text-slate-400">{item.detected_category.replace(/_/g, ' ')}</td>
                   <td className="py-3 px-3 font-mono text-[11px] max-w-xs truncate">{item.raw_input_masked}</td>
                   <td className="py-3 px-3 uppercase text-[10px] text-slate-500 font-bold">{item.input_type}</td>
+                  <td className="py-3 px-3">
+                    <span className={`px-1.5 py-0.5 rounded text-[10px] font-bold uppercase ${
+                      item.channel === 'telegram'
+                        ? 'bg-sky-100 dark:bg-sky-950 text-sky-700 dark:text-sky-300'
+                        : (item.channel === 'whatsapp'
+                            ? 'bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300'
+                            : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300')
+                    }`}>
+                      {item.channel || 'web'}
+                    </span>
+                  </td>
                   <td className="py-3 px-3">
                     <span className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${item.is_simulated ? 'bg-slate-100 dark:bg-slate-800 text-slate-500' : 'bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300'}`}>
                       {item.is_simulated ? 'SIMULATED' : 'LIVE'}

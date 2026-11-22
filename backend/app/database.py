@@ -34,6 +34,9 @@ def ensure_schema_migrations():
                     if "channel" not in cols:
                         cur.execute("ALTER TABLE analysis_history ADD COLUMN channel VARCHAR(50) DEFAULT 'web'")
                         conn.commit()
+                    if "sender_hash" not in cols:
+                        cur.execute("ALTER TABLE analysis_history ADD COLUMN sender_hash VARCHAR(64) DEFAULT NULL")
+                        conn.commit()
                 conn.close()
             except Exception:
                 pass

@@ -17,6 +17,7 @@ class AnalysisHistory(Base):
     id = Column(Integer, primary_key=True, index=True)
     input_type = Column(String, nullable=False)  # "text", "url", "image", "qr", "audio"
     channel = Column(String, default="web")       # "web", "telegram", "whatsapp"
+    sender_hash = Column(String(64), nullable=True, index=True) # Salted SHA-256 for privacy compliance
     raw_input_masked = Column(Text, nullable=False)
     verdict = Column(String, nullable=False)      # "SAFE", "SUSPICIOUS", "HIGH RISK"
     risk_score = Column(Integer, nullable=False)   # 0 to 100
