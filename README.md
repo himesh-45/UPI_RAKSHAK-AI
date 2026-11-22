@@ -9,7 +9,8 @@
 
 ## 📌 Key Highlights
 
-- **Multi-Engine Intelligence Fusion**: Fuses 7 independent detectors (Calibrated 15-Class NLP, Negation-Aware Rules, Static URL Scanner, OpenCV QR & UPI URI Parser, RapidOCR/Tesseract, Digital Arrest Extortion Engine, and 89-Entry Regulatory RAG).
+- **Multi-Engine Intelligence Fusion**: Fuses 7 independent detectors (Calibrated 15-Class NLP, Negation-Aware Rules, Static URL Scanner, OpenCV QR & UPI URI Parser, RapidOCR/Tesseract, Digital Arrest Extortion Engine, and 93-Entry Regulatory RAG).
+- **Intent-Guided Conversational Assistant**: 5-way hybrid router (`ANALYZE`, `HOW_TO`, `EMERGENCY`, `SMALL_TALK`, `UNCLEAR`) that provides relevant guidance for citizen inquiries instead of treating every query as a scam. Strict no-verdict policy for informational queries, 9 human-reviewed procedures ([KB_REVIEW.md](docs/KB_REVIEW.md)), typo tolerance, and measured 98.05% intent accuracy on our 205-sample fictional test set.
 - **Trilingual Native Support**: Full UI, Voice, and Explainability in **English**, **Hindi (हिंदी)**, and **Telugu (తెలుగు)** (including Hinglish and Romanized Telugu / Telugish).
 - **Omnichannel Protection**: Real-time triage on Web PWA, **Telegram Bot** (`@upi_rakshak_bot`), and **WhatsApp Webhooks** with salted SHA-256 privacy and `/delete_data` right-to-be-forgotten.
 - **Digital Arrest Coercion Detector**: Multi-vector interception of fake police/CBI video interrogation extortion, grounded in Indian statutory law (**CrPC Section 41 / BNSS Section 35**).
@@ -101,9 +102,9 @@ docker compose up --build
 
 ---
 
-## 🧪 Comprehensive Automated Testing (165+ Tests)
+## 🧪 Comprehensive Automated Testing (175+ Tests)
 
-The repository ships with an exhaustive test suite covering all security assertions, regression gates, and mutation tests:
+The repository ships with an exhaustive test suite covering all security assertions, regression gates, intent classifications, and mutation tests:
 
 ```bash
 .\.venv\Scripts\pytest.exe backend/tests -v
@@ -111,6 +112,7 @@ The repository ships with an exhaustive test suite covering all security asserti
 
 | Test Suite File | Coverage Scope | Status |
 | :--- | :--- | :---: |
+| `backend/tests/test_assistant_intent.py` | 5-way hybrid intent router, typos, emergency steps, RAG help, zero false verdicts | **PASSED (10/10)** |
 | `backend/tests/test_evaluation_report_consistency.py` | Programmatic gate validation (asserts metrics meet targets) | **PASSED (3/3)** |
 | `backend/tests/test_banned_phrases.py` | Strict prohibition against unsubstantiated marketing absolutes | **PASSED (1/1)** |
 | `backend/tests/test_mutations.py` | Prompt injection immunity, leetspeak, homoglyphs, zero-network audit | **PASSED (8/8)** |
@@ -128,8 +130,8 @@ The repository ships with an exhaustive test suite covering all security asserti
 | `backend/tests/test_masking.py` | PII regex redaction (Indian phones, card numbers, OTPs) | **PASSED (4/4)** |
 | `backend/tests/test_phase2_features.py` | Pre-payment VPA safe-checks, batch text analysis, feedback loop | **PASSED (6/6)** |
 | `backend/tests/test_health.py` | FastAPI health check & engine readiness check | **PASSED (1/1)** |
-| `backend/tests/test_rag.py` | TF-IDF knowledge base cosine retrieval (89 entries) | **PASSED (4/4)** |
-| **Total Automated Tests** | **Full Unit, Integration, Mutation, Security, and Packaging Coverage** | **165+ / 165+ PASSED** |
+| `backend/tests/test_rag.py` | TF-IDF knowledge base cosine retrieval (93 entries) | **PASSED (4/4)** |
+| **Total Automated Tests** | **Full Unit, Integration, Mutation, Security, Intent, and Packaging Coverage** | **175+ / 175+ PASSED** |
 
 ---
 
@@ -172,6 +174,7 @@ All metrics are evaluated programmatically via `backend.app.scripts.evaluate_mod
 ## 📚 Essential Documentation
 
 - [Programmatic Evaluation Report](docs/EVALUATION_REPORT.md)
+- [Human-Reviewed Knowledge Base Audit](docs/KB_REVIEW.md)
 - [Load Testing & Latency Benchmark Report](docs/LOAD_TEST.md)
 - [Production Deployment & Operations Guide](docs/DEPLOY.md)
 - [Pre-Flight Live Demo Checklist](docs/DEMO_CHECKLIST.md)

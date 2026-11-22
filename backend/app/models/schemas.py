@@ -114,6 +114,7 @@ class AssistantChatRequest(BaseModel):
     message: str = Field(min_length=1, max_length=4000)
     language: str = "en"  # "en", "hi", "te"
     context_report_id: Optional[int] = None
+    history: Optional[List[Dict[str, str]]] = None
 
 class AssistantChatResponse(BaseModel):
     reply: str
@@ -122,6 +123,9 @@ class AssistantChatResponse(BaseModel):
     risk_score: Optional[int] = None
     citations: List[RAGCitation] = []
     recommended_actions: List[str] = []
+    intent: Optional[str] = None
+    quick_replies: List[str] = []
+    action_buttons: List[Dict[str, str]] = []
 
 class ThreatReportCreate(BaseModel):
     analysis_id: Optional[int] = None

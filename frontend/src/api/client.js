@@ -38,11 +38,11 @@ export async function analyzeImage(formData) {
   return res.json();
 }
 
-export async function chatAssistant(message, language = 'en') {
+export async function chatAssistant(message, language = 'en', history = []) {
   const res = await fetch(`${BASE_URL}/assistant/chat`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ message, language })
+    body: JSON.stringify({ message, language, history })
   });
   if (!res.ok) {
     const err = await res.json().catch(() => ({}));

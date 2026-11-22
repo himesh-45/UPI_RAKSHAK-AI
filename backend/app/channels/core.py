@@ -14,6 +14,9 @@ from ..detectors.rule_engine import rule_engine
 from ..detectors.url_scanner import url_scanner
 from ..detectors.ocr_pipeline import ocr_pipeline
 from ..fusion.risk_engine import risk_engine
+from ..assistant.intent import intent_classifier, INTENT_ANALYZE
+from ..assistant.service import assistant_service
+from ..models.schemas import AssistantChatRequest
 
 # In-memory rate limiting and deduplication storage
 # {sender_hash: [timestamp1, timestamp2, ...]}
@@ -352,6 +355,38 @@ async def process_channel_submission(
     else:
         # Text analysis
         text_content = str(content).strip()
+
+        # 5a. Intent Classification: Route how-to, emergency, small-talk, and unclear to Knowledge Base
+        intent_res = intent_classifier.classify(text_content)
+        if intent_res.intent != INTENT_ANALYZE:
+            chat_res = assistant_service.analyze_and_respond(
+                AssistantChatRequest(message=text_content, language=target_language)
+            )
+
+            buttons = []
+            for btn in chat_res.action_buttons:
+                action = btn.get("action", "")
+                btn_id = f"{action}_{int(time.time())}"
+                buttons.append({
+                    "id": btn_id,
+                    "label": btn.get("label", "Action"),
+                    "action": action,
+                    "url": btn.get("url")
+                })
+            buttons.append({"id": "lang_hi", "label": "🇮🇳 हिंदी", "action": "lang_hi"})
+            buttons.append({"id": "lang_te", "label": "🇮🇳 తెలుగు", "action": "lang_te"})
+            buttons.append({"id": "delete_my_data", "label": "🗑️ Delete Data", "action": "delete_data"})
+
+            return {
+                "text": chat_res.reply,
+                "verdict": None,
+                "risk_score": None,
+                "language": chat_res.language,
+                "buttons": buttons,
+                "raw_report": None
+            }
+
+        # 5b. Multi-detector threat analysis for ANALYZE intent
         nlp_res = nlp_classifier.predict(text_content)
         rule_res = rule_engine.evaluate(text_content)
         url_res = url_scanner.scan_all_urls(text_content)

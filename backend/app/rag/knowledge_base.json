@@ -14,24 +14,34 @@
       "qr"
     ],
     "content": "In the UPI architecture governed by the National Payments Corporation of India (NPCI), entering your UPI PIN is STRICTLY an authorization to DEBIT funds from your account. Receiving money, refunds, cashback, or rewards NEVER requires entering a UPI PIN, scanning a QR code, or accepting a collect request. If any person or app requests your UPI PIN to credit money, it is guaranteed to be an unauthorized attempt to siphon funds.",
-    "actionable_guidance": "Decline all collect requests immediately. Never enter your UPI PIN unless you intend to transfer money out. Report unauthorized collect handles in your UPI app."
+    "actionable_guidance": "Decline all collect requests immediately. Never enter your UPI PIN unless you intend to transfer money out. Report unauthorized collect handles in your UPI app.",
+    "official_url": "https://www.npci.org.in"
   },
   {
     "id": "kb_upi_collect_request_rules",
     "category": "collect_request_fraud",
-    "title": "UPI Collect Requests: How Attackers Disguise Debit as Credit",
+    "title": "UPI Collect Requests: How Attackers Disguise Debit as Credit & How They Work",
     "source": "NPCI Circular on Collect Request Security & Transaction Limits",
+    "official_url": "https://www.npci.org.in/what-we-do/upi/security",
     "tags": [
+      "collect request",
       "collect",
       "request",
-      "payer",
-      "payee",
-      "debit",
       "upi pin",
-      "fraud"
+      "debit",
+      "receive money",
+      "cashback",
+      "refund",
+      "how collect requests work"
     ],
-    "content": "A UPI 'Collect Request' (Payer-Payee pull transaction) initiates a debit from the victim's account to the requester. Fraudsters frequently disguise collect requests with deceitful notes such as 'Receive Cashback Rs. 5000', 'Refund from Electricity Board', or 'Payment for OLX Item'. When the user taps 'Approve' and enters their UPI PIN, money is immediately debited from their account, not credited.",
-    "actionable_guidance": "Always check whether the button says 'PAY' or 'RECEIVE'. Any prompt requesting a 4 or 6 digit PIN is paying money. Reject the request and block the requester's VPA in your app."
+    "content": "A UPI Collect Request (Payer-Payee pull transaction) initiates a debit from the victim account to the requester. Fraudsters frequently disguise collect requests with deceptive descriptions such as Receive Cashback Rs. 5000, Electricity Refund, or Army Officer OLX Payment. THE GOLDEN RULE OF UPI: Receiving money NEVER requires entering your 4 or 6-digit UPI PIN, scanning a QR code, or accepting a collect request. If any prompt asks you to enter your UPI PIN, money will be deducted from your account, NOT credited.",
+    "actionable_guidance": "Decline all collect requests from unknown persons. Never enter your UPI PIN to receive money. Block and report the fraudulent VPA inside your app.",
+    "steps": [
+      "Understand the rule: You NEVER need to enter your UPI PIN to receive money, refunds, or cashback.",
+      "Check the button: If the screen asks for a 4 or 6-digit PIN, you are SENDING money, not receiving it.",
+      "Decline the request: Tap Decline or Reject on any unfamiliar collect request in your UPI app.",
+      "Report the handle: Select Report as Scam / Fraud inside the UPI app to flag the attacker VPA with NPCI."
+    ]
   },
   {
     "id": "kb_upi_autopay_mandate_fraud",
@@ -47,7 +57,8 @@
       "standing instruction"
     ],
     "content": "UPI AutoPay allows recurring debits (up to Rs. 15,000 without 2FA per cycle) once an initial mandate is authorized with a UPI PIN. Scammers trick users into approving a 'verification mandate' claiming it is a one-time security check or loan approval requirement. Once authorized, the attacker can schedule automated deductions without further user notification or PIN prompts.",
-    "actionable_guidance": "Never authorize an AutoPay mandate for refunds, prizes, or customer support verification. Check 'AutoPay / Mandates' in your UPI app settings and revoke any unfamiliar recurring mandates immediately."
+    "actionable_guidance": "Never authorize an AutoPay mandate for refunds, prizes, or customer support verification. Check 'AutoPay / Mandates' in your UPI app settings and revoke any unfamiliar recurring mandates immediately.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_upi_qr_code_mechanics",
@@ -63,7 +74,8 @@
       "merchant"
     ],
     "content": "A standard Bharat QR or UPI QR code encodes a deep link containing payee parameters (e.g., `upi://pay?pa=merchant@bank&pn=MerchantName&am=500`). Scanning a QR code inside any UPI application ONLY initiates an outbound payment. There is no technical capability in the UPI protocol to 'receive' money by scanning a QR code. Fraudsters send QR codes over WhatsApp or OLX claiming 'Scan this QR to receive payment'.",
-    "actionable_guidance": "Never scan a QR code sent to you to receive payment for goods or services. To receive money, only share your phone number or UPI VPA; scanning is never required."
+    "actionable_guidance": "Never scan a QR code sent to you to receive payment for goods or services. To receive money, only share your phone number or UPI VPA; scanning is never required.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_upi_vpa_structure",
@@ -80,7 +92,8 @@
       "ybl"
     ],
     "content": "A UPI ID (VPA) consists of a username and a Payment Service Provider (PSP) bank handle in the format `username@bankhandle` (e.g., `name@oksbi`, `user@ybl`, `mobile@paytm`). Genuine merchant accounts display verified merchant names registered with NPCI. Fraudulent collect requests frequently use throwaway VPAs on open handles or mimic official names in the username prefix (e.g., `sbi.customer.helpline@icici`).",
-    "actionable_guidance": "Verify the payee's actual registered bank name displayed by the UPI app before confirming any payment, not just the custom display name provided by the sender."
+    "actionable_guidance": "Verify the payee's actual registered bank name displayed by the UPI app before confirming any payment, not just the custom display name provided by the sender.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_upi_lite_limits",
@@ -96,13 +109,15 @@
       "2000"
     ],
     "content": "UPI Lite is an on-device digital wallet enabling near-instant, PIN-less transactions up to Rs. 500 per transaction, with an aggregate daily wallet cap of Rs. 2,000. While convenient for daily micro-payments, users should monitor their UPI Lite transaction logs since PIN authentication is waived for individual transactions.",
-    "actionable_guidance": "Do not disable device lock screens if using UPI Lite. Report phone theft immediately to telecom providers to disable wallet abuse via device physical access."
+    "actionable_guidance": "Do not disable device lock screens if using UPI Lite. Report phone theft immediately to telecom providers to disable wallet abuse via device physical access.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_helpline_1930_golden_hour",
     "category": "general",
     "title": "Reporting Cyber Fraud: National Helpline 1930 & Golden Hour Freezing",
     "source": "Ministry of Home Affairs (MHA) — Citizen Financial Cyber Fraud Reporting System",
+    "official_url": "https://cybercrime.gov.in",
     "tags": [
       "1930",
       "helpline",
@@ -111,26 +126,44 @@
       "freeze",
       "police",
       "golden hour",
-      "cfcfrms"
+      "cfcfrms",
+      "what to prepare",
+      "complaint"
     ],
-    "content": "If you have accidentally entered your PIN, shared an OTP, or transferred money to a scammer, immediately call the National Cyber Crime Helpline number '1930' (formerly 155260) or register an incident at https://cybercrime.gov.in. Under the Citizen Financial Cyber Fraud Reporting and Management System (CFCFRMS), if an incident is reported within the 'Golden Hour' (first 2-3 hours), police and financial intermediaries can coordinate to freeze the illicit funds in the beneficiary mule account before withdrawal.",
-    "actionable_guidance": "1. Call 1930 immediately. 2. Have transaction UTR number, debit account number, sender/beneficiary bank names ready. 3. Request immediate freeze of the beneficiary account."
+    "content": "If you have entered your PIN, shared an OTP, or transferred money to a scammer, immediately call the National Cyber Crime Helpline number 1930 or register at https://cybercrime.gov.in. Under the CFCFRMS protocol, reporting within the Golden Hour (first 2-3 hours) enables police and financial intermediaries to coordinate and freeze illicit funds in intermediate mule bank accounts before cash withdrawal. What to prepare before calling 1930: (1) 12-digit transaction UTR / reference number, (2) Debit bank name and account number, (3) Fraudulent beneficiary account or UPI ID, (4) Exact date and timestamp of the transaction, (5) Screenshots of fraudulent SMS, WhatsApp chats, or payment confirmation.",
+    "actionable_guidance": "Call 1930 immediately with your 12-digit UTR, debit account, and scammer UPI ID ready. Follow up on cybercrime.gov.in within 24 hours.",
+    "steps": [
+      "Call 1930 immediately to connect with the National Cyber Crime Reporting Desk.",
+      "Have your details ready: 12-digit UTR number, debit bank name, transaction time, and scammer UPI ID / phone number.",
+      "The officer generates a financial fraud ticket and alerts the beneficiary bank to freeze funds.",
+      "Within 24 hours, visit cybercrime.gov.in to upload transaction screenshots, SMS evidence, and complete formal complaint registration."
+    ]
   },
   {
     "id": "kb_cybercrime_portal_filing",
     "category": "general",
     "title": "Step-by-Step Formal Complaint Filing on Cybercrime.gov.in",
     "source": "Indian Cyber Crime Coordination Centre (I4C), MHA",
+    "official_url": "https://cybercrime.gov.in",
     "tags": [
       "cybercrime.gov.in",
       "fir",
       "complaint",
       "portal",
       "evidence",
-      "acknowledgment"
+      "acknowledgment",
+      "what to prepare",
+      "file complaint"
     ],
-    "content": "The National Cyber Crime Reporting Portal (cybercrime.gov.in) enables citizens to lodge complaints for financial and social cyber crimes. Filing an official report generates an Acknowledgement Number which is mandatory for insurance claims, formal police investigations, and court-mandated bank balance reversals.",
-    "actionable_guidance": "Prepare: 1. Bank statement showing debited transaction and UTR. 2. Screenshots of fraudulent messages, WhatsApp chats, and caller phone numbers. 3. Copy of Aadhaar/ID. Submit under 'Report Financial Fraud'."
+    "content": "The National Cyber Crime Reporting Portal (https://cybercrime.gov.in) enables citizens to lodge formal complaints for financial cyber fraud. Filing an official report generates an Acknowledgement Number which is legally mandatory for insurance claims, police investigation, and bank dispute reversals. What to prepare before filing: (1) Soft copy of bank account statement showing debited transaction, (2) Screenshots of SMS, WhatsApp messages, or call logs, (3) Suspect details (phone number, UPI ID, email, website link), (4) Identity proof (Aadhaar or Voter ID).",
+    "actionable_guidance": "Visit cybercrime.gov.in, select Report Financial Fraud, fill transaction and suspect details, upload screenshots, and save your Acknowledgement PDF.",
+    "steps": [
+      "Visit the official portal at https://cybercrime.gov.in and click Report Crime -> Financial Fraud.",
+      "Register/log in using your mobile number and OTP.",
+      "Prepare and enter incident details: Incident date/time, victim bank account, and 12-digit transaction UTR number.",
+      "Enter suspect details: Scammer phone number, UPI ID, bank account, or fake website URL.",
+      "Upload evidence: Bank statement copy, screenshots of messages/calls, and save your Acknowledgement Number."
+    ]
   },
   {
     "id": "kb_evidence_preservation",
@@ -147,7 +180,8 @@
       "65b"
     ],
     "content": "When victimized by digital financial fraud, destroying evidence (such as deleting suspicious SMS, call logs, or WhatsApp chats in panic) hinders recovery. Under legal standards, electronic evidence requires timestamps, sender headers, recipient details, and transaction reference (UTR/RRN) numbers.",
-    "actionable_guidance": "Do not delete SMS or WhatsApp chats. Take screenshots showing full phone numbers, dates, timestamps, and message headers. Export chat history and note the exact 12-digit UPI UTR number from your bank passbook."
+    "actionable_guidance": "Do not delete SMS or WhatsApp chats. Take screenshots showing full phone numbers, dates, timestamps, and message headers. Export chat history and note the exact 12-digit UPI UTR number from your bank passbook.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_rbi_zero_liability_rule",
@@ -163,7 +197,8 @@
       "compensation"
     ],
     "content": "Under RBI regulations, a customer has ZERO LIABILITY for unauthorized electronic banking transactions where the fraud or deficiency lies within the banking system, or in third-party breaches where the customer notifies the bank within 3 working days of receiving the debit alert. If notified within 4 to 7 working days, liability is limited to Rs. 10,000 for savings accounts.",
-    "actionable_guidance": "Immediately notify your bank in writing (via email and registered helpline) within 72 hours of any unauthorized debit to establish zero-liability eligibility. Keep written complaint ticket numbers."
+    "actionable_guidance": "Immediately notify your bank in writing (via email and registered helpline) within 72 hours of any unauthorized debit to establish zero-liability eligibility. Keep written complaint ticket numbers.",
+    "official_url": "https://www.rbi.org.in"
   },
   {
     "id": "kb_rbi_negligence_liability",
@@ -178,7 +213,8 @@
       "liability"
     ],
     "content": "Under RBI guidelines, if a financial loss is caused by customer negligence (such as voluntary disclosure of OTP, UPI PIN, CVV, or NetBanking password to a third party), the entire loss until the time the incident is formally reported to the bank is borne by the customer. Any unauthorized loss occurring AFTER reporting the breach must be compensated by the bank.",
-    "actionable_guidance": "Never voluntarily share OTP or passwords. If shared accidentally, report to your bank's fraud helpline within minutes to halt all further debits and cap your personal liability."
+    "actionable_guidance": "Never voluntarily share OTP or passwords. If shared accidentally, report to your bank's fraud helpline within minutes to halt all further debits and cap your personal liability.",
+    "official_url": "https://www.rbi.org.in"
   },
   {
     "id": "kb_rbi_reversal_timeline",
@@ -194,7 +230,8 @@
       "dispute"
     ],
     "content": "Upon receiving an unauthorized transaction complaint, the bank must provide a shadow credit (reversal of debited amount) within 10 working days, subject to investigation. The dispute must be resolved within 90 days. If the bank fails to resolve complaints within 30 days, the customer can escalate to the RBI Banking Ombudsman (cms.rbi.org.in).",
-    "actionable_guidance": "If your bank does not respond within 30 days or rejects your genuine claim unfairly, file a grievance with the RBI Ombudsman at https://cms.rbi.org.in or call 14448."
+    "actionable_guidance": "If your bank does not respond within 30 days or rejects your genuine claim unfairly, file a grievance with the RBI Ombudsman at https://cms.rbi.org.in or call 14448.",
+    "official_url": "https://www.rbi.org.in"
   },
   {
     "id": "kb_bank_sbi_fraud_protocol",
@@ -210,7 +247,8 @@
       "yono"
     ],
     "content": "SBI official web banking is strictly hosted on `onlinesbi.sbi` and `sbi.co.in`. SBI customer care numbers are 1800 1234, 1800 2100, and 1800 11 1109. To instantly block your SBI ATM/Debit Card, send SMS 'BLOCK <last 4 digits of card>' to 567676 from your registered mobile number. To lock NetBanking access, visit onlinesbi.sbi and click 'Lock NetBanking Access'.",
-    "actionable_guidance": "Never click links from sender IDs other than official telecom headers (e.g. SBIBNK, SBIINB). To report unauthorized SBI transactions, call 1800 11 1109 or email report.phishing@sbi.co.in."
+    "actionable_guidance": "Never click links from sender IDs other than official telecom headers (e.g. SBIBNK, SBIINB). To report unauthorized SBI transactions, call 1800 11 1109 or email report.phishing@sbi.co.in.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_bank_hdfc_fraud_protocol",
@@ -225,7 +263,8 @@
       "netbanking.hdfcbank.com"
     ],
     "content": "HDFC Bank's official domain is `hdfcbank.com`. HDFC dedicated national fraud helpline is 1800 202 6161 / 1800 1600. Customers can instantly freeze NetBanking access and cards via MobileBanking app > Menu > Security Center > Freeze Account. HDFC Bank never sends SMS demanding PAN/Aadhaar updates to prevent account freeze.",
-    "actionable_guidance": "Report phishing SMS or suspicious debit to 1800 202 6161 or email report.phishing@hdfcbank.com immediately. Genuine HDFC SMS headers include HDFCBK, HDFCBN."
+    "actionable_guidance": "Report phishing SMS or suspicious debit to 1800 202 6161 or email report.phishing@hdfcbank.com immediately. Genuine HDFC SMS headers include HDFCBK, HDFCBN.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_bank_icici_fraud_protocol",
@@ -240,7 +279,8 @@
       "icicibank.com"
     ],
     "content": "ICICI Bank official online services are strictly hosted on `icicibank.com`. ICICI 24x7 customer care is 1800 1080. You can temporarily block and unblock your debit/credit card in 1-click via the iMobile Pay app > Manage Cards > Temporarily Block. To block internet banking via SMS, send 'BLOCK <User ID>' to 9215667788.",
-    "actionable_guidance": "Send phishing emails or suspicious links to antiphishing@icicibank.com. Call 1800 1080 immediately to lock accounts if credentials were leaked."
+    "actionable_guidance": "Send phishing emails or suspicious links to antiphishing@icicibank.com. Call 1800 1080 immediately to lock accounts if credentials were leaked.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_bank_axis_fraud_protocol",
@@ -255,7 +295,8 @@
       "axisbank.com"
     ],
     "content": "Axis Bank official website is `axisbank.com`. Dedicated fraud reporting numbers are 1800 419 0068 and 1800 103 5577. To block debit cards via SMS, send 'BLOCK <Last 4 digits>' to 56161600 or +918691000002 from registered mobile number.",
-    "actionable_guidance": "Report unauthorized Axis debit or phishing attacks to 1800 419 0068 or email dispute.helpdesk@axisbank.com."
+    "actionable_guidance": "Report unauthorized Axis debit or phishing attacks to 1800 419 0068 or email dispute.helpdesk@axisbank.com.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_bank_pnb_fraud_protocol",
@@ -270,7 +311,8 @@
       "pnbindia.in"
     ],
     "content": "PNB official domain is `pnbindia.in`. Dedicated fraud toll-free numbers are 1800 180 2222 and 1800 103 2222. PNB customers can block ATM debit cards by sending SMS 'HOT <16 digit Card No>' to 5607040.",
-    "actionable_guidance": "Report unauthorized PNB transactions to 1800 180 2222 or email incident@pnb.co.in."
+    "actionable_guidance": "Report unauthorized PNB transactions to 1800 180 2222 or email incident@pnb.co.in.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_bank_kotak_fraud_protocol",
@@ -285,7 +327,8 @@
       "811"
     ],
     "content": "Kotak Mahindra Bank operates on `kotak.com`. Fraud reporting helpline is 1860 266 2666 (or +91 22 6204 2001 for international). Customers can block cards via Kotak Mobile Banking app > Service Requests > Debit Card > Block / Deactivate.",
-    "actionable_guidance": "Report suspicious transactions or phishing attempts immediately to 1860 266 2666 or email report.phishing@kotak.com."
+    "actionable_guidance": "Report suspicious transactions or phishing attempts immediately to 1860 266 2666 or email report.phishing@kotak.com.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_phonepe_fraud_reporting",
@@ -301,7 +344,8 @@
       "axl"
     ],
     "content": "PhonePe customer support helpline is 080-68727374 or 022-68727374. Inside the PhonePe app, open History > select suspicious transaction > tap 'Contact PhonePe Support'. PhonePe never contacts users asking them to install remote screen sharing software or to approve collect requests for refunds.",
-    "actionable_guidance": "Do not search for PhonePe customer care numbers on Google (fake ads scam). Access support strictly within the PhonePe app under 'Help' or call 080-68727374."
+    "actionable_guidance": "Do not search for PhonePe customer care numbers on Google (fake ads scam). Access support strictly within the PhonePe app under 'Help' or call 080-68727374.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_gpay_fraud_reporting",
@@ -318,7 +362,8 @@
       "oksbi"
     ],
     "content": "Google Pay India toll-free customer support is 1800-419-0157. To report a fraudulent user or collect request, tap the user or merchant in Google Pay > tap the 3-dot menu > select 'Report or block'. Google Pay never asks users to transfer money to test payment gateways.",
-    "actionable_guidance": "Report fake merchants inside the Google Pay app. For unauthorized debits, raise a transaction dispute immediately via transaction details > 'Having issues?'."
+    "actionable_guidance": "Report fake merchants inside the Google Pay app. For unauthorized debits, raise a transaction dispute immediately via transaction details > 'Having issues?'.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_paytm_fraud_reporting",
@@ -333,7 +378,8 @@
       "wallet"
     ],
     "content": "Paytm 24x7 cyber fraud helpline is 0120-4456-456. Common Paytm scams involve SMS warning 'Your Paytm KYC has expired, wallet blocked, call 98xxxxxx'. Paytm never instructs users to download QuickSupport or send small fee transfers to renew KYC.",
-    "actionable_guidance": "Call 0120-4456456 immediately to report fraudulent wallet or UPI activity. Renew KYC exclusively through the verified Paytm app."
+    "actionable_guidance": "Call 0120-4456456 immediately to report fraudulent wallet or UPI activity. Renew KYC exclusively through the verified Paytm app.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_bhim_npci_reporting",
@@ -349,7 +395,8 @@
       "drm"
     ],
     "content": "BHIM (Bharat Interface for Money) is operated directly by NPCI. Toll-free helpline is 1800-120-1740. If a payment dispute or fraud is not resolved by your issuing bank within statutory timelines, complaints can be escalated directly to NPCI via the Dispute Redressal Mechanism portal at npci.org.in.",
-    "actionable_guidance": "Log complaints on npci.org.in > 'UPI Dispute Redressal Mechanism' with the 12-digit UPI reference number if bank redressal fails."
+    "actionable_guidance": "Log complaints on npci.org.in > 'UPI Dispute Redressal Mechanism' with the 12-digit UPI reference number if bank redressal fails.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_electricity_bill_scam_playbook",
@@ -367,24 +414,34 @@
       "uppcl"
     ],
     "content": "Fraudsters send deceptive SMS warnings claiming electricity power will be disconnected at '9:30 PM tonight' due to unpaid previous month bills. They provide a personal 10-digit mobile number claiming to be the 'Electricity Officer' or a link to a fake bill portal. Electricity distribution companies never disconnect power overnight without serving statutory written notices, nor do they instruct consumers to call personal mobile numbers.",
-    "actionable_guidance": "Do not call the phone number in the SMS. Check your actual electricity bill balance exclusively on your state utility's official consumer portal or through your authorized bill payment app (BBPS)."
+    "actionable_guidance": "Do not call the phone number in the SMS. Check your actual electricity bill balance exclusively on your state utility's official consumer portal or through your authorized bill payment app (BBPS).",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_remote_access_scam_playbook",
     "category": "remote_access_scam",
-    "title": "Remote Desktop Screen Sharing Fraud: Technical Breakdown",
+    "title": "Remote Desktop Screen Sharing Fraud: What to Do if an App Was Installed",
     "source": "Cyber Crime Investigation Cell & RBI Advisory on Social Engineering",
+    "official_url": "https://cybercrime.gov.in",
     "tags": [
       "anydesk",
       "teamviewer",
       "quicksupport",
       "rustdesk",
-      "support",
-      "remote",
-      "screen"
+      "remote access",
+      "screen sharing",
+      "app installed",
+      "screen control"
     ],
-    "content": "Scammers posing as bank customer support, courier helpdesks, or telecom executives trick victims into downloading remote desktop applications (e.g., AnyDesk, TeamViewer QuickSupport, RustDesk). Once installed, they ask for the 9-digit session code, granting full visual screen access and remote touch controls. This allows attackers to view incoming 2FA SMS and steal OTPs in real-time.",
-    "actionable_guidance": "Never install remote desktop software upon unsolicited advice from callers. If already installed, immediately turn on Airplane Mode, uninstall the remote application, and change all banking passwords from a separate clean device."
+    "content": "Scammers pose as bank customer support, courier executives, or utility officers and trick victims into installing remote desktop software (AnyDesk, TeamViewer QuickSupport, RustDesk, AirDroid). Once installed and the 9-digit session code is shared, attackers gain full visual control of your screen and can read incoming 2FA SMS and steal OTPs in real-time. If you installed such an app: (1) Disconnect Internet immediately: Turn on Airplane Mode or switch off Wi-Fi and mobile data to sever the remote connection. (2) Uninstall the application immediately from Android Settings -> Apps. (3) Change your email, banking, and UPI passwords from a separate clean phone or computer. (4) Call your bank to freeze netbanking and check for unauthorized debits. (5) Scan your device using Google Play Protect.",
+    "actionable_guidance": "1. Turn on Airplane Mode immediately. 2. Uninstall AnyDesk/TeamViewer. 3. Change banking passwords from another device. 4. Call your bank to freeze account. 5. Run Play Protect security scan.",
+    "steps": [
+      "Disconnect internet immediately: Turn on Airplane Mode or disable Wi-Fi and Mobile Data.",
+      "Uninstall the remote application (AnyDesk, TeamViewer, RustDesk) from your phone settings immediately.",
+      "Reset your netbanking and email passwords using a different, secure phone or computer.",
+      "Call your bank fraud desk to check for unauthorized debits and temporarily block netbanking.",
+      "Run a malware scan using Google Play Protect before re-enabling internet."
+    ]
   },
   {
     "id": "kb_part_time_job_crypto_scam",
@@ -402,7 +459,8 @@
       "investment"
     ],
     "content": "Victims receive WhatsApp or Telegram messages offering Rs. 2,000 - 5,000/day for simple tasks like 'liking YouTube videos' or 'submitting 5-star Google ratings'. In Phase 1, small genuine payouts (Rs. 200 - 500) are transferred to build trust. In Phase 2, victims are added to Telegram VIP investment groups and coerced into depositing large sums (Rs. 50,000+) for 'high-yield crypto tasks'. When withdrawal is requested, fraudsters demand fake taxes or frozen fund fees.",
-    "actionable_guidance": "Legitimate companies never pay money for liking videos or require deposits to release earned salaries. Never join unknown Telegram investment channels. If victimized, cease all contact and call 1930 immediately."
+    "actionable_guidance": "Legitimate companies never pay money for liking videos or require deposits to release earned salaries. Never join unknown Telegram investment channels. If victimized, cease all contact and call 1930 immediately.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_predatory_loan_app_extortion",
@@ -419,25 +477,32 @@
       "recovery agent"
     ],
     "content": "Fraudulent loan apps (often downloaded via APK links or social media ads) offer instant paperless loans of Rs. 3,000 - 10,000. During installation, the app demands invasive permissions: full Contacts list, Camera, Gallery, and SMS logs. Within 5 days, recovery agents threaten the borrower, demanding 300% interest and sending morphed, defamatory photos to family members and colleagues scraped from contacts.",
-    "actionable_guidance": "1. Only borrow from RBI-registered NBFCs and Banks listed on rbi.org.in. 2. Never grant Contacts or Storage permissions to utility or loan apps. 3. If blackmailed, report immediately to local cyber police and National Cyber Crime Portal (1930). Do not pay extortion demands."
+    "actionable_guidance": "1. Only borrow from RBI-registered NBFCs and Banks listed on rbi.org.in. 2. Never grant Contacts or Storage permissions to utility or loan apps. 3. If blackmailed, report immediately to local cyber police and National Cyber Crime Portal (1930). Do not pay extortion demands.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_digital_arrest_customs_scam",
-    "category": "courier_customs_scam",
-    "title": "Digital Arrest & Fake Police / Customs Narcotics Extortion",
-    "source": "Ministry of Home Affairs (MHA) Nationwide Advisory on Digital Arrest Scams",
+    "category": "digital_arrest",
+    "title": "Digital Arrest & Fake Police / Customs Narcotics Extortion: Legal Facts",
+    "source": "Ministry of Home Affairs (MHA), CBI, & Delhi Police Cyber Crime Cell Advisory",
+    "official_url": "https://mha.gov.in",
     "tags": [
       "digital arrest",
-      "customs",
+      "skype arrest",
       "cbi",
-      "mumbai police",
-      "fedex",
-      "narcotics",
-      "skype",
-      "dhl"
+      "police video call",
+      "customs narcotics",
+      "rbi verification account",
+      "what is digital arrest"
     ],
-    "content": "Scammers call pretending to be FedEx, DHL, or Customs officials, claiming a parcel sent in the victim's name to Taiwan or Thailand contains MDMA drugs, fake passports, and illegal debit cards. The call is transferred to fake 'Police Officers' or 'CBI Officials' on Skype or WhatsApp video who wear simulated uniforms with forged police insignias. They place the victim under 'Digital Arrest', coercing them into staying on camera for days and transferring their life savings into 'Government Escrow Accounts' for verification.",
-    "actionable_guidance": "THERE IS NO LEGAL CONCEPT OF 'DIGITAL ARREST' UNDER INDIAN LAW. Law enforcement agencies (Police, CBI, ED, NIA) NEVER interrogate citizens over Skype or WhatsApp video, nor do they demand money transfers to verify bank accounts. Disconnect immediately and call 1930."
+    "content": "Scammers pose as CBI officers, Cyber Crime Police, FedEx/DHL courier customs officials, or judges. They claim that an illegal parcel containing narcotics/passports was intercepted in your name, and place you under a fake Digital Arrest on Skype or WhatsApp video call. They threaten arrest unless you transfer funds to an RBI verification account for asset clearance. STATUTORY LEGAL REALITY: (1) Indian Law (Code of Criminal Procedure / Bharatiya Nagarik Suraksha Sanhita Section 35) does NOT recognize any concept of Digital Arrest. (2) Real law enforcement agencies NEVER interrogate or place suspects under arrest over video calls. (3) No government body or court demands money transfers to safe accounts or RBI clearance accounts. (4) Disconnect immediately and call 1930.",
+    "actionable_guidance": "Do not panic. Disconnect the video call immediately. Real police never arrest via Skype or WhatsApp. Report the caller number to 1930 and cybercrime.gov.in.",
+    "steps": [
+      "Recognize the truth: Digital Arrest does NOT exist in Indian law. Police and courts never arrest people over video calls.",
+      "Never transfer money: Real agencies (CBI, Police, RBI) NEVER demand money transfers to verification accounts.",
+      "Disconnect immediately: Hang up the video call or phone call and block the caller number.",
+      "Report to 1930: Call the 1930 National Cyber Helpline or file an extortion report on cybercrime.gov.in."
+    ]
   },
   {
     "id": "kb_marketplace_olx_qr_scam",
@@ -454,7 +519,8 @@
       "advance"
     ],
     "content": "Scammers target sellers listing second-hand furniture, electronics, or vehicles on OLX or Facebook Marketplace. The attacker poses as an Indian Army soldier, CRPF officer, or CISF personnel stationed at a military cantonment. To purchase the item immediately without physical inspection, the scammer claims military accounts can only transfer funds via 'QR Verification' and sends a QR code instructing the seller to scan it to receive the advance payment.",
-    "actionable_guidance": "Do not accept remote payments from buyers claiming to be military personnel who refuse in-person inspection. Scanning ANY QR code or entering a PIN pays money to the scammer."
+    "actionable_guidance": "Do not accept remote payments from buyers claiming to be military personnel who refuse in-person inspection. Scanning ANY QR code or entering a PIN pays money to the scammer.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_wrong_number_sent_money_trap",
@@ -470,7 +536,8 @@
       "chargeback"
     ],
     "content": "The victim receives a fake bank credit SMS or an actual small transfer (e.g., Rs. 5,000) from an unknown number. Soon after, a distressed caller phones claiming: 'I mistakenly sent my child's hospital fee to your UPI ID, please return it urgently via Google Pay'. If the victim sends money back to the caller's separate UPI ID, the scammer files a formal unauthorized transaction chargeback with their own bank, causing the bank to debit the original sum again. The victim loses twice or becomes implicated in money laundering.",
-    "actionable_guidance": "Never send money back directly via UPI. Tell the caller to contact their bank to initiate formal inter-bank auto-reversal. Inform your own bank branch in writing that you received unsolicited funds and authorize the bank to reverse it through official banking settlement channels."
+    "actionable_guidance": "Never send money back directly via UPI. Tell the caller to contact their bank to initiate formal inter-bank auto-reversal. Inform your own bank branch in writing that you received unsolicited funds and authorize the bank to reverse it through official banking settlement channels.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_lottery_kbc_advance_fee",
@@ -487,7 +554,8 @@
       "gst"
     ],
     "content": "Fraudsters circulate audio clips and forged certificates claiming the recipient has won a Rs. 25 Lakh KBC (Kaun Banega Crorepati) lottery selected randomly via their WhatsApp phone number. To claim the prize, victims are asked to call a 'Lottery Manager' and deposit an upfront 'GST', 'Processing Fee', or 'RBI Clearance Charge' (Rs. 15,000 - 50,000) into specified bank accounts. Once paid, further demands follow until the victim realizes no prize exists.",
-    "actionable_guidance": "Legitimate lotteries and contests never require advance cash deposits for tax or processing. Lottery by phone number is legally prohibited. Block the sender and report on 1930."
+    "actionable_guidance": "Legitimate lotteries and contests never require advance cash deposits for tax or processing. Lottery by phone number is legally prohibited. Block the sender and report on 1930.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_fake_govt_scheme_subsidy",
@@ -503,7 +571,8 @@
       "aadhaar registration"
     ],
     "content": "Viral messages on WhatsApp promise free laptops, monthly pensions under 'PM Kanya Yojana', or immediate Rs. 6,000 subsidies from PM-Kisan. Links lead to deceptive clone websites (e.g. `pm-kisan-gov.in.xyz`) that harvest Aadhaar numbers, bank account numbers, and mobile numbers, or trigger unauthorized collect requests disguised as 'Registration Fees'.",
-    "actionable_guidance": "All genuine central and state government schemes are hosted strictly on official `.gov.in` or `.nic.in` domains. Never pay any registration fee for government schemes or welfare subsidies. Verify viral claims with PIB Fact Check (pib.gov.in/factcheck)."
+    "actionable_guidance": "All genuine central and state government schemes are hosted strictly on official `.gov.in` or `.nic.in` domains. Never pay any registration fee for government schemes or welfare subsidies. Verify viral claims with PIB Fact Check (pib.gov.in/factcheck).",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_sim_swap_esim_hijack",
@@ -520,7 +589,8 @@
       "airtel"
     ],
     "content": "In a SIM swap attack, fraudsters obtain a duplicate SIM card of the victim's mobile number using forged IDs or by tricking the victim into forwarding an e-SIM activation QR code. Once the duplicate SIM activates, the victim's phone abruptly loses cellular network signal ('No Service'), allowing the attacker to receive all incoming banking OTPs and reset NetBanking passwords.",
-    "actionable_guidance": "If your phone suddenly loses cellular network connectivity unexpectedly while others have signal, DO NOT assume a temporary tower issue. Immediately call your telecom provider from another phone to check if a SIM swap or e-SIM migration was requested."
+    "actionable_guidance": "If your phone suddenly loses cellular network connectivity unexpectedly while others have signal, DO NOT assume a temporary tower issue. Immediately call your telecom provider from another phone to check if a SIM swap or e-SIM migration was requested.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_sanchar_saathi_tafcop",
@@ -536,7 +606,8 @@
       "dot"
     ],
     "content": "The Government of India's Sanchar Saathi portal (sancharsaathi.gov.in) provides two critical citizen defense tools: TAFCOP (Telecom Analytics for Fraud Management and Consumer Protection) to identify all mobile connections registered against your Aadhaar/ID, and CEIR (Central Equipment Identity Register) to block lost or stolen mobile handsets across all Indian telecom networks.",
-    "actionable_guidance": "Visit https://sancharsaathi.gov.in regularly. Check TAFCOP to disconnect unauthorized mobile numbers issued in your name, and use CEIR to blacklist lost device IMEIs."
+    "actionable_guidance": "Visit https://sancharsaathi.gov.in regularly. Check TAFCOP to disconnect unauthorized mobile numbers issued in your name, and use CEIR to blacklist lost device IMEIs.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_sms_header_trai_dlt",
@@ -553,7 +624,8 @@
       "ax-hdfc"
     ],
     "content": "Under TRAI regulations, commercial and transactional SMS from registered Indian banks and enterprises MUST use registered 6-character alphabetic headers preceded by telecom routing codes (e.g., `AD-SBIINB`, `VK-HDFCBK`, `BZ-AXISBK`). Legitimate banks NEVER send transactional alerts, KYC warnings, or OTPs from ordinary 10-digit mobile numbers (e.g., `+91 98765 43210`).",
-    "actionable_guidance": "Any SMS claiming to be from a bank, electricity board, or government agency that originates from a standard 10-digit mobile number is an illegal, unverified transmission and must be treated as a scam."
+    "actionable_guidance": "Any SMS claiming to be from a bank, electricity board, or government agency that originates from a standard 10-digit mobile number is an illegal, unverified transmission and must be treated as a scam.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_official_gov_domains",
@@ -569,7 +641,8 @@
       "tld"
     ],
     "content": "Official Indian government portals are strictly provisioned on `.gov.in` or `.nic.in` top-level domains by the National Informatics Centre (NIC). Private TLDs like `.com`, `.org`, `.xyz`, or `.top` can NEVER be genuine Indian government portals, regardless of what subdomains they use (e.g., `incometax.gov.in.portal-refund.com` is an external phishing host owned by `portal-refund.com`).",
-    "actionable_guidance": "Look at the domain immediately preceding the final top-level extension. If it does not end in `.gov.in` or the exact official bank domain (e.g. `sbi.co.in`, `hdfcbank.com`), do not enter any credentials."
+    "actionable_guidance": "Look at the domain immediately preceding the final top-level extension. If it does not end in `.gov.in` or the exact official bank domain (e.g. `sbi.co.in`, `hdfcbank.com`), do not enter any credentials.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_punycode_homograph_attacks",
@@ -585,7 +658,8 @@
       "phishing"
     ],
     "content": "Attackers register domain names using Cyrillic or Greek characters that look visually identical to Latin letters (e.g., Cyrillic 'а' vs Latin 'a'). In browsers, these domains resolve to Punycode starting with `xn--` (e.g., `xn--sb-e1a.co.in`). To the human eye, the link looks like the real bank, but it directs traffic to an adversary's server.",
-    "actionable_guidance": "Check browser address bars carefully for `xn--` prefixes. Use password managers that enforce strict domain origin binding and refuse to auto-fill credentials on homograph spoof domains."
+    "actionable_guidance": "Check browser address bars carefully for `xn--` prefixes. Use password managers that enforce strict domain origin binding and refuse to auto-fill credentials on homograph spoof domains.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_https_lock_misconception",
@@ -601,7 +675,8 @@
       "phishing"
     ],
     "content": "A common misconception is that a website with a padlock icon (`https://`) is legitimate and safe. Today, over 80% of phishing websites use free, automated SSL certificates (e.g., Let's Encrypt). The HTTPS padlock only means the connection between your device and the server is encrypted; it DOES NOT verify that the owner of the server is a legitimate bank or merchant.",
-    "actionable_guidance": "Never rely solely on the padlock icon to judge website legitimacy. Verify the exact spelled domain name and look for official domain registration."
+    "actionable_guidance": "Never rely solely on the padlock icon to judge website legitimacy. Verify the exact spelled domain name and look for official domain registration.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_apk_sideloading_malware",
@@ -617,7 +692,8 @@
       "accessibility service"
     ],
     "content": "Fraudsters share direct APK files via WhatsApp or Telegram with names like `SBI_Yono_Update.apk`, `PM_Kisan_Verification.apk`, or `Electricity_Bill_Receipt.apk`. Once sideloaded, these apps request 'Accessibility Service' and 'SMS Read/Receive' permissions. With Accessibility permissions, the malware can bypass screen locks, read 2FA SMS OTPs, and perform background fund transfers without the user's knowledge.",
-    "actionable_guidance": "NEVER install `.apk` files received over WhatsApp, Telegram, or third-party download sites. Disable 'Install unknown apps' in Android settings. Ensure Google Play Protect is enabled on your device."
+    "actionable_guidance": "NEVER install `.apk` files received over WhatsApp, Telegram, or third-party download sites. Disable 'Install unknown apps' in Android settings. Ensure Google Play Protect is enabled on your device.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_accessibility_permission_risks",
@@ -633,7 +709,8 @@
       "android"
     ],
     "content": "Android's Accessibility Service is designed to assist users with disabilities by allowing apps to inspect the screen and interact with UI elements. Banking trojans abuse this service to log keystrokes, capture banking passwords, prevent uninstallation of the malware, and automatically dismiss security prompts.",
-    "actionable_guidance": "Regularly audit your device settings: Settings > Accessibility > Installed apps. If any unfamiliar application has accessibility permissions enabled, revoke it immediately and boot into Safe Mode to uninstall."
+    "actionable_guidance": "Regularly audit your device settings: Settings > Accessibility > Installed apps. If any unfamiliar application has accessibility permissions enabled, revoke it immediately and boot into Safe Mode to uninstall.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_urgency_panic_coercion",
@@ -649,7 +726,8 @@
       "time pressure"
     ],
     "content": "Almost all financial scams exploit an induced state of panic (amygdala hijack) through artificial time pressure: 'Your account will be suspended in 2 hours', 'Power disconnected tonight at 9 PM', 'Police FIR registered against your name'. High emotional arousal inhibits rational analytical thinking, making victims overlook blatant warning signs and willingly execute irrational instructions.",
-    "actionable_guidance": "Rule of 10 Minutes: Whenever a message or caller demands urgent action regarding money or account blocking, deliberately wait 10 minutes. Legitimate institutions never require immediate action within minutes without prior written notice."
+    "actionable_guidance": "Rule of 10 Minutes: Whenever a message or caller demands urgent action regarding money or account blocking, deliberately wait 10 minutes. Legitimate institutions never require immediate action within minutes without prior written notice.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_authority_impersonation",
@@ -666,7 +744,8 @@
       "fear"
     ],
     "content": "Scammers exploit deep-seated respect for and fear of authority by impersonating law enforcement officers, judges, customs agents, or RBI officials. They use formal jargon ('Statutory Notice', 'Non-Bailable Warrant', 'Narcotics Control Bureau Docket'), display counterfeit badges, and threaten severe penal consequences to coerce compliance.",
-    "actionable_guidance": "Remember: Genuine police officers or government officials do not conduct investigations or demand financial settlement over video calls. Demand physical service of legal summons and consult a certified legal advisor or your local police station."
+    "actionable_guidance": "Remember: Genuine police officers or government officials do not conduct investigations or demand financial settlement over video calls. Demand physical service of legal summons and consult a certified legal advisor or your local police station.",
+    "official_url": "https://www.rbi.org.in"
   },
   {
     "id": "kb_elderly_financial_protection",
@@ -682,7 +761,8 @@
       "audio alerts"
     ],
     "content": "Senior citizens are disproportionately targeted by digital financial scams due to unfamiliarity with modern UI flows, fear of losing pensions, and trusting nature. Common attack vectors include pension account KYC renewal scams, utility bill threats, and remote access helpdesk tricks.",
-    "actionable_guidance": "1. Set low daily UPI transaction limits (e.g. Rs. 2,000 - 5,000) for elderly family members. 2. Enable SMS and WhatsApp transaction alerts to a trusted co-family member. 3. Teach elderly relatives: 'Never read out numbers received via SMS to any caller'."
+    "actionable_guidance": "1. Set low daily UPI transaction limits (e.g. Rs. 2,000 - 5,000) for elderly family members. 2. Enable SMS and WhatsApp transaction alerts to a trusted co-family member. 3. Teach elderly relatives: 'Never read out numbers received via SMS to any caller'.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_vpa_safetocheck_guide",
@@ -697,7 +777,8 @@
       "pre-payment"
     ],
     "content": "Before transferring funds to any unfamiliar UPI ID (especially from social media, freelance gigs, or marketplaces), verify the payee's registered banking name. In UPI apps, entering a VPA retrieves the official bank-linked name from NPCI's central database.",
-    "actionable_guidance": "Ensure the displayed registered name strictly matches the individual or legal entity you intend to pay. If an online shop asks you to pay a personal savings handle (e.g., `ramesh123@ybl`) instead of a registered merchant handle, suspect a fraud."
+    "actionable_guidance": "Ensure the displayed registered name strictly matches the individual or legal entity you intend to pay. If an online shop asks you to pay a personal savings handle (e.g., `ramesh123@ybl`) instead of a registered merchant handle, suspect a fraud.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_matrimonial_dating_pig_butchering",
@@ -714,7 +795,8 @@
       "crypto"
     ],
     "content": "Fraudsters create attractive profiles on matrimonial portals or dating apps claiming to be doctors, NRI engineers, or defense personnel based in the UK, USA, or Dubai. After establishing emotional attachment over weeks of messaging, the scammer claims to send expensive gifts (jewelry, foreign currency, designer watches). Soon, a fake 'Customs Officer' calls demanding duty fees to clear the parcel at Delhi/Mumbai airport, continuing with escalated demands.",
-    "actionable_guidance": "Never send money to someone you have only met online. Legitimate customs authorities never contact citizens on WhatsApp asking for fee transfers to personal bank accounts."
+    "actionable_guidance": "Never send money to someone you have only met online. Legitimate customs authorities never contact citizens on WhatsApp asking for fee transfers to personal bank accounts.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_fake_toll_fastag_scam",
@@ -730,7 +812,8 @@
       "blacklisted"
     ],
     "content": "Scammers exploit NHAI's 'One Vehicle One FASTag' rules by sending SMS warnings: 'Your FASTag KYC has expired, your vehicle tag will be blacklisted on national highways within 12 hours. Update immediately at [phishing link]'. The link mimics bank FASTag portals and captures vehicle numbers, OTPs, and UPI credentials.",
-    "actionable_guidance": "Update FASTag KYC solely through the official website of your issuing bank or the official Indian Highway Management Company portal (`ihmcl.co.in`)."
+    "actionable_guidance": "Update FASTag KYC solely through the official website of your issuing bank or the official Indian Highway Management Company portal (`ihmcl.co.in`).",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_challan_traffic_phishing",
@@ -746,7 +829,8 @@
       "parivahan"
     ],
     "content": "Car owners receive alarming SMS messages stating: 'Traffic Police Notice: You have 1 unpaid pending e-challan of Rs. 1,000 for speed violation. Pay today to avoid court summons: [fake link e.g. `echallan-parivahan.in.net`]'. The fake payment gateway steals credit card details or triggers unauthorized UPI mandates.",
-    "actionable_guidance": "Verify and pay traffic challans exclusively on the official Ministry of Road Transport portal: `echallan.parivahan.gov.in`. Never open unofficial links received via SMS."
+    "actionable_guidance": "Verify and pay traffic challans exclusively on the official Ministry of Road Transport portal: `echallan.parivahan.gov.in`. Never open unofficial links received via SMS.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_courier_delivery_failed_scam",
@@ -762,7 +846,8 @@
       "5 rupees"
     ],
     "content": "Victims receive SMS claiming: 'India Post: Your package cannot be delivered because your street address is missing. Update address within 24 hours to avoid return: [phishing link]'. The website prompts for address and a token 're-delivery fee of Rs. 5 or Rs. 25'. When the victim enters card details and OTP, scammers execute unauthorized debits for thousands of rupees.",
-    "actionable_guidance": "India Post never sends SMS links to update delivery addresses or demands online re-delivery fees. Track packages strictly on `indiapost.gov.in` using your consignment number."
+    "actionable_guidance": "India Post never sends SMS links to update delivery addresses or demands online re-delivery fees. Track packages strictly on `indiapost.gov.in` using your consignment number.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_fake_credit_card_reward_points",
@@ -778,7 +863,8 @@
       "sbi card"
     ],
     "content": "Customers receive SMS claiming: 'Dear Customer, your 8,500 Reward Points worth Rs. 4,250 expire today. Redeem cash directly to your bank account: [phishing link]'. The link opens a fake redemption page that captures full 16-digit card number, CVV, expiry date, and net banking credentials to drain the card limit.",
-    "actionable_guidance": "Credit card reward points are redeemed exclusively inside official mobile banking apps or through official reward portals. Banks never redeem reward points as direct cash transfers via SMS links."
+    "actionable_guidance": "Credit card reward points are redeemed exclusively inside official mobile banking apps or through official reward portals. Banks never redeem reward points as direct cash transfers via SMS links.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_telecom_5g_sim_upgrade_scam",
@@ -796,7 +882,8 @@
       "deactivation"
     ],
     "content": "Attackers call subscribers claiming their 4G SIM card will be deactivated due to mandatory government 5G upgrades. They send an SMS containing a porting code or an e-SIM activation request and instruct the victim to forward it to 121 or 1900. By doing so, the victim unwittingly transfers their phone number to the attacker's device.",
-    "actionable_guidance": "5G services on Airtel and Jio work automatically on existing 4G SIMs without any manual code forwarding or SIM replacement. Never forward SIM-related SMS or OTPs to unknown numbers."
+    "actionable_guidance": "5G services on Airtel and Jio work automatically on existing 4G SIMs without any manual code forwarding or SIM replacement. Never forward SIM-related SMS or OTPs to unknown numbers.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_fake_charity_disaster_relief",
@@ -813,7 +900,8 @@
       "crowdfunding"
     ],
     "content": "During natural disasters (floods, earthquakes) or viral medical appeals, scammers create fake donation websites and UPI QR codes mimicking legitimate relief funds (e.g. `pmcares@upi.fake`, fake Red Cross handles). Funds collected are diverted to private mule accounts.",
-    "actionable_guidance": "Donate only through verified national portals (such as official `pmcares.gov.in` or chief minister relief funds ending in `.gov.in`). Always inspect the payee name before approving donation transfers."
+    "actionable_guidance": "Donate only through verified national portals (such as official `pmcares.gov.in` or chief minister relief funds ending in `.gov.in`). Always inspect the payee name before approving donation transfers.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_fake_tech_support_popups",
@@ -829,7 +917,8 @@
       "toll free"
     ],
     "content": "While browsing the web, users encounter deceptive fullscreen pop-ups that simulate a crashed computer with loud siren audio: 'CRITICAL ALERT: Your computer has been locked by Windows Defender due to spyware. Call Microsoft Support at 1800-XXX-XXXX'. Callers instruct victims to install remote desktop tools to 'clean the virus' and demand payment via UPI or gift cards.",
-    "actionable_guidance": "Microsoft, Apple, and Google never show fullscreen browser alerts with phone numbers to call. Simply close the browser tab or terminate the browser process via Task Manager (Ctrl+Shift+Esc)."
+    "actionable_guidance": "Microsoft, Apple, and Google never show fullscreen browser alerts with phone numbers to call. Simply close the browser tab or terminate the browser process via Task Manager (Ctrl+Shift+Esc).",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_mule_account_legal_peril",
@@ -845,7 +934,8 @@
       "legal risk"
     ],
     "content": "Students and job seekers are lured by social media offers to 'earn Rs. 1,000/day by renting your bank account or UPI ID for crypto transactions'. In reality, these accounts receive stolen funds from cyber scams. Under PMLA and Section 420 of the IPC, the account holder is legally recognized as a co-conspirator to fraud, leading to freezing of all personal accounts and non-bailable arrest.",
-    "actionable_guidance": "Never lend your bank account, debit card, or UPI credentials to anyone, regardless of financial promises. You are legally responsible for all transactions originating from or terminating in your account."
+    "actionable_guidance": "Never lend your bank account, debit card, or UPI credentials to anyone, regardless of financial promises. You are legally responsible for all transactions originating from or terminating in your account.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_corporate_email_compromise_bec",
@@ -861,7 +951,8 @@
       "corporate"
     ],
     "content": "Attackers compromise an executive or vendor email account and send modified invoices instructing the accounts team to route upcoming payments to a 'new updated UPI ID or bank account' due to banking audits. Millions are transferred before anyone notices the email domain had a 1-character typo.",
-    "actionable_guidance": "Establish a mandatory two-channel verification policy for any change in vendor payment details or bank accounts. Confirm all bank detail changes via a phone call to a known, pre-established trusted phone number."
+    "actionable_guidance": "Establish a mandatory two-channel verification policy for any change in vendor payment details or bank accounts. Confirm all bank detail changes via a phone call to a known, pre-established trusted phone number.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_whatsapp_pink_malware",
@@ -877,7 +968,8 @@
       "contacts"
     ],
     "content": "Viral links claim to offer an exclusive 'WhatsApp Pink' update with new features and a pink theme. The downloaded APK is an aggressive mobile trojan that hijacks the user's WhatsApp session, sends auto-replies with malicious download links to all phone contacts, and steals saved photos and banking credentials.",
-    "actionable_guidance": "Use only official WhatsApp Messenger downloaded from the Google Play Store or Apple App Store. Never install unofficial mods (GBWhatsApp, WhatsApp Plus, WhatsApp Pink)."
+    "actionable_guidance": "Use only official WhatsApp Messenger downloaded from the Google Play Store or Apple App Store. Never install unofficial mods (GBWhatsApp, WhatsApp Plus, WhatsApp Pink).",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_ai_voice_clone_scam",
@@ -893,7 +985,8 @@
       "family emergency"
     ],
     "content": "Using short audio clips scraped from public Instagram reels, YouTube videos, or LinkedIn profiles, scammers use AI generative voice cloning tools to replicate the voice of a family member (son, daughter, grandchild). The scammer calls parents claiming: 'Dad, I was involved in a severe car crash / arrested by police, please transfer Rs. 50,000 urgently to this UPI ID'.",
-    "actionable_guidance": "Always establish a secret 'Family Safe Word' that only close family members know. Before transferring money, hang up and call your family member directly on their known regular phone number or video call them."
+    "actionable_guidance": "Always establish a secret 'Family Safe Word' that only close family members know. Before transferring money, hang up and call your family member directly on their known regular phone number or video call them.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_qr_tampering_physical_stores",
@@ -909,7 +1002,8 @@
       "standee"
     ],
     "content": "Fraudsters visit crowded physical retail shops or street vendors and secretly paste their own printed QR code sticker over the shopkeeper's genuine UPI QR standee. Customers scanning the QR code unknowingly send payments to the scammer's mule account instead of the shopkeeper.",
-    "actionable_guidance": "Merchants should use secure acrylic standees and check their physical QR codes daily. Customers should confirm the name announced by the Soundbox matches the merchant."
+    "actionable_guidance": "Merchants should use secure acrylic standees and check their physical QR codes daily. Customers should confirm the name announced by the Soundbox matches the merchant.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_upi_number_lookup_privacy",
@@ -924,7 +1018,8 @@
       "privacy"
     ],
     "content": "NPCI enables payments directly to a 10-digit mobile number linked across multiple UPI apps. If you switch from one UPI app to another, ensure your preferred bank account is set as primary in the central NPCI mapper so that incoming funds land in your intended account.",
-    "actionable_guidance": "Periodically review default receiving accounts in your primary UPI application to prevent fund routing confusion."
+    "actionable_guidance": "Periodically review default receiving accounts in your primary UPI application to prevent fund routing confusion.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_aadhaar_biometric_lock",
@@ -940,7 +1035,8 @@
       "maadhaar"
     ],
     "content": "Aadhaar-enabled Payment System (AePS) allows cash withdrawals and balance transfers using only Aadhaar number and fingerprint authentication. Scammers obtain land registry documents containing fingerprints and conduct unauthorized AePS cash withdrawals. Locking biometrics on the UIDAI portal completely prevents unauthorized AePS debits.",
-    "actionable_guidance": "Download the official mAadhaar app or visit `resident.uidai.gov.in`. Enable 'Lock Biometrics'. Unlock it temporarily only when visiting a bank or government office for verification."
+    "actionable_guidance": "Download the official mAadhaar app or visit `resident.uidai.gov.in`. Enable 'Lock Biometrics'. Unlock it temporarily only when visiting a bank or government office for verification.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_two_factor_auth_hygiene",
@@ -956,7 +1052,8 @@
       "hardware key"
     ],
     "content": "While SMS OTP is the default 2FA mechanism in India, it is vulnerable to SIM swap, malware, and social engineering. Whenever supported by banks and email providers, software-based Time-based One-Time Password (TOTP) apps (Google Authenticator, Microsoft Authenticator) provide superior protection because codes cannot be intercepted over cellular networks.",
-    "actionable_guidance": "Enable authenticator app-based 2FA for all primary email accounts and financial recovery portals. Protect your email account securely, as password resets route to it."
+    "actionable_guidance": "Enable authenticator app-based 2FA for all primary email accounts and financial recovery portals. Protect your email account securely, as password resets route to it.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_safe_browsing_dns",
@@ -972,7 +1069,8 @@
       "router"
     ],
     "content": "Protective DNS resolvers (such as Cloudflare Families `1.1.1.2` or Quad9 `9.9.9.9`) automatically block resolution of newly registered phishing domains, malware distribution hosts, and known malicious command-and-control servers at the network boundary before pages load.",
-    "actionable_guidance": "Configure protective DNS (e.g. Quad9: 9.9.9.9 or Cloudflare: 1.1.1.2) on home Wi-Fi routers and mobile devices to automatically block malicious phishing domains."
+    "actionable_guidance": "Configure protective DNS (e.g. Quad9: 9.9.9.9 or Cloudflare: 1.1.1.2) on home Wi-Fi routers and mobile devices to automatically block malicious phishing domains.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_app_permissions_audit",
@@ -989,7 +1087,8 @@
       "contacts"
     ],
     "content": "Under data minimization principles, UPI apps require SMS access (only during initial SIM binding) and Camera (for scanning QR codes). A payment application NEVER requires access to your Contacts list, Microphone, or continuous background location to process payments.",
-    "actionable_guidance": "Review app permissions: Settings > Apps > Permissions. Change sensitive permissions (Camera, Location) to 'Ask every time' or 'While using app'. Revoke SMS and Contact access for apps that do not strictly require them."
+    "actionable_guidance": "Review app permissions: Settings > Apps > Permissions. Change sensitive permissions (Camera, Location) to 'Ask every time' or 'While using app'. Revoke SMS and Contact access for apps that do not strictly require them.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_virtual_credit_cards_tokenization",
@@ -1005,7 +1104,8 @@
       "data security"
     ],
     "content": "Under RBI's Card-on-File Tokenization (CoFT) mandate, merchants cannot store your actual 16-digit debit or credit card number. Instead, they store a secure cryptographic token unique to the merchant. This ensures that even if an e-commerce platform suffers a database breach, your real card credentials cannot be compromised.",
-    "actionable_guidance": "Always tokenize your payment cards when prompted on trusted merchant apps. For one-off purchases on less familiar websites, generate a single-use virtual card through your bank app."
+    "actionable_guidance": "Always tokenize your payment cards when prompted on trusted merchant apps. For one-off purchases on less familiar websites, generate a single-use virtual card through your bank app.",
+    "official_url": "https://www.rbi.org.in"
   },
   {
     "id": "kb_public_wifi_payment_risks",
@@ -1021,7 +1121,8 @@
       "vpn"
     ],
     "content": "Unencrypted public Wi-Fi networks at airports, railway stations, and cafes are susceptible to 'Evil Twin' access points and Man-in-the-Middle (MITM) snooping attacks. Rogue access points can redirect DNS queries to phishing portals or capture unencrypted traffic.",
-    "actionable_guidance": "Never execute UPI payments, NetBanking logins, or credit card checkouts on free public Wi-Fi. Turn off Wi-Fi and use your cellular mobile data (4G/5G) for all financial transactions."
+    "actionable_guidance": "Never execute UPI payments, NetBanking logins, or credit card checkouts on free public Wi-Fi. Turn off Wi-Fi and use your cellular mobile data (4G/5G) for all financial transactions.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_soundbox_merchant_assurance",
@@ -1036,7 +1137,8 @@
       "audio alert"
     ],
     "content": "Fraudsters trick shopkeepers by showing spoof payment apps (like 'Paytm Spoof') that produce animated fake success screens on the customer's phone without transferring real funds. Hardware Soundbox devices (Paytm, PhonePe, BharatPe) announce real-time payment confirmation directly from the bank gateway.",
-    "actionable_guidance": "Merchants should never rely on viewing the customer's phone screen for proof of payment. Only dispense merchandise when your own phone receives the bank SMS or your official Soundbox announces the receipt."
+    "actionable_guidance": "Merchants should never rely on viewing the customer's phone screen for proof of payment. Only dispense merchandise when your own phone receives the bank SMS or your official Soundbox announces the receipt.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_tax_refund_it_department_scam",
@@ -1052,7 +1154,8 @@
       "bank refund"
     ],
     "content": "During tax filing season, taxpayers receive fraudulent SMS alerts: 'Dear Taxpayer, an Income Tax refund of Rs. 15,490 has been approved. It will be credited to your account shortly. Confirm your bank details here: [phishing link]'. The phishing link prompts for net banking credentials and debit card PIN under the pretense of 'depositing' the refund.",
-    "actionable_guidance": "The Income Tax Department NEVER sends direct SMS links requesting bank credentials or PINs to deposit refunds. All genuine refunds are automatically credited via ECS to the bank account pre-validated on `incometax.gov.in`."
+    "actionable_guidance": "The Income Tax Department NEVER sends direct SMS links requesting bank credentials or PINs to deposit refunds. All genuine refunds are automatically credited via ECS to the bank account pre-validated on `incometax.gov.in`.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_job_offer_letter_stamp_scam",
@@ -1068,7 +1171,8 @@
       "security deposit"
     ],
     "content": "Job seekers receive fake appointment letters on counterfeit letterheads of major IT firms (TCS, Infosys, Wipro) or airlines. The letter demands an upfront 'refundable security deposit', 'laptop courier fee', or 'medical examination charge' (Rs. 5,000 - 25,000) payable via UPI.",
-    "actionable_guidance": "Top corporate employers in India strictly adhere to a zero-recruitment-fee policy. No genuine company demands money for job applications, interviews, or laptop security deposits."
+    "actionable_guidance": "Top corporate employers in India strictly adhere to a zero-recruitment-fee policy. No genuine company demands money for job applications, interviews, or laptop security deposits.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_customs_gift_extortion_scam",
@@ -1084,7 +1188,8 @@
       "delhi airport"
     ],
     "content": "Fraudsters pretending to be foreign friends or lovers send messages stating they have dispatched a gift box containing expensive smartphones, gold, or foreign currency. A fake 'Customs Clearance Officer' at Mumbai/Delhi airport calls demanding 'anti-money laundering clearance fees' or 'customs duties' paid into private savings accounts.",
-    "actionable_guidance": "Official customs duties can ONLY be paid to government treasury accounts via the official ICEGATE portal (`icegate.gov.in`). Indian Customs NEVER instructs travelers or recipients to pay duties to personal savings accounts."
+    "actionable_guidance": "Official customs duties can ONLY be paid to government treasury accounts via the official ICEGATE portal (`icegate.gov.in`). Indian Customs NEVER instructs travelers or recipients to pay duties to personal savings accounts.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_sim_card_block_threat_telecom",
@@ -1100,7 +1205,8 @@
       "ivr"
     ],
     "content": "Citizens receive automated Interactive Voice Response (IVR) calls claiming: 'This is the Department of Telecommunications. All your mobile numbers will be disconnected in 2 hours due to illegal advertisements. Press 9 to speak with an executive'. Victims are transferred to scammers who intimidate them with fabricated police warrants.",
-    "actionable_guidance": "DoT NEVER initiates automated calls threatening sudden disconnection of mobile connections. Disconnect the call and report the caller number on the Chakshu portal at sancharsaathi.gov.in."
+    "actionable_guidance": "DoT NEVER initiates automated calls threatening sudden disconnection of mobile connections. Disconnect the call and report the caller number on the Chakshu portal at sancharsaathi.gov.in.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_chakshu_reporting_portal",
@@ -1116,7 +1222,8 @@
       "telecom"
     ],
     "content": "Chakshu is a dedicated national platform under Sanchar Saathi for citizens to report suspected fraud communications received via Calls, SMS, or WhatsApp (such as fake KYC, lottery, lottery prizes, fake customer care, or impersonation of DoT officials). Reporting helps telecom operators proactively blacklist fraudulent numbers across India.",
-    "actionable_guidance": "Report spam/fraud SMS and callers at `sancharsaathi.gov.in/sfc/` (Chakshu). You do not need to be a financial fraud victim to report; reporting proactive attempts protects others."
+    "actionable_guidance": "Report spam/fraud SMS and callers at `sancharsaathi.gov.in/sfc/` (Chakshu). You do not need to be a financial fraud victim to report; reporting proactive attempts protects others.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_cyber_hygiene_passwords",
@@ -1131,7 +1238,8 @@
       "security"
     ],
     "content": "Over 25% of compromised UPI PINs consist of predictable patterns: birth year (1998), repetitive digits (1111, 0000), sequential numbers (1234, 4321), or vehicle registration numbers. If an attacker gains physical or remote access to a device, predictable PINs can be brute-forced within allowable retry limits.",
-    "actionable_guidance": "Never use birth dates, vehicle numbers, or repeated digits as your UPI PIN or banking passwords. Choose non-obvious random 4- or 6-digit combinations and avoid writing PINs on cards."
+    "actionable_guidance": "Never use birth dates, vehicle numbers, or repeated digits as your UPI PIN or banking passwords. Choose non-obvious random 4- or 6-digit combinations and avoid writing PINs on cards.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_credit_score_loan_trap",
@@ -1147,7 +1255,8 @@
       "advance fee"
     ],
     "content": "Scammers claim they can 'cleanse negative remarks' or 'instantly increase your CIBIL score to 800+' in exchange for an upfront fee of Rs. 3,000 - 10,000. Under RBI regulations, credit scores are computed algorithmically based purely on repayment history submitted directly by banks; no third party can artificially alter credit bureau records.",
-    "actionable_guidance": "Do not pay anyone claiming to fix your CIBIL score. Check your authentic credit report once a year for free directly on official bureau websites (`cibil.com`, `experian.in`)."
+    "actionable_guidance": "Do not pay anyone claiming to fix your CIBIL score. Check your authentic credit report once a year for free directly on official bureau websites (`cibil.com`, `experian.in`).",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_fake_ipo_allotment_scam",
@@ -1163,7 +1272,8 @@
       "institutional quota"
     ],
     "content": "Fraudsters create WhatsApp and Instagram investment groups claiming to offer 'Guaranteed Pre-Allotment of Oversubscribed IPOs' through institutional or FII quotas. Victims are instructed to transfer money via UPI to private accounts rather than applying through legitimate ASBA (Application Supported by Blocked Amount) via their registered demat brokers.",
-    "actionable_guidance": "IPO applications in India MUST be made exclusively through SEBI-registered brokers using ASBA (where money stays in your bank account until allotment). Never transfer funds to private UPI IDs for IPO shares."
+    "actionable_guidance": "IPO applications in India MUST be made exclusively through SEBI-registered brokers using ASBA (where money stays in your bank account until allotment). Never transfer funds to private UPI IDs for IPO shares.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_fake_courier_damage_insurance",
@@ -1178,7 +1288,8 @@
       "collect request"
     ],
     "content": "Attackers monitor Twitter/X complaints where users tag delivery services (DTDC, Delhivery, Amazon) regarding delayed parcels. The scammer contacts the user pretending to be logistics escalation managers, offering Rs. 2,000 compensation for delivery delay. They send a UPI collect request claiming 'Accept this collect request to credit your compensation'.",
-    "actionable_guidance": "Never accept collect requests for compensation or refunds. Customer support interactions initiated on social media must always be verified via the official application."
+    "actionable_guidance": "Never accept collect requests for compensation or refunds. Customer support interactions initiated on social media must always be verified via the official application.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_sim_binding_device_security",
@@ -1193,7 +1304,8 @@
       "npci"
     ],
     "content": "UPI apps use cryptographic device binding: the app sends an encrypted SMS from the registered SIM card to verify that the physical SIM is inside the handset. If an attacker copies your app credentials or clones your phone storage, they cannot transact on another phone without the physical SIM card.",
-    "actionable_guidance": "In dual-SIM phones, always ensure the mobile number linked to your bank account is designated correctly for outgoing SMS. Never share SIM-verification SMS tokens."
+    "actionable_guidance": "In dual-SIM phones, always ensure the mobile number linked to your bank account is designated correctly for outgoing SMS. Never share SIM-verification SMS tokens.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_bank_canara_fraud_protocol",
@@ -1208,7 +1320,8 @@
       "hotlisting"
     ],
     "content": "Canara Bank official domain is `canarabank.com`. 24x7 toll-free fraud helpline numbers are 1800 425 0018 and 1800 103 0018. Customers can hotlist Canara debit cards via SMS by sending 'CAN (space) HOTLISTDC (space) <16 digit Card Number>' to 9266623333.",
-    "actionable_guidance": "Report unauthorized Canara transactions immediately to 1800 425 0018 or email posndc@canarabank.com."
+    "actionable_guidance": "Report unauthorized Canara transactions immediately to 1800 425 0018 or email posndc@canarabank.com.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_bank_bob_fraud_protocol",
@@ -1223,7 +1336,8 @@
       "bankofbaroda.in"
     ],
     "content": "Bank of Baroda official domain is `bankofbaroda.in`. 24x7 customer care and fraud helpline numbers are 1800 258 4455 and 1800 102 4455. To instantly block your BOB Debit Card via SMS, send 'BLOCK <Last 4 digits>' to 8422009988 from your registered mobile number.",
-    "actionable_guidance": "Call 1800 258 4455 or email cbscardfraud@bankofbaroda.com immediately upon noticing unauthorized debits."
+    "actionable_guidance": "Call 1800 258 4455 or email cbscardfraud@bankofbaroda.com immediately upon noticing unauthorized debits.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_bank_indusind_fraud_protocol",
@@ -1238,7 +1352,8 @@
       "fraud desk"
     ],
     "content": "IndusInd Bank operates on `indusind.com`. The 24x7 fraud prevention desk can be reached at 1860 267 7777 and 1800 209 0061. To block your IndusInd debit card, send SMS 'HOT <Last 4 digits of card>' to 9223766666.",
-    "actionable_guidance": "Report phishing links or unauthorized debits to 1800 209 0061 or reach.us@indusind.com."
+    "actionable_guidance": "Report phishing links or unauthorized debits to 1800 209 0061 or reach.us@indusind.com.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_bank_union_fraud_protocol",
@@ -1253,7 +1368,8 @@
       "hotlist"
     ],
     "content": "Union Bank of India official domain is `unionbankofindia.co.in`. National 24x7 toll-free support numbers are 1800 22 22 44 and 1800 208 2244. To block your debit card via SMS, send 'BLOCK <16 digit Card No>' to 09223008486.",
-    "actionable_guidance": "Report phishing incidents immediately to 1800 22 22 44 or customercare@unionbankofindia.bank."
+    "actionable_guidance": "Report phishing incidents immediately to 1800 22 22 44 or customercare@unionbankofindia.bank.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_fake_crypto_arbitrage_bot",
@@ -1269,7 +1385,8 @@
       "smart contract"
     ],
     "content": "Scammers convince victims to deposit USDT or Bitcoin into simulated trading platforms promising '3% daily guaranteed returns through AI arbitrage bots'. The dashboard displays fictitious skyrocketing balances. When the victim attempts a withdrawal, the site blocks access, demanding a 20% 'IRS Tax' or 'Smart Contract Gas Fee' deposit.",
-    "actionable_guidance": "Guaranteed daily returns in cryptocurrency trading are impossible. Never deposit funds into non-registered offshore crypto exchanges or unknown Web3 wallet links."
+    "actionable_guidance": "Guaranteed daily returns in cryptocurrency trading are impossible. Never deposit funds into non-registered offshore crypto exchanges or unknown Web3 wallet links.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_fake_toll_plaza_cashback",
@@ -1284,7 +1401,8 @@
       "collect trick"
     ],
     "content": "Motorists receive text messages claiming double deduction occurred at a highway toll plaza and offering an instant refund of Rs. 150: 'Toll refund pending. Click to collect: upi://pay?...'. The link actually triggers an outbound debit collect request.",
-    "actionable_guidance": "Toll dispute refunds are processed automatically back into your FASTag wallet by your issuing bank without customer intervention. Never accept payment requests to receive refunds."
+    "actionable_guidance": "Toll dispute refunds are processed automatically back into your FASTag wallet by your issuing bank without customer intervention. Never accept payment requests to receive refunds.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_pension_life_certificate_scam",
@@ -1300,7 +1418,8 @@
       "dlc"
     ],
     "content": "Elderly pensioners receive calls claiming their monthly pension will stop unless they update their Digital Life Certificate over the phone. Callers ask for NetBanking credentials or instruct seniors to download remote screen sharing apps.",
-    "actionable_guidance": "Submit Jeevan Pramaan exclusively through the official government portal `jeevanpramaan.gov.in`, authorized post offices, or your home bank branch. Government officials never ask for OTPs or screen sharing."
+    "actionable_guidance": "Submit Jeevan Pramaan exclusively through the official government portal `jeevanpramaan.gov.in`, authorized post offices, or your home bank branch. Government officials never ask for OTPs or screen sharing.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_screen_lock_pattern_security",
@@ -1315,7 +1434,8 @@
       "device theft"
     ],
     "content": "Shoulder surfing occurs when a bystander memorizes your screen lock PIN or pattern in public transport or cafes, steals your device, and uses the lock code to reset your UPI PIN and bank accounts.",
-    "actionable_guidance": "Use fingerprint or face recognition alongside complex alphanumeric lock codes rather than simple 4-digit PINs or visible smudge-prone patterns. Conceal your screen when entering banking credentials in public."
+    "actionable_guidance": "Use fingerprint or face recognition alongside complex alphanumeric lock codes rather than simple 4-digit PINs or visible smudge-prone patterns. Conceal your screen when entering banking credentials in public.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_fake_customs_arrest_threat_bail",
@@ -1331,7 +1451,8 @@
       "lawyer"
     ],
     "content": "Fraudsters email forged court summons bearing the emblem of the High Court or Supreme Court, claiming non-bailable arrest warrants have been issued for money laundering. An accomplice posing as an 'authorized court advocate' offers to arrange 'emergency online anticipatory bail' if Rs. 1,00,000 is sent via UPI.",
-    "actionable_guidance": "Indian courts DO NOT issue arrest warrants or grant anticipatory bail over email or WhatsApp UPI transfers. Check genuine case status strictly on the official National Judicial Data Grid (`njdg.ecourts.gov.in`)."
+    "actionable_guidance": "Indian courts DO NOT issue arrest warrants or grant anticipatory bail over email or WhatsApp UPI transfers. Check genuine case status strictly on the official National Judicial Data Grid (`njdg.ecourts.gov.in`).",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_airline_ticket_cancellation_refund",
@@ -1347,7 +1468,8 @@
       "fake customer care"
     ],
     "content": "When flights are delayed or cancelled, desperate travelers search Google for airline helpline numbers and reach fake scammer call centers running sponsored Google Ads. The fake agent instructs the passenger to download AnyDesk or pay a 'Rs. 10 rescheduling fee' via UPI, subsequently draining their accounts.",
-    "actionable_guidance": "Only contact airlines through their verified apps or websites. Never search for customer service phone numbers on open search engines without checking official domain URLs."
+    "actionable_guidance": "Only contact airlines through their verified apps or websites. Never search for customer service phone numbers on open search engines without checking official domain URLs.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_hotel_booking_resort_scam",
@@ -1363,7 +1485,8 @@
       "qr scam"
     ],
     "content": "During holiday seasons, scammers build clone websites of popular luxury resorts in Goa, Manali, and Kerala. They list personal UPI IDs or QR codes demanding 100% advance payment for room reservations. When the guest arrives at the resort, the hotel has no record of the booking.",
-    "actionable_guidance": "Cross-verify phone numbers and booking details directly on verified hotel chains or reputable accredited travel aggregators. Look for verified corporate bank account details."
+    "actionable_guidance": "Cross-verify phone numbers and booking details directly on verified hotel chains or reputable accredited travel aggregators. Look for verified corporate bank account details.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_credit_card_limit_enhancement",
@@ -1378,7 +1501,8 @@
       "phishing"
     ],
     "content": "Cardholders receive calls offering 'instant limit upgrade from Rs. 50,000 to Rs. 3,00,000 and lifetime free annual fee waiver'. To process the upgrade, the caller sends a web link or requests the CVV and the 'verification OTP' sent to the phone.",
-    "actionable_guidance": "Banks process card limit upgrades directly inside their secure mobile banking apps without asking for CVV or OTP over the phone. Never disclose OTPs to anyone offering card upgrades."
+    "actionable_guidance": "Banks process card limit upgrades directly inside their secure mobile banking apps without asking for CVV or OTP over the phone. Never disclose OTPs to anyone offering card upgrades.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_fake_utility_bill_discount",
@@ -1393,7 +1517,8 @@
       "phishing"
     ],
     "content": "Attackers circulate WhatsApp promotions: 'Pay your state electricity bill before month-end and get instant 10% cashback / discount: [unverified link]'. The phishing link collects consumer credentials and bank passwords.",
-    "actionable_guidance": "State utility corporations do not offer unofficial random discounts via WhatsApp links. Pay utility bills exclusively via the Bharat Bill Payment System (BBPS) inside authorized banking applications."
+    "actionable_guidance": "State utility corporations do not offer unofficial random discounts via WhatsApp links. Pay utility bills exclusively via the Bharat Bill Payment System (BBPS) inside authorized banking applications.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_upi_offline_soundbox_voice_spoof",
@@ -1408,7 +1533,8 @@
       "fake payment"
     ],
     "content": "Sophisticated fraudsters carry portable Bluetooth speakers or pair their smartphones with unauthenticated store speakers to play pre-recorded sound clips mimicking the official Paytm/PhonePe soundbox notification ('Rs. 500 received on Paytm').",
-    "actionable_guidance": "Merchants should password-protect their Bluetooth audio hardware and rely on incoming transaction SMS alerts or the merchant dashboard for definitive verification of large transactions."
+    "actionable_guidance": "Merchants should password-protect their Bluetooth audio hardware and rely on incoming transaction SMS alerts or the merchant dashboard for definitive verification of large transactions.",
+    "official_url": "https://cybercrime.gov.in"
   },
   {
     "id": "kb_lost_stolen_phone_action_plan",
@@ -1424,6 +1550,109 @@
       "ceir"
     ],
     "content": "If your smartphone containing active UPI and banking apps is stolen: STEP 1: Call your telecom provider immediately from another phone to BLOCK YOUR SIM CARD (stopping incoming OTPs). STEP 2: Call your bank to BLOCK NETBANKING & UPI ID. STEP 3: Use Google 'Find My Device' or Apple 'Find My' to remotely erase device data. STEP 4: Report on CEIR (sancharsaathi.gov.in) to blacklist the handset IMEI.",
-    "actionable_guidance": "Act within the first 30 minutes: 1. Block SIM. 2. Freeze Bank UPI. 3. Remote wipe device. 4. Block IMEI on Sanchar Saathi. This prevents the thief from resetting UPI PINs."
+    "actionable_guidance": "Act within the first 30 minutes: 1. Block SIM. 2. Freeze Bank UPI. 3. Remote wipe device. 4. Block IMEI on Sanchar Saathi. This prevents the thief from resetting UPI PINs.",
+    "official_url": "https://cybercrime.gov.in"
+  },
+  {
+    "id": "kb_money_lost_emergency_protocol",
+    "category": "general",
+    "title": "Golden Hour Protocol: What to Do Immediately When Money is Lost to a Scam",
+    "source": "Reserve Bank of India (RBI) Circular on Customer Protection & I4C MHA Advisory",
+    "official_url": "https://cybercrime.gov.in",
+    "tags": [
+      "money lost",
+      "lost money",
+      "paisa cut gaya",
+      "cheated",
+      "fraud happened",
+      "emergency",
+      "golden hour",
+      "bank call",
+      "1930",
+      "stolen"
+    ],
+    "content": "When money has been wrongfully deducted or transferred in a scam, acting in the Golden Hour (the first 1-2 hours) is critical to stopping the funds from being laundered. Immediate multi-step protocol: (1) Call your bank emergency helpline immediately to freeze your account/cards and log an unauthorized transaction report. Under RBI Zero-Liability guidelines, notifying within 3 days limits customer liability for unauthorized third-party breaches. (2) Call 1930 (National Cyber Helpline) immediately to initiate inter-bank beneficiary account freezing. (3) Block your UPI IDs and netbanking access. (4) Preserve all digital evidence: screenshots of debit SMS, chat history, call logs, and UTR numbers. (5) Lodge a formal complaint on https://cybercrime.gov.in to receive a police acknowledgement number.",
+    "actionable_guidance": "1. Call your bank emergency fraud desk. 2. Dial 1930 immediately. 3. Block UPI ID & cards. 4. Preserve screenshots & UTR. 5. File complaint on cybercrime.gov.in.",
+    "steps": [
+      "Call your bank emergency helpline immediately to report unauthorized debit and freeze your account/cards.",
+      "Dial 1930 (National Cyber Crime Helpline) within the Golden Hour to freeze funds in the receiver bank account.",
+      "Block your UPI ID and netbanking access through your mobile banking app or customer support.",
+      "Preserve all evidence: Do NOT delete SMS, WhatsApp messages, or transaction receipts; take clear screenshots.",
+      "Lodge an official report on https://cybercrime.gov.in and share the acknowledgement number with your bank."
+    ]
+  },
+  {
+    "id": "kb_shared_otp_pin_emergency",
+    "category": "otp_theft",
+    "title": "Emergency Steps if You Shared an OTP, UPI PIN, or Passwords",
+    "source": "Reserve Bank of India (RBI) Cybersecurity Directives & NPCI Security Advisory",
+    "official_url": "https://www.rbi.org.in",
+    "tags": [
+      "otp shared",
+      "pin shared",
+      "shared otp",
+      "shared pin",
+      "compromised pin",
+      "change upi pin",
+      "block card",
+      "stolen pin"
+    ],
+    "content": "If you mistakenly disclosed your One-Time Password (OTP), UPI PIN, ATM PIN, or Internet Banking password to a caller or phishing site: (1) Change your UPI PIN immediately inside your UPI application (Google Pay / PhonePe / Paytm / BHIM) by going to Profile -> Bank Accounts -> Change UPI PIN. (2) Call your bank customer care immediately to temporarily lock netbanking credentials and hotlist debit/credit cards. (3) Check your bank account mini-statement for any unauthorized debits. (4) If unauthorized transactions have already occurred, report them immediately to your bank and call 1930 to freeze the funds.",
+    "actionable_guidance": "Change your UPI PIN immediately in your payment app, call your bank to freeze netbanking and cards, check your recent statement, and dial 1930 if funds were stolen.",
+    "steps": [
+      "Open your UPI app immediately (PhonePe / GPay / Paytm / BHIM) -> Bank Accounts -> Reset / Change UPI PIN.",
+      "Call your bank customer care right now to freeze Internet Banking and hotlist debit/credit cards.",
+      "Check your account statement for unauthorized transactions.",
+      "If money was deducted, call 1930 immediately and file at cybercrime.gov.in."
+    ]
+  },
+  {
+    "id": "kb_how_to_block_upi_id",
+    "category": "general",
+    "title": "How to Block, Disable, or De-link a UPI ID",
+    "source": "National Payments Corporation of India (NPCI) & Indian Banks Association (IBA)",
+    "official_url": "https://www.npci.org.in",
+    "tags": [
+      "block upi",
+      "disable upi",
+      "de-link upi",
+      "delete upi id",
+      "stop upi",
+      "upi block",
+      "how to block"
+    ],
+    "content": "If you suspect your UPI ID has been compromised or you want to prevent further electronic debits: (1) Block within UPI Apps: In PhonePe (Profile -> Payment Settings -> UPI IDs -> Delete), in Google Pay (Profile -> Bank Account -> Manage UPI IDs -> Trash icon), in Paytm (Profile -> UPI & Payment Settings -> Manage UPI ID -> Remove). (2) Call Bank Customer Care: Contact your bank 24x7 phone banking and ask the agent to Block UPI / IMPS services on my account. (3) Emergency Bank SMS: Many banks offer emergency SMS blocking (e.g. SBI: SMS BLOCK UPI to bank shortcode, HDFC: SMS BLOCK or via NetBanking Security). (4) De-register from UPI: De-link all bank accounts from third-party payment apps.",
+    "actionable_guidance": "Delete the UPI handle inside your payment app, call your bank customer service to disable UPI on your account, or send your bank emergency UPI blocking SMS.",
+    "steps": [
+      "In your UPI app: Go to Profile -> Bank Account / Payment Settings -> Select UPI ID -> Delete or Disable.",
+      "Call your bank customer care: Request the executive to immediately disable UPI services on your account.",
+      "Use Bank SMS / NetBanking: Access your netbanking portal -> Security Settings -> Disable UPI / E-Commerce.",
+      "De-register: Remove your bank account from Google Pay, PhonePe, and Paytm until the security audit is complete."
+    ]
+  },
+  {
+    "id": "kb_verify_bank_upi_message",
+    "category": "general",
+    "title": "How to Verify if a Bank or UPI Message is Genuine or Fake",
+    "source": "Telecom Regulatory Authority of India (TRAI) DLT Registry & RBI Financial Education",
+    "official_url": "https://trai.gov.in",
+    "tags": [
+      "verify bank message",
+      "is message real",
+      "check sbi message",
+      "genuine sms",
+      "sms header",
+      "dlt header",
+      "fake message",
+      "verify message"
+    ],
+    "content": "How to distinguish authentic bank messages from criminal phishing attempts: (1) Official TRAI DLT Headers: Authentic Indian banks use registered 6-character alphanumeric sender IDs (e.g., AD-SBIINB, VK-HDFCBK, VM-ICICIB, BZ-AXISBK). The first two letters identify the telecom circle and operator; the suffix is the bank registered brand. Messages coming from standard 10-digit mobile numbers (+91-9xxxx) are NOT official bank communications. (2) Website URL Check: Genuine banks direct you only to official domains ending in .sbi, .bank.in, or verified .co.in / .com (e.g. onlinesbi.sbi, hdfcbank.com, icicibank.com). Never trust links on .xyz, .top, .live, .cc, .app, or raw IP addresses. (3) Verification Rule: Never call the phone number or click the link provided inside an alarming SMS. Open your official banking mobile app directly or call the customer care number printed on the back of your debit card.",
+    "actionable_guidance": "Check the 6-character SMS header (not a 10-digit mobile number), verify the website domain, and never use contact details from inside an SMS.",
+    "steps": [
+      "Check Sender ID: Authentic bank SMS has a 6-letter header (e.g. AD-SBIINB). Standard 10-digit mobile numbers (+91...) are NOT banks.",
+      "Check Website Links: Genuine banks use official domains (sbi.co.in, hdfcbank.com). They never use .xyz, .top, .live, or IP addresses.",
+      "Never call numbers in SMS: Call your bank only via the phone number printed on the back of your physical debit card.",
+      "Verify in App: Log in to your official mobile banking app directly to check if any alert or notice actually exists."
+    ]
   }
 ]

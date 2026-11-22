@@ -68,5 +68,46 @@
   "dataset_notes": {
     "gold_v1": "Gold Test Set v1 (Frozen Benchmark): Untouched baseline benchmark preserved for comparison.",
     "gold_v2": "Gold Test Set v2 (Development Set — Used for Error Analysis): 243 samples with natural human phrasing and typos."
+  },
+  "intent_metrics": {
+    "dataset_name": "Conversational Safety Intent Test Set (Held-Out Fictional)",
+    "total_test_samples": 205,
+    "overall_accuracy_pct": 98.05,
+    "macro_f1": 0.9781,
+    "target_f1_gate": 0.85,
+    "gate_status": "PASSED",
+    "per_class_breakdown": {
+      "ANALYZE": {
+        "precision": 100.0,
+        "recall": 93.33,
+        "f1": 0.9655,
+        "support": 45.0
+      },
+      "HOW_TO": {
+        "precision": 98.63,
+        "recall": 98.63,
+        "f1": 0.9863,
+        "support": 73.0
+      },
+      "EMERGENCY": {
+        "precision": 100.0,
+        "recall": 100.0,
+        "f1": 1.0,
+        "support": 37.0
+      },
+      "SMALL_TALK": {
+        "precision": 100.0,
+        "recall": 100.0,
+        "f1": 1.0,
+        "support": 27.0
+      },
+      "UNCLEAR": {
+        "precision": 88.46,
+        "recall": 100.0,
+        "f1": 0.9388,
+        "support": 23.0
+      }
+    },
+    "notes": "Evaluated across English, Hindi, Telugu, and Hinglish with colloquial phrasing and typos."
   }
 }
