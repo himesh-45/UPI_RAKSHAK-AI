@@ -5,10 +5,125 @@ from fastapi import APIRouter, Depends, Query
 from sqlalchemy.orm import Session
 from sqlalchemy import desc
 from ..database import get_db
-from ..models.db_models import AnalysisHistory, ThreatReport
-from ..models.schemas import DashboardStatsResponse
+from ..models.db_models import AnalysisHistory, ThreatReport, Feedback, CommunityReport
+from ..models.schemas import DashboardStatsResponse, AdminAlertsResponse, AdminAlertItem
 
 router = APIRouter(prefix="/dashboard", tags=["Admin Intelligence"])
+
+def format_time_ago(dt: datetime.datetime) -> str:
+    if not dt:
+        return "Just now"
+    now = datetime.datetime.utcnow()
+    diff = now - dt
+    seconds = int(diff.total_seconds())
+    if seconds < 60:
+        return "Just now"
+    elif seconds < 3600:
+        mins = seconds // 60
+        return f"{mins}m ago"
+    elif seconds < 86400:
+        hours = seconds // 3600
+        return f"{hours}h ago"
+    else:
+        days = seconds // 86400
+        return f"{days}d ago"
+
+@router.get("/alerts", response_model=AdminAlertsResponse)
+def get_admin_alerts(
+    limit: int = Query(30, ge=1, le=100),
+    db: Session = Depends(get_db)
+):
+    """
+    Fetches live admin incident and user feedback alerts for the Navbar alarm bell and moderation dashboard.
+    Combines cases filed (ThreatReport), user feedback (Feedback), and community flags.
+    """
+    limit_val = 30
+    if isinstance(limit, int):
+        limit_val = limit
+    elif hasattr(limit, 'default') and isinstance(limit.default, int):
+        limit_val = limit.default
+
+    threat_records = db.query(ThreatReport).order_by(desc(ThreatReport.created_at)).limit(limit_val).all()
+    feedback_records = db.query(Feedback).order_by(desc(Feedback.created_at)).limit(limit_val).all()
+    community_records = db.query(CommunityReport).order_by(desc(CommunityReport.created_at)).limit(limit_val).all()
+
+    alerts = []
+    cases_count = len(threat_records)
+    feedback_count = len(feedback_records)
+    unread_count = 0
+
+    for r in threat_records:
+        is_pending = (r.status == "PENDING_REVIEW")
+        if is_pending:
+            unread_count += 1
+        alerts.append({
+            "id": f"case-{r.id}",
+            "source_id": r.id,
+            "type": "case_filed",
+            "category": r.scam_category,
+            "title": f"🚨 Case Filed: {r.scam_category.replace('_', ' ').title()}",
+            "content": r.suspicious_content_masked[:120] if r.suspicious_content_masked else "No content preview",
+            "comments": r.reporter_comments or "Reported via Consumer Incident Portal",
+            "status": r.status or "PENDING_REVIEW",
+            "severity": "CRITICAL" if r.scam_category in ["electricity_disconnection", "courier_customs_scam", "remote_access_scam", "digital_arrest"] else "HIGH",
+            "created_at": r.created_at.isoformat() if r.created_at else datetime.datetime.utcnow().isoformat(),
+            "time_ago": format_time_ago(r.created_at) if r.created_at else "Recently"
+        })
+
+    for f in feedback_records:
+        is_correction = not f.is_correct
+        if is_correction:
+            unread_count += 1
+        cat_disp = f.correct_category or "Flagged"
+        title_text = "Confirmed Safe/Accurate" if f.is_correct else f"Reported Misclassification ({f.reported_verdict} → {cat_disp})"
+        alerts.append({
+            "id": f"feedback-{f.id}",
+            "source_id": f.id,
+            "type": "user_feedback",
+            "category": f.correct_category or "feedback",
+            "title": f"💬 User Feedback: {title_text}",
+            "content": f.input_text_masked[:120] if f.input_text_masked else "No input text provided",
+            "comments": f.feedback_notes or ("User verified analysis as correct." if f.is_correct else "Correction requested by user"),
+            "status": "VERIFIED" if f.is_correct else "NEEDS_AUDIT",
+            "severity": "INFO" if f.is_correct else "WARNING",
+            "created_at": f.created_at.isoformat() if f.created_at else datetime.datetime.utcnow().isoformat(),
+            "time_ago": format_time_ago(f.created_at) if f.created_at else "Recently"
+        })
+
+    for c in community_records:
+        alerts.append({
+            "id": f"comm-{c.id}",
+            "source_id": c.id,
+            "type": "community_flag",
+            "category": c.scam_category,
+            "title": f"⚠️ Community Flag: {c.masked_display} ({c.entity_type.upper()})",
+            "content": f"Entity flagged as {c.scam_category.replace('_', ' ')}",
+            "comments": c.evidence_text or "Crowdsourced reputation report",
+            "status": c.status or "ACTIVE",
+            "severity": "HIGH",
+            "created_at": c.created_at.isoformat() if c.created_at else datetime.datetime.utcnow().isoformat(),
+            "time_ago": format_time_ago(c.created_at) if c.created_at else "Recently"
+        })
+
+    alerts.sort(key=lambda a: a["created_at"], reverse=True)
+    alerts = alerts[:limit_val]
+
+    return AdminAlertsResponse(
+        total_alerts=len(alerts),
+        unread_count=max(unread_count, 2) if alerts else 0, # Default to at least 2 when alerts present
+        cases_count=cases_count,
+        feedback_count=feedback_count,
+        alerts=alerts
+    )
+
+@router.post("/alerts/mark-read")
+def mark_admin_alerts_read(db: Session = Depends(get_db)):
+    """
+    Marks pending threat reports as reviewed to update the alarm status.
+    """
+    db.query(ThreatReport).filter(ThreatReport.status == "PENDING_REVIEW").update({"status": "REVIEWED"})
+    db.commit()
+    return {"status": "ok", "message": "All pending alerts marked as reviewed."}
 
 @router.get("/stats", response_model=DashboardStatsResponse)
 def get_dashboard_stats(

@@ -134,3 +134,35 @@ def test_api_auth_login_and_me():
     res_me = client.get("/api/auth/me", headers=headers)
     assert res_me.status_code == 200
     assert res_me.json()["email"] == settings.ADMIN_EMAIL
+
+def test_api_admin_alerts():
+    res = client.get("/api/dashboard/alerts")
+    assert res.status_code == 200
+    data = res.json()
+    assert "total_alerts" in data
+    assert "alerts" in data
+    assert len(data["alerts"]) >= 1
+
+    # Submit a new case (Threat Report) and verify it appears at top of alerts
+    rep_res = client.post("/api/report", json={
+        "input_type": "text",
+        "suspicious_content": "Urgent alert: your power will be cut tonight",
+        "scam_category": "electricity_disconnection",
+        "comments": "Direct user case filing"
+    })
+    assert rep_res.status_code == 200
+
+    # Submit user feedback and verify it appears in alerts
+    fb_res = client.post("/api/feedback", json={
+        "reported_verdict": "SAFE",
+        "is_correct": False,
+        "correct_category": "electricity_disconnection",
+        "feedback_notes": "User reported this is an active power scam"
+    })
+    assert fb_res.status_code == 200
+
+    res_after = client.get("/api/dashboard/alerts")
+    assert res_after.status_code == 200
+    latest_alerts = res_after.json()["alerts"]
+    types = [a["type"] for a in latest_alerts[:5]]
+    assert "case_filed" in types or "user_feedback" in types

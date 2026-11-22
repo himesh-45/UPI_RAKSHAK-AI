@@ -1,6 +1,7 @@
 import React from 'react';
-import { Shield, Sparkles, BarChart3, HelpCircle, Sun, Moon, Lock, LogOut, BookOpen, Scale, QrCode, Bell } from 'lucide-react';
+import { Shield, Sparkles, BarChart3, HelpCircle, Sun, Moon, Lock, LogOut, BookOpen, Scale, QrCode } from 'lucide-react';
 import { useTranslation } from '../i18n/useTranslation';
+import AdminAlarmBell from './AdminAlarmBell';
 
 export default function Navbar({ activeTab, setActiveTab, darkMode, setDarkMode, token, onOpenLogin, onLogout }) {
   const { language, setLanguage, t } = useTranslation();
@@ -131,13 +132,8 @@ export default function Navbar({ activeTab, setActiveTab, darkMode, setDarkMode,
             <span>🚨 1930</span>
           </a>
 
-          {/* Cyber Notification Bell with Badge */}
-          <div className="relative p-2 rounded-xl bg-[#0c122b] border border-cyan-500/20 text-cyan-400 hover:text-white hover:border-cyan-400/50 transition cursor-pointer" title="Live Security Alerts">
-            <Bell className="w-4 h-4" />
-            <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-rose-500 text-white text-[10px] font-black flex items-center justify-center shadow-[0_0_10px_rgba(239,68,68,0.7)]">
-              2
-            </span>
-          </div>
+          {/* Cyber Admin Incident & Feedback Alarm Bell */}
+          <AdminAlarmBell onNavigateToDashboard={() => setActiveTab('dashboard')} />
 
           {/* Language Switcher */}
           <div className="flex items-center bg-[#060919] p-0.5 rounded-xl border border-cyan-500/20 text-[11px] font-bold">

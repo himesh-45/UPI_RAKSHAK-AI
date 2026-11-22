@@ -61,6 +61,39 @@ export async function submitThreatReport(reportData) {
     const err = await res.json().catch(() => ({}));
     throw new Error(err.detail || 'Failed to submit report');
   }
+  const data = await res.json();
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('upi-admin-alert-trigger', {
+      detail: {
+        type: 'case_filed',
+        category: reportData.scam_category || 'general_fraud',
+        title: `🚨 New Case Filed: ${(reportData.scam_category || 'general_fraud').replace(/_/g, ' ').toUpperCase()}`,
+        content: reportData.suspicious_content || '',
+        comments: reportData.comments || '',
+        timestamp: new Date().toISOString()
+      }
+    }));
+  }
+  return data;
+}
+
+export async function getAdminAlerts(limit = 30) {
+  const res = await fetch(`${BASE_URL}/dashboard/alerts?limit=${limit}`);
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.detail || 'Failed to fetch admin alerts');
+  }
+  return res.json();
+}
+
+export async function markAdminAlertsRead() {
+  const res = await fetch(`${BASE_URL}/dashboard/alerts/mark-read`, {
+    method: 'POST'
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.detail || 'Failed to mark alerts as read');
+  }
   return res.json();
 }
 
@@ -146,7 +179,20 @@ export async function submitFeedback(feedbackData) {
     const err = await res.json().catch(() => ({}));
     throw new Error(err.detail || 'Failed to submit feedback');
   }
-  return res.json();
+  const data = await res.json();
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('upi-admin-alert-trigger', {
+      detail: {
+        type: 'user_feedback',
+        title: `💬 User Feedback: ${feedbackData.is_correct ? 'Confirmed Correct' : 'Reported Correction'}`,
+        content: feedbackData.input_text || '',
+        comments: feedbackData.feedback_notes || '',
+        is_correct: feedbackData.is_correct,
+        timestamp: new Date().toISOString()
+      }
+    }));
+  }
+  return data;
 }
 
 export async function getHealth() {
@@ -177,7 +223,19 @@ export async function submitCommunityReport(reportData) {
     const err = await res.json().catch(() => ({}));
     throw new Error(err.detail || 'Failed to submit community report');
   }
-  return res.json();
+  const data = await res.json();
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('upi-admin-alert-trigger', {
+      detail: {
+        type: 'community_flag',
+        title: `⚠️ Flagged Entity: ${reportData.entity_value} (${reportData.entity_type})`,
+        content: reportData.evidence_text || '',
+        category: reportData.scam_category,
+        timestamp: new Date().toISOString()
+      }
+    }));
+  }
+  return data;
 }
 
 export async function submitReputationDispute(disputeData) {

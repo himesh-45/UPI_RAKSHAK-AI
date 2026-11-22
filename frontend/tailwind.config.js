@@ -59,6 +59,15 @@ export default {
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+      },
+      keyframes: {
+        wiggle: {
+          '0%, 100%': { transform: 'rotate(-12deg)' },
+          '50%': { transform: 'rotate(12deg)' },
+        }
+      },
+      animation: {
+        wiggle: 'wiggle 0.25s ease-in-out infinite',
       }
     },
   },

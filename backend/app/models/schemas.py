@@ -164,6 +164,26 @@ class DashboardStatsResponse(BaseModel):
     seeded_vs_live: Dict[str, int]
     channel_breakdown: Optional[Dict[str, int]] = None
 
+class AdminAlertItem(BaseModel):
+    id: str
+    source_id: int
+    type: str  # "case_filed" | "user_feedback" | "community_flag"
+    title: str
+    category: str
+    content: Optional[str] = None
+    comments: Optional[str] = None
+    status: str
+    severity: str  # "CRITICAL" | "HIGH" | "WARNING" | "INFO"
+    created_at: str
+    time_ago: Optional[str] = None
+
+class AdminAlertsResponse(BaseModel):
+    total_alerts: int
+    unread_count: int
+    cases_count: int
+    feedback_count: int
+    alerts: List[AdminAlertItem]
+
 class StudyItemOut(BaseModel):
     item_id: str
     text: str
