@@ -6,6 +6,7 @@ import DashboardPage from './pages/DashboardPage';
 import AboutPage from './pages/AboutPage';
 import StudyPage from './pages/StudyPage';
 import DigitalArrestPage from './pages/DigitalArrestPage';
+import JudgeTryPage from './pages/JudgeTryPage';
 import LoginModal from './components/LoginModal';
 import { TranslationProvider } from './i18n/useTranslation';
 
@@ -14,6 +15,7 @@ function AppContent() {
     if (typeof window !== 'undefined') {
       if (window.location.pathname === '/study') return 'study';
       if (window.location.pathname === '/arrest') return 'arrest';
+      if (window.location.pathname === '/try') return 'try';
     }
     return 'analyzer';
   });
@@ -63,6 +65,7 @@ function AppContent() {
         )}
         {activeTab === 'study' && <StudyPage />}
         {activeTab === 'arrest' && <DigitalArrestPage />}
+        {activeTab === 'try' && <JudgeTryPage />}
         {activeTab === 'about' && <AboutPage />}
       </main>
 

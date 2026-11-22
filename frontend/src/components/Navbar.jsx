@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shield, Sparkles, BarChart3, HelpCircle, Sun, Moon, Lock, LogOut, BookOpen, Scale } from 'lucide-react';
+import { Shield, Sparkles, BarChart3, HelpCircle, Sun, Moon, Lock, LogOut, BookOpen, Scale, QrCode } from 'lucide-react';
 import { useTranslation } from '../i18n/useTranslation';
 
 export default function Navbar({ activeTab, setActiveTab, darkMode, setDarkMode, token, onOpenLogin, onLogout }) {
@@ -92,6 +92,18 @@ export default function Navbar({ activeTab, setActiveTab, darkMode, setDarkMode,
           >
             <Scale className="w-3.5 h-3.5 text-rose-500" />
             <span>Digital Arrest</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('try')}
+            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 ${
+              activeTab === 'try'
+                ? 'bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-400 shadow-sm border border-amber-200 dark:border-amber-900/60'
+                : 'text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-400'
+            }`}
+          >
+            <QrCode className="w-3.5 h-3.5 text-amber-500" />
+            <span>Judge / Try</span>
           </button>
 
           <button
@@ -200,6 +212,13 @@ export default function Navbar({ activeTab, setActiveTab, darkMode, setDarkMode,
         >
           <Scale className="w-4 h-4" />
           <span>Arrest</span>
+        </button>
+        <button
+          onClick={() => setActiveTab('try')}
+          className={`text-xs font-bold flex flex-col items-center gap-1 ${activeTab === 'try' ? 'text-amber-600 dark:text-amber-400' : 'text-slate-500'}`}
+        >
+          <QrCode className="w-4 h-4" />
+          <span>Try</span>
         </button>
         <button
           onClick={() => setActiveTab('about')}
