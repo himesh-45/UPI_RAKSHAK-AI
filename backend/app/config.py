@@ -4,22 +4,56 @@ from pydantic_settings import BaseSettings
 from typing import Optional
 
 _BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+_PROJECT_ROOT = os.path.dirname(_BASE_DIR)
+_BACKEND_SECRET_PATH = os.path.join(_BASE_DIR, "data", ".admin_secret")
+_ROOT_SECRET_PATH = os.path.join(_PROJECT_ROOT, "data", ".admin_secret")
 _IN_MEM_ADMIN_PASSWORD = None
 
 def _resolve_admin_password() -> str:
     global _IN_MEM_ADMIN_PASSWORD
     if _IN_MEM_ADMIN_PASSWORD:
         return _IN_MEM_ADMIN_PASSWORD
+
     env_pwd = os.getenv("ADMIN_PASSWORD")
     if env_pwd and env_pwd.strip():
         _IN_MEM_ADMIN_PASSWORD = env_pwd.strip()
+        for p in [_BACKEND_SECRET_PATH, _ROOT_SECRET_PATH]:
+            try:
+                os.makedirs(os.path.dirname(p), exist_ok=True)
+                with open(p, "w", encoding="utf-8") as f:
+                    f.write(_IN_MEM_ADMIN_PASSWORD + "\n")
+            except Exception:
+                pass
         return _IN_MEM_ADMIN_PASSWORD
 
+    # Check if existing .admin_secret already exists
+    for p in [_BACKEND_SECRET_PATH, _ROOT_SECRET_PATH]:
+        if os.path.exists(p):
+            try:
+                with open(p, "r", encoding="utf-8") as f:
+                    saved = f.read().strip()
+                    if saved:
+                        _IN_MEM_ADMIN_PASSWORD = saved
+                        return _IN_MEM_ADMIN_PASSWORD
+            except Exception:
+                pass
+
+    # Generate a cryptographically secure 16-character token on first run
     gen_pwd = secrets.token_urlsafe(16)
     _IN_MEM_ADMIN_PASSWORD = gen_pwd
+
+    # Persist to disk so that restarts/reloads keep the exact same password
+    for p in [_BACKEND_SECRET_PATH, _ROOT_SECRET_PATH]:
+        try:
+            os.makedirs(os.path.dirname(p), exist_ok=True)
+            with open(p, "w", encoding="utf-8") as f:
+                f.write(gen_pwd + "\n")
+        except Exception:
+            pass
+
     print("\n" + "=" * 68)
-    print(" [SECURITY] Ephemeral in-memory ADMIN_PASSWORD generated for this session")
-    print(f"   Admin Email: admin@upirakshak.ai")
+    print(" [SECURITY] Admin password generated and saved to backend/data/.admin_secret")
+    print("   Admin Email: admin@upirakshak.ai")
     print(f"   Password:    {gen_pwd}")
     print("=" * 68 + "\n")
     return gen_pwd
