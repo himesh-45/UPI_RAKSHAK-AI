@@ -43,7 +43,37 @@ The fastest and most isolated way to run UPI Rakshak AI in production.
 
 ---
 
-## 2. Serverless Deployment: Google Cloud Run / AWS ECS
+## 2. Render Cloud Deployment (Zero-Config / Free Tier)
+
+Deploying UPI Rakshak AI on Render (render.com) provides an instant, public HTTPS URL with automatic builds and zero server maintenance.
+
+### Method A: Blueprint (Recommended - 1-Click via `render.yaml`)
+1. Push your repository to GitHub or GitLab.
+2. Log in to [dashboard.render.com](https://dashboard.render.com).
+3. Click **New +** &rarr; **Blueprint**.
+4. Select your `upi-rakshak-ai` repository. Render automatically reads `render.yaml`.
+5. Enter any optional secrets (e.g. `TELEGRAM_BOT_TOKEN`), then click **Apply**.
+6. Render builds the React frontend and Python backend, then deploys to `https://upi-rakshak-ai.onrender.com`.
+
+### Method B: Manual Web Service Setup
+1. On [Render Dashboard](https://dashboard.render.com), click **New +** &rarr; **Web Service**.
+2. Connect your GitHub repository.
+3. Configure settings:
+   - **Name**: `upi-rakshak-ai`
+   - **Environment**: `Python 3` (or `Docker` using root `Dockerfile`)
+   - **Build Command**: `./build.sh` (or `pip install -r backend/requirements.txt && cd frontend && npm install && npm run build && cd ..`)
+   - **Start Command**: `uvicorn backend.app.main:app --host 0.0.0.0 --port $PORT`
+4. Add Environment Variables:
+   - `DATABASE_URL`: `sqlite:///./backend/data/upi_rakshak.db`
+   - `JWT_SECRET`: `<generated_random_secret>`
+   - `ADMIN_EMAIL`: `admin@upirakshak.ai`
+   - `SENDER_HASH_SALT`: `<random_salt>`
+   - `TELEGRAM_BOT_TOKEN`: `9270859974:AAFkXi6GE9k64x81oPxODkmmDnRu5jj61-Q`
+5. Click **Deploy Web Service**.
+
+---
+
+## 3. Serverless Deployment: Google Cloud Run / AWS ECS
 
 Because UPI Rakshak AI is designed with an **in-memory, CPU-optimized ML pipeline** (< 30ms latency, zero GPU requirements), it runs exceptionally well on serverless container platforms.
 
