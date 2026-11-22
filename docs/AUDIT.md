@@ -44,8 +44,8 @@ This audit documents each finding, root cause, severity, and the remediation roa
 ### 2.2 Security & Credential Hygiene
 - **Finding 2.1: Hardcoded Admin Password in Public Documentation (CRITICAL)**
   - *Location*: [`README.md`](../README.md), [`frontend/src/components/LoginModal.jsx`](../frontend/src/components/LoginModal.jsx), [`backend/app/config.py`](../backend/app/config.py)
-  - *Root Cause*: Default demo credentials `admin@upirakshak.ai` / `AdminRakshak#2026` were hardcoded in multiple docs and components.
-  - *Remediation*: Purge all plaintext passwords from documentation. Read admin credentials strictly from `.env`. On first run if `ADMIN_PASSWORD` is unset, generate a cryptographically secure random password via `secrets.token_urlsafe(16)`, output it once to stdout, and persist a salted bcrypt hash.
+  - *Root Cause*: Default demo credentials were hardcoded in multiple legacy docs and components.
+  - *Remediation*: Purge all plaintext passwords from documentation. Admin password is in backend/data/.admin_secret (generated on first run). Read admin credentials strictly from `.env` or the generated secret file. On first run if `ADMIN_PASSWORD` is unset, generate a cryptographically secure random password via `secrets.token_urlsafe(16)`, output it once to stdout, and persist a salted bcrypt hash.
 
 - **Finding 2.2: Git Index Tracking `__pycache__` Artifacts (MEDIUM)**
   - *Location*: Git tracking index
@@ -95,7 +95,7 @@ This audit documents each finding, root cause, severity, and the remediation roa
 | **RAG Knowledge** | 8 entries | 60+ verified entries across all scam vectors | Phase 1 & 2 |
 | **Explainability** | General bullets only | Inline token-level highlighting + Score Waterfall | Phase 2 |
 | **UX & Features** | Basic cards | Elder mode, Scam timeline, Emergency mode, VPA checker, PWA | Phase 2 & 3 |
-| **Security** | Hardcoded credentials | Random admin password, zero secrets in repo, network-isolation test | Phase 4 |
+| **Security** | Hardcoded credentials | Random admin password, no secrets tracked in repo, network-isolation test | Phase 4 |
 | **Tests & CI** | 53 unit tests | 100+ tests (property, mutation, Playwright e2e) + GitHub Actions CI | Phase 5 |
 
 ---

@@ -69,8 +69,7 @@
     "email": "ईमेल पता",
     "password": "पासवर्ड",
     "loginBtn": "साइन इन करें",
-    "logout": "लॉग आउट",
-    "demoCredentialsNotice": "डेमो क्रेडेंशियल्स: admin@upirakshak.ai / AdminRakshak#2026"
+    "logout": "लॉग आउट"
   },
   "footer": {
     "disclaimer": "यूपीआई रक्षक एआई उपभोक्ता संरक्षण के लिए एक शैक्षिक प्रोटोटाइप है। राष्ट्रीय साइबर हेल्पलाइन: 1930"

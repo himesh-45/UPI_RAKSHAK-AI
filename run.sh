@@ -49,7 +49,7 @@ echo ""
 echo "🚀 UPI Rakshak AI is running!"
 echo "   Frontend Web UI : http://localhost:5173"
 echo "   Backend API Docs: http://localhost:8000/docs"
-echo "   Admin Login     : admin@upirakshak.ai / AdminRakshak#2026"
+echo "   Admin Login     : Admin password is in backend/data/.admin_secret (generated on first run)"
 echo ""
 echo "Press Ctrl+C to stop both servers."
 

@@ -37,5 +37,5 @@ echo ==========================================================
 echo  UPI Rakshak AI is running!
 echo    Frontend UI: http://localhost:5173
 echo    API Docs:    http://localhost:8000/docs
-echo    Admin:       admin@upirakshak.ai / AdminRakshak#2026
+echo    Admin:       Admin password is in backend/data/.admin_secret (generated on first run)
 echo ==========================================================

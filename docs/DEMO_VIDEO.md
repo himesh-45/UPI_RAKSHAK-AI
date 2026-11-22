@@ -21,7 +21,7 @@ This document provides the definitive, second-by-second screen recording script 
 - **Voiceover**:
   > *"Every month, India processes over 13 billion UPI transactions. But alongside financial inclusion came an explosion in psychological extortion: fake bank KYC closures, OLX collect-request traps, and coercive 'Digital Arrest' scams. Victims don't lose money because their software was hacked—they lose money because they were deceived.*
   > 
-  > *Meet UPI Rakshak AI: an evidence-based, 100% offline fraud detection engine supporting English, Hindi, and Telugu. Unlike chatbots that ask an LLM 'is this a scam?', our verdict is derived deterministically from independent mathematical detectors running on a commodity CPU in under 35 milliseconds."*
+  > *Meet UPI Rakshak AI: an evidence-based, offline-first fraud detection engine supporting English, Hindi, and Telugu (core engine runs without internet; bots need internet). Unlike chatbots that ask an LLM 'is this a scam?', our verdict is derived deterministically from independent mathematical detectors running on a commodity CPU in ~32 milliseconds."*
 
 ---
 
@@ -49,13 +49,13 @@ This document provides the definitive, second-by-second screen recording script 
 
 ---
 
-### 2:00 – 2:30 | Hard Negatives & Zero-Network Offline Air-Gapped Speed
+### 2:00 – 2:30 | Hard Negatives & Zero-Network Offline Speed
 - **Visual**: Return to the main Analyzer (`/`). Click **"Quick Test Scenarios"** $\rightarrow$ **"Genuine Swiggy Refund & Bank SMS"**. Click **"Check Scam Threat"**.
 - **Visual**: Instant verdict: **SAFE (Score: 0/100)**. Show the Waterfall chart displaying 0 points.
 - **Voiceover**:
   > *"A fraud detector is useless if it panics on real messages. Here is a genuine refund confirmation with amounts and transaction IDs. Notice how our calibrated classifier scores it 0 out of 100—SAFE.*
   > 
-  > *And examine our load test results: median CPU inference latency is 32.22 milliseconds, running on a standard laptop CPU without a single GPU. It makes zero outbound network calls, meaning banks and defense intranets can deploy it completely air-gapped with zero data leakage."*
+  > *And examine our load test results: median CPU text inference latency is ~32 milliseconds, running on a standard laptop CPU without a single GPU. Core detection makes zero outbound network calls, meaning banks and defense intranets can deploy it locally without internet with zero data leakage."*
 
 ---
 

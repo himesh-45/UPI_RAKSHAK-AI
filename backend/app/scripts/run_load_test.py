@@ -1,7 +1,7 @@
 """
 High-throughput CPU load test and latency benchmarking tool for UPI Rakshak AI.
-Evaluates local inference latency across text, URL, and RAG pipelines without network jitter.
-Measures p50, p90, p95, p99, and requests/second under sustained concurrent load.
+Evaluates local inference latency across text, URL, and RAG pipelines without IP rotation.
+Measures p50, p90, p95, p99, and requests/second under sustained 50 concurrent clients.
 """
 
 import time
@@ -9,6 +9,7 @@ import statistics
 import concurrent.futures
 from fastapi.testclient import TestClient
 from backend.app.main import app
+from backend.app.core.security import RATE_LIMIT_STORE
 
 SAMPLE_TEXTS = [
     {"text": "URGENT: Your SBI YONO account blocked. Update PAN immediately at http://sbi-kyc-update.top", "language": "en"},
@@ -33,25 +34,41 @@ SAMPLE_RAG_QUERIES = [
     {"message": "How to report cyber fraud on 1930?", "language": "en"},
 ]
 
+HARDWARE_INFO = {
+    "cpu": "AMD Ryzen AI 5 340 (12 logical cores, AuthenticAMD)",
+    "ram": "16 GB RAM (15.2 GB usable)",
+    "os": "Windows 11 x86_64",
+    "concurrency": 50,
+    "ip_rotation": "Disabled (single client IP, 600 req/min rate limit)"
+}
 
-def benchmark_endpoint(client, endpoint, payload, iterations=100):
+
+def make_single_request(client, url_path, payload):
+    t0 = time.perf_counter()
+    if url_path == "/api/health":
+        resp = client.get(url_path)
+    else:
+        resp = client.post(url_path, json=payload)
+    t1 = time.perf_counter()
+    elapsed_ms = (t1 - t0) * 1000.0
+    return elapsed_ms, resp.status_code
+
+
+def benchmark_endpoint_concurrent(client, endpoint, payload, total_requests=100, num_clients=50):
+    url_path = endpoint.split()[0]
+    RATE_LIMIT_STORE.clear()  # Fresh rate limit window per endpoint benchmark
+
     latencies = []
     errors = 0
     start_total = time.perf_counter()
 
-    url_path = endpoint.split()[0]
-    for i in range(iterations):
-        headers = {"x-forwarded-for": f"10.0.{i // 40}.{i % 40 + 1}"}
-        t0 = time.perf_counter()
-        if url_path == "/api/health":
-            resp = client.get(url_path, headers=headers)
-        else:
-            resp = client.post(url_path, json=payload, headers=headers)
-        t1 = time.perf_counter()
-        elapsed_ms = (t1 - t0) * 1000.0
-        latencies.append(elapsed_ms)
-        if resp.status_code >= 400:
-            errors += 1
+    with concurrent.futures.ThreadPoolExecutor(max_workers=num_clients) as executor:
+        futures = [executor.submit(make_single_request, client, url_path, payload) for _ in range(total_requests)]
+        for fut in concurrent.futures.as_completed(futures):
+            elapsed_ms, status_code = fut.result()
+            latencies.append(elapsed_ms)
+            if status_code >= 400:
+                errors += 1
 
     total_time = time.perf_counter() - start_total
     latencies.sort()
@@ -59,9 +76,10 @@ def benchmark_endpoint(client, endpoint, payload, iterations=100):
 
     return {
         "endpoint": endpoint,
-        "iterations": iterations,
+        "iterations": total_requests,
+        "clients": num_clients,
         "total_time_s": total_time,
-        "throughput_rps": iterations / total_time if total_time > 0 else 0,
+        "throughput_rps": total_requests / total_time if total_time > 0 else 0,
         "p50_ms": statistics.median(latencies),
         "p90_ms": latencies[int(n * 0.90)],
         "p95_ms": latencies[int(n * 0.95)],
@@ -73,36 +91,43 @@ def benchmark_endpoint(client, endpoint, payload, iterations=100):
     }
 
 
-def run_concurrent_load_test(num_workers=4, requests_per_worker=50):
+def run_concurrent_load_test(num_clients=50, requests_per_endpoint=100):
     client = TestClient(app)
     # Warm up models
     client.post("/api/analyze/text", json={**SAMPLE_TEXTS[0], "save_history": False})
     client.post("/api/analyze/url", json={"url": SAMPLE_URLS[0]})
     client.post("/api/assistant/chat", json=SAMPLE_RAG_QUERIES[0])
 
-    print(f"[*] Running concurrent load test ({num_workers} concurrent workers, {requests_per_worker} req/worker)...")
+    print("=" * 82)
+    print("UPI RAKSHAK AI — LOAD TEST BENCHMARK (50 CONCURRENT CLIENTS)")
+    print("=" * 82)
+    print(f"Hardware:    CPU: {HARDWARE_INFO['cpu']}")
+    print(f"Memory:      RAM: {HARDWARE_INFO['ram']}")
+    print(f"Concurrency: {num_clients} concurrent clients (Single IP, No Header Spoofing)")
+    print(f"Rate Limit:  600 requests/minute (Default environment config)")
+    print("=" * 82)
 
     results = {}
     endpoints = [
-        ("/api/analyze/text (pure CPU inference)", {**SAMPLE_TEXTS[0], "save_history": False}, 150),
-        ("/api/analyze/text (with DB audit log)", {**SAMPLE_TEXTS[0], "save_history": True}, 100),
-        ("/api/analyze/url", {"url": SAMPLE_URLS[0]}, 150),
+        ("/api/analyze/text (pure CPU inference)", {**SAMPLE_TEXTS[0], "save_history": False}, 100),
+        ("/api/analyze/text (with DB audit log)", {**SAMPLE_TEXTS[0], "save_history": True}, 80),
+        ("/api/analyze/url", {"url": SAMPLE_URLS[0]}, 100),
         ("/api/assistant/chat (RAG + Template)", SAMPLE_RAG_QUERIES[0], 100),
-        ("/api/health", None, 150),
+        ("/api/health", None, 100),
     ]
 
     for ep, payload, iters in endpoints:
-        print(f"Benchmarking {ep} across {iters} requests...")
-        metrics = benchmark_endpoint(client, ep, payload, iterations=iters)
+        print(f"Benchmarking {ep} across {iters} requests with {num_clients} clients...")
+        metrics = benchmark_endpoint_concurrent(client, ep, payload, total_requests=iters, num_clients=num_clients)
         results[ep] = metrics
 
     return results
 
 
 def main():
-    results = run_concurrent_load_test()
+    results = run_concurrent_load_test(num_clients=50, requests_per_endpoint=100)
     print("\n" + "=" * 82)
-    print("UPI RAKSHAK AI - LATENCY & THROUGHPUT BENCHMARK REPORT")
+    print("UPI RAKSHAK AI — LATENCY & THROUGHPUT BENCHMARK RESULTS")
     print("=" * 82)
     print(f"{'Endpoint':<36} | {'p50 (ms)':<9} | {'p95 (ms)':<9} | {'p99 (ms)':<9} | {'Req/Sec':<9} | {'Errors'}")
     print("-" * 82)

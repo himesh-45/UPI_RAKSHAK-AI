@@ -2,7 +2,7 @@
 
 **Audit Date**: November 2026  
 **Status**: Ready for Hackathon Live Demonstration & Technical Submission  
-**Repository State**: Clean, zero secrets, zero untracked dependencies, 165+ passing tests  
+**Repository State**: Clean, no secrets committed, no untracked dependencies, 165+ passing tests  
 
 ---
 
@@ -21,8 +21,8 @@
 | **Automated Test Suite** | 53 tests | **165+ Tests Passing** | Full unit, integration, mutation, consistency, domain-disjoint, channels, reputation, digital arrest, load test, and packaging coverage. |
 | **Omnichannel Deployment** | Web only | **Web PWA + Telegram Bot + WhatsApp Sandbox** | Multi-channel dispatcher with salted SHA-256 sender hashing, 20 msg/hr sliding rate limiter, and `/delete_data` right-to-be-forgotten. |
 | **Community Reputation** | None | **Consensus-Gated Database with Anti-Poisoning Whitelist** | Consensus gating ($\ge 2$ distinct reporters), 24h per-entity limits, 30-day half-life decay, and immune bank domains. |
-| **Credential Hygiene** | Admin password in README; `.admin_secret` in repo | **Zero Secrets Tracked**; ephemeral in-memory startup password | Verified via git tracking audits, clean `.gitignore`, and package inspection. |
-| **Production Readiness** | No container hardening | **Multi-Stage Non-Root Docker & Locust CPU Load Tested** | Sub-35ms median CPU latency (32.22ms p50, 70.88ms p99) under 650 concurrent requests with zero errors. |
+| **Credential Hygiene** | Admin password in README; `.admin_secret` in repo | **No Secrets Tracked**; random generated password in `.admin_secret` (git-ignored) | Verified via git tracking audits, clean `.gitignore`, and package inspection. |
+| **Production Readiness** | No container hardening | **Multi-Stage Non-Root Docker & 50-Client CPU Load Tested** | Median ~32 ms text inference on AMD Ryzen AI 5 340 CPU (~100 ms with synchronous SQLite audit logging); 25.0 req/s under 50 concurrent clients with zero errors. |
 | **Documentation Cleanliness** | Hand-typed metrics with contradictions; local paths | **Fully Programmatic Report Generation**; zero absolute local paths | Consistency asserted by automated test `test_evaluation_report_consistency.py`. |
 | **Clean Submission Packaging** | No automated packaging script | `make package` / `package_submission.py` creates clean zip | Excludes `.venv`, `node_modules`, `.git`, `.pytest_cache`, `dist`, `*.db`, `.env`, `.admin_secret`. Verified by `test_packaging.py`. |
 

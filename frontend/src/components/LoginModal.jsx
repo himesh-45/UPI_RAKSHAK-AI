@@ -87,7 +87,7 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }) {
 
           <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-[11px] text-slate-500">
             <p className="font-medium text-slate-600 dark:text-slate-400">
-              Admin credentials are read securely from your environment (<code className="font-mono text-[10px]">.env</code>) or printed once to the console on first startup.
+              Admin password is in backend/data/.admin_secret (generated on first run)
             </p>
           </div>
 

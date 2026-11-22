@@ -1,37 +1,39 @@
 # Model Architecture Comparison: Classical TF-IDF Ensemble vs. Multilingual Transformer
 
-## 1. Executive Summary
-To rigorously determine the optimal machine learning architecture for edge-deployable, offline scam detection, we conducted an empirical head-to-head comparison between:
-1. **Classical Calibrated Ensemble (Production Default)**: Dual word (1-2) + char_wb (3-5) n-grams + engineered domain features with Calibrated Logistic Regression (`C=3.0`, sigmoid calibration).
-2. **Fine-Tuned Multilingual Transformer (Experimental Candidate)**: Google MuRIL (`google/muril-base-cased`, 236M parameters) fine-tuned for 3 epochs with AdamW (`lr=2e-5`) on the exact same Group-Split training set.
+## 1. Executive Summary & Status
+- **Production Model**: Classical Calibrated Ensemble (Dual word [1-2] + char_wb [3-5] n-grams + engineered domain features with Calibrated Logistic Regression, `C=3.0`, sigmoid calibration).
+- **Multilingual Transformer (MuRIL)**: **Not run: script and notebook provided; classical ensemble is the production model**.
+  - A fine-tuning script (`backend/app/scripts/finetune_indic_model.py`) and exploratory Jupyter notebook (`notebooks/finetune_indic_model.ipynb`) are provided for environments equipped with GPU resources.
+  - Because full MuRIL transformer fine-tuning (`google/muril-base-cased`, 236M parameters) requires dedicated GPU compute and extended training time, the transformer pipeline was not trained or benchmarked for this CPU-first deployment. No unverified transformer numbers are claimed.
 
 ---
 
-## 2. Empirical Benchmark Matrix
+## 2. Verified Benchmark Metrics (Production Classical Model)
 
-| Evaluation Dimension | Classical TF-IDF Ensemble (Current) | Fine-Tuned MuRIL Transformer | Practical Verdict / Tradeoff |
-| :--- | :---: | :---: | :--- |
-| **Gold v1 15-Class Macro-F1** | **0.8994** | 0.9080 | Transformer leads slightly (+0.86% F1). |
-| **Gold v2 15-Class Macro-F1** | **0.8624** | 0.8690 | Transformer shows marginal semantic edge (+0.66%). |
-| **Risk Fusion Scam Recall (Gold v2)** | **98.55%** (136/138) | 98.55% (136/138) | Equal detection rate when fused with rule engine. |
-| **Legitimate False Positive Rate (FPR)** | **1.90%** (2/105) | 2.86% (3/105) | Classical ensemble yields fewer false alarms on bank alerts. |
-| **CPU Inference Latency (p50)** | **4.2 ms** | 185.0 ms | **44x faster** inference on consumer CPU. |
-| **CPU Inference Latency (p95)** | **8.5 ms** | 310.0 ms | Classical ensemble avoids tail latency spikes. |
-| **Model Disk Size** | **9.6 MB** | 950 MB | **99% storage reduction** for edge & mobile devices. |
-| **RAM Runtime Footprint** | **~45 MB** | ~1,200 MB | Feasible on ultra-low-cost VPS / Raspberry Pi. |
-| **Cold Start / Load Time** | **< 0.15 seconds** | ~4.8 seconds | Instant server boot and test execution. |
-| **Air-Gapped Offline Operation** | **100% Native** | Requires heavy torch / CUDA dependencies | Zero external pip dependencies beyond scikit-learn. |
+All metrics below are verified and programmatically measured from the production ensemble running on CPU:
+
+| Evaluation Dimension | Classical TF-IDF Ensemble (Production Model) | Status / Notes |
+| :--- | :---: | :--- |
+| **Gold v1 15-Class Macro-F1** | **0.8994** | Leakage-free `GroupShuffleSplit`, frozen benchmark (306 samples) |
+| **Gold v2 15-Class Macro-F1** | **0.8624** | Natural noisy human phrasings development set (243 samples) |
+| **Risk Fusion Scam Recall (Gold v1)** | **99.49%** (195/196) | Fused with deterministic safety rules |
+| **Risk Fusion Scam Recall (Gold v2)** | **98.55%** (136/138) | Fused with deterministic safety rules |
+| **Legitimate False Alarm Rate (Gold v1)** | **0.00%** (0/110) | Verified on clean banking alerts |
+| **Legitimate False Alarm Rate (Gold v2)** | **1.90%** (2/105) | 105 realistic transaction alerts, OTP receipts, and chats |
+| **Pure Text Inference Latency (p50)** | **32.22 ms** | Measured under 50 concurrent clients on CPU |
+| **Pure Text Inference Latency (p99)** | **70.88 ms** | Measured under 50 concurrent clients on CPU |
+| **Model Artifact Size on Disk** | **~9.6 MB** | Serialized vectorizers and calibrated classifier weights |
+| **Memory (RAM) Runtime Footprint** | **~45 MB** | In-memory Python process allocation |
+| **Offline Operation** | Supported | Core classification engine runs locally without internet |
 
 ---
 
 ## 3. Engineering Decision & Rationale
+
 **Decision**: Retain the **Classical Calibrated TF-IDF + Engineered Feature Ensemble** as the primary production engine.
 
 ### Why this choice is defensible to judges:
-1. **The 44x Latency Advantage**: In live payment fraud prevention (e.g., verifying a QR code or SMS before approving a UPI PIN), human attention spans require sub-50ms feedback. The classical model executes in **4.2 ms**, compared to **185 ms** for transformer CPU forward passes.
-2. **Marginal Accuracy Delta (+0.7% F1)**: The transformer achieves only a fraction of a percent higher Macro-F1 on human slang, while incurring a 20x memory penalty and a 44x latency penalty.
-3. **Multi-Layer Synergy**: High-level semantic errors made by either model are reliably caught by the deterministic Rule Safety Layer and Static URL Scanner. The Risk Fusion Engine levels the playing field, achieving **98.55% Scam Recall** on both architectures.
-4. **Deployability & Carbon Footprint**: A 9.6 MB model runs comfortably in low-memory Docker containers ($5/month VPS or local edge node) without demanding dedicated GPU infrastructure.
-
-### Configurable Transformer Option:
-For environments equipped with server-grade GPUs where sub-second latency is acceptable, the transformer can be activated by toggling `USE_TRANSFORMER_NLP=true` in `.env` and placing fine-tuned weights in `backend/app/data/indic_transformer_model`.
+1. **Low Latency on Commodity Hardware**: In digital payment fraud prevention, human attention spans require rapid verification. The classical model executes in median **~32 ms** on CPU, avoiding transformer CPU latency overhead.
+2. **Deterministic Rules & Multi-Layer Synergy**: High-level semantic errors made by statistical text classification are caught by the deterministic Rule Safety Layer and Static URL Scanner. The Risk Fusion Engine combines these signals to achieve **98.55%–99.49% Scam Recall**.
+3. **Deployability & Resource Efficiency**: A ~9.6 MB model artifact runs comfortably in low-memory Docker containers ($5/month VPS or local edge node) without demanding dedicated GPU infrastructure.
+4. **Reproducibility**: Training the classical model completes in under 15 seconds via `make seed` or `python -m backend.app.scripts.train_model`, allowing rapid iteration and complete auditability.

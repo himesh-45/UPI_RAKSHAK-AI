@@ -388,10 +388,10 @@ export default function JudgeTryPage() {
           <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 space-y-2">
             <h3 className="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-1.5">
               <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-              2. How is Sub-35ms CPU Latency Guaranteed?
+              2. How is Sub-50ms CPU Latency Achieved?
             </h3>
             <p className="text-slate-600 dark:text-slate-300">
-              Our TF-IDF char+word n-gram vectorizers and calibrated linear classifiers evaluate in ~12ms on ordinary CPU hardware. Pure algorithmic parsing of URLs (Trie matching + Levenshtein distance) runs in under 8ms. Even under 4-worker concurrent stress load, median response latency is <strong>32.22 ms</strong> (p99 70.88 ms), requiring zero GPU instances and enabling 100% offline air-gapped operation.
+              Our TF-IDF char+word n-gram vectorizers and calibrated linear classifiers evaluate in ~11 ms on ordinary CPU hardware (~32 ms end-to-end multi-detector fusion). Pure algorithmic parsing of URLs (Trie matching + Levenshtein distance) runs in under 8ms. Under 50 concurrent client load, text inference achieves 25.0 req/s with 0 errors, requiring zero GPU instances and enabling local offline operation without internet (core engine runs without internet; bots need internet).
             </p>
           </div>
 

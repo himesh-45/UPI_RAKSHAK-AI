@@ -28,7 +28,7 @@ UPI Rakshak AI is engineered under a zero-trust, privacy-first threat model. Bec
 
 ---
 
-## 3. Zero-Network Execution Guarantee (SSRF Prevention)
+## 3. Zero-Network Execution Standard (SSRF Prevention)
 
 A critical vulnerability in naive URL scanners is Server-Side Request Forgery (SSRF) and malware detonation when the server attempts to `curl`, `fetch`, or follow HTTP redirects for submitted links. If an attacker submits `http://169.254.169.254/latest/meta-data/` or an active exploit kit link, a naive scanner can be exploited.
 
@@ -63,7 +63,7 @@ Scammers continuously mutate message text to bypass keyword filters:
 2. **JWT Secret:**
    - `JWT_SECRET_KEY` falls back to an ephemeral token per process lifetime if undeclared in production environments.
 3. **Third-Party API Keys:**
-   - UPI Rakshak AI requires zero third-party API keys (no OpenAI, Gemini, or Anthropic keys needed for detection). All detection and RAG retrieval runs 100% offline.
+   - UPI Rakshak AI requires no third-party API keys (no OpenAI, Gemini, or Anthropic keys needed for detection). All detection and RAG retrieval runs locally without internet.
 
 ---
 

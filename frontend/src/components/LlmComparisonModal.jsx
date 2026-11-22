@@ -8,13 +8,13 @@ export default function LlmComparisonModal({ isOpen, onClose, onLoadPromptInject
     {
       dimension: 'Inference Latency',
       plainLlm: '2,000 – 4,500 ms (Network round-trip)',
-      upiRakshak: '12 – 20 ms (Single-threaded CPU)',
+      upiRakshak: '~32 ms (Commodity CPU)',
       winner: 'upi'
     },
     {
       dimension: 'Offline / Air-Gapped',
       plainLlm: '❌ Impossible (Requires cloud API keys & internet)',
-      upiRakshak: '✅ 100% Offline (Local ONNX, scikit-learn, regex)',
+      upiRakshak: '✅ Offline-First (Core engine runs without internet)',
       winner: 'upi'
     },
     {

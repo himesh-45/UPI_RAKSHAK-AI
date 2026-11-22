@@ -69,8 +69,7 @@
     "email": "Email Address",
     "password": "Password",
     "loginBtn": "Sign In",
-    "logout": "Sign Out",
-    "demoCredentialsNotice": "Demo Credentials: admin@upirakshak.ai / AdminRakshak#2026"
+    "logout": "Sign Out"
   },
   "footer": {
     "disclaimer": "UPI Rakshak AI is an open-source educational prototype for consumer protection. National Cyber Crime Helpline: 1930 • cybercrime.gov.in"

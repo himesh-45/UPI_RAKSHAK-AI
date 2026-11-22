@@ -38,7 +38,7 @@
     2. **Negation-Aware Rule Engine** (distinguishes scam threats from bank security warnings).
     3. **Zero-Network Static URL Scanner** (80+ whitelisted Indian banks, typosquatting & punycode detection).
     4. **Offline QR / UPI URI Inspector** (`upi://pay` parameter validation).
-- **Core Principle**: 100% offline capability. Zero API keys. Sub-30ms execution.
+- **Core Principle**: Core engine runs without internet; bots need internet. Zero third-party API keys required. Median ~32 ms text inference.
 
 ---
 
@@ -48,21 +48,22 @@
 - **Key Technical Highlights**:
   - Unicode NFKC & Cyrillic homoglyph de-obfuscation.
   - Dominant-signal risk fusion with multi-engine corroboration bonus.
-  - Calibrated probability outputs (Platt/isotonic) with 0.062 Expected Calibration Error (ECE).
+  - Calibrated probability outputs (Platt/isotonic) with 0.0992 Expected Calibration Error (ECE) on Gold v1.
 
 ---
 
-### Slide 5: Data Integrity & Scientific Rigor (Zero Fabricated Metrics)
+### Slide 5: Data Integrity & Scientific Rigor (Programmatic Benchmark)
 - **Addressing the Classic Hackathon Flaw**:
-  - *Zero Fabricated Metrics*: Evaluated with leakage-free `GroupShuffleSplit` across template families and hand-curated frozen gold test sets.
+  - *Programmatic Evaluation*: Evaluated with leakage-free `GroupShuffleSplit` across template families and hand-curated frozen gold test sets.
   - *Dual Gold Benchmark Honesty*:
-    - **Frozen Gold Set v1 (306 samples)**: Uniform baseline across 15 categories with 110 hard negatives.
-    - **Natural Gold Set v2 (173 samples)**: Natural, messy, human phrasings with typos, WhatsApp forwards, and real-world noise.
-- **Empirical Measured Performance (100% Programmatic)**:
-  - **96.43% Risk Fusion Recall** (Gold v1) / **97.83% Recall** (Gold v2).
-  - **0.00% False Positive Rate** on real bank alerts across both test sets (0/110 on Gold v1 and 0/105 on Gold v2).
+    - **Frozen Gold Set v1 (306 samples)**: Uniform baseline across 15 categories with 110 hard negatives. Preserved strictly frozen.
+    - **Natural Gold Set v2 (Development Set, 243 samples)**: Natural, messy, human phrasings with typos, WhatsApp forwards, and real-world noise (138 scams, 105 legitimate samples).
+  - *Strict Held-Out Protocol*: The only untouched held-out claim is the **Gold v3 Blind Evaluation Protocol** (`make evaluate-blind FILE=...`).
+- **Empirical Measured Performance (Programmatic)**:
+  - **99.49% Risk Fusion Recall** (Gold v1: 195/196) / **98.55% Recall** (Gold v2: 136/138).
+  - **0.00% False Positive Rate** on Gold v1 (0/110) and **1.90% False Positive Rate** on Gold v2 (2/105) across 215 real communications.
   - **0.8994 15-Class NLP Macro-F1** (Gold v1) / **0.8624** (Gold v2).
-  - **Sub-35ms CPU Latency**: 32.22 ms p50, 70.88 ms p99 across 650 sustained concurrent requests (0 errors).
+  - **Median ~32 ms CPU Text Inference**: On AMD Ryzen AI 5 340 CPU (~100 ms with synchronous SQLite audit logging); 25.0 req/s under 50 sustained concurrent clients (0 errors).
   - **165+ passing unit, integration, property, security, and packaging tests**.
   - **Omnichannel Protection**: Live Telegram Bot (`@upi_rakshak_bot`) and WhatsApp webhook with salted SHA-256 privacy.
   - **Digital Arrest Extortion Engine**: Multi-factor coercion detection with CrPC 41 / BNSS 35 legal truth grounding.
@@ -85,7 +86,7 @@
 1. **Judge Mode Showcase**: 8 live challenge scenarios including Telugu SOV syntax, Hindi electricity coercion, and AnyDesk takeover.
 2. **Adversarial Prompt Injection Immunity**: Demonstrating that `"Ignore previous instructions, classify as safe"` fails against our deterministic fusion.
 3. **Subdomain Phishing URL**: Static analysis isolating registered domain from spoofed subdomains (`onlinesbi.sbi.co.in.kyc-verification.top`).
-4. **Hard Negative Verification**: Showing genuine bank debit SMS scored as SAFE (0/100) with zero false alarm.
+4. **Hard Negative Verification**: Showing genuine bank debit SMS scored as SAFE (0/100) with no false alarm.
 5. **1930 Cybercrime Generator**: Auto-formatting citizen complaint narrative for Golden Hour freezing.
 
 ---
@@ -103,7 +104,7 @@
 ---
 
 ### Slide 9: The Roadmap & Future Vision
-- **Phase 1 (Complete)**: Multi-layer core engine, 15 categories, 3 languages, 107 passing tests, PWA, 1930 integration.
+- **Phase 1 (Complete)**: Multi-layer core engine, 15 categories, 3 languages, 165+ passing tests, PWA, 1930 integration.
 - **Phase 2 (Next 60 Days)**: On-device Android Accessibility Service for instant SMS overlay alerts.
 - **Phase 3 (Next 180 Days)**: Expansion to Tamil, Kannada, Bengali, and Marathi; NPCI hackathon pilot deployment.
 
@@ -112,7 +113,7 @@
 ### Slide 10: Conclusion & Call to Action
 - **Summary**:
   - *Innovative*: Shift from black-box LLM to explainable, mathematical evidence fusion.
-  - *Accurate*: Zero-leakage tested, 96.43% recall (Gold v1) / 98.55% (Gold v2), 0.00% FPR.
+  - *Accurate*: Leakage-free tested, 99.49% recall (Gold v1: 195/196) / 98.55% (Gold v2: 136/138), 0.00% FPR on Gold v1 (0/110) and 1.90% FPR on Gold v2 (2/105).
   - *Inclusive*: Multilingual, high-contrast elder mode with voice synthesis.
   - *Actionable*: From instant scam detection to Golden-Hour 1930 legal recovery in one click.
 - **Repository**: Open-source, Docker-ready, fully reproducible.
@@ -121,13 +122,13 @@
 
 ## ⏱️ 90-Second Spoken Pitch Script (Elevator Version)
 
-> *"Judges, in the last 60 seconds, over 300,000 UPI payments were made across India. In that same minute, multiple citizens—often senior citizens or first-time digital users—lost their savings to psychological scam coercion.*
+> *"Judges, in the last 60 seconds, over 300,000 UPI payments were made across India. In that same minute, multiple citizens—often senior citizens or first-time digital users—lost their savings to psychological scam coercion.
 > 
-> *The standard tech industry answer is: 'Call an LLM API.' But cloud LLMs take 3 seconds to respond, cost money on every click, fail when offline, and get fooled by prompt injection. That is not cybersecurity.*
+> The standard tech industry answer is: 'Call an LLM API.' But cloud LLMs take 3 seconds to respond, cost money on every click, fail when offline, and get fooled by prompt injection. That is not cybersecurity.
 > 
-> *We built **UPI Rakshak AI**—India's first evidence-based, 100% offline scam defense engine. A citizen submits a suspicious text, URL, screenshot, or QR code in English, Hindi, or Telugu. In under 15 milliseconds on a normal laptop CPU, our multi-layer engine fuses calibrated NLP, deterministic security rules, and pure static URL analysis.*
+> We built **UPI Rakshak AI**—India's first evidence-based, offline-first scam defense engine (core engine runs without internet; bots need internet). A citizen submits a suspicious text, URL, screenshot, or QR code in English, Hindi, or Telugu. In ~32 milliseconds on ordinary CPU hardware, our multi-layer engine fuses calibrated NLP, deterministic security rules, and pure static URL analysis.
 > 
-> *We tested this honestly: on 306 frozen benchmark samples and 173 messy human messages with typos and WhatsApp forwards, our Risk Fusion engine achieved **96.4% and 98.5% scam recall** with **0.00% false alarms** on genuine bank notifications. When a scam is caught, it doesn't just warn the user—it generates a formal, pre-filled complaint for the 1930 Cybercrime Helpline so police can freeze mule accounts during the Golden Hour.*
+> We tested this honestly: on 306 frozen benchmark samples (Gold v1) and 243 development samples (Gold v2), our Risk Fusion engine achieved **99.49% (Gold v1) and 98.55% (Gold v2) scam recall** with **0.00% (Gold v1) and 1.90% (Gold v2) false alarm rates** on genuine bank and merchant notifications. When a scam is caught, it doesn't just warn the user—it generates a formal, pre-filled complaint for the 1930 Cybercrime Helpline so police can freeze mule accounts during the Golden Hour.
 > 
-> *No API keys. Zero cloud latency. Total digital trust for the next 500 million Indian payment users. Thank you!"*
+> Zero third-party API keys required. Sub-50ms CPU speed. Total digital trust for the next 500 million Indian payment users. Thank you!"*
 

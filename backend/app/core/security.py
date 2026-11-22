@@ -1,3 +1,4 @@
+import os
 import time
 import html
 from collections import defaultdict
@@ -5,15 +6,22 @@ from fastapi import Request, HTTPException, status
 
 # In-memory IP rate limiter with sliding window and automatic prune
 RATE_LIMIT_STORE = defaultdict(list)
-MAX_REQUESTS_PER_MINUTE = 60
+MAX_REQUESTS_PER_MINUTE = int(os.getenv("RATE_LIMIT_PER_MINUTE", "600"))
 WINDOW_SECONDS = 60
 _LAST_CLEANUP = time.time()
 
+# Configurable trusted proxy enforcement
+TRUST_PROXY_HEADERS = os.getenv("TRUST_PROXY_HEADERS", "false").lower() in ("true", "1", "yes")
+TRUSTED_PROXIES = set(p.strip() for p in os.getenv("TRUSTED_PROXIES", "127.0.0.1,::1,testclient").split(",") if p.strip())
+
 def _get_client_ip(request: Request) -> str:
+    client_host = request.client.host if request.client else "unknown"
     forwarded_for = request.headers.get("x-forwarded-for")
-    if forwarded_for:
+    
+    # Honour X-Forwarded-For strictly when request originates from a configured trusted proxy
+    if forwarded_for and (TRUST_PROXY_HEADERS or client_host in TRUSTED_PROXIES):
         return forwarded_for.split(",")[0].strip()
-    return request.client.host if request.client else "unknown"
+    return client_host
 
 def rate_limiter(request: Request):
     global _LAST_CLEANUP

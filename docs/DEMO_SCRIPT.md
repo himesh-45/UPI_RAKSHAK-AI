@@ -14,11 +14,11 @@
    >
    > *Most AI scam detectors fail because they blindly ask an LLM: 'Is this a scam?'. That leaks user financial SMS to third-party clouds, costs money, hallucinations, and takes 2 to 5 seconds.*
    >
-   > *Meet **UPI Rakshak AI**: a 100% offline-first, multilingual (English, Hindi, Telugu), sub-30ms scam intelligence engine. It runs on a mathematical ensemble of calibrated linear models, 15 deterministic fraud rules, zero-network static URL analysis, and offline QR/OCR parsing. 0 API keys required. 104 passing tests."*
+   > *Meet **UPI Rakshak AI**: an offline-first, multilingual (English, Hindi, Telugu), ~32ms scam intelligence engine (core engine runs without internet; bots need internet). It runs on a mathematical ensemble of calibrated linear models, 15 deterministic fraud rules, zero-network static URL analysis, and offline QR/OCR parsing. Zero third-party API keys required. 165+ passing tests."*
 
 2. **Visual**:
    - Web UI at `http://localhost:5173` displayed on screen.
-   - Point out the trust badge: **Offline-First • Evidence-Based • Calibrated Thresholds • 104 Tests Passing**.
+   - Point out the trust badge: **Offline-First • Evidence-Based • Calibrated Thresholds • 165+ Tests Passing**.
 
 ---
 
@@ -64,7 +64,7 @@
 
 ---
 
-## 🛡️ Act 3: Shift-Left VPA Safe-Check & Zero False Positives (1:55 – 2:35)
+## 🛡️ Act 3: Shift-Left VPA Safe-Check & Low False Alarm Rate (1:55 – 2:35)
 
 1. **Shift-Left Pre-Payment VPA Safe-Check**:
    - Switch to the **VPA / Collect Check** tab.
@@ -75,13 +75,13 @@
      - Flags **Institutional Impersonation on Retail Handle**: The scammer uses a personal consumer handle (`@paytm`) while claiming to be institutional bank support (`sbi-refund`).
      - Flags **Collect-Request Trap Warning**: Reminds users: *"Entering your UPI PIN NEVER receives money; it ONLY authorizes a debit."*
 
-2. **The "Hard Negative" Test (Proof of Zero Over-Flagging)**:
+2. **The "Hard Negative" Test (Proof of Low False Alarm Rate)**:
    - Switch to **Message / SMS** tab and click chip: **`Genuine Bank Alert (Safe)`**.
    - Input: *"HDFC Bank: An amount of Rs. 1,450.00 is debited from account ending 4821 on 21-Nov-2026 for UPI/Swiggy. Available balance: Rs. 24,190.00. NEVER share your OTP or PIN with anyone."*
    - Click **Analyze Threat**.
    - **Show Judges**:
-     - **Score**: **12 / 100 (SAFE)**.
-     - **Negation & Advisory Suppression**: Even though the text contains `OTP` and `PIN`, our dependency-aware regex parser recognizes the preceding advisory *"NEVER share"*, capping the risk score and achieving **2.73% False Positive Rate on real bank alerts**.
+     - **Score**: **0 / 100 (SAFE)**.
+     - **Negation & Advisory Suppression**: Even though the text contains `OTP` and `PIN`, our dependency-aware regex parser recognizes the preceding advisory *"NEVER share"*, capping the risk score and achieving **0.00% False Positive Rate on Gold v1 and 1.90% on Gold v2**.
 
 ---
 

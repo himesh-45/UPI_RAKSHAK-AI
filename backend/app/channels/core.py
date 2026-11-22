@@ -260,7 +260,7 @@ async def process_channel_submission(
                     "• `/help` - Show instructions\n"
                     "• `/delete_data` - Permanently erase all your scan records\n"
                     "• `/lang hi` or `/lang te` - Change explanation language\n\n"
-                    "🔒 *Zero-PII Guarantee*: We never store your phone number or raw identifiers."
+                    "🔒 *Privacy Standard*: We do not store your raw phone number or plain text identifiers."
                 ),
                 "verdict": "INFO",
                 "risk_score": 0,

@@ -1,8 +1,8 @@
 # 🛡️ UPI Rakshak AI (यूपीआई रक्षक / యూపీఐ రక్షక్)
 
-> **Real-Time, Multilingual (English, Hindi, Telugu), Fully Offline Digital Payment Scam Detection & Golden-Hour Prevention Platform.**
+> **Real-Time, Multilingual (English, Hindi, Telugu) Digital Payment Scam Detection & Golden-Hour Prevention Platform.**
 >
-> ⚡ **Zero Cloud Dependency**: Fully operational offline with no external API keys or network latency. Runs in ~12ms on commodity CPU.  
+> ⚡ **Edge Execution**: Core scam detection engine operates without internet access or external API keys (~32 ms median text inference on AMD Ryzen AI 5 340 CPU, ~100 ms with SQLite audit logging). Conversational bots require internet for webhooks.  
 > ⚖️ **Evidence-Based Multi-Signal Fusion**: Verdicts stem from independent mathematical detectors, NOT by asking an LLM "is this a scam?".
 
 ---
@@ -62,7 +62,7 @@ docker compose up --build
 
 - **Web UI**: [http://localhost:5173](http://localhost:5173)
 - **Interactive API Docs**: [http://localhost:8000/docs](http://localhost:8000/docs)
-- **Admin Authentication**: Email `admin@upirakshak.ai` (Password is read from `ADMIN_PASSWORD` in `.env` or ephemeral auto-generated string printed to console on first run).
+- **Admin Authentication**: Email `admin@upirakshak.ai`. Admin password is in backend/data/.admin_secret (generated on first run) or set via `ADMIN_PASSWORD` in `.env`.
 
 ---
 
@@ -121,7 +121,7 @@ The repository ships with an exhaustive test suite covering all security asserti
 | `backend/tests/test_channels.py` | Telegram & WhatsApp webhooks, rate limits, sender hashing, purge | **PASSED (8/8)** |
 | `backend/tests/test_community_reputation.py` | Consensus gating, 24h limits, decay, immune whitelists, disputes | **PASSED (7/7)** |
 | `backend/tests/test_digital_arrest.py` | Law enforcement impersonation, virtual confinement, CrPC truth | **PASSED (4/4)** |
-| `backend/tests/test_packaging.py` | Submission zip verification (zero secrets, zero .db, zero venvs) | **PASSED (2/2)** |
+| `backend/tests/test_packaging.py` | Submission zip verification (no secrets, no .db, no venvs) | **PASSED (2/2)** |
 | `backend/tests/test_api.py` | REST API endpoints, JWT auth, analysis history, rate limits | **PASSED (11/11)** |
 | `backend/tests/test_qr_ocr.py` | QR payment URI decoding, RapidOCR fallback pipeline | **PASSED (6/6)** |
 | `backend/tests/test_assistant.py` | Trilingual safety chat assistant, vernacular queries | **PASSED (4/4)** |
@@ -133,9 +133,9 @@ The repository ships with an exhaustive test suite covering all security asserti
 
 ---
 
-## 📊 Measured Quality Gates (Zero Fabricated Metrics)
+## 📊 Measured Quality Gates (Programmatic Benchmark)
 
-All metrics are evaluated **100% programmatically** via `backend.app.scripts.evaluate_models`:
+All metrics are evaluated programmatically via `backend.app.scripts.evaluate_models`:
 
 | Evaluation Gate | Target Benchmark | Measured (Frozen Gold v1) | Measured (Natural Gold v2) | Gate Status |
 | :--- | :---: | :---: | :---: | :---: |
@@ -171,7 +171,7 @@ All metrics are evaluated **100% programmatically** via `backend.app.scripts.eva
 
 ## 📚 Essential Documentation
 
-- [Programmatic Evaluation Report (Zero Fabricated Metrics)](docs/EVALUATION_REPORT.md)
+- [Programmatic Evaluation Report](docs/EVALUATION_REPORT.md)
 - [Load Testing & Latency Benchmark Report](docs/LOAD_TEST.md)
 - [Production Deployment & Operations Guide](docs/DEPLOY.md)
 - [Pre-Flight Live Demo Checklist](docs/DEMO_CHECKLIST.md)

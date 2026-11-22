@@ -3,7 +3,7 @@
 This document records technical and design decisions made to keep the system robust, demo-ready, and compliant with all project requirements.
 
 ## 1. Zero External API Dependency (Offline First)
-- **Decision**: The entire core engine (NLP, static URL scanner, QR parser, OCR, RAG retrieval, and risk fusion) operates 100% offline without requiring internet access or third-party API keys.
+- **Decision**: The entire core engine (NLP, static URL scanner, QR parser, OCR, RAG retrieval, and risk fusion) operates offline without requiring internet access or third-party API keys (core engine runs without internet; bots need internet).
 - **Rationale**: Real-world fraud analysis must be fast, private, and resilient to third-party downtime or quotas. Any LLM provider (Gemini or Anthropic) is purely optional behind a feature flag; when no key is configured, a deterministic multilingual template engine produces grounded explanations.
 
 ## 2. Evidence-Based Fusion vs. LLM "Vibes"
@@ -213,3 +213,19 @@ This document records technical and design decisions made to keep the system rob
 ### Decision 53: Comprehensive Hackathon Defensibility Alignment
 - **Decision**: Synchronized `README.md`, `docs/PITCH_OUTLINE.md`, `docs/JUDGE_QA.md` (expanded to 29 technical defenses), `docs/LOAD_TEST.md`, and `docs/FINAL_STATUS.md` with honest programmatic outcomes, zero absolute marketing claims, and reproducible execution commands.
 - **Rationale**: Equips the presentation team with rigorous, defensible proof for tough technical judges across Cybersecurity, Fintech, and Digital Trust tracks.
+
+### Decision 54: Classical Model Primacy & Honest MuRIL Documentation
+- **Decision**: Completely rewrote `docs/MODEL_COMPARISON.md` to state transparently: "Not run: script and notebook provided; classical ensemble is the production model", removing all fabricated MuRIL metrics and false claims like "zero external pip dependencies" and "100% native".
+- **Rationale**: Strict adherence to scientific honesty. The production system is powered by the fast, calibrated linear/TF-IDF ensemble running locally without requiring transformer weights.
+
+### Decision 55: Ephemeral Admin Secret & Elimination of Hardcoded Demo Passwords
+- **Decision**: Removed hardcoded passwords and `demoCredentialsNotice` from all i18n JSON files, frontend components, and startup scripts (`run.sh`, `run.bat`). Implemented dynamic `backend/data/.admin_secret` generation and enforced zero hardcoded credentials via `test_credential_hygiene.py`.
+- **Rationale**: Prevents accidental credential leaks, removes misleading demo banners, and complies with enterprise credential hygiene standards.
+
+### Decision 56: Banned Marketing Phrase Erasure & Metric Discrepancy Prevention
+- **Decision**: Replaced all absolute claims ("Zero Fabricated Metrics", "100% programmatically", "zero false alarm", "Zero False Positives", "100% offline", "zero secrets", "sub-20ms", "12ms") with measured, hardware-grounded wording ("core engine runs without internet; bots need internet", "median ~32 ms text inference on AMD Ryzen AI 5 340 (12 cores), ~100 ms with synchronous SQLite audit logging"). Extended `test_banned_phrases.py` to scan `docs/*.md` and `frontend/src/i18n/*.json`, and created `test_demo_docs_consistency.py` to prevent stale numbers from diverging from `EVALUATION_REPORT.md`.
+- **Rationale**: Eliminates credibility risks under scrutiny from senior reviewers and technical judges.
+
+### Decision 57: Transparent Dataset Provenance & Single Held-Out Claim
+- **Decision**: Designated Gold Test Set v2 as a development set used for linguistic error analysis in `docs/EVALUATION_REPORT.md`, documented the real-world origin of natural vocabulary enhancements (police advisories, user study submissions, SMS registries), and established `docs/BLIND_EVALUATION.md` (`make evaluate-blind FILE=...`) as the sole held-out benchmark claim.
+- **Rationale**: Eliminates test leakage ambiguity and demonstrates rigorous ML methodology.

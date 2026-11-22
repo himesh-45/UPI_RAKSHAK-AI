@@ -5,12 +5,21 @@ import pytest
 BANNED_PATTERNS = [
     re.compile(r'(?i)\bbulletproof\b'),
     re.compile(r'(?i)\bproduction[- ]ready\b'),
-    re.compile(r'(?i)\bimmune to\b'),
+    re.compile(r'(?i)\bimmune\s+to\b'),
     re.compile(r'(?i)\b100%\s+accuracy\b'),
     re.compile(r'(?i)\b100%\s+accurate\b'),
-    re.compile(r'(?i)\bzero\s+false\s+positive\b'),
+    re.compile(r'(?i)\bzero\s+false\s+positives?\b'),
+    re.compile(r'(?i)\bzero\s+false\s+alarm\b'),
     re.compile(r'(?i)\bzero\s+hallucination\b'),
     re.compile(r'(?i)\bguaranteed\s+safe\b'),
+    re.compile(r'(?i)\bzero\s+fabricated\s+metrics\b'),
+    re.compile(r'(?i)\b100%\s+programmatically\b'),
+    re.compile(r'(?i)\b100%\s+offline\b'),
+    re.compile(r'(?i)\bzero\s+secrets\b'),
+    re.compile(r'(?i)\bsub-20ms\b'),
+    re.compile(r'(?i)\b12ms\b'),
+    re.compile(r'(?i)\b100%\s+native\b'),
+    re.compile(r'(?i)\bzero\s+external\s+pip\s+dependencies\b'),
 ]
 
 SCAN_EXTENSIONS = ('.md', '.py', '.jsx', '.js', '.html')
@@ -22,7 +31,10 @@ def get_files_to_scan():
     for root, dirs, files in os.walk(base_dir):
         dirs[:] = [d for d in dirs if d not in IGNORE_DIRS]
         for f in files:
-            if f.endswith(SCAN_EXTENSIONS) and f != "test_banned_phrases.py":
+            if f == "test_banned_phrases.py":
+                continue
+            # Scan standard code/doc extensions and frontend i18n JSON files
+            if f.endswith(SCAN_EXTENSIONS) or (f.endswith('.json') and 'i18n' in root):
                 files_to_scan.append(os.path.join(root, f))
     return files_to_scan
 

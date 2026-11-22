@@ -1,11 +1,11 @@
 # UPI Rakshak AI: Comprehensive Evaluation & Benchmark Report
 
 > [!IMPORTANT]
-> **Strict Defensibility Standard (Zero Fabricated Metrics)**:
-> All metrics in this report are computed **100% programmatically** via `backend.app.scripts.evaluate_models`.
+> **Strict Defensibility Standard (Programmatic Benchmark)**:
+> All metrics in this report are computed directly from evaluation code via `backend.app.scripts.evaluate_models`.
 > No numbers are manually typed. All gate statuses are derived directly from mathematical comparisons (`value >= target` or `value <= target`).
 > Targets are strictly uncompromised: 15-class Macro-F1 gate target is set to **0.8500**.
-> Both Gold Test Sets (v1 and v2) are evaluated individually with per-set gate determinations.
+> Both Gold Sets (v1 Frozen Benchmark and v2 Development Set) are evaluated individually with per-set gate determinations.
 
 ---
 
@@ -30,20 +30,27 @@
 ### Explanation of Gate Outcomes & Defensible Analysis:
 1. **Gold v1 15-Class Macro-F1 (0.8994)**: **PASSED** (exceeds the 0.8500 quality target).
 2. **Gold v2 15-Class Macro-F1 (0.8624)**: **PASSED** (exceeds the 0.8500 quality target).
-   - *Analysis*: Gold Test Set v2 was constructed entirely with chaotic, uncurated human phrasings (colloquial Hinglish, Romanized Telugu, WhatsApp forwards). With our targeted natural vocabulary enhancements, fine-grained 15-class attribution achieved 0.8624 Macro-F1, passing the 0.8500 gate while maintaining an ultra-low 1.90% false alarm rate on 105 legitimate messages.
+   - *Analysis*: Gold Test Set v2 was constructed with colloquial human phrasings (colloquial Hinglish, Romanized Telugu, WhatsApp forwards). With our targeted natural vocabulary enhancements, fine-grained 15-class attribution achieved 0.8624 Macro-F1, passing the 0.8500 gate while maintaining an ultra-low 1.90% false alarm rate on 105 legitimate messages.
 3. **Gold v2 ECE (0.1206)**: **FAILED** (above 0.1000 target).
    - *Root Cause*: High-confidence predictions on vernacular code-mixed phrases exhibit mild over-confidence on out-of-distribution human slang. In strict adherence to scientific honesty, this gate remains marked FAILED rather than lowering the 0.1000 threshold.
 
 ---
 
-## 2. Benchmark Dataset Provenance & Honest Disclosure
+## 2. Benchmark Dataset Provenance & Data Provenance Disclosure
 
+### Dataset Provenance & Split Roles
 - **Gold Test Set v1 (Frozen Benchmark)**:
   - **306 samples**: Hand-crafted real-style messages (110 legitimate hard negatives, 196 scam vectors across 14 categories).
-  - *Provenance Note*: Authored early with uniform class balance (~14 samples per scam class). Strictly frozen to prevent test leakage; never trained or tuned on.
-- **Gold Test Set v2 (Natural Human Phrasings & Expanded Hard Negatives)**:
-  - **243 samples**: Highly realistic, unstructured human phrasings (138 scam attacks and **105 legitimate communications**).
-  - *Provenance Note*: The initial release of Gold v2 contained only 35 legitimate samples, resulting in an unrepresentative 0.0% FPR claim. To rectify this statistical limitation, Gold v2 was expanded to **105 diverse legitimate messages** (bank debit/credit notifications with OTP warnings, courier delivery PIN alerts, merchant food/cab receipts, telecom messages, and family P2P money transfers in English, Hindi, Telugu, and Hinglish).
+  - *Role*: Strictly frozen baseline benchmark. Never tuned on, never modified, and preserved for comparison across iterations.
+- **Gold Test Set v2 (Development Set — Used for Error Analysis)**:
+  - **243 samples**: Realistic, unstructured human phrasings (138 scam attacks and **105 legitimate communications**).
+  - *Role & Status Disclosure*: **Gold v2 is designated as a Development Set (used for error analysis), NOT an untouched held-out test set**. Because natural vocabulary enhancements in our training set were identified through linguistic failure analysis on Gold v2, the only strictly untouched held-out evaluation is the **Gold v3 Blind Evaluation Protocol** (`make evaluate-blind FILE=...`, documented in `docs/BLIND_EVALUATION.md` and `docs/GOLD_V3.md`).
+- **Data Provenance of Natural Vocabulary Enhancements**:
+  - The 150+ natural human-style training rows added to `backend/app/data/synthetic_scam_dataset.csv` originated from:
+    1. Error analysis of misclassifications on colloquial Hinglish and Romanized Telugu phrasing.
+    2. Real public advisory bulletins from Delhi Police, Mumbai Crime Branch, Cyber Safe India, and NHAI/FASTag notices.
+    3. User study submissions collected via the `/study` research interface.
+    4. Legitimate banking alerts collected from 12 public bank SMS format registries (SBI, HDFC, ICICI, Axis, PNB).
 
 ---
 
@@ -60,17 +67,49 @@ In real-world fraud prevention, two distinct binary evaluations are critical for
 | :--- | :--- | :---: | :---: | :---: | :---: |
 | **NLP-Only Binary** | Gold Test Set v1 | **95.92%** [92.9%, 98.5%] | **1.82%** [0.0%, 4.8%] | **98.95%** [97.2%, 100.0%] | **0.9741** [0.9569, 0.9895] |
 | **Full Risk Fusion** | Gold Test Set v1 | **99.49%** [98.4%, 100.0%] | **0.00%** [0.0%, 0.0%] | **100.00%** [100.0%, 100.0%] | **0.9974** [0.9917, 1.0000] |
-| **NLP-Only Binary** | Gold Test Set v2 | **96.38%** [93.0%, 99.3%] | **4.76%** [1.1%, 9.2%] | **96.38%** [93.1%, 99.2%] | **0.9638** [0.9421, 0.9829] |
-| **Full Risk Fusion** | Gold Test Set v2 | **98.55%** [96.3%, 100.0%] | **1.90%** [0.0%, 4.8%] | **98.55%** [96.4%, 100.0%] | **0.9855** [0.9711, 0.9967] |
+| **NLP-Only Binary** | Gold Test Set v2 (Dev Set) | **96.38%** [93.0%, 99.3%] | **4.76%** [1.1%, 9.2%] | **96.38%** [93.1%, 99.2%] | **0.9638** [0.9421, 0.9829] |
+| **Full Risk Fusion** | Gold Test Set v2 (Dev Set) | **98.55%** [96.3%, 100.0%] | **1.90%** [0.0%, 4.8%] | **98.55%** [96.4%, 100.0%] | **0.9855** [0.9711, 0.9967] |
 
 *Error Analysis on NLP-only Gold v2 FPR*:
 On the expanded 105 legitimate samples of Gold v2, the standalone NLP model triggers only 5 false positives (4.76% FPR, well within the target threshold of <= 5.0%). The few edge cases involved high-stress language in legitimate bank transaction disputes where phrasing mirrored urgent scam notifications. In the full production engine, the Risk Fusion layer cross-checks official headers, bank sender metadata, and absence of external action links, suppressing false alarms.
 
 ---
 
-## 4. Static URL Scanner: Rigorous Non-Circular Evaluation
+## 4. Digital Arrest & Coercion Benchmark Report
 
-To completely eliminate circularity, the static URL scanner is benchmarked on two strictly partitioned, independent datasets:
+Evaluated against the frozen 102-sample benchmark (`backend/app/data/digital_arrest_testset.json`): **65 extortion scripts** vs. **37 legitimate courier and bank calls**.
+
+| Benchmark Metric | Total Measured Value | 95% Bootstrap CI | Quality Target | Gate Status |
+| :--- | :---: | :---: | :---: | :---: |
+| **Digital Arrest Scam Recall** | **100.00%** (65/65) | [100.00%, 100.00%] | >= 95.0% | **PASSED** |
+| **Legitimate Call FPR** | **0.00%** (0/37) | [0.00%, 0.00%] | <= 3.0% | **PASSED** |
+| **Precision** | **100.00%** | — | >= 95.0% | **PASSED** |
+| **F1-Score** | **1.0000** | — | >= 0.9500 | **PASSED** |
+
+### Per-Language Breakdown
+- **English**: Recall: **100.0%** (20 samples) | FPR: **0.0%** (25 samples)
+- **Hindi (हिंदी)**: Recall: **100.0%** (25 samples) | FPR: **0.0%** (6 samples)
+- **Telugu (తెలుగు)**: Recall: **100.0%** (20 samples) | FPR: **0.0%** (6 samples)
+
+---
+
+## 5. Community Reputation & Omnichannel Channel Behavior Summary
+
+| Architectural Guardrail | Implementation | Verification Status |
+| :--- | :--- | :---: |
+| **Consensus Gating** | Entity flagged only upon corroboration by $\ge 2$ distinct client hashes | **VERIFIED** (`test_community_reputation.py`) |
+| **Reporter Daily Caps** | Max 3 distinct entity reports per client hash per 24 hours | **VERIFIED** (`test_community_reputation.py`) |
+| **Immune Whitelist** | Authorized banking VPAs and telecom domains cryptographically protected | **VERIFIED** (`test_community_reputation.py`) |
+| **Capped Risk Fusion** | Community signal capped at +15 points; cannot trigger HIGH RISK alone (max 49) | **VERIFIED** (`test_community_reputation.py`) |
+| **Sender Privacy Parity** | Raw sender IDs salted and hashed with SHA-256 before storage | **VERIFIED** (`test_channels.py`) |
+| **Sliding Rate Limiter** | 20 messages / hour sliding window per client sender hash | **VERIFIED** (`test_channels.py`) |
+| **Right-to-be-Forgotten** | User command `/delete_data` permanently purges all sender records | **VERIFIED** (`test_channels.py`) |
+
+---
+
+## 6. Static URL Scanner: Rigorous Non-Circular Evaluation
+
+To eliminate circularity, the static URL scanner is benchmarked on two strictly partitioned, independent datasets:
 
 1. **Row 1: Real-Feed Benchmark**:
    - Evaluated on chronologically held-out **OpenPhish live feed URLs** (n=100) and disjoint **Tranco Top-1000 Benign Domains** (n=250).
@@ -79,15 +118,15 @@ To completely eliminate circularity, the static URL scanner is benchmarked on tw
    - Generated by an independent adversarial generator using different mutation mechanisms (Cyrillic homoglyphs, QWERTY keyboard adjacent substitutions, bit-squatting, subdomain nesting) PLUS **107 hand-written real-world scam lookalikes** (n=357), evaluated against held-out benign domains (n=357).
 
 | Benchmark Dimension | Phishing Samples | Benign Samples | Phishing Recall (95% CI) | Benign FPR (95% CI) | Precision (95% CI) | F1-Score (95% CI) |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | **Real-Feed Benchmark** (OpenPhish + Tranco) | 100 | 250 | **82.00%** [74.51%, 89.32%] | **1.60%** [0.39%, 3.29%] | **95.35%** [90.47%, 98.90%] | **0.8817** [0.8307, 0.9276] |
 | **Synthetic Adversarial Benchmark** (Independent + 107 Handwritten) | 357 | 357 | **98.60%** [97.32%, 99.72%] | **1.12%** [0.28%, 2.31%] | **98.88%** [97.69%, 99.72%] | **0.9874** [0.9794, 0.9946] |
 
-*Architectural Guarantee*: Zero network calls, zero DNS lookups, strictly air-gapped static lexical/structural/ML inspection.
+*Network Architecture*: Core engine runs without internet; bots need internet connection to receive webhook events.
 
 ---
 
-## 5. NLP 15-Class Performance Breakdown (Gold Test Set v1)
+## 7. NLP 15-Class Performance Breakdown (Gold Test Set v1)
 
 | Category | Precision | Recall | F1-Score | Support |
 | :--- | :---: | :---: | :---: | :---: |
@@ -111,7 +150,7 @@ To completely eliminate circularity, the static URL scanner is benchmarked on tw
 
 ---
 
-## 6. Confusion Matrix (Gold Test Set v1)
+## 8. Confusion Matrix (Gold Test Set v1)
 
 | True \ Pred | accidental_transfer_scam | collect_request_fraud | courier_customs_scam | electricity_disconnection | fake_bank_kyc | fake_customer_support | fake_govt_scheme | fake_upi_refund_cashback | job_investment_scam | legitimate | loan_app_extortion | lottery_prize | marketplace_qr_scam | otp_pin_theft | remote_access_scam |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
@@ -133,19 +172,20 @@ To completely eliminate circularity, the static URL scanner is benchmarked on tw
 
 ---
 
-## 7. Inference Latency & Performance on CPU
+## 9. Inference Latency & Performance on CPU
 
-Measured across single-threaded execution on standard commodity x86 hardware:
+Measured on AMD Ryzen AI 5 340 (12 logical cores, AuthenticAMD):
 
-- **p50 Latency (Median)**: **10.79 ms** per sample.
-- **p95 Latency**: **18.18 ms** per sample (well under the 1,500 ms target).
-- **Peak RAM Footprint**: < 25 MB total process memory.
+- **Pure Text Inference Latency (Median)**: **11.87 ms** per sample (~32 ms end-to-end multi-detector fusion).
+- **With SQLite Audit Logging**: **~100 ms** per request under synchronous disk commit.
+- **Under 50 Concurrent Clients**: Sustained throughput of **25.0 requests/second** with **0.00% error rate**.
+- **Process Memory Footprint**: ~45 MB runtime memory.
 
 ---
 
-## 8. Uncertainty & Abstention Handling
+## 10. Uncertainty & Abstention Handling
 
 When model confidence falls within the ambiguous margin ($0.35 \le p \le 0.60$) or detectors disagree:
 - The system abstains from declaring a dogmatic verdict and instead returns:
   `"Not enough evidence - verify with your bank or official source"`.
-- This ensures high-consequence edge cases guide the user to human verification rather than risking catastrophic false assurances.
+- This ensures high-consequence edge cases guide the user to human verification rather than risking false assurances.
