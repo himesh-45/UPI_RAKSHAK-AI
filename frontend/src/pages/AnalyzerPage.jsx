@@ -149,72 +149,102 @@ export default function AnalyzerPage() {
       {/* ------------------------------------------------------------------ */}
       {/* 1. TOP HERO BANNER: "Stop scams before they strike." + CYBER SHIELD */}
       {/* ------------------------------------------------------------------ */}
-      <div className="relative overflow-hidden rounded-3xl p-6 sm:p-10 cyber-glass border border-cyan-500/20 shadow-[0_10px_40px_rgba(0,0,0,0.6)]">
-        {/* Ambient Radial Background Glows */}
-        <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-cyan-500/10 blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-blue-600/15 blur-3xl pointer-events-none" />
+      <div className="relative overflow-hidden rounded-3xl p-6 sm:p-10 glass-card border border-[#1E3A5F] shadow-[0_12px_45px_rgba(5,10,24,0.7)]">
+        {/* Ambient Subtle Radial Background Glows */}
+        <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-[#1FB5AD]/10 blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-[#D9A441]/08 blur-3xl pointer-events-none" />
 
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           
           {/* Left Hero Content */}
           <div className="lg:col-span-7 space-y-4 text-left">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-black tracking-wider uppercase bg-cyan-500/20 text-cyan-300 border border-cyan-400/40 shadow-[0_0_15px_rgba(6,182,212,0.25)]">
-              <Sparkles className="w-3.5 h-3.5 text-cyan-300 animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-black tracking-wider uppercase bg-[#1FB5AD]/15 text-[#35D0C8] border border-[#35D0C8]/40 shadow-[0_0_15px_rgba(53,208,200,0.2)]">
+              <Sparkles className="w-3.5 h-3.5 text-[#35D0C8] animate-pulse" />
               <span>AI Cyber Shield Active • Edge Inference</span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-tight">
-              {t('hero.title')}
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#F5F1E6] leading-tight font-display">
+              Stop <span className="text-gold-highlight font-serif font-black">scams</span> before they strike.
             </h1>
 
-            <p className="text-sm sm:text-base text-slate-300 font-medium max-w-xl leading-relaxed">
-              {t('hero.subtitle')}
+            <p className="text-sm sm:text-base text-[#A9B4CC] font-medium max-w-xl leading-relaxed">
+              AI-powered fraud detection to keep you and your family safe online.
             </p>
 
             <div className="pt-2 flex flex-wrap items-center gap-3">
               <button
-                onClick={() => setLlmModalOpen(true)}
-                className="px-4 py-2 rounded-2xl bg-indigo-500/20 hover:bg-indigo-500/30 border border-indigo-400/40 hover:border-indigo-400 text-indigo-300 font-extrabold text-xs flex items-center gap-2 shadow-[0_0_15px_rgba(99,102,241,0.2)] transition hover:scale-105 active:scale-95"
+                type="button"
+                onClick={() => {
+                  const el = document.getElementById('analyzer-input-area');
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                  else window.scrollTo({ top: 380, behavior: 'smooth' });
+                }}
+                className="btn-gold-primary px-5 py-2.5 rounded-2xl text-xs font-black flex items-center gap-2 shadow-[0_4px_18px_rgba(217,164,65,0.35)] cursor-pointer"
               >
-                <Zap className="w-4 h-4 text-indigo-400" />
-                <span>Why Not Just Use an LLM?</span>
+                <Shield className="w-4 h-4 text-[#050A18]" />
+                <span>Check a message</span>
+                <ArrowRight className="w-4 h-4 stroke-[3]" />
               </button>
 
               <button
                 type="button"
                 onClick={() => setHonestyModalOpen(true)}
-                className="px-4 py-2 rounded-2xl bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 hover:border-cyan-400 text-cyan-300 font-extrabold text-xs flex items-center gap-2 shadow-[0_0_15px_rgba(6,182,212,0.15)] transition hover:scale-105 active:scale-95"
+                className="btn-teal-outline px-4 py-2.5 rounded-2xl text-xs font-extrabold flex items-center gap-2 cursor-pointer"
               >
-                <HelpCircle className="w-4 h-4 text-cyan-400" />
+                <HelpCircle className="w-4 h-4 text-[#35D0C8]" />
                 <span>How accurate is this?</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setLlmModalOpen(true)}
+                className="px-3.5 py-2 rounded-2xl bg-[#0F1D3A] hover:bg-[#14254B] border border-[#1E3A5F] hover:border-[#35D0C8]/40 text-[#A9B4CC] hover:text-[#F5F1E6] text-xs font-bold flex items-center gap-1.5 transition cursor-pointer"
+              >
+                <Zap className="w-3.5 h-3.5 text-[#F5C96A]" />
+                <span>Why Not Just Use an LLM?</span>
               </button>
             </div>
           </div>
 
-          {/* Right Hero Graphic: Holographic Shield & Cyber Matrix */}
+          {/* Right Hero Graphic: Original Vector Shield Emblem with Teal Glow & Gold Rim */}
           <div className="lg:col-span-5 flex justify-center lg:justify-end">
             <div className="relative w-64 h-56 sm:w-72 sm:h-64 flex items-center justify-center">
-              {/* Outer Pulse Rings */}
-              <div className="absolute inset-0 rounded-full border border-cyan-500/20 animate-ping opacity-25" style={{ animationDuration: '3s' }} />
-              <div className="absolute w-52 h-52 rounded-full border border-cyan-400/30 shadow-[0_0_30px_rgba(6,182,212,0.2)]" />
-              <div className="absolute w-40 h-40 rounded-full border border-blue-500/40 animate-spin" style={{ animationDuration: '16s' }} />
-              
-              {/* Central Glowing Cyber Shield Hologram */}
-              <div className="relative z-10 w-32 h-36 rounded-3xl bg-gradient-to-b from-cyan-400/30 via-blue-600/40 to-indigo-900/60 backdrop-blur-md border border-cyan-300/60 shadow-[0_0_40px_rgba(6,182,212,0.55)] flex flex-col items-center justify-center text-center p-3">
-                <Shield className="w-14 h-14 text-cyan-300 drop-shadow-[0_0_15px_rgba(0,242,254,0.8)] fill-cyan-400/20" />
-                <div className="mt-2 px-2 py-0.5 rounded-full bg-cyan-950/80 border border-cyan-400/50 text-[10px] font-black uppercase tracking-wider text-cyan-300 shadow-[0_0_10px_rgba(6,182,212,0.4)]">
-                  PROTECTED
+              {/* Soft Teal Halo Behind Shield */}
+              <div className="absolute inset-0 rounded-full bg-[#1FB5AD]/10 blur-2xl pointer-events-none" />
+              <div className="absolute w-52 h-52 rounded-full border border-[#35D0C8]/25 animate-pulse pointer-events-none" style={{ animationDuration: '4s' }} />
+              <div className="absolute w-44 h-44 rounded-full border border-[#D9A441]/20 pointer-events-none" />
+
+              {/* Original Vector SVG Shield Emblem */}
+              <div className="relative z-10 w-36 h-40 sm:w-40 sm:h-44 rounded-3xl bg-gradient-to-b from-[#0F1D3A]/90 via-[#070E22]/95 to-[#050A18] backdrop-blur-md border-2 border-[#D9A441] shadow-[0_0_35px_rgba(53,208,200,0.35)] flex flex-col items-center justify-center text-center p-4 group">
+                <svg className="w-16 h-16 sm:w-20 sm:h-20 drop-shadow-[0_0_18px_rgba(53,208,200,0.7)]" viewBox="0 0 64 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient id="shieldTealGrad" x1="32" y1="4" x2="32" y2="68" gradientUnits="userSpaceOnUse">
+                      <stop stopColor="#35D0C8" stopOpacity="0.35" />
+                      <stop stopColor="#0B1530" stopOpacity="0.85" />
+                    </linearGradient>
+                    <linearGradient id="shieldGoldRim" x1="4" y1="4" x2="60" y2="68" gradientUnits="userSpaceOnUse">
+                      <stop stopColor="#F5C96A" />
+                      <stop stopColor="#D9A441" />
+                      <stop stopColor="#A87B1E" />
+                    </linearGradient>
+                  </defs>
+                  {/* Outer Protective Rim */}
+                  <path d="M32 4L56 12V32C56 48 45.6 62.4 32 68C18.4 62.4 8 48 8 32V12L32 4Z" fill="url(#shieldTealGrad)" stroke="url(#shieldGoldRim)" strokeWidth="3" strokeLinejoin="round" />
+                  {/* Inner Cyber Crest */}
+                  <path d="M32 14L48 20V32C48 43.6 40.8 54 32 58C23.2 54 16 43.6 16 32V20L32 14Z" stroke="#35D0C8" strokeWidth="1.5" strokeOpacity="0.6" strokeDasharray="3 3" />
+                  {/* Center Lock / Padlock */}
+                  <rect x="24" y="32" width="16" height="13" rx="3" fill="#050A18" stroke="#D9A441" strokeWidth="2" />
+                  <path d="M27 32V27C27 24.2 29.2 22 32 22C34.8 22 37 24.2 37 27V32" stroke="#35D0C8" strokeWidth="2.2" strokeLinecap="round" />
+                  <circle cx="32" cy="38" r="1.5" fill="#F5C96A" />
+                </svg>
+                <div className="mt-2 px-2.5 py-0.5 rounded-full bg-[#050A18]/90 border border-[#D9A441]/50 text-[10px] font-black uppercase tracking-wider text-[#F5C96A] shadow-[0_0_10px_rgba(217,164,65,0.3)]">
+                  SHIELD ACTIVE
                 </div>
               </div>
 
-              {/* Threat Alert Hexagon (Right Corner) */}
-              <div className="absolute top-4 right-2 w-11 h-11 rounded-2xl bg-rose-500/20 border border-rose-500/50 shadow-[0_0_20px_rgba(244,63,94,0.4)] flex items-center justify-center text-rose-300 animate-bounce" style={{ animationDuration: '4s' }}>
-                <AlertTriangle className="w-5 h-5 text-rose-400 drop-shadow-[0_0_8px_rgba(239,68,68,0.7)]" />
-              </div>
-
-              {/* Status Pill Indicator (Bottom Left) */}
-              <div className="absolute bottom-4 left-2 px-3 py-1 rounded-full bg-[#080d22]/90 border border-emerald-400/40 text-[11px] font-bold text-emerald-300 shadow-[0_0_15px_rgba(16,185,129,0.3)] flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+              {/* Live Guard Status Pill (Bottom Left) */}
+              <div className="absolute -bottom-2 -left-2 px-3 py-1 rounded-full bg-[#070E22]/95 border border-[#35D0C8]/40 text-[11px] font-bold text-[#35D0C8] shadow-[0_0_15px_rgba(53,208,200,0.3)] flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-[#34D399] animate-ping" />
                 <span>Live Guard Active</span>
               </div>
             </div>
@@ -229,18 +259,18 @@ export default function AnalyzerPage() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
         
         {/* LEFT COLUMN (7 COLS): "Scan a Suspicious Message" Card */}
-        <div className="lg:col-span-7 cyber-glass rounded-3xl p-6 sm:p-7 space-y-5 border border-cyan-500/25 flex flex-col justify-between">
+        <div id="analyzer-input-area" className="lg:col-span-7 glass-card rounded-3xl p-6 sm:p-7 space-y-5 border border-[#1E3A5F] flex flex-col justify-between">
           <div className="space-y-4">
             {/* Header: Activity Wave + Title */}
             <div className="flex items-center gap-3">
-              <div className="p-2.5 rounded-2xl bg-cyan-500/20 text-cyan-300 border border-cyan-400/40 shadow-[0_0_15px_rgba(6,182,212,0.3)]">
+              <div className="p-2.5 rounded-2xl bg-[#35D0C8]/15 text-[#35D0C8] border border-[#35D0C8]/30 shadow-[0_0_15px_rgba(53,208,200,0.2)]">
                 <Activity className="w-5 h-5 animate-pulse" />
               </div>
               <div>
-                <h2 className="text-base sm:text-lg font-black tracking-tight text-white">
+                <h2 className="text-base sm:text-lg font-black tracking-tight text-[#F5F1E6]">
                   Scan a Suspicious Message
                 </h2>
-                <p className="text-xs text-slate-400 font-medium">
+                <p className="text-xs text-[#A9B4CC] font-medium">
                   Paste the message, link or upload a screenshot for analysis.
                 </p>
               </div>
@@ -253,8 +283,8 @@ export default function AnalyzerPage() {
                 onClick={() => setActiveInputTab('text')}
                 className={`px-4 py-2 rounded-full text-xs font-black flex items-center gap-2 transition ${
                   activeInputTab === 'text'
-                    ? 'bg-gradient-to-r from-cyan-500/30 to-blue-500/30 text-cyan-300 border border-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.35)]'
-                    : 'bg-[#060919]/70 text-slate-400 border border-slate-800 hover:text-white hover:border-slate-700'
+                    ? 'bg-[#35D0C8]/20 text-[#35D0C8] border border-[#35D0C8]/50 shadow-[0_0_15px_rgba(53,208,200,0.25)]'
+                    : 'bg-[#070E22]/80 text-[#A9B4CC] border border-[#1E3A5F] hover:text-[#F5F1E6] hover:border-[#35D0C8]/40'
                 }`}
               >
                 <MessageSquare className="w-3.5 h-3.5" />
@@ -266,8 +296,8 @@ export default function AnalyzerPage() {
                 onClick={() => setActiveInputTab('url')}
                 className={`px-4 py-2 rounded-full text-xs font-black flex items-center gap-2 transition ${
                   activeInputTab === 'url'
-                    ? 'bg-gradient-to-r from-cyan-500/30 to-blue-500/30 text-cyan-300 border border-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.35)]'
-                    : 'bg-[#060919]/70 text-slate-400 border border-slate-800 hover:text-white hover:border-slate-700'
+                    ? 'bg-[#35D0C8]/20 text-[#35D0C8] border border-[#35D0C8]/50 shadow-[0_0_15px_rgba(53,208,200,0.25)]'
+                    : 'bg-[#070E22]/80 text-[#A9B4CC] border border-[#1E3A5F] hover:text-[#F5F1E6] hover:border-[#35D0C8]/40'
                 }`}
               >
                 <LinkIcon className="w-3.5 h-3.5" />
@@ -279,8 +309,8 @@ export default function AnalyzerPage() {
                 onClick={() => setActiveInputTab('vpa')}
                 className={`px-4 py-2 rounded-full text-xs font-black flex items-center gap-2 transition ${
                   activeInputTab === 'vpa'
-                    ? 'bg-gradient-to-r from-cyan-500/30 to-blue-500/30 text-cyan-300 border border-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.35)]'
-                    : 'bg-[#060919]/70 text-slate-400 border border-slate-800 hover:text-white hover:border-slate-700'
+                    ? 'bg-[#35D0C8]/20 text-[#35D0C8] border border-[#35D0C8]/50 shadow-[0_0_15px_rgba(53,208,200,0.25)]'
+                    : 'bg-[#070E22]/80 text-[#A9B4CC] border border-[#1E3A5F] hover:text-[#F5F1E6] hover:border-[#35D0C8]/40'
                 }`}
               >
                 <CreditCard className="w-3.5 h-3.5" />
@@ -292,8 +322,8 @@ export default function AnalyzerPage() {
                 onClick={() => setActiveInputTab('image')}
                 className={`px-4 py-2 rounded-full text-xs font-black flex items-center gap-2 transition ${
                   activeInputTab === 'image'
-                    ? 'bg-gradient-to-r from-cyan-500/30 to-blue-500/30 text-cyan-300 border border-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.35)]'
-                    : 'bg-[#060919]/70 text-slate-400 border border-slate-800 hover:text-white hover:border-slate-700'
+                    ? 'bg-[#35D0C8]/20 text-[#35D0C8] border border-[#35D0C8]/50 shadow-[0_0_15px_rgba(53,208,200,0.25)]'
+                    : 'bg-[#070E22]/80 text-[#A9B4CC] border border-[#1E3A5F] hover:text-[#F5F1E6] hover:border-[#35D0C8]/40'
                 }`}
               >
                 <ImageIcon className="w-3.5 h-3.5" />
@@ -303,9 +333,9 @@ export default function AnalyzerPage() {
 
             {/* Input Box: SMS / Text Area */}
             {activeInputTab === 'text' && (
-              <div className="relative rounded-2xl bg-[#060919]/90 border border-cyan-500/25 focus-within:border-cyan-400 focus-within:shadow-[0_0_20px_rgba(6,182,212,0.25)] p-4 transition space-y-2">
-                <div className="flex items-center justify-between pb-1 border-b border-cyan-500/10">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+              <div className="relative rounded-2xl bg-[#070E22]/90 border border-[#1E3A5F] focus-within:border-[#35D0C8] focus-within:shadow-[0_0_20px_rgba(53,208,200,0.2)] p-4 transition space-y-2">
+                <div className="flex items-center justify-between pb-1 border-b border-[#1E3A5F]/60">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#A9B4CC]">
                     Message Body
                   </span>
                   <VoiceInput
@@ -318,10 +348,10 @@ export default function AnalyzerPage() {
                   value={textInput}
                   onChange={(e) => setTextInput(e.target.value)}
                   placeholder="Your account will be blocked today. Verify KYC now: secure-kyc-check.example"
-                  className="w-full bg-transparent text-white placeholder:text-slate-500 focus:outline-none text-sm font-sans resize-none"
+                  className="w-full bg-transparent text-[#F5F1E6] placeholder:text-[#7C89A6] focus:outline-none text-sm font-sans resize-none"
                 />
                 <div className="flex items-center justify-end pt-1">
-                  <span className="text-[11px] font-mono text-slate-400">
+                  <span className="text-[11px] font-mono text-[#A9B4CC]">
                     {textInput.length}/500
                   </span>
                 </div>
@@ -330,8 +360,8 @@ export default function AnalyzerPage() {
 
             {/* Input Box: URL */}
             {activeInputTab === 'url' && (
-              <div className="relative rounded-2xl bg-[#060919]/90 border border-cyan-500/25 focus-within:border-cyan-400 focus-within:shadow-[0_0_20px_rgba(6,182,212,0.25)] p-4 transition space-y-2">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+              <div className="relative rounded-2xl bg-[#070E22]/90 border border-[#1E3A5F] focus-within:border-[#35D0C8] focus-within:shadow-[0_0_20px_rgba(53,208,200,0.2)] p-4 transition space-y-2">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#A9B4CC]">
                   Suspicious Website / Payment Link URL
                 </span>
                 <input
@@ -339,14 +369,14 @@ export default function AnalyzerPage() {
                   value={urlInput}
                   onChange={(e) => setUrlInput(e.target.value)}
                   placeholder="e.g. https://sbi-kyc-verification.top/login or http://192.168.1.10/pay"
-                  className="w-full bg-transparent text-white placeholder:text-slate-500 focus:outline-none text-sm font-mono"
+                  className="w-full bg-transparent text-[#F5F1E6] placeholder:text-[#7C89A6] focus:outline-none text-sm font-mono"
                 />
               </div>
             )}
 
             {/* Input Box: Image / QR */}
             {activeInputTab === 'image' && (
-              <div className="relative border-2 border-dashed border-cyan-500/30 hover:border-cyan-400 rounded-2xl p-6 text-center cursor-pointer transition bg-[#060919]/70">
+              <div className="relative border-2 border-dashed border-[#1E3A5F] hover:border-[#35D0C8] rounded-2xl p-6 text-center cursor-pointer transition bg-[#070E22]/70">
                 <input
                   type="file"
                   accept="image/png, image/jpeg, image/jpg, image/webp"
@@ -358,17 +388,17 @@ export default function AnalyzerPage() {
                     <img
                       src={filePreview}
                       alt="Uploaded preview"
-                      className="max-h-40 mx-auto rounded-xl object-contain border border-cyan-500/40 shadow-[0_0_15px_rgba(6,182,212,0.3)]"
+                      className="max-h-40 mx-auto rounded-xl object-contain border border-[#35D0C8]/40 shadow-[0_0_15px_rgba(53,208,200,0.3)]"
                     />
-                    <p className="text-xs text-cyan-300 font-mono">{selectedFile?.name}</p>
+                    <p className="text-xs text-[#35D0C8] font-mono">{selectedFile?.name}</p>
                   </div>
                 ) : (
                   <div className="space-y-2">
-                    <Upload className="w-8 h-8 text-cyan-400 mx-auto" />
-                    <p className="text-sm font-bold text-white">
+                    <Upload className="w-8 h-8 text-[#35D0C8] mx-auto" />
+                    <p className="text-sm font-bold text-[#F5F1E6]">
                       Click to browse or drag & drop payment screenshot
                     </p>
-                    <p className="text-xs text-slate-400">
+                    <p className="text-xs text-[#A9B4CC]">
                       PNG, JPG, or WEBP. Decodes QR codes safely offline.
                     </p>
                   </div>
@@ -378,7 +408,7 @@ export default function AnalyzerPage() {
 
             {/* Input Box: VPA Tab */}
             {activeInputTab === 'vpa' && (
-              <div className="rounded-2xl bg-[#060919]/90 border border-cyan-500/25 p-4">
+              <div className="rounded-2xl bg-[#070E22]/90 border border-[#1E3A5F] p-4">
                 <VpaCheckTab />
               </div>
             )}
@@ -386,7 +416,7 @@ export default function AnalyzerPage() {
             {/* Demo Sample Chips */}
             {activeInputTab !== 'vpa' && demoExamples.length > 0 && (
               <div className="space-y-1.5 pt-1">
-                <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+                <span className="text-[11px] font-bold text-[#A9B4CC] uppercase tracking-wider">
                   Try Fictional Samples:
                 </span>
                 <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
@@ -395,7 +425,7 @@ export default function AnalyzerPage() {
                       key={chip.id}
                       type="button"
                       onClick={() => handleApplyChip(chip)}
-                      className="px-2.5 py-1 rounded-full text-[11px] font-bold whitespace-nowrap bg-[#0a102b] hover:bg-cyan-500/20 text-slate-300 hover:text-cyan-300 border border-cyan-500/20 hover:border-cyan-400/50 transition"
+                      className="px-2.5 py-1 rounded-full text-[11px] font-bold whitespace-nowrap bg-[#0B1530] hover:bg-[#35D0C8]/20 text-[#A9B4CC] hover:text-[#35D0C8] border border-[#1E3A5F] hover:border-[#35D0C8]/50 transition cursor-pointer"
                     >
                       {chip.label}
                     </button>
@@ -414,10 +444,10 @@ export default function AnalyzerPage() {
 
           {/* Action Footer: [Upload Screenshot] [Clear] [Analyze Threat ->] */}
           {activeInputTab !== 'vpa' && (
-            <div className="pt-4 border-t border-cyan-500/15 flex flex-wrap items-center justify-between gap-3">
+            <div className="pt-4 border-t border-[#1E3A5F]/60 flex flex-wrap items-center justify-between gap-3">
               <div className="flex items-center gap-2">
-                <label className="px-3 py-1.5 rounded-full bg-[#060919] hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700/60 text-xs font-bold flex items-center gap-1.5 cursor-pointer transition">
-                  <Upload className="w-3.5 h-3.5 text-cyan-400" />
+                <label className="btn-teal-outline px-3.5 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 cursor-pointer">
+                  <Upload className="w-3.5 h-3.5 text-[#35D0C8]" />
                   <span>Upload Screenshot</span>
                   <input
                     type="file"
@@ -433,7 +463,7 @@ export default function AnalyzerPage() {
                 <button
                   type="button"
                   onClick={handleClear}
-                  className="px-3 py-1.5 rounded-full bg-[#060919] hover:bg-slate-800 text-slate-400 hover:text-rose-400 border border-slate-800 text-xs font-bold flex items-center gap-1.5 transition"
+                  className="px-3 py-1.5 rounded-full bg-[#070E22] hover:bg-[#0F1D3A] text-[#A9B4CC] hover:text-[#F43F5E] border border-[#1E3A5F] text-xs font-bold flex items-center gap-1.5 transition cursor-pointer"
                   title="Clear inputs"
                 >
                   <Trash2 className="w-3.5 h-3.5" />
@@ -445,11 +475,11 @@ export default function AnalyzerPage() {
                 type="button"
                 onClick={handleAnalyze}
                 disabled={loading}
-                className="px-6 py-2.5 rounded-full bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-slate-950 font-black text-xs uppercase tracking-wider shadow-[0_0_20px_rgba(6,182,212,0.45)] hover:shadow-[0_0_30px_rgba(6,182,212,0.7)] flex items-center gap-2 transition hover:scale-105 active:scale-95 disabled:opacity-50"
+                className="btn-gold-primary px-6 py-2.5 rounded-full text-xs font-black uppercase tracking-wider flex items-center gap-2 shadow-[0_4px_18px_rgba(217,164,65,0.35)] cursor-pointer disabled:opacity-50"
               >
                 {loading ? (
                   <>
-                    <div className="w-3.5 h-3.5 border-2 border-slate-950/30 border-t-slate-950 rounded-full animate-spin" />
+                    <div className="w-3.5 h-3.5 border-2 border-[#050A18]/30 border-t-[#050A18] rounded-full animate-spin" />
                     <span>Analyzing...</span>
                   </>
                 ) : (
@@ -464,11 +494,11 @@ export default function AnalyzerPage() {
         </div>
 
         {/* RIGHT COLUMN (5 COLS): Threat Detection Card */}
-        <div className="lg:col-span-5 cyber-glass rounded-3xl p-6 sm:p-7 space-y-5 border border-cyan-500/25 flex flex-col justify-between">
+        <div className={`lg:col-span-5 glass-card rounded-3xl p-6 sm:p-7 space-y-5 border border-[#1E3A5F] flex flex-col justify-between ${report ? 'glass-card-active' : ''}`}>
           {report ? (
             <div className="space-y-5">
               {/* Top Row Badges: Fraud Risk Detected + AI Analysis Complete */}
-              <div className="flex items-center justify-between gap-2 flex-wrap pb-3 border-b border-cyan-500/15">
+              <div className="flex items-center justify-between gap-2 flex-wrap pb-3 border-b border-[#1E3A5F]/60">
                 <div className={`px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider flex items-center gap-1.5 border shadow-sm ${
                   report.verdict === 'HIGH RISK'
                     ? 'bg-rose-500/20 text-rose-300 border-rose-500/50 shadow-[0_0_12px_rgba(239,68,68,0.4)]'
@@ -482,8 +512,8 @@ export default function AnalyzerPage() {
                   </span>
                 </div>
 
-                <div className="px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 text-xs font-black flex items-center gap-1 shadow-[0_0_10px_rgba(16,185,129,0.25)]">
-                  <Activity className="w-3.5 h-3.5 text-emerald-400" />
+                <div className="px-3 py-1 rounded-full bg-[#1FB5AD]/15 text-[#35D0C8] border border-[#35D0C8]/30 text-xs font-black flex items-center gap-1 shadow-[0_0_10px_rgba(53,208,200,0.2)]">
+                  <Activity className="w-3.5 h-3.5 text-[#35D0C8]" />
                   <span>AI Analysis Complete ✓</span>
                 </div>
               </div>
@@ -494,64 +524,66 @@ export default function AnalyzerPage() {
                   <ScoreGauge score={report.risk_score} verdict={report.verdict} />
                 </div>
                 <div className="sm:col-span-7 space-y-2">
-                  <h4 className="text-xs font-black uppercase tracking-wider text-white">
+                  <h4 className="text-xs font-black uppercase tracking-wider text-[#F5F1E6]">
                     Why was this flagged?
                   </h4>
-                  <ul className="space-y-1.5 text-xs text-slate-300 font-medium">
+                  <ul className="space-y-1.5 text-xs text-[#A9B4CC] font-medium">
                     {report.evidence && report.evidence.length > 0 ? (
                       report.evidence.slice(0, 4).map((ev, i) => (
                         <li key={i} className="flex items-start gap-1.5 leading-snug">
-                          <span className="w-2 h-2 rounded-full bg-rose-500 mt-1.5 shrink-0 shadow-[0_0_6px_rgba(239,68,68,0.8)]" />
-                          <span className="line-clamp-2">{ev.signal}</span>
+                          <span className={`w-2 h-2 rounded-full mt-1.5 shrink-0 ${
+                            report.verdict === 'HIGH RISK' ? 'bg-[#F43F5E] shadow-[0_0_6px_rgba(244,63,94,0.8)]' : 'bg-[#FB923C] shadow-[0_0_6px_rgba(251,146,60,0.8)]'
+                          }`} />
+                          <span className="line-clamp-2 text-[#F5F1E6]">{ev.signal}</span>
                         </li>
                       ))
                     ) : (
-                      <li className="text-slate-400 text-xs">No overt high-risk threat indicators matched.</li>
+                      <li className="text-[#A9B4CC] text-xs">No overt high-risk threat indicators matched.</li>
                     )}
                   </ul>
                 </div>
               </div>
 
-              {/* AI Recommendation Box with Purple Glow */}
-              <div className="p-4 rounded-2xl bg-purple-950/40 border border-purple-500/30 text-purple-200 shadow-[0_0_20px_rgba(168,85,247,0.15)] flex items-start justify-between gap-3">
+              {/* AI Recommendation Box in Midnight Raised Navy with Teal Border */}
+              <div className="p-4 rounded-2xl bg-[#0B1530]/90 border border-[#1FB5AD]/30 text-[#F5F1E6] shadow-[0_0_20px_rgba(53,208,200,0.1)] flex items-start justify-between gap-3">
                 <div className="space-y-1 text-left">
-                  <div className="flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-purple-300">
-                    <Lightbulb className="w-3.5 h-3.5 text-purple-400" />
+                  <div className="flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-[#35D0C8]">
+                    <Lightbulb className="w-3.5 h-3.5 text-[#35D0C8]" />
                     <span>AI Recommendation</span>
                   </div>
-                  <p className="text-xs text-purple-200/90 leading-relaxed font-medium">
+                  <p className="text-xs text-[#A9B4CC] leading-relaxed font-medium">
                     {report.recommended_actions?.[0] || 'Never enter your UPI PIN or scan QR codes to receive money.'}
                   </p>
                 </div>
-                <div className="p-2 rounded-xl bg-purple-900/40 border border-purple-400/40 text-purple-300 shrink-0 shadow-[0_0_10px_rgba(168,85,247,0.3)]">
-                  <ShieldCheck className="w-5 h-5 text-purple-300" />
+                <div className="p-2 rounded-xl bg-[#0F1D3A] border border-[#35D0C8]/40 text-[#35D0C8] shrink-0 shadow-[0_0_10px_rgba(53,208,200,0.25)]">
+                  <ShieldCheck className="w-5 h-5 text-[#35D0C8]" />
                 </div>
               </div>
 
               {/* Action Buttons: Copy, Feedback, Report */}
-              <div className="pt-2 flex items-center justify-between gap-2 border-t border-cyan-500/10">
+              <div className="pt-2 flex items-center justify-between gap-2 border-t border-[#1E3A5F]/60">
                 <button
                   type="button"
                   onClick={handleCopySummary}
-                  className="px-3 py-1.5 rounded-xl text-xs font-bold bg-[#060919] hover:bg-slate-800 text-slate-300 border border-slate-700/60 flex items-center gap-1 transition"
+                  className="px-3 py-1.5 rounded-xl text-xs font-bold bg-[#070E22] hover:bg-[#0F1D3A] text-[#A9B4CC] hover:text-[#F5F1E6] border border-[#1E3A5F] flex items-center gap-1 transition cursor-pointer"
                 >
-                  {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                  {copied ? <Check className="w-3.5 h-3.5 text-[#34D399]" /> : <Copy className="w-3.5 h-3.5" />}
                   <span>{copied ? 'Copied' : 'Share'}</span>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => setFeedbackModalOpen(true)}
-                  className="px-3 py-1.5 rounded-xl text-xs font-bold bg-[#060919] hover:bg-slate-800 text-slate-300 border border-slate-700/60 flex items-center gap-1 transition"
+                  className="px-3 py-1.5 rounded-xl text-xs font-bold bg-[#070E22] hover:bg-[#0F1D3A] text-[#A9B4CC] hover:text-[#F5F1E6] border border-[#1E3A5F] flex items-center gap-1 transition cursor-pointer"
                 >
-                  <ThumbsUp className="w-3.5 h-3.5 text-cyan-400" />
+                  <ThumbsUp className="w-3.5 h-3.5 text-[#35D0C8]" />
                   <span>Feedback</span>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => setReportModalOpen(true)}
-                  className="px-3 py-1.5 rounded-xl text-xs font-black bg-rose-500/20 text-rose-300 border border-rose-500/40 hover:bg-rose-500/30 flex items-center gap-1 transition shadow-[0_0_10px_rgba(244,63,94,0.3)]"
+                  className="px-3 py-1.5 rounded-xl text-xs font-black bg-rose-500/20 text-rose-300 border border-rose-500/40 hover:bg-rose-500/30 flex items-center gap-1 transition shadow-[0_0_10px_rgba(244,63,94,0.3)] cursor-pointer"
                 >
                   <Flag className="w-3.5 h-3.5" />
                   <span>Report</span>
@@ -559,15 +591,15 @@ export default function AnalyzerPage() {
               </div>
             </div>
           ) : (
-            /* Idle Preview State Matching Screenshot Layout */
+            /* Idle Preview State */
             <div className="space-y-5 my-auto py-2">
-              <div className="flex items-center justify-between pb-3 border-b border-cyan-500/15">
-                <div className="px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-400/40 text-xs font-black flex items-center gap-1.5 shadow-[0_0_10px_rgba(6,182,212,0.25)]">
+              <div className="flex items-center justify-between pb-3 border-b border-[#1E3A5F]/60">
+                <div className="px-3 py-1 rounded-full bg-[#1FB5AD]/15 text-[#35D0C8] border border-[#35D0C8]/40 text-xs font-black flex items-center gap-1.5 shadow-[0_0_10px_rgba(53,208,200,0.2)]">
                   <ShieldCheck className="w-3.5 h-3.5" />
                   <span>Threat Radar Ready</span>
                 </div>
-                <div className="px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 text-xs font-black flex items-center gap-1">
-                  <Activity className="w-3.5 h-3.5 text-emerald-400" />
+                <div className="px-3 py-1 rounded-full bg-[#34D399]/15 text-[#34D399] border border-[#34D399]/30 text-xs font-black flex items-center gap-1">
+                  <Activity className="w-3.5 h-3.5 text-[#34D399]" />
                   <span>7 Engines Active</span>
                 </div>
               </div>
@@ -577,42 +609,42 @@ export default function AnalyzerPage() {
                   <ScoreGauge score={0} verdict="Awaiting Input" />
                 </div>
                 <div className="sm:col-span-7 space-y-2 text-left">
-                  <h4 className="text-xs font-black uppercase tracking-wider text-white">
+                  <h4 className="text-xs font-black uppercase tracking-wider text-[#F5F1E6]">
                     Detection Coverage
                   </h4>
-                  <ul className="space-y-1.5 text-xs text-slate-300 font-medium">
-                    <li className="flex items-center gap-2 text-cyan-300">
-                      <span className="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_6px_rgba(6,182,212,0.8)]" />
+                  <ul className="space-y-1.5 text-xs text-[#A9B4CC] font-medium">
+                    <li className="flex items-center gap-2 text-[#F5F1E6]">
+                      <span className="w-2 h-2 rounded-full bg-[#35D0C8] shadow-[0_0_6px_rgba(53,208,200,0.8)]" />
                       <span>15-Class Vernacular NLP Engine</span>
                     </li>
-                    <li className="flex items-center gap-2 text-cyan-300">
-                      <span className="w-2 h-2 rounded-full bg-blue-400 shadow-[0_0_6px_rgba(14,165,233,0.8)]" />
+                    <li className="flex items-center gap-2 text-[#F5F1E6]">
+                      <span className="w-2 h-2 rounded-full bg-[#1FB5AD] shadow-[0_0_6px_rgba(31,181,173,0.8)]" />
                       <span>Zero-Network URL & Phishing Scanner</span>
                     </li>
-                    <li className="flex items-center gap-2 text-cyan-300">
-                      <span className="w-2 h-2 rounded-full bg-purple-400 shadow-[0_0_6px_rgba(168,85,247,0.8)]" />
+                    <li className="flex items-center gap-2 text-[#F5F1E6]">
+                      <span className="w-2 h-2 rounded-full bg-[#FB923C] shadow-[0_0_6px_rgba(251,146,60,0.8)]" />
                       <span>Digital Arrest Extortion Interceptor</span>
                     </li>
-                    <li className="flex items-center gap-2 text-cyan-300">
-                      <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(16,185,129,0.8)]" />
+                    <li className="flex items-center gap-2 text-[#F5F1E6]">
+                      <span className="w-2 h-2 rounded-full bg-[#34D399] shadow-[0_0_6px_rgba(52,211,153,0.8)]" />
                       <span>Statutory CrPC 41 / BNSS 35 Grounding</span>
                     </li>
                   </ul>
                 </div>
               </div>
 
-              <div className="p-4 rounded-2xl bg-purple-950/40 border border-purple-500/30 text-purple-200 shadow-[0_0_20px_rgba(168,85,247,0.15)] flex items-start justify-between gap-3">
+              <div className="p-4 rounded-2xl bg-[#0B1530]/90 border border-[#1FB5AD]/30 text-[#F5F1E6] shadow-[0_0_20px_rgba(53,208,200,0.1)] flex items-start justify-between gap-3">
                 <div className="space-y-1 text-left">
-                  <div className="flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-purple-300">
-                    <Lightbulb className="w-3.5 h-3.5 text-purple-400" />
+                  <div className="flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-[#35D0C8]">
+                    <Lightbulb className="w-3.5 h-3.5 text-[#35D0C8]" />
                     <span>AI Recommendation</span>
                   </div>
-                  <p className="text-xs text-purple-200/90 leading-relaxed font-medium">
+                  <p className="text-xs text-[#A9B4CC] leading-relaxed font-medium">
                     Paste a suspicious message or tap any sample on the left to inspect real-time risk scores.
                   </p>
                 </div>
-                <div className="p-2 rounded-xl bg-purple-900/40 border border-purple-400/40 text-purple-300 shrink-0">
-                  <Shield className="w-5 h-5 text-purple-300" />
+                <div className="p-2 rounded-xl bg-[#0F1D3A] border border-[#35D0C8]/40 text-[#35D0C8] shrink-0">
+                  <Shield className="w-5 h-5 text-[#35D0C8]" />
                 </div>
               </div>
             </div>
@@ -626,64 +658,223 @@ export default function AnalyzerPage() {
       {/* ------------------------------------------------------------------ */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Card 1: Messages Scanned */}
-        <div className="cyber-glass rounded-2xl p-4 border border-cyan-500/20 flex items-center justify-between gap-3">
+        <div className="glass-card rounded-2xl p-4 border border-[#1E3A5F] flex items-center justify-between gap-3">
           <div className="space-y-1">
-            <span className="text-2xl font-black text-white font-mono">1,248</span>
-            <p className="text-xs text-slate-400 font-semibold">Messages Scanned</p>
-            <span className="text-[11px] font-bold text-cyan-400 flex items-center gap-0.5">
+            <span className="text-2xl font-black text-[#F5C96A] font-mono">1,248</span>
+            <p className="text-xs text-[#A9B4CC] font-semibold">Messages Scanned</p>
+            <span className="text-[11px] font-bold text-[#35D0C8] flex items-center gap-0.5">
               <TrendingUp className="w-3 h-3" /> ↑ 12%
             </span>
           </div>
           {/* Mini Sparkline SVG */}
-          <svg className="w-16 h-8 text-cyan-400 stroke-current shrink-0" fill="none" viewBox="0 0 64 32">
+          <svg className="w-16 h-8 text-[#35D0C8] stroke-current shrink-0" fill="none" viewBox="0 0 64 32">
             <path d="M0 24 Q16 10 32 18 T64 6" strokeWidth="2.5" strokeLinecap="round" />
           </svg>
         </div>
 
         {/* Card 2: Threats Detected */}
-        <div className="cyber-glass rounded-2xl p-4 border border-cyan-500/20 flex items-center justify-between gap-3">
+        <div className="glass-card rounded-2xl p-4 border border-[#1E3A5F] flex items-center justify-between gap-3">
           <div className="space-y-1">
-            <span className="text-2xl font-black text-rose-400 font-mono">92</span>
-            <p className="text-xs text-slate-400 font-semibold">Threats Detected</p>
-            <span className="text-[11px] font-bold text-rose-400 flex items-center gap-0.5">
+            <span className="text-2xl font-black text-[#F43F5E] font-mono">92</span>
+            <p className="text-xs text-[#A9B4CC] font-semibold">Threats Detected</p>
+            <span className="text-[11px] font-bold text-[#F43F5E] flex items-center gap-0.5">
               <TrendingUp className="w-3 h-3" /> ↑ 8%
             </span>
           </div>
           {/* Mini Sparkline SVG */}
-          <svg className="w-16 h-8 text-rose-400 stroke-current shrink-0" fill="none" viewBox="0 0 64 32">
+          <svg className="w-16 h-8 text-[#F43F5E] stroke-current shrink-0" fill="none" viewBox="0 0 64 32">
             <path d="M0 28 Q16 20 32 12 T64 4" strokeWidth="2.5" strokeLinecap="round" />
           </svg>
         </div>
 
         {/* Card 3: Links Analysed */}
-        <div className="cyber-glass rounded-2xl p-4 border border-cyan-500/20 flex items-center justify-between gap-3">
+        <div className="glass-card rounded-2xl p-4 border border-[#1E3A5F] flex items-center justify-between gap-3">
           <div className="space-y-1">
-            <span className="text-2xl font-black text-sky-400 font-mono">421</span>
-            <p className="text-xs text-slate-400 font-semibold">Links Analysed</p>
-            <span className="text-[11px] font-bold text-sky-400 flex items-center gap-0.5">
+            <span className="text-2xl font-black text-[#35D0C8] font-mono">421</span>
+            <p className="text-xs text-[#A9B4CC] font-semibold">Links Analysed</p>
+            <span className="text-[11px] font-bold text-[#35D0C8] flex items-center gap-0.5">
               <TrendingUp className="w-3 h-3" /> ↑ 15%
             </span>
           </div>
           {/* Mini Sparkline SVG */}
-          <svg className="w-16 h-8 text-sky-400 stroke-current shrink-0" fill="none" viewBox="0 0 64 32">
+          <svg className="w-16 h-8 text-[#35D0C8] stroke-current shrink-0" fill="none" viewBox="0 0 64 32">
             <path d="M0 26 Q16 8 32 20 T64 8" strokeWidth="2.5" strokeLinecap="round" />
           </svg>
         </div>
 
         {/* Card 4: Safety Score */}
-        <div className="cyber-glass rounded-2xl p-4 border border-cyan-500/20 flex items-center justify-between gap-3">
+        <div className="glass-card rounded-2xl p-4 border border-[#1E3A5F] flex items-center justify-between gap-3">
           <div className="space-y-1">
-            <span className="text-2xl font-black text-emerald-400 font-mono">95%</span>
-            <p className="text-xs text-slate-400 font-semibold">Safety Score</p>
-            <span className="text-[11px] font-bold text-emerald-400 flex items-center gap-1">
+            <span className="text-2xl font-black text-[#34D399] font-mono">95%</span>
+            <p className="text-xs text-[#A9B4CC] font-semibold">Safety Score</p>
+            <span className="text-[11px] font-bold text-[#34D399] flex items-center gap-1">
               <ShieldCheck className="w-3 h-3" /> Verified Healthy
             </span>
           </div>
           {/* Mini Sparkline SVG */}
-          <svg className="w-16 h-8 text-emerald-400 stroke-current shrink-0" fill="none" viewBox="0 0 64 32">
+          <svg className="w-16 h-8 text-[#34D399] stroke-current shrink-0" fill="none" viewBox="0 0 64 32">
             <path d="M0 22 Q16 16 32 10 T64 2" strokeWidth="2.5" strokeLinecap="round" />
           </svg>
         </div>
+      </div>
+
+      {/* ------------------------------------------------------------------ */}
+      {/* 4. BOTTOM 3 CYBER GRID CARDS (RECENT SCANS, SCAM TYPES, TIP)       */}
+      {/* ------------------------------------------------------------------ */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        {/* Card 1: Recent Scans */}
+        <div className="glass-card rounded-3xl p-5 border border-[#1E3A5F] space-y-4">
+          <div className="flex items-center justify-between pb-2 border-b border-[#1E3A5F]/60">
+            <div className="flex items-center gap-2">
+              <Clock className="w-4 h-4 text-[#35D0C8]" />
+              <h3 className="text-xs font-black uppercase tracking-wider text-[#F5F1E6]">Recent Scans</h3>
+            </div>
+            <span className="text-[11px] font-bold text-[#35D0C8] hover:text-[#5EEAD4] cursor-pointer">
+              View All →
+            </span>
+          </div>
+
+          <div className="space-y-2.5">
+            <div className="p-2.5 rounded-xl bg-[#070E22]/80 border border-[#1E3A5F] flex items-center justify-between gap-2">
+              <div className="truncate">
+                <p className="text-xs font-bold text-[#F5F1E6] truncate">Win ₹50,000 Prize! Click here</p>
+                <span className="text-[10px] text-[#A9B4CC]">2 min ago</span>
+              </div>
+              <span className="px-2 py-0.5 rounded-md text-[10px] font-black uppercase bg-rose-500/20 text-rose-300 border border-rose-500/40">
+                Blocked
+              </span>
+            </div>
+
+            <div className="p-2.5 rounded-xl bg-[#070E22]/80 border border-[#1E3A5F] flex items-center justify-between gap-2">
+              <div className="truncate">
+                <p className="text-xs font-bold text-[#F5F1E6] truncate">https://bit.ly/upi-offer</p>
+                <span className="text-[10px] text-[#A9B4CC]">12 min ago</span>
+              </div>
+              <span className="px-2 py-0.5 rounded-md text-[10px] font-black uppercase bg-amber-500/20 text-amber-300 border border-amber-500/40">
+                Suspicious
+              </span>
+            </div>
+
+            <div className="p-2.5 rounded-xl bg-[#070E22]/80 border border-[#1E3A5F] flex items-center justify-between gap-2">
+              <div className="truncate">
+                <p className="text-xs font-bold text-[#F5F1E6] truncate">Your account will be blocked...</p>
+                <span className="text-[10px] text-[#A9B4CC]">1 hour ago</span>
+              </div>
+              <span className="px-2 py-0.5 rounded-md text-[10px] font-black uppercase bg-red-500/20 text-red-300 border border-red-500/40">
+                Fraud
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Card 2: Common Scam Types Donut Breakdown */}
+        <div className="glass-card rounded-3xl p-5 border border-[#1E3A5F] space-y-4">
+          <div className="flex items-center gap-2 pb-2 border-b border-[#1E3A5F]/60">
+            <Activity className="w-4 h-4 text-[#35D0C8]" />
+            <h3 className="text-xs font-black uppercase tracking-wider text-[#F5F1E6]">Common Scam Types</h3>
+          </div>
+
+          <div className="flex items-center justify-between gap-4">
+            {/* SVG Donut Chart */}
+            <div className="relative w-24 h-24 shrink-0 flex items-center justify-center">
+              <svg className="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+                <path
+                  d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                  fill="none"
+                  stroke="#1E3A5F"
+                  strokeWidth="3.8"
+                />
+                <path
+                  d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                  fill="none"
+                  stroke="#35D0C8"
+                  strokeWidth="3.8"
+                  strokeDasharray="38, 100"
+                />
+                <path
+                  d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                  fill="none"
+                  stroke="#F5C96A"
+                  strokeWidth="3.8"
+                  strokeDasharray="32, 100"
+                  strokeDashoffset="-38"
+                />
+                <path
+                  d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                  fill="none"
+                  stroke="#FB923C"
+                  strokeWidth="3.8"
+                  strokeDasharray="18, 100"
+                  strokeDashoffset="-70"
+                />
+                <path
+                  d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                  fill="none"
+                  stroke="#A9B4CC"
+                  strokeWidth="3.8"
+                  strokeDasharray="12, 100"
+                  strokeDashoffset="-88"
+                />
+              </svg>
+            </div>
+
+            <div className="space-y-1.5 text-xs text-[#A9B4CC] flex-1">
+              <div className="flex items-center justify-between">
+                <span className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-[#35D0C8]" />
+                  <span>UPI Fraud</span>
+                </span>
+                <span className="font-bold text-[#F5F1E6]">38%</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-[#F5C96A]" />
+                  <span>Phishing</span>
+                </span>
+                <span className="font-bold text-[#F5F1E6]">32%</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-[#FB923C]" />
+                  <span>Lottery Scam</span>
+                </span>
+                <span className="font-bold text-[#F5F1E6]">18%</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-[#A9B4CC]" />
+                  <span>Others</span>
+                </span>
+                <span className="font-bold text-[#F5F1E6]">12%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Card 3: Safety Tip of the Day */}
+        <div className="glass-card rounded-3xl p-5 border border-[#1E3A5F] border-t-2 border-t-[#D9A441] space-y-3 flex flex-col justify-between">
+          <div className="space-y-2">
+            <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-[#F5C96A]">
+              <Lightbulb className="w-4 h-4 text-[#F5C96A]" />
+              <span>Safety Tip of the Day</span>
+            </div>
+            <p className="text-xs text-[#F5F1E6] leading-relaxed font-medium">
+              Never share your UPI PIN or OTP with anyone, even if they claim to be calling from your bank or electricity department.
+            </p>
+          </div>
+
+          <div className="pt-2">
+            <button
+              type="button"
+              onClick={() => setActiveInputTab('text')}
+              className="btn-gold-primary px-4 py-2 rounded-xl text-xs font-black flex items-center gap-1.5 cursor-pointer"
+            >
+              <span>Learn More →</span>
+            </button>
+          </div>
+        </div>
+
       </div>
 
       {/* ------------------------------------------------------------------ */}
