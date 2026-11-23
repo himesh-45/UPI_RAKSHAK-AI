@@ -75,11 +75,12 @@ def test_demo_docs_do_not_contain_stale_metrics():
         (re.compile(r'189/196'), f"Stale Gold v1 ratio (current: {metrics['v1_recall_ratio']})"),
         (re.compile(r'187/196'), f"Stale Gold v1 ratio (current: {metrics['v1_recall_ratio']})"),
         (re.compile(r'190/196'), f"Stale Gold v1 ratio (current: {metrics['v1_recall_ratio']})"),
-        (re.compile(r'97\.8(?:3)?%'), f"Stale Gold v2 recall (current: {metrics['v2_recall']}%)"),
         (re.compile(r'173\s+samples'), "Stale Gold v2 sample count (current: 243 samples)"),
         (re.compile(r'35\s+legitimate'), "Stale Gold v2 legitimate count (current: 105 samples)"),
         (re.compile(r'0/35'), f"Stale Gold v2 FPR ratio (current: {metrics['v2_fpr_ratio']})"),
     ]
+    if metrics['v2_recall'] != '97.83':
+        stale_patterns.append((re.compile(r'97\.8(?:3)?%'), f"Stale Gold v2 recall (current: {metrics['v2_recall']}%)"))
 
     violations = []
     for rel_path in DEMO_DOCS:
@@ -108,16 +109,16 @@ def test_demo_docs_agree_with_evaluation_report():
         (re.compile(r'(\d+\.\d+)%\s*on\s*messy\s*human\s*wording', re.I), metrics["v2_recall"], "Gold v2 recall"),
         (re.compile(r'\*\*(\d+\.\d+)%\s*Risk\s*Fusion\s*Recall\*\*\s*\(\s*Gold\s*v1', re.I), metrics["v1_recall"], "Gold v1 recall"),
         (re.compile(r'\*\*(\d+\.\d+)%\s*Recall\*\*\s*\(\s*Gold\s*v2', re.I), metrics["v2_recall"], "Gold v2 recall"),
-        (re.compile(r'(\d+\.\d+)%\s*recall\s*\(\s*Gold\s*v1:\s*195/196\)', re.I), metrics["v1_recall"], "Gold v1 recall"),
-        (re.compile(r'(\d+\.\d+)%\s*\(\s*Gold\s*v2:\s*136/138\)', re.I), metrics["v2_recall"], "Gold v2 recall"),
-        (re.compile(r'\*\*(\d+\.\d+)%\*\*\s*\(195/196\s*Gold\s*v1\)', re.I), metrics["v1_recall"], "Gold v1 recall"),
-        (re.compile(r'\*\*(\d+\.\d+)%\*\*\s*\(136/138\s*Gold\s*v2\)', re.I), metrics["v2_recall"], "Gold v2 recall"),
+        (re.compile(rf'(\d+\.\d+)%\s*recall\s*\(\s*Gold\s*v1:\s*{re.escape(metrics["v1_recall_ratio"])}\)', re.I), metrics["v1_recall"], "Gold v1 recall"),
+        (re.compile(rf'(\d+\.\d+)%\s*\(\s*Gold\s*v2:\s*{re.escape(metrics["v2_recall_ratio"])}\)', re.I), metrics["v2_recall"], "Gold v2 recall"),
+        (re.compile(rf'\*\*(\d+\.\d+)%\*\*\s*\({re.escape(metrics["v1_recall_ratio"])}\s*Gold\s*v1\)', re.I), metrics["v1_recall"], "Gold v1 recall"),
+        (re.compile(rf'\*\*(\d+\.\d+)%\*\*\s*\({re.escape(metrics["v2_recall_ratio"])}\s*Gold\s*v2\)', re.I), metrics["v2_recall"], "Gold v2 recall"),
         (re.compile(r'\*\*(\d+\.\d+)%\*\*\s*\(0/110\s*on\s*Gold\s*v1\)', re.I), metrics["v1_fpr"], "Gold v1 FPR"),
-        (re.compile(r'\*\*(\d+\.\d+)%\*\*\s*\(2/105\s*on\s*expanded\s*Gold\s*v2\)', re.I), metrics["v2_fpr"], "Gold v2 FPR"),
+        (re.compile(rf'\*\*(\d+\.\d+)%\*\*\s*\({re.escape(metrics["v2_fpr_ratio"])}\s*on\s*expanded\s*Gold\s*v2\)', re.I), metrics["v2_fpr"], "Gold v2 FPR"),
         (re.compile(r'\*\*(\d+\.\d+)%\s*False\s*Positive\s*Rate\*\*\s*on\s*Gold\s*v1', re.I), metrics["v1_fpr"], "Gold v1 FPR"),
         (re.compile(r'\*\*(\d+\.\d+)%\s*False\s*Positive\s*Rate\*\*\s*on\s*Gold\s*v2', re.I), metrics["v2_fpr"], "Gold v2 FPR"),
         (re.compile(r'(\d+\.\d+)%\s*on\s*Gold\s*v1\s*\(0/110\)', re.I), metrics["v1_fpr"], "Gold v1 FPR"),
-        (re.compile(r'(\d+\.\d+)%\s*on\s*Gold\s*v2\s*\(2/105\)', re.I), metrics["v2_fpr"], "Gold v2 FPR"),
+        (re.compile(rf'(\d+\.\d+)%\s*on\s*Gold\s*v2\s*\({re.escape(metrics["v2_fpr_ratio"])}\)', re.I), metrics["v2_fpr"], "Gold v2 FPR"),
     ]
 
     for rel_path in target_docs:

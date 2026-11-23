@@ -9,6 +9,7 @@ from ..core.community_reputation import lookup_community_reputation
 from ..detectors.url_scanner import URL_EXTRACT_REGEX
 
 PHONE_REGEX = re.compile(r'(?<!\d)(?:\+91[-\s]?)?[6-9]\d{9}(?!\d)')
+PLACEHOLDER_NUMBER_REGEX = re.compile(r'(?i)(?:\+91[-\s]?)?(?:[xX*]{5,12}|[6-9]\d{1,4}[-\s]?[xX*]{5,9}|[xX*]{3,5}[-\s][xX*]{3,5}|[6-9][\dxX*]{9})')
 UPI_VPA_REGEX = re.compile(r'\b[a-zA-Z0-9.\-_]{2,}@[a-zA-Z0-9.\-_]{2,}\b')
 CREDENTIAL_REGEX = re.compile(r'(?i)\b(?:otp|upi pin|pin|cvv|password|passcode|secret code|पिन|ओटीपी|పిన్|ఓటీపీ)\b')
 URGENCY_REGEX = re.compile(r'(?i)\b(?:blocked|suspended|disconnected|cut off|immediately|tonight|24 hours|urgent|turant|ventane|आज रात|బ్లాక్|వెంటనే)\b')
@@ -86,6 +87,11 @@ CATEGORY_NAMES_I18N = {
         "hi": "गलत खाते में पैसे भेजने का झांसा",
         "te": "పొరపాటున డబ్బు పంపినట్లు మోసం"
     },
+    "fake_debit_alert_callback": {
+        "en": "Fake Debit Alert Callback Phishing",
+        "hi": "फर्जी डेबिट अलर्ट कॉल-बैक धोखाधड़ी",
+        "te": "నకిలీ డెబిట్ హెచ్చరిక కాల్-బ్యాక్ మోసం"
+    },
     "legitimate": {
         "en": "Legitimate Notification / Genuine Message",
         "hi": "प्रामाणिक बैंक/सेवा संदेश",
@@ -115,7 +121,7 @@ class RiskFusionEngine:
                 severity="HIGH"
             ))
 
-        # 2. Phone numbers
+        # 2. Phone numbers & Obfuscated Callback numbers
         for m in PHONE_REGEX.finditer(text):
             spans.append(HighlightSpan(
                 start=m.start(),
@@ -124,6 +130,15 @@ class RiskFusionEngine:
                 label="PHONE_NUMBER",
                 severity="MEDIUM"
             ))
+        for m in PLACEHOLDER_NUMBER_REGEX.finditer(text):
+            if not any(s.start <= m.start() and s.end >= m.end() for s in spans):
+                spans.append(HighlightSpan(
+                    start=m.start(),
+                    end=m.end(),
+                    text=m.group(),
+                    label="OBFUSCATED_CALLBACK_NUMBER",
+                    severity="HIGH"
+                ))
 
         # 3. UPI VPAs
         for m in UPI_VPA_REGEX.finditer(text):
@@ -236,6 +251,14 @@ class RiskFusionEngine:
             else:
                 actions.append("Do NOT transfer money under threat of 'Digital Arrest' or customs parcel contraband. Real law enforcement never interrogates via Skype.")
 
+        if category == "fake_debit_alert_callback" or signals_detected.get("has_callback_scam"):
+            if lang == "hi":
+                actions.append("संदेश में दिए गए किसी भी नंबर पर कॉल न करें। बैंक कभी भी अनधिकृत ट्रांजेक्शन रोकने के लिए निजी मोबाइल नंबर पर कॉल करने को नहीं कहता। अपने बैंक के आधिकारिक ऐप का उपयोग करें या कार्ड के पीछे दिए गए नंबर पर संपर्क करें।")
+            elif lang == "te":
+                actions.append("మెసేజ్‌లో ఇచ్చిన నంబర్‌కు కాల్ చేయవద్దు. లావాదేవీలను రద్దు చేయడానికి బ్యాంకులు ఎప్పుడూ వ్యక్తిగత మొబైల్ నంబర్లకు కాల్ చేయమని చెప్పవు. మీ అధికారిక బ్యాంక్ యాప్‌ను ఉపయోగించండి లేదా మీ కార్డు వెనుక ఉన్న నంబర్‌కు కాల్ చేయండి.")
+            else:
+                actions.append("Do NOT call the number given in the message. Official banks never ask you to call personal mobile numbers or message on WhatsApp to reverse transactions. Open your official bank app or call the number on the back of your debit/credit card.")
+
         # Universal fallback actions
         if verdict in ["HIGH RISK", "SUSPICIOUS"]:
             if lang == "hi":
@@ -296,7 +319,7 @@ class RiskFusionEngine:
         evidence: List[EvidenceItem],
         urls: List[Dict[str, Any]]
     ) -> Dict[str, Any]:
-        phones = list(set(PHONE_REGEX.findall(text)))
+        phones = list(set(PHONE_REGEX.findall(text) + PLACEHOLDER_NUMBER_REGEX.findall(text)))
         vpas = list(set(UPI_VPA_REGEX.findall(text)))
         extracted_urls = [u["url"] for u in urls]
 
@@ -395,6 +418,13 @@ class RiskFusionEngine:
         # 4. Calibrated NLP contribution
         predicted_category = nlp_result.get("category", "legitimate")
         nlp_confidence = nlp_result.get("confidence", 0.5)
+
+        # Reconcile category with Callback Phishing detector if positively matched
+        cb_res = rule_result.get("callback_scam_result", {})
+        if cb_res.get("is_callback_scam"):
+            if predicted_category == "legitimate" or cb_res.get("score", 0) >= 70.0:
+                predicted_category = "fake_debit_alert_callback"
+                nlp_confidence = max(nlp_confidence, 0.88)
         
         if predicted_category != "legitimate":
             nlp_risk_score = 42.0 + (nlp_confidence * 48.0)

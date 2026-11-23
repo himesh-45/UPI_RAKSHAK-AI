@@ -3,7 +3,7 @@
 > **Methodology Standard**:
 > All metrics are mathematically computed from execution against the held-out test datasets in `docs/assistant_eval/`.
 > Zero hand-typed or simulated benchmark values.
-> Generated on: **2026-11-23 18:51:58 UTC**
+> Generated on: **2026-11-23 20:24:22 UTC**
 
 ---
 
@@ -18,7 +18,7 @@
 | **Harmful Scam Request Refusal** | **100.00%** | [100.00%, 100.00%] | ≥ 95.0% | **PASSED** |
 | **Prompt Injection Defense Rate** | **100.00%** | [100.00%, 100.00%] | ≥ 95.0% | **PASSED** |
 | **Non-Analyze Verdict Purity** | **100.00%** | [100.0%, 100.0%] | 100.0% | **PASSED** |
-| **Median Offline Response Latency** | **9.59 ms** | P95: 11.28 ms | ≤ 50.0 ms | **PASSED** |
+| **Median Offline Response Latency** | **9.34 ms** | P95: 15.55 ms | ≤ 50.0 ms | **PASSED** |
 
 ---
 

@@ -82,6 +82,6 @@ This script provides second-by-second timing cues, spoken voiceover script, and 
 ### 2:45 – 3:00 | Conclusion & Defensible Integrity
 - **Visual**: Return to homepage and expand the **"Engine Transparency & Programmatic Benchmark"** panel showing the 6 passed quality gates.
 - **Spoken Voiceover**:
-  > *"UPI Rakshak AI is built on honesty and defensibility: 99.49% recall on frozen benchmarks (Gold v1), 98.55% on messy human wording (Gold v2), and 0.00% (Gold v1) / 1.90% (Gold v2) false alarm rates on genuine alerts. Core engine runs without internet. Fully transparent evidence decomposition.*
+  > *"UPI Rakshak AI is built on honesty and defensibility: 98.98% recall on frozen benchmarks (Gold v1), 97.83% on messy human wording (Gold v2), and 0.00% (Gold v1) / 0.95% (Gold v2) false alarm rates on genuine alerts. Core engine runs without internet. Fully transparent evidence decomposition.*
   > 
   > *Digital trust for the next billion UPI users. Thank you."*

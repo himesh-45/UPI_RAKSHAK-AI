@@ -6591,4 +6591,494 @@ nat_legit_en_11,legitimate,en,Swiggy Support: Refund of Rs 220 for missing item 
 nat_legit_en_12,legitimate,en,Deloitte Campus Recruitment: Your written aptitude assessment is scheduled for 25-Nov at 10 AM. Login to official portal careers.deloitte.com. Note: Deloitte never asks for security fees.,
 nat_legit_hi_11,legitimate,hi,स्विगी रिफंड: आपके छूटे हुए सामान का 220 रुपये का रिफंड आपके बैंक खाते में आ गया है। समस्या का समाधान हो गया है।,
 nat_legit_te_11,legitimate,te,స్విగ్గీ: మీ మిస్సింగ్ ఐటెమ్ రూ. 220 రీఫండ్ మీ బ్యాంక్ ఖాతాలో విజయవంతంగా జమ అయింది. సమస్య పరిష్కరించబడింది.,
-feedback_33,legitimate,en,Sample text for feedback test,0.0
+cb_scam_en_1,fake_debit_alert_callback,en,"Alert: ₹99,999 debited from your a/c. If not done by you, call +91 9876543210 urgently to reverse.",scam
+cb_scam_en_1,fake_debit_alert_callback,en,"Alert: ₹40,000 debited from your account. If not done by you, call 9988776655 immediately to reverse.",scam
+cb_scam_en_1,fake_debit_alert_callback,en,"Alert: ₹20,000 debited from your account. If not done by you, call +91-6543210987 immediately to reverse.",scam
+cb_scam_en_1,fake_debit_alert_callback,en,"Alert: ₹99,999 debited from your a/c. If not done by you, call 8765432109 urgently to reverse.",scam
+cb_scam_en_1,fake_debit_alert_callback,en,"Alert: ₹65,000 debited from your account. If not done by you, call 9876543210 immediately to reverse.",scam
+cb_scam_en_1,fake_debit_alert_callback,en,"Alert: ₹49,999 debited from your account. If not done by you, call 8765432109 immediately to reverse.",scam
+cb_scam_en_1,fake_debit_alert_callback,en,"Alert: ₹30,000 debited from your a/c. If not done by you, call +91 9988776655 urgently to reverse.",scam
+cb_scam_en_2,fake_debit_alert_callback,en,"URGENT: Rs 49,999 has been deducted from your bank a/c. To dispute this transaction or cancel, contact customer care at +91-8123456789 now.",scam
+cb_scam_en_2,fake_debit_alert_callback,en,"URGENT: Rs 65,000 has been deducted from your bank account. To dispute this transaction or cancel, contact customer care at +91 9988776655 now.",scam
+cb_scam_en_2,fake_debit_alert_callback,en,"URGENT: Rs 48,500 has been deducted from your bank account. To dispute this transaction or cancel, contact customer care at XXXXXXXXXX now.",scam
+cb_scam_en_2,fake_debit_alert_callback,en,"URGENT: Rs 49,999 has been deducted from your bank a/c. To dispute this transaction or cancel, contact customer care at +91-9123456780 now.",scam
+cb_scam_en_2,fake_debit_alert_callback,en,"URGENT: Rs 65,000 has been deducted from your bank account. To dispute this transaction or cancel, contact customer care at 98765***** now.",scam
+cb_scam_en_2,fake_debit_alert_callback,en,"URGENT: Rs 40,000 has been deducted from your bank account. To dispute this transaction or cancel, contact customer care at 6543210987 now.",scam
+cb_scam_en_2,fake_debit_alert_callback,en,"URGENT: Rs 30,000 has been deducted from your bank a/c. To dispute this transaction or cancel, contact customer care at 98765***** now.",scam
+cb_scam_en_3,fake_debit_alert_callback,en,"Notice: Txn of INR 99,999 processed on your a/c. If unauthorized, dial 8765432109 within 24 hours.",scam
+cb_scam_en_3,fake_debit_alert_callback,en,"Notice: Transaction of INR 35,500 processed on your account. If unauthorized, dial +91 7654321098 within 24 hours.",scam
+cb_scam_en_3,fake_debit_alert_callback,en,"Notice: Transaction of INR 10,000 processed on your account. If unauthorized, dial XXXXX XXXXX within 24 hours.",scam
+cb_scam_en_3,fake_debit_alert_callback,en,"Notice: Txn of INR 40,000 processed on your a/c. If unauthorized, dial 9876543210 within 24 hours.",scam
+cb_scam_en_3,fake_debit_alert_callback,en,"Notice: Transaction of INR 48,500 processed on your account. If unauthorized, dial 7654321098 within 24 hours.",scam
+cb_scam_en_3,fake_debit_alert_callback,en,"Notice: Transaction of INR 35,500 processed on your account. If unauthorized, dial 8765432109 within 24 hours.",scam
+cb_scam_en_3,fake_debit_alert_callback,en,"Notice: Txn of INR 80,000 processed on your a/c. If unauthorized, dial 98765 XXXXX within 24 hours.",scam
+cb_scam_en_4,fake_debit_alert_callback,en,"Bank Alert: Payment of Rs 30,000 charged. If not you? Call fraud desk at +91-8765432109 urgently.",scam
+cb_scam_en_4,fake_debit_alert_callback,en,"Bank Alert: Payment of Rs 50,000 charged. If not you? Call fraud desk at +91 9988776655 immediately.",scam
+cb_scam_en_4,fake_debit_alert_callback,en,"Bank Alert: Payment of Rs 80,000 charged. If not you? Call fraud desk at 8765432109 immediately.",scam
+cb_scam_en_4,fake_debit_alert_callback,en,"Bank Alert: Payment of Rs 20,000 charged. If not you? Call fraud desk at +91 7654321098 urgently.",scam
+cb_scam_en_4,fake_debit_alert_callback,en,"Bank Alert: Payment of Rs 35,500 charged. If not you? Call fraud desk at XXXXXXXXXX immediately.",scam
+cb_scam_en_4,fake_debit_alert_callback,en,"Bank Alert: Payment of Rs 48,500 charged. If not you? Call fraud desk at 98765 XXXXX immediately.",scam
+cb_scam_en_4,fake_debit_alert_callback,en,"Bank Alert: Payment of Rs 75,000 charged. If not you? Call fraud desk at 98765 XXXXX urgently.",scam
+cb_scam_en_5,fake_debit_alert_callback,en,"Your a/c debited by ₹10,000. Dispute this transaction urgently by calling 8123456789.",scam
+cb_scam_en_5,fake_debit_alert_callback,en,"Your account debited by ₹40,000. Dispute this transaction immediately by calling +91-8765432109.",scam
+cb_scam_en_5,fake_debit_alert_callback,en,"Your account debited by ₹75,000. Dispute this transaction immediately by calling 9988776655.",scam
+cb_scam_en_5,fake_debit_alert_callback,en,"Your a/c debited by ₹75,000. Dispute this transaction urgently by calling nine eight seven six five four three two one zero.",scam
+cb_scam_en_5,fake_debit_alert_callback,en,"Your account debited by ₹35,500. Dispute this transaction immediately by calling XXXXXXXXXX.",scam
+cb_scam_en_5,fake_debit_alert_callback,en,"Your account debited by ₹20,000. Dispute this transaction immediately by calling +91-98765XXXXX.",scam
+cb_scam_en_5,fake_debit_alert_callback,en,"Your a/c debited by ₹50,000. Dispute this transaction urgently by calling +91 9988776655.",scam
+cb_scam_en_6,fake_debit_alert_callback,en,"Txn Alert: ₹50,000 debited from your bank a/c. Not you? Contact security helpline +91-98765XXXXX urgently.",scam
+cb_scam_en_6,fake_debit_alert_callback,en,"Transaction Alert: ₹35,500 debited from your bank account. Not you? Contact security helpline XXXXXXXXXX immediately.",scam
+cb_scam_en_6,fake_debit_alert_callback,en,"Transaction Alert: ₹25,000 debited from your bank account. Not you? Contact security helpline 8123456789 immediately.",scam
+cb_scam_en_6,fake_debit_alert_callback,en,"Txn Alert: ₹15,000 debited from your bank a/c. Not you? Contact security helpline 8123456789 urgently.",scam
+cb_scam_en_6,fake_debit_alert_callback,en,"Transaction Alert: ₹85,000 debited from your bank account. Not you? Contact security helpline +91 9 8 7 6 5 4 3 2 1 0 immediately.",scam
+cb_scam_en_6,fake_debit_alert_callback,en,"Transaction Alert: ₹48,500 debited from your bank account. Not you? Contact security helpline 6543210987 immediately.",scam
+cb_scam_en_6,fake_debit_alert_callback,en,"Txn Alert: ₹40,000 debited from your bank a/c. Not you? Contact security helpline +91-6543210987 urgently.",scam
+cb_scam_en_7,fake_debit_alert_callback,en,"Dear Customer, ₹20,000 was withdrawn from your a/c. To stop this transaction, reach us at +91-XXXXXXXXXX urgently.",scam
+cb_scam_en_7,fake_debit_alert_callback,en,"Dear Customer, ₹65,000 was withdrawn from your account. To stop this transaction, reach us at +91 9 8 7 6 5 4 3 2 1 0 immediately.",scam
+cb_scam_en_7,fake_debit_alert_callback,en,"Dear Customer, ₹10,000 was withdrawn from your account. To stop this transaction, reach us at +91 9988776655 immediately.",scam
+cb_scam_en_7,fake_debit_alert_callback,en,"Dear Customer, ₹1,00,000 was withdrawn from your a/c. To stop this transaction, reach us at nine one two three four five six seven eight zero urgently.",scam
+cb_scam_en_7,fake_debit_alert_callback,en,"Dear Customer, ₹25,000 was withdrawn from your account. To stop this transaction, reach us at 09876543210 immediately.",scam
+cb_scam_en_7,fake_debit_alert_callback,en,"Dear Customer, ₹99,999 was withdrawn from your account. To stop this transaction, reach us at 6543210987 immediately.",scam
+cb_scam_en_7,fake_debit_alert_callback,en,"Dear Customer, ₹75,000 was withdrawn from your a/c. To stop this transaction, reach us at 7 6 5 4 3 2 1 0 9 8 urgently.",scam
+cb_scam_en_8,fake_debit_alert_callback,en,"Alert: Rs 25,000 debited. If not done by you, msg/call on this number 9 8 7 6 5 4 3 2 1 0 urgently.",scam
+cb_scam_en_8,fake_debit_alert_callback,en,"Alert: Rs 35,500 debited. If not done by you, msg/call on this number nine eight seven six five four three two one zero immediately.",scam
+cb_scam_en_8,fake_debit_alert_callback,en,"Alert: Rs 40,000 debited. If not done by you, msg/call on this number +91-9876543210 immediately.",scam
+cb_scam_en_8,fake_debit_alert_callback,en,"Alert: Rs 99,999 debited. If not done by you, msg/call on this number XXXXXXXXXX urgently.",scam
+cb_scam_en_8,fake_debit_alert_callback,en,"Alert: Rs 15,000 debited. If not done by you, msg/call on this number 7654321098 immediately.",scam
+cb_scam_en_8,fake_debit_alert_callback,en,"Alert: Rs 80,000 debited. If not done by you, msg/call on this number 7 6 5 4 3 2 1 0 9 8 immediately.",scam
+cb_scam_en_8,fake_debit_alert_callback,en,"Alert: Rs 75,000 debited. If not done by you, msg/call on this number nine eight seven six five four three two one zero urgently.",scam
+cb_scam_en_9,fake_debit_alert_callback,en,"Hello, I am from bank fraud team. ₹49,999 debited from your a/c. If not done by you, call this number +91-XXXXXXXXXX urgently.",scam
+cb_scam_en_9,fake_debit_alert_callback,en,"Hello, I am from bank fraud team. ₹75,000 debited from your account. If not done by you, call this number +91 7654321098 immediately.",scam
+cb_scam_en_9,fake_debit_alert_callback,en,"Hello, I am from bank fraud team. ₹80,000 debited from your account. If not done by you, call this number +91-8123456789 immediately.",scam
+cb_scam_en_9,fake_debit_alert_callback,en,"Hello, I am from bank fraud team. ₹1,00,000 debited from your a/c. If not done by you, call this number 98765 XXXXX urgently.",scam
+cb_scam_en_9,fake_debit_alert_callback,en,"Hello, I am from bank fraud team. ₹75,000 debited from your account. If not done by you, call this number +91-9876543210 immediately.",scam
+cb_scam_en_9,fake_debit_alert_callback,en,"Hello, I am from bank fraud team. ₹15,000 debited from your account. If not done by you, call this number nine one two three four five six seven eight zero immediately.",scam
+cb_scam_en_9,fake_debit_alert_callback,en,"Hello, I am from bank fraud team. ₹49,999 debited from your a/c. If not done by you, call this number 7654321098 urgently.",scam
+cb_scam_en_10,fake_debit_alert_callback,en,"URGENT DISPUTE ALERT: ₹10,000 deducted from your a/c. Call officer on 98765XXXXX to claim refund and freeze transfer.",scam
+cb_scam_en_10,fake_debit_alert_callback,en,"URGENT DISPUTE ALERT: ₹20,000 deducted from your account. Call officer on 09876543210 to claim refund and freeze transfer.",scam
+cb_scam_en_10,fake_debit_alert_callback,en,"URGENT DISPUTE ALERT: ₹20,000 deducted from your account. Call officer on 8765432109 to claim refund and freeze transfer.",scam
+cb_scam_en_10,fake_debit_alert_callback,en,"URGENT DISPUTE ALERT: ₹25,000 deducted from your a/c. Call officer on nine one two three four five six seven eight zero to claim refund and freeze transfer.",scam
+cb_scam_en_10,fake_debit_alert_callback,en,"URGENT DISPUTE ALERT: ₹25,000 deducted from your account. Call officer on +91-6543210987 to claim refund and freeze transfer.",scam
+cb_scam_en_10,fake_debit_alert_callback,en,"URGENT DISPUTE ALERT: ₹1,00,000 deducted from your account. Call officer on eight seven six five four three two one zero nine to claim refund and freeze transfer.",scam
+cb_scam_en_10,fake_debit_alert_callback,en,"URGENT DISPUTE ALERT: ₹75,000 deducted from your a/c. Call officer on +91-XXXXXXXXXX to claim refund and freeze transfer.",scam
+cb_scam_en_11,fake_debit_alert_callback,en,"Important notification: An amount of Rs 65,000 is debited from your a/c. If not initiated by you, dial 8123456789 at once.",scam
+cb_scam_en_11,fake_debit_alert_callback,en,"Important notification: An amount of Rs 30,000 is debited from your account. If not initiated by you, dial 98765XXXXX at once.",scam
+cb_scam_en_11,fake_debit_alert_callback,en,"Important notification: An amount of Rs 35,500 is debited from your account. If not initiated by you, dial 98765 XXXXX at once.",scam
+cb_scam_en_11,fake_debit_alert_callback,en,"Important notification: An amount of Rs 48,500 is debited from your a/c. If not initiated by you, dial 9 1 2 3 4 5 6 7 8 0 at once.",scam
+cb_scam_en_11,fake_debit_alert_callback,en,"Important notification: An amount of Rs 99,999 is debited from your account. If not initiated by you, dial 9988776655 at once.",scam
+cb_scam_en_11,fake_debit_alert_callback,en,"Important notification: An amount of Rs 20,000 is debited from your account. If not initiated by you, dial +91-8765432109 at once.",scam
+cb_scam_en_11,fake_debit_alert_callback,en,"Important notification: An amount of Rs 15,000 is debited from your a/c. If not initiated by you, dial +91 9876543210 at once.",scam
+cb_scam_en_12,fake_debit_alert_callback,en,"Alert: Debit of Rs 20,000 successful. If not you, call +91 9988776655 urgently to block card and reverse funds.",scam
+cb_scam_en_12,fake_debit_alert_callback,en,"Alert: Debit of Rs 49,999 successful. If not you, call +91-8765432109 immediately to block card and reverse funds.",scam
+cb_scam_en_12,fake_debit_alert_callback,en,"Alert: Debit of Rs 50,000 successful. If not you, call +91 9988776655 immediately to block card and reverse funds.",scam
+cb_scam_en_12,fake_debit_alert_callback,en,"Alert: Debit of Rs 25,000 successful. If not you, call 9876543210 urgently to block card and reverse funds.",scam
+cb_scam_en_12,fake_debit_alert_callback,en,"Alert: Debit of Rs 15,000 successful. If not you, call +91-8765432109 immediately to block card and reverse funds.",scam
+cb_scam_en_12,fake_debit_alert_callback,en,"Alert: Debit of Rs 20,000 successful. If not you, call XXXXXXXXXX immediately to block card and reverse funds.",scam
+cb_scam_en_12,fake_debit_alert_callback,en,"Alert: Debit of Rs 85,000 successful. If not you, call 8123456789 urgently to block card and reverse funds.",scam
+cb_scam_en_13,fake_debit_alert_callback,en,"Security warning: Your a/c has been charged ₹1,00,000. To reverse unauthorized debit, contact customer care eight seven six five four three two one zero nine.",scam
+cb_scam_en_13,fake_debit_alert_callback,en,"Security warning: Your account has been charged ₹20,000. To reverse unauthorized debit, contact customer care eight seven six five four three two one zero nine.",scam
+cb_scam_en_13,fake_debit_alert_callback,en,"Security warning: Your account has been charged ₹65,000. To reverse unauthorized debit, contact customer care +91-8123456789.",scam
+cb_scam_en_13,fake_debit_alert_callback,en,"Security warning: Your a/c has been charged ₹99,999. To reverse unauthorized debit, contact customer care +91 7654321098.",scam
+cb_scam_en_13,fake_debit_alert_callback,en,"Security warning: Your account has been charged ₹65,000. To reverse unauthorized debit, contact customer care XXXXX XXXXX.",scam
+cb_scam_en_13,fake_debit_alert_callback,en,"Security warning: Your account has been charged ₹65,000. To reverse unauthorized debit, contact customer care 8 7 6 5 4 3 2 1 0 9.",scam
+cb_scam_en_13,fake_debit_alert_callback,en,"Security warning: Your a/c has been charged ₹48,500. To reverse unauthorized debit, contact customer care 09876543210.",scam
+cb_scam_en_14,fake_debit_alert_callback,en,"Bank Notification: Rs 99,999 debited. Call 09876543210 urgently if this was not done by you.",scam
+cb_scam_en_14,fake_debit_alert_callback,en,"Bank Notification: Rs 35,500 debited. Call 98765***** immediately if this was not done by you.",scam
+cb_scam_en_14,fake_debit_alert_callback,en,"Bank Notification: Rs 99,999 debited. Call 9988776655 immediately if this was not done by you.",scam
+cb_scam_en_14,fake_debit_alert_callback,en,"Bank Notification: Rs 30,000 debited. Call +91-8123456789 urgently if this was not done by you.",scam
+cb_scam_en_14,fake_debit_alert_callback,en,"Bank Notification: Rs 48,500 debited. Call +91-6543210987 immediately if this was not done by you.",scam
+cb_scam_en_14,fake_debit_alert_callback,en,"Bank Notification: Rs 65,000 debited. Call 9123456780 immediately if this was not done by you.",scam
+cb_scam_en_14,fake_debit_alert_callback,en,"Bank Notification: Rs 40,000 debited. Call nine eight seven six five four three two one zero urgently if this was not done by you.",scam
+cb_scam_en_15,fake_debit_alert_callback,en,"Txn alert: Rs 20,000 debited from your a/c. If not you call +91-8765432109 now to cancel.",scam
+cb_scam_en_15,fake_debit_alert_callback,en,"Txn alert: Rs 48,500 debited from your account. If not you call +91 7654321098 now to cancel.",scam
+cb_scam_en_15,fake_debit_alert_callback,en,"Txn alert: Rs 50,000 debited from your account. If not you call +91-9876543210 now to cancel.",scam
+cb_scam_en_15,fake_debit_alert_callback,en,"Txn alert: Rs 25,000 debited from your a/c. If not you call 9988776655 now to cancel.",scam
+cb_scam_en_15,fake_debit_alert_callback,en,"Txn alert: Rs 75,000 debited from your account. If not you call 8 7 6 5 4 3 2 1 0 9 now to cancel.",scam
+cb_scam_en_15,fake_debit_alert_callback,en,"Txn alert: Rs 85,000 debited from your account. If not you call eight seven six five four three two one zero nine now to cancel.",scam
+cb_scam_en_15,fake_debit_alert_callback,en,"Txn alert: Rs 30,000 debited from your a/c. If not you call +91 9 8 7 6 5 4 3 2 1 0 now to cancel.",scam
+cb_scam_hi_1,fake_debit_alert_callback,hi,"अलर्ट: आपके बैंक खाते से ₹50,000 डेबिट हो गए हैं। यदि आपने यह ट्रांजेक्शन नहीं किया, तो तुरंत 09876543210 पर कॉल करें।",scam
+cb_scam_hi_1,fake_debit_alert_callback,hi,"अलर्ट: आपके बैंक खाते से ₹35,500 डेबिट हो गए हैं। यदि आपने यह ट्रांजेक्शन नहीं किया, तो तुरंत +91-9876543210 पर कॉल करें।",scam
+cb_scam_hi_1,fake_debit_alert_callback,hi,"अलर्ट: आपके बैंक खाते से ₹35,500 डेबिट हो गए हैं। यदि आपने यह ट्रांजेक्शन नहीं किया, तो तुरंत XXXXXXXXXX पर कॉल करें।",scam
+cb_scam_hi_1,fake_debit_alert_callback,hi,"अलर्ट: आपके बैंक खाते से ₹48,500 डेबिट हो गए हैं। यदि आपने यह ट्रांजेक्शन नहीं किया, तो तुरंत XXXXXXXXXX पर कॉल करें।",scam
+cb_scam_hi_1,fake_debit_alert_callback,hi,"अलर्ट: आपके बैंक खाते से ₹65,000 डेबिट हो गए हैं। यदि आपने यह ट्रांजेक्शन नहीं किया, तो तुरंत नौ आठ सात छह पांच चार तीन दो एक शून्य पर कॉल करें।",scam
+cb_scam_hi_1,fake_debit_alert_callback,hi,"अलर्ट: आपके बैंक खाते से ₹1,00,000 डेबिट हो गए हैं। यदि आपने यह ट्रांजेक्शन नहीं किया, तो तुरंत +91-XXXXXXXXXX पर कॉल करें।",scam
+cb_scam_hi_1,fake_debit_alert_callback,hi,"अलर्ट: आपके बैंक खाते से ₹80,000 डेबिट हो गए हैं। यदि आपने यह ट्रांजेक्शन नहीं किया, तो तुरंत +91-XXXXXXXXXX पर कॉल करें।",scam
+cb_scam_hi_1,fake_debit_alert_callback,hi,"अलर्ट: आपके बैंक खाते से ₹50,000 डेबिट हो गए हैं। यदि आपने यह ट्रांजेक्शन नहीं किया, तो तुरंत +91-9876543210 पर कॉल करें।",scam
+cb_scam_hi_2,fake_debit_alert_callback,hi,"सूचना: आपके खाते से ₹15,000 की राशि निकाल ली गई है। इस ट्रांजेक्शन को रद्द करने के लिए तुरंत +91-9876543210 पर संपर्क करें।",scam
+cb_scam_hi_2,fake_debit_alert_callback,hi,"सूचना: आपके खाते से ₹50,000 की राशि निकाल ली गई है। इस ट्रांजेक्शन को रद्द करने के लिए तुरंत नौ आठ सात छह पांच चार तीन दो एक शून्य पर संपर्क करें।",scam
+cb_scam_hi_2,fake_debit_alert_callback,hi,"सूचना: आपके खाते से ₹75,000 की राशि निकाल ली गई है। इस ट्रांजेक्शन को रद्द करने के लिए तुरंत +91-9876543210 पर संपर्क करें।",scam
+cb_scam_hi_2,fake_debit_alert_callback,hi,"सूचना: आपके खाते से ₹25,000 की राशि निकाल ली गई है। इस ट्रांजेक्शन को रद्द करने के लिए तुरंत 09876543210 पर संपर्क करें।",scam
+cb_scam_hi_2,fake_debit_alert_callback,hi,"सूचना: आपके खाते से ₹25,000 की राशि निकाल ली गई है। इस ट्रांजेक्शन को रद्द करने के लिए तुरंत 9876543210 पर संपर्क करें।",scam
+cb_scam_hi_2,fake_debit_alert_callback,hi,"सूचना: आपके खाते से ₹20,000 की राशि निकाल ली गई है। इस ट्रांजेक्शन को रद्द करने के लिए तुरंत 9 8 7 6 5 4 3 2 1 0 पर संपर्क करें।",scam
+cb_scam_hi_2,fake_debit_alert_callback,hi,"सूचना: आपके खाते से ₹99,999 की राशि निकाल ली गई है। इस ट्रांजेक्शन को रद्द करने के लिए तुरंत +91-XXXXXXXXXX पर संपर्क करें।",scam
+cb_scam_hi_2,fake_debit_alert_callback,hi,"सूचना: आपके खाते से ₹50,000 की राशि निकाल ली गई है। इस ट्रांजेक्शन को रद्द करने के लिए तुरंत 9876543210 पर संपर्क करें।",scam
+cb_scam_hi_3,fake_debit_alert_callback,hi,"बैंक अलर्ट: आपके खाते से ₹65,000 काटे गए हैं। यदि आपने नहीं किया तो तुरंत कस्टमर केयर नंबर 98765XXXXX पर कॉल करें।",scam
+cb_scam_hi_3,fake_debit_alert_callback,hi,"बैंक अलर्ट: आपके खाते से ₹40,000 काटे गए हैं। यदि आपने नहीं किया तो तुरंत कस्टमर केयर नंबर +91-XXXXXXXXXX पर कॉल करें।",scam
+cb_scam_hi_3,fake_debit_alert_callback,hi,"बैंक अलर्ट: आपके खाते से ₹15,000 काटे गए हैं। यदि आपने नहीं किया तो तुरंत कस्टमर केयर नंबर +91-XXXXXXXXXX पर कॉल करें।",scam
+cb_scam_hi_3,fake_debit_alert_callback,hi,"बैंक अलर्ट: आपके खाते से ₹40,000 काटे गए हैं। यदि आपने नहीं किया तो तुरंत कस्टमर केयर नंबर 9 8 7 6 5 4 3 2 1 0 पर कॉल करें।",scam
+cb_scam_hi_3,fake_debit_alert_callback,hi,"बैंक अलर्ट: आपके खाते से ₹1,00,000 काटे गए हैं। यदि आपने नहीं किया तो तुरंत कस्टमर केयर नंबर XXXXXXXXXX पर कॉल करें।",scam
+cb_scam_hi_3,fake_debit_alert_callback,hi,"बैंक अलर्ट: आपके खाते से ₹48,500 काटे गए हैं। यदि आपने नहीं किया तो तुरंत कस्टमर केयर नंबर 98765XXXXX पर कॉल करें।",scam
+cb_scam_hi_3,fake_debit_alert_callback,hi,"बैंक अलर्ट: आपके खाते से ₹25,000 काटे गए हैं। यदि आपने नहीं किया तो तुरंत कस्टमर केयर नंबर +91-9876543210 पर कॉल करें।",scam
+cb_scam_hi_3,fake_debit_alert_callback,hi,"बैंक अलर्ट: आपके खाते से ₹48,500 काटे गए हैं। यदि आपने नहीं किया तो तुरंत कस्टमर केयर नंबर 9876543210 पर कॉल करें।",scam
+cb_scam_hi_4,fake_debit_alert_callback,hi,"चेतावनी: खाते से ₹25,000 का लेनदेन हुआ है। अनधिकृत लेनदेन रोकने हेतु तुरंत इस नंबर +91-XXXXXXXXXX पर कॉल करें।",scam
+cb_scam_hi_4,fake_debit_alert_callback,hi,"चेतावनी: खाते से ₹40,000 का लेनदेन हुआ है। अनधिकृत लेनदेन रोकने हेतु तुरंत इस नंबर 09876543210 पर कॉल करें।",scam
+cb_scam_hi_4,fake_debit_alert_callback,hi,"चेतावनी: खाते से ₹10,000 का लेनदेन हुआ है। अनधिकृत लेनदेन रोकने हेतु तुरंत इस नंबर 9876543210 पर कॉल करें।",scam
+cb_scam_hi_4,fake_debit_alert_callback,hi,"चेतावनी: खाते से ₹20,000 का लेनदेन हुआ है। अनधिकृत लेनदेन रोकने हेतु तुरंत इस नंबर 98765XXXXX पर कॉल करें।",scam
+cb_scam_hi_4,fake_debit_alert_callback,hi,"चेतावनी: खाते से ₹80,000 का लेनदेन हुआ है। अनधिकृत लेनदेन रोकने हेतु तुरंत इस नंबर 09876543210 पर कॉल करें।",scam
+cb_scam_hi_4,fake_debit_alert_callback,hi,"चेतावनी: खाते से ₹48,500 का लेनदेन हुआ है। अनधिकृत लेनदेन रोकने हेतु तुरंत इस नंबर XXXXXXXXXX पर कॉल करें।",scam
+cb_scam_hi_4,fake_debit_alert_callback,hi,"चेतावनी: खाते से ₹49,999 का लेनदेन हुआ है। अनधिकृत लेनदेन रोकने हेतु तुरंत इस नंबर XXXXXXXXXX पर कॉल करें।",scam
+cb_scam_hi_4,fake_debit_alert_callback,hi,"चेतावनी: खाते से ₹99,999 का लेनदेन हुआ है। अनधिकृत लेनदेन रोकने हेतु तुरंत इस नंबर 09876543210 पर कॉल करें।",scam
+cb_scam_hi_5,fake_debit_alert_callback,hi,"ज़रूरी सूचना: आपके बैंक अकाउंट से ₹40,000 निकल गए हैं। इस ट्रांजेक्शन को रोकने के लिए अभी कॉल करें: 9876543210",scam
+cb_scam_hi_5,fake_debit_alert_callback,hi,"ज़रूरी सूचना: आपके बैंक अकाउंट से ₹99,999 निकल गए हैं। इस ट्रांजेक्शन को रोकने के लिए अभी कॉल करें: 09876543210",scam
+cb_scam_hi_5,fake_debit_alert_callback,hi,"ज़रूरी सूचना: आपके बैंक अकाउंट से ₹40,000 निकल गए हैं। इस ट्रांजेक्शन को रोकने के लिए अभी कॉल करें: XXXXXXXXXX",scam
+cb_scam_hi_5,fake_debit_alert_callback,hi,"ज़रूरी सूचना: आपके बैंक अकाउंट से ₹30,000 निकल गए हैं। इस ट्रांजेक्शन को रोकने के लिए अभी कॉल करें: 98765XXXXX",scam
+cb_scam_hi_5,fake_debit_alert_callback,hi,"ज़रूरी सूचना: आपके बैंक अकाउंट से ₹30,000 निकल गए हैं। इस ट्रांजेक्शन को रोकने के लिए अभी कॉल करें: XXXXXXXXXX",scam
+cb_scam_hi_5,fake_debit_alert_callback,hi,"ज़रूरी सूचना: आपके बैंक अकाउंट से ₹85,000 निकल गए हैं। इस ट्रांजेक्शन को रोकने के लिए अभी कॉल करें: XXXXXXXXXX",scam
+cb_scam_hi_5,fake_debit_alert_callback,hi,"ज़रूरी सूचना: आपके बैंक अकाउंट से ₹50,000 निकल गए हैं। इस ट्रांजेक्शन को रोकने के लिए अभी कॉल करें: 9876543210",scam
+cb_scam_hi_5,fake_debit_alert_callback,hi,"ज़रूरी सूचना: आपके बैंक अकाउंट से ₹65,000 निकल गए हैं। इस ट्रांजेक्शन को रोकने के लिए अभी कॉल करें: XXXXXXXXXX",scam
+cb_scam_hi_6,fake_debit_alert_callback,hi,"अलर्ट: ₹50,000 खाते से डेबिट। अगर आपने नहीं किया तो तुरंत +91-9876543210 पर कॉल या मैसेज करें।",scam
+cb_scam_hi_6,fake_debit_alert_callback,hi,"अलर्ट: ₹15,000 खाते से डेबिट। अगर आपने नहीं किया तो तुरंत 09876543210 पर कॉल या मैसेज करें।",scam
+cb_scam_hi_6,fake_debit_alert_callback,hi,"अलर्ट: ₹40,000 खाते से डेबिट। अगर आपने नहीं किया तो तुरंत 09876543210 पर कॉल या मैसेज करें।",scam
+cb_scam_hi_6,fake_debit_alert_callback,hi,"अलर्ट: ₹48,500 खाते से डेबिट। अगर आपने नहीं किया तो तुरंत 9 8 7 6 5 4 3 2 1 0 पर कॉल या मैसेज करें।",scam
+cb_scam_hi_6,fake_debit_alert_callback,hi,"अलर्ट: ₹49,999 खाते से डेबिट। अगर आपने नहीं किया तो तुरंत 9876543210 पर कॉल या मैसेज करें।",scam
+cb_scam_hi_6,fake_debit_alert_callback,hi,"अलर्ट: ₹25,000 खाते से डेबिट। अगर आपने नहीं किया तो तुरंत 09876543210 पर कॉल या मैसेज करें।",scam
+cb_scam_hi_6,fake_debit_alert_callback,hi,"अलर्ट: ₹50,000 खाते से डेबिट। अगर आपने नहीं किया तो तुरंत 98765XXXXX पर कॉल या मैसेज करें।",scam
+cb_scam_hi_6,fake_debit_alert_callback,hi,"अलर्ट: ₹1,00,000 खाते से डेबिट। अगर आपने नहीं किया तो तुरंत 9 8 7 6 5 4 3 2 1 0 पर कॉल या मैसेज करें।",scam
+cb_scam_hi_6,fake_debit_alert_callback,hi,"अलर्ट: ₹1,00,000 खाते से डेबिट। अगर आपने नहीं किया तो तुरंत +91-9876543210 पर कॉल या मैसेज करें।",scam
+cb_scam_hi_7,fake_debit_alert_callback,hi,"नमस्ते, मैं बैंक फ्रॉड प्रिवेंशन टीम से हूँ। आपके खाते से ₹80,000 डेबिट हुए हैं। यदि आपने नहीं किया, तो तुरंत 98765XXXXX पर डायल करें।",scam
+cb_scam_hi_7,fake_debit_alert_callback,hi,"नमस्ते, मैं बैंक फ्रॉड प्रिवेंशन टीम से हूँ। आपके खाते से ₹50,000 डेबिट हुए हैं। यदि आपने नहीं किया, तो तुरंत 98765XXXXX पर डायल करें।",scam
+cb_scam_hi_7,fake_debit_alert_callback,hi,"नमस्ते, मैं बैंक फ्रॉड प्रिवेंशन टीम से हूँ। आपके खाते से ₹30,000 डेबिट हुए हैं। यदि आपने नहीं किया, तो तुरंत +91-XXXXXXXXXX पर डायल करें।",scam
+cb_scam_hi_7,fake_debit_alert_callback,hi,"नमस्ते, मैं बैंक फ्रॉड प्रिवेंशन टीम से हूँ। आपके खाते से ₹99,999 डेबिट हुए हैं। यदि आपने नहीं किया, तो तुरंत 98765XXXXX पर डायल करें।",scam
+cb_scam_hi_7,fake_debit_alert_callback,hi,"नमस्ते, मैं बैंक फ्रॉड प्रिवेंशन टीम से हूँ। आपके खाते से ₹65,000 डेबिट हुए हैं। यदि आपने नहीं किया, तो तुरंत 09876543210 पर डायल करें।",scam
+cb_scam_hi_7,fake_debit_alert_callback,hi,"नमस्ते, मैं बैंक फ्रॉड प्रिवेंशन टीम से हूँ। आपके खाते से ₹20,000 डेबिट हुए हैं। यदि आपने नहीं किया, तो तुरंत 09876543210 पर डायल करें।",scam
+cb_scam_hi_7,fake_debit_alert_callback,hi,"नमस्ते, मैं बैंक फ्रॉड प्रिवेंशन टीम से हूँ। आपके खाते से ₹75,000 डेबिट हुए हैं। यदि आपने नहीं किया, तो तुरंत 9 8 7 6 5 4 3 2 1 0 पर डायल करें।",scam
+cb_scam_hi_7,fake_debit_alert_callback,hi,"नमस्ते, मैं बैंक फ्रॉड प्रिवेंशन टीम से हूँ। आपके खाते से ₹49,999 डेबिट हुए हैं। यदि आपने नहीं किया, तो तुरंत 09876543210 पर डायल करें।",scam
+cb_scam_hi_7,fake_debit_alert_callback,hi,"नमस्ते, मैं बैंक फ्रॉड प्रिवेंशन टीम से हूँ। आपके खाते से ₹15,000 डेबिट हुए हैं। यदि आपने नहीं किया, तो तुरंत 9 8 7 6 5 4 3 2 1 0 पर डायल करें।",scam
+cb_scam_hi_8,fake_debit_alert_callback,hi,"बैंक सुरक्षा चेतावनी: आपके खाते से ₹20,000 कटे हैं। पैसे वापस पाने के लिए तुरंत अधिकारी से XXXXXXXXXX पर संपर्क करें।",scam
+cb_scam_hi_8,fake_debit_alert_callback,hi,"बैंक सुरक्षा चेतावनी: आपके खाते से ₹75,000 कटे हैं। पैसे वापस पाने के लिए तुरंत अधिकारी से 9876543210 पर संपर्क करें।",scam
+cb_scam_hi_8,fake_debit_alert_callback,hi,"बैंक सुरक्षा चेतावनी: आपके खाते से ₹35,500 कटे हैं। पैसे वापस पाने के लिए तुरंत अधिकारी से +91-9876543210 पर संपर्क करें।",scam
+cb_scam_hi_8,fake_debit_alert_callback,hi,"बैंक सुरक्षा चेतावनी: आपके खाते से ₹85,000 कटे हैं। पैसे वापस पाने के लिए तुरंत अधिकारी से +91-XXXXXXXXXX पर संपर्क करें।",scam
+cb_scam_hi_8,fake_debit_alert_callback,hi,"बैंक सुरक्षा चेतावनी: आपके खाते से ₹30,000 कटे हैं। पैसे वापस पाने के लिए तुरंत अधिकारी से नौ आठ सात छह पांच चार तीन दो एक शून्य पर संपर्क करें।",scam
+cb_scam_hi_8,fake_debit_alert_callback,hi,"बैंक सुरक्षा चेतावनी: आपके खाते से ₹10,000 कटे हैं। पैसे वापस पाने के लिए तुरंत अधिकारी से XXXXXXXXXX पर संपर्क करें।",scam
+cb_scam_hi_8,fake_debit_alert_callback,hi,"बैंक सुरक्षा चेतावनी: आपके खाते से ₹20,000 कटे हैं। पैसे वापस पाने के लिए तुरंत अधिकारी से +91-XXXXXXXXXX पर संपर्क करें।",scam
+cb_scam_hi_8,fake_debit_alert_callback,hi,"बैंक सुरक्षा चेतावनी: आपके खाते से ₹49,999 कटे हैं। पैसे वापस पाने के लिए तुरंत अधिकारी से +91-XXXXXXXXXX पर संपर्क करें।",scam
+cb_scam_hi_8,fake_debit_alert_callback,hi,"बैंक सुरक्षा चेतावनी: आपके खाते से ₹35,500 कटे हैं। पैसे वापस पाने के लिए तुरंत अधिकारी से 98765XXXXX पर संपर्क करें।",scam
+cb_scam_hi_9,fake_debit_alert_callback,hi,"अलर्ट: ₹40,000 आपके बैंक खाते से ट्रांसफर हुए। अगर यह आपने नहीं किया तो तुरंत 9876543210 पर शिकायत दर्ज करें।",scam
+cb_scam_hi_9,fake_debit_alert_callback,hi,"अलर्ट: ₹40,000 आपके बैंक खाते से ट्रांसफर हुए। अगर यह आपने नहीं किया तो तुरंत 98765XXXXX पर शिकायत दर्ज करें।",scam
+cb_scam_hi_9,fake_debit_alert_callback,hi,"अलर्ट: ₹35,500 आपके बैंक खाते से ट्रांसफर हुए। अगर यह आपने नहीं किया तो तुरंत 98765XXXXX पर शिकायत दर्ज करें।",scam
+cb_scam_hi_9,fake_debit_alert_callback,hi,"अलर्ट: ₹49,999 आपके बैंक खाते से ट्रांसफर हुए। अगर यह आपने नहीं किया तो तुरंत 9876543210 पर शिकायत दर्ज करें।",scam
+cb_scam_hi_9,fake_debit_alert_callback,hi,"अलर्ट: ₹40,000 आपके बैंक खाते से ट्रांसफर हुए। अगर यह आपने नहीं किया तो तुरंत 09876543210 पर शिकायत दर्ज करें।",scam
+cb_scam_hi_9,fake_debit_alert_callback,hi,"अलर्ट: ₹40,000 आपके बैंक खाते से ट्रांसफर हुए। अगर यह आपने नहीं किया तो तुरंत +91-9876543210 पर शिकायत दर्ज करें।",scam
+cb_scam_hi_9,fake_debit_alert_callback,hi,"अलर्ट: ₹99,999 आपके बैंक खाते से ट्रांसफर हुए। अगर यह आपने नहीं किया तो तुरंत 9 8 7 6 5 4 3 2 1 0 पर शिकायत दर्ज करें।",scam
+cb_scam_hi_9,fake_debit_alert_callback,hi,"अलर्ट: ₹10,000 आपके बैंक खाते से ट्रांसफर हुए। अगर यह आपने नहीं किया तो तुरंत 98765XXXXX पर शिकायत दर्ज करें।",scam
+cb_scam_hi_9,fake_debit_alert_callback,hi,"अलर्ट: ₹65,000 आपके बैंक खाते से ट्रांसफर हुए। अगर यह आपने नहीं किया तो तुरंत 9876543210 पर शिकायत दर्ज करें।",scam
+cb_scam_hi_10,fake_debit_alert_callback,hi,"अति आवश्यक: ₹35,500 कट गए हैं। ट्रांजेक्शन रद्द करवाने हेतु तुरंत +91-XXXXXXXXXX पर फोन करें।",scam
+cb_scam_hi_10,fake_debit_alert_callback,hi,"अति आवश्यक: ₹40,000 कट गए हैं। ट्रांजेक्शन रद्द करवाने हेतु तुरंत +91-9876543210 पर फोन करें।",scam
+cb_scam_hi_10,fake_debit_alert_callback,hi,"अति आवश्यक: ₹65,000 कट गए हैं। ट्रांजेक्शन रद्द करवाने हेतु तुरंत +91-9876543210 पर फोन करें।",scam
+cb_scam_hi_10,fake_debit_alert_callback,hi,"अति आवश्यक: ₹30,000 कट गए हैं। ट्रांजेक्शन रद्द करवाने हेतु तुरंत 98765XXXXX पर फोन करें।",scam
+cb_scam_hi_10,fake_debit_alert_callback,hi,"अति आवश्यक: ₹65,000 कट गए हैं। ट्रांजेक्शन रद्द करवाने हेतु तुरंत 9876543210 पर फोन करें।",scam
+cb_scam_hi_10,fake_debit_alert_callback,hi,"अति आवश्यक: ₹15,000 कट गए हैं। ट्रांजेक्शन रद्द करवाने हेतु तुरंत 98765XXXXX पर फोन करें।",scam
+cb_scam_hi_10,fake_debit_alert_callback,hi,"अति आवश्यक: ₹99,999 कट गए हैं। ट्रांजेक्शन रद्द करवाने हेतु तुरंत XXXXXXXXXX पर फोन करें।",scam
+cb_scam_hi_10,fake_debit_alert_callback,hi,"अति आवश्यक: ₹80,000 कट गए हैं। ट्रांजेक्शन रद्द करवाने हेतु तुरंत 9 8 7 6 5 4 3 2 1 0 पर फोन करें।",scam
+cb_scam_hi_10,fake_debit_alert_callback,hi,"अति आवश्यक: ₹15,000 कट गए हैं। ट्रांजेक्शन रद्द करवाने हेतु तुरंत 9 8 7 6 5 4 3 2 1 0 पर फोन करें।",scam
+cb_scam_te_1,fake_debit_alert_callback,te,"హెచ్చరిక: మీ బ్యాంక్ ఖాతా నుండి ₹80,000 డెబిట్ చేయబడింది. ఈ లావాదేవీ మీరు చేయకపోతే, వెంటనే 98765XXXXX నంబర్‌కు కాల్ చేయండి.",scam
+cb_scam_te_1,fake_debit_alert_callback,te,"హెచ్చరిక: మీ బ్యాంక్ ఖాతా నుండి ₹1,00,000 డెబిట్ చేయబడింది. ఈ లావాదేవీ మీరు చేయకపోతే, వెంటనే 9876543210 నంబర్‌కు కాల్ చేయండి.",scam
+cb_scam_te_1,fake_debit_alert_callback,te,"హెచ్చరిక: మీ బ్యాంక్ ఖాతా నుండి ₹65,000 డెబిట్ చేయబడింది. ఈ లావాదేవీ మీరు చేయకపోతే, వెంటనే 9 8 7 6 5 4 3 2 1 0 నంబర్‌కు కాల్ చేయండి.",scam
+cb_scam_te_1,fake_debit_alert_callback,te,"హెచ్చరిక: మీ బ్యాంక్ ఖాతా నుండి ₹35,500 డెబిట్ చేయబడింది. ఈ లావాదేవీ మీరు చేయకపోతే, వెంటనే 9 8 7 6 5 4 3 2 1 0 నంబర్‌కు కాల్ చేయండి.",scam
+cb_scam_te_1,fake_debit_alert_callback,te,"హెచ్చరిక: మీ బ్యాంక్ ఖాతా నుండి ₹75,000 డెబిట్ చేయబడింది. ఈ లావాదేవీ మీరు చేయకపోతే, వెంటనే 98765XXXXX నంబర్‌కు కాల్ చేయండి.",scam
+cb_scam_te_1,fake_debit_alert_callback,te,"హెచ్చరిక: మీ బ్యాంక్ ఖాతా నుండి ₹80,000 డెబిట్ చేయబడింది. ఈ లావాదేవీ మీరు చేయకపోతే, వెంటనే XXXXXXXXXX నంబర్‌కు కాల్ చేయండి.",scam
+cb_scam_te_1,fake_debit_alert_callback,te,"హెచ్చరిక: మీ బ్యాంక్ ఖాతా నుండి ₹49,999 డెబిట్ చేయబడింది. ఈ లావాదేవీ మీరు చేయకపోతే, వెంటనే +91-XXXXXXXXXX నంబర్‌కు కాల్ చేయండి.",scam
+cb_scam_te_1,fake_debit_alert_callback,te,"హెచ్చరిక: మీ బ్యాంక్ ఖాతా నుండి ₹80,000 డెబిట్ చేయబడింది. ఈ లావాదేవీ మీరు చేయకపోతే, వెంటనే 9876543210 నంబర్‌కు కాల్ చేయండి.",scam
+cb_scam_te_2,fake_debit_alert_callback,te,"ముఖ్య గమనిక: మీ ఖాతా నుండి ₹65,000 నగదు విత్‌డ్రా చేయబడింది. లావాదేవీని రద్దు చేయడానికి వెంటనే తొమ్మిది ఎనిమిది ఏడు ఆరు ఐదు నాలుగు మూడు రెండు ఒకటి సున్నా ను సంప్రదించండి.",scam
+cb_scam_te_2,fake_debit_alert_callback,te,"ముఖ్య గమనిక: మీ ఖాతా నుండి ₹15,000 నగదు విత్‌డ్రా చేయబడింది. లావాదేవీని రద్దు చేయడానికి వెంటనే XXXXXXXXXX ను సంప్రదించండి.",scam
+cb_scam_te_2,fake_debit_alert_callback,te,"ముఖ్య గమనిక: మీ ఖాతా నుండి ₹48,500 నగదు విత్‌డ్రా చేయబడింది. లావాదేవీని రద్దు చేయడానికి వెంటనే XXXXXXXXXX ను సంప్రదించండి.",scam
+cb_scam_te_2,fake_debit_alert_callback,te,"ముఖ్య గమనిక: మీ ఖాతా నుండి ₹30,000 నగదు విత్‌డ్రా చేయబడింది. లావాదేవీని రద్దు చేయడానికి వెంటనే 98765XXXXX ను సంప్రదించండి.",scam
+cb_scam_te_2,fake_debit_alert_callback,te,"ముఖ్య గమనిక: మీ ఖాతా నుండి ₹85,000 నగదు విత్‌డ్రా చేయబడింది. లావాదేవీని రద్దు చేయడానికి వెంటనే తొమ్మిది ఎనిమిది ఏడు ఆరు ఐదు నాలుగు మూడు రెండు ఒకటి సున్నా ను సంప్రదించండి.",scam
+cb_scam_te_2,fake_debit_alert_callback,te,"ముఖ్య గమనిక: మీ ఖాతా నుండి ₹75,000 నగదు విత్‌డ్రా చేయబడింది. లావాదేవీని రద్దు చేయడానికి వెంటనే 9 8 7 6 5 4 3 2 1 0 ను సంప్రదించండి.",scam
+cb_scam_te_2,fake_debit_alert_callback,te,"ముఖ్య గమనిక: మీ ఖాతా నుండి ₹25,000 నగదు విత్‌డ్రా చేయబడింది. లావాదేవీని రద్దు చేయడానికి వెంటనే +91-XXXXXXXXXX ను సంప్రదించండి.",scam
+cb_scam_te_2,fake_debit_alert_callback,te,"ముఖ్య గమనిక: మీ ఖాతా నుండి ₹15,000 నగదు విత్‌డ్రా చేయబడింది. లావాదేవీని రద్దు చేయడానికి వెంటనే +91-9876543210 ను సంప్రదించండి.",scam
+cb_scam_te_3,fake_debit_alert_callback,te,"బ్యాంక్ అలర్ట్: మీ అకౌంట్ నుండి ₹20,000 కట్ అయ్యాయి. మీరు చేయకపోతే వెంటనే కస్టమర్ కేర్ 9 8 7 6 5 4 3 2 1 0 కు కాల్ చేయండి.",scam
+cb_scam_te_3,fake_debit_alert_callback,te,"బ్యాంక్ అలర్ట్: మీ అకౌంట్ నుండి ₹80,000 కట్ అయ్యాయి. మీరు చేయకపోతే వెంటనే కస్టమర్ కేర్ 9876543210 కు కాల్ చేయండి.",scam
+cb_scam_te_3,fake_debit_alert_callback,te,"బ్యాంక్ అలర్ట్: మీ అకౌంట్ నుండి ₹30,000 కట్ అయ్యాయి. మీరు చేయకపోతే వెంటనే కస్టమర్ కేర్ 9876543210 కు కాల్ చేయండి.",scam
+cb_scam_te_3,fake_debit_alert_callback,te,"బ్యాంక్ అలర్ట్: మీ అకౌంట్ నుండి ₹49,999 కట్ అయ్యాయి. మీరు చేయకపోతే వెంటనే కస్టమర్ కేర్ +91-9876543210 కు కాల్ చేయండి.",scam
+cb_scam_te_3,fake_debit_alert_callback,te,"బ్యాంక్ అలర్ట్: మీ అకౌంట్ నుండి ₹20,000 కట్ అయ్యాయి. మీరు చేయకపోతే వెంటనే కస్టమర్ కేర్ XXXXXXXXXX కు కాల్ చేయండి.",scam
+cb_scam_te_3,fake_debit_alert_callback,te,"బ్యాంక్ అలర్ట్: మీ అకౌంట్ నుండి ₹25,000 కట్ అయ్యాయి. మీరు చేయకపోతే వెంటనే కస్టమర్ కేర్ XXXXXXXXXX కు కాల్ చేయండి.",scam
+cb_scam_te_3,fake_debit_alert_callback,te,"బ్యాంక్ అలర్ట్: మీ అకౌంట్ నుండి ₹65,000 కట్ అయ్యాయి. మీరు చేయకపోతే వెంటనే కస్టమర్ కేర్ 9 8 7 6 5 4 3 2 1 0 కు కాల్ చేయండి.",scam
+cb_scam_te_3,fake_debit_alert_callback,te,"బ్యాంక్ అలర్ట్: మీ అకౌంట్ నుండి ₹30,000 కట్ అయ్యాయి. మీరు చేయకపోతే వెంటనే కస్టమర్ కేర్ 9 8 7 6 5 4 3 2 1 0 కు కాల్ చేయండి.",scam
+cb_scam_te_4,fake_debit_alert_callback,te,"అత్యవసరం: మీ ఖాతా నుండి ₹35,500 డెబిట్ అయింది. ఈ లావాదేవీని ఆపడానికి వెంటనే XXXXXXXXXX కు డయల్ చేయండి.",scam
+cb_scam_te_4,fake_debit_alert_callback,te,"అత్యవసరం: మీ ఖాతా నుండి ₹35,500 డెబిట్ అయింది. ఈ లావాదేవీని ఆపడానికి వెంటనే 9876543210 కు డయల్ చేయండి.",scam
+cb_scam_te_4,fake_debit_alert_callback,te,"అత్యవసరం: మీ ఖాతా నుండి ₹1,00,000 డెబిట్ అయింది. ఈ లావాదేవీని ఆపడానికి వెంటనే 9 8 7 6 5 4 3 2 1 0 కు డయల్ చేయండి.",scam
+cb_scam_te_4,fake_debit_alert_callback,te,"అత్యవసరం: మీ ఖాతా నుండి ₹49,999 డెబిట్ అయింది. ఈ లావాదేవీని ఆపడానికి వెంటనే తొమ్మిది ఎనిమిది ఏడు ఆరు ఐదు నాలుగు మూడు రెండు ఒకటి సున్నా కు డయల్ చేయండి.",scam
+cb_scam_te_4,fake_debit_alert_callback,te,"అత్యవసరం: మీ ఖాతా నుండి ₹99,999 డెబిట్ అయింది. ఈ లావాదేవీని ఆపడానికి వెంటనే తొమ్మిది ఎనిమిది ఏడు ఆరు ఐదు నాలుగు మూడు రెండు ఒకటి సున్నా కు డయల్ చేయండి.",scam
+cb_scam_te_4,fake_debit_alert_callback,te,"అత్యవసరం: మీ ఖాతా నుండి ₹65,000 డెబిట్ అయింది. ఈ లావాదేవీని ఆపడానికి వెంటనే 9876543210 కు డయల్ చేయండి.",scam
+cb_scam_te_4,fake_debit_alert_callback,te,"అత్యవసరం: మీ ఖాతా నుండి ₹75,000 డెబిట్ అయింది. ఈ లావాదేవీని ఆపడానికి వెంటనే తొమ్మిది ఎనిమిది ఏడు ఆరు ఐదు నాలుగు మూడు రెండు ఒకటి సున్నా కు డయల్ చేయండి.",scam
+cb_scam_te_4,fake_debit_alert_callback,te,"అత్యవసరం: మీ ఖాతా నుండి ₹48,500 డెబిట్ అయింది. ఈ లావాదేవీని ఆపడానికి వెంటనే +91-9876543210 కు డయల్ చేయండి.",scam
+cb_scam_te_5,fake_debit_alert_callback,te,"భద్రతా హెచ్చరిక: ₹20,000 మీ అకౌంట్ నుండి బదిలీ చేయబడింది. రీఫండ్ పొందడానికి వెంటనే ఈ నంబర్ తొమ్మిది ఎనిమిది ఏడు ఆరు ఐదు నాలుగు మూడు రెండు ఒకటి సున్నా కు కాల్ చేయండి.",scam
+cb_scam_te_5,fake_debit_alert_callback,te,"భద్రతా హెచ్చరిక: ₹99,999 మీ అకౌంట్ నుండి బదిలీ చేయబడింది. రీఫండ్ పొందడానికి వెంటనే ఈ నంబర్ XXXXXXXXXX కు కాల్ చేయండి.",scam
+cb_scam_te_5,fake_debit_alert_callback,te,"భద్రతా హెచ్చరిక: ₹1,00,000 మీ అకౌంట్ నుండి బదిలీ చేయబడింది. రీఫండ్ పొందడానికి వెంటనే ఈ నంబర్ తొమ్మిది ఎనిమిది ఏడు ఆరు ఐదు నాలుగు మూడు రెండు ఒకటి సున్నా కు కాల్ చేయండి.",scam
+cb_scam_te_5,fake_debit_alert_callback,te,"భద్రతా హెచ్చరిక: ₹48,500 మీ అకౌంట్ నుండి బదిలీ చేయబడింది. రీఫండ్ పొందడానికి వెంటనే ఈ నంబర్ 9 8 7 6 5 4 3 2 1 0 కు కాల్ చేయండి.",scam
+cb_scam_te_5,fake_debit_alert_callback,te,"భద్రతా హెచ్చరిక: ₹15,000 మీ అకౌంట్ నుండి బదిలీ చేయబడింది. రీఫండ్ పొందడానికి వెంటనే ఈ నంబర్ తొమ్మిది ఎనిమిది ఏడు ఆరు ఐదు నాలుగు మూడు రెండు ఒకటి సున్నా కు కాల్ చేయండి.",scam
+cb_scam_te_5,fake_debit_alert_callback,te,"భద్రతా హెచ్చరిక: ₹48,500 మీ అకౌంట్ నుండి బదిలీ చేయబడింది. రీఫండ్ పొందడానికి వెంటనే ఈ నంబర్ 98765XXXXX కు కాల్ చేయండి.",scam
+cb_scam_te_5,fake_debit_alert_callback,te,"భద్రతా హెచ్చరిక: ₹65,000 మీ అకౌంట్ నుండి బదిలీ చేయబడింది. రీఫండ్ పొందడానికి వెంటనే ఈ నంబర్ తొమ్మిది ఎనిమిది ఏడు ఆరు ఐదు నాలుగు మూడు రెండు ఒకటి సున్నా కు కాల్ చేయండి.",scam
+cb_scam_te_5,fake_debit_alert_callback,te,"భద్రతా హెచ్చరిక: ₹48,500 మీ అకౌంట్ నుండి బదిలీ చేయబడింది. రీఫండ్ పొందడానికి వెంటనే ఈ నంబర్ 9876543210 కు కాల్ చేయండి.",scam
+cb_scam_te_6,fake_debit_alert_callback,te,"అలర్ట్: ఖాతా నుండి ₹85,000 డెబిట్. మీరు చేయకపోతే వెంటనే XXXXXXXXXX కు వాట్సాప్ లేదా కాల్ చేయండి.",scam
+cb_scam_te_6,fake_debit_alert_callback,te,"అలర్ట్: ఖాతా నుండి ₹20,000 డెబిట్. మీరు చేయకపోతే వెంటనే తొమ్మిది ఎనిమిది ఏడు ఆరు ఐదు నాలుగు మూడు రెండు ఒకటి సున్నా కు వాట్సాప్ లేదా కాల్ చేయండి.",scam
+cb_scam_te_6,fake_debit_alert_callback,te,"అలర్ట్: ఖాతా నుండి ₹40,000 డెబిట్. మీరు చేయకపోతే వెంటనే తొమ్మిది ఎనిమిది ఏడు ఆరు ఐదు నాలుగు మూడు రెండు ఒకటి సున్నా కు వాట్సాప్ లేదా కాల్ చేయండి.",scam
+cb_scam_te_6,fake_debit_alert_callback,te,"అలర్ట్: ఖాతా నుండి ₹85,000 డెబిట్. మీరు చేయకపోతే వెంటనే 9 8 7 6 5 4 3 2 1 0 కు వాట్సాప్ లేదా కాల్ చేయండి.",scam
+cb_scam_te_6,fake_debit_alert_callback,te,"అలర్ట్: ఖాతా నుండి ₹20,000 డెబిట్. మీరు చేయకపోతే వెంటనే +91-XXXXXXXXXX కు వాట్సాప్ లేదా కాల్ చేయండి.",scam
+cb_scam_te_6,fake_debit_alert_callback,te,"అలర్ట్: ఖాతా నుండి ₹48,500 డెబిట్. మీరు చేయకపోతే వెంటనే +91-9876543210 కు వాట్సాప్ లేదా కాల్ చేయండి.",scam
+cb_scam_te_6,fake_debit_alert_callback,te,"అలర్ట్: ఖాతా నుండి ₹80,000 డెబిట్. మీరు చేయకపోతే వెంటనే 9876543210 కు వాట్సాప్ లేదా కాల్ చేయండి.",scam
+cb_scam_te_6,fake_debit_alert_callback,te,"అలర్ట్: ఖాతా నుండి ₹40,000 డెబిట్. మీరు చేయకపోతే వెంటనే +91-XXXXXXXXXX కు వాట్సాప్ లేదా కాల్ చేయండి.",scam
+cb_scam_te_7,fake_debit_alert_callback,te,"నమస్కారం, నేను బ్యాంక్ ఫ్రాడ్ విభాగం నుండి మాట్లాడుతున్నాను. మీ ఖాతా నుండి ₹25,000 కట్ అయ్యాయి. ఆపడానికి వెంటనే 9876543210 కు కాల్ చేయండి.",scam
+cb_scam_te_7,fake_debit_alert_callback,te,"నమస్కారం, నేను బ్యాంక్ ఫ్రాడ్ విభాగం నుండి మాట్లాడుతున్నాను. మీ ఖాతా నుండి ₹1,00,000 కట్ అయ్యాయి. ఆపడానికి వెంటనే 9876543210 కు కాల్ చేయండి.",scam
+cb_scam_te_7,fake_debit_alert_callback,te,"నమస్కారం, నేను బ్యాంక్ ఫ్రాడ్ విభాగం నుండి మాట్లాడుతున్నాను. మీ ఖాతా నుండి ₹35,500 కట్ అయ్యాయి. ఆపడానికి వెంటనే 9 8 7 6 5 4 3 2 1 0 కు కాల్ చేయండి.",scam
+cb_scam_te_7,fake_debit_alert_callback,te,"నమస్కారం, నేను బ్యాంక్ ఫ్రాడ్ విభాగం నుండి మాట్లాడుతున్నాను. మీ ఖాతా నుండి ₹1,00,000 కట్ అయ్యాయి. ఆపడానికి వెంటనే 9 8 7 6 5 4 3 2 1 0 కు కాల్ చేయండి.",scam
+cb_scam_te_7,fake_debit_alert_callback,te,"నమస్కారం, నేను బ్యాంక్ ఫ్రాడ్ విభాగం నుండి మాట్లాడుతున్నాను. మీ ఖాతా నుండి ₹30,000 కట్ అయ్యాయి. ఆపడానికి వెంటనే +91-9876543210 కు కాల్ చేయండి.",scam
+cb_scam_te_7,fake_debit_alert_callback,te,"నమస్కారం, నేను బ్యాంక్ ఫ్రాడ్ విభాగం నుండి మాట్లాడుతున్నాను. మీ ఖాతా నుండి ₹65,000 కట్ అయ్యాయి. ఆపడానికి వెంటనే XXXXXXXXXX కు కాల్ చేయండి.",scam
+cb_scam_te_7,fake_debit_alert_callback,te,"నమస్కారం, నేను బ్యాంక్ ఫ్రాడ్ విభాగం నుండి మాట్లాడుతున్నాను. మీ ఖాతా నుండి ₹15,000 కట్ అయ్యాయి. ఆపడానికి వెంటనే 98765XXXXX కు కాల్ చేయండి.",scam
+cb_scam_te_7,fake_debit_alert_callback,te,"నమస్కారం, నేను బ్యాంక్ ఫ్రాడ్ విభాగం నుండి మాట్లాడుతున్నాను. మీ ఖాతా నుండి ₹48,500 కట్ అయ్యాయి. ఆపడానికి వెంటనే XXXXXXXXXX కు కాల్ చేయండి.",scam
+cb_scam_te_8,fake_debit_alert_callback,te,"ముఖ్యమైన సమాచారం: ₹50,000 మీ ఖాతా నుండి తీసివేయబడింది. వెంటనే నిలిపివేయడానికి 9876543210 సంప్రదించండి.",scam
+cb_scam_te_8,fake_debit_alert_callback,te,"ముఖ్యమైన సమాచారం: ₹65,000 మీ ఖాతా నుండి తీసివేయబడింది. వెంటనే నిలిపివేయడానికి XXXXXXXXXX సంప్రదించండి.",scam
+cb_scam_te_8,fake_debit_alert_callback,te,"ముఖ్యమైన సమాచారం: ₹49,999 మీ ఖాతా నుండి తీసివేయబడింది. వెంటనే నిలిపివేయడానికి తొమ్మిది ఎనిమిది ఏడు ఆరు ఐదు నాలుగు మూడు రెండు ఒకటి సున్నా సంప్రదించండి.",scam
+cb_scam_te_8,fake_debit_alert_callback,te,"ముఖ్యమైన సమాచారం: ₹35,500 మీ ఖాతా నుండి తీసివేయబడింది. వెంటనే నిలిపివేయడానికి XXXXXXXXXX సంప్రదించండి.",scam
+cb_scam_te_8,fake_debit_alert_callback,te,"ముఖ్యమైన సమాచారం: ₹49,999 మీ ఖాతా నుండి తీసివేయబడింది. వెంటనే నిలిపివేయడానికి +91-XXXXXXXXXX సంప్రదించండి.",scam
+cb_scam_te_8,fake_debit_alert_callback,te,"ముఖ్యమైన సమాచారం: ₹80,000 మీ ఖాతా నుండి తీసివేయబడింది. వెంటనే నిలిపివేయడానికి తొమ్మిది ఎనిమిది ఏడు ఆరు ఐదు నాలుగు మూడు రెండు ఒకటి సున్నా సంప్రదించండి.",scam
+cb_scam_te_8,fake_debit_alert_callback,te,"ముఖ్యమైన సమాచారం: ₹35,500 మీ ఖాతా నుండి తీసివేయబడింది. వెంటనే నిలిపివేయడానికి తొమ్మిది ఎనిమిది ఏడు ఆరు ఐదు నాలుగు మూడు రెండు ఒకటి సున్నా సంప్రదించండి.",scam
+cb_scam_te_8,fake_debit_alert_callback,te,"ముఖ్యమైన సమాచారం: ₹65,000 మీ ఖాతా నుండి తీసివేయబడింది. వెంటనే నిలిపివేయడానికి 98765XXXXX సంప్రదించండి.",scam
+cb_scam_te_8,fake_debit_alert_callback,te,"ముఖ్యమైన సమాచారం: ₹20,000 మీ ఖాతా నుండి తీసివేయబడింది. వెంటనే నిలిపివేయడానికి XXXXXXXXXX సంప్రదించండి.",scam
+cb_scam_te_9,fake_debit_alert_callback,te,"బ్యాంక్ నోటీస్: మీ ఖాతా నుండి ₹20,000 డెబిట్ జరిగింది. మీరు కాకపోతే వెంటనే +91-XXXXXXXXXX కు ఫోన్ చేయండి.",scam
+cb_scam_te_9,fake_debit_alert_callback,te,"బ్యాంక్ నోటీస్: మీ ఖాతా నుండి ₹65,000 డెబిట్ జరిగింది. మీరు కాకపోతే వెంటనే XXXXXXXXXX కు ఫోన్ చేయండి.",scam
+cb_scam_te_9,fake_debit_alert_callback,te,"బ్యాంక్ నోటీస్: మీ ఖాతా నుండి ₹15,000 డెబిట్ జరిగింది. మీరు కాకపోతే వెంటనే 9 8 7 6 5 4 3 2 1 0 కు ఫోన్ చేయండి.",scam
+cb_scam_te_9,fake_debit_alert_callback,te,"బ్యాంక్ నోటీస్: మీ ఖాతా నుండి ₹35,500 డెబిట్ జరిగింది. మీరు కాకపోతే వెంటనే 9 8 7 6 5 4 3 2 1 0 కు ఫోన్ చేయండి.",scam
+cb_scam_te_9,fake_debit_alert_callback,te,"బ్యాంక్ నోటీస్: మీ ఖాతా నుండి ₹75,000 డెబిట్ జరిగింది. మీరు కాకపోతే వెంటనే తొమ్మిది ఎనిమిది ఏడు ఆరు ఐదు నాలుగు మూడు రెండు ఒకటి సున్నా కు ఫోన్ చేయండి.",scam
+cb_scam_te_9,fake_debit_alert_callback,te,"బ్యాంక్ నోటీస్: మీ ఖాతా నుండి ₹48,500 డెబిట్ జరిగింది. మీరు కాకపోతే వెంటనే 9876543210 కు ఫోన్ చేయండి.",scam
+cb_scam_te_9,fake_debit_alert_callback,te,"బ్యాంక్ నోటీస్: మీ ఖాతా నుండి ₹49,999 డెబిట్ జరిగింది. మీరు కాకపోతే వెంటనే XXXXXXXXXX కు ఫోన్ చేయండి.",scam
+cb_scam_te_9,fake_debit_alert_callback,te,"బ్యాంక్ నోటీస్: మీ ఖాతా నుండి ₹49,999 డెబిట్ జరిగింది. మీరు కాకపోతే వెంటనే +91-9876543210 కు ఫోన్ చేయండి.",scam
+cb_scam_te_10,fake_debit_alert_callback,te,"హెచ్చరిక: ₹65,000 లావాదేవీ జరిగింది. రద్దు చేయడానికి వెంటనే 9876543210 నంబర్‌కు కాల్ చేయండి.",scam
+cb_scam_te_10,fake_debit_alert_callback,te,"హెచ్చరిక: ₹48,500 లావాదేవీ జరిగింది. రద్దు చేయడానికి వెంటనే 9876543210 నంబర్‌కు కాల్ చేయండి.",scam
+cb_scam_te_10,fake_debit_alert_callback,te,"హెచ్చరిక: ₹50,000 లావాదేవీ జరిగింది. రద్దు చేయడానికి వెంటనే +91-XXXXXXXXXX నంబర్‌కు కాల్ చేయండి.",scam
+cb_scam_te_10,fake_debit_alert_callback,te,"హెచ్చరిక: ₹30,000 లావాదేవీ జరిగింది. రద్దు చేయడానికి వెంటనే XXXXXXXXXX నంబర్‌కు కాల్ చేయండి.",scam
+cb_scam_te_10,fake_debit_alert_callback,te,"హెచ్చరిక: ₹15,000 లావాదేవీ జరిగింది. రద్దు చేయడానికి వెంటనే +91-XXXXXXXXXX నంబర్‌కు కాల్ చేయండి.",scam
+cb_scam_te_10,fake_debit_alert_callback,te,"హెచ్చరిక: ₹35,500 లావాదేవీ జరిగింది. రద్దు చేయడానికి వెంటనే +91-XXXXXXXXXX నంబర్‌కు కాల్ చేయండి.",scam
+cb_scam_te_10,fake_debit_alert_callback,te,"హెచ్చరిక: ₹65,000 లావాదేవీ జరిగింది. రద్దు చేయడానికి వెంటనే +91-XXXXXXXXXX నంబర్‌కు కాల్ చేయండి.",scam
+cb_scam_te_10,fake_debit_alert_callback,te,"హెచ్చరిక: ₹25,000 లావాదేవీ జరిగింది. రద్దు చేయడానికి వెంటనే XXXXXXXXXX నంబర్‌కు కాల్ చేయండి.",scam
+cb_scam_hinglish_1,fake_debit_alert_callback,en,"Alert: Aapke account se Rs 49,999 debit ho gaya hai. Agar aapne nahi kiya toh turant 09876543210 par call kare.",scam
+cb_scam_hinglish_1,fake_debit_alert_callback,en,"Alert: Aapke account se Rs 10,000 debit ho gaya hai. Agar aapne nahi kiya toh turant +91 9988776655 par call kare.",scam
+cb_scam_hinglish_1,fake_debit_alert_callback,en,"Alert: Aapke account se Rs 25,000 debit ho gaya hai. Agar aapne nahi kiya toh turant 9876543210 par call kare.",scam
+cb_scam_hinglish_1,fake_debit_alert_callback,en,"Alert: Aapke account se Rs 49,999 debit ho gaya hai. Agar aapne nahi kiya toh turant 9988776655 par call kare.",scam
+cb_scam_hinglish_1,fake_debit_alert_callback,en,"Alert: Aapke account se Rs 30,000 debit ho gaya hai. Agar aapne nahi kiya toh turant +91 9876543210 par call kare.",scam
+cb_scam_hinglish_1,fake_debit_alert_callback,en,"Alert: Aapke account se Rs 1,00,000 debit ho gaya hai. Agar aapne nahi kiya toh turant 9988776655 par call kare.",scam
+cb_scam_hinglish_2,fake_debit_alert_callback,hi,"URGENT: Khate se Rs 1,00,000 cut gaye hai. Cancel karne ke liye abhi customer care number eight seven six five four three two one zero nine par contact kare.",scam
+cb_scam_hinglish_2,fake_debit_alert_callback,hi,"URGENT: Khate se Rs 99,999 cut gaye hai. Cancel karne ke liye abhi customer care number 8123456789 par contact kare.",scam
+cb_scam_hinglish_2,fake_debit_alert_callback,hi,"URGENT: Khate se Rs 48,500 cut gaye hai. Cancel karne ke liye abhi customer care number +91-XXXXXXXXXX par contact kare.",scam
+cb_scam_hinglish_2,fake_debit_alert_callback,hi,"URGENT: Khate se Rs 10,000 cut gaye hai. Cancel karne ke liye abhi customer care number +91-9123456780 par contact kare.",scam
+cb_scam_hinglish_2,fake_debit_alert_callback,hi,"URGENT: Khate se Rs 99,999 cut gaye hai. Cancel karne ke liye abhi customer care number +91-9123456780 par contact kare.",scam
+cb_scam_hinglish_2,fake_debit_alert_callback,hi,"URGENT: Khate se Rs 80,000 cut gaye hai. Cancel karne ke liye abhi customer care number +91 7654321098 par contact kare.",scam
+cb_scam_hinglish_3,fake_debit_alert_callback,en,"Bank Alert: Rs 49,999 debited from your bank account. Agar ye aapne nahi kiya toh turant 98765XXXXX pe call karo.",scam
+cb_scam_hinglish_3,fake_debit_alert_callback,en,"Bank Alert: Rs 35,500 debited from your bank account. Agar ye aapne nahi kiya toh turant +91 9 8 7 6 5 4 3 2 1 0 pe call karo.",scam
+cb_scam_hinglish_3,fake_debit_alert_callback,en,"Bank Alert: Rs 30,000 debited from your bank account. Agar ye aapne nahi kiya toh turant +91-8765432109 pe call karo.",scam
+cb_scam_hinglish_3,fake_debit_alert_callback,en,"Bank Alert: Rs 20,000 debited from your bank account. Agar ye aapne nahi kiya toh turant +91 7654321098 pe call karo.",scam
+cb_scam_hinglish_3,fake_debit_alert_callback,en,"Bank Alert: Rs 80,000 debited from your bank account. Agar ye aapne nahi kiya toh turant 7654321098 pe call karo.",scam
+cb_scam_hinglish_3,fake_debit_alert_callback,en,"Bank Alert: Rs 50,000 debited from your bank account. Agar ye aapne nahi kiya toh turant XXXXX XXXXX pe call karo.",scam
+cb_scam_hinglish_4,fake_debit_alert_callback,hi,"Notice: Account se Rs 25,000 nikal gaye hai. Transaction reverse karne ke liye call kare 98765***** turant.",scam
+cb_scam_hinglish_4,fake_debit_alert_callback,hi,"Notice: Account se Rs 49,999 nikal gaye hai. Transaction reverse karne ke liye call kare 8 7 6 5 4 3 2 1 0 9 turant.",scam
+cb_scam_hinglish_4,fake_debit_alert_callback,hi,"Notice: Account se Rs 85,000 nikal gaye hai. Transaction reverse karne ke liye call kare +91 7654321098 turant.",scam
+cb_scam_hinglish_4,fake_debit_alert_callback,hi,"Notice: Account se Rs 65,000 nikal gaye hai. Transaction reverse karne ke liye call kare 98765 XXXXX turant.",scam
+cb_scam_hinglish_4,fake_debit_alert_callback,hi,"Notice: Account se Rs 48,500 nikal gaye hai. Transaction reverse karne ke liye call kare 6543210987 turant.",scam
+cb_scam_hinglish_5,fake_debit_alert_callback,hi,"Alert: Rs 65,000 debit ho chuka hai. If not you, msg or call on this number 9123456780 immediately.",scam
+cb_scam_hinglish_5,fake_debit_alert_callback,hi,"Alert: Rs 40,000 debit ho chuka hai. If not you, msg or call on this number eight seven six five four three two one zero nine immediately.",scam
+cb_scam_hinglish_5,fake_debit_alert_callback,hi,"Alert: Rs 48,500 debit ho chuka hai. If not you, msg or call on this number 7 6 5 4 3 2 1 0 9 8 immediately.",scam
+cb_scam_hinglish_5,fake_debit_alert_callback,hi,"Alert: Rs 40,000 debit ho chuka hai. If not you, msg or call on this number +91-98765XXXXX immediately.",scam
+cb_scam_hinglish_5,fake_debit_alert_callback,hi,"Alert: Rs 20,000 debit ho chuka hai. If not you, msg or call on this number 8765432109 immediately.",scam
+cb_scam_hinglish_5,fake_debit_alert_callback,hi,"Alert: Rs 40,000 debit ho chuka hai. If not you, msg or call on this number 9 1 2 3 4 5 6 7 8 0 immediately.",scam
+cb_scam_hinglish_6,fake_debit_alert_callback,en,"Hello sir, I am from bank fraud team. Aapke account se Rs 20,000 debit hua hai. Rokne ke liye call nine eight seven six five four three two one zero immediately.",scam
+cb_scam_hinglish_6,fake_debit_alert_callback,en,"Hello sir, I am from bank fraud team. Aapke account se Rs 35,500 debit hua hai. Rokne ke liye call 98765***** immediately.",scam
+cb_scam_hinglish_6,fake_debit_alert_callback,en,"Hello sir, I am from bank fraud team. Aapke account se Rs 49,999 debit hua hai. Rokne ke liye call nine one two three four five six seven eight zero immediately.",scam
+cb_scam_hinglish_6,fake_debit_alert_callback,en,"Hello sir, I am from bank fraud team. Aapke account se Rs 15,000 debit hua hai. Rokne ke liye call 9123456780 immediately.",scam
+cb_scam_hinglish_6,fake_debit_alert_callback,en,"Hello sir, I am from bank fraud team. Aapke account se Rs 85,000 debit hua hai. Rokne ke liye call 8123456789 immediately.",scam
+cb_scam_hinglish_6,fake_debit_alert_callback,en,"Hello sir, I am from bank fraud team. Aapke account se Rs 10,000 debit hua hai. Rokne ke liye call +91-XXXXXXXXXX immediately.",scam
+cb_scam_hinglish_7,fake_debit_alert_callback,en,"Aapka account se Rs 15,000 deducted. Agar aapne transaction nahi kiya toh turant call kare: XXXXXXXXXX",scam
+cb_scam_hinglish_7,fake_debit_alert_callback,en,"Aapka account se Rs 40,000 deducted. Agar aapne transaction nahi kiya toh turant call kare: +91-9876543210",scam
+cb_scam_hinglish_7,fake_debit_alert_callback,en,"Aapka account se Rs 30,000 deducted. Agar aapne transaction nahi kiya toh turant call kare: 8765432109",scam
+cb_scam_hinglish_7,fake_debit_alert_callback,en,"Aapka account se Rs 20,000 deducted. Agar aapne transaction nahi kiya toh turant call kare: 8 7 6 5 4 3 2 1 0 9",scam
+cb_scam_hinglish_7,fake_debit_alert_callback,en,"Aapka account se Rs 85,000 deducted. Agar aapne transaction nahi kiya toh turant call kare: 9988776655",scam
+cb_scam_hinglish_7,fake_debit_alert_callback,en,"Aapka account se Rs 85,000 deducted. Agar aapne transaction nahi kiya toh turant call kare: nine one two three four five six seven eight zero",scam
+cb_scam_hinglish_8,fake_debit_alert_callback,en,"Mee account nundi Rs 48,500 debit aindi. Meeru cheyakapothe ventane call cheyandi +91 9876543210 ki.",scam
+cb_scam_hinglish_8,fake_debit_alert_callback,en,"Mee account nundi Rs 25,000 debit aindi. Meeru cheyakapothe ventane call cheyandi +91 XXXXXXXXXX ki.",scam
+cb_scam_hinglish_8,fake_debit_alert_callback,en,"Mee account nundi Rs 20,000 debit aindi. Meeru cheyakapothe ventane call cheyandi +91 9 8 7 6 5 4 3 2 1 0 ki.",scam
+cb_scam_hinglish_8,fake_debit_alert_callback,en,"Mee account nundi Rs 20,000 debit aindi. Meeru cheyakapothe ventane call cheyandi 98765XXXXX ki.",scam
+cb_scam_hinglish_8,fake_debit_alert_callback,en,"Mee account nundi Rs 10,000 debit aindi. Meeru cheyakapothe ventane call cheyandi eight seven six five four three two one zero nine ki.",scam
+cb_scam_hinglish_8,fake_debit_alert_callback,en,"Mee account nundi Rs 10,000 debit aindi. Meeru cheyakapothe ventane call cheyandi 7 6 5 4 3 2 1 0 9 8 ki.",scam
+cb_scam_hinglish_9,fake_debit_alert_callback,en,"Warning: Bank account se Rs 15,000 kat gaye. Dispute transaction ke liye call kare XXXXX XXXXX turant.",scam
+cb_scam_hinglish_9,fake_debit_alert_callback,en,"Warning: Bank account se Rs 48,500 kat gaye. Dispute transaction ke liye call kare XXXXXXXXXX turant.",scam
+cb_scam_hinglish_9,fake_debit_alert_callback,en,"Warning: Bank account se Rs 80,000 kat gaye. Dispute transaction ke liye call kare +91-XXXXXXXXXX turant.",scam
+cb_scam_hinglish_9,fake_debit_alert_callback,en,"Warning: Bank account se Rs 20,000 kat gaye. Dispute transaction ke liye call kare 7654321098 turant.",scam
+cb_scam_hinglish_9,fake_debit_alert_callback,en,"Warning: Bank account se Rs 30,000 kat gaye. Dispute transaction ke liye call kare +91-98765XXXXX turant.",scam
+cb_scam_hinglish_9,fake_debit_alert_callback,en,"Warning: Bank account se Rs 99,999 kat gaye. Dispute transaction ke liye call kare 9123456780 turant.",scam
+cb_scam_hinglish_10,fake_debit_alert_callback,hi,"Alert: Rs 30,000 has been debited. Agar aap nahi ho toh turant 8123456789 par phone karke stop kare.",scam
+cb_scam_hinglish_10,fake_debit_alert_callback,hi,"Alert: Rs 85,000 has been debited. Agar aap nahi ho toh turant XXXXXXXXXX par phone karke stop kare.",scam
+cb_scam_hinglish_10,fake_debit_alert_callback,hi,"Alert: Rs 80,000 has been debited. Agar aap nahi ho toh turant +91 7654321098 par phone karke stop kare.",scam
+cb_scam_hinglish_10,fake_debit_alert_callback,hi,"Alert: Rs 30,000 has been debited. Agar aap nahi ho toh turant +91 XXXXXXXXXX par phone karke stop kare.",scam
+cb_scam_hinglish_10,fake_debit_alert_callback,hi,"Alert: Rs 20,000 has been debited. Agar aap nahi ho toh turant 98765 XXXXX par phone karke stop kare.",scam
+cb_scam_hinglish_10,fake_debit_alert_callback,hi,"Alert: Rs 75,000 has been debited. Agar aap nahi ho toh turant 98765XXXXX par phone karke stop kare.",scam
+legit_cb_hardneg_en_1,legitimate,en,"HDFC Bank: Rs 1,229.75 debited from a/c **2211 on 20-Nov-26 for Uber. Avl Bal: Rs 53,480.00. Ref: 648032707158. If not done by you, call 1800 202 6161.",legitimate
+legit_cb_hardneg_en_1,legitimate,en,"Canara Bank: Rs 3,100.75 debited from a/c **4821 on 27-Nov-26 for Myntra. Avl Bal: Rs 56,633.00. Ref: 219618598381. If not done by you, call 1800 1234.",legitimate
+legit_cb_hardneg_en_1,legitimate,en,"Kotak Bank: Rs 834.50 debited from a/c XX5432 on 20-Nov-26 for Amazon. Avl Bal: Rs 72,165.50. Ref: 528518769814. If not done by you, call 1800 258 4455.",legitimate
+legit_cb_hardneg_en_1,legitimate,en,"Union Bank: Rs 3,137.00 debited from a/c XX5432 on 27-Nov-26 for Amazon. Avl Bal: Rs 11,412.00. Ref: 168469954667. If not done by you, call 1800 1080.",legitimate
+legit_cb_hardneg_en_1,legitimate,en,"Axis Bank: Rs 681.00 debited from a/c XX9012 on 15-Nov-26 for Uber. Avl Bal: Rs 81,595.00. Ref: 786528168245. If not done by you, call 1800 425 3800.",legitimate
+legit_cb_hardneg_en_1,legitimate,en,"Punjab National Bank: Rs 3,644.50 debited from a/c **7788 on 12-Nov-26 for Zepto. Avl Bal: Rs 21,559.00. Ref: 394597855590. If not done by you, call 1800 1080.",legitimate
+legit_cb_hardneg_en_1,legitimate,en,"Union Bank: Rs 978.25 debited from a/c XX6543 on 14-Nov-26 for Zomato. Avl Bal: Rs 69,871.50. Ref: 619868609703. If not done by you, call 1800 1234.",legitimate
+legit_cb_hardneg_en_1,legitimate,en,"Punjab National Bank: Rs 756.50 debited from a/c XX9012 on 14-Nov-26 for Amazon. Avl Bal: Rs 80,247.50. Ref: 691374339280. If not done by you, call 1800 102 1661.",legitimate
+legit_cb_hardneg_en_1,legitimate,en,"Union Bank: Rs 1,250.00 debited from a/c XX5432 on 25-Nov-26 for Swiggy. Avl Bal: Rs 18,861.00. Ref: 120334912310. If not done by you, call 1800 425 3800.",legitimate
+legit_cb_hardneg_en_1,legitimate,en,"State Bank of India: Rs 4,410.75 debited from a/c **7788 on 23-Nov-26 for Paytm Merchant. Avl Bal: Rs 38,945.50. Ref: 196145398101. If not done by you, call 1800 202 6161.",legitimate
+legit_cb_hardneg_en_2,legitimate,en,"State Bank of India: INR 1,738.75 debited from A/C XX1122 at ATM WDL. Avl Bal: INR 30,426.50. If not you, SMS BLOCK to 567676 or call 1800 425 3800.",legitimate
+legit_cb_hardneg_en_2,legitimate,en,"Kotak Bank: INR 474.50 debited from A/C **3344 at ATM WDL. Avl Bal: INR 75,462.00. If not you, SMS BLOCK to 567676 or call 1860 267 7777.",legitimate
+legit_cb_hardneg_en_2,legitimate,en,"Axis Bank: INR 2,879.50 debited from A/C XX6543 at ATM WDL. Avl Bal: INR 33,380.50. If not you, SMS BLOCK to 567676 or call 1800 202 6161.",legitimate
+legit_cb_hardneg_en_2,legitimate,en,"State Bank of India: INR 244.00 debited from A/C XX1122 at ATM WDL. Avl Bal: INR 80,882.50. If not you, SMS BLOCK to 567676 or call 1800 11 2211.",legitimate
+legit_cb_hardneg_en_2,legitimate,en,"SBI: INR 100.00 debited from A/C ending 4321 at ATM WDL. Avl Bal: INR 33,774.00. If not you, SMS BLOCK to 567676 or call 1800 11 2211.",legitimate
+legit_cb_hardneg_en_2,legitimate,en,"Kotak Bank: INR 170.50 debited from A/C **7788 at ATM WDL. Avl Bal: INR 54,300.00. If not you, SMS BLOCK to 567676 or call 1800 1080.",legitimate
+legit_cb_hardneg_en_2,legitimate,en,"Canara Bank: INR 1,290.50 debited from A/C **4821 at ATM WDL. Avl Bal: INR 31,174.00. If not you, SMS BLOCK to 567676 or call 1800 258 4455.",legitimate
+legit_cb_hardneg_en_2,legitimate,en,"State Bank of India: INR 2,832.50 debited from A/C **4821 at ATM WDL. Avl Bal: INR 46,942.00. If not you, SMS BLOCK to 567676 or call 1800 1080.",legitimate
+legit_cb_hardneg_en_2,legitimate,en,"Axis Bank: INR 3,689.25 debited from A/C XX1122 at ATM WDL. Avl Bal: INR 68,037.50. If not you, SMS BLOCK to 567676 or call 1800 102 1661.",legitimate
+legit_cb_hardneg_en_2,legitimate,en,"Canara Bank: INR 3,554.75 debited from A/C **3344 at ATM WDL. Avl Bal: INR 72,900.00. If not you, SMS BLOCK to 567676 or call 1800 1080.",legitimate
+legit_cb_hardneg_en_3,legitimate,en,"Union Bank: Your A/C **3344 is debited with INR 253.00 on 26-Nov-26 via UPI (Ref No 770862907857). Avl Bal: INR 88,600.00. Call 1800 202 6161 if not done by you.",legitimate
+legit_cb_hardneg_en_3,legitimate,en,"Axis Bank: Your A/C XX9012 is debited with INR 4,031.75 on 15-Nov-26 via UPI (Ref No 603979255936). Avl Bal: INR 59,939.50. Call 1800 258 4455 if not done by you.",legitimate
+legit_cb_hardneg_en_3,legitimate,en,"Bank of Baroda: Your A/C **7788 is debited with INR 987.25 on 13-Nov-26 via UPI (Ref No 959426588879). Avl Bal: INR 51,946.50. Call 1800 102 1661 if not done by you.",legitimate
+legit_cb_hardneg_en_3,legitimate,en,"Punjab National Bank: Your A/C **7788 is debited with INR 1,776.50 on 27-Nov-26 via UPI (Ref No 363859296690). Avl Bal: INR 65,688.00. Call 1800 258 4455 if not done by you.",legitimate
+legit_cb_hardneg_en_3,legitimate,en,"Canara Bank: Your A/C XX5432 is debited with INR 448.50 on 6-Nov-26 via UPI (Ref No 251240970210). Avl Bal: INR 44,705.00. Call 1860 267 7777 if not done by you.",legitimate
+legit_cb_hardneg_en_3,legitimate,en,"Axis Bank: Your A/C ending 8901 is debited with INR 3,232.50 on 4-Nov-26 via UPI (Ref No 247586390507). Avl Bal: INR 38,382.00. Call 1800 11 2211 if not done by you.",legitimate
+legit_cb_hardneg_en_3,legitimate,en,"Axis Bank: Your A/C **4821 is debited with INR 2,137.00 on 15-Nov-26 via UPI (Ref No 732975303982). Avl Bal: INR 25,196.50. Call 1800 102 1661 if not done by you.",legitimate
+legit_cb_hardneg_en_3,legitimate,en,"Canara Bank: Your A/C **2211 is debited with INR 4,495.00 on 10-Nov-26 via UPI (Ref No 185118992189). Avl Bal: INR 6,172.50. Call 1800 1234 if not done by you.",legitimate
+legit_cb_hardneg_en_3,legitimate,en,"ICICI Bank: Your A/C XX5432 is debited with INR 768.75 on 3-Nov-26 via UPI (Ref No 105835608257). Avl Bal: INR 67,845.00. Call 1800 258 4455 if not done by you.",legitimate
+legit_cb_hardneg_en_3,legitimate,en,"Punjab National Bank: Your A/C **7788 is debited with INR 775.25 on 28-Nov-26 via UPI (Ref No 457362914520). Avl Bal: INR 29,271.00. Call 1800 1234 if not done by you.",legitimate
+legit_cb_hardneg_en_4,legitimate,en,₹533.00 debited from Kotak Bank a/c no. **3344 on 7-Nov-26 at IRCTC. UPI Ref 215510056232. Call 1860 267 7777 for dispute. NEVER share OTP/PIN.,legitimate
+legit_cb_hardneg_en_4,legitimate,en,"₹3,302.00 debited from ICICI Bank a/c no. XX1122 on 20-Nov-26 at Swiggy. UPI Ref 177422856743. Call 1860 267 7777 for dispute. NEVER share OTP/PIN.",legitimate
+legit_cb_hardneg_en_4,legitimate,en,"₹3,309.50 debited from Axis Bank a/c no. **2211 on 14-Nov-26 at Uber. UPI Ref 730500053124. Call 1800 11 2211 for dispute. NEVER share OTP/PIN.",legitimate
+legit_cb_hardneg_en_4,legitimate,en,"₹3,103.50 debited from Punjab National Bank a/c no. **2211 on 17-Nov-26 at IRCTC. UPI Ref 120722398578. Call 1800 1080 for dispute. NEVER share OTP/PIN.",legitimate
+legit_cb_hardneg_en_4,legitimate,en,"₹1,512.00 debited from Bank of Baroda a/c no. XX9012 on 4-Nov-26 at Swiggy. UPI Ref 213651300840. Call 1800 202 6161 for dispute. NEVER share OTP/PIN.",legitimate
+legit_cb_hardneg_en_4,legitimate,en,"₹4,168.75 debited from Axis Bank a/c no. **4821 on 12-Nov-26 at Paytm Merchant. UPI Ref 444635930572. Call 1800 1234 for dispute. NEVER share OTP/PIN.",legitimate
+legit_cb_hardneg_en_4,legitimate,en,"₹1,109.00 debited from Kotak Bank a/c no. XX9012 on 2-Nov-26 at Zomato. UPI Ref 576180277528. Call 1800 1234 for dispute. NEVER share OTP/PIN.",legitimate
+legit_cb_hardneg_en_4,legitimate,en,₹892.75 debited from ICICI Bank a/c no. **7788 on 12-Nov-26 at Paytm Merchant. UPI Ref 454670611644. Call 1800 258 4455 for dispute. NEVER share OTP/PIN.,legitimate
+legit_cb_hardneg_en_4,legitimate,en,₹238.75 debited from Kotak Bank a/c no. ending 4321 on 1-Nov-26 at Zepto. UPI Ref 164469127049. Call 1800 11 2211 for dispute. NEVER share OTP/PIN.,legitimate
+legit_cb_hardneg_en_4,legitimate,en,"₹4,462.25 debited from Axis Bank a/c no. **2211 on 4-Nov-26 at Uber. UPI Ref 135678219646. Call 1800 11 2211 for dispute. NEVER share OTP/PIN.",legitimate
+legit_cb_hardneg_en_5,legitimate,en,"Axis Bank Alert: Account **4821 debited for Rs 2,270.25 towards Apollo Pharmacy. Available Balance: Rs 15,637.50. Ref #915156797810. Visit branch or call 1800 1234 if not recognized.",legitimate
+legit_cb_hardneg_en_5,legitimate,en,"Kotak Bank Alert: Account **2211 debited for Rs 2,999.75 towards Blinkit. Available Balance: Rs 42,022.00. Ref #651290449006. Visit branch or call 1800 1234 if not recognized.",legitimate
+legit_cb_hardneg_en_5,legitimate,en,"Bank of Baroda Alert: Account ending 4321 debited for Rs 3,596.75 towards Myntra. Available Balance: Rs 27,743.00. Ref #395155938869. Visit branch or call 1800 102 1661 if not recognized.",legitimate
+legit_cb_hardneg_en_5,legitimate,en,"Kotak Bank Alert: Account ending 4321 debited for Rs 2,628.25 towards Zomato. Available Balance: Rs 42,846.00. Ref #660529915551. Visit branch or call 1800 102 1661 if not recognized.",legitimate
+legit_cb_hardneg_en_5,legitimate,en,"Canara Bank Alert: Account **4821 debited for Rs 2,160.75 towards IRCTC. Available Balance: Rs 57,774.00. Ref #944525106977. Visit branch or call 1800 1080 if not recognized.",legitimate
+legit_cb_hardneg_en_5,legitimate,en,"Axis Bank Alert: Account XX6543 debited for Rs 2,915.25 towards Flipkart. Available Balance: Rs 25,332.50. Ref #106783221468. Visit branch or call 1860 267 7777 if not recognized.",legitimate
+legit_cb_hardneg_en_5,legitimate,en,"Canara Bank Alert: Account **4821 debited for Rs 2,534.00 towards Blinkit. Available Balance: Rs 79,024.00. Ref #883001392008. Visit branch or call 1800 1080 if not recognized.",legitimate
+legit_cb_hardneg_en_5,legitimate,en,"State Bank of India Alert: Account **4821 debited for Rs 2,804.25 towards IRCTC. Available Balance: Rs 24,371.00. Ref #979099464072. Visit branch or call 1800 258 4455 if not recognized.",legitimate
+legit_cb_hardneg_en_5,legitimate,en,"Axis Bank Alert: Account XX6543 debited for Rs 3,664.00 towards Amazon. Available Balance: Rs 26,876.00. Ref #698286102047. Visit branch or call 1800 1080 if not recognized.",legitimate
+legit_cb_hardneg_en_5,legitimate,en,"Canara Bank Alert: Account **7788 debited for Rs 2,994.00 towards Tata Neu. Available Balance: Rs 53,659.50. Ref #189423519079. Visit branch or call 1800 102 1661 if not recognized.",legitimate
+legit_cb_hardneg_en_6,legitimate,en,"Union Bank: Payment of Rs 948.50 done using Card XX6543 at Zomato. Total Bal: Rs 21,725.50. Txn ID 483476638341. Call 1800 202 6161 if not authorized. Bank never asks for PIN.",legitimate
+legit_cb_hardneg_en_6,legitimate,en,"Kotak Bank: Payment of Rs 3,797.25 done using Card XX5432 at Amazon. Total Bal: Rs 46,324.00. Txn ID 369808323635. Call 1800 425 3800 if not authorized. Bank never asks for PIN.",legitimate
+legit_cb_hardneg_en_6,legitimate,en,"State Bank of India: Payment of Rs 3,692.00 done using Card XX1122 at Paytm Merchant. Total Bal: Rs 54,989.50. Txn ID 278344939476. Call 1860 267 7777 if not authorized. Bank never asks for PIN.",legitimate
+legit_cb_hardneg_en_6,legitimate,en,"Kotak Bank: Payment of Rs 4,308.75 done using Card **3344 at Zepto. Total Bal: Rs 48,040.00. Txn ID 350479041299. Call 1800 1234 if not authorized. Bank never asks for PIN.",legitimate
+legit_cb_hardneg_en_6,legitimate,en,"Axis Bank: Payment of Rs 981.75 done using Card XX6543 at Blinkit. Total Bal: Rs 47,979.00. Txn ID 130239288897. Call 1800 425 3800 if not authorized. Bank never asks for PIN.",legitimate
+legit_cb_hardneg_en_6,legitimate,en,"ICICI Bank: Payment of Rs 133.75 done using Card ending 4321 at Uber. Total Bal: Rs 81,600.00. Txn ID 163797371192. Call 1800 102 1661 if not authorized. Bank never asks for PIN.",legitimate
+legit_cb_hardneg_en_6,legitimate,en,"Kotak Bank: Payment of Rs 1,999.50 done using Card **7788 at Zomato. Total Bal: Rs 12,609.50. Txn ID 372839562421. Call 1800 258 4455 if not authorized. Bank never asks for PIN.",legitimate
+legit_cb_hardneg_en_6,legitimate,en,"HDFC Bank: Payment of Rs 838.50 done using Card ending 4321 at IRCTC. Total Bal: Rs 47,827.50. Txn ID 841110628259. Call 1800 425 3800 if not authorized. Bank never asks for PIN.",legitimate
+legit_cb_hardneg_en_6,legitimate,en,"Punjab National Bank: Payment of Rs 3,616.25 done using Card ending 4321 at Zomato. Total Bal: Rs 36,611.50. Txn ID 617191345011. Call 1800 1234 if not authorized. Bank never asks for PIN.",legitimate
+legit_cb_hardneg_en_6,legitimate,en,"Union Bank: Payment of Rs 1,751.00 done using Card **3344 at Swiggy. Total Bal: Rs 55,299.50. Txn ID 600062114016. Call 1800 1080 if not authorized. Bank never asks for PIN.",legitimate
+legit_cb_hardneg_en_7,legitimate,en,"Dear Customer, A/C **2211 debited by INR 766.25 on 1-Nov-26. Info: Zepto. Avl Bal: Rs 26,525.00. Dispute? Call 1800 425 3800 or SMS BLOCK to 567678.",legitimate
+legit_cb_hardneg_en_7,legitimate,en,"Dear Customer, A/C **2211 debited by INR 1,447.75 on 4-Nov-26. Info: Blinkit. Avl Bal: Rs 59,549.00. Dispute? Call 1800 102 1661 or SMS BLOCK to 567678.",legitimate
+legit_cb_hardneg_en_7,legitimate,en,"Dear Customer, A/C XX1122 debited by INR 109.25 on 11-Nov-26. Info: Myntra. Avl Bal: Rs 78,332.50. Dispute? Call 1860 267 7777 or SMS BLOCK to 567678.",legitimate
+legit_cb_hardneg_en_7,legitimate,en,"Dear Customer, A/C XX1122 debited by INR 3,004.75 on 5-Nov-26. Info: Myntra. Avl Bal: Rs 18,270.50. Dispute? Call 1800 425 3800 or SMS BLOCK to 567678.",legitimate
+legit_cb_hardneg_en_7,legitimate,en,"Dear Customer, A/C ending 4321 debited by INR 3,840.75 on 1-Nov-26. Info: Apollo Pharmacy. Avl Bal: Rs 71,393.00. Dispute? Call 1800 11 2211 or SMS BLOCK to 567678.",legitimate
+legit_cb_hardneg_en_7,legitimate,en,"Dear Customer, A/C ending 8901 debited by INR 2,530.00 on 7-Nov-26. Info: Swiggy. Avl Bal: Rs 94,685.00. Dispute? Call 1800 11 2211 or SMS BLOCK to 567678.",legitimate
+legit_cb_hardneg_en_7,legitimate,en,"Dear Customer, A/C ending 8901 debited by INR 1,267.50 on 6-Nov-26. Info: Zepto. Avl Bal: Rs 86,246.50. Dispute? Call 1860 267 7777 or SMS BLOCK to 567678.",legitimate
+legit_cb_hardneg_en_7,legitimate,en,"Dear Customer, A/C XX1122 debited by INR 779.00 on 17-Nov-26. Info: Uber. Avl Bal: Rs 28,052.50. Dispute? Call 1800 202 6161 or SMS BLOCK to 567678.",legitimate
+legit_cb_hardneg_en_7,legitimate,en,"Dear Customer, A/C **4821 debited by INR 319.25 on 23-Nov-26. Info: Blinkit. Avl Bal: Rs 14,466.00. Dispute? Call 1800 1234 or SMS BLOCK to 567678.",legitimate
+legit_cb_hardneg_en_7,legitimate,en,"Dear Customer, A/C XX6543 debited by INR 2,214.00 on 7-Nov-26. Info: Flipkart. Avl Bal: Rs 91,979.50. Dispute? Call 1800 202 6161 or SMS BLOCK to 567678.",legitimate
+legit_cb_hardneg_hi_1,legitimate,hi,"State Bank of India: खाता ending 4321 से ₹1,490 डेबिट हुए (Flipkart)। उपलब्ध शेष: ₹61,408। संदर्भ: 316705285408। यदि आपने नहीं किया तो 1800 258 4455 पर कॉल करें। ओटीपी कभी साझा न करें।",legitimate
+legit_cb_hardneg_hi_1,legitimate,hi,"Punjab National Bank: खाता **2211 से ₹1,244 डेबिट हुए (Swiggy)। उपलब्ध शेष: ₹13,229। संदर्भ: 124491708941। यदि आपने नहीं किया तो 1800 425 3800 पर कॉल करें। ओटीपी कभी साझा न करें।",legitimate
+legit_cb_hardneg_hi_1,legitimate,hi,"Union Bank: खाता XX6543 से ₹1,229 डेबिट हुए (Flipkart)। उपलब्ध शेष: ₹33,990। संदर्भ: 876213228775। यदि आपने नहीं किया तो 1800 11 2211 पर कॉल करें। ओटीपी कभी साझा न करें।",legitimate
+legit_cb_hardneg_hi_1,legitimate,hi,"HDFC Bank: खाता XX6543 से ₹1,947 डेबिट हुए (Uber)। उपलब्ध शेष: ₹25,258। संदर्भ: 809174579743। यदि आपने नहीं किया तो 1800 1234 पर कॉल करें। ओटीपी कभी साझा न करें।",legitimate
+legit_cb_hardneg_hi_1,legitimate,hi,"HDFC Bank: खाता **3344 से ₹1,796 डेबिट हुए (IRCTC)। उपलब्ध शेष: ₹28,723। संदर्भ: 543222601788। यदि आपने नहीं किया तो 1800 1234 पर कॉल करें। ओटीपी कभी साझा न करें।",legitimate
+legit_cb_hardneg_hi_1,legitimate,hi,"Union Bank: खाता ending 4321 से ₹3,154 डेबिट हुए (Amazon)। उपलब्ध शेष: ₹58,594। संदर्भ: 738812148144। यदि आपने नहीं किया तो 1800 425 3800 पर कॉल करें। ओटीपी कभी साझा न करें।",legitimate
+legit_cb_hardneg_hi_1,legitimate,hi,"Kotak Bank: खाता **3344 से ₹817 डेबिट हुए (Flipkart)। उपलब्ध शेष: ₹9,602। संदर्भ: 993684486648। यदि आपने नहीं किया तो 1800 11 2211 पर कॉल करें। ओटीपी कभी साझा न करें।",legitimate
+legit_cb_hardneg_hi_1,legitimate,hi,"HDFC Bank: खाता **7788 से ₹162 डेबिट हुए (DMart)। उपलब्ध शेष: ₹37,963। संदर्भ: 855453924968। यदि आपने नहीं किया तो 1860 267 7777 पर कॉल करें। ओटीपी कभी साझा न करें।",legitimate
+legit_cb_hardneg_hi_1,legitimate,hi,"Axis Bank: खाता **4821 से ₹1,645 डेबिट हुए (Zomato)। उपलब्ध शेष: ₹11,973। संदर्भ: 517922119950। यदि आपने नहीं किया तो 1800 425 3800 पर कॉल करें। ओटीपी कभी साझा न करें।",legitimate
+legit_cb_hardneg_hi_1,legitimate,hi,"ICICI Bank: खाता XX5432 से ₹3,042 डेबिट हुए (Paytm Merchant)। उपलब्ध शेष: ₹50,638। संदर्भ: 795585561556। यदि आपने नहीं किया तो 1860 267 7777 पर कॉल करें। ओटीपी कभी साझा न करें।",legitimate
+legit_cb_hardneg_hi_1,legitimate,hi,"Bank of Baroda: खाता **2211 से ₹145 डेबिट हुए (Swiggy)। उपलब्ध शेष: ₹25,914। संदर्भ: 109085484113। यदि आपने नहीं किया तो 1860 267 7777 पर कॉल करें। ओटीपी कभी साझा न करें।",legitimate
+legit_cb_hardneg_hi_2,legitimate,hi,"Union Bank सूचना: आपके खाते **2211 से ₹965 की निकासी हुई। शेष राशि: ₹64,242। यूपीआई संदर्भ 702649295687। अनधिकृत होने पर टोल फ्री 1800 1080 पर संपर्क करें।",legitimate
+legit_cb_hardneg_hi_2,legitimate,hi,"Canara Bank सूचना: आपके खाते ending 8901 से ₹2,152 की निकासी हुई। शेष राशि: ₹26,473। यूपीआई संदर्भ 658813916272। अनधिकृत होने पर टोल फ्री 1800 102 1661 पर संपर्क करें।",legitimate
+legit_cb_hardneg_hi_2,legitimate,hi,"Axis Bank सूचना: आपके खाते XX1122 से ₹390 की निकासी हुई। शेष राशि: ₹57,143। यूपीआई संदर्भ 249527792829। अनधिकृत होने पर टोल फ्री 1800 425 3800 पर संपर्क करें।",legitimate
+legit_cb_hardneg_hi_2,legitimate,hi,"Punjab National Bank सूचना: आपके खाते XX9012 से ₹3,339 की निकासी हुई। शेष राशि: ₹36,493। यूपीआई संदर्भ 132670168108। अनधिकृत होने पर टोल फ्री 1800 102 1661 पर संपर्क करें।",legitimate
+legit_cb_hardneg_hi_2,legitimate,hi,"HDFC Bank सूचना: आपके खाते **2211 से ₹629 की निकासी हुई। शेष राशि: ₹40,222। यूपीआई संदर्भ 650867367933। अनधिकृत होने पर टोल फ्री 1800 425 3800 पर संपर्क करें।",legitimate
+legit_cb_hardneg_hi_2,legitimate,hi,"Kotak Bank सूचना: आपके खाते XX1122 से ₹2,723 की निकासी हुई। शेष राशि: ₹34,957। यूपीआई संदर्भ 658490813538। अनधिकृत होने पर टोल फ्री 1800 202 6161 पर संपर्क करें।",legitimate
+legit_cb_hardneg_hi_2,legitimate,hi,"Union Bank सूचना: आपके खाते ending 4321 से ₹1,814 की निकासी हुई। शेष राशि: ₹45,745। यूपीआई संदर्भ 207615459001। अनधिकृत होने पर टोल फ्री 1800 1080 पर संपर्क करें।",legitimate
+legit_cb_hardneg_hi_2,legitimate,hi,"Axis Bank सूचना: आपके खाते ending 8901 से ₹1,514 की निकासी हुई। शेष राशि: ₹49,159। यूपीआई संदर्भ 332873956299। अनधिकृत होने पर टोल फ्री 1800 425 3800 पर संपर्क करें।",legitimate
+legit_cb_hardneg_hi_2,legitimate,hi,"Punjab National Bank सूचना: आपके खाते XX9012 से ₹2,890 की निकासी हुई। शेष राशि: ₹46,954। यूपीआई संदर्भ 133116910323। अनधिकृत होने पर टोल फ्री 1800 102 1661 पर संपर्क करें।",legitimate
+legit_cb_hardneg_hi_2,legitimate,hi,"Punjab National Bank सूचना: आपके खाते ending 8901 से ₹771 की निकासी हुई। शेष राशि: ₹59,275। यूपीआई संदर्भ 287626317139। अनधिकृत होने पर टोल फ्री 1800 425 3800 पर संपर्क करें।",legitimate
+legit_cb_hardneg_hi_2,legitimate,hi,"HDFC Bank सूचना: आपके खाते XX5432 से ₹153 की निकासी हुई। शेष राशि: ₹14,335। यूपीआई संदर्भ 502452154571। अनधिकृत होने पर टोल फ्री 1800 1234 पर संपर्क करें।",legitimate
+legit_cb_hardneg_hi_3,legitimate,hi,"प्रिय ग्राहक, आपके खाते ending 8901 से ₹2,564 कटे हैं (21 Nov)। शेष: ₹21,475। यदि यह आपने नहीं किया, तो 567676 पर एसएमएस ब्लॉक भेजें या 1800 1234 पर कॉल करें।",legitimate
+legit_cb_hardneg_hi_3,legitimate,hi,"प्रिय ग्राहक, आपके खाते ending 4321 से ₹2,289 कटे हैं (2 Nov)। शेष: ₹35,955। यदि यह आपने नहीं किया, तो 567676 पर एसएमएस ब्लॉक भेजें या 1800 425 3800 पर कॉल करें।",legitimate
+legit_cb_hardneg_hi_3,legitimate,hi,"प्रिय ग्राहक, आपके खाते XX6543 से ₹384 कटे हैं (1 Nov)। शेष: ₹47,069। यदि यह आपने नहीं किया, तो 567676 पर एसएमएस ब्लॉक भेजें या 1800 202 6161 पर कॉल करें।",legitimate
+legit_cb_hardneg_hi_3,legitimate,hi,"प्रिय ग्राहक, आपके खाते XX5432 से ₹590 कटे हैं (3 Nov)। शेष: ₹36,782। यदि यह आपने नहीं किया, तो 567676 पर एसएमएस ब्लॉक भेजें या 1800 202 6161 पर कॉल करें।",legitimate
+legit_cb_hardneg_hi_3,legitimate,hi,"प्रिय ग्राहक, आपके खाते XX9012 से ₹2,642 कटे हैं (18 Nov)। शेष: ₹23,720। यदि यह आपने नहीं किया, तो 567676 पर एसएमएस ब्लॉक भेजें या 1800 102 1661 पर कॉल करें।",legitimate
+legit_cb_hardneg_hi_3,legitimate,hi,"प्रिय ग्राहक, आपके खाते XX5432 से ₹1,279 कटे हैं (18 Nov)। शेष: ₹50,346। यदि यह आपने नहीं किया, तो 567676 पर एसएमएस ब्लॉक भेजें या 1800 425 3800 पर कॉल करें।",legitimate
+legit_cb_hardneg_hi_3,legitimate,hi,"प्रिय ग्राहक, आपके खाते **3344 से ₹1,802 कटे हैं (27 Nov)। शेष: ₹60,712। यदि यह आपने नहीं किया, तो 567676 पर एसएमएस ब्लॉक भेजें या 1800 1080 पर कॉल करें।",legitimate
+legit_cb_hardneg_hi_3,legitimate,hi,"प्रिय ग्राहक, आपके खाते XX9012 से ₹1,666 कटे हैं (15 Nov)। शेष: ₹32,697। यदि यह आपने नहीं किया, तो 567676 पर एसएमएस ब्लॉक भेजें या 1860 267 7777 पर कॉल करें।",legitimate
+legit_cb_hardneg_hi_3,legitimate,hi,"प्रिय ग्राहक, आपके खाते XX6543 से ₹2,683 कटे हैं (10 Nov)। शेष: ₹34,340। यदि यह आपने नहीं किया, तो 567676 पर एसएमएस ब्लॉक भेजें या 1800 1234 पर कॉल करें।",legitimate
+legit_cb_hardneg_hi_3,legitimate,hi,"प्रिय ग्राहक, आपके खाते **7788 से ₹3,460 कटे हैं (15 Nov)। शेष: ₹39,414। यदि यह आपने नहीं किया, तो 567676 पर एसएमएस ब्लॉक भेजें या 1800 258 4455 पर कॉल करें।",legitimate
+legit_cb_hardneg_hi_3,legitimate,hi,"प्रिय ग्राहक, आपके खाते **4821 से ₹1,961 कटे हैं (15 Nov)। शेष: ₹46,413। यदि यह आपने नहीं किया, तो 567676 पर एसएमएस ब्लॉक भेजें या 1800 425 3800 पर कॉल करें।",legitimate
+legit_cb_hardneg_hi_4,legitimate,hi,"HDFC Bank: कार्ड **7788 द्वारा Blinkit पर ₹2,329 का भुगतान सफल। शेष बैलेंस: ₹63,889। संदर्भ सं. 985572759866। सहायता हेतु कॉल करें: 1800 1080।",legitimate
+legit_cb_hardneg_hi_4,legitimate,hi,"Canara Bank: कार्ड ending 8901 द्वारा Uber पर ₹2,423 का भुगतान सफल। शेष बैलेंस: ₹57,537। संदर्भ सं. 456650616228। सहायता हेतु कॉल करें: 1800 258 4455।",legitimate
+legit_cb_hardneg_hi_4,legitimate,hi,"Union Bank: कार्ड XX5432 द्वारा Swiggy पर ₹911 का भुगतान सफल। शेष बैलेंस: ₹46,301। संदर्भ सं. 731455205054। सहायता हेतु कॉल करें: 1800 11 2211।",legitimate
+legit_cb_hardneg_hi_4,legitimate,hi,"Punjab National Bank: कार्ड **4821 द्वारा IRCTC पर ₹3,459 का भुगतान सफल। शेष बैलेंस: ₹51,064। संदर्भ सं. 196136922780। सहायता हेतु कॉल करें: 1800 202 6161।",legitimate
+legit_cb_hardneg_hi_4,legitimate,hi,"State Bank of India: कार्ड ending 8901 द्वारा DMart पर ₹185 का भुगतान सफल। शेष बैलेंस: ₹12,018। संदर्भ सं. 279853792638। सहायता हेतु कॉल करें: 1800 202 6161।",legitimate
+legit_cb_hardneg_hi_4,legitimate,hi,"Bank of Baroda: कार्ड XX1122 द्वारा Myntra पर ₹885 का भुगतान सफल। शेष बैलेंस: ₹9,494। संदर्भ सं. 379487204992। सहायता हेतु कॉल करें: 1800 1234।",legitimate
+legit_cb_hardneg_hi_4,legitimate,hi,"ICICI Bank: कार्ड ending 8901 द्वारा Swiggy पर ₹1,902 का भुगतान सफल। शेष बैलेंस: ₹26,089। संदर्भ सं. 413793685070। सहायता हेतु कॉल करें: 1800 1234।",legitimate
+legit_cb_hardneg_hi_4,legitimate,hi,"Axis Bank: कार्ड XX1122 द्वारा Zomato पर ₹1,864 का भुगतान सफल। शेष बैलेंस: ₹63,045। संदर्भ सं. 479338782993। सहायता हेतु कॉल करें: 1800 1080।",legitimate
+legit_cb_hardneg_hi_4,legitimate,hi,"Bank of Baroda: कार्ड **7788 द्वारा IRCTC पर ₹2,470 का भुगतान सफल। शेष बैलेंस: ₹24,422। संदर्भ सं. 196458326621। सहायता हेतु कॉल करें: 1800 258 4455।",legitimate
+legit_cb_hardneg_hi_4,legitimate,hi,"SBI: कार्ड XX1122 द्वारा Blinkit पर ₹3,106 का भुगतान सफल। शेष बैलेंस: ₹55,792। संदर्भ सं. 135690891775। सहायता हेतु कॉल करें: 1860 267 7777।",legitimate
+legit_cb_hardneg_hi_4,legitimate,hi,"ICICI Bank: कार्ड XX5432 द्वारा Zepto पर ₹2,913 का भुगतान सफल। शेष बैलेंस: ₹43,297। संदर्भ सं. 279372926392। सहायता हेतु कॉल करें: 1800 102 1661।",legitimate
+legit_cb_hardneg_hi_4,legitimate,hi,"Canara Bank: कार्ड XX6543 द्वारा Blinkit पर ₹503 का भुगतान सफल। शेष बैलेंस: ₹60,186। संदर्भ सं. 220473908494। सहायता हेतु कॉल करें: 1800 258 4455।",legitimate
+legit_cb_hardneg_te_1,legitimate,te,"Bank of Baroda: మీ ఖాతా XX9012 నుండి ₹863 డెబిట్ చేయబడింది (Apollo Pharmacy). నిల్వ: ₹25,162. రిఫరెన్స్: 910625258196. మీరు చేయకపోతే టోల్ ఫ్రీ 1800 102 1661 కు కాల్ చేయండి.",legitimate
+legit_cb_hardneg_te_1,legitimate,te,"Kotak Bank: మీ ఖాతా **7788 నుండి ₹1,139 డెబిట్ చేయబడింది (Swiggy). నిల్వ: ₹55,910. రిఫరెన్స్: 124310981093. మీరు చేయకపోతే టోల్ ఫ్రీ 1800 425 3800 కు కాల్ చేయండి.",legitimate
+legit_cb_hardneg_te_1,legitimate,te,"Bank of Baroda: మీ ఖాతా **7788 నుండి ₹2,973 డెబిట్ చేయబడింది (Myntra). నిల్వ: ₹16,824. రిఫరెన్స్: 826901920817. మీరు చేయకపోతే టోల్ ఫ్రీ 1860 267 7777 కు కాల్ చేయండి.",legitimate
+legit_cb_hardneg_te_1,legitimate,te,"Bank of Baroda: మీ ఖాతా ending 8901 నుండి ₹2,553 డెబిట్ చేయబడింది (Apollo Pharmacy). నిల్వ: ₹32,936. రిఫరెన్స్: 678192413297. మీరు చేయకపోతే టోల్ ఫ్రీ 1800 102 1661 కు కాల్ చేయండి.",legitimate
+legit_cb_hardneg_te_1,legitimate,te,"Kotak Bank: మీ ఖాతా **7788 నుండి ₹1,163 డెబిట్ చేయబడింది (DMart). నిల్వ: ₹39,681. రిఫరెన్స్: 383798604613. మీరు చేయకపోతే టోల్ ఫ్రీ 1800 102 1661 కు కాల్ చేయండి.",legitimate
+legit_cb_hardneg_te_1,legitimate,te,"HDFC Bank: మీ ఖాతా **7788 నుండి ₹204 డెబిట్ చేయబడింది (Swiggy). నిల్వ: ₹28,160. రిఫరెన్స్: 224427635048. మీరు చేయకపోతే టోల్ ఫ్రీ 1860 267 7777 కు కాల్ చేయండి.",legitimate
+legit_cb_hardneg_te_1,legitimate,te,"State Bank of India: మీ ఖాతా XX1122 నుండి ₹1,911 డెబిట్ చేయబడింది (Zepto). నిల్వ: ₹14,421. రిఫరెన్స్: 984013894724. మీరు చేయకపోతే టోల్ ఫ్రీ 1800 102 1661 కు కాల్ చేయండి.",legitimate
+legit_cb_hardneg_te_1,legitimate,te,"Axis Bank: మీ ఖాతా **3344 నుండి ₹606 డెబిట్ చేయబడింది (Paytm Merchant). నిల్వ: ₹52,591. రిఫరెన్స్: 335104073941. మీరు చేయకపోతే టోల్ ఫ్రీ 1800 102 1661 కు కాల్ చేయండి.",legitimate
+legit_cb_hardneg_te_1,legitimate,te,"Punjab National Bank: మీ ఖాతా **2211 నుండి ₹1,388 డెబిట్ చేయబడింది (IRCTC). నిల్వ: ₹56,156. రిఫరెన్స్: 627192407690. మీరు చేయకపోతే టోల్ ఫ్రీ 1800 202 6161 కు కాల్ చేయండి.",legitimate
+legit_cb_hardneg_te_1,legitimate,te,"State Bank of India: మీ ఖాతా ending 4321 నుండి ₹2,874 డెబిట్ చేయబడింది (IRCTC). నిల్వ: ₹45,904. రిఫరెన్స్: 436760017941. మీరు చేయకపోతే టోల్ ఫ్రీ 1800 425 3800 కు కాల్ చేయండి.",legitimate
+legit_cb_hardneg_te_1,legitimate,te,"ICICI Bank: మీ ఖాతా XX9012 నుండి ₹131 డెబిట్ చేయబడింది (Uber). నిల్వ: ₹58,324. రిఫరెన్స్: 181317078307. మీరు చేయకపోతే టోల్ ఫ్రీ 1800 1234 కు కాల్ చేయండి.",legitimate
+legit_cb_hardneg_te_2,legitimate,te,"SBI అలర్ట్: మీ అకౌంట్ XX6543 నుండి ₹123 UPI ద్వారా చెల్లించబడింది. మిగిలిన బ్యాలెన్స్: ₹38,431. లావాదేవీ నం: 824150753930. సహాయం కోసం 1800 1234 కు డయల్ చేయండి.",legitimate
+legit_cb_hardneg_te_2,legitimate,te,"Bank of Baroda అలర్ట్: మీ అకౌంట్ XX5432 నుండి ₹2,942 UPI ద్వారా చెల్లించబడింది. మిగిలిన బ్యాలెన్స్: ₹25,361. లావాదేవీ నం: 399634281946. సహాయం కోసం 1800 1080 కు డయల్ చేయండి.",legitimate
+legit_cb_hardneg_te_2,legitimate,te,"Axis Bank అలర్ట్: మీ అకౌంట్ **3344 నుండి ₹1,585 UPI ద్వారా చెల్లించబడింది. మిగిలిన బ్యాలెన్స్: ₹57,730. లావాదేవీ నం: 461926420215. సహాయం కోసం 1800 11 2211 కు డయల్ చేయండి.",legitimate
+legit_cb_hardneg_te_2,legitimate,te,"Canara Bank అలర్ట్: మీ అకౌంట్ ending 8901 నుండి ₹704 UPI ద్వారా చెల్లించబడింది. మిగిలిన బ్యాలెన్స్: ₹52,620. లావాదేవీ నం: 821437960681. సహాయం కోసం 1800 1080 కు డయల్ చేయండి.",legitimate
+legit_cb_hardneg_te_2,legitimate,te,"Punjab National Bank అలర్ట్: మీ అకౌంట్ **4821 నుండి ₹1,772 UPI ద్వారా చెల్లించబడింది. మిగిలిన బ్యాలెన్స్: ₹29,597. లావాదేవీ నం: 813102128941. సహాయం కోసం 1800 202 6161 కు డయల్ చేయండి.",legitimate
+legit_cb_hardneg_te_2,legitimate,te,"State Bank of India అలర్ట్: మీ అకౌంట్ **3344 నుండి ₹1,432 UPI ద్వారా చెల్లించబడింది. మిగిలిన బ్యాలెన్స్: ₹60,529. లావాదేవీ నం: 202877618220. సహాయం కోసం 1800 1234 కు డయల్ చేయండి.",legitimate
+legit_cb_hardneg_te_2,legitimate,te,"ICICI Bank అలర్ట్: మీ అకౌంట్ **2211 నుండి ₹2,966 UPI ద్వారా చెల్లించబడింది. మిగిలిన బ్యాలెన్స్: ₹21,044. లావాదేవీ నం: 441975497172. సహాయం కోసం 1800 425 3800 కు డయల్ చేయండి.",legitimate
+legit_cb_hardneg_te_2,legitimate,te,"SBI అలర్ట్: మీ అకౌంట్ **2211 నుండి ₹2,027 UPI ద్వారా చెల్లించబడింది. మిగిలిన బ్యాలెన్స్: ₹44,622. లావాదేవీ నం: 781527458353. సహాయం కోసం 1800 1080 కు డయల్ చేయండి.",legitimate
+legit_cb_hardneg_te_2,legitimate,te,"Punjab National Bank అలర్ట్: మీ అకౌంట్ ending 8901 నుండి ₹2,050 UPI ద్వారా చెల్లించబడింది. మిగిలిన బ్యాలెన్స్: ₹46,380. లావాదేవీ నం: 121644043576. సహాయం కోసం 1800 102 1661 కు డయల్ చేయండి.",legitimate
+legit_cb_hardneg_te_2,legitimate,te,"Bank of Baroda అలర్ట్: మీ అకౌంట్ ending 8901 నుండి ₹2,968 UPI ద్వారా చెల్లించబడింది. మిగిలిన బ్యాలెన్స్: ₹43,656. లావాదేవీ నం: 557074360754. సహాయం కోసం 1800 425 3800 కు డయల్ చేయండి.",legitimate
+legit_cb_hardneg_te_2,legitimate,te,"Punjab National Bank అలర్ట్: మీ అకౌంట్ XX9012 నుండి ₹1,864 UPI ద్వారా చెల్లించబడింది. మిగిలిన బ్యాలెన్స్: ₹8,318. లావాదేవీ నం: 995265630745. సహాయం కోసం 1800 102 1661 కు డయల్ చేయండి.",legitimate
+legit_cb_hardneg_te_3,legitimate,te,"ప్రియమైన కస్టమర్, మీ ఖాతా **4821 నుండి ₹3,115 విత్‌డ్రా అయింది. అందుబాటులో ఉన్న నిల్వ: ₹32,807. ఈ లావాదేవీ మీరు చేయకపోతే వెంటనే 1800 258 4455 కు కాల్ చేయండి.",legitimate
+legit_cb_hardneg_te_3,legitimate,te,"ప్రియమైన కస్టమర్, మీ ఖాతా XX5432 నుండి ₹3,063 విత్‌డ్రా అయింది. అందుబాటులో ఉన్న నిల్వ: ₹31,710. ఈ లావాదేవీ మీరు చేయకపోతే వెంటనే 1860 267 7777 కు కాల్ చేయండి.",legitimate
+legit_cb_hardneg_te_3,legitimate,te,"ప్రియమైన కస్టమర్, మీ ఖాతా XX1122 నుండి ₹2,415 విత్‌డ్రా అయింది. అందుబాటులో ఉన్న నిల్వ: ₹62,807. ఈ లావాదేవీ మీరు చేయకపోతే వెంటనే 1800 1080 కు కాల్ చేయండి.",legitimate
+legit_cb_hardneg_te_3,legitimate,te,"ప్రియమైన కస్టమర్, మీ ఖాతా XX6543 నుండి ₹2,526 విత్‌డ్రా అయింది. అందుబాటులో ఉన్న నిల్వ: ₹33,506. ఈ లావాదేవీ మీరు చేయకపోతే వెంటనే 1800 1234 కు కాల్ చేయండి.",legitimate
+legit_cb_hardneg_te_3,legitimate,te,"ప్రియమైన కస్టమర్, మీ ఖాతా **3344 నుండి ₹2,263 విత్‌డ్రా అయింది. అందుబాటులో ఉన్న నిల్వ: ₹40,687. ఈ లావాదేవీ మీరు చేయకపోతే వెంటనే 1860 267 7777 కు కాల్ చేయండి.",legitimate
+legit_cb_hardneg_te_3,legitimate,te,"ప్రియమైన కస్టమర్, మీ ఖాతా **7788 నుండి ₹196 విత్‌డ్రా అయింది. అందుబాటులో ఉన్న నిల్వ: ₹62,477. ఈ లావాదేవీ మీరు చేయకపోతే వెంటనే 1800 258 4455 కు కాల్ చేయండి.",legitimate
+legit_cb_hardneg_te_3,legitimate,te,"ప్రియమైన కస్టమర్, మీ ఖాతా XX5432 నుండి ₹986 విత్‌డ్రా అయింది. అందుబాటులో ఉన్న నిల్వ: ₹45,561. ఈ లావాదేవీ మీరు చేయకపోతే వెంటనే 1800 11 2211 కు కాల్ చేయండి.",legitimate
+legit_cb_hardneg_te_3,legitimate,te,"ప్రియమైన కస్టమర్, మీ ఖాతా ending 4321 నుండి ₹2,324 విత్‌డ్రా అయింది. అందుబాటులో ఉన్న నిల్వ: ₹47,734. ఈ లావాదేవీ మీరు చేయకపోతే వెంటనే 1800 1234 కు కాల్ చేయండి.",legitimate
+legit_cb_hardneg_te_3,legitimate,te,"ప్రియమైన కస్టమర్, మీ ఖాతా ending 8901 నుండి ₹1,388 విత్‌డ్రా అయింది. అందుబాటులో ఉన్న నిల్వ: ₹55,922. ఈ లావాదేవీ మీరు చేయకపోతే వెంటనే 1800 1234 కు కాల్ చేయండి.",legitimate
+legit_cb_hardneg_te_3,legitimate,te,"ప్రియమైన కస్టమర్, మీ ఖాతా ending 4321 నుండి ₹359 విత్‌డ్రా అయింది. అందుబాటులో ఉన్న నిల్వ: ₹13,514. ఈ లావాదేవీ మీరు చేయకపోతే వెంటనే 1860 267 7777 కు కాల్ చేయండి.",legitimate
+legit_cb_hardneg_te_3,legitimate,te,"ప్రియమైన కస్టమర్, మీ ఖాతా XX9012 నుండి ₹2,278 విత్‌డ్రా అయింది. అందుబాటులో ఉన్న నిల్వ: ₹26,673. ఈ లావాదేవీ మీరు చేయకపోతే వెంటనే 1800 425 3800 కు కాల్ చేయండి.",legitimate
+legit_cb_hardneg_te_4,legitimate,te,"Union Bank: కార్డ్ **4821 ద్వారా Flipkart వద్ద ₹2,726 చెల్లింపు విజయవంతమైంది. బ్యాలెన్స్: ₹36,630. రిఫరెన్స్ 444431345558. బ్యాంక్ ఎప్పుడూ పిన్ అడగదు. సందేహాలకు 1800 425 3800.",legitimate
+legit_cb_hardneg_te_4,legitimate,te,"Union Bank: కార్డ్ **7788 ద్వారా Zepto వద్ద ₹409 చెల్లింపు విజయవంతమైంది. బ్యాలెన్స్: ₹51,559. రిఫరెన్స్ 427207310106. బ్యాంక్ ఎప్పుడూ పిన్ అడగదు. సందేహాలకు 1800 102 1661.",legitimate
+legit_cb_hardneg_te_4,legitimate,te,"Axis Bank: కార్డ్ **3344 ద్వారా Apollo Pharmacy వద్ద ₹3,486 చెల్లింపు విజయవంతమైంది. బ్యాలెన్స్: ₹11,235. రిఫరెన్స్ 449534952588. బ్యాంక్ ఎప్పుడూ పిన్ అడగదు. సందేహాలకు 1800 258 4455.",legitimate
+legit_cb_hardneg_te_4,legitimate,te,"HDFC Bank: కార్డ్ ending 4321 ద్వారా Tata Neu వద్ద ₹1,638 చెల్లింపు విజయవంతమైంది. బ్యాలెన్స్: ₹63,622. రిఫరెన్స్ 306992827069. బ్యాంక్ ఎప్పుడూ పిన్ అడగదు. సందేహాలకు 1800 1234.",legitimate
+legit_cb_hardneg_te_4,legitimate,te,"Canara Bank: కార్డ్ **2211 ద్వారా Paytm Merchant వద్ద ₹2,466 చెల్లింపు విజయవంతమైంది. బ్యాలెన్స్: ₹57,401. రిఫరెన్స్ 723573578632. బ్యాంక్ ఎప్పుడూ పిన్ అడగదు. సందేహాలకు 1800 1080.",legitimate
+legit_cb_hardneg_te_4,legitimate,te,"SBI: కార్డ్ **3344 ద్వారా Paytm Merchant వద్ద ₹2,799 చెల్లింపు విజయవంతమైంది. బ్యాలెన్స్: ₹11,952. రిఫరెన్స్ 555508848591. బ్యాంక్ ఎప్పుడూ పిన్ అడగదు. సందేహాలకు 1800 102 1661.",legitimate
+legit_cb_hardneg_te_4,legitimate,te,"State Bank of India: కార్డ్ **4821 ద్వారా Tata Neu వద్ద ₹1,228 చెల్లింపు విజయవంతమైంది. బ్యాలెన్స్: ₹34,072. రిఫరెన్స్ 348291377338. బ్యాంక్ ఎప్పుడూ పిన్ అడగదు. సందేహాలకు 1800 425 3800.",legitimate
+legit_cb_hardneg_te_4,legitimate,te,"Canara Bank: కార్డ్ XX5432 ద్వారా IRCTC వద్ద ₹1,552 చెల్లింపు విజయవంతమైంది. బ్యాలెన్స్: ₹60,871. రిఫరెన్స్ 696531724783. బ్యాంక్ ఎప్పుడూ పిన్ అడగదు. సందేహాలకు 1800 1080.",legitimate
+legit_cb_hardneg_te_4,legitimate,te,"SBI: కార్డ్ **3344 ద్వారా Swiggy వద్ద ₹2,653 చెల్లింపు విజయవంతమైంది. బ్యాలెన్స్: ₹40,470. రిఫరెన్స్ 209844550409. బ్యాంక్ ఎప్పుడూ పిన్ అడగదు. సందేహాలకు 1800 102 1661.",legitimate
+legit_cb_hardneg_te_4,legitimate,te,"SBI: కార్డ్ XX1122 ద్వారా Myntra వద్ద ₹1,504 చెల్లింపు విజయవంతమైంది. బ్యాలెన్స్: ₹42,399. రిఫరెన్స్ 231715926130. బ్యాంక్ ఎప్పుడూ పిన్ అడగదు. సందేహాలకు 1800 1080.",legitimate
+legit_cb_hardneg_te_4,legitimate,te,"State Bank of India: కార్డ్ **4821 ద్వారా Zomato వద్ద ₹2,636 చెల్లింపు విజయవంతమైంది. బ్యాలెన్స్: ₹11,427. రిఫరెన్స్ 281101810124. బ్యాంక్ ఎప్పుడూ పిన్ అడగదు. సందేహాలకు 1860 267 7777.",legitimate
+legit_cb_hardneg_te_4,legitimate,te,"HDFC Bank: కార్డ్ XX9012 ద్వారా Amazon వద్ద ₹2,154 చెల్లింపు విజయవంతమైంది. బ్యాలెన్స్: ₹9,216. రిఫరెన్స్ 959978993689. బ్యాంక్ ఎప్పుడూ పిన్ అడగదు. సందేహాలకు 1800 1080.",legitimate
+feedback_38,legitimate,en,Sample text for feedback test,0

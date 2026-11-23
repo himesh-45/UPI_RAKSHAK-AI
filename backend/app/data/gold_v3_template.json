@@ -17,9 +17,21 @@
     "loan_app_extortion",
     "courier_customs_scam",
     "marketplace_qr_scam",
-    "accidental_transfer_scam"
+    "accidental_transfer_scam",
+    "fake_debit_alert_callback"
   ],
   "languages": ["en", "hi", "te", "hinglish", "romanized_telugu"],
+  "blind_sample_size_calculation": {
+    "target_category": "fake_debit_alert_callback",
+    "statistical_basis": "Cochran formula n = (Z^2 * p * (1-p)) / e^2 for 95% confidence (Z=1.96) and 5% margin of error with expected recall p=0.95",
+    "minimum_samples_needed": 73,
+    "recommended_quota_per_language": {
+      "en": 30,
+      "hi": 30,
+      "te": 30,
+      "total_recommended_blind_samples": 90
+    }
+  },
   "format_example": [
     {
       "id": "gold_v3_sample_001",

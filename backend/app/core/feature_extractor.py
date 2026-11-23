@@ -29,7 +29,10 @@ UTILITY_WORDS = [
 ADVISORY_NEGATIONS = [
     "never share", "do not share", "don't share", "not share", "kisi ko na",
     "share na kare", "evariki cheppavaddu", "share cheyavoddu", "bank never",
-    "never calls", "never disclose", "do not disclose", "never ask", "not disclose"
+    "never calls", "never disclose", "do not disclose", "never ask", "not disclose",
+    "never asks", "never ask for", "ఎవరికీ చెప్పవద్దు", "చెప్పవద్దు", "పంచుకోవద్దు",
+    "ఎవరితోనూ పంచుకోవద్దు", "సాझा न करें", "साझा न करें", "मत बताएं", "किसी को न बताएं",
+    "साझा मत करें", "शेयर न करें"
 ]
 
 BANK_ALERT_MARKERS = [

@@ -7,7 +7,7 @@ GENUINE_ADVISORY_PATTERNS = [
     re.compile(r'(?i)\b(?:bank|staff|employee|official|executive)\s+(?:never|does not|will never|never asks?)\s+(?:for|to ask|call for)\b.*?\b(?:otp|pin|cvv|password)\b'),
     re.compile(r'(?i)\b(?:share|give)\s+(?:the\s+)?(?:otp|pin|delivery pin)\b.*?\b(?:only\s+(?:upon|after|at|when)|physically received|at\s+(?:the\s+)?time\s+of\s+(?:delivery|accepting)|delivery agent|handed over)\b'),
     re.compile(r'(?i)\b(?:delivery|package|order|courier)\b.*?\b(?:share\s+(?:otp|pin|delivery pin)\s+only|valid\s+upon\s+receipt|out for delivery)\b'),
-    re.compile(r'(?i)(?:kabhi bhi apna otp|otp kisi se sajha na kare|kisi ko na bataye|kisi ke sath share na kare|kisi se share na kare|evaritho share cheyavoddu|evariki cheppavaddu)'),
+    re.compile(r'(?i)(?:kabhi bhi apna otp|otp kisi se sajha na kare|kisi ko na bataye|kisi ke sath share na kare|kisi se share na kare|evaritho share cheyavoddu|evariki cheppavaddu|evariki share cheyavadd\w*|share cheyavadd\w*)'),
     re.compile(r'(?i)(?:ఎవరితోనూ పంచుకోవద్దు|ఎవరికీ చెప్పవద్దు|ఓటీపీ పంచుకోవద్దు|ఎవరితోనూ పంచుకోకండి|ఓటీపీ ఎవరికీ చెప్పకండి)'),
     re.compile(r'(?i)(?:किसी\s*(?:से|के\s+साथ)\s*(?:साझा|शेयर)\s*(?:न|मत)\s*करें|साझा\s+(?:न|मत)\s+करें|शेयर\s+(?:न|मत)\s+करें|किसी को न बताएं|बैंक\s+कभी.*?नहीं\s+मांगता|बैंक कभी ओटीपी नहीं मांगता|बैंक कभी पिन नहीं मांगता)'),
     re.compile(r'(?i)(?:(?:if not done by you|if not authorized|report fraud to|sms block to).*?(?:call 1800|toll free|visit branch|never share)|(?:call 1800|toll free|visit branch).*?(?:if not done by you|if not you|if not authorized|report fraud))'),
@@ -64,7 +64,7 @@ VERIFY_CREDENTIAL_WORDS = [
 
 # 6. Disconnection / Block threat with personal phone contact or link (English & Indic syntax)
 PHONE_CONTACT_PATTERN = re.compile(
-    r'(?i)(?:(?:call|contact|संपर्क|कॉल|సంప్రదించండి|ఫోన్|supervisor|officer|अधिकारी|అధికారి).*?(?:\+91[-\s]?)?(?<!1800)(?<!1860)(?<!1930)[6-9]\d{9}|(?:\+91[-\s]?)?(?<!1800)(?<!1860)(?<!1930)[6-9]\d{9}.*?(?:par call|ku call|ki call|call chey|call kare|par sampark|me sampark|कॉल|సంప్రదించండి))'
+    r'(?i)(?:(?:call|contact|संपर्क|कॉल|సంప్రదించండి|ఫోన్|supervisor|officer|अधिकारी|అధికారి).*?(?:\+91[-\s]?)?(?<!1800)(?<!1860)(?<!1930)[6-9](?:[-\s]?\d){9}|(?:\+91[-\s]?)?(?<!1800)(?<!1860)(?<!1930)[6-9](?:[-\s]?\d){9}.*?(?:par call|ku call|ki call|call chey|call kare|par sampark|me sampark|कॉल|సంప్రదించండి))'
 )
 
 # 7. Advance-fee lottery patterns
@@ -138,7 +138,7 @@ class RuleSafetyEngine:
 
         # Contextual check for legitimate delivery OTP, telecom recharge, or official bank debit
         is_delivery_otp = bool(re.search(
-            r'(?i)\b(?:delivery\s+(?:associate|agent|boy|executive|person)|out\s+for\s+delivery|upon\s+(?:delivery|physical)|at\s+(?:the\s+)?time\s+of\s+(?:delivery|accepting)|handed\s+over|handover|accepting\s+(?:the\s+)?parcel|receiving\s+(?:the\s+)?package|delivery\s+PIN)\b',
+            r'(?i)\b(?:delivery\s+(?:associate|agent|boy|executive|person|partner)|out\s+for\s+delivery|upon\s+(?:delivery|physical)|at\s+(?:the\s+)?time\s+of\s+(?:delivery|accepting)|handed\s+over|handover|accepting\s+(?:the\s+)?parcel|receiving\s+(?:the\s+)?package|delivery\s+PIN|delivered\s+at)\b|(?:डिलीवरी\s*(?:एजेंट|पार्टनर|बॉय|के\s*लिए)|డెలివరీ\s*(?:బాయ్|ఏజెంట్|చేయబడుతుంది|పార్టనర్)|ఆర్డర్\s+డెలివరీ|पार्सल.*?डिलीवरी)',
             text
         ))
         is_telecom_recharge = bool(re.search(
@@ -149,6 +149,13 @@ class RuleSafetyEngine:
             r'(?i)\b(?:withdrawn\s+from\s+atm|debited\s+from\s+a/c|credited\s+to\s+a/c|available\s+bal(?:ance)?|avail\s+bal)\b',
             text
         ))
+
+        # Callback Phishing Scam Check (Telephone-Oriented Attack Delivery)
+        from .callback_detector import callback_scam_detector
+        cb_res = callback_scam_detector.analyze(text)
+        has_callback_scam = cb_res.get("is_callback_scam", False)
+        if has_callback_scam:
+            matched_rules.extend(cb_res.get("signals", []))
 
         # 1. OTP / PIN theft check (with strict negation and delivery filtering)
         for p in OTP_REQUEST_PATTERNS:
@@ -164,9 +171,9 @@ class RuleSafetyEngine:
                     })
                     break
 
-        # Advisory check: ONLY genuine if NO active OTP theft request is present
+        # Advisory check: ONLY genuine if NO active OTP theft request and NO callback scam
         advisory_matches = [p for p in GENUINE_ADVISORY_PATTERNS if p.search(text)]
-        if (advisory_matches or is_delivery_otp or is_telecom_recharge or is_bank_debit_alert) and not has_otp_request:
+        if (advisory_matches or is_delivery_otp or is_telecom_recharge or (is_bank_debit_alert and not has_callback_scam)) and not has_otp_request and not has_callback_scam:
             is_genuine_alert = True
             matched_rules.append({
                 "signal": "Legitimate Safety Advisory: Message explicitly warns NEVER to share OTP/PIN, or is verified delivery/bank/telecom notice.",
@@ -336,6 +343,9 @@ class RuleSafetyEngine:
         if has_otp_request:
             hard_override_high_risk = True
             override_reason = "Hard Override Triggered: Coercive instruction requesting credential (OTP/PIN/password)."
+        elif has_callback_scam and cb_res.get("score", 0) >= 70.0:
+            hard_override_high_risk = True
+            override_reason = "Hard Override Triggered: High-Risk Callback Phishing - Fake debit alert instructing victim to call an unauthorized or placeholder number."
         elif has_collect_trick:
             hard_override_high_risk = True
             override_reason = "Hard Override Triggered: UPI collect request trick to steal funds (Receiving money never requires a PIN)."
@@ -366,8 +376,10 @@ class RuleSafetyEngine:
             "hard_override_high_risk": hard_override_high_risk,
             "override_reason": override_reason,
             "is_genuine_alert": is_genuine_alert,
+            "callback_scam_result": cb_res,
             "signals_detected": {
                 "has_otp_request": has_otp_request,
+                "has_callback_scam": has_callback_scam,
                 "has_collect_trick": has_collect_trick,
                 "has_urgency": has_urgency,
                 "has_link": has_link,

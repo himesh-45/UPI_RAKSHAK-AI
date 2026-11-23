@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ShieldCheck, AlertTriangle, ShieldAlert, Clock } from 'lucide-react';
 
-export default function ScoreGauge({ score = null, verdict = null }) {
+export default function ScoreGauge({ score = null, verdict = null, isUncertain = false }) {
   const isIdle = score === null || score === undefined || verdict === 'Awaiting Input' || verdict === null || verdict === '';
   const safeScore = isIdle ? 0 : Math.max(0, Math.min(100, Math.round(score)));
   const [displayScore, setDisplayScore] = useState(0);
@@ -38,15 +38,15 @@ export default function ScoreGauge({ score = null, verdict = null }) {
   // Semantic verdict styles
   let gradStart = 'var(--teal-400)';
   let gradEnd = 'var(--verdict-safe)';
-  let pillStyle = 'bg-verdict-safe/15 text-verdict-safe border-verdict-safe/40 shadow-xs';
-  let badgeText = 'Low Risk';
+  let pillStyle = 'bg-teal/15 text-teal border-teal/40 shadow-xs';
+  let badgeText = 'No Strong Signals';
   let Icon = ShieldCheck;
 
   if (isIdle) {
     gradStart = 'var(--border)';
     gradEnd = 'var(--border)';
     pillStyle = 'bg-navy text-ink-muted border-border';
-    badgeText = 'Waiting for a message';
+    badgeText = 'Waiting for input';
     Icon = Clock;
   } else if (safeScore >= 70) {
     gradStart = 'var(--verdict-suspicious)';
@@ -59,6 +59,12 @@ export default function ScoreGauge({ score = null, verdict = null }) {
     gradEnd = 'var(--verdict-suspicious)';
     pillStyle = 'bg-verdict-suspicious/15 text-verdict-suspicious border-verdict-suspicious/40 shadow-xs';
     badgeText = 'Suspicious';
+    Icon = AlertTriangle;
+  } else if (isUncertain) {
+    gradStart = 'var(--gold-400)';
+    gradEnd = 'var(--verdict-suspicious)';
+    pillStyle = 'bg-amber-500/15 text-amber-400 border-amber-500/40 shadow-xs';
+    badgeText = 'Needs Verification';
     Icon = AlertTriangle;
   }
 

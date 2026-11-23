@@ -146,6 +146,18 @@ export default function AnalyzerPage() {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const inputTextForChecks = (report?.masked_input || textInput || urlInput || '').trim();
+  const wordCount = inputTextForChecks.split(/\s+/).filter(Boolean).length;
+  const isUncertain = Boolean(
+    report &&
+    report.verdict === 'SAFE' &&
+    (wordCount < 4 || (report.risk_score > 0 && report.risk_score <= 25))
+  );
+  const hasActionRequest = Boolean(
+    inputTextForChecks &&
+    /(?:call|click|visit|open|verify|update|contact|download|install|pay|send|dial|helpdesk|reversed?|dispute|cancel|ब्लॉक|कॉल|क्लिक|संपर्क|डाउनलोड|వెంటనే|కాల్|క్లిక్|సంప్రదించండి|రద్దు)/i.test(inputTextForChecks)
+  );
+
   return (
     <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 animate-fade-in ${isElderMode ? 'text-base font-medium' : ''}`}>
       
@@ -502,11 +514,17 @@ export default function AnalyzerPage() {
                     ? 'bg-rose-500/20 text-rose-300 border-rose-500/50 shadow-[0_0_12px_rgba(239,68,68,0.4)]'
                     : (report.verdict === 'SUSPICIOUS'
                       ? 'bg-amber-500/20 text-amber-300 border-amber-500/50 shadow-[0_0_12px_rgba(245,158,11,0.35)]'
-                      : 'bg-emerald-500/20 text-emerald-300 border-emerald-500/50 shadow-[0_0_12px_rgba(16,185,129,0.3)]')
+                      : (isUncertain
+                        ? 'bg-amber-500/20 text-amber-300 border-amber-500/50 shadow-[0_0_12px_rgba(245,158,11,0.35)]'
+                        : 'bg-emerald-500/20 text-emerald-300 border-emerald-500/50 shadow-[0_0_12px_rgba(16,185,129,0.3)]'))
                 }`}>
                   <AlertTriangle className="w-3.5 h-3.5" />
                   <span>
-                    {report.verdict === 'HIGH RISK' ? 'Fraud Risk Detected' : (report.verdict === 'SUSPICIOUS' ? 'Suspicious Risk' : 'Likely Safe Content')}
+                    {report.verdict === 'HIGH RISK'
+                      ? 'Fraud Risk Detected'
+                      : (report.verdict === 'SUSPICIOUS'
+                        ? 'Suspicious Risk'
+                        : (isUncertain ? 'Uncertain / Needs Verification' : 'No strong scam signals found'))}
                   </span>
                 </div>
 
@@ -519,18 +537,18 @@ export default function AnalyzerPage() {
               {/* Gauge and "Why was this flagged?" */}
               <div className="grid grid-cols-1 sm:grid-cols-12 gap-5 items-center">
                 <div className="sm:col-span-5 flex justify-center">
-                  <ScoreGauge score={report.risk_score} verdict={report.verdict} />
+                  <ScoreGauge score={report.risk_score} verdict={report.verdict} isUncertain={isUncertain} />
                 </div>
                 <div className="sm:col-span-7 space-y-2">
                   <h4 className="text-xs font-black uppercase tracking-wider text-ink">
-                    Why was this flagged?
+                    {report.verdict === 'SAFE' ? 'Pattern Evaluation' : 'Why was this flagged?'}
                   </h4>
                   <ul className="space-y-1.5 text-xs text-ink-muted font-medium">
                     {report.evidence && report.evidence.length > 0 ? (
                       report.evidence.slice(0, 4).map((ev, i) => (
                         <li key={i} className="flex items-start gap-1.5 leading-snug">
                           <span className={`w-2 h-2 rounded-full mt-1.5 shrink-0 ${
-                            report.verdict === 'HIGH RISK' ? 'bg-verdict-danger' : 'bg-verdict-suspicious'
+                            report.verdict === 'HIGH RISK' ? 'bg-verdict-danger' : (report.verdict === 'SUSPICIOUS' ? 'bg-verdict-suspicious' : 'bg-verdict-safe')
                           }`} />
                           <span className="line-clamp-2 text-ink">{ev.signal}</span>
                         </li>
@@ -542,6 +560,19 @@ export default function AnalyzerPage() {
                 </div>
               </div>
 
+              {/* Action Request Warning in Side Panel if directives detected */}
+              {hasActionRequest && (
+                <div className="p-3.5 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-ink flex items-start gap-2.5">
+                  <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                  <div className="text-left space-y-0.5">
+                    <span className="text-[11px] font-black uppercase tracking-wider text-amber-400 block">Action Request Warning</span>
+                    <p className="text-xs text-ink-muted leading-tight font-medium">
+                      This message asks you to do something. Verify through your bank's official app, website or the number on your card before acting.
+                    </p>
+                  </div>
+                </div>
+              )}
+
               {/* AI Recommendation Box in Midnight Raised Navy with Teal Border */}
               <div className="p-4 rounded-2xl bg-navy border border-border text-ink flex items-start justify-between gap-3">
                 <div className="space-y-1 text-left">
@@ -550,7 +581,9 @@ export default function AnalyzerPage() {
                     <span>AI Recommendation</span>
                   </div>
                   <p className="text-xs text-ink-muted leading-relaxed font-medium">
-                    {report.recommended_actions?.[0] || 'Never enter your UPI PIN or scan QR codes to receive money.'}
+                    {report.verdict === 'SAFE' && hasActionRequest
+                      ? 'Verify this request through your official banking application or card hotline before proceeding.'
+                      : (report.recommended_actions?.[0] || 'Never enter your UPI PIN or scan QR codes to receive money.')}
                   </p>
                 </div>
                 <div className="p-2 rounded-xl bg-navy-surface border border-border text-teal shrink-0 shadow-[0_0_10px_rgba(53,208,200,0.25)]">
@@ -820,7 +853,7 @@ export default function AnalyzerPage() {
           
           {/* Top Verdict Row */}
           <div className="flex flex-col lg:flex-row items-center gap-6 pb-6 border-b border-border">
-            <ScoreGauge score={report.risk_score} verdict={report.verdict} />
+            <ScoreGauge score={report.risk_score} verdict={report.verdict} isUncertain={isUncertain} />
             
             <div className="space-y-3 flex-1 text-center lg:text-left">
               <div className="flex items-center justify-center lg:justify-start gap-2 flex-wrap">
@@ -836,7 +869,7 @@ export default function AnalyzerPage() {
               </div>
 
               <h2 className="font-extrabold text-xl sm:text-2xl text-ink">
-                {report.verdict === 'HIGH RISK' ? '🚨 High Risk Digital Payment Scam Detected' : (report.verdict === 'SUSPICIOUS' ? '⚠️ Suspicious Threat Signals Found' : '✅ No Strong Scam Patterns Found')}
+                {report.verdict === 'HIGH RISK' ? '🚨 High Risk Digital Payment Scam Detected' : (report.verdict === 'SUSPICIOUS' ? '⚠️ Suspicious Threat Signals Found' : (isUncertain ? '🔍 Uncertain / Needs Direct Verification' : '🛡️ No strong scam signals found'))}
               </h2>
               <p className="text-ink-muted leading-relaxed font-medium text-sm">
                 {report.plain_language_explanation}
@@ -871,6 +904,134 @@ export default function AnalyzerPage() {
               </button>
             </div>
           </div>
+
+          {/* Action Request Callout */}
+          {hasActionRequest && (
+            <div className="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-ink flex items-start gap-3">
+              <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+              <div>
+                <h4 className="text-xs font-black uppercase tracking-wider text-amber-400">
+                  Action Request Callout
+                </h4>
+                <p className="text-xs text-ink-muted leading-relaxed font-medium mt-0.5">
+                  This message asks you to do something. Verify through your bank's official app, website or the number on your card before acting.
+                </p>
+              </div>
+            </div>
+          )}
+
+          {/* Structured What We Checked / What We Cannot Check for Safe Verdicts */}
+          {report.verdict === 'SAFE' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-5 rounded-2xl bg-navy border border-border">
+              <div className="space-y-2">
+                <h4 className="text-xs font-black uppercase tracking-wider text-teal flex items-center gap-1.5">
+                  <ShieldCheck className="w-4 h-4 text-verdict-safe" />
+                  What We Checked
+                </h4>
+                <ul className="space-y-1.5 text-xs text-ink-muted">
+                  <li className="flex items-start gap-2">
+                    <span className="text-verdict-safe font-bold">✓</span>
+                    <span>NLP threat & phishing patterns across English, Hindi, and Telugu</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-verdict-safe font-bold">✓</span>
+                    <span>Deceptive URLs, IP hosts, and suspicious subdomain structures</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-verdict-safe font-bold">✓</span>
+                    <span>Suspicious personal callback numbers and missing bank reference markers</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-verdict-safe font-bold">✓</span>
+                    <span>Urgency keywords, coercion tactics, and OTP/credential theft demands</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="space-y-2">
+                <h4 className="text-xs font-black uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
+                  <AlertTriangle className="w-4 h-4 text-amber-400" />
+                  What We Cannot Check
+                </h4>
+                <ul className="space-y-1.5 text-xs text-ink-muted">
+                  <li className="flex items-start gap-2">
+                    <span className="text-amber-400 font-bold">!</span>
+                    <span>SMS header spoofing (fraudsters can forge alphabetic sender headers)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-amber-400 font-bold">!</span>
+                    <span>Your live bank account balance or real-time banking ledger state</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-amber-400 font-bold">!</span>
+                    <span>Verbal claims or instructions given during offline phone calls</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-amber-400 font-bold">!</span>
+                    <span>Brand-new zero-day phishing sites created minutes ago</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          )}
+
+          {/* Unsure? Verify Action Row for Safe Verdicts */}
+          {report.verdict === 'SAFE' && (
+            <div className="p-4 rounded-2xl bg-navy border border-border space-y-3">
+              <div className="flex items-center gap-2">
+                <Shield className="w-4 h-4 text-teal" />
+                <h4 className="text-xs font-black uppercase tracking-wider text-ink">
+                  Unsure? Verify Before Taking Any Action
+                </h4>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                <div className="p-3.5 rounded-xl bg-navy-surface border border-border space-y-1">
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-teal">
+                    <span>📱 Open Bank App</span>
+                  </div>
+                  <p className="text-[11px] text-ink-muted leading-tight">
+                    Log in directly to your bank's official mobile application to verify alerts.
+                  </p>
+                </div>
+
+                <div className="p-3.5 rounded-xl bg-navy-surface border border-border space-y-1">
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-teal">
+                    <span>💳 Call Card Back Number</span>
+                  </div>
+                  <p className="text-[11px] text-ink-muted leading-tight">
+                    Call the official customer support number printed on the back of your card.
+                  </p>
+                </div>
+
+                <a
+                  href="tel:1930"
+                  className="p-3.5 rounded-xl bg-navy-surface border border-border hover:border-gold-400/50 space-y-1 transition block"
+                >
+                  <div className="flex items-center justify-between text-xs font-bold text-gold-400">
+                    <span>📞 Call 1930 Helpline</span>
+                    <span className="text-[10px] uppercase tracking-wider font-extrabold text-verdict-danger">24x7</span>
+                  </div>
+                  <p className="text-[11px] text-ink-muted leading-tight">
+                    National Cyber Crime reporting helpline for immediate fraud assistance.
+                  </p>
+                </a>
+
+                <button
+                  type="button"
+                  onClick={() => setReportModalOpen(true)}
+                  className="p-3.5 rounded-xl bg-navy-surface border border-border hover:border-rose-500/50 space-y-1 text-left transition cursor-pointer"
+                >
+                  <div className="flex items-center justify-between text-xs font-bold text-rose-300">
+                    <span>🚩 Report Message</span>
+                    <span className="text-[10px] text-rose-400">Crowdsource</span>
+                  </div>
+                  <p className="text-[11px] text-ink-muted leading-tight">
+                    Submit suspicious messages to help protect other users across India.
+                  </p>
+                </button>
+              </div>
+            </div>
+          )}
 
           {/* Token-Level Explainability Highlighting */}
           {report.highlight_spans && report.highlight_spans.length > 0 && (

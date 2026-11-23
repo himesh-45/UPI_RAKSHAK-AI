@@ -10,12 +10,12 @@
 
 | Evaluation Dimension | Legacy Baseline | Current Final Engineering Status | Impact / Validation |
 | :--- | :--- | :--- | :--- |
-| **Model Evaluation Rigor** | Claimed near-perfect score on leaky stratified random split | **0.8994 Macro-F1** on frozen Gold v1; **0.8624** on natural noisy human Gold v2 | Leakage-free `GroupShuffleSplit` on template IDs. Macro-F1 target strictly set to 0.8500 (Both Gold v1 and Gold v2 PASSED). |
-| **Risk Fusion Scam Recall** | 91.84% (180/196) — Marked FAILED | **99.49%** (195/196 Gold v1) & **98.55%** (136/138 Gold v2) | Intercepts obscure attack vectors with zero network latency. |
-| **Legitimate False Alarm Rate** | 2.73% (3 false alarms on bank SMS) | **0.00%** (0/110 on Gold v1) & **1.90%** (2/105 on expanded Gold v2); NLP-only FPR **2.86%** | Gold v2 expanded from 35 to 105 realistic legitimate communications (bank debit/credit alerts with OTP warnings, delivery PINs, receipts, telecom, chats). Both PASSED ($\le 3\%$). |
+| **Model Evaluation Rigor** | Claimed near-perfect score on leaky stratified random split | **0.8810 Macro-F1** on frozen Gold v1; **0.8233** on natural noisy human Gold v2 | Leakage-free `GroupShuffleSplit` on template IDs. Macro-F1 target strictly set to 0.8500 (Gold v1 PASSED). |
+| **Risk Fusion Scam Recall** | 91.84% (180/196) — Marked FAILED | **98.98%** (194/196 Gold v1) & **97.83%** (135/138 Gold v2) | Intercepts obscure attack vectors with zero network latency. |
+| **Legitimate False Alarm Rate** | 2.73% (3 false alarms on bank SMS) | **0.00%** (0/110 on Gold v1) & **0.95%** (1/105 on expanded Gold v2); NLP-only FPR **2.73%** | Gold v2 expanded from 35 to 105 realistic legitimate communications (bank debit/credit alerts with OTP warnings, delivery PINs, receipts, telecom, chats). Both PASSED ($\le 3\%$). |
 | **Marketplace QR Scam Precision** | 0.2619 (28 genuine messages misrouted) | **0.8125** (Gold v1) and **1.0000** (Gold v2) | Added 300+ hard negative merchant receipts and chat context. |
 | **Static URL Scanner Metrics** | Zero measured accuracy; anecdotal | **Real-Feed**: 82.00% Phishing Recall, 1.60% Benign FPR on OpenPhish/Tranco; **Adversarial**: 98.60% Recall, 1.12% FPR on 357 targets (incl. 107 handwritten) | Non-circular benchmark with domain-disjoint train/test split. Zero network calls. |
-| **Expected Calibration Error (ECE)** | 0.1328 (uncalibrated probability scores) | **0.0992** (Gold v1, PASSED) & **0.1206** (Gold v2, honestly reported FAILED) | Calibrated probabilities ensure risk scores reflect real-world attack probability. |
+| **Expected Calibration Error (ECE)** | 0.1328 (uncalibrated probability scores) | **0.0601** (Gold v1, PASSED) & **0.1089** (Gold v2, honestly reported FAILED) | Calibrated probabilities ensure risk scores reflect real-world attack probability. |
 | **Taxonomy Coverage** | 8 basic categories | **15 Comprehensive Categories + Digital Arrest Extortion Engine** | Added collect fraud, AnyDesk, loan extortion, digital arrest coercion, QR scams, accidental transfers, task jobs. |
 | **Adversarial Robustness** | Vulnerable to "O T P", leetspeak, prompt injection | **Resistant in our tests (35 prompt injection cases across en/hi/te)** | Tested via property-based and multilingual mutation tests in `test_mutations.py`. |
 | **Automated Test Suite** | 53 tests | **216 Tests Passing (100% Pass Rate)** | Full unit, integration, mutation, consistency, domain-disjoint, channels, reputation, digital arrest, theme contrast, responsive viewports, load test, and packaging coverage. |
@@ -35,10 +35,10 @@ All gates are derived dynamically from code comparisons (`value >= target` or `v
 ```markdown
 | Evaluation Quality Gate | Target Benchmark | Measured (Gold v1) | Gate (Gold v1) | Measured (Gold v2) | Gate (Gold v2) |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| **Risk Fusion Scam Recall** | >= 95.0% | **99.49%** (195/196) | **PASSED** | **98.55%** (136/138) | **PASSED** |
-| **Legitimate False Positive Rate (FPR)** | <= 3.0% | **0.00%** (0/110) | **PASSED** | **1.90%** (2/105) | **PASSED** |
-| **15-Class NLP Macro-F1** | >= 0.8500 | **0.8994** | **PASSED** | **0.8624** | **PASSED** |
-| **Expected Calibration Error (ECE)** | < 0.1000 | **0.0992** | **PASSED** | **0.1206** | **FAILED** |
+| **Risk Fusion Scam Recall** | >= 95.0% | **98.98%** (194/196) | **PASSED** | **97.83%** (135/138) | **PASSED** |
+| **Legitimate False Positive Rate (FPR)** | <= 3.0% | **0.00%** (0/110) | **PASSED** | **0.95%** (1/105) | **PASSED** |
+| **15-Class NLP Macro-F1** | >= 0.8500 | **0.8810** | **PASSED** | **0.8233** | **FAILED** |
+| **Expected Calibration Error (ECE)** | < 0.1000 | **0.0601** | **PASSED** | **0.1089** | **FAILED** |
 ```
 
 ### Static URL Scanner Quality Gates (Pure Static Engine)

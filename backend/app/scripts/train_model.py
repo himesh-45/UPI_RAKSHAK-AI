@@ -84,11 +84,22 @@ def train_and_evaluate():
     y = df["category"]
 
     # Stratified Group Split by template_id within each category
+    # Preserves backward-compatible category sequence so existing 15 categories retain exact template splits
     train_indices = []
     val_indices = []
     rng = np.random.RandomState(42)
 
-    for cat in sorted(df["category"].unique()):
+    original_categories = [
+        "accidental_transfer_scam", "collect_request_fraud", "courier_customs_scam",
+        "electricity_disconnection", "fake_bank_kyc", "fake_customer_support",
+        "fake_govt_scheme", "fake_upi_refund_cashback", "job_investment_scam",
+        "legitimate", "loan_app_extortion", "lottery_prize", "marketplace_qr_scam",
+        "otp_pin_theft", "remote_access_scam"
+    ]
+    new_categories = [c for c in sorted(df["category"].unique()) if c not in original_categories]
+    all_cats = original_categories + new_categories
+
+    for cat in all_cats:
         cat_df = df[df["category"] == cat]
         unique_templates = list(cat_df["template_id"].unique())
         rng.shuffle(unique_templates)

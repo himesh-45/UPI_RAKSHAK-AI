@@ -1,5 +1,14 @@
 [
   {
+    "id": "ex_fake_debit_callback",
+    "type": "text",
+    "category": "fake_debit_alert_callback",
+    "language": "en",
+    "label": "Fake Debit Alert + Callback Scam",
+    "input": "Alert: ₹49,999 debited from your account. If not done by you, call +91-XXXXXXXXXX immediately.",
+    "expected_verdict": "HIGH RISK"
+  },
+  {
     "id": "ex_classic_otp",
     "type": "text",
     "category": "otp_pin_theft",

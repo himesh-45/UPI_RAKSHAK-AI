@@ -124,11 +124,11 @@ def benchmark_dataset(data: List[Dict[str, Any]], set_name: str) -> Dict[str, An
     row_sums[row_sums == 0] = 1.0
     all_probs = all_probs / row_sums
 
-    macro_p, macro_r, macro_f1, _ = precision_recall_fscore_support(nlp_true, nlp_preds, average="macro", zero_division=0)
+    macro_p, macro_r, macro_f1, _ = precision_recall_fscore_support(nlp_true, nlp_preds, labels=classes, average="macro", zero_division=0)
     acc = accuracy_score(nlp_true, nlp_preds)
 
     def f1_metric(yt, yp):
-        _, _, f, _ = precision_recall_fscore_support(yt, yp, average="macro", zero_division=0)
+        _, _, f, _ = precision_recall_fscore_support(yt, yp, labels=classes, average="macro", zero_division=0)
         return f
 
     _, f1_low, f1_high = bootstrap_confidence_interval(np.array(nlp_true), np.array(nlp_preds), f1_metric)

@@ -354,6 +354,44 @@ KB_TOPIC_TRANSLATIONS = {
             "official_url": "https://trai.gov.in",
             "source": "టెలికాం రెగ్యులేటరీ అథారిటీ ఆఫ్ ఇండియా (TRAI) & RBI"
         }
+    },
+    "kb_fake_debit_alert_callback": {
+        "en": {
+            "title": "Fake Debit Alert & Callback Scam: How to Identify & Protect Yourself",
+            "summary": "Never call the phone number or message the WhatsApp contact in an unsolicited debit alert. Verify balances only in your bank's official app.",
+            "steps": [
+                "Verify independently: Open your bank's official mobile application or check NetBanking directly to verify your true balance.",
+                "Do NOT dial the SMS number: Scammers pose as bank fraud executives to convince you to install remote screen-sharing apps or share OTPs.",
+                "Check for genuine markers: Real bank alerts contain masked account numbers (A/C **1234), valid transaction reference IDs (UTR/RRN), and merchant names.",
+                "Call verified helplines: Only call the toll-free number printed on the back of your physical card or listed on your bank's official website."
+            ],
+            "official_url": "https://cybercrime.gov.in",
+            "source": "RBI Customer Protection Framework & I4C Cyber Threat Advisory"
+        },
+        "hi": {
+            "title": "फर्जी डेबिट अलर्ट कॉल-बैक फ्रॉड: पहचान और बचाव के उपाय",
+            "summary": "खाते से पैसे कटने के किसी भी संदिग्ध एसएमएस में दिए गए नंबर पर कभी कॉल न करें। केवल आधिकारिक बैंक ऐप में बैलेंस जांचें।",
+            "steps": [
+                "सीधे ऐप में जांचें: अपने बैंक के आधिकारिक मोबाइल ऐप या नेटबैंकिंग में लॉगिन करके अपना सही खाता बैलेंस और स्टेटमेंट देखें।",
+                "एसएमएस में दिए नंबर पर कॉल न करें: जालसाज बैंक अधिकारी बनकर रिमोट ऐप (AnyDesk) डाउनलोड करने या ओटीपी मांगने का प्रयास करते हैं।",
+                "असली बैंक संदेश के संकेत पहचानें: असली बैंक अलर्ट में खाते के अंतिम 4 अंक (**1234), ट्रांजेक्शन रेफरेंस आईडी (UTR) और शेष बैलेंस होता है।",
+                "कार्ड के पीछे दिए नंबर पर संपर्क करें: सहायता के लिए केवल अपने डेबिट कार्ड के पीछे छपे बैंक के आधिकारिक टोल-फ्री नंबर पर कॉल करें।"
+            ],
+            "official_url": "https://cybercrime.gov.in",
+            "source": "भारतीय रिजर्व बैंक (RBI) ग्राहक सुरक्षा ढांचा एवं I4C"
+        },
+        "te": {
+            "title": "నకిలీ డెబిట్ అలర్ట్ మరియు కాల్-బ్యాక్ మోసం: ఎలా గుర్తించాలి మరియు రక్షణ చర్యలు",
+            "summary": "డెబిట్ సందేశంలోని ఫోన్ నంబర్‌కు ఎప్పుడూ కాల్ చేయవద్దు. మీ అధికారిక బ్యాంక్ యాప్‌లో మాత్రమే ఖాతా బ్యాలెన్స్ తనిఖీ చేయండి.",
+            "steps": [
+                "యాప్‌లో తనిఖీ చేయండి: మీ అధికారిక మొబైల్ బ్యాంకింగ్ యాప్ లేదా నెట్‌బ్యాంకింగ్‌లోకి లాగిన్ అయ్యి మీ ఖచ్చితమైన బ్యాలెన్స్ చూడండి.",
+                "మెసేజ్‌లోని నంబర్‌కు కాల్ చేయవద్దు: మోసగాళ్లు బ్యాంక్ అధికారులుగా నటిస్తూ స్క్రీన్ షేరింగ్ యాప్‌లు ఇన్‌స్టాల్ చేయమని లేదా ఓటీపీలు అడుగుతారు.",
+                "అసలైన అలర్ట్ లక్షణాలు: అసలైన బ్యాంక్ అలర్ట్‌లో ఖాతా చివరి 4 అంకెలు (**1234), లావాదేవీ రిఫరెన్స్ నంబర్ (UTR) మరియు నిల్వ ఉంటాయి.",
+                "కార్డు వెనుక ఉన్న నంబర్‌ను సంప్రదించండి: మీ ఏటీఎం లేదా డెబిట్ కార్డు వెనుక ముద్రించిన అధికారిక టోల్-ఫ్రీ నంబర్‌కు మాత్రమే కాల్ చేయండి."
+            ],
+            "official_url": "https://cybercrime.gov.in",
+            "source": "రిజర్వ్ బ్యాంక్ ఆఫ్ ఇండియా (RBI) మరియు I4C సైబర్ హెచ్చరిక"
+        }
     }
 }
 

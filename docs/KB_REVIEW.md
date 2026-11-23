@@ -3,7 +3,7 @@
 > **Defensibility Standard**:
 > In accordance with digital fraud safety guidelines, no phone numbers, procedures, or portal URLs are invented or hallucinated by any language model.
 > All procedural guidance delivered by the Assistant (Web, Telegram, and WhatsApp) is strictly retrieved from the reviewed entries below.
-> Total Knowledge Entries: **160** | Human Reviewed: **158** | Draft (Excluded from Answers): **2**.
+> Total Knowledge Entries: **161** | Human Reviewed: **158** | Draft (Excluded from Answers): **3**.
 > Every entry is verified against statutory authorities: Ministry of Home Affairs (MHA), Indian Cyber Crime Coordination Centre (I4C), Reserve Bank of India (RBI), National Payments Corporation of India (NPCI), Telecom Regulatory Authority of India (TRAI), and UIDAI.
 
 ---
@@ -12,6 +12,7 @@
 
 | Entry ID | Title & Topic | Official Authority | Verified Official URL | Last Reviewed | Reviewer | Status |
 | :--- | :--- | :--- | :--- | :---: | :--- | :---: |
+| `kb_fake_debit_alert_callback` | Fake Debit Alerts & Callback Phishing Scams (TOAD) | RBI Customer Protection Advisory & I4C | [https://cybercrime.gov.in](https://cybercrime.gov.in) | 2026-11-24 | I4C Regulatory Compliance Audit | **DRAFT** |
 | `kb_upi_pin_receiving` | UPI Architecture: Receiving Money Never Requires a PIN or Co | NPCI Guidelines on Unified Payments | [https://www.npci.org.in](https://www.npci.org.in) | 2026-11-23 | I4C Regulatory Compliance Au | **REVIEWED** |
 | `kb_upi_collect_request_rules` | UPI Collect Requests: How Attackers Disguise Debit as Credit | NPCI Circular on Collect Request Se | [https://www.npci.org.in/what-we-do/upi/security](https://www.npci.org.in/what-we-do/upi/security) | 2026-11-23 | I4C Regulatory Compliance Au | **REVIEWED** |
 | `kb_upi_autopay_mandate_fraud` | UPI AutoPay & Recurring E-Mandate Exploitation | RBI Master Directions on Processing | [https://cybercrime.gov.in](https://cybercrime.gov.in) | 2026-11-23 | I4C Regulatory Compliance Au | **REVIEWED** |

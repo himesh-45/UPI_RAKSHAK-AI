@@ -3852,5 +3852,38 @@
     "status": "reviewed",
     "content": "Physical and digital defense protocols against ATM skimming devices and card cloning.",
     "actionable_guidance": "Always cover the PIN keypad and immediately report suspicious card reader attachments to the branch guard or bank."
+  },
+  {
+    "id": "kb_fake_debit_alert_callback",
+    "category": "fake_debit_alert_callback",
+    "title": "Fake Debit Alerts & Callback Phishing Scams (TOAD Attacks)",
+    "source": "RBI Customer Protection Advisory & I4C Cyber Threat Bulletin",
+    "official_url": "https://cybercrime.gov.in",
+    "tags": [
+      "callback",
+      "debit alert",
+      "fake sms",
+      "phone call",
+      "reversal",
+      "customer care",
+      "dispute",
+      "toad"
+    ],
+    "content": "In telephone-oriented attack delivery (TOAD) or callback phishing scams, cybercriminals send shock SMS or WhatsApp notices alleging a large unauthorized debit (e.g. ₹49,999 or ₹99,999) from your account. The message instructs the victim to call an unauthorized personal mobile number, masked placeholder, or WhatsApp contact immediately to cancel or dispute the transaction. When victims call, scammers impersonate bank fraud desk executives and instruct them to install remote screen-sharing tools (AnyDesk/QuickSupport), share OTPs, or send a test reversal transfer. Genuine bank debit alerts ALWAYS display masked account last-4 digits (e.g., A/C **1234), official transaction references (UTR/RRN), available balances, and provide official toll-free numbers (1800/1860) or branch contact rather than personal 10-digit mobile numbers.",
+    "actionable_guidance": "Do NOT call numbers provided in unsolicited debit alerts. Check your official bank mobile app directly or call the toll-free number printed on the back of your debit/credit card. Never install remote access applications or share OTPs to reverse a transaction.",
+    "steps": [
+      "Verify independently: Open your bank official NetBanking portal or mobile application to check your actual account balance and statement.",
+      "Check the caller ID/number: Official Indian banks never provide personal 10-digit mobile numbers (+91-9xxxxxxxxx) or WhatsApp links for dispute resolution.",
+      "Inspect alert details: Legitimate debit alerts always contain your account masked last-4 digits, transaction reference number, and merchant/payee name.",
+      "Use official contacts: Only call the phone number physically embossed on the back of your debit card or the toll-free helpline listed on the bank official website.",
+      "Report fraud attempts: Forward suspicious SMS messages to 1909 (TRAI spam reporting) and file an incident report at cybercrime.gov.in or helpline 1930."
+    ],
+    "en": "In callback phishing scams, cybercriminals send shock SMS notices alleging a large unauthorized debit from your account and instruct you to call an unauthorized mobile number to dispute it.\n\nActionable Steps:\n1. Verify through official bank app.\n2. Do NOT call the phone number in the SMS.\n3. Call the number on the back of your debit/credit card.\n4. Never share OTP or download remote screen-sharing apps.\n5. Report incident to 1930 or cybercrime.gov.in.",
+    "hi": "फर्जी डेबिट अलर्ट कॉल-बैक धोखाधड़ी: धोखेबाज खाते से बड़ी रकम कटने का फर्जी संदेश भेजते हैं और ट्रांजेक्शन रोकने के लिए दिए गए मोबाइल नंबर पर कॉल करने को कहते हैं। कभी भी ऐसे नंबर पर कॉल न करें। अपने बैंक के आधिकारिक ऐप में खाता बैलेंस जांचें या अपने डेबिट कार्ड के पीछे दिए गए आधिकारिक टोल-फ्री नंबर पर संपर्क करें।",
+    "te": "నకిలీ డెబిట్ హెచ్చరిక కాల్-బ్యాక్ మోసం: మోసగాళ్లు మీ ఖాతా నుండి పెద్ద మొత్తం కట్ అయినట్లు నకిలీ సందేశం పంపి, దానిని రద్దు చేయడానికి ఇచ్చిన నంబర్‌కు కాల్ చేయమని చెబుతారు. ఎప్పుడూ ఆ నంబర్‌కు కాల్ చేయవద్దు. మీ బ్యాంక్ అధికారిక యాప్‌లో బ్యాలెన్స్ సరిచూసుకోండి లేదా మీ కార్డు వెనుక ఉన్న అధికారిక నంబర్‌ను సంప్రదించండి.",
+    "official_source_link": "https://cybercrime.gov.in",
+    "last_reviewed": "2026-11-24",
+    "reviewer": "I4C Regulatory Compliance Audit",
+    "status": "draft"
   }
 ]

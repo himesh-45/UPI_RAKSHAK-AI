@@ -121,6 +121,36 @@ SCAM_STORIES_DATA = {
                 "te": {"stage": "దశ 4: సర్వం లూటీ", "title": "ఖాతా ఖాళీ", "desc": "కాల్‌లో మాట్లాడుతూనే మీ ఖాతాలోని మొత్తం డబ్బును బదిలీ చేసుకుంటారు.", "flag": "ఫోన్ మాట్లాడుతుండగానే డబ్బు కట్ అయిన మెసేజ్‌లు రావడం."}
             }
         ]
+    },
+    "fake_debit_alert_callback": {
+        "name": {"en": "Fake Debit Alert Callback Scam", "hi": "फर्जी डेबिट अलर्ट कॉल-बैक धोखा", "te": "నకిలీ డెబిట్ అలర్ట్ కాల్-బ్యాక్ మోసం"},
+        "overview": {
+            "en": "Scammer sends a shock message alleging a large debit from your account, providing an unauthorized personal or placeholder phone number to dispute it.",
+            "hi": "धोखेबाज खाते से बड़ी रकम कटने का फर्जी संदेश भेजता है और ट्रांजेक्शन रोकने के लिए दिए गए मोबाइल नंबर पर कॉल करने का झांसा देता है।",
+            "te": "మీ ఖాతా నుండి పెద్ద మొత్తం డెబిట్ అయినట్లు నకిలీ సందేశం పంపి, దానిని రద్దు చేయడానికి ఇచ్చిన గుర్తుతెలియని నంబర్‌కు కాల్ చేయమని మోసం చేస్తారు."
+        },
+        "steps": [
+            {
+                "en": {"stage": "Stage 1: Shock Alert", "title": "False Debit Panic", "desc": "Victim receives an alarming SMS stating ₹49,999 or ₹99,999 has been debited from their account.", "flag": "No masked account last-4 digits or valid bank UTR reference."},
+                "hi": {"stage": "चरण 1: झूठा अलर्ट", "title": "अचानक पैसे कटने का झटका", "desc": "पीड़ित को संदेश आता है कि खाते से ₹49,999 या ₹99,999 डेबिट हो गए हैं।", "flag": "संदेश में बैंक खाता संख्या के अंतिम 4 अंक या संदर्भ संख्या गायब होना।"},
+                "te": {"stage": "దశ 1: భయాందోళన", "title": "నకిలీ డెబిట్ మెసేజ్", "desc": "ఖాతా నుండి ₹49,999 డెబిట్ అయిందని బాధితుడికి భయపెట్టే ఎస్ఎంఎస్ వస్తుంది.", "flag": "ఖాతా చివరి 4 అంకెలు లేదా బ్యాంక్ లావాదేవీ రిఫరెన్స్ లేకపోవడం."}
+            },
+            {
+                "en": {"stage": "Stage 2: Urgent Directive", "title": "Callback Trap", "desc": "Message instructs victim to immediately call an unverified 10-digit mobile number or placeholder to dispute the debit.", "flag": "Official banks provide 1800 toll-free numbers, not personal mobile contacts."},
+                "hi": {"stage": "चरण 2: कॉल करने का दबाव", "title": "कॉल-बैक ट्रैप", "desc": "संदेश में अनधिकृत ट्रांजेक्शन रद्द करने के लिए तुरंत दिए गए मोबाइल नंबर पर कॉल करने को कहा जाता है।", "flag": "बैंक व्यक्तिगत 10-अंकों के मोबाइल नंबर पर कॉल करने को नहीं कहते।"},
+                "te": {"stage": "దశ 2: తక్షణ ఆదేశం", "title": "కాల్ చేయమని ఉచ్చు", "desc": "లావాదేవీని రద్దు చేయడానికి వెంటనే ఇచ్చిన 10 అంకెల మొబైల్ నంబర్‌కు కాల్ చేయమని చెబుతారు.", "flag": "నిజమైన బ్యాంకులు 1800 టోల్-ఫ్రీ నంబర్లను మాత్రమే ఇస్తాయి."}
+            },
+            {
+                "en": {"stage": "Stage 3: Impersonation Desk", "title": "Posing as Fraud Team", "desc": "When called, imposter claims to be bank security and asks victim to install a remote screen-share app or share an OTP to 'cancel' the debit.", "flag": "Never install remote access software (AnyDesk) or disclose OTPs to reverse transactions."},
+                "hi": {"stage": "चरण 3: फर्जी अधिकारी", "title": "बैंक फ्रॉड टीम का ढोंग", "desc": "कॉल करने पर जालसाज बैंक अधिकारी बनकर रिमोट ऐप (AnyDesk) इंस्टॉल करने या ओटीपी बताने को कहता है।", "flag": "ट्रांजेक्शन रद्द करने के लिए कभी रिमोट ऐप या ओटीपी की आवश्यकता नहीं होती।"},
+                "te": {"stage": "దశ 3: నకిలీ అధికారి", "title": "ఫ్రాడ్ టీమ్ అవతారం", "desc": "బాధితుడు కాల్ చేయగానే మోసగాడు బ్యాంక్ అధికారిగా నటిస్తూ స్క్రీన్ షేరింగ్ యాప్ ఎక్కించమని లేదా ఓటీపీ అడుగుతాడు.", "flag": "లావాదేవీని రద్దు చేయడానికి ఎప్పుడూ యాప్‌లు ఇన్‌స్టాల్ చేయకూడదు."}
+            },
+            {
+                "en": {"stage": "Stage 4: Real Account Siphoning", "title": "Actual Financial Drain", "desc": "Using shared screen access or harvested OTPs, the attacker executes genuine debits, siphoning the victim's true savings.", "flag": "Actual funds vanish while caller promises 'reversal complete'."},
+                "hi": {"stage": "चरण 4: असली चोरी", "title": "खाता खाली होना", "desc": "रिमोट एक्सेस या ओटीपी का उपयोग करके धोखेबाज खाते से असली पैसे निकाल लेता है।", "flag": "कॉल पर बात करते-करते खाते से वास्तविक पैसे कट जाना।"},
+                "te": {"stage": "దశ 4: అసలైన నష్టం", "title": "డబ్బు లూటీ", "desc": "స్క్రీన్ యాక్సెస్ లేదా ఓటీపీని ఉపయోగించి మోసగాడు అసలైన డబ్బును వారి ఖాతాకు బదిలీ చేసుకుంటాడు.", "flag": "రివర్స్ చేశామని చెబుతూనే అసలు బ్యాలెన్స్ ఖాళీ చేయడం."}
+            }
+        ]
     }
 }
 

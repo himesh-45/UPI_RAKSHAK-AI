@@ -60,9 +60,9 @@
     - **Natural Gold Set v2 (Development Set, 243 samples)**: Natural, messy, human phrasings with typos, WhatsApp forwards, and real-world noise (138 scams, 105 legitimate samples).
   - *Strict Held-Out Protocol*: The only untouched held-out claim is the **Gold v3 Blind Evaluation Protocol** (`make evaluate-blind FILE=...`).
 - **Empirical Measured Performance (Programmatic)**:
-  - **99.49% Risk Fusion Recall** (Gold v1: 195/196) / **98.55% Recall** (Gold v2: 136/138).
-  - **0.00% False Positive Rate** on Gold v1 (0/110) and **1.90% False Positive Rate** on Gold v2 (2/105) across 215 real communications.
-  - **0.8994 15-Class NLP Macro-F1** (Gold v1) / **0.8624** (Gold v2).
+  - **98.98% Risk Fusion Recall** (Gold v1: 194/196) / **97.83% Recall** (Gold v2: 135/138).
+  - **0.00% False Positive Rate** on Gold v1 (0/110) and **0.95% False Positive Rate** on Gold v2 (1/105) across 215 real communications.
+  - **0.8810 15-Class NLP Macro-F1** (Gold v1) / **0.8233** (Gold v2).
   - **Median ~32 ms CPU Text Inference**: On AMD Ryzen AI 5 340 CPU (~100 ms with synchronous SQLite audit logging); 25.0 req/s under 50 sustained concurrent clients (0 errors).
   - **165+ passing unit, integration, property, security, and packaging tests**.
   - **Omnichannel Protection**: Live Telegram Bot (`@upi_rakshak_bot`) with salted SHA-256 privacy. (WhatsApp integration is a planned future channel requiring Meta Business API approval).
@@ -113,7 +113,7 @@
 ### Slide 10: Conclusion & Call to Action
 - **Summary**:
   - *Innovative*: Shift from black-box LLM to explainable, mathematical evidence fusion.
-  - *Accurate*: Leakage-free tested, 99.49% recall (Gold v1: 195/196) / 98.55% (Gold v2: 136/138), 0.00% FPR on Gold v1 (0/110) and 1.90% FPR on Gold v2 (2/105).
+  - *Accurate*: Leakage-free tested, 98.98% recall (Gold v1: 194/196) / 97.83% (Gold v2: 135/138), 0.00% FPR on Gold v1 (0/110) and 0.95% FPR on Gold v2 (1/105).
   - *Inclusive*: Multilingual, high-contrast elder mode with voice synthesis.
   - *Actionable*: From instant scam detection to Golden-Hour 1930 legal recovery in one click.
 - **Repository**: Open-source, Docker-ready, fully reproducible.
@@ -128,7 +128,7 @@
 > 
 > We built **UPI Rakshak AI**—India's first evidence-based, offline-first scam defense engine (core engine runs without internet; bots need internet). A citizen submits a suspicious text, URL, screenshot, or QR code in English, Hindi, or Telugu. In ~32 milliseconds on ordinary CPU hardware, our multi-layer engine fuses calibrated NLP, deterministic security rules, and pure static URL analysis.
 > 
-> We tested this honestly: on 306 frozen benchmark samples (Gold v1) and 243 development samples (Gold v2), our Risk Fusion engine achieved **99.49% (Gold v1) and 98.55% (Gold v2) scam recall** with **0.00% (Gold v1) and 1.90% (Gold v2) false alarm rates** on genuine bank and merchant notifications. When a scam is caught, it doesn't just warn the user—it generates a formal, pre-filled complaint for the 1930 Cybercrime Helpline so police can freeze mule accounts during the Golden Hour.
+> We tested this honestly: on 306 frozen benchmark samples (Gold v1) and 243 development samples (Gold v2), our Risk Fusion engine achieved **98.98% (Gold v1) and 97.83% (Gold v2) scam recall** with **0.00% (Gold v1) and 0.95% (Gold v2) false alarm rates** on genuine bank and merchant notifications. When a scam is caught, it doesn't just warn the user—it generates a formal, pre-filled complaint for the 1930 Cybercrime Helpline so police can freeze mule accounts during the Golden Hour.
 > 
 > Zero third-party API keys required. Sub-50ms CPU speed. Total digital trust for the next 500 million Indian payment users. Thank you!"*
 
