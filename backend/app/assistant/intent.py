@@ -8,9 +8,12 @@ from .intent_dataset import (
     TRAIN_INTENT_DATA,
     ALL_INTENTS,
     INTENT_ANALYZE,
+    INTENT_HELP,
     INTENT_HOW_TO,
     INTENT_EMERGENCY,
+    INTENT_GREETING,
     INTENT_SMALL_TALK,
+    INTENT_OUT_OF_SCOPE,
     INTENT_UNCLEAR,
 )
 
@@ -63,6 +66,12 @@ class IntentClassifier:
             re.compile(r'\b(who are you|what is your name|who built you|what is upi rakshak|what can you do|what are your capabilities|what are you capable of)\b', re.IGNORECASE),
             re.compile(r'\b(meeru evaru|aap kaun hain|aap kya karte ho|aapka naam kya hai)\b', re.IGNORECASE),
             re.compile(r'^(bye|goodbye|see you|ok bye|untanu)[!.]*$', re.IGNORECASE),
+        ]
+
+        # 2b. Out-of-Scope Queries (General trivia, recipes, weather, code requests, sports)
+        self.out_of_scope_patterns = [
+            re.compile(r'\b(recipe|biryani|cook|baking|cake|weather|forecast|temperature|cricket score|world cup|capital of|joke|chutkula|essay|poem|write (a )?python|write (a )?code|javascript|linked list|factorial|quicksort|binary search|solve equation|movie|cinema ticket|marathon|tomato plant)\b', re.IGNORECASE),
+            re.compile(r'\b(kaise banate|mausam kaisa|kisne banwaya|ela cheyali biryani|joke cheppandi|cinema director|vanta ela|ela chesukovali|ela tayaru)\b', re.IGNORECASE),
         ]
 
         # 3. Emergency Patterns (Immediate financial loss, ongoing theft)
@@ -148,10 +157,21 @@ class IntentClassifier:
         for pat in self.smalltalk_patterns:
             if pat.search(cleaned):
                 return IntentResult(
-                    intent=INTENT_SMALL_TALK,
+                    intent=INTENT_GREETING,
                     confidence=0.98,
                     rule_matched="smalltalk_pattern"
                 )
+
+        # 2b. Out-of-Scope Detection (recipes, weather, general trivia)
+        for pat in self.out_of_scope_patterns:
+            if pat.search(cleaned):
+                # Ensure it's not actually a security question
+                if not re.search(r'\b(upi|bank|otp|pin|cvv|scam|1930|cyber|fraud|police|loss|lost|money|debit|credit|apk|arrest|freeze)\b', cleaned, re.IGNORECASE):
+                    return IntentResult(
+                        intent=INTENT_OUT_OF_SCOPE,
+                        confidence=0.96,
+                        rule_matched="out_of_scope_pattern"
+                    )
 
         # 3. Emergency vs Pasted SMS Check
         is_pasted_forward = bool(self.forwarded_pattern.search(cleaned))

@@ -2,9 +2,12 @@ import pytest
 from backend.app.assistant.intent import (
     intent_classifier,
     INTENT_ANALYZE,
+    INTENT_HELP,
     INTENT_HOW_TO,
     INTENT_EMERGENCY,
+    INTENT_GREETING,
     INTENT_SMALL_TALK,
+    INTENT_OUT_OF_SCOPE,
     INTENT_UNCLEAR
 )
 from backend.app.assistant.intent_dataset import TEST_INTENT_DATA, TRAIN_INTENT_DATA
@@ -107,6 +110,29 @@ def test_regression_unclear_queries():
     assert chat_res.risk_score is None
     assert "didn't quite catch" in chat_res.reply or "check" in chat_res.reply.lower()
     assert len(chat_res.action_buttons) >= 2
+
+def test_regression_out_of_scope_queries():
+    """
+    Regression: Out-of-scope questions (recipes, weather, coding, trivia)
+    must return a polite explanation of Rakshak's cybersecurity scope with no verdict or score.
+    """
+    out_of_scope_queries = [
+        "How do I make authentic Hyderabadi chicken biryani at home?",
+        "What is the weather forecast for New Delhi today?",
+        "Write python code for binary search tree insertion",
+        "Who won the ICC Cricket World Cup in 2011?",
+        "Tell me a funny joke about software developers."
+    ]
+    for q in out_of_scope_queries:
+        intent_res = intent_classifier.classify(q)
+        assert intent_res.intent == INTENT_OUT_OF_SCOPE, f"Expected OUT_OF_SCOPE for '{q}', got {intent_res.intent}"
+
+        chat_res = assistant_service.analyze_and_respond(
+            AssistantChatRequest(message=q, language="en")
+        )
+        assert chat_res.verdict is None, "OUT_OF_SCOPE must never return a verdict"
+        assert chat_res.risk_score is None, "OUT_OF_SCOPE must never return a risk score"
+        assert "UPI Rakshak AI" in chat_res.reply or "cybersecurity" in chat_res.reply.lower() or "suspicious" in chat_res.reply.lower()
 
 def test_multilingual_how_to_guidance():
     """Validates Hindi and Telugu procedural answers."""

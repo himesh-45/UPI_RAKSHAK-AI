@@ -533,6 +533,32 @@ def format_low_confidence_fallback(lang: str = "en") -> str:
         return "I'm not sure. Please check [cybercrime.gov.in](https://cybercrime.gov.in) or call the national cyber helpline at 1930 for verified guidance."
 
 
+def format_out_of_scope_response(lang: str = "en") -> str:
+    """
+    Polite redirect when user asks a general-knowledge or non-cybersecurity question.
+    Explains UPI Rakshak AI's specialized role and offers immediate security assistance.
+    """
+    target_lang = lang if lang in ["hi", "te"] else "en"
+    if target_lang == "hi":
+        return (
+            "मैं **UPI रक्षक AI** हूँ—डिजिटल भुगतान, UPI सुरक्षा और साइबर अपराध से बचाव के लिए विशेष रूप से बनाया गया सहायक।\n\n"
+            "मैं सामान्य ज्ञान या असंबंधित विषयों के प्रश्नों के उत्तर नहीं दे सकता।\n\n"
+            "यदि आपको किसी संदिग्ध संदेश, कॉल, लिंक या बैंक धोखाधड़ी की जांच करवानी है, तो कृपया यहाँ साझा करें।"
+        )
+    elif target_lang == "te":
+        return (
+            "నేను **UPI రక్షక్ AI**—డిజిటల్ చెల్లింపులు, UPI భద్రత మరియు సైబర్ మోసాల నివారణలో సహాయం చేయడానికి రూపొందించబడ్డాను.\n\n"
+            "సాధారణ విషయాలు లేదా సంబంధం లేని ప్రశ్నలకు నేను సమాధానం ఇవ్వలేను.\n\n"
+            "మీకు ఏదైనా అనుమానాస్పద మెసేజ్, లింక్ లేదా సైబర్ మోసం గురించి సహాయం కావాలంటే ఇక్కడ అడగండి."
+        )
+    else:
+        return (
+            "I am **UPI Rakshak AI**, specialized exclusively in digital payment safety, scam detection, and cybercrime defense.\n\n"
+            "I cannot answer general-knowledge questions outside cybersecurity and digital payments.\n\n"
+            "If you received a suspicious message, link, call, or need assistance reporting cyber fraud, paste it here or ask below."
+        )
+
+
 def format_threat_analysis_response(report: SafetyReport, lang: str = "en") -> str:
     """
     Formats an evidence-based threat analysis response for ANALYZE intent.

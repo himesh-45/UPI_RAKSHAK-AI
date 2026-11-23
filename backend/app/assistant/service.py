@@ -7,14 +7,33 @@ from ..detectors.rule_engine import rule_engine
 from ..detectors.url_scanner import url_scanner
 from ..fusion.risk_engine import risk_engine
 from ..rag.retriever import rag_retriever
-from .intent import intent_classifier, INTENT_ANALYZE, INTENT_HOW_TO, INTENT_EMERGENCY, INTENT_SMALL_TALK, INTENT_UNCLEAR
+from .intent import (
+    intent_classifier,
+    INTENT_ANALYZE,
+    INTENT_HELP,
+    INTENT_HOW_TO,
+    INTENT_EMERGENCY,
+    INTENT_GREETING,
+    INTENT_SMALL_TALK,
+    INTENT_OUT_OF_SCOPE,
+    INTENT_UNCLEAR
+)
+from .tools import (
+    analyze_text,
+    analyze_url,
+    check_upi_id,
+    check_call_script,
+    lookup_community_reports,
+    retrieve_kb
+)
 from .templates import (
     format_how_to_response,
     format_emergency_response,
     format_small_talk_response,
     format_unclear_response,
     format_low_confidence_fallback,
-    format_threat_analysis_response
+    format_threat_analysis_response,
+    format_out_of_scope_response
 )
 
 class AssistantService:
@@ -39,8 +58,8 @@ class AssistantService:
         # ----------------------------------------------------------------------
         # CASE 1: HOW_TO / HELP PROCEDURAL INQUIRIES
         # ----------------------------------------------------------------------
-        if intent == INTENT_HOW_TO:
-            citations = rag_retriever.retrieve(message, top_k=2)
+        if intent in [INTENT_HELP, INTENT_HOW_TO, "HOW_TO", "HELP"]:
+            citations = retrieve_kb(message, language=effective_lang, top_k=2)
 
             # Strict low-confidence check: if retrieval score < 0.16, never hallucinate
             if not citations or citations[0].get("relevance_score", 0.0) < 0.16:
@@ -99,7 +118,7 @@ class AssistantService:
         # ----------------------------------------------------------------------
         elif intent == INTENT_EMERGENCY:
             reply_text = format_emergency_response(effective_lang)
-            citations = rag_retriever.retrieve("lost money golden hour 1930 helpline freeze bank account", top_k=1)
+            citations = retrieve_kb("lost money golden hour 1930 helpline freeze bank account", language=effective_lang, top_k=1)
             rag_citations = [
                 RAGCitation(
                     title=c["title"],
@@ -151,9 +170,9 @@ class AssistantService:
             )
 
         # ----------------------------------------------------------------------
-        # CASE 3: SMALL_TALK (Greetings, Thanks, Chit-Chat)
+        # CASE 3: GREETING / SMALL_TALK (Greetings, Thanks, Chit-Chat)
         # ----------------------------------------------------------------------
-        elif intent == INTENT_SMALL_TALK:
+        elif intent in [INTENT_GREETING, INTENT_SMALL_TALK, "GREETING", "SMALL_TALK"]:
             reply_text = format_small_talk_response(effective_lang)
             quick_replies = [
                 "Check a suspicious message",
@@ -179,8 +198,46 @@ class AssistantService:
             return AssistantChatResponse(
                 reply=reply_text,
                 language=effective_lang,
-                verdict=None,       # Strict: Never show verdict for SMALL_TALK
-                risk_score=None,    # Strict: Never show score for SMALL_TALK
+                verdict=None,       # Strict: Never show verdict for GREETING
+                risk_score=None,    # Strict: Never show score for GREETING
+                citations=[],
+                recommended_actions=[],
+                intent=intent,
+                quick_replies=quick_replies,
+                action_buttons=action_buttons
+            )
+
+        # ----------------------------------------------------------------------
+        # CASE 3b: OUT_OF_SCOPE (Non-Cybersecurity, Trivia, Coding, Recipes)
+        # ----------------------------------------------------------------------
+        elif intent == INTENT_OUT_OF_SCOPE:
+            reply_text = format_out_of_scope_response(effective_lang)
+            quick_replies = [
+                "Check a suspicious message",
+                "How to report to 1930?",
+                "What is digital arrest?"
+            ] if effective_lang == "en" else (
+                [
+                    "संदिग्ध मैसेज चेक करें",
+                    "1930 पर रिपोर्ट कैसे करें?",
+                    "डिजिटल अरेस्ट क्या है?"
+                ] if effective_lang == "hi" else [
+                    "అనుమానాస్పద సందేశాన్ని తనిఖీ చేయండి",
+                    "1930 కు ఎలా ఫిర్యాదు చేయాలి?",
+                    "డిజిటల్ అరెస్ట్ అంటే ఏమిటి?"
+                ]
+            )
+
+            action_buttons = [
+                {"label": "🔍 Check a Message", "action": "prompt_analyze"},
+                {"label": "💡 Safety Guidelines", "action": "prompt_help"}
+            ]
+
+            return AssistantChatResponse(
+                reply=reply_text,
+                language=effective_lang,
+                verdict=None,       # Strict: Never show verdict for OUT_OF_SCOPE
+                risk_score=None,    # Strict: Never show score for OUT_OF_SCOPE
                 citations=[],
                 recommended_actions=[],
                 intent=intent,

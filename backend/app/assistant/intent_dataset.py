@@ -5,20 +5,63 @@ Hindi, Telugu, and Hinglish with realistic human typos.
 """
 
 INTENT_ANALYZE = "ANALYZE"
-INTENT_HOW_TO = "HOW_TO"
+INTENT_HELP = "HELP"
+INTENT_HOW_TO = INTENT_HELP
 INTENT_EMERGENCY = "EMERGENCY"
-INTENT_SMALL_TALK = "SMALL_TALK"
+INTENT_GREETING = "GREETING"
+INTENT_SMALL_TALK = INTENT_GREETING
+INTENT_OUT_OF_SCOPE = "OUT_OF_SCOPE"
 INTENT_UNCLEAR = "UNCLEAR"
 
 ALL_INTENTS = [
     INTENT_ANALYZE,
-    INTENT_HOW_TO,
+    INTENT_HELP,
     INTENT_EMERGENCY,
-    INTENT_SMALL_TALK,
+    INTENT_GREETING,
+    INTENT_OUT_OF_SCOPE,
     INTENT_UNCLEAR,
 ]
 
 TRAIN_INTENT_DATA = [
+    ["How do I make authentic Hyderabadi chicken biryani at home?", "OUT_OF_SCOPE"],
+    ["What is the weather forecast for New Delhi today?", "OUT_OF_SCOPE"],
+    ["Who won the ICC Cricket World Cup in 2011?", "OUT_OF_SCOPE"],
+    ["Write a python function to reverse a singly linked list.", "OUT_OF_SCOPE"],
+    ["Tell me a funny joke about software developers.", "OUT_OF_SCOPE"],
+    ["What is the capital city of Australia?", "OUT_OF_SCOPE"],
+    ["Can you write an essay about renewable solar energy?", "OUT_OF_SCOPE"],
+    ["Solve the quadratic equation 2x^2 + 5x - 3 = 0.", "OUT_OF_SCOPE"],
+    ["What movies are releasing this weekend in cinema halls?", "OUT_OF_SCOPE"],
+    ["How to play chess for complete beginners?", "OUT_OF_SCOPE"],
+    ["What is the average distance between Earth and Mars?", "OUT_OF_SCOPE"],
+    ["How to bake a chocolate fudge cake without microwave?", "OUT_OF_SCOPE"],
+    ["Who is the current CEO of Google Alphabet?", "OUT_OF_SCOPE"],
+    ["Write a short rhyming poem about monsoons and rain.", "OUT_OF_SCOPE"],
+    ["Explain offside rule in football.", "OUT_OF_SCOPE"],
+    ["How to train for running a half marathon in 12 weeks?", "OUT_OF_SCOPE"],
+    ["बिरयानी बनाने की सबसे स्वादिष्ट रेसिपी बताइए", "OUT_OF_SCOPE"],
+    ["आज मुंबई का मौसम कैसा रहने वाला है?", "OUT_OF_SCOPE"],
+    ["क्रिकेट में सबसे ज्यादा शतक किसने बनाए हैं?", "OUT_OF_SCOPE"],
+    ["मुझे एक मजेदार चुटकुला सुनाओ भाई", "OUT_OF_SCOPE"],
+    ["ताजमहल किस मुगल बादशाह ने बनवाया था?", "OUT_OF_SCOPE"],
+    ["पायथन प्रोग्रामिंग में फॉर लूप कैसे लिखते हैं?", "OUT_OF_SCOPE"],
+    ["भारत की राजधानी और राष्ट्रपति कौन हैं?", "OUT_OF_SCOPE"],
+    ["घर पर गुलाब जामुन कैसे बनाते हैं?", "OUT_OF_SCOPE"],
+    ["హైదరాబాద్ దమ్ బిర్యానీ ఎలా తయారు చేయాలి?", "OUT_OF_SCOPE"],
+    ["ఈరోజు విజయవాడలో వర్షం పడుతుందా వాతావరణం ఎలా ఉంది?", "OUT_OF_SCOPE"],
+    ["నాకు ఒక మంచి తెలుగు కామెడీ జోక్ చెప్పండి", "OUT_OF_SCOPE"],
+    ["పైథాన్ ప్రోగ్రామింగ్ ఎలా నేర్చుకోవాలి?", "OUT_OF_SCOPE"],
+    ["బాహుబలి సినిమా డైరెక్టర్ రాజమౌళి ఇతర సినిమాలు ఏవి?", "OUT_OF_SCOPE"],
+    ["భారతదేశానికి స్వాతంత్ర్యం ఏ సంవత్సరంలో వచ్చింది?", "OUT_OF_SCOPE"],
+    ["మంచి మసాలా టీ ఎలా తయారు చేసుకోవాలి?", "OUT_OF_SCOPE"],
+    ["Biryani kaise banate hain step by step recipe batao", "OUT_OF_SCOPE"],
+    ["Aaj Bangalore me weather kaisa hai thand hai kya", "OUT_OF_SCOPE"],
+    ["Write python code for binary search tree insertion", "OUT_OF_SCOPE"],
+    ["Ek mast chutkula sunao hasi aaye", "OUT_OF_SCOPE"],
+    ["Kal IPL match kis team ne jeeta tha", "OUT_OF_SCOPE"],
+    ["Ee roju weather ela undi Hyderabad lo", "OUT_OF_SCOPE"],
+    ["Bookmyshow lo cinema tickets ela book cheyali", "OUT_OF_SCOPE"],
+
     [
         "URGENT: Your SBI YONO account will be blocked tonight. Click http://sbi-kyc-verify.top to update PAN immediately.",
         "ANALYZE"
@@ -313,455 +356,455 @@ TRAIN_INTENT_DATA = [
     ],
     [
         "how to complain to 1930",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how do I report on cybercrime.gov.in",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "what is the process to file a cyber complaint",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how to block my UPI ID",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how do collect requests work in UPI",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "what is digital arrest",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how to verify if a bank SMS is genuine or fake",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "is UPI safe for online shopping",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "what should I prepare before calling 1930",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how to recover money from a cyber fraud",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "what is golden hour in cyber crime",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how do scammers steal money through QR codes",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "can someone debit money if I only give my UPI ID",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how to check if a website domain is an official bank site",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "what to do if I shared my OTP with someone",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "what steps should I take if I installed AnyDesk app",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how to freeze my bank account quickly",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how to report a fraudulent mobile number to Chakshu portal",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "can police arrest someone over WhatsApp video call",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "what is RBI zero liability policy",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how to change UPI PIN in PhonePe and Google Pay",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how to file an FIR for online financial fraud",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how does AnyDesk allow scammers to see my screen",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how to de-link bank account from Google Pay",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "what is TRAI DLT header on SMS",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how to check mobile numbers registered on my Aadhaar using TAFCOP",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how to protect senior citizens from UPI scams",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "is entering UPI PIN required to receive money",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how to know if customer care number on Google is fake",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "what documents are required for cybercrime complaint",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how to file a cyber complaint on cybercrime.gov.in",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "what is the official helpline number for online fraud in India",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how to block upi id in google pay",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how to block upi id in paytm",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how to de-link my bank account from upi apps",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "what is digital arrest scam and how does it operate",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how do collect requests work in upi payments",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "is upi pin required to receive money or cashback",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how to verify if an SMS is from genuine bank or fraudster",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "what are the TRAI DLT header rules for bank sms",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "what should I prepare before calling 1930 helpline",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "what to do if I installed anydesk on caller advice",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "what to do if I accidentally shared my otp or upi pin",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how to recover money lost in cyber fraud",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "what is rbi zero liability rule for unauthorized banking transactions",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how to report suspicious mobile number on Chakshu portal",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how to check mobile connections registered in my name on Sanchar Saathi",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how to lock Aadhaar biometrics to prevent AePS fraud",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how to freeze bank account immediately",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "can cyber police freeze scammer bank account",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "1930 पर साइबर क्राइम शिकायत कैसे दर्ज करें",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "cybercrime.gov.in पोर्टल पर रिपोर्ट कैसे करते हैं",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "अपना यूपीआई आईडी कैसे ब्लॉक करें",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "डिजिटल अरेस्ट क्या होता है",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "क्या पैसे लेने के लिए यूपीआई पिन डालना पड़ता है",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "नकली बैंक मैसेज की पहचान कैसे करें",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "कलेक्ट रिक्वेस्ट कैसे काम करता है",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "अगर किसी को ओटीपी बता दिया तो क्या करना चाहिए",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "एनीडेस्क ऐप डाउनलोड कर लिया तो क्या करें",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "साइबर फ्रॉड होने पर बैंक में शिकायत कैसे करें",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "1930 helpline pe complain kaise kare",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "cybercrime portal me kya documents upload karne hote hain",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "upi id block karne ka tarika batao",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "kya police video call pe arrest kar sakti hai",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "golden hour kya hota hai fraud me",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "fake message kaise pehchane",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "gpay se bank account unlink kaise kare",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "upi pin change kaise karte hain phonepe me",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "1930 helpline par call kaise karein",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "cybercrime portal par online report kaise darj karein",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "gpay me upi id block kaise karein",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "phonepe me upi id delete kaise karein",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "kya paise lene ke liye kabhi bhi pin dalna padta hai",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "digital arrest kya hai aur kya police video call pe arrest kar sakti hai",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "fake bank sms ko kaise pehchane",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "agar kisi ko otp de diya to turant kya karna chahiye",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "anydesk app download karne ke baad phone safe kaise karein",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "bank account ko freeze kaise karwaye",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "chakshu portal par fraud number report kaise karein",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "1930 par complaint karne ke liye kya jankari chahiye",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "cyber fraud hone par paise wapas aane ka kya process hai",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "sanchar saathi portal par sim check kaise karein",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "aadhaar biometric lock kaise karte hain",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "1930 హెల్ప్‌లైన్‌కు సైబర్ మోసం గురించి ఎలా ఫిర్యాదు చేయాలి",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "cybercrime.gov.in పోర్టల్‌లో ఆన్‌లైన్ ఫిర్యాదు ఎలా నమోదు చేయాలి",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "నా యూపీఐ ఐడీని ఎలా బ్లాక్ చేసుకోవాలి",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "డిజిటల్ అరెస్ట్ అంటే ఏమిటి మరియు ఇది నిజమా",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "యూపీఐ కలెక్ట్ రిక్వెస్ట్ ఎలా పనిచేస్తుంది",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "బ్యాంక్ నుంచి వచ్చిన మెసేజ్ అసలైనదో కాదో ఎలా తెలుసుకోవాలి",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "డబ్బులు తీసుకోవడానికి యూపీఐ పిన్ నమోదు చేయాలా",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "ఒకవేళ పొరపాటున ఎవరికైనా ఓటీపీ చెబితే ఏం చేయాలి",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "ఎనీడెస్క్ యాప్ ఇన్‌స్టాల్ చేసుకుంటే ఫోన్ సేఫ్‌గా ఉంచడానికి ఏం చేయాలి",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "సైబర్ క్రైమ్ ఫిర్యాదు కోసం ఏఏ ఆధారాలు సిద్ధం చేసుకోవాలి",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "1930 lo complain ela ivvali",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "cybercrime portal lo report cheyadam ela",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "upi id block cheyatam ela",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "digital arrest ante ento cheppandi",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "bank account freeze ela cheyali",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "1930 హెల్ప్‌లైన్‌కు సైబర్ మోసం ఫిర్యాదు ఎలా చేయాలి",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "cybercrime.gov.in లో ఆన్‌లైన్ ఎఫ్‌ఐఆర్ ఎలా నమోదు చేయాలి",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "గూగుల్ పే లో నా యూపీఐ ఐడీని ఎలా డిలీట్ చేయాలి",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "ఫోన్‌పే లో యూపీఐ ఐడీ బ్లాక్ చేయడం ఎలా",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "డబ్బులు స్వీకరించడానికి యూపీఐ పిన్ అవసరమా",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "డిజిటల్ అరెస్ట్ అంటే ఏమిటి మరియు చట్టపరంగా ఇది చెల్లుతుందా",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "నకిలీ బ్యాంక్ మెసేజ్‌లను ఎలా గుర్తించాలి",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "ఓటీపీ చెబితే వెంటనే ఏం చేయాలి",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "ఎనీడెస్క్ యాప్ ఇన్‌స్టాల్ చేస్తే సైబర్ మోసం ఎలా ఆపాలి",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "బ్యాంక్ ఖాతాను వెంటనే ఫ్రీజ్ చేయడం ఎలా",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "చక్షు పోర్టల్‌లో ఫేక్ నంబర్‌ను ఎలా రిపోర్ట్ చేయాలి",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "1930 కి కాల్ చేసే ముందు ఏఏ వివరాలు సిద్ధం చేసుకోవాలి",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "ఆధార్ బయోమెట్రిక్ లాక్ ఎలా చేసుకోవాలి",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "సైబర్ మోసంలో పోయిన డబ్బును ఎలా రికవర్ చేయాలి",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "కలెక్ట్ రిక్వెస్ట్ ఆమోదిస్తే డబ్బులు కట్ అవుతాయా",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "I lost 5000 rupees to a scammer just now",
@@ -1013,231 +1056,231 @@ TRAIN_INTENT_DATA = [
     ],
     [
         "hi",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "hello",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "hey",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "good morning",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "good evening",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "hello there",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "who are you",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "what is UPI Rakshak",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "what can you do for me",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "how can you help me",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "thank you so much",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "thanks a lot",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "thanks for the help",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "you are very helpful",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "bye",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "ok bye",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "hello there safety assistant",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "good day",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "hi upi rakshak",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "are you a chatbot",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "what is your purpose",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "what features do you have",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "how do you work",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "many thanks for the guidance",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "thank you very much",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "have a wonderful day",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "नमस्ते",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "नमस्कार",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "आप कौन हैं",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "आप क्या कर सकते हैं",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "बहुत बहुत धन्यवाद",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "शुक्रिया आपकी मदद के लिए",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "namaste",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "kya haal hai",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "aap kya karte ho",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "dhanyawad",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "shukriya",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "namaste rakshak",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "shubh prabhat",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "aapka swagat hai",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "aap kaun se scams check kar sakte ho",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "dhanyawad aapki jankari ke liye",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "shukriya dost",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "నమస్కారం",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "హలో",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "మీరు ఎవరు",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "మీరు నాకు ఎలా సహాయపడగలరు",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "చాలా ధన్యవాదాలు",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "మీ సహాయానికి ధన్యవాదాలు",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "namaskaram",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "dhanyavadalu",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "namaskaram andi ela unnaru",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "subhodayam",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "meeru em chestharu",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "meeru ae bhashalo matladagalaru",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "chala thanks andi mee sahayaniki",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "dhanyavadalu rakshak",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "help",
@@ -1374,6 +1417,25 @@ TRAIN_INTENT_DATA = [
 ]
 
 TEST_INTENT_DATA = [
+    ["How to cook paneer butter masala restaurant style?", "OUT_OF_SCOPE"],
+    ["What is the current score of today's cricket match?", "OUT_OF_SCOPE"],
+    ["Write a JavaScript script to compute factorial of a number.", "OUT_OF_SCOPE"],
+    ["Tell me a creative bedtime story about an astronaut.", "OUT_OF_SCOPE"],
+    ["दिल्ली में आज का तापमान कितना डिग्री है?", "OUT_OF_SCOPE"],
+    ["मुझे कोई नया मजेदार चुटकुला बताइए", "OUT_OF_SCOPE"],
+    ["గులాబ్ జామున్ ఎలా తయారు చేయాలి రెసిపీ చెప్పండి", "OUT_OF_SCOPE"],
+    ["ఈరోజు ఇండియా మ్యాచ్ స్కోర్ ఎంత?", "OUT_OF_SCOPE"],
+    ["Weather kaisa hai Delhi me aaj", "OUT_OF_SCOPE"],
+    ["Who won the FIFA world cup in 2022?", "OUT_OF_SCOPE"],
+    ["What is the capital of France?", "OUT_OF_SCOPE"],
+    ["Write a short poem on mountains and rivers", "OUT_OF_SCOPE"],
+    ["How to grow tomato plants in balcony pot?", "OUT_OF_SCOPE"],
+    ["Who invented the telephone?", "OUT_OF_SCOPE"],
+    ["चाय की अच्छी रेसिपी बताइए", "OUT_OF_SCOPE"],
+    ["సినిమా రివ్యూ ఎలా ఉంది?", "OUT_OF_SCOPE"],
+    ["Tell me lyrics of national anthem", "OUT_OF_SCOPE"],
+    ["Who is prime minister of Japan?", "OUT_OF_SCOPE"],
+
     [
         "SBI Alert: Your YONO account blocked. Click http://sbi-kyc-fix.top to reactivate.",
         "ANALYZE"
@@ -1556,295 +1618,295 @@ TEST_INTENT_DATA = [
     ],
     [
         "how to compliant to 1930",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how to complain to 1930",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how do I report on cybercrime.gov.in",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how to bloack my upi id",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how to block upi id in phonepe",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "what is digital arrest",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how do collect requests work",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how to verify if bank sms is real",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "is entering upi pin required to receive money",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "what should I prepare before calling 1930 helplne",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how to report scam on cybercrime portal",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "what is golden hour protocol in cyber crime",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how to protect my bank account from fraud",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how to report fake WhatsApp caller to Chakshu",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "can CBI arrest through video call",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "what is rbi zero liability rule",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how to change my upi pin in gpay",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how to check if sms header is genuine",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how to recover scammed money from bank",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "what to do if I installed anydesk app",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "1930 pe shikayat kaise kare",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "cybercrime portal pe report kaise karte hain",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "upi id block kaise karein",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "kya paise lene ke liye pin dalna padta h",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "digital arrest ka kya matlab hota hai",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "fake customer care number kaise pehchane",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "anydesk install ho gaya to kya kare",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "1930 helpline pe kya documents lagte hain",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "1930 lo complaint ela ivvali",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "cybercrime.gov.in lo report ela cheyyali",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "upi id block cheyadam ela",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "digital arrest ante ento cheppandi",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "collect request ante enti",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "dabbu teesukovadaniki upi pin kottala",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "fake bank sms ni ela gurtinchali",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "1930 ki call chese mundu em ready chesukovali",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "anydesk app delete cheste saripotunda",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "bank nundi dabbu recovery cheyadam ela",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how to compliant to 1930 helplne",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how do i report on cybercrime.gov.in portal",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how to bloack my upi id in phonepe",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how to block upi id in gpay and paytm",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "what is digital arrest scam in india",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how do collect requests work in upi",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "do i need to enter upi pin to receive money",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how to verify if bank sms is genuine or fake",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "what should i prepare before calling 1930 helpline",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "what to do if i installed anydesck screen share app",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "what to do if i accidentally shared my otp with fraudster",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how to freeze bank account immediately after scam",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "what is golden hour recovery protocol",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "how to report fraud caller on Chakshu portal",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "is upi payment safe for online buyers",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "1930 pe complaint kaise karein",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "cybercrime portal pe report darj karne ka tarika",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "upi id block kaise karte hain",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "kya paise lene ke liye upi pin dalna padta hai",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "digital arrest kya sach me hota hai",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "fake bank sms ko pehchanne ka tarika",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "agar otp de diya to turant kya karein",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "anydesk install ho jaye to phone safe kaise kare",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "1930 par call karne se pehle kya ready rakhein",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "bank account ko freeze kaise karwaye",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "1930 lo complain ela ivvali",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "cybercrime portal lo case ela file cheyyali",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "upi id ni ela block cheyali",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "డబ్బులు స్వీకరించడానికి యూపీఐ పిన్ కొట్టాలా",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "డిజిటల్ అరెస్ట్ అంటే ఏమిటి నిజమైన పోలీసులా",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "నకిలీ బ్యాంక్ మెసేజ్‌లను ఎలా ధృవీకరించాలి",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "ఎవరికైనా ఓటీపీ చెబితే తక్షణమే ఏం చేయాలి",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "ఎనీడెస్క్ యాప్ ఇన్‌స్టాల్ చేసుకుంటే దాన్ని ఎలా తొలగించాలి",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "1930 కాల్ చేసే ముందు ఏ వివరాలు కావాలి",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "బ్యాంక్ ఖాతాను వెంటనే ఫ్రీజ్ చేయడం ఎలా",
-        "HOW_TO"
+        "HELP"
     ],
     [
         "I lost 5000 rupees",
@@ -1996,111 +2058,111 @@ TEST_INTENT_DATA = [
     ],
     [
         "hi there",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "hello assistant",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "hey buddy",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "good morning assistant",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "who built you",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "what is your name",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "what are your capabilities",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "thanks a lot for this info",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "thank you assistant",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "namaste ji",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "namaskaram andi",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "aapka naam kya hai",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "bahut dhanyawad",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "meeru evaru",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "chala thanks andi",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "bye bye",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "hello assistant can you help me",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "good afternoon upi rakshak",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "what are you capable of doing",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "thank you for your prompt response",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "thanks a lot buddy",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "namaste kaise ho aap",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "bahut bahut shukriya aapka",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "aap kya kya check kar sakte ho",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "namaskaram meeru ela unnaru",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "chala thanks andi mee sahayaniki",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "meeru ememi check chestaru",
-        "SMALL_TALK"
+        "GREETING"
     ],
     [
         "help me",

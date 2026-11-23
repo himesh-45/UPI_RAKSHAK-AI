@@ -176,7 +176,7 @@ To eliminate circularity, the static URL scanner is benchmarked on two strictly 
 
 Measured on AMD Ryzen AI 5 340 (12 logical cores, AuthenticAMD):
 
-- **Pure Text Inference Latency (Median)**: **11.87 ms** per sample (~32 ms end-to-end multi-detector fusion).
+- **Pure Text Inference Latency (Median)**: **12.75 ms** per sample (~32 ms end-to-end multi-detector fusion).
 - **With SQLite Audit Logging**: **~100 ms** per request under synchronous disk commit.
 - **Under 50 Concurrent Clients**: Sustained throughput of **25.0 requests/second** with **0.00% error rate**.
 - **Process Memory Footprint**: ~45 MB runtime memory.
@@ -189,28 +189,3 @@ When model confidence falls within the ambiguous margin ($0.35 \le p \le 0.60$) 
 - The system abstains from declaring a dogmatic verdict and instead returns:
   `"Not enough evidence - verify with your bank or official source"`.
 - This ensures high-consequence edge cases guide the user to human verification rather than risking false assurances.
-
-
----
-
-## 4. Assistant Intent Router Benchmark (Conversational Safety Assistant)
-
-> [!NOTE]
-> **Evaluation Scope**:
-> Evaluated on a held-out test suite of 205 realistic fictional queries spanning English, Hindi, Telugu, and Hinglish, specifically including common human typos (e.g. *"compliant"* for complaint, *"bloack"* for block, *"anydesck"* for AnyDesk).
-> Intent labels: `ANALYZE`, `HOW_TO`, `EMERGENCY`, `SMALL_TALK`, and `UNCLEAR`.
-
-| Intent Metric | Target Benchmark | Measured Value | Gate Status | Dataset Notes |
-| :--- | :---: | :---: | :---: | :--- |
-| **Intent Overall Accuracy** | >= 85.0% | **98.05%** | **PASSED** | Held-out test set (n=205) |
-| **5-Class Intent Macro-F1** | >= 0.8500 | **0.9781** | **PASSED** | Multilingual & Typo-Tolerant holdout |
-
-### Per-Class Performance Breakdown:
-- **`ANALYZE`**: Recall: **93.33%** | Precision: **100.0%** (Pasted SMS, links, VPAs, threat forwards)
-- **`HOW_TO`**: Recall: **98.63%** | Precision: **98.63%** (Questions on 1930, reporting, rules)
-- **`EMERGENCY`**: Recall: **100.0%** | Precision: **100.0%** (Immediate funds lost, OTP shared)
-- **`SMALL_TALK`**: Recall: **100.0%** | Precision: **100.0%** (Greetings, polite thanks)
-- **`UNCLEAR`**: Recall: **100.0%** | Precision: **88.46%** (Ambiguous terms -> clarification prompt)
-
-### Scientific Honesty Note:
-The intent router uses a hybrid fast-rule pre-filter plus subword character n-gram logistic regression. Confidence thresholding (<0.48) routes ambiguous queries to `UNCLEAR` rather than hazarding a guess on critical safety queries.
