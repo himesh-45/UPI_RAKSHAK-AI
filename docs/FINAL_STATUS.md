@@ -2,7 +2,7 @@
 
 **Audit Date**: November 2026  
 **Status**: Ready for Hackathon Live Demonstration & Technical Submission  
-**Repository State**: Clean, no secrets committed, no untracked dependencies, 165+ passing tests  
+**Repository State**: Clean, no secrets committed, no untracked dependencies, 216 passing tests  
 
 ---
 
@@ -18,7 +18,7 @@
 | **Expected Calibration Error (ECE)** | 0.1328 (uncalibrated probability scores) | **0.0992** (Gold v1, PASSED) & **0.1206** (Gold v2, honestly reported FAILED) | Calibrated probabilities ensure risk scores reflect real-world attack probability. |
 | **Taxonomy Coverage** | 8 basic categories | **15 Comprehensive Categories + Digital Arrest Extortion Engine** | Added collect fraud, AnyDesk, loan extortion, digital arrest coercion, QR scams, accidental transfers, task jobs. |
 | **Adversarial Robustness** | Vulnerable to "O T P", leetspeak, prompt injection | **Resistant in our tests (35 prompt injection cases across en/hi/te)** | Tested via property-based and multilingual mutation tests in `test_mutations.py`. |
-| **Automated Test Suite** | 53 tests | **165+ Tests Passing** | Full unit, integration, mutation, consistency, domain-disjoint, channels, reputation, digital arrest, load test, and packaging coverage. |
+| **Automated Test Suite** | 53 tests | **216 Tests Passing (100% Pass Rate)** | Full unit, integration, mutation, consistency, domain-disjoint, channels, reputation, digital arrest, theme contrast, responsive viewports, load test, and packaging coverage. |
 | **Omnichannel Deployment** | Web only | **Web PWA + Telegram Bot** | Multi-channel dispatcher with salted SHA-256 sender hashing, 20 msg/hr sliding rate limiter, and `/delete_data` right-to-be-forgotten. (WhatsApp planned roadmap channel requiring Meta Business approval). |
 | **Community Reputation** | None | **Consensus-Gated Database with Anti-Poisoning Whitelist** | Consensus gating ($\ge 2$ distinct reporters), 24h per-entity limits, 30-day half-life decay, and immune bank domains. |
 | **Credential Hygiene** | Admin password in README; `.admin_secret` in repo | **No Secrets Tracked**; random generated password in `.admin_secret` (git-ignored) | Verified via git tracking audits, clean `.gitignore`, and package inspection. |
@@ -64,7 +64,7 @@ All gates are derived dynamically from code comparisons (`value >= target` or `v
 | **Harmful Scam Request Refusal** | >= 95.0% | **100.00%** | [100.00%, 100.00%] | **PASSED** |
 | **Prompt Injection Defense Rate** | >= 95.0% | **100.00%** | [100.00%, 100.00%] | **PASSED** |
 | **Non-Analyze Verdict Purity** | 100.0% | **100.00%** | [100.0%, 100.0%] | **PASSED** |
-| **Median Offline Response Latency** | <= 50.0 ms | **9.78 ms** | P95: 13.15 ms | **PASSED** |
+| **Median Offline Response Latency** | <= 50.0 ms | **9.59 ms** | P95: 11.28 ms | **PASSED** |
 ```
 
 ---
@@ -96,7 +96,7 @@ All gates are derived dynamically from code comparisons (`value >= target` or `v
 ## 5. Key Verification Commands
 
 ```bash
-# 1. Run all automated backend tests (165+ tests)
+# 1. Run all automated backend tests (216 tests)
 .\.venv\Scripts\pytest.exe backend/tests -v
 
 # 2. Run Assistant Conversational & Guardrail Test Suite
