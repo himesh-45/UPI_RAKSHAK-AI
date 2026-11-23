@@ -33,7 +33,7 @@ class SpaHandler(SimpleHTTPRequestHandler):
         return super().do_GET()
 
 def test_theme_wcag_contrast_and_elements():
-    """Verify light and dark theme contrast compliance and key element visibility."""
+    """Verify permanent cyber dark theme contrast compliance, absence of toggle button, and key element visibility."""
     dist_dir = os.path.abspath("frontend/dist")
     if not os.path.exists(dist_dir):
         pytest.skip("frontend/dist does not exist. Run npm run build first.")
@@ -46,59 +46,49 @@ def test_theme_wcag_contrast_and_elements():
     try:
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=True)
+            context = browser.new_context(viewport={"width": 1440, "height": 900})
+            page = context.new_page()
 
-            for theme in ['light', 'dark']:
-                context = browser.new_context(viewport={"width": 1440, "height": 900})
-                page = context.new_page()
+            page.goto(f"http://127.0.0.1:{port}/", wait_until="networkidle", timeout=15000)
+            page.wait_for_timeout(300)
 
-                page.add_init_script(f"""
-                    localStorage.setItem('theme', '{theme}');
-                    document.documentElement.className = '{theme}';
-                """)
+            # Ensure document has class 'dark'
+            has_dark = page.evaluate("document.documentElement.classList.contains('dark')")
+            assert has_dark, "Document element should have class 'dark' for permanent dark mode"
 
-                page.goto(f"http://127.0.0.1:{port}/", wait_until="networkidle", timeout=15000)
+            # 1. Headline visibility and contrast (Cyber Dark Theme)
+            h1 = page.locator("h1")
+            assert h1.is_visible()
+            body_bg = page.evaluate("window.getComputedStyle(document.body).backgroundColor")
+            h1_color = page.evaluate("window.getComputedStyle(document.querySelector('h1')).color")
+            sub_color = page.evaluate("window.getComputedStyle(document.querySelector('h1 + p')).color")
 
-                # Ensure class set properly
-                page.evaluate(f"""
-                    if ('{theme}' === 'light') {{
-                        document.documentElement.classList.remove('dark');
-                        document.documentElement.classList.add('light');
-                    }} else {{
-                        document.documentElement.classList.remove('light');
-                        document.documentElement.classList.add('dark');
-                    }}
-                """)
-                page.wait_for_timeout(300)
+            ratio_h1 = contrast_ratio(parse_rgb(h1_color), parse_rgb(body_bg))
+            ratio_sub = contrast_ratio(parse_rgb(sub_color), parse_rgb(body_bg))
 
-                # 1. Headline visibility and contrast
-                h1 = page.locator("h1")
-                assert h1.is_visible()
-                body_bg = page.evaluate("window.getComputedStyle(document.body).backgroundColor")
-                h1_color = page.evaluate("window.getComputedStyle(document.querySelector('h1')).color")
-                sub_color = page.evaluate("window.getComputedStyle(document.querySelector('h1 + p')).color")
+            assert ratio_h1 >= 3.0, f"Dark H1 contrast {ratio_h1:.2f} failed 3.0:1 requirement"
+            assert ratio_sub >= 4.5, f"Dark Subtitle contrast {ratio_sub:.2f} failed 4.5:1 requirement"
 
-                ratio_h1 = contrast_ratio(parse_rgb(h1_color), parse_rgb(body_bg))
-                ratio_sub = contrast_ratio(parse_rgb(sub_color), parse_rgb(body_bg))
+            # 2. Check that the theme toggle button has been removed
+            assert page.locator("button[aria-label*='light mode']").count() == 0, "Theme toggle button should be removed"
+            assert page.locator("button[aria-label*='dark mode']").count() == 0, "Theme toggle button should be removed"
+            assert page.locator("button:has(svg.lucide-sun)").count() == 0, "Sun icon should be removed"
+            assert page.locator("button:has(svg.lucide-moon)").count() == 0, "Moon icon should be removed"
 
-                assert ratio_h1 >= 3.0, f"{theme} H1 contrast {ratio_h1:.2f} failed 3.0:1 requirement"
-                assert ratio_sub >= 4.5, f"{theme} Subtitle contrast {ratio_sub:.2f} failed 4.5:1 requirement"
+            # 3. Check idle gauge state
+            assert page.locator("text=Waiting for input").first.is_visible()
+            assert page.locator("text=--").first.is_visible()
 
-                # 2. Check idle gauge state
-                assert page.locator("text=Waiting for input").first.is_visible()
-                assert page.locator("text=--").first.is_visible()
+            # 4. Check hero CTA buttons
+            assert page.locator("button:has-text('Check a message')").is_visible()
+            assert page.locator("button:has-text('How accurate is this?')").is_visible()
+            assert page.locator("div.pt-2 >> text=Why Not Just Use an LLM?").count() == 0
 
-                # 3. Check hero CTA buttons
-                assert page.locator("button:has-text('Check a message')").is_visible()
-                assert page.locator("button:has-text('How accurate is this?')").is_visible()
-                # Verify LLM button is NOT in hero
-                assert page.locator("div.pt-2 >> text=Why Not Just Use an LLM?").count() == 0
+            # 5. Check factual coverage list
+            assert page.locator("text=Multilingual NLP classifier").first.is_visible()
+            assert page.locator("text=7 Engines Active").count() == 0
 
-                # 4. Check factual coverage list
-                assert page.locator("text=Multilingual NLP classifier").first.is_visible()
-                assert page.locator("text=7 Engines Active").count() == 0
-
-                context.close()
-
+            context.close()
             browser.close()
     finally:
         server.shutdown()

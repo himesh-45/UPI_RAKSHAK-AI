@@ -158,16 +158,16 @@ export default function AnalyzerPage() {
           
           {/* Left Hero Content */}
           <div className="lg:col-span-7 space-y-4 text-left">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold tracking-wider bg-[#0E8F89]/10 text-[#0E8F89] border border-[#0E8F89]/30 dark:bg-teal/15 dark:text-teal dark:border-teal/40 shadow-xs">
-              <Sparkles className="w-3.5 h-3.5 text-[#0E8F89] dark:text-teal animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold tracking-wider bg-teal/15 text-teal border border-teal/40 shadow-xs">
+              <Sparkles className="w-3.5 h-3.5 text-teal animate-pulse" />
               <span>Evidence-based scam checks • English, हिन्दी, తెలుగు</span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#0B1530] dark:text-[#F5F1E6] leading-tight font-display">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-ink leading-tight font-display">
               Stop <span className="text-gold-highlight font-serif font-black">scams</span> before they strike.
             </h1>
 
-            <p className="text-sm sm:text-base text-[#4A5878] dark:text-[#A9B4CC] font-medium max-w-xl leading-relaxed">
+            <p className="text-sm sm:text-base text-ink-muted font-medium max-w-xl leading-relaxed">
               AI-powered fraud detection to keep you and your family safe online.
             </p>
 
@@ -189,9 +189,9 @@ export default function AnalyzerPage() {
               <button
                 type="button"
                 onClick={() => setHonestyModalOpen(true)}
-                className="text-xs font-semibold text-[#4A5878] hover:text-[#0E8F89] dark:text-[#A9B4CC] dark:hover:text-teal underline underline-offset-4 flex items-center gap-1.5 transition cursor-pointer"
+                className="text-xs font-semibold text-ink-muted hover:text-teal underline underline-offset-4 flex items-center gap-1.5 transition cursor-pointer"
               >
-                <HelpCircle className="w-3.5 h-3.5 text-[#0E8F89] dark:text-teal" />
+                <HelpCircle className="w-3.5 h-3.5 text-teal" />
                 <span>How accurate is this?</span>
               </button>
             </div>
@@ -206,14 +206,10 @@ export default function AnalyzerPage() {
               <div className="absolute w-44 h-44 rounded-full border border-gold-500/20 pointer-events-none" />
 
               {/* Original Vector SVG Shield Emblem */}
-              <div className="relative z-10 w-36 h-40 sm:w-40 sm:h-44 rounded-3xl bg-gradient-to-b from-white via-[#F8F5EE] to-[#EAE3D5] dark:from-navy-surface dark:via-navy dark:to-navy-deep backdrop-blur-md border-2 border-gold-500 shadow-[0_4px_25px_rgba(14,143,137,0.12)] dark:shadow-[0_0_35px_rgba(53,208,200,0.25)] flex flex-col items-center justify-center text-center p-4 group">
-                <svg className="w-16 h-16 sm:w-20 sm:h-20 drop-shadow-[0_0_18px_rgba(var(--teal-400-rgb),0.6)]" viewBox="0 0 64 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <div className="relative z-10 w-36 h-40 sm:w-40 sm:h-44 rounded-3xl bg-gradient-to-b from-navy-surface via-navy to-navy-deep backdrop-blur-md border-2 border-gold-500 shadow-[0_0_35px_rgba(53,208,200,0.25)] flex flex-col items-center justify-center text-center p-4 group">
+                <svg className="w-16 h-16 sm:w-20 sm:h-20 drop-shadow-[0_0_18px_rgba(53,208,200,0.6)]" viewBox="0 0 64 72" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <defs>
-                    <linearGradient id="shieldTealGradLight" x1="32" y1="4" x2="32" y2="68" gradientUnits="userSpaceOnUse">
-                      <stop stopColor="#0E8F89" stopOpacity="0.25" />
-                      <stop stopColor="#FAF7F0" stopOpacity="0.95" />
-                    </linearGradient>
-                    <linearGradient id="shieldTealGradDark" x1="32" y1="4" x2="32" y2="68" gradientUnits="userSpaceOnUse">
+                    <linearGradient id="shieldTealGrad" x1="32" y1="4" x2="32" y2="68" gradientUnits="userSpaceOnUse">
                       <stop stopColor="#35D0C8" stopOpacity="0.35" />
                       <stop stopColor="#0B1530" stopOpacity="0.85" />
                     </linearGradient>
@@ -224,26 +220,21 @@ export default function AnalyzerPage() {
                     </linearGradient>
                   </defs>
                   {/* Outer Protective Rim */}
-                  <path className="dark:hidden" d="M32 4L56 12V32C56 48 45.6 62.4 32 68C18.4 62.4 8 48 8 32V12L32 4Z" fill="url(#shieldTealGradLight)" stroke="url(#shieldGoldRim)" strokeWidth="3" strokeLinejoin="round" />
-                  <path className="hidden dark:block" d="M32 4L56 12V32C56 48 45.6 62.4 32 68C18.4 62.4 8 48 8 32V12L32 4Z" fill="url(#shieldTealGradDark)" stroke="url(#shieldGoldRim)" strokeWidth="3" strokeLinejoin="round" />
+                  <path d="M32 4L56 12V32C56 48 45.6 62.4 32 68C18.4 62.4 8 48 8 32V12L32 4Z" fill="url(#shieldTealGrad)" stroke="url(#shieldGoldRim)" strokeWidth="3" strokeLinejoin="round" />
                   {/* Inner Cyber Crest */}
-                  <path className="dark:hidden" d="M32 14L48 20V32C48 43.6 40.8 54 32 58C23.2 54 16 43.6 16 32V20L32 14Z" stroke="#0E8F89" strokeWidth="1.5" strokeOpacity="0.7" strokeDasharray="3 3" />
-                  <path className="hidden dark:block" d="M32 14L48 20V32C48 43.6 40.8 54 32 58C23.2 54 16 43.6 16 32V20L32 14Z" stroke="#35D0C8" strokeWidth="1.5" strokeOpacity="0.6" strokeDasharray="3 3" />
+                  <path d="M32 14L48 20V32C48 43.6 40.8 54 32 58C23.2 54 16 43.6 16 32V20L32 14Z" stroke="#35D0C8" strokeWidth="1.5" strokeOpacity="0.6" strokeDasharray="3 3" />
                   {/* Center Lock / Padlock */}
-                  <rect className="dark:hidden" x="24" y="32" width="16" height="13" rx="3" fill="#FAF7F0" stroke="#8A6410" strokeWidth="2" />
-                  <rect className="hidden dark:block" x="24" y="32" width="16" height="13" rx="3" fill="#050A18" stroke="#D9A441" strokeWidth="2" />
-                  <path className="dark:hidden" d="M27 32V27C27 24.2 29.2 22 32 22C34.8 22 37 24.2 37 27V32" stroke="#0E8F89" strokeWidth="2.2" strokeLinecap="round" />
-                  <path className="hidden dark:block" d="M27 32V27C27 24.2 29.2 22 32 22C34.8 22 37 24.2 37 27V32" stroke="#35D0C8" strokeWidth="2.2" strokeLinecap="round" />
-                  <circle className="dark:hidden" cx="32" cy="38" r="1.5" fill="#8A6410" />
-                  <circle className="hidden dark:block" cx="32" cy="38" r="1.5" fill="#F5C96A" />
+                  <rect x="24" y="32" width="16" height="13" rx="3" fill="#050A18" stroke="#D9A441" strokeWidth="2" />
+                  <path d="M27 32V27C27 24.2 29.2 22 32 22C34.8 22 37 24.2 37 27V32" stroke="#35D0C8" strokeWidth="2.2" strokeLinecap="round" />
+                  <circle cx="32" cy="38" r="1.5" fill="#F5C96A" />
                 </svg>
-                <div className="mt-2 px-2.5 py-0.5 rounded-full bg-white/95 text-[#8A6410] border border-[#8A6410]/40 shadow-xs dark:bg-navy/90 dark:text-gold-400 dark:border-gold-500/50 text-[10px] font-black uppercase tracking-wider">
+                <div className="mt-2 px-2.5 py-0.5 rounded-full bg-navy/90 border border-gold-500/50 text-[10px] font-black uppercase tracking-wider text-gold-400 shadow-xs">
                   EVIDENCE SHIELD
                 </div>
               </div>
 
               {/* Live Guard Status Pill (Bottom Left) */}
-              <div className="absolute -bottom-2 -left-2 px-3 py-1 rounded-full bg-white/95 text-[#0E8F89] border border-[#0E8F89]/40 shadow-md font-bold dark:bg-navy/95 dark:text-teal dark:border-teal/40 text-[11px] flex items-center gap-1.5">
+              <div className="absolute -bottom-2 -left-2 px-3 py-1 rounded-full bg-navy/95 border border-teal/40 text-[11px] font-bold text-teal shadow-xs flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-verdict-safe animate-pulse" />
                 <span>Statutory Guardrails</span>
               </div>

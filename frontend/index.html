@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -10,18 +10,10 @@
     <script>
       (function() {
         try {
-          var saved = localStorage.getItem('theme');
-          var isDark = saved ? (saved === 'dark') : true;
           var html = document.documentElement;
-          if (isDark) {
-            html.classList.add('dark');
-            html.classList.remove('light');
-          } else {
-            html.classList.remove('dark');
-            html.classList.add('light');
-            var meta = document.querySelector('meta[name="theme-color"]');
-            if (meta) meta.setAttribute('content', '#FAF7F0');
-          }
+          html.classList.add('dark');
+          html.classList.remove('light');
+          localStorage.setItem('theme', 'dark');
         } catch (e) {}
       })();
     </script>

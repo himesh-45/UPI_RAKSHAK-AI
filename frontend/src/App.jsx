@@ -20,29 +20,18 @@ function AppContent() {
     }
     return 'analyzer';
   });
-  const [darkMode, setDarkMode] = useState(() => {
-    const saved = localStorage.getItem('theme');
-    if (saved) return saved === 'dark';
-    return true; // Default to Cyber Dark Theme
-  });
   const [token, setToken] = useState(() => localStorage.getItem('upi_rakshak_token') || null);
   const [loginModalOpen, setLoginModalOpen] = useState(false);
   const [llmModalOpen, setLlmModalOpen] = useState(false);
 
+  // Enforce Cyber Dark Theme permanently across the entire application
   useEffect(() => {
+    document.documentElement.classList.add('dark');
+    document.documentElement.classList.remove('light');
+    localStorage.setItem('theme', 'dark');
     const meta = document.querySelector('meta[name="theme-color"]');
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-      document.documentElement.classList.remove('light');
-      localStorage.setItem('theme', 'dark');
-      if (meta) meta.setAttribute('content', '#050A18');
-    } else {
-      document.documentElement.classList.remove('dark');
-      document.documentElement.classList.add('light');
-      localStorage.setItem('theme', 'light');
-      if (meta) meta.setAttribute('content', '#FAF7F0');
-    }
-  }, [darkMode]);
+    if (meta) meta.setAttribute('content', '#050A18');
+  }, []);
 
   const handleLoginSuccess = (newToken) => {
     setToken(newToken);
@@ -59,8 +48,6 @@ function AppContent() {
       <Navbar
         activeTab={activeTab}
         setActiveTab={setActiveTab}
-        darkMode={darkMode}
-        setDarkMode={setDarkMode}
         token={token}
         onOpenLogin={() => setLoginModalOpen(true)}
         onLogout={handleLogout}

@@ -1,13 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Shield, Sparkles, BarChart3, HelpCircle, Sun, Moon, Lock, LogOut, BookOpen, Scale, QrCode, MoreHorizontal, ChevronDown, Zap } from 'lucide-react';
+import { Shield, Sparkles, BarChart3, HelpCircle, Lock, LogOut, BookOpen, Scale, QrCode, MoreHorizontal, ChevronDown, Zap } from 'lucide-react';
 import { useTranslation } from '../i18n/useTranslation';
 import AdminAlarmBell from './AdminAlarmBell';
 
 export default function Navbar({
   activeTab,
   setActiveTab,
-  darkMode,
-  setDarkMode,
   token,
   onOpenLogin,
   onLogout,
@@ -259,15 +257,6 @@ export default function Navbar({
                 తెలుగు
               </button>
             </div>
-
-            {/* Dark / Light Mode Toggle */}
-            <button
-              onClick={() => setDarkMode(!darkMode)}
-              aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
-              className="p-2 rounded-xl bg-navy-surface text-teal border border-border hover:border-teal/50 hover:bg-navy-raised transition"
-            >
-              {darkMode ? <Sun className="w-4 h-4 text-gold-400" /> : <Moon className="w-4 h-4 text-teal" />}
-            </button>
           </div>
         </div>
       </header>
