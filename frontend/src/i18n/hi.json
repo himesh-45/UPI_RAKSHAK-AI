@@ -49,7 +49,7 @@
     "disclaimer": "सहायक के उत्तर डिटेक्टर साक्ष्य और एनपीसीआई/आरबीआई दिशानिर्देशों पर आधारित हैं।"
   },
   "dashboard": {
-    "title": "धोखाधड़ी इंटेलिजेंस डैशबोर्ड",
+    "title": "धोखाधड़ी इनसाइट्स एवं थ्रेट इंटेलिजेंस (Insights)",
     "simulatedNotice": "सिम्युलेटेड डेमो डेटा – मूल्यांकन के लिए वास्तविक समय के साथ ऐतिहासिक डेटा शामिल है।",
     "totalAnalyses": "कुल विश्लेषण",
     "safeCount": "सुरक्षित परिणाम",
@@ -60,9 +60,9 @@
     "riskScoreDist": "जोखिम स्कोर वितरण",
     "recentHistory": "हालिया विश्लेषण इतिहास",
     "threatReports": "उपयोगकर्ता रिपोर्ट",
-    "filterLive": "लाइव डेटा",
-    "filterSimulated": "डेमो डेटा",
-    "filterAll": "सभी डेटा"
+    "filterLive": "केवल लाइव उपयोगकर्ता (Live users only)",
+    "filterSimulated": "सिम्युलेटेड डेमो डेटा (Simulated demo data)",
+    "filterAll": "सभी डेटा स्रोत"
   },
   "auth": {
     "adminLogin": "व्यवस्थापक लॉगिन",

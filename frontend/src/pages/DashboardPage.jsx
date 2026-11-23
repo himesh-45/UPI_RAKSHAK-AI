@@ -5,11 +5,10 @@ import {
 } from 'recharts';
 import {
   ShieldAlert, ShieldCheck, AlertTriangle, Activity,
-  Database, RefreshCw, Lock, Sparkles, Filter
+  Database, RefreshCw, Lock, Sparkles, Filter, Info, Shield, CheckCircle
 } from 'lucide-react';
 import { useTranslation } from '../i18n/useTranslation';
 import { getDashboardStats } from '../api/client';
-import AdminModerationPanel from '../components/AdminModerationPanel';
 
 export default function DashboardPage({ token, onOpenLogin }) {
   const { t } = useTranslation();
@@ -17,23 +16,51 @@ export default function DashboardPage({ token, onOpenLogin }) {
   const [scope, setScope] = useState('live'); // 'live' (default: Live users only), 'simulated', 'all'
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [lastUpdated, setLastUpdated] = useState(() => new Date().toLocaleTimeString());
 
-  const fetchStats = async (selectedScope) => {
-    setLoading(true);
+  const fetchStats = async (selectedScope, silent = false) => {
+    if (!silent) setLoading(true);
     setError('');
     try {
       const dataSrc = selectedScope === 'live' ? 'live_user' : (selectedScope === 'simulated' ? 'demo_seed' : 'all');
       const data = await getDashboardStats(selectedScope, dataSrc);
       setStats(data);
+      setLastUpdated(new Date().toLocaleTimeString());
     } catch (err) {
-      setError(err.message || 'Failed to load intelligence metrics');
+      if (!silent) setError(err.message || 'Failed to load intelligence metrics');
     } finally {
-      setLoading(false);
+      if (!silent) setLoading(false);
     }
   };
 
   useEffect(() => {
     fetchStats(scope);
+
+    // Live polling: refresh stats every 12 seconds when tab is visible
+    const interval = setInterval(() => {
+      if (typeof document !== 'undefined' && document.visibilityState === 'visible') {
+        fetchStats(scope, true);
+      }
+    }, 12000);
+
+    const handleVisibility = () => {
+      if (document.visibilityState === 'visible') {
+        fetchStats(scope, true);
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
+
+    // Event listener for immediate refresh after any scan finishes
+    const handleScanComplete = () => {
+      fetchStats(scope, true);
+    };
+    window.addEventListener('rakshak_scan_completed', handleScanComplete);
+
+    return () => {
+      clearInterval(interval);
+      document.removeEventListener('visibilitychange', handleVisibility);
+      window.removeEventListener('rakshak_scan_completed', handleScanComplete);
+    };
   }, [scope]);
 
   const COLORS = ['#D9A441', '#35D0C8', '#F5C96A', '#34D399', '#1FB5AD', '#FB923C', '#F43F5E'];
@@ -93,8 +120,8 @@ export default function DashboardPage({ token, onOpenLogin }) {
           </p>
         </div>
 
-        {/* Filter scope buttons */}
-        <div className="flex items-center gap-2">
+        {/* Filter scope buttons and Live Sync Indicator */}
+        <div className="flex flex-wrap items-center gap-2.5">
           <div className="flex items-center bg-navy p-1 rounded-xl border border-border text-xs font-bold">
             <button
               onClick={() => setScope('live')}
@@ -104,7 +131,7 @@ export default function DashboardPage({ token, onOpenLogin }) {
                   : 'text-ink-muted hover:text-ink'
               }`}
             >
-              Live users only
+              {t('dashboard.filterLive')}
             </button>
             <button
               onClick={() => setScope('simulated')}
@@ -114,7 +141,7 @@ export default function DashboardPage({ token, onOpenLogin }) {
                   : 'text-ink-muted hover:text-ink'
               }`}
             >
-              Demo Seed
+              {t('dashboard.filterSimulated')}
             </button>
             <button
               onClick={() => setScope('all')}
@@ -128,37 +155,53 @@ export default function DashboardPage({ token, onOpenLogin }) {
             </button>
           </div>
 
-          <button
-            onClick={() => fetchStats(scope)}
-            className="p-2 rounded-xl bg-navy text-ink-muted hover:text-teal hover:bg-navy-raised border border-border transition"
-          >
-            <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
-          </button>
+          <div className="flex items-center gap-2">
+            <span className="text-[11px] text-ink-faint font-mono hidden sm:inline">
+              Last updated {lastUpdated}
+            </span>
+            <button
+              onClick={() => fetchStats(scope)}
+              className="p-2 rounded-xl bg-navy text-ink-muted hover:text-teal hover:bg-navy-raised border border-border transition cursor-pointer"
+              title="Force Refresh Data"
+            >
+              <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin text-teal' : ''}`} />
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Admin Governance & Dispute Moderation Panel (Visible when Admin signed in or login prompt) */}
-      {token ? (
-        <AdminModerationPanel token={token} />
-      ) : (
-        <div className="p-4 rounded-2xl bg-navy-surface/90 border border-border flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs shadow-md">
-          <div className="flex items-center gap-2.5">
-            <Lock className="w-5 h-5 text-teal shrink-0" />
-            <div>
-              <span className="font-extrabold text-ink">Admin Dispute Moderation & Research Export:</span>{' '}
-              <span className="text-ink-muted">
-                Sign in as Admin to review community VPA reports, adjudicate merchant false positive appeals, and export study telemetry.
-              </span>
-            </div>
+      {/* Community Threat Alerts & Safety Tips Banner */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="p-4 rounded-2xl bg-navy-surface border border-teal/30 space-y-1 shadow-sm">
+          <div className="flex items-center gap-2 text-teal text-xs font-bold uppercase tracking-wider">
+            <Shield className="w-4 h-4 text-teal" />
+            <span>Rule #1: Receiving Money</span>
           </div>
-          <button
-            onClick={onOpenLogin}
-            className="btn-gold-primary px-3.5 py-1.5 rounded-xl text-xs uppercase tracking-wider shrink-0 transition"
-          >
-            Sign In as Admin
-          </button>
+          <p className="text-xs text-ink-muted leading-relaxed">
+            You <strong className="text-ink">NEVER need to enter your UPI PIN</strong> or scan a QR code to receive money. PIN entry always deducts money from your account.
+          </p>
         </div>
-      )}
+
+        <div className="p-4 rounded-2xl bg-navy-surface border border-gold-500/30 space-y-1 shadow-sm">
+          <div className="flex items-center gap-2 text-gold-400 text-xs font-bold uppercase tracking-wider">
+            <AlertTriangle className="w-4 h-4 text-gold-400" />
+            <span>Electricity & KYC Phishing</span>
+          </div>
+          <p className="text-xs text-ink-muted leading-relaxed">
+            Electricity boards and banks never threaten immediate disconnection via SMS or WhatsApp from personal 10-digit mobile numbers.
+          </p>
+        </div>
+
+        <div className="p-4 rounded-2xl bg-navy-surface border border-verdict-danger/30 space-y-1 shadow-sm">
+          <div className="flex items-center gap-2 text-verdict-danger text-xs font-bold uppercase tracking-wider">
+            <ShieldAlert className="w-4 h-4 text-verdict-danger" />
+            <span>"Digital Arrest" Extortion</span>
+          </div>
+          <p className="text-xs text-ink-muted leading-relaxed">
+            No police officer, judge, or CBI agent will ever place you under "video arrest" or ask you to transfer funds for "clearance verification".
+          </p>
+        </div>
+      </div>
 
       {/* KPI Cards Row */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">

@@ -323,4 +323,73 @@ export async function exportStudyCsv(token) {
   return res.blob();
 }
 
+export async function getAdminSystemInfo(token) {
+  const res = await fetch(`${BASE_URL}/admin/system-info`, {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  if (!res.ok) throw new Error('Failed to load admin system telemetry');
+  return res.json();
+}
+
+export async function getAdminReports(token, statusFilter = 'ALL') {
+  const res = await fetch(`${BASE_URL}/admin/reports?status_filter=${statusFilter}`, {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  if (!res.ok) throw new Error('Failed to load incident reports');
+  return res.json();
+}
+
+export async function updateAdminReportStatus(reportId, newStatus, token) {
+  const res = await fetch(`${BASE_URL}/admin/reports/${reportId}/status?status=${newStatus}`, {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  if (!res.ok) throw new Error('Failed to update report status');
+  return res.json();
+}
+
+export async function getAdminEntities(token) {
+  const res = await fetch(`${BASE_URL}/admin/entities`, {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  if (!res.ok) throw new Error('Failed to load flagged entities');
+  return res.json();
+}
+
+export async function addAdminEntity(entityType, entityValue, scamCategory, token) {
+  const res = await fetch(`${BASE_URL}/admin/entities?entity_type=${entityType}&entity_value=${encodeURIComponent(entityValue)}&scam_category=${scamCategory}`, {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  if (!res.ok) throw new Error('Failed to add community entity');
+  return res.json();
+}
+
+export async function deleteAdminEntity(entityId, token) {
+  const res = await fetch(`${BASE_URL}/admin/entities/${entityId}`, {
+    method: 'DELETE',
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  if (!res.ok) throw new Error('Failed to remove entity');
+  return res.json();
+}
+
+export async function export1930Incidents(format = 'csv', token) {
+  const res = await fetch(`${BASE_URL}/admin/export/1930?export_format=${format}`, {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  if (!res.ok) throw new Error('Failed to export 1930 incident dossier');
+  if (format === 'json') return res.json();
+  return res.blob();
+}
+
+export async function getAdminAuditLog(limit = 50, offset = 0, dataSource = 'all', token) {
+  const res = await fetch(`${BASE_URL}/admin/audit-log?limit=${limit}&offset=${offset}&data_source=${dataSource}`, {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  if (!res.ok) throw new Error('Failed to load admin audit log');
+  return res.json();
+}
+
+
 

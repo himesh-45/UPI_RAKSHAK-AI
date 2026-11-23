@@ -49,7 +49,7 @@
     "disclaimer": "సహాయకుడి సమాధానాలు డిటెక్టర్ ఆధారాలు మరియు NPCI మార్గదర్శకాలకు లోబడి ఉంటాయి."
   },
   "dashboard": {
-    "title": "ఫ్రాడ్ ఇంటెలిజెన్స్ డ్యాష్‌బోర్డ్",
+    "title": "స్కామ్ ఇన్‌సైట్స్ & థ్రెట్ ఇంటెలిజెన్స్ (Insights)",
     "simulatedNotice": "సిమ్యులేటెడ్ డెమో డేటా – పరిశీలన కోసం నిజమైన డేటాతో పాటు చారిత్రక డేటా చేర్చబడింది.",
     "totalAnalyses": "మొత్తం పరిశీలనలు",
     "safeCount": "సురక్షితమైనవి",
@@ -60,9 +60,9 @@
     "riskScoreDist": "రిస్క్ స్కోర్ పంపిణీ",
     "recentHistory": "ఇటీవలి విశ్లేషణల చరిత్ర",
     "threatReports": "యూజర్ రిపోర్టులు",
-    "filterLive": "లైవ్ డేటా",
-    "filterSimulated": "డెమో డేటా",
-    "filterAll": "అన్ని వివరాలు"
+    "filterLive": "లైవ్ యూజర్లు మాత్రమే (Live users only)",
+    "filterSimulated": "సిమ్యులేటెడ్ డెమో డేటా (Simulated demo data)",
+    "filterAll": "అన్ని డేటా వనరులు"
   },
   "auth": {
     "adminLogin": "అడ్మిన్ లాగిన్",

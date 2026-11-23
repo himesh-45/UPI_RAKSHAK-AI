@@ -1,7 +1,7 @@
 import json
 from collections import Counter, defaultdict
 import datetime
-from fastapi import APIRouter, Depends, Query
+from fastapi import APIRouter, Depends, Query, Response
 from sqlalchemy.orm import Session
 from sqlalchemy import desc
 from ..database import get_db
@@ -9,6 +9,11 @@ from ..models.db_models import AnalysisHistory, ThreatReport, Feedback, Communit
 from ..models.schemas import DashboardStatsResponse, AdminAlertsResponse, AdminAlertItem
 
 router = APIRouter(prefix="/dashboard", tags=["Admin Intelligence"])
+
+def set_no_cache_headers(response: Response):
+    response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "0"
 
 def format_time_ago(dt: datetime.datetime) -> str:
     if not dt:
@@ -30,6 +35,7 @@ def format_time_ago(dt: datetime.datetime) -> str:
 
 @router.get("/alerts", response_model=AdminAlertsResponse)
 def get_admin_alerts(
+    response: Response,
     limit: int = Query(30, ge=1, le=100),
     db: Session = Depends(get_db)
 ):
@@ -37,6 +43,7 @@ def get_admin_alerts(
     Fetches live admin incident and user feedback alerts for the Navbar alarm bell and moderation dashboard.
     Combines cases filed (ThreatReport), user feedback (Feedback), and community flags.
     """
+    set_no_cache_headers(response)
     limit_val = 30
     if isinstance(limit, int):
         limit_val = limit
@@ -127,10 +134,12 @@ def mark_admin_alerts_read(db: Session = Depends(get_db)):
 
 @router.get("/stats", response_model=DashboardStatsResponse)
 def get_dashboard_stats(
+    response: Response,
     scope: str = Query("all", pattern="^(all|live|simulated)$"),
     data_source: str = Query("live_user", pattern="^(all|live_user|demo_seed|test_traffic)$"),
     db: Session = Depends(get_db)
 ):
+    set_no_cache_headers(response)
     query = db.query(AnalysisHistory)
 
     # Prioritize data_source filtering (Phase 2 truthfulness)

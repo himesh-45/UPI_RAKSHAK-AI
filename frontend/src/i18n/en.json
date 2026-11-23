@@ -49,7 +49,7 @@
     "disclaimer": "Assistant answers are grounded strictly in detector evidence and official NPCI/RBI security guidelines."
   },
   "dashboard": {
-    "title": "Fraud Intelligence Dashboard",
+    "title": "Scam Insights & Threat Intelligence",
     "simulatedNotice": "SIMULATED DEMO DATA – Seeded historical patterns alongside live analyses for evaluation purposes.",
     "totalAnalyses": "Total Analyses",
     "safeCount": "Safe Verdicts",
@@ -60,9 +60,9 @@
     "riskScoreDist": "Risk Score Distribution",
     "recentHistory": "Recent Threat Analyses",
     "threatReports": "User Threat Reports",
-    "filterLive": "Live Real-Time Data",
-    "filterSimulated": "Simulated Seed Data",
-    "filterAll": "All Data"
+    "filterLive": "Live users only (default)",
+    "filterSimulated": "Simulated demo data",
+    "filterAll": "All data sources"
   },
   "auth": {
     "adminLogin": "Admin Login",

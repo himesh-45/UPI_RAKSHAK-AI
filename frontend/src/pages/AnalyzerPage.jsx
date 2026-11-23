@@ -128,6 +128,9 @@ export default function AnalyzerPage() {
         result = await analyzeImage(formData);
       }
       setReport(result);
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('rakshak_scan_completed', { detail: result }));
+      }
     } catch (err) {
       setError(err.message || 'Analysis failed. Please check inputs.');
     } finally {

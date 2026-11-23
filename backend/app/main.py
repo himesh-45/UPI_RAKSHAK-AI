@@ -70,7 +70,7 @@ def health_check():
         "timestamp": datetime.datetime.utcnow().isoformat() + "Z"
     }
 
-from .routes import analyze, assistant, report, dashboard, history, auth, study, reputation
+from .routes import analyze, assistant, report, dashboard, history, auth, study, reputation, admin
 from .channels.telegram import router as telegram_router
 from .database import get_db
 from fastapi import Depends
@@ -88,6 +88,7 @@ app.include_router(history.router, prefix=settings.API_PREFIX)
 app.include_router(auth.router, prefix=settings.API_PREFIX)
 app.include_router(study.router, prefix=settings.API_PREFIX)
 app.include_router(reputation.router, prefix=settings.API_PREFIX)
+app.include_router(admin.router, prefix=settings.API_PREFIX)
 app.include_router(telegram_router, prefix=settings.API_PREFIX)
 
 # Serve production frontend if frontend/dist exists

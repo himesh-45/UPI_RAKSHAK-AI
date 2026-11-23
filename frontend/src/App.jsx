@@ -7,6 +7,7 @@ import AboutPage from './pages/AboutPage';
 import StudyPage from './pages/StudyPage';
 import DigitalArrestPage from './pages/DigitalArrestPage';
 import JudgeTryPage from './pages/JudgeTryPage';
+import AdminPage from './pages/AdminPage';
 import LoginModal from './components/LoginModal';
 import LlmComparisonModal from './components/LlmComparisonModal';
 import { TranslationProvider } from './i18n/useTranslation';
@@ -17,6 +18,7 @@ function AppContent() {
       if (window.location.pathname === '/study') return 'study';
       if (window.location.pathname === '/arrest') return 'arrest';
       if (window.location.pathname === '/try') return 'try';
+      if (window.location.pathname === '/admin') return 'admin';
     }
     return 'analyzer';
   });
@@ -87,6 +89,9 @@ function AppContent() {
         {activeTab === 'study' && <StudyPage />}
         {activeTab === 'arrest' && <DigitalArrestPage />}
         {activeTab === 'try' && <JudgeTryPage />}
+        {activeTab === 'admin' && (
+          <AdminPage token={token} onOpenLogin={() => setLoginModalOpen(true)} />
+        )}
         {activeTab === 'about' && <AboutPage />}
       </main>
 
