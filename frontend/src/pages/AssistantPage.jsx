@@ -291,7 +291,7 @@ export default function AssistantPage() {
       {/* ------------------------------------------------------------- */}
       {/* 1. HEADER BAR                                                 */}
       {/* ------------------------------------------------------------- */}
-      <header className="flex items-center justify-between px-3 sm:px-4 py-2.5 bg-slate-900/90 border border-slate-800 rounded-2xl shadow-xl backdrop-blur-md mb-2">
+      <header className="flex items-center justify-between px-3 sm:px-4 py-2.5 bg-[#0F1D3A]/90 border border-[#1E3A5F] rounded-2xl shadow-xl backdrop-blur-md mb-2">
         <div className="flex items-center gap-3">
           <GuardianAvatar
             state={loading ? 'scanning' : guardianState}
@@ -301,15 +301,15 @@ export default function AssistantPage() {
           />
           <div>
             <div className="flex items-center gap-2">
-              <h1 className="text-sm sm:text-base font-bold text-slate-100 tracking-wide font-sans">
+              <h1 className="text-sm sm:text-base font-bold text-[#F5F1E6] tracking-wide font-sans">
                 Rakshak Assistant
               </h1>
-              <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+              <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-[#35D0C8]/15 text-[#35D0C8] border border-[#35D0C8]/30">
                 PROD
               </span>
             </div>
-            <p className="text-[11px] text-cyan-400 font-mono hidden sm:block">
-              {taglines[language] || taglines.en} • <span className="text-slate-400">{statusLines[language] || statusLines.en}</span>
+            <p className="text-[11px] text-[#35D0C8] font-mono hidden sm:block">
+              {taglines[language] || taglines.en} • <span className="text-[#A9B4CC]">{statusLines[language] || statusLines.en}</span>
             </p>
           </div>
         </div>
@@ -319,28 +319,28 @@ export default function AssistantPage() {
           {/* Secure Session Pill */}
           <button
             onClick={() => setAboutOpen(true)}
-            className="hidden md:flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-800 text-[11px] text-slate-300 border border-slate-700/60 transition-colors"
+            className="hidden md:flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#0B1530] hover:bg-[#14254B] text-[11px] text-[#A9B4CC] border border-[#1E3A5F] transition-colors"
             title="Privacy and data protection details"
           >
-            <Lock className="w-3 h-3 text-emerald-400" />
+            <Lock className="w-3 h-3 text-[#34D399]" />
             <span>Secure Session</span>
           </button>
 
           {/* Learn Red Flags Carousel Shortcut */}
           <button
             onClick={() => setLearnOpen(true)}
-            className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-cyan-950/40 hover:bg-cyan-900/40 text-[11px] text-cyan-300 border border-cyan-500/30 transition-colors font-medium"
+            className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#0B1530] hover:bg-[#14254B] text-[11px] text-[#F5C96A] border border-[#D9A441]/40 transition-colors font-medium"
           >
-            <BookOpen className="w-3.5 h-3.5" />
+            <BookOpen className="w-3.5 h-3.5 text-[#F5C96A]" />
             <span className="hidden sm:inline">Learn Scams</span>
           </button>
 
           {/* Language Switcher */}
-          <div className="flex items-center bg-slate-800/90 rounded-lg p-0.5 border border-slate-700">
+          <div className="flex items-center bg-[#0B1530] rounded-lg p-0.5 border border-[#1E3A5F]">
             <button
               onClick={() => setLanguage('en')}
               className={`px-2 py-0.5 text-xs font-semibold rounded ${
-                language === 'en' ? 'bg-cyan-500 text-slate-950 shadow-sm' : 'text-slate-400 hover:text-slate-200'
+                language === 'en' ? 'bg-[#D9A441] text-[#050A18] font-bold shadow-sm' : 'text-[#A9B4CC] hover:text-[#F5F1E6]'
               }`}
             >
               EN
@@ -348,7 +348,7 @@ export default function AssistantPage() {
             <button
               onClick={() => setLanguage('hi')}
               className={`px-2 py-0.5 text-xs font-semibold rounded ${
-                language === 'hi' ? 'bg-cyan-500 text-slate-950 shadow-sm' : 'text-slate-400 hover:text-slate-200'
+                language === 'hi' ? 'bg-[#D9A441] text-[#050A18] font-bold shadow-sm' : 'text-[#A9B4CC] hover:text-[#F5F1E6]'
               }`}
             >
               हिंदी
@@ -356,7 +356,7 @@ export default function AssistantPage() {
             <button
               onClick={() => setLanguage('te')}
               className={`px-2 py-0.5 text-xs font-semibold rounded ${
-                language === 'te' ? 'bg-cyan-500 text-slate-950 shadow-sm' : 'text-slate-400 hover:text-slate-200'
+                language === 'te' ? 'bg-[#D9A441] text-[#050A18] font-bold shadow-sm' : 'text-[#A9B4CC] hover:text-[#F5F1E6]'
               }`}
             >
               తెలుగు
@@ -403,7 +403,7 @@ export default function AssistantPage() {
         aria-live="polite"
         aria-atomic="false"
         role="log"
-        className={`flex-1 overflow-y-auto px-2 sm:px-3 py-3 space-y-4 rounded-2xl bg-slate-950/60 border border-slate-900/80 shadow-inner relative ${
+        className={`flex-1 overflow-y-auto px-2 sm:px-3 py-3 space-y-4 rounded-2xl bg-[#070E22]/90 border border-[#1E3A5F] shadow-inner relative ${
           isElderMode ? 'text-base sm:text-lg font-medium' : ''
         }`}
       >
@@ -411,10 +411,10 @@ export default function AssistantPage() {
         {messages.length === 0 && (
           <div className="max-w-xl mx-auto py-6 sm:py-8 flex flex-col items-center text-center animate-fadeIn select-none">
             <GuardianAvatar state="idle" size={96} className="mb-4" />
-            <h2 className="text-lg sm:text-xl font-bold text-slate-100 font-sans tracking-wide">
+            <h2 className="text-lg sm:text-xl font-bold text-[#F5F1E6] font-sans tracking-wide">
               {emptyHeaders[language] || emptyHeaders.en}
             </h2>
-            <p className="text-xs text-slate-400 mt-1.5 max-w-md font-mono">
+            <p className="text-xs text-[#A9B4CC] mt-1.5 max-w-md font-mono">
               Grounded guidance on 1930 reporting, bank freezing, and instant detection of suspicious UPI requests and links.
             </p>
 
@@ -425,14 +425,14 @@ export default function AssistantPage() {
                   setMode('analyze');
                   inputRef.current?.focus();
                 }}
-                className="p-3 bg-slate-900/90 hover:bg-slate-800/90 border border-slate-800 hover:border-cyan-500/40 rounded-xl cursor-pointer transition-all flex items-start gap-3 shadow-md"
+                className="p-3 bg-[#0F1D3A]/90 hover:bg-[#14254B] border border-[#1E3A5F] hover:border-[#35D0C8]/50 rounded-xl cursor-pointer transition-all flex items-start gap-3 shadow-md"
               >
-                <div className="p-2 rounded-lg bg-cyan-950/50 text-cyan-400 shrink-0">
+                <div className="p-2 rounded-lg bg-[#0B1530] text-[#35D0C8] shrink-0 border border-[#1E3A5F]">
                   <ShieldCheck className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-xs font-bold text-slate-200">Check a message or link</h3>
-                  <p className="text-[11px] text-slate-400 mt-0.5">Paste suspicious SMS, UPI ID, or URL</p>
+                  <h3 className="text-xs font-bold text-[#F5F1E6]">Check a message or link</h3>
+                  <p className="text-[11px] text-[#A9B4CC] mt-0.5">Paste suspicious SMS, UPI ID, or URL</p>
                 </div>
               </div>
 
@@ -444,14 +444,14 @@ export default function AssistantPage() {
                       : (language === 'te' ? "డబ్బులు పోయాయి ఏం చేయాలి?" : "I lost money to a scammer what should I do?")
                   )
                 }
-                className="p-3 bg-red-950/20 hover:bg-red-950/30 border border-red-500/30 rounded-xl cursor-pointer transition-all flex items-start gap-3 shadow-md"
+                className="p-3 bg-[#F43F5E]/10 hover:bg-[#F43F5E]/15 border border-[#F43F5E]/30 rounded-xl cursor-pointer transition-all flex items-start gap-3 shadow-md"
               >
-                <div className="p-2 rounded-lg bg-red-950/60 text-red-400 shrink-0">
+                <div className="p-2 rounded-lg bg-[#F43F5E]/20 text-[#F43F5E] shrink-0 border border-[#F43F5E]/30">
                   <PhoneCall className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-xs font-bold text-red-200">I lost money (Emergency)</h3>
-                  <p className="text-[11px] text-red-300/80 mt-0.5">Golden hour freezing & 1930 steps</p>
+                  <h3 className="text-xs font-bold text-[#FDA4AF]">I lost money (Emergency)</h3>
+                  <p className="text-[11px] text-[#FDA4AF]/80 mt-0.5">Golden hour freezing & 1930 steps</p>
                 </div>
               </div>
 
@@ -463,27 +463,27 @@ export default function AssistantPage() {
                       : (language === 'te' ? "1930 కు ఎలా ఫిర్యాదు చేయాలి?" : "How to report to 1930 helpline?")
                   )
                 }
-                className="p-3 bg-slate-900/90 hover:bg-slate-800/90 border border-slate-800 hover:border-cyan-500/40 rounded-xl cursor-pointer transition-all flex items-start gap-3 shadow-md"
+                className="p-3 bg-[#0F1D3A]/90 hover:bg-[#14254B] border border-[#1E3A5F] hover:border-[#35D0C8]/50 rounded-xl cursor-pointer transition-all flex items-start gap-3 shadow-md"
               >
-                <div className="p-2 rounded-lg bg-blue-950/50 text-blue-400 shrink-0">
+                <div className="p-2 rounded-lg bg-[#0B1530] text-[#F5C96A] shrink-0 border border-[#1E3A5F]">
                   <HelpCircle className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-xs font-bold text-slate-200">How to report to 1930</h3>
-                  <p className="text-[11px] text-slate-400 mt-0.5">Required documents & preparation</p>
+                  <h3 className="text-xs font-bold text-[#F5F1E6]">How to report to 1930</h3>
+                  <p className="text-[11px] text-[#A9B4CC] mt-0.5">Required documents & preparation</p>
                 </div>
               </div>
 
               <div
                 onClick={() => setLearnOpen(true)}
-                className="p-3 bg-slate-900/90 hover:bg-slate-800/90 border border-slate-800 hover:border-cyan-500/40 rounded-xl cursor-pointer transition-all flex items-start gap-3 shadow-md"
+                className="p-3 bg-[#0F1D3A]/90 hover:bg-[#14254B] border border-[#1E3A5F] hover:border-[#35D0C8]/50 rounded-xl cursor-pointer transition-all flex items-start gap-3 shadow-md"
               >
-                <div className="p-2 rounded-lg bg-indigo-950/50 text-indigo-400 shrink-0">
+                <div className="p-2 rounded-lg bg-[#0B1530] text-[#35D0C8] shrink-0 border border-[#1E3A5F]">
                   <BookOpen className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-xs font-bold text-slate-200">Learn common UPI scams</h3>
-                  <p className="text-[11px] text-slate-400 mt-0.5">5-card interactive red flag carousel</p>
+                  <h3 className="text-xs font-bold text-[#F5F1E6]">Learn common UPI scams</h3>
+                  <p className="text-[11px] text-[#A9B4CC] mt-0.5">5-card interactive red flag carousel</p>
                 </div>
               </div>
             </div>
@@ -520,7 +520,7 @@ export default function AssistantPage() {
                 {!isUser ? (
                   <GuardianAvatar state={avatarState} size={32} className="shrink-0 mt-1" />
                 ) : (
-                  <div className="w-8 h-8 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center shrink-0 mt-1 text-slate-300">
+                  <div className="w-8 h-8 rounded-full bg-[#14254B] border border-[#D9A441]/40 flex items-center justify-center shrink-0 mt-1 text-[#F5C96A]">
                     <User className="w-4 h-4" />
                   </div>
                 )}
@@ -529,8 +529,8 @@ export default function AssistantPage() {
                 <div
                   className={`p-3.5 rounded-2xl text-xs sm:text-sm leading-relaxed shadow-md ${
                     isUser
-                      ? 'bg-slate-900 border border-cyan-500/30 text-slate-100 rounded-tr-none'
-                      : 'bg-slate-900/90 border border-slate-800 text-slate-200 rounded-tl-none'
+                      ? 'bg-gradient-to-r from-[#14254B] to-[#1E3A5F] border border-[#D9A441]/40 text-[#F5F1E6] rounded-tr-none'
+                      : 'bg-[#0F1D3A]/90 border border-[#1E3A5F] border-l-2 border-l-[#35D0C8] text-[#F5F1E6] rounded-tl-none'
                   }`}
                 >
                   {/* Clean Markdown Rendering without raw hashes */}
@@ -591,12 +591,12 @@ export default function AssistantPage() {
 
                   {/* Action Buttons */}
                   {msg.action_buttons && msg.action_buttons.length > 0 && (
-                    <div className="mt-3 flex flex-wrap gap-2 pt-2 border-t border-slate-800/80">
+                    <div className="mt-3 flex flex-wrap gap-2 pt-2 border-t border-[#1E3A5F]">
                       {msg.action_buttons.map((btn, btnIdx) => (
                         <button
                           key={btnIdx}
                           onClick={() => handleActionClick(btn)}
-                          className="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium border border-slate-700 transition-colors flex items-center gap-1.5"
+                          className="px-2.5 py-1 rounded-lg bg-[#0B1530] hover:bg-[#14254B] text-[#F5F1E6] text-xs font-medium border border-[#1E3A5F] transition-colors flex items-center gap-1.5"
                         >
                           {btn.label}
                         </button>
@@ -605,7 +605,7 @@ export default function AssistantPage() {
                   )}
 
                   {/* Timestamp */}
-                  <div className="mt-2 text-[10px] text-slate-400 font-mono text-right">
+                  <div className="mt-2 text-[10px] text-[#7C89A6] font-mono text-right">
                     {msg.timestamp}
                   </div>
                 </div>
@@ -618,7 +618,7 @@ export default function AssistantPage() {
                     <button
                       key={chipIdx}
                       onClick={() => handleSend(chip)}
-                      className="px-2.5 py-1 rounded-full bg-slate-900/90 hover:bg-slate-800 text-cyan-300 hover:text-cyan-200 border border-cyan-500/30 text-[11px] font-medium transition-all shadow-sm"
+                      className="px-2.5 py-1 rounded-full bg-[#0B1530] hover:bg-[#14254B] text-[#35D0C8] hover:text-[#35D0C8] border border-[#35D0C8]/40 hover:border-[#35D0C8] text-[11px] font-medium transition-all shadow-sm"
                     >
                       {chip}
                     </button>
@@ -631,10 +631,10 @@ export default function AssistantPage() {
 
         {/* LOADING INDICATOR */}
         {loading && (
-          <div className="flex items-center gap-2.5 text-slate-400 animate-fadeIn">
+          <div className="flex items-center gap-2.5 text-[#A9B4CC] animate-fadeIn">
             <GuardianAvatar state="scanning" size={28} />
-            <div className="px-3 py-2 rounded-2xl bg-slate-900 border border-slate-800 text-xs font-mono text-cyan-400 flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
+            <div className="px-3 py-2 rounded-2xl bg-[#0B1530] border border-[#1E3A5F] text-xs font-mono text-[#35D0C8] flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-[#35D0C8] animate-ping" />
               <span>Rakshak is analyzing safety guidance...</span>
             </div>
           </div>
@@ -646,7 +646,7 @@ export default function AssistantPage() {
         {showScrollBottom && (
           <button
             onClick={() => scrollToBottom('smooth')}
-            className="sticky bottom-2 right-4 ml-auto p-2 rounded-full bg-cyan-500 text-slate-950 shadow-xl hover:bg-cyan-400 transition-all z-10 flex items-center justify-center animate-bounce"
+            className="sticky bottom-2 right-4 ml-auto p-2 rounded-full bg-[#D9A441] text-[#050A18] shadow-xl hover:bg-[#F5C96A] transition-all z-10 flex items-center justify-center animate-bounce"
             title="Scroll to bottom"
           >
             <ArrowDown className="w-4 h-4" />
@@ -664,7 +664,7 @@ export default function AssistantPage() {
             <button
               key={i}
               onClick={() => handleSend(chip)}
-              className="whitespace-nowrap px-2.5 py-1 rounded-full bg-slate-900/90 hover:bg-slate-800 text-slate-300 hover:text-cyan-300 border border-slate-800 hover:border-cyan-500/40 text-[11px] font-mono transition-all shrink-0"
+              className="whitespace-nowrap px-2.5 py-1 rounded-full bg-[#0F1D3A] hover:bg-[#14254B] text-[#A9B4CC] hover:text-[#F5C96A] border border-[#1E3A5F] hover:border-[#D9A441]/40 text-[11px] font-mono transition-all shrink-0"
             >
               {chip}
             </button>
@@ -673,11 +673,11 @@ export default function AssistantPage() {
 
         {/* Segmented Mode Switcher */}
         <div className="flex items-center justify-between px-1">
-          <div className="inline-flex bg-slate-900 rounded-lg p-0.5 border border-slate-800 text-xs">
+          <div className="inline-flex bg-[#0B1530] rounded-lg p-0.5 border border-[#1E3A5F] text-xs">
             <button
               onClick={() => setMode('help')}
               className={`px-3 py-1 rounded-md font-semibold transition-all ${
-                mode === 'help' ? 'bg-cyan-500 text-slate-950 shadow-sm' : 'text-slate-400 hover:text-slate-200'
+                mode === 'help' ? 'bg-[#D9A441] text-[#050A18] font-bold shadow-sm' : 'text-[#A9B4CC] hover:text-[#F5F1E6]'
               }`}
             >
               Ask a Question
@@ -685,7 +685,7 @@ export default function AssistantPage() {
             <button
               onClick={() => setMode('analyze')}
               className={`px-3 py-1 rounded-md font-semibold transition-all ${
-                mode === 'analyze' ? 'bg-cyan-500 text-slate-950 shadow-sm' : 'text-slate-400 hover:text-slate-200'
+                mode === 'analyze' ? 'bg-[#D9A441] text-[#050A18] font-bold shadow-sm' : 'text-[#A9B4CC] hover:text-[#F5F1E6]'
               }`}
             >
               Check a Message
@@ -695,7 +695,7 @@ export default function AssistantPage() {
           {/* Quick Paste Button */}
           <button
             onClick={handlePasteClipboard}
-            className="flex items-center gap-1 text-[11px] font-mono text-cyan-400 hover:text-cyan-300 transition-colors"
+            className="flex items-center gap-1 text-[11px] font-mono text-[#35D0C8] hover:text-[#35D0C8]/80 transition-colors"
             title="Paste suspicious text from clipboard"
           >
             <ClipboardPaste className="w-3.5 h-3.5" />
@@ -704,7 +704,7 @@ export default function AssistantPage() {
         </div>
 
         {/* Input Box */}
-        <div className="relative flex items-center gap-2 p-1.5 bg-slate-900/95 border border-cyan-500/30 rounded-2xl shadow-xl backdrop-blur-md">
+        <div className="relative flex items-center gap-2 p-1.5 bg-[#0F1D3A]/95 border border-[#1E3A5F] focus-within:border-[#35D0C8] rounded-2xl shadow-xl backdrop-blur-md">
           {/* File Attachment */}
           <input
             type="file"
@@ -715,7 +715,7 @@ export default function AssistantPage() {
           />
           <button
             onClick={() => fileInputRef.current?.click()}
-            className="p-2 text-slate-400 hover:text-cyan-400 hover:bg-slate-800 rounded-xl transition-colors"
+            className="p-2 text-[#A9B4CC] hover:text-[#35D0C8] hover:bg-[#14254B] rounded-xl transition-colors"
             title="Attach screenshot or message text"
           >
             <Paperclip className="w-4 h-4" />
@@ -738,7 +738,7 @@ export default function AssistantPage() {
                 ? (language === 'hi' ? 'सत्यापन के लिए कोई संदिग्ध संदेश, लिंक या यूपीआई आईडी यहाँ पेस्ट करें...' : 'Paste a suspicious message, link, or UPI ID to scan for fraud...')
                 : (language === 'hi' ? 'साइबर सुरक्षा या 1930 रिपोर्टिंग के बारे में कुछ भी पूछें...' : 'Ask how to report to 1930, block UPI, or recover lost funds...')
             }
-            className="flex-1 bg-transparent border-0 text-slate-100 text-xs sm:text-sm placeholder-slate-500 focus:outline-none focus:ring-0 resize-none py-1.5 max-h-32"
+            className="flex-1 bg-transparent border-0 text-[#F5F1E6] text-xs sm:text-sm placeholder-[#7C89A6] focus:outline-none focus:ring-0 resize-none py-1.5 max-h-32"
           />
 
           {/* Voice Input with Web Speech API */}
@@ -756,8 +756,8 @@ export default function AssistantPage() {
             disabled={!input.trim() || loading}
             className={`p-2.5 rounded-xl flex items-center justify-center transition-all ${
               input.trim() && !loading
-                ? 'bg-cyan-500 hover:bg-cyan-400 text-slate-950 shadow-lg shadow-cyan-500/30'
-                : 'bg-slate-800 text-slate-600 cursor-not-allowed'
+                ? 'bg-gradient-to-r from-[#D9A441] to-[#F5C96A] text-[#050A18] font-bold shadow-lg shadow-gold/30 hover:shadow-glow-gold'
+                : 'bg-[#0B1530] text-[#7C89A6] cursor-not-allowed'
             }`}
             aria-label="Send message"
           >

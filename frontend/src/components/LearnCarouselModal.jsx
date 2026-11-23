@@ -117,20 +117,20 @@ export default function LearnCarouselModal({ isOpen, onClose, language = 'en' })
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fadeIn">
-      <div className="relative w-full max-w-md bg-slate-900 border border-cyan-500/30 rounded-2xl shadow-2xl p-6 text-slate-100 overflow-hidden">
+      <div className="relative w-full max-w-md bg-[#0F1D3A] border border-[#1E3A5F] border-t-2 border-t-[#D9A441] rounded-2xl shadow-2xl p-6 text-[#F5F1E6] overflow-hidden">
         {/* Header */}
-        <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+        <div className="flex items-center justify-between pb-3 border-b border-[#1E3A5F]">
           <div className="flex items-center gap-2">
-            <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+            <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-[#0B1530] text-[#35D0C8] border border-[#1E3A5F]">
               {current.tag}
             </span>
-            <span className="text-xs font-mono text-slate-400">
+            <span className="text-xs font-mono text-[#A9B4CC]">
               {currentIndex + 1} of {slides.length}
             </span>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 text-slate-400 hover:text-slate-100 rounded-lg hover:bg-slate-800 transition-colors"
+            className="p-1.5 text-[#A9B4CC] hover:text-[#F5F1E6] rounded-lg hover:bg-[#14254B] transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -140,24 +140,24 @@ export default function LearnCarouselModal({ isOpen, onClose, language = 'en' })
         <div className="mt-4 min-h-[220px] flex flex-col justify-between">
           <div>
             <div className="flex items-center gap-3 mb-2">
-              <div className="p-2.5 rounded-xl bg-cyan-950/40 border border-cyan-500/30 text-cyan-400">
+              <div className="p-2.5 rounded-xl bg-[#0B1530] border border-[#1E3A5F] text-[#35D0C8]">
                 <Icon className="w-6 h-6" />
               </div>
-              <h3 className="text-sm font-bold text-slate-100 font-sans">
+              <h3 className="text-sm font-bold text-[#F5F1E6] font-sans">
                 {current.title[language] || current.title.en}
               </h3>
             </div>
 
-            <p className="text-xs text-slate-300 leading-relaxed mt-2.5">
+            <p className="text-xs text-[#A9B4CC] leading-relaxed mt-2.5">
               {current.summary[language] || current.summary.en}
             </p>
 
             {/* Red Flag Warning Box */}
-            <div className="mt-3 p-3 bg-red-950/25 border border-red-500/30 rounded-xl text-xs text-red-200">
-              <span className="font-bold font-mono text-[11px] text-red-400 block mb-0.5">
+            <div className="mt-3 p-3 bg-[#F43F5E]/15 border border-[#F43F5E]/40 rounded-xl text-xs text-[#FDA4AF]">
+              <span className="font-bold font-mono text-[11px] text-[#F43F5E] block mb-0.5">
                 ⚠️ RED FLAG TO SPOT:
               </span>
-              <p className="italic text-slate-300">
+              <p className="italic text-[#F5F1E6]">
                 {current.redFlag[language] || current.redFlag.en}
               </p>
             </div>
@@ -165,10 +165,10 @@ export default function LearnCarouselModal({ isOpen, onClose, language = 'en' })
         </div>
 
         {/* Carousel Navigation Footer */}
-        <div className="mt-5 pt-3 border-t border-slate-800 flex items-center justify-between">
+        <div className="mt-5 pt-3 border-t border-[#1E3A5F] flex items-center justify-between">
           <button
             onClick={prevSlide}
-            className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors flex items-center gap-1 text-xs"
+            className="p-2 rounded-lg bg-[#14254B] hover:bg-[#1E3A5F] text-[#F5F1E6] border border-[#1E3A5F] transition-colors flex items-center gap-1 text-xs"
           >
             <ChevronLeft className="w-4 h-4" /> Prev
           </button>
@@ -180,7 +180,7 @@ export default function LearnCarouselModal({ isOpen, onClose, language = 'en' })
                 key={i}
                 onClick={() => setCurrentIndex(i)}
                 className={`w-2 h-2 rounded-full cursor-pointer transition-all ${
-                  i === currentIndex ? 'w-5 bg-cyan-400' : 'bg-slate-700 hover:bg-slate-500'
+                  i === currentIndex ? 'w-5 bg-[#D9A441]' : 'bg-[#1E3A5F] hover:bg-[#A9B4CC]'
                 }`}
               />
             ))}
@@ -188,7 +188,7 @@ export default function LearnCarouselModal({ isOpen, onClose, language = 'en' })
 
           <button
             onClick={nextSlide}
-            className="p-2 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-bold transition-colors flex items-center gap-1 text-xs"
+            className="p-2 rounded-lg bg-gradient-to-r from-[#D9A441] to-[#F5C96A] text-[#050A18] font-bold shadow-md hover:shadow-glow-gold transition-all flex items-center gap-1 text-xs"
           >
             Next <ChevronRight className="w-4 h-4" />
           </button>

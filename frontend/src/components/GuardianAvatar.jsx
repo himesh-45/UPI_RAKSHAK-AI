@@ -19,46 +19,46 @@ export default function GuardianAvatar({
 }) {
   const isInteractive = typeof onClick === 'function';
 
-  // State-specific styling & colors
+  // State-specific styling & colors (Midnight Navy + Gold + Teal Shield theme)
   const stateConfig = {
     idle: {
-      primary: '#00e5ff',
-      secondary: '#06b6d4',
-      glow: 'rgba(0, 229, 255, 0.35)',
-      ringColor: '#0891b2',
-      badgeColor: '#00e5ff',
+      primary: '#35D0C8',
+      secondary: '#1FB5AD',
+      glow: 'rgba(53, 208, 200, 0.4)',
+      ringColor: '#1FB5AD',
+      badgeColor: '#35D0C8',
       badgeText: 'ONLINE'
     },
     listening: {
-      primary: '#38bdf8',
-      secondary: '#0284c7',
-      glow: 'rgba(56, 189, 248, 0.55)',
-      ringColor: '#38bdf8',
-      badgeColor: '#38bdf8',
+      primary: '#F5C96A',
+      secondary: '#D9A441',
+      glow: 'rgba(245, 201, 106, 0.45)',
+      ringColor: '#D9A441',
+      badgeColor: '#F5C96A',
       badgeText: 'LISTENING'
     },
     scanning: {
-      primary: '#22d3ee',
-      secondary: '#0891b2',
-      glow: 'rgba(34, 211, 238, 0.65)',
-      ringColor: '#06b6d4',
-      badgeColor: '#22d3ee',
+      primary: '#35D0C8',
+      secondary: '#D9A441',
+      glow: 'rgba(53, 208, 200, 0.55)',
+      ringColor: '#35D0C8',
+      badgeColor: '#35D0C8',
       badgeText: 'SCANNING'
     },
     safe: {
-      primary: '#10b981',
-      secondary: '#059669',
-      glow: 'rgba(16, 185, 129, 0.45)',
-      ringColor: '#10b981',
-      badgeColor: '#10b981',
+      primary: '#34D399',
+      secondary: '#10B981',
+      glow: 'rgba(52, 211, 153, 0.45)',
+      ringColor: '#34D399',
+      badgeColor: '#34D399',
       badgeText: 'VERIFIED SAFE'
     },
     alert: {
-      primary: '#ef4444',
-      secondary: '#dc2626',
-      glow: 'rgba(239, 68, 68, 0.55)',
-      ringColor: '#ef4444',
-      badgeColor: '#ef4444',
+      primary: '#F43F5E',
+      secondary: '#E11D48',
+      glow: 'rgba(244, 63, 94, 0.55)',
+      ringColor: '#F43F5E',
+      badgeColor: '#F43F5E',
       badgeText: 'THREAT ALERT'
     }
   };
@@ -96,9 +96,9 @@ export default function GuardianAvatar({
           {/* Definitions for Gradients and Filters */}
           <defs>
             <linearGradient id={`shieldGrad-${state}`} x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#0c162d" />
-              <stop offset="50%" stopColor="#0a0f1d" />
-              <stop offset="100%" stopColor="#050811" />
+              <stop offset="0%" stopColor="#0B1530" />
+              <stop offset="50%" stopColor="#070E22" />
+              <stop offset="100%" stopColor="#050A18" />
             </linearGradient>
 
             <linearGradient id={`accentGrad-${state}`} x1="0%" y1="0%" x2="100%" y2="100%">
@@ -109,8 +109,8 @@ export default function GuardianAvatar({
             {/* Rotating scanner beam */}
             {state === 'scanning' && (
               <linearGradient id="scanBeam" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="rgba(34, 211, 238, 0)" />
-                <stop offset="100%" stopColor="rgba(34, 211, 238, 0.45)" />
+                <stop offset="0%" stopColor="rgba(53, 208, 200, 0)" />
+                <stop offset="100%" stopColor="rgba(53, 208, 200, 0.45)" />
               </linearGradient>
             )}
           </defs>
@@ -155,7 +155,7 @@ export default function GuardianAvatar({
           {/* Center Dynamic Shield Emblem */}
           <path
             d="M50 22 C64 22 72 26 72 40 C72 62 50 78 50 78 C50 78 28 62 28 40 C28 26 36 22 50 22 Z"
-            fill="rgba(6, 182, 212, 0.08)"
+            fill="rgba(53, 208, 200, 0.08)"
             stroke={config.primary}
             strokeWidth={size >= 48 ? '2' : '1.5'}
             className="transition-all duration-300"

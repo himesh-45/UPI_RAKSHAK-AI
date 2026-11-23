@@ -27,23 +27,23 @@ export default function ScoreGauge({ score = 0, verdict = 'SAFE' }) {
     requestAnimationFrame(animate);
   }, [safeScore]);
 
-  // Cyber theme glowing palette & badges
-  let gradStart = '#06b6d4';
-  let gradEnd = '#10b981';
-  let pillStyle = 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40 shadow-[0_0_12px_rgba(16,185,129,0.3)]';
+  // Cyber theme glowing palette & badges (Strictly Midnight Navy + Gold/Teal with semantic verdict accents)
+  let gradStart = '#35D0C8';
+  let gradEnd = '#34D399';
+  let pillStyle = 'bg-[#34D399]/15 text-[#34D399] border-[#34D399]/40 shadow-[0_0_12px_rgba(52,211,153,0.25)]';
   let badgeText = 'Low Risk';
   let Icon = ShieldCheck;
 
   if (safeScore >= 70) {
-    gradStart = '#f59e0b';
-    gradEnd = '#ef4444';
-    pillStyle = 'bg-rose-500/20 text-rose-300 border-rose-500/50 shadow-[0_0_15px_rgba(239,68,68,0.4)]';
+    gradStart = '#FB923C';
+    gradEnd = '#F43F5E';
+    pillStyle = 'bg-[#F43F5E]/15 text-[#F43F5E] border-[#F43F5E]/40 shadow-[0_0_15px_rgba(244,63,94,0.3)]';
     badgeText = 'High Risk';
     Icon = ShieldAlert;
   } else if (safeScore >= 35) {
-    gradStart = '#facc15';
-    gradEnd = '#f59e0b';
-    pillStyle = 'bg-amber-500/20 text-amber-300 border-amber-500/50 shadow-[0_0_12px_rgba(245,158,11,0.35)]';
+    gradStart = '#F5C96A';
+    gradEnd = '#FB923C';
+    pillStyle = 'bg-[#FB923C]/15 text-[#FB923C] border-[#FB923C]/40 shadow-[0_0_12px_rgba(251,146,60,0.25)]';
     badgeText = 'Suspicious';
     Icon = AlertTriangle;
   }
@@ -53,7 +53,7 @@ export default function ScoreGauge({ score = 0, verdict = 'SAFE' }) {
   const strokeOffset = arcLength - (safeScore / 100) * arcLength;
 
   return (
-    <div className="flex flex-col items-center justify-center p-5 bg-[#0a0f26]/90 rounded-3xl border border-cyan-500/20 shadow-[0_0_20px_rgba(6,182,212,0.1)] shrink-0">
+    <div className="flex flex-col items-center justify-center p-5 bg-[#0B1530]/90 rounded-3xl border border-[#1E3A5F] shadow-[0_0_20px_rgba(5,10,24,0.5)] shrink-0">
       <div className="relative w-44 h-28 flex items-center justify-center">
         <svg className="w-full h-full overflow-visible" viewBox="0 0 160 100">
           <defs>
@@ -74,7 +74,7 @@ export default function ScoreGauge({ score = 0, verdict = 'SAFE' }) {
           <path
             d="M 22 88 A 58 58 0 0 1 138 88"
             fill="none"
-            stroke="#161f3d"
+            stroke="#101F3D"
             strokeWidth="11"
             strokeLinecap="round"
           />
@@ -96,10 +96,10 @@ export default function ScoreGauge({ score = 0, verdict = 'SAFE' }) {
         {/* Center Score with /100 */}
         <div className="absolute inset-0 flex flex-col items-center justify-end pb-1 text-center">
           <div className="flex items-baseline gap-1">
-            <span className="text-4xl font-black tracking-tight text-white font-mono drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]">
+            <span className="text-4xl font-black tracking-tight text-[#F5F1E6] font-mono drop-shadow-[0_0_10px_rgba(245,241,230,0.3)]">
               {displayScore}
             </span>
-            <span className="text-sm font-semibold text-slate-400">/100</span>
+            <span className="text-sm font-semibold text-[#A9B4CC]">/100</span>
           </div>
         </div>
       </div>

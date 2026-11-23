@@ -47,23 +47,23 @@ export default function AboutRakshakModal({ isOpen, onClose, language = 'en' }) 
   const text = content[language] || content.en;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fadeIn">
-      <div className="relative w-full max-w-lg bg-slate-900 border border-cyan-500/30 rounded-2xl shadow-2xl p-6 text-slate-100 overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#050A18]/80 backdrop-blur-md animate-fadeIn">
+      <div className="relative w-full max-w-lg bg-[#0F1D3A] border border-[#1E3A5F] border-t-2 border-t-[#D9A441] rounded-2xl shadow-2xl p-6 text-[#F5F1E6] overflow-hidden">
         {/* Ambient Top Glow */}
-        <div className="absolute -top-12 left-1/2 -translate-x-1/2 w-64 h-24 bg-cyan-500/15 rounded-full blur-2xl pointer-events-none" />
+        <div className="absolute -top-12 left-1/2 -translate-x-1/2 w-64 h-24 bg-[#35D0C8]/15 rounded-full blur-2xl pointer-events-none" />
 
         {/* Header */}
-        <div className="flex items-start justify-between pb-4 border-b border-slate-800">
+        <div className="flex items-start justify-between pb-4 border-b border-[#1E3A5F]">
           <div className="flex items-center gap-3">
             <GuardianAvatar state="idle" size={42} />
             <div>
-              <h2 className="text-lg font-bold text-slate-100 font-sans tracking-wide">{text.title}</h2>
-              <p className="text-xs text-cyan-400 font-mono">{text.subtitle}</p>
+              <h2 className="text-lg font-bold text-[#F5F1E6] font-sans tracking-wide">{text.title}</h2>
+              <p className="text-xs text-[#35D0C8] font-mono">{text.subtitle}</p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 text-slate-400 hover:text-slate-100 rounded-lg hover:bg-slate-800 transition-colors"
+            className="p-1.5 text-[#A9B4CC] hover:text-[#F5F1E6] rounded-lg hover:bg-[#14254B] transition-colors"
             aria-label={text.close}
           >
             <X className="w-5 h-5" />
@@ -72,65 +72,65 @@ export default function AboutRakshakModal({ isOpen, onClose, language = 'en' }) 
 
         {/* Body Pillars */}
         <div className="mt-4 space-y-3.5 text-xs">
-          <div className="p-3 bg-slate-800/60 rounded-xl border border-slate-700/60 flex items-start gap-3">
-            <ShieldCheck className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+          <div className="p-3 bg-[#0B1530] rounded-xl border border-[#1E3A5F] flex items-start gap-3">
+            <ShieldCheck className="w-5 h-5 text-[#34D399] shrink-0 mt-0.5" />
             <div>
-              <h3 className="font-semibold text-slate-200">{text.purityTitle}</h3>
-              <p className="text-slate-400 mt-0.5 leading-relaxed">{text.purityDesc}</p>
+              <h3 className="font-semibold text-[#F5F1E6]">{text.purityTitle}</h3>
+              <p className="text-[#A9B4CC] mt-0.5 leading-relaxed">{text.purityDesc}</p>
             </div>
           </div>
 
-          <div className="p-3 bg-slate-800/60 rounded-xl border border-slate-700/60 flex items-start gap-3">
-            <EyeOff className="w-5 h-5 text-cyan-400 shrink-0 mt-0.5" />
+          <div className="p-3 bg-[#0B1530] rounded-xl border border-[#1E3A5F] flex items-start gap-3">
+            <EyeOff className="w-5 h-5 text-[#35D0C8] shrink-0 mt-0.5" />
             <div>
-              <h3 className="font-semibold text-slate-200">{text.privacyTitle}</h3>
-              <p className="text-slate-400 mt-0.5 leading-relaxed">{text.privacyDesc}</p>
+              <h3 className="font-semibold text-[#F5F1E6]">{text.privacyTitle}</h3>
+              <p className="text-[#A9B4CC] mt-0.5 leading-relaxed">{text.privacyDesc}</p>
             </div>
           </div>
 
-          <div className="p-3 bg-slate-800/60 rounded-xl border border-slate-700/60 flex items-start gap-3">
-            <BookOpen className="w-5 h-5 text-indigo-400 shrink-0 mt-0.5" />
+          <div className="p-3 bg-[#0B1530] rounded-xl border border-[#1E3A5F] flex items-start gap-3">
+            <BookOpen className="w-5 h-5 text-[#F5C96A] shrink-0 mt-0.5" />
             <div>
-              <h3 className="font-semibold text-slate-200">{text.groundingTitle}</h3>
-              <p className="text-slate-400 mt-0.5 leading-relaxed">{text.groundingDesc}</p>
+              <h3 className="font-semibold text-[#F5F1E6]">{text.groundingTitle}</h3>
+              <p className="text-[#A9B4CC] mt-0.5 leading-relaxed">{text.groundingDesc}</p>
             </div>
           </div>
 
           {/* States Gallery */}
           <div className="pt-2">
-            <h4 className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 font-mono">
+            <h4 className="text-xs font-semibold text-[#A9B4CC] uppercase tracking-wider mb-2 font-mono">
               {text.statesTitle}
             </h4>
             <div className="grid grid-cols-5 gap-2 text-center">
-              <div className="p-2 bg-slate-800/40 rounded-lg border border-slate-800 flex flex-col items-center">
+              <div className="p-2 bg-[#0B1530] rounded-lg border border-[#1E3A5F] flex flex-col items-center">
                 <GuardianAvatar state="idle" size={28} />
-                <span className="text-[10px] mt-1 text-slate-400 font-mono">Idle</span>
+                <span className="text-[10px] mt-1 text-[#A9B4CC] font-mono">Idle</span>
               </div>
-              <div className="p-2 bg-slate-800/40 rounded-lg border border-slate-800 flex flex-col items-center">
+              <div className="p-2 bg-[#0B1530] rounded-lg border border-[#1E3A5F] flex flex-col items-center">
                 <GuardianAvatar state="listening" size={28} />
-                <span className="text-[10px] mt-1 text-cyan-400 font-mono">Listening</span>
+                <span className="text-[10px] mt-1 text-[#F5C96A] font-mono">Listening</span>
               </div>
-              <div className="p-2 bg-slate-800/40 rounded-lg border border-slate-800 flex flex-col items-center">
+              <div className="p-2 bg-[#0B1530] rounded-lg border border-[#1E3A5F] flex flex-col items-center">
                 <GuardianAvatar state="scanning" size={28} />
-                <span className="text-[10px] mt-1 text-blue-400 font-mono">Scanning</span>
+                <span className="text-[10px] mt-1 text-[#35D0C8] font-mono">Scanning</span>
               </div>
-              <div className="p-2 bg-slate-800/40 rounded-lg border border-slate-800 flex flex-col items-center">
+              <div className="p-2 bg-[#0B1530] rounded-lg border border-[#1E3A5F] flex flex-col items-center">
                 <GuardianAvatar state="safe" size={28} />
-                <span className="text-[10px] mt-1 text-emerald-400 font-mono">Safe</span>
+                <span className="text-[10px] mt-1 text-[#34D399] font-mono">Safe</span>
               </div>
-              <div className="p-2 bg-slate-800/40 rounded-lg border border-slate-800 flex flex-col items-center">
+              <div className="p-2 bg-[#0B1530] rounded-lg border border-[#1E3A5F] flex flex-col items-center">
                 <GuardianAvatar state="alert" size={28} />
-                <span className="text-[10px] mt-1 text-red-400 font-mono">Alert</span>
+                <span className="text-[10px] mt-1 text-[#F43F5E] font-mono">Alert</span>
               </div>
             </div>
           </div>
         </div>
 
         {/* Footer */}
-        <div className="mt-5 pt-3 border-t border-slate-800 flex justify-end">
+        <div className="mt-5 pt-3 border-t border-[#1E3A5F] flex justify-end">
           <button
             onClick={onClose}
-            className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-lg transition-colors border border-slate-700"
+            className="px-4 py-2 bg-[#14254B] hover:bg-[#1E3A5F] text-[#F5F1E6] text-xs font-semibold rounded-lg transition-colors border border-[#1E3A5F]"
           >
             {text.close}
           </button>

@@ -4,7 +4,7 @@ import { AlertCircle, CheckCircle2, ShieldAlert, Cpu, Globe, QrCode, FileText, U
 export default function EvidenceList({ evidence = [] }) {
   if (!evidence || evidence.length === 0) {
     return (
-      <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 text-sm text-slate-500">
+      <div className="p-4 rounded-xl bg-[#0B1530] border border-[#1E3A5F] text-sm text-[#A9B4CC]">
         No specific detection signals flagged.
       </div>
     );
@@ -24,15 +24,15 @@ export default function EvidenceList({ evidence = [] }) {
   const getSeverityStyle = (sev) => {
     switch (sev) {
       case 'CRITICAL':
-        return 'bg-rose-100 text-rose-800 dark:bg-rose-900/40 dark:text-rose-300 border-rose-300 dark:border-rose-800';
+        return 'bg-[#F43F5E]/15 text-[#F43F5E] border-[#F43F5E]/40';
       case 'HIGH':
-        return 'bg-orange-100 text-orange-800 dark:bg-orange-900/40 dark:text-orange-300 border-orange-300 dark:border-orange-800';
+        return 'bg-[#FB923C]/15 text-[#FB923C] border-[#FB923C]/40';
       case 'MEDIUM':
-        return 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300 border-amber-300 dark:border-amber-800';
+        return 'bg-[#F5C96A]/15 text-[#F5C96A] border-[#D9A441]/40';
       case 'INFO':
-        return 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300 border-emerald-300 dark:border-emerald-800';
+        return 'bg-[#34D399]/15 text-[#34D399] border-[#34D399]/40';
       default:
-        return 'bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-300 border-slate-300 dark:border-slate-700';
+        return 'bg-[#0B1530] text-[#A9B4CC] border-[#1E3A5F]';
     }
   };
 
@@ -41,16 +41,16 @@ export default function EvidenceList({ evidence = [] }) {
       {evidence.map((item, idx) => (
         <div
           key={idx}
-          className="p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+          className="p-3.5 rounded-xl bg-[#0F1D3A]/90 border border-[#1E3A5F] hover:border-[#35D0C8]/40 transition-colors shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3"
         >
           <div className="flex items-start gap-3 flex-1">
-            <span className="mt-0.5 text-slate-400 font-mono text-xs">#{idx + 1}</span>
+            <span className="mt-0.5 text-[#7C89A6] font-mono text-xs">#{idx + 1}</span>
             <div>
-              <p className="text-sm font-medium text-slate-900 dark:text-slate-100 leading-snug">
+              <p className="text-sm font-medium text-[#F5F1E6] leading-snug">
                 {item.signal}
               </p>
               <div className="mt-1.5 flex items-center gap-2 flex-wrap">
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-semibold bg-[#0B1530] text-[#A9B4CC] border border-[#1E3A5F]">
                   {getSourceIcon(item.source_module)}
                   {item.source_module.replace('_', ' ')}
                 </span>
@@ -62,7 +62,7 @@ export default function EvidenceList({ evidence = [] }) {
           </div>
 
           <div className="text-right sm:self-center font-mono text-xs font-semibold shrink-0">
-            <span className={item.weight > 0 ? 'text-rose-600 dark:text-rose-400' : 'text-emerald-600 dark:text-emerald-400'}>
+            <span className={item.weight > 0 ? 'text-[#F43F5E]' : 'text-[#34D399]'}>
               {item.weight > 0 ? `+${item.weight}` : item.weight} pts
             </span>
           </div>

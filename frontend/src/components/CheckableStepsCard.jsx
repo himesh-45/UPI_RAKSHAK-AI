@@ -37,12 +37,12 @@ export default function CheckableStepsCard({ steps = [], language = 'en', messag
   if (!steps || steps.length === 0) return null;
 
   return (
-    <div className="mt-3 p-3.5 bg-slate-900/90 border border-cyan-500/25 rounded-xl shadow-lg text-slate-100">
-      <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-800">
-        <span className="text-xs font-bold text-cyan-400 font-sans tracking-wide uppercase">
+    <div className="mt-3 p-3.5 bg-[#0F1D3A]/95 border border-[#1E3A5F] rounded-xl shadow-lg text-[#F5F1E6]">
+      <div className="flex items-center justify-between pb-2 mb-2 border-b border-[#1E3A5F]">
+        <span className="text-xs font-bold text-[#35D0C8] font-sans tracking-wide uppercase">
           {l.header}
         </span>
-        <span className="text-[11px] font-mono text-slate-400">
+        <span className="text-[11px] font-mono text-[#A9B4CC]">
           {l.progress}
         </span>
       </div>
@@ -59,24 +59,24 @@ export default function CheckableStepsCard({ steps = [], language = 'en', messag
               onClick={() => toggleStep(idx)}
               className={`flex items-start gap-2.5 p-2 rounded-lg cursor-pointer transition-all border ${
                 isDone
-                  ? 'bg-emerald-950/20 border-emerald-500/30 text-slate-300'
-                  : 'bg-slate-800/50 hover:bg-slate-800 border-slate-700/60 text-slate-100'
+                  ? 'bg-[#34D399]/10 border-[#34D399]/30 text-[#A9B4CC]'
+                  : 'bg-[#0B1530] hover:bg-[#14254B] border-[#1E3A5F] text-[#F5F1E6]'
               }`}
             >
               <button
                 type="button"
-                className="mt-0.5 shrink-0 text-slate-400 hover:text-cyan-400 transition-colors"
+                className="mt-0.5 shrink-0 text-[#7C89A6] hover:text-[#35D0C8] transition-colors"
                 aria-label={isDone ? "Mark incomplete" : "Mark complete"}
               >
                 {isDone ? (
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                  <CheckCircle2 className="w-4 h-4 text-[#34D399]" />
                 ) : (
-                  <Circle className="w-4 h-4 text-slate-500" />
+                  <Circle className="w-4 h-4 text-[#7C89A6]" />
                 )}
               </button>
 
               <div className="flex-1 text-xs leading-relaxed">
-                <span className={isDone ? 'line-through text-slate-400' : 'text-slate-200'}>
+                <span className={isDone ? 'line-through text-[#A9B4CC]' : 'text-[#F5F1E6]'}>
                   {step}
                 </span>
 
@@ -85,7 +85,7 @@ export default function CheckableStepsCard({ steps = [], language = 'en', messag
                   {isPhoneStep && (
                     <a
                       href="tel:1930"
-                      className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-medium bg-red-500/20 text-red-300 hover:bg-red-500/30 border border-red-500/30 transition-colors"
+                      className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-medium bg-[#F43F5E]/15 text-[#F43F5E] hover:bg-[#F43F5E]/25 border border-[#F43F5E]/30 transition-colors"
                     >
                       <PhoneCall className="w-3 h-3" /> Dial 1930
                     </a>
@@ -95,7 +95,7 @@ export default function CheckableStepsCard({ steps = [], language = 'en', messag
                       href="https://cybercrime.gov.in"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-medium bg-cyan-500/20 text-cyan-300 hover:bg-cyan-500/30 border border-cyan-500/30 transition-colors"
+                      className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-medium bg-[#35D0C8]/15 text-[#35D0C8] hover:bg-[#35D0C8]/25 border border-[#35D0C8]/30 transition-colors"
                     >
                       <ExternalLink className="w-3 h-3" /> cybercrime.gov.in
                     </a>
@@ -108,7 +108,7 @@ export default function CheckableStepsCard({ steps = [], language = 'en', messag
       </div>
 
       {allDone && (
-        <div className="mt-2.5 p-2 bg-emerald-950/30 border border-emerald-500/40 rounded-lg text-center text-xs text-emerald-300 font-medium animate-fadeIn">
+        <div className="mt-2.5 p-2 bg-[#34D399]/15 border border-[#34D399]/40 rounded-lg text-center text-xs text-[#A7F3D0] font-medium animate-fadeIn">
           {l.allDone}
         </div>
       )}
