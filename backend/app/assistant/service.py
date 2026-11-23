@@ -35,6 +35,7 @@ from .templates import (
     format_threat_analysis_response,
     format_out_of_scope_response
 )
+from .generator import answer_generator
 
 class AssistantService:
     """
@@ -62,22 +63,24 @@ class AssistantService:
             citations = retrieve_kb(message, language=effective_lang, top_k=2)
 
             # Strict low-confidence check: if retrieval score < 0.16, never hallucinate
-            if not citations or citations[0].get("relevance_score", 0.0) < 0.16:
-                reply_text = format_low_confidence_fallback(effective_lang)
-                rag_citations = []
-                actions = ["Call 1930 Cyber Helpline", "Visit cybercrime.gov.in"]
-            else:
-                top_chunk = citations[0]
-                reply_text = format_how_to_response(top_chunk, effective_lang)
-                rag_citations = [
-                    RAGCitation(
-                        title=c["title"],
-                        content=c["content"],
-                        source=c["source"],
-                        actionable_guidance=c.get("actionable_guidance", "")
-                    ) for c in citations
-                ]
-                actions = top_chunk.get("steps", [])
+            valid_citations = citations if (citations and citations[0].get("relevance_score", 0.0) >= 0.16) else []
+
+            reply_text, actions = answer_generator.generate(
+                intent="HELP",
+                user_message=message,
+                citations=valid_citations,
+                language=effective_lang,
+                history=req.history
+            )
+
+            rag_citations = [
+                RAGCitation(
+                    title=c["title"],
+                    content=c["content"],
+                    source=c["source"],
+                    actionable_guidance=c.get("actionable_guidance", "")
+                ) for c in valid_citations
+            ]
 
             quick_replies = [
                 "What should I prepare?",
@@ -117,7 +120,13 @@ class AssistantService:
         # CASE 2: EMERGENCY (Money Lost / Active Fraud)
         # ----------------------------------------------------------------------
         elif intent == INTENT_EMERGENCY:
-            reply_text = format_emergency_response(effective_lang)
+            reply_text, actions = answer_generator.generate(
+                intent="EMERGENCY",
+                user_message=message,
+                citations=[],
+                language=effective_lang,
+                history=req.history
+            )
             citations = retrieve_kb("lost money golden hour 1930 helpline freeze bank account", language=effective_lang, top_k=1)
             rag_citations = [
                 RAGCitation(

@@ -104,6 +104,14 @@ class Settings(BaseSettings):
     # Optional Speech-To-Text for channel voice notes
     ENABLE_OFFLINE_STT: bool = os.getenv("ENABLE_OFFLINE_STT", "false").lower() == "true"
 
+    # Conversational Assistant Brain settings
+    ASSISTANT_BACKEND: str = os.getenv("ASSISTANT_BACKEND", "template")
+    ASSISTANT_PROVIDER: str = os.getenv("ASSISTANT_PROVIDER", "anthropic")
+    ASSISTANT_MODEL: str = os.getenv("ASSISTANT_MODEL", "claude-3-5-haiku-20241022")
+    ASSISTANT_DAILY_CAP: int = int(os.getenv("ASSISTANT_DAILY_CAP", "1000"))
+    ASSISTANT_TIMEOUT_SECONDS: int = int(os.getenv("ASSISTANT_TIMEOUT_SECONDS", "15"))
+    OLLAMA_BASE_URL: str = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
+
     # Model architecture selection: Classical TF-IDF Ensemble (default) vs Fine-Tuned Transformer
     USE_TRANSFORMER_NLP: bool = os.getenv("USE_TRANSFORMER_NLP", "false").lower() == "true"
     TRANSFORMER_MODEL_PATH: str = os.getenv("TRANSFORMER_MODEL_PATH", "backend/app/data/indic_transformer_model")
