@@ -28,6 +28,7 @@ import CheckableStepsCard from '../components/CheckableStepsCard';
 import EmergencyPlaybookCard from '../components/EmergencyPlaybookCard';
 import CitationCard from '../components/CitationCard';
 import SecurityTipCard from '../components/SecurityTipCard';
+import FamilyElderMode from '../components/FamilyElderMode';
 import { chatAssistant } from '../api/client';
 
 export default function AssistantPage() {
@@ -40,6 +41,7 @@ export default function AssistantPage() {
   const [loading, setLoading] = useState(false);
   const [guardianState, setGuardianState] = useState('idle');
   const [showScrollBottom, setShowScrollBottom] = useState(false);
+  const [isElderMode, setIsElderMode] = useState(false);
 
   // Modals
   const [aboutOpen, setAboutOpen] = useState(false);
@@ -51,6 +53,33 @@ export default function AssistantPage() {
   const chatContainerRef = useRef(null);
   const inputRef = useRef(null);
   const fileInputRef = useRef(null);
+
+  // Global Keyboard Shortcuts (Ctrl+K, Escape, Alt+1/2/3)
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        inputRef.current?.focus();
+      }
+      if (e.key === 'Escape') {
+        setAboutOpen(false);
+        setLearnOpen(false);
+        setPrefilledModalOpen(false);
+      }
+      if (e.altKey && e.key === '1') {
+        e.preventDefault();
+        setLanguage('en');
+      } else if (e.altKey && e.key === '2') {
+        e.preventDefault();
+        setLanguage('hi');
+      } else if (e.altKey && e.key === '3') {
+        e.preventDefault();
+        setLanguage('te');
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [setLanguage]);
 
   const taglines = {
     en: "Your AI Digital Guardian",
@@ -336,13 +365,47 @@ export default function AssistantPage() {
         </div>
       </header>
 
+      {/* Elder Mode Accessibility & Read-Aloud Bar */}
+      <div className="mb-2">
+        <FamilyElderMode
+          isElderMode={isElderMode}
+          setIsElderMode={setIsElderMode}
+          language={language}
+          onCheckMessage={() => {
+            setMode('analyze');
+            inputRef.current?.focus();
+          }}
+          onEmergency={() =>
+            handleSend(
+              language === 'hi'
+                ? "पैसे कट गए क्या करें?"
+                : (language === 'te' ? "డబ్బులు పోయాయి ఏం చేయాలి?" : "I lost money to a scammer")
+            )
+          }
+          onHelp={() =>
+            handleSend(
+              language === 'hi'
+                ? "1930 पर शिकायत कैसे करें?"
+                : (language === 'te' ? "1930 కు ఎలా ఫిర్యాదు చేయాలి?" : "How to report to 1930 helpline?")
+            )
+          }
+          activeVerdict={messages.filter(m => m.sender === 'assistant' && m.verdict).slice(-1)[0]?.verdict}
+          activeAdvice={messages.filter(m => m.sender === 'assistant' && m.text).slice(-1)[0]?.text?.slice(0, 180)}
+        />
+      </div>
+
       {/* ------------------------------------------------------------- */}
       {/* 2. CHAT MESSAGES CONTAINER                                    */}
       {/* ------------------------------------------------------------- */}
       <div
         ref={chatContainerRef}
         onScroll={handleScroll}
-        className="flex-1 overflow-y-auto px-2 sm:px-3 py-3 space-y-4 rounded-2xl bg-slate-950/60 border border-slate-900/80 shadow-inner relative"
+        aria-live="polite"
+        aria-atomic="false"
+        role="log"
+        className={`flex-1 overflow-y-auto px-2 sm:px-3 py-3 space-y-4 rounded-2xl bg-slate-950/60 border border-slate-900/80 shadow-inner relative ${
+          isElderMode ? 'text-base sm:text-lg font-medium' : ''
+        }`}
       >
         {/* EMPTY STATE */}
         {messages.length === 0 && (
