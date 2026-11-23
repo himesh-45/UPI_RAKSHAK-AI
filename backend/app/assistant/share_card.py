@@ -33,29 +33,31 @@ def generate_scam_alert_card(
     if len(safe_snippet) > 160:
         safe_snippet = safe_snippet[:157] + "..."
 
-    # Colors
+    # Colors - Midnight Navy + Gold + Teal theme palette
     is_high = verdict.upper() in ["HIGH RISK", "DANGER"] or score >= 70
     is_suspicious = verdict.upper() in ["SUSPICIOUS", "WARNING"] or (score >= 35 and score < 70)
 
     if is_high:
-        accent_color = (239, 68, 68)       # Red-500
-        accent_glow = (239, 68, 68, 40)
+        accent_color = (244, 63, 94)       # Semantic High Risk #F43F5E
+        accent_glow = (244, 63, 94, 40)
         verdict_label = "HIGH RISK SCAM"
     elif is_suspicious:
-        accent_color = (245, 158, 11)     # Amber-500
-        accent_glow = (245, 158, 11, 40)
+        accent_color = (251, 146, 60)      # Semantic Suspicious #FB923C (distinct orange)
+        accent_glow = (251, 146, 60, 40)
         verdict_label = "SUSPICIOUS THREAT"
     else:
-        accent_color = (16, 185, 129)     # Green-500
-        accent_glow = (16, 185, 129, 40)
+        accent_color = (52, 211, 153)      # Semantic Safe #34D399
+        accent_glow = (52, 211, 153, 40)
         verdict_label = "LIKELY SAFE"
 
-    bg_color = (10, 15, 29)               # Deep Navy #0a0f1d
-    card_bg = (16, 24, 46)                # Slate-900 #10182e
-    border_color = (30, 41, 69)           # Slate-800
-    cyan_accent = (0, 229, 255)           # Electric Cyan #00e5ff
-    text_white = (248, 250, 252)          # Slate-50
-    text_muted = (148, 163, 184)          # Slate-400
+    bg_color = (5, 10, 24)                 # Deep Midnight Navy #050A18
+    card_bg = (15, 29, 58)                 # Surface Card Navy #0F1D3A
+    border_color = (30, 58, 95)            # Navy Border #1E3A5F
+    teal_accent = (53, 208, 200)           # Shield Teal #35D0C8
+    gold_accent = (217, 164, 65)           # Brand Gold #D9A441
+    gold_light = (245, 201, 106)           # Gold-400 #F5C96A
+    text_white = (245, 241, 230)           # Warm White #F5F1E6
+    text_muted = (169, 180, 204)           # Slate Muted #A9B4CC
 
     # Create base canvas
     img = Image.new("RGB", (1200, 630), bg_color)
@@ -63,22 +65,22 @@ def generate_scam_alert_card(
 
     # 1. Subtle Background Grid Lines
     for x in range(0, 1200, 60):
-        draw.line([(x, 0), (x, 630)], fill=(16, 23, 42), width=1)
+        draw.line([(x, 0), (x, 630)], fill=(11, 21, 48), width=1)
     for y in range(0, 630, 60):
-        draw.line([(0, y), (1200, y)], fill=(16, 23, 42), width=1)
+        draw.line([(0, y), (1200, y)], fill=(11, 21, 48), width=1)
 
     # 2. Outer Border Frame
     draw.rectangle([(24, 24), (1176, 606)], outline=border_color, width=2)
-    # Corner accent ticks
-    tick_len = 20
-    draw.line([(24, 24), (24 + tick_len, 24)], fill=cyan_accent, width=3)
-    draw.line([(24, 24), (24, 24 + tick_len)], fill=cyan_accent, width=3)
-    draw.line([(1176, 24), (1176 - tick_len, 24)], fill=cyan_accent, width=3)
-    draw.line([(1176, 24), (1176, 24 + tick_len)], fill=cyan_accent, width=3)
-    draw.line([(24, 606), (24 + tick_len, 606)], fill=cyan_accent, width=3)
-    draw.line([(24, 606), (24, 606 - tick_len)], fill=cyan_accent, width=3)
-    draw.line([(1176, 606), (1176 - tick_len, 606)], fill=cyan_accent, width=3)
-    draw.line([(1176, 606), (1176, 606 - tick_len)], fill=cyan_accent, width=3)
+    # Corner accent ticks in brand Gold
+    tick_len = 22
+    draw.line([(24, 24), (24 + tick_len, 24)], fill=gold_accent, width=3)
+    draw.line([(24, 24), (24, 24 + tick_len)], fill=gold_accent, width=3)
+    draw.line([(1176, 24), (1176 - tick_len, 24)], fill=gold_accent, width=3)
+    draw.line([(1176, 24), (1176, 24 + tick_len)], fill=gold_accent, width=3)
+    draw.line([(24, 606), (24 + tick_len, 606)], fill=gold_accent, width=3)
+    draw.line([(24, 606), (24, 606 - tick_len)], fill=gold_accent, width=3)
+    draw.line([(1176, 606), (1176 - tick_len, 606)], fill=gold_accent, width=3)
+    draw.line([(1176, 606), (1176, 606 - tick_len)], fill=gold_accent, width=3)
 
     # Fonts (Fallback to default if custom ttf unavailable)
     try:
@@ -92,11 +94,11 @@ def generate_scam_alert_card(
         font_logo = font_title = font_score = font_body = font_bold = font_sub = ImageFont.load_default()
 
     # 3. Header Branding
-    # Guardian Shield Emblem
+    # Guardian Shield Emblem (Teal Shield + Gold Accent Rim)
     shield_pts = [(60, 48), (80, 56), (80, 78), (60, 92), (40, 78), (40, 56)]
-    draw.polygon(shield_pts, fill=card_bg, outline=cyan_accent, width=2)
-    draw.text((100, 55), "UPI RAKSHAK AI", font=font_logo, fill=cyan_accent)
-    draw.text((320, 60), "•  OFFICIAL CITIZEN SAFETY ALERT", font=font_sub, fill=text_muted)
+    draw.polygon(shield_pts, fill=card_bg, outline=teal_accent, width=2)
+    draw.text((100, 55), "UPI RAKSHAK AI", font=font_logo, fill=gold_light)
+    draw.text((330, 60), "•  OFFICIAL CITIZEN SAFETY ALERT", font=font_sub, fill=text_muted)
 
     # 4. Verdict Banner Box
     draw.rounded_rectangle([(60, 115), (780, 195)], radius=12, fill=card_bg, outline=accent_color, width=2)
@@ -115,12 +117,12 @@ def generate_scam_alert_card(
     draw.text((score_cx - 24, score_cy + 18), "/100 RISK", font=font_sub, fill=accent_color)
 
     # 6. Flagged Message Quote Box
-    draw.rounded_rectangle([(60, 220), (1140, 315)], radius=10, fill=card_bg, outline=border_color, width=1)
-    draw.text((85, 232), "FLAGGED CONTENT SNIPPET:", font=font_bold, fill=cyan_accent)
+    draw.rounded_rectangle([(60, 220), (1140, 315)], radius=12, fill=card_bg, outline=border_color, width=1)
+    draw.text((85, 232), "FLAGGED CONTENT SNIPPET:", font=font_bold, fill=teal_accent)
     draw.text((85, 265), f'"{safe_snippet}"', font=font_body, fill=text_white)
 
     # 7. Evidence Bullets
-    draw.text((60, 340), "KEY DETECTED THREAT INDICATORS:", font=font_bold, fill=text_white)
+    draw.text((60, 340), "KEY DETECTED THREAT INDICATORS:", font=font_bold, fill=gold_light)
     y_pos = 375
     for i, reason in enumerate(reasons[:3]):
         # Bullet pip
@@ -129,8 +131,10 @@ def generate_scam_alert_card(
         y_pos += 36
 
     # 8. Golden Rule Advice Footer
-    draw.rounded_rectangle([(60, 500), (1140, 580)], radius=10, fill=(18, 30, 58), outline=cyan_accent, width=1)
-    draw.text((85, 515), "GOLDEN RULE: Receiving money NEVER requires entering your UPI PIN.", font=font_bold, fill=cyan_accent)
+    draw.rounded_rectangle([(60, 500), (1140, 580)], radius=12, fill=(11, 21, 48), outline=teal_accent, width=1)
+    # Thin gold top bar
+    draw.line([(72, 500), (1128, 500)], fill=gold_accent, width=2)
+    draw.text((85, 515), "GOLDEN RULE: Receiving money NEVER requires entering your UPI PIN.", font=font_bold, fill=gold_light)
     draw.text((85, 545), "Call 1930 immediately within the Golden Hour | Register at https://cybercrime.gov.in", font=font_sub, fill=text_white)
 
     # Output to in-memory bytes
@@ -140,33 +144,33 @@ def generate_scam_alert_card(
 
 
 def generate_guardian_avatar_png(size: int = 640) -> bytes:
-    """Generates high-res 640x640 guardian avatar PNG for bot profiles and official assets."""
-    img = Image.new("RGBA", (size, size), (10, 15, 29, 255))
+    """Generates high-res 640x640 guardian avatar PNG for bot profiles and official assets in Midnight Navy + Gold + Teal."""
+    img = Image.new("RGBA", (size, size), (5, 10, 24, 255))
     draw = ImageDraw.Draw(img)
 
     cx, cy = size // 2, size // 2
-    r_outer = int(size * 0.42)
+    r_outer = int(size * 0.44)
 
-    # Outer cyan halo
+    # Outer teal glow halo
     draw.ellipse(
         [(cx - r_outer, cy - r_outer), (cx + r_outer, cy + r_outer)],
-        outline=(0, 229, 255, 180),
+        outline=(53, 208, 200, 160),
         width=int(size * 0.015)
     )
 
-    # Hexagonal chassis
+    # Hexagonal chassis with Gold rim
     import math
     hex_pts = []
-    r_hex = int(size * 0.36)
+    r_hex = int(size * 0.38)
     for i in range(6):
         angle = math.radians(60 * i - 30)
         px = cx + r_hex * math.cos(angle)
         py = cy + r_hex * math.sin(angle)
         hex_pts.append((px, py))
 
-    draw.polygon(hex_pts, fill=(16, 24, 46, 255), outline=(0, 229, 255, 255))
+    draw.polygon(hex_pts, fill=(15, 29, 58, 255), outline=(217, 164, 65, 255))
 
-    # Center Shield
+    # Center Shield with Teal Rim
     shield_w = int(size * 0.22)
     shield_h = int(size * 0.26)
     s_pts = [
@@ -177,16 +181,17 @@ def generate_guardian_avatar_png(size: int = 640) -> bytes:
         (cx - shield_w, cy + int(shield_h * 0.4)),
         (cx - shield_w, cy - shield_h + int(shield_h * 0.3))
     ]
-    draw.polygon(s_pts, fill=(12, 18, 43, 255), outline=(0, 229, 255, 255))
+    draw.polygon(s_pts, fill=(11, 21, 48, 255), outline=(53, 208, 200, 255))
 
-    # Center lock/check circle
+    # Center Gold emblem circle
     draw.ellipse(
         [(cx - int(size * 0.08), cy - int(size * 0.08)), (cx + int(size * 0.08), cy + int(size * 0.08))],
-        fill=(0, 229, 255, 220)
+        fill=(245, 201, 106, 230),
+        outline=(53, 208, 200, 255)
     )
     draw.ellipse(
         [(cx - int(size * 0.04), cy - int(size * 0.04)), (cx + int(size * 0.04), cy + int(size * 0.04))],
-        fill=(10, 15, 29, 255)
+        fill=(5, 10, 24, 255)
     )
 
     buffer = io.BytesIO()
