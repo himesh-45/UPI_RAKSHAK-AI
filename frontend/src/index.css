@@ -2,7 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+:root,
+html.dark {
   /* Midnight Navy + Gold + Teal Design Tokens (Dark Default) */
   --bg-deep: #050a18;
   --bg-deep-rgb: 5 10 24;

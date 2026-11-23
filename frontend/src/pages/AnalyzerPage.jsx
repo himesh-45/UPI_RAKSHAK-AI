@@ -158,16 +158,16 @@ export default function AnalyzerPage() {
           
           {/* Left Hero Content */}
           <div className="lg:col-span-7 space-y-4 text-left">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold tracking-wider bg-teal/15 text-teal border border-teal/40 shadow-xs">
-              <Sparkles className="w-3.5 h-3.5 text-teal animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold tracking-wider bg-[#0E8F89]/10 text-[#0E8F89] border border-[#0E8F89]/30 dark:bg-teal/15 dark:text-teal dark:border-teal/40 shadow-xs">
+              <Sparkles className="w-3.5 h-3.5 text-[#0E8F89] dark:text-teal animate-pulse" />
               <span>Evidence-based scam checks • English, हिन्दी, తెలుగు</span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-ink leading-tight font-display">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#0B1530] dark:text-[#F5F1E6] leading-tight font-display">
               Stop <span className="text-gold-highlight font-serif font-black">scams</span> before they strike.
             </h1>
 
-            <p className="text-sm sm:text-base text-ink-muted font-medium max-w-xl leading-relaxed">
+            <p className="text-sm sm:text-base text-[#4A5878] dark:text-[#A9B4CC] font-medium max-w-xl leading-relaxed">
               AI-powered fraud detection to keep you and your family safe online.
             </p>
 
@@ -189,9 +189,9 @@ export default function AnalyzerPage() {
               <button
                 type="button"
                 onClick={() => setHonestyModalOpen(true)}
-                className="text-xs font-semibold text-ink-muted hover:text-teal underline underline-offset-4 flex items-center gap-1.5 transition cursor-pointer"
+                className="text-xs font-semibold text-[#4A5878] hover:text-[#0E8F89] dark:text-[#A9B4CC] dark:hover:text-teal underline underline-offset-4 flex items-center gap-1.5 transition cursor-pointer"
               >
-                <HelpCircle className="w-3.5 h-3.5 text-teal" />
+                <HelpCircle className="w-3.5 h-3.5 text-[#0E8F89] dark:text-teal" />
                 <span>How accurate is this?</span>
               </button>
             </div>
@@ -206,35 +206,44 @@ export default function AnalyzerPage() {
               <div className="absolute w-44 h-44 rounded-full border border-gold-500/20 pointer-events-none" />
 
               {/* Original Vector SVG Shield Emblem */}
-              <div className="relative z-10 w-36 h-40 sm:w-40 sm:h-44 rounded-3xl bg-gradient-to-b from-navy-surface via-navy to-navy-deep backdrop-blur-md border-2 border-gold-500 shadow-[0_0_35px_rgba(var(--teal-400-rgb),0.25)] flex flex-col items-center justify-center text-center p-4 group">
+              <div className="relative z-10 w-36 h-40 sm:w-40 sm:h-44 rounded-3xl bg-gradient-to-b from-white via-[#F8F5EE] to-[#EAE3D5] dark:from-navy-surface dark:via-navy dark:to-navy-deep backdrop-blur-md border-2 border-gold-500 shadow-[0_4px_25px_rgba(14,143,137,0.12)] dark:shadow-[0_0_35px_rgba(53,208,200,0.25)] flex flex-col items-center justify-center text-center p-4 group">
                 <svg className="w-16 h-16 sm:w-20 sm:h-20 drop-shadow-[0_0_18px_rgba(var(--teal-400-rgb),0.6)]" viewBox="0 0 64 72" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <defs>
-                    <linearGradient id="shieldTealGrad" x1="32" y1="4" x2="32" y2="68" gradientUnits="userSpaceOnUse">
-                      <stop stopColor="var(--teal-400)" stopOpacity="0.35" />
-                      <stop stopColor="var(--bg-raised)" stopOpacity="0.85" />
+                    <linearGradient id="shieldTealGradLight" x1="32" y1="4" x2="32" y2="68" gradientUnits="userSpaceOnUse">
+                      <stop stopColor="#0E8F89" stopOpacity="0.25" />
+                      <stop stopColor="#FAF7F0" stopOpacity="0.95" />
+                    </linearGradient>
+                    <linearGradient id="shieldTealGradDark" x1="32" y1="4" x2="32" y2="68" gradientUnits="userSpaceOnUse">
+                      <stop stopColor="#35D0C8" stopOpacity="0.35" />
+                      <stop stopColor="#0B1530" stopOpacity="0.85" />
                     </linearGradient>
                     <linearGradient id="shieldGoldRim" x1="4" y1="4" x2="60" y2="68" gradientUnits="userSpaceOnUse">
-                      <stop stopColor="var(--gold-400)" />
-                      <stop stopColor="var(--gold-500)" />
-                      <stop stopColor="var(--gold-600)" />
+                      <stop stopColor="#F5C96A" />
+                      <stop stopColor="#D9A441" />
+                      <stop stopColor="#A87B1E" />
                     </linearGradient>
                   </defs>
                   {/* Outer Protective Rim */}
-                  <path d="M32 4L56 12V32C56 48 45.6 62.4 32 68C18.4 62.4 8 48 8 32V12L32 4Z" fill="url(#shieldTealGrad)" stroke="url(#shieldGoldRim)" strokeWidth="3" strokeLinejoin="round" />
+                  <path className="dark:hidden" d="M32 4L56 12V32C56 48 45.6 62.4 32 68C18.4 62.4 8 48 8 32V12L32 4Z" fill="url(#shieldTealGradLight)" stroke="url(#shieldGoldRim)" strokeWidth="3" strokeLinejoin="round" />
+                  <path className="hidden dark:block" d="M32 4L56 12V32C56 48 45.6 62.4 32 68C18.4 62.4 8 48 8 32V12L32 4Z" fill="url(#shieldTealGradDark)" stroke="url(#shieldGoldRim)" strokeWidth="3" strokeLinejoin="round" />
                   {/* Inner Cyber Crest */}
-                  <path d="M32 14L48 20V32C48 43.6 40.8 54 32 58C23.2 54 16 43.6 16 32V20L32 14Z" stroke="var(--teal-400)" strokeWidth="1.5" strokeOpacity="0.6" strokeDasharray="3 3" />
+                  <path className="dark:hidden" d="M32 14L48 20V32C48 43.6 40.8 54 32 58C23.2 54 16 43.6 16 32V20L32 14Z" stroke="#0E8F89" strokeWidth="1.5" strokeOpacity="0.7" strokeDasharray="3 3" />
+                  <path className="hidden dark:block" d="M32 14L48 20V32C48 43.6 40.8 54 32 58C23.2 54 16 43.6 16 32V20L32 14Z" stroke="#35D0C8" strokeWidth="1.5" strokeOpacity="0.6" strokeDasharray="3 3" />
                   {/* Center Lock / Padlock */}
-                  <rect x="24" y="32" width="16" height="13" rx="3" fill="var(--bg-deep)" stroke="var(--gold-500)" strokeWidth="2" />
-                  <path d="M27 32V27C27 24.2 29.2 22 32 22C34.8 22 37 24.2 37 27V32" stroke="var(--teal-400)" strokeWidth="2.2" strokeLinecap="round" />
-                  <circle cx="32" cy="38" r="1.5" fill="var(--gold-400)" />
+                  <rect className="dark:hidden" x="24" y="32" width="16" height="13" rx="3" fill="#FAF7F0" stroke="#8A6410" strokeWidth="2" />
+                  <rect className="hidden dark:block" x="24" y="32" width="16" height="13" rx="3" fill="#050A18" stroke="#D9A441" strokeWidth="2" />
+                  <path className="dark:hidden" d="M27 32V27C27 24.2 29.2 22 32 22C34.8 22 37 24.2 37 27V32" stroke="#0E8F89" strokeWidth="2.2" strokeLinecap="round" />
+                  <path className="hidden dark:block" d="M27 32V27C27 24.2 29.2 22 32 22C34.8 22 37 24.2 37 27V32" stroke="#35D0C8" strokeWidth="2.2" strokeLinecap="round" />
+                  <circle className="dark:hidden" cx="32" cy="38" r="1.5" fill="#8A6410" />
+                  <circle className="hidden dark:block" cx="32" cy="38" r="1.5" fill="#F5C96A" />
                 </svg>
-                <div className="mt-2 px-2.5 py-0.5 rounded-full bg-navy/90 border border-gold-500/50 text-[10px] font-black uppercase tracking-wider text-gold-400 shadow-xs">
+                <div className="mt-2 px-2.5 py-0.5 rounded-full bg-white/95 text-[#8A6410] border border-[#8A6410]/40 shadow-xs dark:bg-navy/90 dark:text-gold-400 dark:border-gold-500/50 text-[10px] font-black uppercase tracking-wider">
                   EVIDENCE SHIELD
                 </div>
               </div>
 
               {/* Live Guard Status Pill (Bottom Left) */}
-              <div className="absolute -bottom-2 -left-2 px-3 py-1 rounded-full bg-navy/95 border border-teal/40 text-[11px] font-bold text-teal shadow-xs flex items-center gap-1.5">
+              <div className="absolute -bottom-2 -left-2 px-3 py-1 rounded-full bg-white/95 text-[#0E8F89] border border-[#0E8F89]/40 shadow-md font-bold dark:bg-navy/95 dark:text-teal dark:border-teal/40 text-[11px] flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-verdict-safe animate-pulse" />
                 <span>Statutory Guardrails</span>
               </div>
@@ -258,10 +267,10 @@ export default function AnalyzerPage() {
                 <Activity className="w-5 h-5 animate-pulse" />
               </div>
               <div>
-                <h2 className="text-base sm:text-lg font-black tracking-tight text-ink">
+                <h2 className="text-base sm:text-lg font-black tracking-tight text-[#0B1530] dark:text-[#F5F1E6]">
                   Scan a Suspicious Message
                 </h2>
-                <p className="text-xs text-ink-muted font-medium">
+                <p className="text-xs text-[#4A5878] dark:text-[#A9B4CC] font-medium">
                   Paste the message, link or upload a screenshot for analysis.
                 </p>
               </div>
@@ -600,10 +609,10 @@ export default function AnalyzerPage() {
                   <ScoreGauge score={null} verdict="Awaiting Input" />
                 </div>
                 <div className="sm:col-span-7 space-y-2 text-left">
-                  <h4 className="text-xs font-black uppercase tracking-wider text-ink">
+                  <h4 className="text-xs font-black uppercase tracking-wider text-[#0B1530] dark:text-[#F5F1E6]">
                     Detection Coverage
                   </h4>
-                  <ul className="space-y-1.5 text-xs text-ink font-medium">
+                  <ul className="space-y-1.5 text-xs text-[#0B1530] dark:text-[#F5F1E6] font-medium">
                     <li className="flex items-center gap-2">
                       <span className="w-2 h-2 rounded-full bg-teal shrink-0" />
                       <span>Multilingual NLP classifier (En, Hi, Te)</span>
@@ -719,9 +728,9 @@ export default function AnalyzerPage() {
           <div className="flex items-center justify-between pb-2 border-b border-border">
             <div className="flex items-center gap-2">
               <Clock className="w-4 h-4 text-teal" />
-              <h3 className="text-xs font-black uppercase tracking-wider text-ink">Recent Scans</h3>
+              <h3 className="text-xs font-black uppercase tracking-wider text-[#0B1530] dark:text-[#F5F1E6]">Recent Scans</h3>
             </div>
-            <span className="text-[11px] font-bold text-teal hover:text-teal cursor-pointer">
+            <span className="text-[11px] font-bold text-[#0E8F89] dark:text-teal hover:underline cursor-pointer">
               View All →
             </span>
           </div>
@@ -729,30 +738,30 @@ export default function AnalyzerPage() {
           <div className="space-y-2.5">
             <div className="p-2.5 rounded-xl bg-navy border border-border flex items-center justify-between gap-2">
               <div className="truncate">
-                <p className="text-xs font-bold text-ink truncate">Win ₹50,000 Prize! Click here</p>
-                <span className="text-[10px] text-ink-muted">2 min ago</span>
+                <p className="text-xs font-bold text-[#0B1530] dark:text-[#F5F1E6] truncate">Win ₹50,000 Prize! Click here</p>
+                <span className="text-[10px] text-[#4A5878] dark:text-[#A9B4CC]">2 min ago</span>
               </div>
-              <span className="px-2 py-0.5 rounded-md text-[10px] font-black uppercase bg-rose-500/20 text-rose-300 border border-rose-500/40">
+              <span className="px-2 py-0.5 rounded-md text-[10px] font-black uppercase bg-rose-500/15 text-rose-700 border border-rose-500/30 dark:bg-rose-500/20 dark:text-rose-300 dark:border-rose-500/40">
                 Blocked
               </span>
             </div>
 
             <div className="p-2.5 rounded-xl bg-navy border border-border flex items-center justify-between gap-2">
               <div className="truncate">
-                <p className="text-xs font-bold text-ink truncate">https://bit.ly/upi-offer</p>
-                <span className="text-[10px] text-ink-muted">12 min ago</span>
+                <p className="text-xs font-bold text-[#0B1530] dark:text-[#F5F1E6] truncate">https://bit.ly/upi-offer</p>
+                <span className="text-[10px] text-[#4A5878] dark:text-[#A9B4CC]">12 min ago</span>
               </div>
-              <span className="px-2 py-0.5 rounded-md text-[10px] font-black uppercase bg-amber-500/20 text-amber-300 border border-amber-500/40">
+              <span className="px-2 py-0.5 rounded-md text-[10px] font-black uppercase bg-amber-500/15 text-amber-800 border border-amber-500/30 dark:bg-amber-500/20 dark:text-amber-300 dark:border-amber-500/40">
                 Suspicious
               </span>
             </div>
 
             <div className="p-2.5 rounded-xl bg-navy border border-border flex items-center justify-between gap-2">
               <div className="truncate">
-                <p className="text-xs font-bold text-ink truncate">Your account will be blocked...</p>
-                <span className="text-[10px] text-ink-muted">1 hour ago</span>
+                <p className="text-xs font-bold text-[#0B1530] dark:text-[#F5F1E6] truncate">Your account will be blocked...</p>
+                <span className="text-[10px] text-[#4A5878] dark:text-[#A9B4CC]">1 hour ago</span>
               </div>
-              <span className="px-2 py-0.5 rounded-md text-[10px] font-black uppercase bg-red-500/20 text-red-300 border border-red-500/40">
+              <span className="px-2 py-0.5 rounded-md text-[10px] font-black uppercase bg-rose-500/15 text-rose-700 border border-rose-500/30 dark:bg-red-500/20 dark:text-red-300 dark:border-red-500/40">
                 Fraud
               </span>
             </div>
@@ -763,7 +772,7 @@ export default function AnalyzerPage() {
         <div className="glass-card rounded-3xl p-5 border border-border space-y-4">
           <div className="flex items-center gap-2 pb-2 border-b border-border">
             <Activity className="w-4 h-4 text-teal" />
-            <h3 className="text-xs font-black uppercase tracking-wider text-ink">Common Scam Types</h3>
+            <h3 className="text-xs font-black uppercase tracking-wider text-[#0B1530] dark:text-[#F5F1E6]">Common Scam Types</h3>
           </div>
 
           <div className="flex items-center justify-between gap-4">
@@ -846,11 +855,11 @@ export default function AnalyzerPage() {
         {/* Card 3: Safety Tip of the Day */}
         <div className="glass-card rounded-3xl p-5 border border-border border-t-2 border-t-gold-500 space-y-3 flex flex-col justify-between">
           <div className="space-y-2">
-            <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-gold-400">
-              <Lightbulb className="w-4 h-4 text-gold-400" />
+            <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-[#8A6410] dark:text-gold-400">
+              <Lightbulb className="w-4 h-4 text-[#8A6410] dark:text-gold-400" />
               <span>Safety Tip of the Day</span>
             </div>
-            <p className="text-xs text-ink leading-relaxed font-medium">
+            <p className="text-xs text-[#0B1530] dark:text-[#F5F1E6] leading-relaxed font-medium">
               Never share your UPI PIN or OTP with anyone, even if they claim to be calling from your bank or electricity department.
             </p>
           </div>
