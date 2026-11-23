@@ -32,6 +32,10 @@ async def send_telegram_message(
     reply_markup: Optional[Dict[str, Any]] = None,
     parse_mode: str = "Markdown"
 ) -> bool:
+    # Telegram message length limit: 4096 characters
+    if len(text) > 4000:
+        text = text[:3990] + "\n\n..."
+
     token = _clean_token()
     if not token:
         logger.info(f"[Telegram Mock] To {chat_id}: {text[:80]}...")

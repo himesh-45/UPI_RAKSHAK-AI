@@ -180,3 +180,32 @@ def test_twilio_webhook_endpoint():
     assert res.status_code == 200
     assert "xml" in res.headers["content-type"]
     assert "<Response><Message>" in res.text
+
+def test_share_card_generation_and_api():
+    """Verify server-side 1200x630 shareable PNG card generation is fast and valid."""
+    import time
+    from backend.app.assistant.share_card import generate_scam_alert_card, generate_guardian_avatar_png
+
+    start = time.time()
+    png_bytes = generate_scam_alert_card(
+        verdict="HIGH RISK",
+        score=92,
+        message_snippet="Call 9876543210 immediately to unblock your SBI bank account"
+    )
+    duration = time.time() - start
+    assert duration < 0.200  # Must be fast (< 200ms)
+    assert png_bytes.startswith(b"\x89PNG\r\n\x1a\n")
+
+    # API Endpoint check
+    res = client.get("/api/assistant/share-card?verdict=HIGH+RISK&score=92&text=Suspicious+message")
+    assert res.status_code == 200
+    assert res.headers["content-type"] == "image/png"
+    assert res.content.startswith(b"\x89PNG\r\n\x1a\n")
+
+    # Guardian Avatar PNG check
+    avatar_bytes = generate_guardian_avatar_png(size=640)
+    assert avatar_bytes.startswith(b"\x89PNG\r\n\x1a\n")
+    res_av = client.get("/api/assistant/avatar?size=640")
+    assert res_av.status_code == 200
+    assert res_av.headers["content-type"] == "image/png"
+

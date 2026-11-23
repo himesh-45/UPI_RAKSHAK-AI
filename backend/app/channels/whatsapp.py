@@ -49,6 +49,9 @@ async def send_twilio_reply(to_number: str, message_text: str) -> bool:
     """
     Sends an outbound WhatsApp message via Twilio REST API.
     """
+    if len(message_text) > 1600:
+        message_text = message_text[:1590] + "\n\n..."
+
     if not (settings.TWILIO_ACCOUNT_SID and settings.TWILIO_AUTH_TOKEN and settings.TWILIO_WHATSAPP_NUMBER):
         logger.info(f"[Twilio Mock] To {to_number}: {message_text[:80]}...")
         return True
@@ -87,6 +90,9 @@ async def send_meta_reply(
     Sends an outbound WhatsApp message via Meta Cloud API.
     Supports interactive button messages with fallback to text menus.
     """
+    if len(text) > 1600:
+        text = text[:1590] + "\n\n..."
+
     if not (settings.META_WHATSAPP_TOKEN and settings.META_PHONE_NUMBER_ID):
         logger.info(f"[Meta Mock] To {to_phone_number}: {text[:80]}...")
         return True
