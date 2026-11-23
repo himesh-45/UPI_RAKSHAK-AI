@@ -52,9 +52,35 @@ All gates are derived dynamically from code comparisons (`value >= target` or `v
 | **Synthetic Adversarial FPR** | <= 3.0% | **1.12%** | **PASSED** | Disjoint Benign + Whitelisted (n=357) |
 ```
 
+### Assistant Brain Quality Gates (Grounded Multilingual Conversational Engine)
+
+```markdown
+| Assistant Benchmark Gate | Target Benchmark | Measured Value | 95% Confidence Interval | Gate Status |
+| :--- | :---: | :---: | :---: | :---: |
+| **Intent Classification Accuracy** | >= 90.0% | **100.00%** | [100.00%, 100.00%] | **PASSED** |
+| **Intent Classification Macro-F1** | >= 0.8500 | **1.0000** | — | **PASSED** |
+| **Help Retrieval Recall@1** | >= 80.0% | **96.67%** | [91.67%, 100.00%] | **PASSED** |
+| **Help Retrieval Recall@2** | >= 90.0% | **98.33%** | [95.00%, 100.00%] | **PASSED** |
+| **Harmful Scam Request Refusal** | >= 95.0% | **100.00%** | [100.00%, 100.00%] | **PASSED** |
+| **Prompt Injection Defense Rate** | >= 95.0% | **100.00%** | [100.00%, 100.00%] | **PASSED** |
+| **Non-Analyze Verdict Purity** | 100.0% | **100.00%** | [100.0%, 100.0%] | **PASSED** |
+| **Median Offline Response Latency** | <= 50.0 ms | **9.78 ms** | P95: 13.15 ms | **PASSED** |
+```
+
 ---
 
-## 3. Honest System Limitations & Tradeoffs
+## 3. Six-Part Architectural Task Checklist
+
+- [x] **Part A - Assistant Brain**: 6-class hybrid intent router, deterministic tool executor, 160-item RAG knowledge base (158 reviewed, 2 draft isolated), swappable template/API/Ollama generator, PII pre-masking, statutory domain allowlists, and daily rate limiter.
+- [x] **Part B - Guardian Avatar & UI Components**: 5 SVG animation states (`idle`, `listening`, `scanning`, `safe`, `alert`), 4 starter inquiry cards, rich verdict/step/playbook cards, and interactive Learn & About modal dialogs.
+- [x] **Part C - Conversational Features & Follow-ups**: Conversational context grounding (`how do i do that`), quick-reply follow-up chips, voice synthesis read-aloud via Web Speech API, copyable markdown steps, and feedback collection.
+- [x] **Part D - Omnichannel Adapters & Share Assets**: Shared channel adapter with Telegram/WhatsApp message caps (4000/1600 chars), BotFather definitions in en/hi/te, 1200x630 PIL share card generator, and 640x640 guardian avatar endpoint.
+- [x] **Part E - Accessibility & Elder Mode**: High-contrast family/elder toggle, 18px+ readable typography, 3 prominent high-urgency action buttons, auto-speech readout, `aria-live` screen-reader regions, and WCAG AA contrast compliance.
+- [x] **Part F - Evaluation Harness, Linguistic QA & Submission Packaging**: Programmatic evaluation harness with bootstrap confidence intervals, `docs/ASSISTANT_EVALUATION.md`, qualitative `docs/QA_LANGUAGE.md` audit, and automated clean zip builder.
+
+---
+
+## 4. Honest System Limitations & Tradeoffs
 
 1. **Browser Web Speech API Dependency**:
    - Voice input for vernacular languages (`hi-IN`, `te-IN`) relies on browser-native SpeechRecognition engines (Chromium-based browsers like Chrome and Edge provide optimal support). If speech recognition is unsupported or network-blocked in the browser, users can type or paste text.
@@ -67,18 +93,22 @@ All gates are derived dynamically from code comparisons (`value >= target` or `v
 
 ---
 
-## 4. Key Verification Commands
+## 5. Key Verification Commands
 
 ```bash
-# 1. Run all 107 automated tests
+# 1. Run all automated backend tests (165+ tests)
 .\.venv\Scripts\pytest.exe backend/tests -v
 
-# 2. Verify Evaluation Report consistency
-.\.venv\Scripts\pytest.exe backend/tests/test_evaluation_report_consistency.py -v
+# 2. Run Assistant Conversational & Guardrail Test Suite
+.\.venv\Scripts\pytest.exe backend/tests/test_assistant_intent.py backend/tests/test_assistant_tools.py backend/tests/test_assistant_generator.py backend/tests/test_rag.py backend/tests/test_channels.py backend/tests/test_banned_phrases.py -v
 
-# 3. Regenerate Programmatic Evaluation Report
+# 3. Run Programmatic Assistant Benchmark Evaluation
+.\.venv\Scripts\python.exe -m backend.app.scripts.evaluate_assistant
+
+# 4. Regenerate Core Scam Models Programmatic Evaluation Report
 .\.venv\Scripts\python.exe -m backend.app.scripts.evaluate_models
 
-# 4. Build clean submission zip
+# 5. Build and verify clean submission package
 .\.venv\Scripts\python.exe -m backend.app.scripts.package_submission
+.\.venv\Scripts\pytest.exe backend/tests/test_packaging.py -v
 ```

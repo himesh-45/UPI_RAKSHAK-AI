@@ -1,0 +1,662 @@
+[
+  {
+    "id": "hq_1",
+    "question": "How do I report a scam to the 1930 helpline?",
+    "language": "en",
+    "expected_kb_id": "kb_helpline_1930_golden_hour",
+    "required_facts": [
+      "1930",
+      "UTR",
+      "cybercrime.gov.in"
+    ]
+  },
+  {
+    "id": "hq_2",
+    "question": "What documents and details do I need before calling 1930?",
+    "language": "en",
+    "expected_kb_id": "kb_helpline_1930_golden_hour",
+    "required_facts": [
+      "1930",
+      "UTR",
+      "cybercrime.gov.in"
+    ]
+  },
+  {
+    "id": "hq_3",
+    "question": "1930 पर साइबर अपराध की शिकायत कैसे दर्ज करें?",
+    "language": "hi",
+    "expected_kb_id": "kb_helpline_1930_golden_hour",
+    "required_facts": [
+      "1930",
+      "UTR",
+      "cybercrime.gov.in"
+    ]
+  },
+  {
+    "id": "hq_4",
+    "question": "1930 हेल्पलाइन के लिए क्या-क्या दस्तावेज चाहिए?",
+    "language": "hi",
+    "expected_kb_id": "kb_helpline_1930_golden_hour",
+    "required_facts": [
+      "1930",
+      "UTR",
+      "cybercrime.gov.in"
+    ]
+  },
+  {
+    "id": "hq_5",
+    "question": "1930 హెల్ప్‌లైన్‌కు సైబర్ మోసం గురించి ఎలా ఫిర్యాదు చేయాలి?",
+    "language": "te",
+    "expected_kb_id": "kb_helpline_1930_golden_hour",
+    "required_facts": [
+      "1930",
+      "UTR",
+      "cybercrime.gov.in"
+    ]
+  },
+  {
+    "id": "hq_6",
+    "question": "1930 కాల్ చేసేటప్పుడు ఏ వివరాలు అవసరం?",
+    "language": "te",
+    "expected_kb_id": "kb_helpline_1930_golden_hour",
+    "required_facts": [
+      "1930",
+      "UTR",
+      "cybercrime.gov.in"
+    ]
+  },
+  {
+    "id": "hq_7",
+    "question": "Do I ever need to enter my UPI PIN to receive money or refunds?",
+    "language": "en",
+    "expected_kb_id": "kb_upi_basics_pin_receiving_rule",
+    "required_facts": [
+      "PIN",
+      "receive",
+      "send"
+    ]
+  },
+  {
+    "id": "hq_8",
+    "question": "Can someone send me money without asking for my UPI PIN?",
+    "language": "en",
+    "expected_kb_id": "kb_upi_basics_pin_receiving_rule",
+    "required_facts": [
+      "PIN",
+      "receive",
+      "send"
+    ]
+  },
+  {
+    "id": "hq_9",
+    "question": "क्या पैसे प्राप्त करने के लिए यूपीआई पिन डालना पड़ता है?",
+    "language": "hi",
+    "expected_kb_id": "kb_upi_basics_pin_receiving_rule",
+    "required_facts": [
+      "PIN",
+      "receive",
+      "send"
+    ]
+  },
+  {
+    "id": "hq_10",
+    "question": "पैसे लेने के लिए क्या क्यूआर कोड स्कैन करना जरूरी है?",
+    "language": "hi",
+    "expected_kb_id": "kb_upi_basics_pin_receiving_rule",
+    "required_facts": [
+      "PIN",
+      "receive",
+      "send"
+    ]
+  },
+  {
+    "id": "hq_11",
+    "question": "డబ్బులు అందుకోవడానికి యూపీఐ పిన్ ఎంటర్ చేయాలా?",
+    "language": "te",
+    "expected_kb_id": "kb_upi_basics_pin_receiving_rule",
+    "required_facts": [
+      "PIN",
+      "receive",
+      "send"
+    ]
+  },
+  {
+    "id": "hq_12",
+    "question": "ఖాతాలో డబ్బులు జమ కావడానికి పిన్ అవసరమా?",
+    "language": "te",
+    "expected_kb_id": "kb_upi_basics_pin_receiving_rule",
+    "required_facts": [
+      "PIN",
+      "receive",
+      "send"
+    ]
+  },
+  {
+    "id": "hq_13",
+    "question": "Is digital arrest recognized by Indian police or legal courts?",
+    "language": "en",
+    "expected_kb_id": "kb_digital_arrest_legal_reality",
+    "required_facts": [
+      "illegal",
+      "no provision",
+      "video call"
+    ]
+  },
+  {
+    "id": "hq_14",
+    "question": "What should I do if a police officer video calls me on Skype threatening digital arrest?",
+    "language": "en",
+    "expected_kb_id": "kb_digital_arrest_legal_reality",
+    "required_facts": [
+      "illegal",
+      "no provision",
+      "video call"
+    ]
+  },
+  {
+    "id": "hq_15",
+    "question": "डिजिटल अरेस्ट क्या है और क्या यह भारतीय कानून में मान्य है?",
+    "language": "hi",
+    "expected_kb_id": "kb_digital_arrest_legal_reality",
+    "required_facts": [
+      "illegal",
+      "no provision",
+      "video call"
+    ]
+  },
+  {
+    "id": "hq_16",
+    "question": "अगर कोई पुलिस बनकर वीडियो कॉल पर डिजिटल अरेस्ट की धमकी दे तो क्या करें?",
+    "language": "hi",
+    "expected_kb_id": "kb_digital_arrest_legal_reality",
+    "required_facts": [
+      "illegal",
+      "no provision",
+      "video call"
+    ]
+  },
+  {
+    "id": "hq_17",
+    "question": "డిజిటల్ అరెస్ట్ అంటే ఏమిటి పోలీసులు అలా చేస్తారా?",
+    "language": "te",
+    "expected_kb_id": "kb_digital_arrest_legal_reality",
+    "required_facts": [
+      "illegal",
+      "no provision",
+      "video call"
+    ]
+  },
+  {
+    "id": "hq_18",
+    "question": "వీడియో కాల్ ద్వారా పోలీసులు అరెస్ట్ చేయవచ్చా?",
+    "language": "te",
+    "expected_kb_id": "kb_digital_arrest_legal_reality",
+    "required_facts": [
+      "illegal",
+      "no provision",
+      "video call"
+    ]
+  },
+  {
+    "id": "hq_19",
+    "question": "What is the RBI limited liability rule if money is stolen from my account?",
+    "language": "en",
+    "expected_kb_id": "kb_rbi_limited_customer_liability_dispute",
+    "required_facts": [
+      "RBI",
+      "zero liability",
+      "3 working days"
+    ]
+  },
+  {
+    "id": "hq_20",
+    "question": "How many days do I have to report unauthorized bank debit for zero liability?",
+    "language": "en",
+    "expected_kb_id": "kb_rbi_limited_customer_liability_dispute",
+    "required_facts": [
+      "RBI",
+      "zero liability",
+      "3 working days"
+    ]
+  },
+  {
+    "id": "hq_21",
+    "question": "आरबीआई की जीरो लायबिलिटी पॉलिसी क्या है और कितने दिन में रिपोर्ट करना होता है?",
+    "language": "hi",
+    "expected_kb_id": "kb_rbi_limited_customer_liability_dispute",
+    "required_facts": [
+      "RBI",
+      "zero liability",
+      "3 working days"
+    ]
+  },
+  {
+    "id": "hq_22",
+    "question": "अनधिकृत बैंक कटौती पर बैंक कितने दिन में पैसे वापस करता है?",
+    "language": "hi",
+    "expected_kb_id": "kb_rbi_limited_customer_liability_dispute",
+    "required_facts": [
+      "RBI",
+      "zero liability",
+      "3 working days"
+    ]
+  },
+  {
+    "id": "hq_23",
+    "question": "ఆర్బీఐ పరిమిత బాధ్యత నియమం అంటే ఏమిటి?",
+    "language": "te",
+    "expected_kb_id": "kb_rbi_limited_customer_liability_dispute",
+    "required_facts": [
+      "RBI",
+      "zero liability",
+      "3 working days"
+    ]
+  },
+  {
+    "id": "hq_24",
+    "question": "బ్యాంక్ మోసం జరిగితే ఎన్ని రోజుల్లో ఫిర్యాదు చేస్తే పూర్తి డబ్బు వస్తుంది?",
+    "language": "te",
+    "expected_kb_id": "kb_rbi_limited_customer_liability_dispute",
+    "required_facts": [
+      "RBI",
+      "zero liability",
+      "3 working days"
+    ]
+  },
+  {
+    "id": "hq_25",
+    "question": "What should I do if I installed AnyDesk or TeamViewer on scammer instructions?",
+    "language": "en",
+    "expected_kb_id": "kb_remote_access_scam_playbook",
+    "required_facts": [
+      "AnyDesk",
+      "uninstall",
+      "disconnect"
+    ]
+  },
+  {
+    "id": "hq_26",
+    "question": "How to clean my phone after installing a remote access app?",
+    "language": "en",
+    "expected_kb_id": "kb_remote_access_scam_playbook",
+    "required_facts": [
+      "AnyDesk",
+      "uninstall",
+      "disconnect"
+    ]
+  },
+  {
+    "id": "hq_27",
+    "question": "अगर धोखेबाज के कहने पर AnyDesk डाउनलोड कर लिया तो क्या करें?",
+    "language": "hi",
+    "expected_kb_id": "kb_remote_access_scam_playbook",
+    "required_facts": [
+      "AnyDesk",
+      "uninstall",
+      "disconnect"
+    ]
+  },
+  {
+    "id": "hq_28",
+    "question": "रिमोट एक्सेस ऐप हटाने और बैंक सुरक्षित करने के कदम क्या हैं?",
+    "language": "hi",
+    "expected_kb_id": "kb_remote_access_scam_playbook",
+    "required_facts": [
+      "AnyDesk",
+      "uninstall",
+      "disconnect"
+    ]
+  },
+  {
+    "id": "hq_29",
+    "question": "మోసగాడు AnyDesk డౌన్‌లోడ్ చేయమంటే ఏమి చేయాలి?",
+    "language": "te",
+    "expected_kb_id": "kb_remote_access_scam_playbook",
+    "required_facts": [
+      "AnyDesk",
+      "uninstall",
+      "disconnect"
+    ]
+  },
+  {
+    "id": "hq_30",
+    "question": "రిమోట్ యాప్స్ ద్వారా మోసం జరిగితే వెంటనే చేయాల్సిన పనులు ఏమిటి?",
+    "language": "te",
+    "expected_kb_id": "kb_remote_access_scam_playbook",
+    "required_facts": [
+      "AnyDesk",
+      "uninstall",
+      "disconnect"
+    ]
+  },
+  {
+    "id": "hq_31",
+    "question": "How do I file a formal complaint on cybercrime.gov.in?",
+    "language": "en",
+    "expected_kb_id": "kb_cybercrime_portal_filing",
+    "required_facts": [
+      "cybercrime.gov.in",
+      "complaint",
+      "acknowledgement"
+    ]
+  },
+  {
+    "id": "hq_32",
+    "question": "What is the difference between calling 1930 and filing on cybercrime.gov.in?",
+    "language": "en",
+    "expected_kb_id": "kb_cybercrime_portal_filing",
+    "required_facts": [
+      "cybercrime.gov.in",
+      "complaint",
+      "acknowledgement"
+    ]
+  },
+  {
+    "id": "hq_33",
+    "question": "cybercrime.gov.in पर औपचारिक पुलिस शिकायत कैसे दर्ज करें?",
+    "language": "hi",
+    "expected_kb_id": "kb_cybercrime_portal_filing",
+    "required_facts": [
+      "cybercrime.gov.in",
+      "complaint",
+      "acknowledgement"
+    ]
+  },
+  {
+    "id": "hq_34",
+    "question": "साइबर अपराध पोर्टल पर साक्ष्य कैसे अपलोड करें?",
+    "language": "hi",
+    "expected_kb_id": "kb_cybercrime_portal_filing",
+    "required_facts": [
+      "cybercrime.gov.in",
+      "complaint",
+      "acknowledgement"
+    ]
+  },
+  {
+    "id": "hq_35",
+    "question": "cybercrime.gov.in లో ఆన్‌లైన్ కేసు ఎలా నమోదు చేయాలి?",
+    "language": "te",
+    "expected_kb_id": "kb_cybercrime_portal_filing",
+    "required_facts": [
+      "cybercrime.gov.in",
+      "complaint",
+      "acknowledgement"
+    ]
+  },
+  {
+    "id": "hq_36",
+    "question": "పోలీస్ ఎక్నాలెడ్జ్‌మెంట్ నంబర్ కోసం ఎక్కడ దరఖాస్తు చేయాలి?",
+    "language": "te",
+    "expected_kb_id": "kb_cybercrime_portal_filing",
+    "required_facts": [
+      "cybercrime.gov.in",
+      "complaint",
+      "acknowledgement"
+    ]
+  },
+  {
+    "id": "hq_37",
+    "question": "How do I report a suspicious SMS or WhatsApp message on Chakshu portal?",
+    "language": "en",
+    "expected_kb_id": "kb_chakshu_citizen_spam_reporting",
+    "required_facts": [
+      "Chakshu",
+      "sancharsaathi.gov.in",
+      "spam"
+    ]
+  },
+  {
+    "id": "hq_38",
+    "question": "Where can I report spam fraud calls before losing any money?",
+    "language": "en",
+    "expected_kb_id": "kb_chakshu_citizen_spam_reporting",
+    "required_facts": [
+      "Chakshu",
+      "sancharsaathi.gov.in",
+      "spam"
+    ]
+  },
+  {
+    "id": "hq_39",
+    "question": "चक्षु (Chakshu) पोर्टल पर संदिग्ध मैसेज और कॉल की शिकायत कैसे करें?",
+    "language": "hi",
+    "expected_kb_id": "kb_chakshu_citizen_spam_reporting",
+    "required_facts": [
+      "Chakshu",
+      "sancharsaathi.gov.in",
+      "spam"
+    ]
+  },
+  {
+    "id": "hq_40",
+    "question": "संचार साथी पर धोखाधड़ी वाले नंबरों को कैसे ब्लॉक करवाएं?",
+    "language": "hi",
+    "expected_kb_id": "kb_chakshu_citizen_spam_reporting",
+    "required_facts": [
+      "Chakshu",
+      "sancharsaathi.gov.in",
+      "spam"
+    ]
+  },
+  {
+    "id": "hq_41",
+    "question": "సంచార్ సాథీ చక్షు పోర్టల్ లో స్పామ్ ఎలా రిపోర్ట్ చేయాలి?",
+    "language": "te",
+    "expected_kb_id": "kb_chakshu_citizen_spam_reporting",
+    "required_facts": [
+      "Chakshu",
+      "sancharsaathi.gov.in",
+      "spam"
+    ]
+  },
+  {
+    "id": "hq_42",
+    "question": "డబ్బులు పోకముందే మోసగాడి నంబర్ ను ఎలా రిపోర్ట్ చేయాలి?",
+    "language": "te",
+    "expected_kb_id": "kb_chakshu_citizen_spam_reporting",
+    "required_facts": [
+      "Chakshu",
+      "sancharsaathi.gov.in",
+      "spam"
+    ]
+  },
+  {
+    "id": "hq_43",
+    "question": "How to check how many active SIM cards are registered on my Aadhaar using TAFCOP?",
+    "language": "en",
+    "expected_kb_id": "kb_tafcop_sim_verification",
+    "required_facts": [
+      "TAFCOP",
+      "Aadhaar",
+      "connections"
+    ]
+  },
+  {
+    "id": "hq_44",
+    "question": "What to do if unknown mobile numbers are linked to my Aadhaar?",
+    "language": "en",
+    "expected_kb_id": "kb_tafcop_sim_verification",
+    "required_facts": [
+      "TAFCOP",
+      "Aadhaar",
+      "connections"
+    ]
+  },
+  {
+    "id": "hq_45",
+    "question": "TAFCOP पोर्टल पर आधार से जुड़े अनजान सिम कार्ड की जांच कैसे करें?",
+    "language": "hi",
+    "expected_kb_id": "kb_tafcop_sim_verification",
+    "required_facts": [
+      "TAFCOP",
+      "Aadhaar",
+      "connections"
+    ]
+  },
+  {
+    "id": "hq_46",
+    "question": "आधार पर जारी फर्जी नंबरों को कैसे बंद करवाएं?",
+    "language": "hi",
+    "expected_kb_id": "kb_tafcop_sim_verification",
+    "required_facts": [
+      "TAFCOP",
+      "Aadhaar",
+      "connections"
+    ]
+  },
+  {
+    "id": "hq_47",
+    "question": "ఆధార్‌పై ఎన్ని సిమ్ కార్డులు ఉన్నాయో ఎలా తెలుసుకోవాలి?",
+    "language": "te",
+    "expected_kb_id": "kb_tafcop_sim_verification",
+    "required_facts": [
+      "TAFCOP",
+      "Aadhaar",
+      "connections"
+    ]
+  },
+  {
+    "id": "hq_48",
+    "question": "తెలియని నంబర్లు నా ఆధార్‌పై ఉంటే ఎలా తొలగించాలి?",
+    "language": "te",
+    "expected_kb_id": "kb_tafcop_sim_verification",
+    "required_facts": [
+      "TAFCOP",
+      "Aadhaar",
+      "connections"
+    ]
+  },
+  {
+    "id": "hq_49",
+    "question": "How do I block, freeze, or disable my UPI ID if it is compromised?",
+    "language": "en",
+    "expected_kb_id": "kb_how_to_block_upi_id",
+    "required_facts": [
+      "block",
+      "UPI",
+      "app"
+    ]
+  },
+  {
+    "id": "hq_50",
+    "question": "Can I disable UPI services through my bank mobile app?",
+    "language": "en",
+    "expected_kb_id": "kb_how_to_block_upi_id",
+    "required_facts": [
+      "block",
+      "UPI",
+      "app"
+    ]
+  },
+  {
+    "id": "hq_51",
+    "question": "यूपीआई आईडी को तुरंत ब्लॉक या डी-लिंक कैसे करें?",
+    "language": "hi",
+    "expected_kb_id": "kb_how_to_block_upi_id",
+    "required_facts": [
+      "block",
+      "UPI",
+      "app"
+    ]
+  },
+  {
+    "id": "hq_52",
+    "question": "बैंक ऐप से यूपीआई सेवा कैसे बंद करें?",
+    "language": "hi",
+    "expected_kb_id": "kb_how_to_block_upi_id",
+    "required_facts": [
+      "block",
+      "UPI",
+      "app"
+    ]
+  },
+  {
+    "id": "hq_53",
+    "question": "యూపీఐ ఐడీ ఎలా బ్లాక్ చేయాలి లేదా నిలిపివేయాలి?",
+    "language": "te",
+    "expected_kb_id": "kb_how_to_block_upi_id",
+    "required_facts": [
+      "block",
+      "UPI",
+      "app"
+    ]
+  },
+  {
+    "id": "hq_54",
+    "question": "బ్యాంక్ యాప్ ద్వారా యూపీఐ ని ఎలా ఆపవచ్చు?",
+    "language": "te",
+    "expected_kb_id": "kb_how_to_block_upi_id",
+    "required_facts": [
+      "block",
+      "UPI",
+      "app"
+    ]
+  },
+  {
+    "id": "hq_55",
+    "question": "What is the emergency helpline number to block State Bank of India SBI debit card?",
+    "language": "en",
+    "expected_kb_id": "kb_emergency_freeze_sbi",
+    "required_facts": [
+      "SBI",
+      "1800 1234",
+      "freeze"
+    ]
+  },
+  {
+    "id": "hq_56",
+    "question": "How do I freeze my SBI netbanking account immediately?",
+    "language": "en",
+    "expected_kb_id": "kb_emergency_freeze_sbi",
+    "required_facts": [
+      "SBI",
+      "1800 1234",
+      "freeze"
+    ]
+  },
+  {
+    "id": "hq_57",
+    "question": "एसबीआई (SBI) डेबिट कार्ड ब्लॉक करने का आपातकालीन नंबर क्या है?",
+    "language": "hi",
+    "expected_kb_id": "kb_emergency_freeze_sbi",
+    "required_facts": [
+      "SBI",
+      "1800 1234",
+      "freeze"
+    ]
+  },
+  {
+    "id": "hq_58",
+    "question": "एसबीआई बैंक खाते को तत्काल फ्रीज कैसे करवाएं?",
+    "language": "hi",
+    "expected_kb_id": "kb_emergency_freeze_sbi",
+    "required_facts": [
+      "SBI",
+      "1800 1234",
+      "freeze"
+    ]
+  },
+  {
+    "id": "hq_59",
+    "question": "ఎస్బీఐ (SBI) ఖాతా లేదా ఏటీఎం కార్డును వెంటనే ఎలా బ్లాక్ చేయాలి?",
+    "language": "te",
+    "expected_kb_id": "kb_emergency_freeze_sbi",
+    "required_facts": [
+      "SBI",
+      "1800 1234",
+      "freeze"
+    ]
+  },
+  {
+    "id": "hq_60",
+    "question": "ఎస్బీఐ కస్టమర్ కేర్ ఎమర్జెన్సీ నంబర్ ఎంత?",
+    "language": "te",
+    "expected_kb_id": "kb_emergency_freeze_sbi",
+    "required_facts": [
+      "SBI",
+      "1800 1234",
+      "freeze"
+    ]
+  }
+]

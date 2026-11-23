@@ -11,9 +11,9 @@ def test_assistant_english_response():
 
     assert res.verdict == "HIGH RISK"
     assert res.language == "en"
-    assert "High Risk Scam Warning" in res.reply
-    assert "What Looks Suspicious?" in res.reply
-    assert "What NOT To Do" in res.reply
+    assert "High Risk" in res.reply
+    assert "Key Malicious Indicators" in res.reply or "What Looks Suspicious?" in res.reply
+    assert "Prohibited Actions" in res.reply or "What NOT To Do" in res.reply
     assert "1930" in res.reply
 
 def test_assistant_telugu_query():

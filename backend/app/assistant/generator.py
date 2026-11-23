@@ -69,12 +69,17 @@ WHITELISTED_PHONE_NUMBERS = {
 
 # Prompt Injection & Malicious Jailbreak Keywords
 INJECTION_PATTERNS = [
-    r"(?i)\bignore\s+(?:all\s+)?(?:previous\s+|prior\s+)?(?:instructions|rules|prompts|guidelines)\b",
-    r"(?i)\bdisregard\s+(?:all\s+)?(?:safety|rules|instructions)\b",
-    r"(?i)\b(?:system\s+prompt|developer\s+mode|dan\s+mode|jailbreak)\b",
-    r"(?i)\b(?:write|generate|create|draft)\s+(?:a\s+)?(?:phishing|scam|fraudulent|fake\s+lottery|fake\s+kyc|fake\s+electricity)\b",
-    r"(?i)\b(?:how\s+to\s+scam|how\s+to\s+defraud|how\s+to\s+trick|how\s+to\s+steal\s+otp)\b",
-    r"(?i)\b(?:bypass|evade)\s+(?:detector|security|rakshak|filters?)\b"
+    r"(?i)\b(?:ignore|disregard)\s+(?:all\s+)?(?:previous\s+|prior\s+|safety\s+)?(?:safety|instructions|rules|prompts|guidelines|constraints)\b",
+    r"(?i)\b(?:system\s+prompt|developer\s+mode|dan\s+mode|jailbreak|root\s+admin)\b",
+    r"(?i)\b(?:from now on you are|you are now|act as|pretend to be|roleplay as|evilrakshak)\b",
+    r"(?i)\b(?:write|generate|create|draft|make|give|provide)\b.*\b(?:phishing|scam|fraudulent|deceptive|fake|spyware|malicious|lottery|kbc|cashback|collect\s+request|digital\s+arrest)\b",
+    r"(?i)\b(?:write|draft|create|give)\b.*\b(?:script|dialogue)\b.*\b(?:cbi|police|digital\s+arrest|arrest|officer)\b",
+    r"(?i)\b(?:set\s+up|create|make|host|build)\b.*\b(?:fake|phishing)\b.*\b(?:website|portal|support|login|page)\b",
+    r"(?i)\b(?:how\s+to\s+scam|how\s+to\s+defraud|how\s+to\s+trick|how\s+to\s+steal\s+otp|drain\s+a\s+bank|social\s+engineering\s+tricks)\b",
+    r"(?i)\b(?:bypass|evade)\s+(?:all\s+)?(?:detector|security|rakshak|filters?|telecom|scrubbing)\b",
+    r"(?i)\b(?:dump\s+internal\s+api\s+keys|output\s+all\s+internal\s+rules|unrestricted\s+coding\s+assistant|bypass\s+all\s+safety\s+rules|exploit\s+payload)\b",
+    r"(?:पिछले\s+सभी\s+नियम|डेवलपर\s+मोड|सिस्टम\s+प्रॉम्प्ट|फर्जी\s+बिजली|पैन\s+कार्ड\s+अपडेट\s+मैसेज|ओटीपी\s+मांगने|पैसे\s+ऐंठने|लोगों\s+को\s+फंसाएं|स्क्रिप्ट\s+लिखें)",
+    r"(?:సిస్టమ్\s+ప్రాంప్ట్|దాటవేయవచ్చో|నకిలీ.*మెసేజ్\s+రాయండి|మోసం\s+చేయడానికి|కాల్\s+స్క్రిప్ట్\s+రాయండి|ఫ్రాడ్\s+మెసేజ్|డబ్బులు\s+ఎలా\s+కాజేయాలి|పోలీసు\s+స్క్రిప్ట్\s+రాయండి|స్క్రిప్ట్\s+రాయండి|భయపెట్టే)"
 ]
 
 

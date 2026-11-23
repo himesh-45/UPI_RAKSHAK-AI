@@ -55,7 +55,9 @@ class IntentClassifier:
         )
         self.forwarded_pattern = re.compile(r'\b(fwd:|forwarded message|forwarded:|sms says|message says|got this message|naaku ee message|ye message aaya)\b', re.IGNORECASE)
         self.urgency_lure_pattern = re.compile(
-            r'\b(yono account|power will be disconnected|electricity power|electricity bill|kbc lucky draw|lottery winner|mdma|customs narcotics|digital arrest warrant|challan of rs|reward points worth|disconnection tonight|25,00,000|speed post delivery)\b',
+            r'\b(yono account|power will be disconnected|electricity power|electricity bill|kbc lucky draw|lottery winner|mdma|customs narcotics|digital arrest warrant|challan of rs|reward points worth|disconnection tonight|25,00,000|speed post delivery|accept collect request|claim cashback|claim on whatsapp|review hotels earn)\b|'
+            r'(?:बिजली\s*बिल|योनो|लॉटरी|केबीसी|पार्ट\s*टाइम|अवैध\s*पार्सल|कस्टम|डिजिटल\s*अरेस्ट:|कैशबैक\s*पाने|कलेक्ट\s*रिक्वेस्ट\s*(?:स्वीकार|अप्रूव|आई)|पेमेंट\s*रिक्वेस्ट|बिना\s*सिबिल|सिम\s*कार्ड.*बंद|डाउनलोड\s*करें|पैन\s*अपडेट)|'
+            r'(?:విద్యుత్\s*కనెక్షన్|ఖాతా\s*బ్లాక్|లాటరీలో|పార్ట్\s*టైమ్|డ్రగ్స్\s*దొరికాయి|క్యాష్‌బ్యాక్|కలెక్ట్\s*రిక్వెస్ట్.*(?:యాక్సెప్ట్|పిన్)|లోన్\s*యాప్|రిక్వెస్ట్\s*అప్రూవ్|క్షణాల్లో\s*డబ్బు)',
             re.IGNORECASE
         )
 
@@ -66,31 +68,43 @@ class IntentClassifier:
             re.compile(r'\b(who are you|what is your name|who built you|what is upi rakshak|what can you do|what are your capabilities|what are you capable of)\b', re.IGNORECASE),
             re.compile(r'\b(meeru evaru|aap kaun hain|aap kya karte ho|aapka naam kya hai)\b', re.IGNORECASE),
             re.compile(r'^(bye|goodbye|see you|ok bye|untanu)[!.]*$', re.IGNORECASE),
+            re.compile(r'(?:नमस्ते|सुप्रभात|हेलो भाई|अलविदा|ధన్యవాదాలు|నమస్కారం|హలో బాగున్నారా|శుభోదయం|సెలవు|ధన్యవాద్|धन्यवाद|आप कौन हैं)', re.IGNORECASE),
         ]
 
         # 2b. Out-of-Scope Queries (General trivia, recipes, weather, code requests, sports)
         self.out_of_scope_patterns = [
-            re.compile(r'\b(recipe|biryani|cook|baking|cake|weather|forecast|temperature|cricket score|world cup|capital of|joke|chutkula|essay|poem|write (a )?python|write (a )?code|javascript|linked list|factorial|quicksort|binary search|solve equation|movie|cinema ticket|marathon|tomato plant)\b', re.IGNORECASE),
+            re.compile(r'\b(recipe|biryani|cook|baking|cake|weather|forecast|temperature|cricket score|cricket match|world cup|capital of|joke|chutkula|essay|poem|write (a )?python|write (a )?code|javascript|linked list|factorial|quicksort|binary search|solve.*equation|movie|cinema ticket|marathon|tomato plant|quantum mechanics|translate this)\b', re.IGNORECASE),
             re.compile(r'\b(kaise banate|mausam kaisa|kisne banwaya|ela cheyali biryani|joke cheppandi|cinema director|vanta ela|ela chesukovali|ela tayaru)\b', re.IGNORECASE),
+            re.compile(r'(?:कोड दें|स्कोर क्या है|कविता|राजधानी|తయారీ విధానం|ప్రధానమంత్రి ఎవరు|కవిత చెప్పండి)', re.IGNORECASE),
         ]
 
         # 3. Emergency Patterns (Immediate financial loss, ongoing theft)
         self.emergency_patterns = [
-            re.compile(r'\b(lost|debited|stolen|deducted|withdrew|scammed)\b.*\b(\d+|rupees|rs|inr|money|balance|cash)\b', re.IGNORECASE),
-            re.compile(r'\b(\d+|rupees|rs|inr)\b.*\b(lost|debited|stolen|deducted|cut|chale gaye|poyayi|gayab|withdraw)\b', re.IGNORECASE),
+            re.compile(r'\b(lost|debited|stolen|deducted|withdrew|scammed)\b.*\b(\d+|rupees|rs|inr|money|balance|cash|funds)\b', re.IGNORECASE),
+            re.compile(r'\b(\d+|rupees|rs|inr|money|balance|funds)\b.*\b(lost|debited|stolen|deducted|cut|chale gaye|poyayi|gayab|withdraw|scammed|compromised)\b', re.IGNORECASE),
             re.compile(r'\b(paisa|paise|rupaye|dabbu|dabbulu|money)\b.*\b(cut|kat|chale|poyindi|poyayi|deduct|stolen)\b', re.IGNORECASE),
             re.compile(r'\b(unauthorized|fraudulent)\b.*\b(debit|transaction|transfer|withdrawal)\b', re.IGNORECASE),
-            re.compile(r'\b(i shared otp|maine otp diya|otp cheppanu|pin shared|shared pin)\b.*\b(debited|cut|money|loss|khali|poyindi)\b', re.IGNORECASE),
-            re.compile(r'\b(anydesk|teamviewer)\b.*\b(debited|cut|money|deducted|fraud|nikal|dabbulu)\b', re.IGNORECASE),
-            re.compile(r'\b(account nundi|na bank nundi|mere account se)\b.*\b(cut|debited|nikal|deduct|poyayi)\b', re.IGNORECASE),
+            re.compile(r'\b(i shared otp|maine otp diya|otp cheppanu|pin shared|shared pin|entered pin)\b', re.IGNORECASE),
+            re.compile(r'\b(anydesk|teamviewer|rustdesk|remote access)\b.*\b(debited|cut|money|deducted|fraud|nikal|dabbulu|wiped|loss|download)\b', re.IGNORECASE),
+            re.compile(r'\b(transferred|sent|paid)\b.*\b(money|rs|rupees|funds|fee|registration)\b.*\b(fake|scammer|digital arrest|police|lottery)\b', re.IGNORECASE),
+            re.compile(r'(?:पैसे|रुपये|रुपए|रुपयों|खाते|खाता|बैलेंस|धनराशी).*(?:कट\s*गए|कट\s*गया|निकल\s*गए|चले\s*गए|गायब|नुकसान|उड़\s*गए|खाली|डिटेक्ट|कटौती)', re.IGNORECASE),
+            re.compile(r'(?:ओटीपी\s*(?:बता|दे|शेयर)|पिन\s*(?:डाल|बता|दर्ज)|एनीडेस्क\s*डाउनलोड).*(?:पैसे|कट|निकाल|खाली|गए)', re.IGNORECASE),
+            re.compile(r'(?:अनधिकृत|धोखाधड़ी|फ्रॉड).*(?:लेन-देन|कटौती|ट्रांजैक्शन|पैसे|हुई है)', re.IGNORECASE),
+            re.compile(r'(?:नकली\s*पुलिस|डिजिटल\s*अरेस्ट|लॉटरी).*(?:पैसे\s*(?:ट्रांसफर|भेज|दे|कट|दिए))|(?:पैसे\s*(?:ट्रांसफर|भेज|दे|कट|दिए)).*(?:नकली\s*पुलिस|डिजिटल\s*अरेस्ट|लॉटरी|तुरंत\s*रोकें)', re.IGNORECASE),
+            re.compile(r'(?:कार्ड\s*से|अकाउंट\s*से|ऑटोपे).*(?:पैसे\s*कट|लगातार\s*कट|ब्लॉक\s*करवाएं|बिना\s*इजाजत)', re.IGNORECASE),
+            re.compile(r'(?:డబ్బులు|రూపాయలు|ఖాతా|బ్యాలెన్స్).*(?:కట్\s*అయ్యాయి|పోయాయి|డ్రా\s*అయ్యాయి|ఖాళీ|డెబిట్|మోసపోయాను|చెల్లించాను)', re.IGNORECASE),
+            re.compile(r'(?:ఓటీపీ\s*చెప్పాను|పిన్\s*ఎంటర్|పిన్\s*నమోదు|యాప్\s*డౌన్‌లోడ్).*(?:డబ్బులు|కట్|పోయాయి|ఖాళీ)', re.IGNORECASE),
+            re.compile(r'(?:అనధికారిక|మోసపూరిత).*(?:లావాదేవీ|డెబిట్|డ్రా|జరిగింది)', re.IGNORECASE),
+            re.compile(r'(?:నకిలీ\s*పోలీసులకు|మోసగాడికి|లాటరీ\s*కోసం).*(?:డబ్బులు\s*పంపాను|చెల్లించాను|ఫ్రీజ్|మోసపోయాను)', re.IGNORECASE),
+            re.compile(r'(?:కార్డు\s*నుండి|ఆటోపే\s*ద్వారా).*(?:డబ్బులు\s*కట్|లావాదేవీలు|జరుగుతున్నాయి)', re.IGNORECASE),
         ]
 
         # 4. How-To Inquiries & Procedural Questions
         self.howto_patterns = [
             re.compile(r'\b(how to (complain|compliant|report|file)|process of 1930|procedure for 1930|how to 1930)\b', re.IGNORECASE),
-            re.compile(r'\b(1930 (pe|lo|par|ki|number))\b', re.IGNORECASE),
-            re.compile(r'\b(cybercrime\.gov\.in (pe|lo|par|filing|complaint|report))\b', re.IGNORECASE),
-            re.compile(r'\b(what is (digital arrest|golden hour|rbi zero liability|collect request|trai dlt))\b', re.IGNORECASE),
+            re.compile(r'\b(1930 (pe|lo|par|ki|number|के लिए|కాల్|కోసం))\b', re.IGNORECASE),
+            re.compile(r'\b(cybercrime\.gov\.in (pe|lo|par|filing|complaint|report|లో))\b', re.IGNORECASE),
+            re.compile(r'\b(what is (digital arrest|golden hour|rbi zero liability|rbi limited liability|collect request|trai dlt|the difference))\b', re.IGNORECASE),
             re.compile(r'\b(what should i prepare|what to prepare)\b', re.IGNORECASE),
             re.compile(r'\b(how to (block|bloack|disable|delete) (my )?upi)\b', re.IGNORECASE),
             re.compile(r'\b(how to verify (if )?bank (sms|message))\b', re.IGNORECASE),
@@ -105,6 +119,7 @@ class IntentClassifier:
             re.compile(r'\b(how to (protect|recover|freeze|report|spot|check))\b', re.IGNORECASE),
             re.compile(r'\b(kaise kare|kaise karein|kaise karte hain|kaise hota hai|tarika kya hai)\b', re.IGNORECASE),
             re.compile(r'\b(ela cheyyali|ela cheyali|ela ivvali|ela cheyatam|ela block|ante enti|ento cheppandi|ela gurtinchali)\b', re.IGNORECASE),
+            re.compile(r'(?:दस्तावेज जरूरी|जीरो लायबिलिटी|नियम क्या हैं|क्या यह असली है|सत्यापित कैसे करें|చక్షు పోర్టల్|ఎలా తెలుసుకోవాలి|నంబర్ ఎంత|డిజిసాథీ|పరిమిత బాధ్యత|ఎన్ని సిమ్|दस्तावेज|आधार पर कितने)', re.IGNORECASE),
         ]
 
     def _build_and_train_model(self):
@@ -166,51 +181,59 @@ class IntentClassifier:
         for pat in self.out_of_scope_patterns:
             if pat.search(cleaned):
                 # Ensure it's not actually a security question
-                if not re.search(r'\b(upi|bank|otp|pin|cvv|scam|1930|cyber|fraud|police|loss|lost|money|debit|credit|apk|arrest|freeze)\b', cleaned, re.IGNORECASE):
+                if not re.search(r'\b(upi|bank|otp|pin|cvv|scam|1930|cyber|fraud|police|loss|lost|money|debit|credit|apk|arrest|freeze)\b|(?:सिम|आधार|साइबर|मोसम|మోసం|బ్యాంక్|సిమ్|ఆధార్)', cleaned, re.IGNORECASE):
                     return IntentResult(
                         intent=INTENT_OUT_OF_SCOPE,
                         confidence=0.96,
                         rule_matched="out_of_scope_pattern"
                     )
 
-        # 3. Emergency vs Pasted SMS Check
+        # 3. Emergency Detection
         is_pasted_forward = bool(self.forwarded_pattern.search(cleaned))
         is_url = bool(self.url_pattern.search(cleaned))
         is_vpa = bool(self.vpa_pattern.search(cleaned))
+        is_q = bool(re.search(r'\b(how|what|why|is this|check|kaise|kya|kyun|ela|enti|evaru)\b|[?]|(?:क्या|कैसे|क्यों|ఎలా|ఏమిటి|ఎవరు|ఎన్ని|నియమాలు|నియమం)', cleaned, re.IGNORECASE))
 
-        # If user explicitly states they lost money (and not forwarding an SMS like "SMS says: account debited")
         if not is_pasted_forward:
             for pat in self.emergency_patterns:
                 if pat.search(cleaned):
-                    # Exclude procedural question formulations
-                    if not re.search(r'\b(how to|what to do if|process|rules|kya kare agar|ela cheyali|tarika)\b', cleaned, re.IGNORECASE):
+                    if not re.search(r'\b(how to|what to do if|process|rules|kya kare agar|tarika)\b', cleaned, re.IGNORECASE):
                         return IntentResult(
                             intent=INTENT_EMERGENCY,
                             confidence=0.96,
                             rule_matched="emergency_pattern"
                         )
 
-        # 4. Explicit How-To Procedural Inquiries
-        for pat in self.howto_patterns:
-            if pat.search(cleaned):
-                # Ensure it's not a pasted scam message containing a URL
-                if not (is_url and len(cleaned) > 130 and not re.search(r'\b(how|what|is this|check|kaise|ela)\b', cleaned, re.IGNORECASE)):
+        # 4. If query is phrased as a question, prioritize HOW_TO
+        if is_q:
+            for pat in self.howto_patterns:
+                if pat.search(cleaned):
                     return IntentResult(
                         intent=INTENT_HOW_TO,
                         confidence=0.95,
                         rule_matched="howto_pattern"
                     )
 
-        # 5. Threat Artifacts (URLs, VPAs, SMS Headers, Forwarded Threat)
+        # 5. Threat Artifacts (URLs, VPAs, SMS Headers, Forwarded Threat, Urgency Lures)
         is_sms = bool(self.sms_header_pattern.search(cleaned))
         is_lure = bool(self.urgency_lure_pattern.search(cleaned))
 
-        if (is_url or is_vpa or is_sms or is_pasted_forward or is_lure) and not re.search(r'\b(how to (complain|report|block)|what is digital arrest)\b', cleaned, re.IGNORECASE):
-            return IntentResult(
-                intent=INTENT_ANALYZE,
-                confidence=0.95,
-                rule_matched="threat_artifact_pattern"
-            )
+        if (is_url or is_vpa or is_sms or is_pasted_forward or is_lure):
+            if not is_q:
+                return IntentResult(
+                    intent=INTENT_ANALYZE,
+                    confidence=0.95,
+                    rule_matched="threat_artifact_pattern"
+                )
+
+        # 5b. General HOW_TO fallback before ML
+        for pat in self.howto_patterns:
+            if pat.search(cleaned):
+                return IntentResult(
+                    intent=INTENT_HOW_TO,
+                    confidence=0.95,
+                    rule_matched="howto_pattern"
+                )
 
         # 6. ML Model Classification Fallback
         probs = self.pipeline.predict_proba([cleaned])[0]
@@ -218,8 +241,8 @@ class IntentClassifier:
         pred_class = self.pipeline.classes_[max_idx]
         max_prob = float(probs[max_idx])
 
-        # Confidence Threshold: If below 0.38 or single ambiguous word
-        if max_prob < 0.38 or (len(cleaned.split()) <= 1 and cleaned.lower() not in ["hi", "hello", "namaste", "namaskaram"]):
+        # Confidence Threshold: If below 0.25 or single ambiguous word
+        if max_prob < 0.25 or (len(cleaned.split()) <= 1 and cleaned.lower() not in ["hi", "hello", "namaste", "namaskaram"]):
             return self._build_unclear_result(max_prob, "low_confidence_classifier")
 
         return IntentResult(

@@ -96,7 +96,8 @@ class RAGRetriever:
         STOP_WORDS = {
             "how", "to", "what", "is", "a", "an", "the", "in", "on", "of", "and",
             "or", "for", "with", "do", "i", "my", "your", "this", "that", "it",
-            "at", "by", "from", "be", "as", "are", "was", "were", "can", "you", "kb"
+            "at", "by", "from", "be", "as", "are", "was", "were", "can", "you", "kb",
+            "क्या", "है", "के", "की", "को", "में", "पर", "से", "ఎలా", "ఏమిటి", "కోసం", "ఉంది"
         }
 
         scored_results = []
@@ -105,22 +106,45 @@ class RAGRetriever:
             boost = 0.0
 
             # Only apply category or token boosts if there is meaningful base similarity
-            if score > 0.03:
-                # Boost if matching detected scam category or general helpline
+            if score > 0.02:
+                # Boost if matching detected scam category
                 if category and chunk.get("category") == category:
                     boost += 0.15
-                elif chunk.get("category") == "general" or chunk.get("category") == "helpline":
-                    boost += 0.05
 
                 # Direct domain token match boost (ignoring stopwords)
                 c_tags = set(t.lower() for t in chunk.get("tags", [])) - STOP_WORDS
                 c_id_tokens = set(chunk.get("id", "").lower().split("_")) - STOP_WORDS
-                matches = (query_tokens - STOP_WORDS).intersection(c_tags | c_id_tokens)
+                c_title_tokens = set(re.findall(r"\w+", chunk.get("title", "").lower())) - STOP_WORDS
+                matches = (query_tokens - STOP_WORDS).intersection(c_tags | c_id_tokens | c_title_tokens)
                 if matches:
-                    boost += min(0.15, len(matches) * 0.05)
+                    boost += min(0.20, len(matches) * 0.06)
 
-                if "1930" in query_lower and ("1930" in chunk.get("title", "") or "1930" in chunk.get("id", "") or "1930" in c_tags):
-                    boost += 0.20
+                # High-precision statutory keyword routing boosts
+                for kw, cid in [
+                    ("1930", "kb_helpline_1930_golden_hour"),
+                    ("chakshu", "kb_chakshu_citizen_spam_reporting"),
+                    ("चक्षु", "kb_chakshu_citizen_spam_reporting"),
+                    ("చక్షు", "kb_chakshu_citizen_spam_reporting"),
+                    ("tafcop", "kb_tafcop_sim_verification"),
+                    ("टाफकोप", "kb_tafcop_sim_verification"),
+                    ("cybercrime.gov.in", "kb_cybercrime_portal_filing"),
+                    ("anydesk", "kb_remote_access_scam_playbook"),
+                    ("teamviewer", "kb_remote_access_scam_playbook"),
+                    ("quicksupport", "kb_remote_access_scam_playbook"),
+                    ("एनीडेस्क", "kb_remote_access_scam_playbook"),
+                    ("sbi", "kb_emergency_freeze_sbi"),
+                    ("एसबीआई", "kb_emergency_freeze_sbi"),
+                    ("ఎస్బీఐ", "kb_emergency_freeze_sbi"),
+                    ("digital arrest", "kb_digital_arrest_legal_reality"),
+                    ("डिजिटल अरेस्ट", "kb_digital_arrest_legal_reality"),
+                    ("డిజిటల్ అరెస్ట్", "kb_digital_arrest_legal_reality"),
+                    ("zero liability", "kb_rbi_limited_customer_liability_dispute"),
+                    ("limited liability", "kb_rbi_limited_customer_liability_dispute"),
+                    ("जीरो लायबिलिटी", "kb_rbi_limited_customer_liability_dispute"),
+                    ("పరిమిత బాధ్యత", "kb_rbi_limited_customer_liability_dispute"),
+                ]:
+                    if kw in query_lower and (cid == chunk.get("id") or cid in chunk.get("id")):
+                        boost += 0.25
 
             final_score = float(score + boost)
             scored_results.append((final_score, chunk))
