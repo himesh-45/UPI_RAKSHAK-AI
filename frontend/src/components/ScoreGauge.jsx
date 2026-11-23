@@ -46,7 +46,7 @@ export default function ScoreGauge({ score = null, verdict = null }) {
     gradStart = 'var(--border)';
     gradEnd = 'var(--border)';
     pillStyle = 'bg-navy text-ink-muted border-border';
-    badgeText = 'Waiting for input';
+    badgeText = 'Waiting for a message';
     Icon = Clock;
   } else if (safeScore >= 70) {
     gradStart = 'var(--verdict-suspicious)';

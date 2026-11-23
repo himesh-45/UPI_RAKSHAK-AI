@@ -2,10 +2,10 @@
   "appName": "UPI Rakshak AI",
   "appTagline": "Real-Time Evidence-Based Digital-Payment Scam Detection & Prevention Platform",
   "nav": {
-    "analyzer": "Threat Analyzer",
-    "assistant": "AI Assistant",
-    "dashboard": "Admin Intelligence",
-    "about": "How It Works"
+    "analyzer": "Check",
+    "assistant": "Assistant",
+    "dashboard": "Insights",
+    "about": "About"
   },
   "hero": {
     "badge": "Offline-First • Evidence-Based • Multilingual (EN / HI / TE)",
