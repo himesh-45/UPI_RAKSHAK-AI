@@ -64,7 +64,7 @@ export default function VoiceInput({ onTranscript, selectedLang = 'en-IN', onLan
       <select
         value={selectedLang}
         onChange={(e) => onLangChange && onLangChange(e.target.value)}
-        className="text-[11px] font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 rounded-lg px-2 py-1 focus:ring-1 focus:ring-indigo-500"
+        className="text-[11px] font-semibold bg-[#0B1530] text-ink border border-[#1E3A5F] rounded-lg px-2 py-1 focus:border-teal-400 focus:ring-1 focus:ring-teal-400 focus:outline-hidden"
       >
         <option value="en-IN">English (India)</option>
         <option value="hi-IN">हिंदी (India)</option>
@@ -76,10 +76,10 @@ export default function VoiceInput({ onTranscript, selectedLang = 'en-IN', onLan
         type="button"
         onClick={toggleListening}
         title={supported ? (isListening ? 'Stop listening' : 'Start voice input') : 'Voice input not supported'}
-        className={`p-2 rounded-xl transition flex items-center justify-center ${
+        className={`p-2 rounded-xl border transition flex items-center justify-center ${
           isListening
-            ? 'bg-rose-600 text-white animate-pulse shadow-lg ring-2 ring-rose-400'
-            : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
+            ? 'bg-verdict-danger border-verdict-danger text-white animate-pulse shadow-lg ring-2 ring-verdict-danger/50'
+            : 'bg-[#0B1530] border-[#1E3A5F] text-ink-muted hover:text-ink hover:border-teal-400/50'
         }`}
       >
         {isListening ? <Mic className="w-4 h-4" /> : <MicOff className="w-4 h-4" />}

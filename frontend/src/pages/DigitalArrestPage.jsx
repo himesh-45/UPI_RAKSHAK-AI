@@ -70,22 +70,22 @@ export default function DigitalArrestPage({ onOpenPreFilled1930 }) {
   return (
     <div className="max-w-4xl mx-auto px-4 py-8 space-y-8 animate-fade-in">
       {/* Top Banner: National Cybercrime Advisory */}
-      <div className="p-5 rounded-3xl bg-gradient-to-r from-rose-950/40 via-amber-950/20 to-slate-900 border border-rose-800/40 shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div className="p-5 rounded-3xl bg-gradient-to-r from-[#0F1D3A] via-[#0B1530] to-[#050A18] border border-verdict-danger/40 border-t-2 border-t-gold-400 shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="flex items-start gap-3.5">
-          <div className="p-3 rounded-2xl bg-rose-500/20 text-rose-400 border border-rose-500/30">
+          <div className="p-3 rounded-2xl bg-verdict-danger/20 text-verdict-danger border border-verdict-danger/30">
             <Scale className="w-6 h-6" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-rose-500/30 text-rose-300 border border-rose-500/50">
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-verdict-danger/30 text-verdict-danger border border-verdict-danger/50">
                 Official Legal Reality Check
               </span>
-              <span className="text-xs text-slate-400 font-semibold">MHA / Cyber Dost Advisory</span>
+              <span className="text-xs text-gold-300 font-semibold">MHA / Cyber Dost Advisory</span>
             </div>
-            <h2 className="text-lg font-black text-white mt-1">
+            <h2 className="text-lg font-black text-ink mt-1">
               Indian Law Does NOT Recognize "Digital Arrest"
             </h2>
-            <p className="text-xs text-slate-300 mt-1 max-w-2xl leading-relaxed">
+            <p className="text-xs text-ink-muted mt-1 max-w-2xl leading-relaxed">
               No genuine police officer, CBI/ED official, or judge conducts official investigations or arrests over Skype or WhatsApp video calls. Demands to stay in a room with cameras on are psychological extortion.
             </p>
           </div>
@@ -95,7 +95,7 @@ export default function DigitalArrestPage({ onOpenPreFilled1930 }) {
           href="https://cybercrime.gov.in"
           target="_blank"
           rel="noopener noreferrer"
-          className="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs shadow-lg shadow-rose-600/30 transition shrink-0 flex items-center gap-1.5"
+          className="px-4 py-2 rounded-xl bg-verdict-danger hover:bg-rose-500 text-white font-bold text-xs shadow-lg shadow-verdict-danger/30 transition shrink-0 flex items-center gap-1.5"
         >
           <PhoneCall className="w-3.5 h-3.5" /> Helpline 1930
         </a>
@@ -103,17 +103,17 @@ export default function DigitalArrestPage({ onOpenPreFilled1930 }) {
 
       {/* Header & Overview */}
       <div className="text-center space-y-2">
-        <h1 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+        <h1 className="text-2xl sm:text-3xl font-black text-ink font-display">
           Digital Arrest & Police Video Call Extortion Checker
         </h1>
-        <p className="text-sm text-slate-600 dark:text-slate-400 max-w-xl mx-auto">
+        <p className="text-sm text-ink-muted max-w-xl mx-auto">
           Audit suspicious calls alleging contraband parcels (FedEx/DHL/Customs), non-bailable warrants, or sham "RBI safe escrow" demands.
         </p>
       </div>
 
       {/* Pre-fill Scenarios Chips */}
       <div className="space-y-2">
-        <span className="text-xs font-bold text-slate-500 uppercase tracking-wider block">
+        <span className="text-xs font-bold text-gold-300 uppercase tracking-wider block">
           Quick Demo Scenarios (Click to Load):
         </span>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
@@ -121,17 +121,17 @@ export default function DigitalArrestPage({ onOpenPreFilled1930 }) {
             <button
               key={idx}
               onClick={() => handleSelectScenario(scen)}
-              className="p-3 text-left rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-indigo-500 dark:hover:border-indigo-500 transition shadow-xs space-y-1 group"
+              className="p-3 text-left rounded-2xl bg-[#0F1D3A]/90 border border-[#1E3A5F] hover:border-teal-400/60 transition shadow-xs space-y-1 group"
             >
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-indigo-500 transition">
+                <span className="text-xs font-bold text-ink group-hover:text-gold-300 transition">
                   {scen.title}
                 </span>
-                <span className="text-[10px] text-slate-400 font-mono">
+                <span className="text-[10px] text-ink-muted font-mono">
                   {scen.lang}
                 </span>
               </div>
-              <p className="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-2">
+              <p className="text-[11px] text-ink-muted line-clamp-2">
                 {scen.text}
               </p>
             </button>
@@ -141,22 +141,22 @@ export default function DigitalArrestPage({ onOpenPreFilled1930 }) {
 
       {/* Input Form */}
       <form onSubmit={handleEvaluate} className="space-y-4">
-        <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-2">
-          <label className="text-xs font-bold text-slate-700 dark:text-slate-300 flex items-center justify-between">
+        <div className="p-4 rounded-3xl bg-[#0F1D3A]/90 border border-[#1E3A5F] shadow-sm space-y-2">
+          <label className="text-xs font-bold text-ink flex items-center justify-between">
             <span>Paste Call Transcript, SMS, or Voice Note Transcript:</span>
-            <span className="text-[11px] text-slate-400 font-normal">English, हिंदी, తెలుగు, Hinglish</span>
+            <span className="text-[11px] text-teal-400 font-normal">English, हिंदी, తెలుగు, Hinglish</span>
           </label>
           <textarea
             rows={5}
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
             placeholder="e.g. This is Inspector Rathore from Mumbai Crime Branch. Your FedEx parcel containing MDMA drugs was seized. Stay on this Skype call..."
-            className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-3.5 text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:border-indigo-500 leading-relaxed font-sans"
+            className="w-full bg-[#070E22] border border-[#1E3A5F] rounded-2xl p-3.5 text-sm text-ink placeholder:text-ink-faint focus:outline-hidden focus:border-teal-400 focus:ring-1 focus:ring-teal-400 leading-relaxed font-sans"
           />
         </div>
 
         {error && (
-          <div className="p-3 rounded-xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900 text-xs text-rose-700 dark:text-rose-300">
+          <div className="p-3 rounded-xl bg-verdict-danger/10 border border-verdict-danger/30 text-xs text-verdict-danger">
             {error}
           </div>
         )}
@@ -164,7 +164,7 @@ export default function DigitalArrestPage({ onOpenPreFilled1930 }) {
         <button
           type="submit"
           disabled={loading}
-          className="w-full py-3.5 rounded-xl bg-gradient-to-r from-rose-600 via-indigo-600 to-indigo-700 hover:from-rose-500 hover:to-indigo-600 text-white font-extrabold text-sm shadow-lg shadow-indigo-500/20 transition-all flex items-center justify-center gap-2"
+          className="w-full py-3.5 rounded-2xl btn-gold-primary font-extrabold text-sm transition-all flex items-center justify-center gap-2"
         >
           {loading ? 'Evaluating Coercion Tactics...' : 'Audit For Digital Arrest Extortion'}
           <ArrowRight className="w-4 h-4" />
@@ -177,83 +177,83 @@ export default function DigitalArrestPage({ onOpenPreFilled1930 }) {
           {/* Main Verdict Card */}
           <div className={`p-6 rounded-3xl border shadow-lg ${
             result.verdict === 'HIGH RISK'
-              ? 'bg-rose-50 dark:bg-rose-950/30 border-rose-300 dark:border-rose-900/60'
+              ? 'bg-[#0F1D3A]/95 border-verdict-danger/40 border-t-2 border-t-verdict-danger'
               : (result.verdict === 'SUSPICIOUS'
-                  ? 'bg-amber-50 dark:bg-amber-950/30 border-amber-300 dark:border-amber-900/60'
-                  : 'bg-emerald-50 dark:bg-emerald-950/30 border-emerald-300 dark:border-emerald-900/60')
+                  ? 'bg-[#0F1D3A]/95 border-verdict-suspicious/40 border-t-2 border-t-verdict-suspicious'
+                  : 'bg-[#0F1D3A]/95 border-verdict-safe/40 border-t-2 border-t-verdict-safe')
           }`}>
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200 dark:border-slate-800">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#1E3A5F]">
               <div className="flex items-center gap-3">
                 <span className={`px-3.5 py-1.5 rounded-full text-xs font-black tracking-wider uppercase ${
                   result.verdict === 'HIGH RISK'
-                    ? 'bg-rose-600 text-white'
-                    : (result.verdict === 'SUSPICIOUS' ? 'bg-amber-500 text-white' : 'bg-emerald-600 text-white')
+                    ? 'bg-verdict-danger text-white'
+                    : (result.verdict === 'SUSPICIOUS' ? 'bg-verdict-suspicious text-white' : 'bg-verdict-safe text-white')
                 }`}>
                   {result.verdict === 'HIGH RISK' ? '🔴 DIGITAL ARREST SCAM DETECTED' : (result.verdict === 'SUSPICIOUS' ? '🟡 SUSPICIOUS COERCION' : '🟢 VERIFIED LEGITIMATE')}
                 </span>
-                <span className="text-xs font-mono font-bold text-slate-600 dark:text-slate-400">
+                <span className="text-xs font-mono font-bold text-ink-muted">
                   Risk Score: {result.risk_score}/100
                 </span>
               </div>
 
               <div className="text-right">
-                <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Detected Taxonomy</span>
-                <span className="text-xs font-bold text-slate-800 dark:text-slate-200">
+                <span className="text-[10px] text-ink-muted font-bold uppercase tracking-wider block">Detected Taxonomy</span>
+                <span className="text-xs font-bold text-gold-300">
                   {result.detected_category.replace(/_/g, ' ').toUpperCase()}
                 </span>
               </div>
             </div>
 
             {/* Plain Explanation */}
-            <div className="mt-4 text-sm text-slate-800 dark:text-slate-200 leading-relaxed font-medium">
+            <div className="mt-4 text-sm text-ink leading-relaxed font-medium">
               {result.plain_language_explanation}
             </div>
 
             {/* Legal Facts Box if High Risk */}
             {result.verdict === 'HIGH RISK' && (
-              <div className="mt-4 p-4 rounded-2xl bg-white dark:bg-slate-900/90 border border-rose-200 dark:border-rose-900/80 space-y-2">
-                <div className="flex items-center gap-2 text-rose-600 dark:text-rose-400 font-bold text-xs uppercase tracking-wider">
+              <div className="mt-4 p-4 rounded-2xl bg-[#0B1530] border border-verdict-danger/30 space-y-2">
+                <div className="flex items-center gap-2 text-verdict-danger font-bold text-xs uppercase tracking-wider">
                   <Scale className="w-4 h-4" />
                   <span>Statutory Legal Protection Reality</span>
                 </div>
-                <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
-                  Under the Bharatiya Nagarik Suraksha Sanhita (BNSS) and the Code of Criminal Procedure (CrPC), <strong>police cannot arrest citizens over video calls</strong>. Real police officers must serve physical summons, be in uniform with identifiable name tags, and provide a written arrest memo in the presence of family or independent witnesses.
+                <p className="text-xs text-ink-muted leading-relaxed">
+                  Under the Bharatiya Nagarik Suraksha Sanhita (BNSS) and the Code of Criminal Procedure (CrPC), <strong className="text-ink">police cannot arrest citizens over video calls</strong>. Real police officers must serve physical summons, be in uniform with identifiable name tags, and provide a written arrest memo in the presence of family or independent witnesses.
                 </p>
               </div>
             )}
           </div>
 
           {/* Extracted Coercion Tactics */}
-          <div className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-            <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
-              <FileWarning className="w-4 h-4 text-rose-500" />
+          <div className="p-6 rounded-3xl bg-[#0F1D3A]/90 border border-[#1E3A5F] shadow-sm space-y-4">
+            <h3 className="text-sm font-bold text-ink uppercase tracking-wider flex items-center gap-2">
+              <FileWarning className="w-4 h-4 text-verdict-danger" />
               <span>Extracted Coercion Tactics & Evidence Signals</span>
             </h3>
             <div className="space-y-2.5">
               {result.evidence.map((ev, i) => (
-                <div key={i} className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-start gap-2.5 text-xs text-slate-700 dark:text-slate-300">
+                <div key={i} className="p-3 rounded-xl bg-[#0B1530] border border-[#1E3A5F] flex items-start gap-2.5 text-xs text-ink">
                   <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase shrink-0 ${
-                    ev.severity === 'CRITICAL' ? 'bg-rose-100 dark:bg-rose-950 text-rose-700 dark:text-rose-300' : 'bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300'
+                    ev.severity === 'CRITICAL' ? 'bg-verdict-danger/20 text-verdict-danger border border-verdict-danger/30' : 'bg-verdict-suspicious/20 text-verdict-suspicious border border-verdict-suspicious/30'
                   }`}>
                     {ev.severity}
                   </span>
-                  <span>{ev.signal}</span>
+                  <span className="text-ink-muted">{ev.signal}</span>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Actionable Emergency Guidance */}
-          <div className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-            <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
-              <PhoneCall className="w-4 h-4 text-emerald-500" />
+          <div className="p-6 rounded-3xl bg-[#0F1D3A]/90 border border-[#1E3A5F] shadow-sm space-y-4">
+            <h3 className="text-sm font-bold text-teal-400 uppercase tracking-wider flex items-center gap-2">
+              <PhoneCall className="w-4 h-4 text-teal-400" />
               <span>Immediate Defense Actions</span>
             </h3>
-            <ul className="space-y-2 text-xs text-slate-700 dark:text-slate-300">
+            <ul className="space-y-2 text-xs text-ink-muted">
               {result.recommended_actions.map((act, i) => (
                 <li key={i} className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
-                  <span>{act}</span>
+                  <CheckCircle2 className="w-4 h-4 text-verdict-safe shrink-0 mt-0.5" />
+                  <span className="text-ink">{act}</span>
                 </li>
               ))}
             </ul>

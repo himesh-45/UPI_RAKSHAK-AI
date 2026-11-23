@@ -96,25 +96,25 @@ export default function JudgeTryPage() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
       
       {/* Top Banner & Title */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-6">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#1E3A5F] pb-6">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-800 text-indigo-700 dark:text-indigo-300 text-xs font-bold uppercase tracking-wider mb-2">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-400/10 border border-gold-400/30 text-gold-300 text-xs font-bold uppercase tracking-wider mb-2">
             <Sparkles className="w-3.5 h-3.5" />
             Hackathon Judge Evaluation Portal
           </div>
-          <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+          <h1 className="text-3xl font-extrabold tracking-tight text-ink font-display">
             Live Testing & Defensibility Bench
           </h1>
-          <p className="text-slate-600 dark:text-slate-400 text-sm mt-1 max-w-3xl">
+          <p className="text-ink-muted text-sm mt-1 max-w-3xl">
             Test UPI Rakshak AI live on your smartphone, run instant adversarial scenarios, or examine technical defenses against fraud evasion.
           </p>
         </div>
         <div className="flex items-center gap-3">
           <button
             onClick={() => window.print()}
-            className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bold flex items-center gap-2 transition shadow-sm"
+            className="px-4 py-2 rounded-xl bg-[#0B1530] hover:bg-[#070E22] border border-[#1E3A5F] text-ink text-xs font-bold flex items-center gap-2 transition shadow-sm"
           >
-            <Printer className="w-4 h-4" />
+            <Printer className="w-4 h-4 text-gold-300" />
             Print Judge Handout
           </button>
         </div>
@@ -123,25 +123,25 @@ export default function JudgeTryPage() {
       {/* Live QR Codes Section */}
       <div>
         <div className="flex items-center gap-2 mb-4">
-          <Smartphone className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
-          <h2 className="text-lg font-bold text-slate-900 dark:text-white">
+          <Smartphone className="w-5 h-5 text-teal-400" />
+          <h2 className="text-lg font-bold text-ink">
             Scan to Test Live on Your Phone
           </h2>
         </div>
-        <p className="text-xs text-slate-500 mb-6">
+        <p className="text-xs text-ink-muted mb-6">
           Judges can scan these QR codes using their iOS/Android camera to test the web interface or interact directly with the conversational bots.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           
           {/* Card 1: Web Interface */}
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 flex flex-col items-center text-center shadow-sm">
-            <div className="p-2 rounded-xl bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 mb-3">
+          <div className="bg-[#0F1D3A]/90 border border-[#1E3A5F] border-t-2 border-t-gold-400 rounded-3xl p-6 flex flex-col items-center text-center shadow-sm">
+            <div className="p-2 rounded-xl bg-teal-500/10 border border-teal-500/30 text-teal-300 mb-3">
               <QrCode className="w-5 h-5" />
             </div>
-            <h3 className="font-bold text-slate-900 dark:text-white text-sm">Web Application</h3>
-            <p className="text-xs text-slate-500 mt-1 mb-4">Scan to open mobile responsive client</p>
-            <div className="bg-white p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-inner">
+            <h3 className="font-bold text-ink text-sm">Web Application</h3>
+            <p className="text-xs text-ink-muted mt-1 mb-4">Scan to open mobile responsive client</p>
+            <div className="bg-white p-2.5 rounded-2xl border border-[#1E3A5F] shadow-inner">
               <img
                 src={`/api/report/generate-qr?text=${encodeURIComponent(originUrl)}`}
                 alt="Web App QR"
@@ -152,7 +152,7 @@ export default function JudgeTryPage() {
               href={originUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-4 text-xs font-bold text-indigo-600 dark:text-indigo-400 flex items-center gap-1 hover:underline"
+              className="mt-4 text-xs font-bold text-teal-400 hover:text-teal-300 flex items-center gap-1 hover:underline"
             >
               <span>{originUrl}</span>
               <ExternalLink className="w-3.5 h-3.5" />
@@ -160,13 +160,13 @@ export default function JudgeTryPage() {
           </div>
 
           {/* Card 2: Telegram Bot */}
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 flex flex-col items-center text-center shadow-sm">
-            <div className="p-2 rounded-xl bg-sky-50 dark:bg-sky-950/50 text-sky-600 dark:text-sky-400 mb-3">
+          <div className="bg-[#0F1D3A]/90 border border-[#1E3A5F] border-t-2 border-t-teal-400 rounded-3xl p-6 flex flex-col items-center text-center shadow-sm">
+            <div className="p-2 rounded-xl bg-sky-500/10 border border-sky-500/30 text-sky-400 mb-3">
               <Send className="w-5 h-5" />
             </div>
-            <h3 className="font-bold text-slate-900 dark:text-white text-sm">Telegram Bot</h3>
-            <p className="text-xs text-slate-500 mt-1 mb-4">Forward SMS or paste screenshots to @upi_rakshak_bot</p>
-            <div className="bg-white p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-inner">
+            <h3 className="font-bold text-ink text-sm">Telegram Bot</h3>
+            <p className="text-xs text-ink-muted mt-1 mb-4">Forward SMS or paste screenshots to @upi_rakshak_bot</p>
+            <div className="bg-white p-2.5 rounded-2xl border border-[#1E3A5F] shadow-inner">
               <img
                 src={`/api/report/generate-qr?text=${encodeURIComponent(telegramBotUrl)}`}
                 alt="Telegram Bot QR"
@@ -177,7 +177,7 @@ export default function JudgeTryPage() {
               href={telegramBotUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-4 text-xs font-bold text-sky-600 dark:text-sky-400 flex items-center gap-1 hover:underline"
+              className="mt-4 text-xs font-bold text-sky-400 hover:text-sky-300 flex items-center gap-1 hover:underline"
             >
               <span>t.me/upi_rakshak_bot</span>
               <ExternalLink className="w-3.5 h-3.5" />
@@ -185,13 +185,13 @@ export default function JudgeTryPage() {
           </div>
 
           {/* Card 3: WhatsApp Bot */}
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 flex flex-col items-center text-center shadow-sm">
-            <div className="p-2 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 mb-3">
+          <div className="bg-[#0F1D3A]/90 border border-[#1E3A5F] border-t-2 border-t-emerald-400 rounded-3xl p-6 flex flex-col items-center text-center shadow-sm">
+            <div className="p-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 mb-3">
               <MessageSquare className="w-5 h-5" />
             </div>
-            <h3 className="font-bold text-slate-900 dark:text-white text-sm">WhatsApp Bot</h3>
-            <p className="text-xs text-slate-500 mt-1 mb-4">Twilio Sandbox / Meta Cloud API webhook</p>
-            <div className="bg-white p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-inner">
+            <h3 className="font-bold text-ink text-sm">WhatsApp Bot</h3>
+            <p className="text-xs text-ink-muted mt-1 mb-4">Twilio Sandbox / Meta Cloud API webhook</p>
+            <div className="bg-white p-2.5 rounded-2xl border border-[#1E3A5F] shadow-inner">
               <img
                 src={`/api/report/generate-qr?text=${encodeURIComponent(whatsappUrl)}`}
                 alt="WhatsApp Bot QR"
@@ -202,7 +202,7 @@ export default function JudgeTryPage() {
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-4 text-xs font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1 hover:underline"
+              className="mt-4 text-xs font-bold text-emerald-400 hover:text-emerald-300 flex items-center gap-1 hover:underline"
             >
               <span>Connect on WhatsApp</span>
               <ExternalLink className="w-3.5 h-3.5" />
@@ -213,14 +213,14 @@ export default function JudgeTryPage() {
       </div>
 
       {/* Interactive 1-Click Evaluation Station */}
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
+      <div className="bg-[#0F1D3A]/90 border border-[#1E3A5F] rounded-3xl p-6 shadow-sm">
         <div className="flex items-center gap-2 mb-2">
-          <Shield className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
-          <h2 className="text-lg font-bold text-slate-900 dark:text-white">
+          <Shield className="w-5 h-5 text-teal-400" />
+          <h2 className="text-lg font-bold text-ink">
             1-Click Interactive Adversarial Scenarios
           </h2>
         </div>
-        <p className="text-xs text-slate-500 mb-6">
+        <p className="text-xs text-ink-muted mb-6">
           Click any scenario to execute live CPU inference and examine the multi-detector risk waterfall in real time.
         </p>
 
@@ -233,26 +233,26 @@ export default function JudgeTryPage() {
                 <div
                   key={test.id}
                   onClick={() => handleRunAnalysis(test)}
-                  className={`p-3.5 rounded-xl border cursor-pointer transition flex flex-col gap-1 text-left ${
+                  className={`p-3.5 rounded-2xl border cursor-pointer transition flex flex-col gap-1 text-left ${
                     isActive
-                      ? 'bg-indigo-50/70 dark:bg-indigo-950/40 border-indigo-300 dark:border-indigo-800 shadow-xs'
-                      : 'bg-slate-50 dark:bg-slate-800/40 border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700'
+                      ? 'bg-gold-400/10 border-gold-400 shadow-xs'
+                      : 'bg-[#0B1530] border-[#1E3A5F] hover:border-teal-400/50'
                   }`}
                 >
                   <div className="flex items-center justify-between">
-                    <span className="font-bold text-xs text-slate-900 dark:text-white">
+                    <span className="font-bold text-xs text-ink">
                       {test.title}
                     </span>
-                    <span className="text-[10px] px-2 py-0.5 rounded font-mono font-bold bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+                    <span className="text-[10px] px-2 py-0.5 rounded-md font-mono font-bold bg-[#070E22] text-gold-300 border border-[#1E3A5F]">
                       {test.lang}
                     </span>
                   </div>
-                  <p className="text-[11px] text-slate-500 line-clamp-2 mt-0.5">
+                  <p className="text-[11px] text-ink-muted line-clamp-2 mt-0.5">
                     "{test.text}"
                   </p>
-                  <div className="flex items-center justify-between mt-1 text-[10px] text-slate-400">
-                    <span>Expected: <strong className="text-slate-600 dark:text-slate-300">{test.expected}</strong></span>
-                    <span className="text-indigo-600 dark:text-indigo-400 font-bold flex items-center gap-0.5">
+                  <div className="flex items-center justify-between mt-1 text-[10px] text-ink-faint">
+                    <span>Expected: <strong className="text-gold-300">{test.expected}</strong></span>
+                    <span className="text-teal-400 font-bold flex items-center gap-0.5">
                       Run Live <ArrowRight className="w-3 h-3" />
                     </span>
                   </div>
@@ -262,20 +262,20 @@ export default function JudgeTryPage() {
           </div>
 
           {/* Real-Time Result Box */}
-          <div className="lg:col-span-7 bg-slate-50 dark:bg-slate-950 rounded-xl p-5 border border-slate-200 dark:border-slate-800 flex flex-col justify-between">
+          <div className="lg:col-span-7 bg-[#070E22] rounded-2xl p-5 border border-[#1E3A5F] flex flex-col justify-between">
             <div>
-              <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
-                <span className="text-xs font-extrabold uppercase tracking-wider text-slate-500">
+              <div className="flex items-center justify-between pb-3 border-b border-[#1E3A5F]">
+                <span className="text-xs font-extrabold uppercase tracking-wider text-ink-muted">
                   Live Execution Inspector
                 </span>
                 {analysisResult && (
                   <span
                     className={`px-2.5 py-0.5 rounded text-xs font-black uppercase tracking-wider ${
                       analysisResult.verdict === 'HIGH RISK'
-                        ? 'bg-rose-100 dark:bg-rose-900/60 text-rose-700 dark:text-rose-300'
+                        ? 'bg-verdict-danger/20 text-verdict-danger border border-verdict-danger/30'
                         : analysisResult.verdict === 'SUSPICIOUS'
-                        ? 'bg-amber-100 dark:bg-amber-900/60 text-amber-700 dark:text-amber-300'
-                        : 'bg-emerald-100 dark:bg-emerald-900/60 text-emerald-700 dark:text-emerald-300'
+                        ? 'bg-verdict-suspicious/20 text-verdict-suspicious border border-verdict-suspicious/30'
+                        : 'bg-verdict-safe/20 text-verdict-safe border border-verdict-safe/30'
                     }`}
                   >
                     {analysisResult.verdict} • {analysisResult.risk_score}/100
@@ -284,53 +284,53 @@ export default function JudgeTryPage() {
               </div>
 
               {analyzing ? (
-                <div className="py-16 text-center text-slate-500 space-y-2">
-                  <div className="w-6 h-6 border-2 border-indigo-600 border-t-transparent rounded-full animate-spin mx-auto" />
+                <div className="py-16 text-center text-ink-muted space-y-2">
+                  <div className="w-6 h-6 border-2 border-gold-400 border-t-transparent rounded-full animate-spin mx-auto" />
                   <p className="text-xs">Executing multi-layer CPU risk fusion...</p>
                 </div>
               ) : analysisResult ? (
                 <div className="mt-4 space-y-4">
                   {/* Category & Confidence */}
                   <div className="grid grid-cols-2 gap-3 text-xs">
-                    <div className="bg-white dark:bg-slate-900 p-2.5 rounded-lg border border-slate-200 dark:border-slate-800">
-                      <span className="text-slate-400 block text-[10px]">Detected Category</span>
-                      <strong className="text-slate-800 dark:text-slate-200 font-mono">
+                    <div className="bg-[#0B1530] p-2.5 rounded-xl border border-[#1E3A5F]">
+                      <span className="text-ink-muted block text-[10px]">Detected Category</span>
+                      <strong className="text-gold-300 font-mono">
                         {analysisResult.detected_category}
                       </strong>
                     </div>
-                    <div className="bg-white dark:bg-slate-900 p-2.5 rounded-lg border border-slate-200 dark:border-slate-800">
-                      <span className="text-slate-400 block text-[10px]">Language Detected</span>
-                      <strong className="text-slate-800 dark:text-slate-200 uppercase font-mono">
+                    <div className="bg-[#0B1530] p-2.5 rounded-xl border border-[#1E3A5F]">
+                      <span className="text-ink-muted block text-[10px]">Language Detected</span>
+                      <strong className="text-teal-300 uppercase font-mono">
                         {analysisResult.language}
                       </strong>
                     </div>
                   </div>
 
                   {/* Plain Language Explanation */}
-                  <div className="bg-white dark:bg-slate-900 p-3.5 rounded-lg border border-slate-200 dark:border-slate-800">
-                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">
+                  <div className="bg-[#0B1530] p-3.5 rounded-xl border border-[#1E3A5F]">
+                    <span className="text-[10px] font-bold text-gold-300 uppercase tracking-wider block mb-1">
                       Plain Language Defense Explanation
                     </span>
-                    <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+                    <p className="text-xs text-ink leading-relaxed">
                       {analysisResult.plain_language_explanation}
                     </p>
                   </div>
 
                   {/* Evidence Items */}
                   <div>
-                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-2">
+                    <span className="text-[10px] font-bold text-ink-muted uppercase tracking-wider block mb-2">
                       Independent Technical Evidence ({analysisResult.evidence?.length || 0} signals)
                     </span>
                     <div className="space-y-1.5 max-h-48 overflow-y-auto pr-1">
                       {analysisResult.evidence?.map((ev, i) => (
                         <div
                           key={i}
-                          className="text-xs p-2 rounded bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-start gap-2"
+                          className="text-xs p-2 rounded-lg bg-[#0B1530] border border-[#1E3A5F] flex items-start gap-2"
                         >
-                          <span className="px-1.5 py-0.5 rounded text-[9px] font-mono font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 shrink-0">
+                          <span className="px-1.5 py-0.5 rounded text-[9px] font-mono font-bold bg-[#070E22] text-teal-300 shrink-0">
                             {ev.source_module}
                           </span>
-                          <span className="text-slate-700 dark:text-slate-300 leading-snug">
+                          <span className="text-ink-muted leading-snug">
                             {ev.signal}
                           </span>
                         </div>
@@ -339,21 +339,21 @@ export default function JudgeTryPage() {
                   </div>
                 </div>
               ) : (
-                <div className="py-16 text-center text-slate-400 text-xs">
+                <div className="py-16 text-center text-ink-faint text-xs">
                   Click any scenario on the left or press "Run Live" to view instant results.
                 </div>
               )}
             </div>
 
             {/* Input snippet display */}
-            <div className="mt-4 pt-3 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs text-slate-500">
-              <span className="truncate max-w-md italic">"{selectedTest?.text}"</span>
+            <div className="mt-4 pt-3 border-t border-[#1E3A5F] flex items-center justify-between text-xs text-ink-muted">
+              <span className="truncate max-w-md italic font-mono text-ink">"{selectedTest?.text}"</span>
               <button
                 onClick={() => copyToClipboard(selectedTest?.text, 'snippet')}
-                className="shrink-0 p-1 rounded hover:bg-slate-200 dark:hover:bg-slate-800 transition"
+                className="shrink-0 p-1.5 rounded-lg hover:bg-[#0B1530] text-ink-muted hover:text-ink transition"
                 title="Copy snippet"
               >
-                {copiedId === 'snippet' ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
+                {copiedId === 'snippet' ? <Check className="w-3.5 h-3.5 text-verdict-safe" /> : <Copy className="w-3.5 h-3.5" />}
               </button>
             </div>
           </div>
@@ -364,57 +364,57 @@ export default function JudgeTryPage() {
       <ModelHonestyPanel defaultOpen={true} />
 
       {/* Judge Cheat Sheet / Architecture Highlights */}
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm space-y-6">
+      <div className="bg-[#0F1D3A]/90 border border-[#1E3A5F] rounded-3xl p-6 shadow-sm space-y-6">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <Scale className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
-            <h2 className="text-lg font-bold text-slate-900 dark:text-white">
+            <Scale className="w-5 h-5 text-gold-400" />
+            <h2 className="text-lg font-bold text-ink">
               Judge Defensibility & Technical Architecture Matrix
             </h2>
           </div>
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-ink-muted">
             Answers to tough architectural and practical questions for hackathon judges.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs leading-relaxed">
           
-          <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 space-y-2">
-            <h3 className="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+          <div className="p-4 rounded-2xl bg-[#0B1530] border border-[#1E3A5F] space-y-2">
+            <h3 className="font-bold text-sm text-ink flex items-center gap-1.5">
+              <CheckCircle2 className="w-4 h-4 text-verdict-safe" />
               1. Why Evidence-Based Fusion over Pure LLM?
             </h3>
-            <p className="text-slate-600 dark:text-slate-300">
-              Asking a cloud LLM <em>"is this message a scam?"</em> suffers from severe prompt injection vulnerability, hallucination, non-deterministic latency (1.5s - 4s), and high inference cost. UPI Rakshak AI uses a deterministic multi-engine pipeline (NLP char+word n-grams + Regex safety rules + Algorithmic URL/QR static parsers). The LLM/template layer is strictly constrained to <strong>explaining verifiable evidence</strong> in the user's native tongue.
+            <p className="text-ink-muted">
+              Asking a cloud LLM <em>"is this message a scam?"</em> suffers from severe prompt injection vulnerability, hallucination, non-deterministic latency (1.5s - 4s), and high inference cost. UPI Rakshak AI uses a deterministic multi-engine pipeline (NLP char+word n-grams + Regex safety rules + Algorithmic URL/QR static parsers). The LLM/template layer is strictly constrained to <strong className="text-ink">explaining verifiable evidence</strong> in the user's native tongue.
             </p>
           </div>
 
-          <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 space-y-2">
-            <h3 className="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+          <div className="p-4 rounded-2xl bg-[#0B1530] border border-[#1E3A5F] space-y-2">
+            <h3 className="font-bold text-sm text-ink flex items-center gap-1.5">
+              <CheckCircle2 className="w-4 h-4 text-verdict-safe" />
               2. How is Sub-50ms CPU Latency Achieved?
             </h3>
-            <p className="text-slate-600 dark:text-slate-300">
+            <p className="text-ink-muted">
               Our TF-IDF char+word n-gram vectorizers and calibrated linear classifiers evaluate in ~11 ms on ordinary CPU hardware (~32 ms end-to-end multi-detector fusion). Pure algorithmic parsing of URLs (Trie matching + Levenshtein distance) runs in under 8ms. Under 50 concurrent client load, text inference achieves 25.0 req/s with 0 errors, requiring zero GPU instances and enabling local offline operation without internet (core engine runs without internet; bots need internet).
             </p>
           </div>
 
-          <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 space-y-2">
-            <h3 className="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+          <div className="p-4 rounded-2xl bg-[#0B1530] border border-[#1E3A5F] space-y-2">
+            <h3 className="font-bold text-sm text-ink flex items-center gap-1.5">
+              <CheckCircle2 className="w-4 h-4 text-verdict-safe" />
               3. Statutory Indian Legal Grounding
             </h3>
-            <p className="text-slate-600 dark:text-slate-300">
-              Unlike generic toxicity or spam filters, UPI Rakshak AI grounds coercion threats in Indian statutory law (CrPC Section 41 / BNSS Section 35). The system directly informs victims that Indian law recognizes no concept of "Digital Arrest" or Skype police trials, and generates a structured, pre-filled complaint dossier formatted for immediate <strong>1930 / cybercrime.gov.in</strong> reporting.
+            <p className="text-ink-muted">
+              Unlike generic toxicity or spam filters, UPI Rakshak AI grounds coercion threats in Indian statutory law (CrPC Section 41 / BNSS Section 35). The system directly informs victims that Indian law recognizes no concept of "Digital Arrest" or Skype police trials, and generates a structured, pre-filled complaint dossier formatted for immediate <strong className="text-gold-300">1930 / cybercrime.gov.in</strong> reporting.
             </p>
           </div>
 
-          <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 space-y-2">
-            <h3 className="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+          <div className="p-4 rounded-2xl bg-[#0B1530] border border-[#1E3A5F] space-y-2">
+            <h3 className="font-bold text-sm text-ink flex items-center gap-1.5">
+              <CheckCircle2 className="w-4 h-4 text-verdict-safe" />
               4. Anti-Poisoning & Privacy Architecture
             </h3>
-            <p className="text-slate-600 dark:text-slate-300">
+            <p className="text-ink-muted">
               Our Community Reputation database prevents sybil attacks via strict consensus gating (&ge; 2 distinct reporter hashes), 24h per-entity reporter caps, 30-day half-life recency decay, and an automated immune whitelist protecting authorized banks and utility handles. All phone, UPI, and account identifiers are masked with salted SHA-256 hashes prior to storage.
             </p>
           </div>

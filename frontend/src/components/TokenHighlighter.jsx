@@ -2,11 +2,11 @@ import React from 'react';
 import { AlertCircle, Link, Phone, ShieldAlert, Zap } from 'lucide-react';
 
 const SEVERITY_COLORS = {
-  CRITICAL: 'bg-red-500/20 text-red-300 border-red-500/40 hover:bg-red-500/30',
-  HIGH: 'bg-orange-500/20 text-orange-300 border-orange-500/40 hover:bg-orange-500/30',
-  MEDIUM: 'bg-amber-500/20 text-amber-300 border-amber-500/40 hover:bg-amber-500/30',
-  LOW: 'bg-blue-500/20 text-blue-300 border-blue-500/40 hover:bg-blue-500/30',
-  INFO: 'bg-slate-500/20 text-slate-300 border-slate-500/40 hover:bg-slate-500/30',
+  CRITICAL: 'bg-verdict-danger/20 text-verdict-danger border-verdict-danger/40 hover:bg-verdict-danger/30',
+  HIGH: 'bg-verdict-suspicious/20 text-verdict-suspicious border-verdict-suspicious/40 hover:bg-verdict-suspicious/30',
+  MEDIUM: 'bg-gold-400/20 text-gold-300 border-gold-400/40 hover:bg-gold-400/30',
+  LOW: 'bg-teal-500/20 text-teal-300 border-teal-500/40 hover:bg-teal-500/30',
+  INFO: 'bg-[#0B1530] text-ink-muted border-[#1E3A5F] hover:bg-[#0F1D3A]',
 };
 
 const LABEL_ICONS = {
@@ -21,7 +21,7 @@ const LABEL_ICONS = {
 export default function TokenHighlighter({ text, highlightSpans = [] }) {
   if (!text) return null;
   if (!highlightSpans || highlightSpans.length === 0) {
-    return <div className="text-slate-300 leading-relaxed font-mono text-sm whitespace-pre-wrap">{text}</div>;
+    return <div className="text-ink leading-relaxed font-mono text-sm whitespace-pre-wrap">{text}</div>;
   }
 
   // Sort spans ascending by start index and filter non-overlapping
@@ -59,10 +59,10 @@ export default function TokenHighlighter({ text, highlightSpans = [] }) {
   }
 
   return (
-    <div className="bg-slate-950/80 rounded-xl p-4 border border-slate-800 text-sm font-mono leading-loose whitespace-pre-wrap">
+    <div className="bg-[#070E22]/90 rounded-2xl p-4 border border-[#1E3A5F] text-sm font-mono leading-loose whitespace-pre-wrap">
       {segments.map((seg) => {
         if (seg.type === 'text') {
-          return <span key={seg.key} className="text-slate-300">{seg.content}</span>;
+          return <span key={seg.key} className="text-ink">{seg.content}</span>;
         }
 
         const Icon = LABEL_ICONS[seg.label] || AlertCircle;

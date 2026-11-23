@@ -194,24 +194,21 @@ export default function AdminAlarmBell({ onNavigateToDashboard }) {
       <button
         onClick={() => {
           setIsOpen(!isOpen);
-          if (!isOpen && unreadCount > 0) {
-            // Optional: Mark as seen when opening
-          }
         }}
-        className={`relative p-2 rounded-xl bg-[#0c122b] border transition cursor-pointer select-none ${
+        className={`relative p-2 rounded-xl bg-[#0B1530] border transition cursor-pointer select-none ${
           isRinging
-            ? 'border-rose-500 text-rose-400 shadow-[0_0_20px_rgba(244,63,94,0.7)] animate-bounce'
+            ? 'border-verdict-danger text-verdict-danger shadow-[0_0_20px_rgba(244,63,94,0.7)] animate-bounce'
             : unreadCount > 0
-            ? 'border-rose-500/40 text-cyan-400 hover:text-white hover:border-cyan-400/60'
-            : 'border-cyan-500/20 text-cyan-400 hover:text-white hover:border-cyan-400/50'
+            ? 'border-verdict-danger/40 text-teal-400 hover:text-ink hover:border-teal-400/60'
+            : 'border-[#1E3A5F] text-teal-400 hover:text-ink hover:border-teal-400/50'
         }`}
         title={`Admin Incident & Feedback Alarm (${unreadCount} unread)`}
         aria-label="Admin Alerts Alarm"
       >
-        <Bell className={`w-4 h-4 ${isRinging ? 'animate-wiggle text-rose-400' : ''}`} />
+        <Bell className={`w-4 h-4 ${isRinging ? 'animate-wiggle text-verdict-danger' : ''}`} />
 
         {unreadCount > 0 && (
-          <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-rose-500 text-white text-[10px] font-black flex items-center justify-center shadow-[0_0_10px_rgba(239,68,68,0.85)] ring-2 ring-[#060919] animate-pulse">
+          <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-verdict-danger text-white text-[10px] font-black flex items-center justify-center shadow-[0_0_10px_rgba(244,63,94,0.85)] ring-2 ring-[#050A18] animate-pulse">
             {unreadCount > 9 ? '9+' : unreadCount}
           </span>
         )}
@@ -219,22 +216,22 @@ export default function AdminAlarmBell({ onNavigateToDashboard }) {
 
       {/* Interactive Cyber Alarm & Notification Dropdown */}
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-96 max-w-[90vw] bg-[#080d22]/98 backdrop-blur-xl border border-cyan-500/30 rounded-2xl shadow-[0_12px_40px_rgba(0,0,0,0.8)] z-50 overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+        <div className="absolute right-0 mt-2 w-96 max-w-[90vw] bg-[#0F1D3A]/98 backdrop-blur-xl border border-[#1E3A5F] rounded-2xl shadow-[0_12px_40px_rgba(5,10,24,0.9)] z-50 overflow-hidden border-t-2 border-t-gold-400 animate-in fade-in zoom-in-95 duration-150">
           {/* Header */}
-          <div className="p-3.5 border-b border-cyan-500/20 bg-[#060919]/90 flex items-center justify-between">
+          <div className="p-3.5 border-b border-[#1E3A5F] bg-[#0B1530] flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="p-1.5 rounded-lg bg-rose-500/10 border border-rose-500/30 text-rose-400">
+              <div className="p-1.5 rounded-lg bg-verdict-danger/10 border border-verdict-danger/30 text-verdict-danger">
                 <ShieldAlert className="w-4 h-4" />
               </div>
               <div>
-                <h4 className="text-xs font-black text-white uppercase tracking-wider flex items-center gap-1.5">
+                <h4 className="text-xs font-black text-ink uppercase tracking-wider flex items-center gap-1.5">
                   Admin Alarm Center
                   <span className="flex h-2 w-2 relative">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-verdict-danger opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-verdict-danger"></span>
                   </span>
                 </h4>
-                <p className="text-[10px] text-slate-400">Cases filed & citizen feedback alerts</p>
+                <p className="text-[10px] text-ink-muted">Cases filed & citizen feedback alerts</p>
               </div>
             </div>
 
@@ -244,8 +241,8 @@ export default function AdminAlarmBell({ onNavigateToDashboard }) {
                 onClick={toggleSound}
                 className={`p-1.5 rounded-lg border text-xs transition ${
                   soundEnabled
-                    ? 'border-cyan-500/40 bg-cyan-500/10 text-cyan-300 hover:bg-cyan-500/20'
-                    : 'border-slate-700 bg-slate-800 text-slate-400 hover:text-slate-200'
+                    ? 'border-teal-500/40 bg-teal-500/10 text-teal-300 hover:bg-teal-500/20'
+                    : 'border-[#1E3A5F] bg-[#070E22] text-ink-faint hover:text-ink'
                 }`}
                 title={soundEnabled ? 'Alarm Sound: Enabled' : 'Alarm Sound: Muted'}
               >
@@ -255,7 +252,7 @@ export default function AdminAlarmBell({ onNavigateToDashboard }) {
               {/* Test Chime Button */}
               <button
                 onClick={() => playAdminChime()}
-                className="px-2 py-1 rounded-lg border border-cyan-500/30 bg-cyan-950/40 hover:bg-cyan-900/60 text-cyan-300 text-[10px] font-bold transition"
+                className="px-2 py-1 rounded-lg border border-gold-400/30 bg-gold-400/10 hover:bg-gold-400/20 text-gold-300 text-[10px] font-bold transition"
                 title="Play test alert chime"
               >
                 Test Chime
@@ -264,7 +261,7 @@ export default function AdminAlarmBell({ onNavigateToDashboard }) {
               {/* Close */}
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-1 rounded-lg text-slate-400 hover:text-white"
+                className="p-1 rounded-lg text-ink-muted hover:text-ink"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -272,14 +269,14 @@ export default function AdminAlarmBell({ onNavigateToDashboard }) {
           </div>
 
           {/* Filter Pills & Actions */}
-          <div className="px-3 py-2 bg-[#0a0f28] border-b border-cyan-500/10 flex items-center justify-between text-[11px]">
+          <div className="px-3 py-2 bg-[#070E22] border-b border-[#1E3A5F] flex items-center justify-between text-[11px]">
             <div className="flex items-center gap-1">
               <button
                 onClick={() => setFilter('all')}
                 className={`px-2 py-0.5 rounded-md font-bold transition ${
                   filter === 'all'
-                    ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-400/40'
-                    : 'text-slate-400 hover:text-slate-200'
+                    ? 'bg-teal-500/20 text-teal-300 border border-teal-400/40'
+                    : 'text-ink-muted hover:text-ink'
                 }`}
               >
                 All ({alerts.length})
@@ -288,8 +285,8 @@ export default function AdminAlarmBell({ onNavigateToDashboard }) {
                 onClick={() => setFilter('case_filed')}
                 className={`px-2 py-0.5 rounded-md font-bold transition ${
                   filter === 'case_filed'
-                    ? 'bg-rose-500/20 text-rose-300 border border-rose-400/40'
-                    : 'text-slate-400 hover:text-slate-200'
+                    ? 'bg-verdict-danger/20 text-verdict-danger border border-verdict-danger/40'
+                    : 'text-ink-muted hover:text-ink'
                 }`}
               >
                 🚨 Cases ({casesCount})
@@ -298,8 +295,8 @@ export default function AdminAlarmBell({ onNavigateToDashboard }) {
                 onClick={() => setFilter('user_feedback')}
                 className={`px-2 py-0.5 rounded-md font-bold transition ${
                   filter === 'user_feedback'
-                    ? 'bg-amber-500/20 text-amber-300 border border-amber-400/40'
-                    : 'text-slate-400 hover:text-slate-200'
+                    ? 'bg-gold-400/20 text-gold-300 border border-gold-400/40'
+                    : 'text-ink-muted hover:text-ink'
                 }`}
               >
                 💬 Feedback ({feedbackCount})
@@ -309,7 +306,7 @@ export default function AdminAlarmBell({ onNavigateToDashboard }) {
             {unreadCount > 0 && (
               <button
                 onClick={handleMarkAllRead}
-                className="text-[10px] text-cyan-400 hover:text-cyan-300 font-semibold flex items-center gap-1"
+                className="text-[10px] text-teal-400 hover:text-teal-300 font-semibold flex items-center gap-1"
               >
                 <Check className="w-3 h-3" /> Mark read
               </button>
@@ -317,44 +314,44 @@ export default function AdminAlarmBell({ onNavigateToDashboard }) {
           </div>
 
           {/* Scrollable Alerts List */}
-          <div className="max-h-80 overflow-y-auto divide-y divide-cyan-500/10 text-xs">
+          <div className="max-h-80 overflow-y-auto divide-y divide-[#1E3A5F] text-xs">
             {filteredAlerts.length === 0 ? (
-              <div className="p-8 text-center text-slate-400">
-                <Check className="w-8 h-8 mx-auto mb-2 text-emerald-400 opacity-60" />
-                <p className="font-bold text-slate-300 text-xs">All Clear!</p>
+              <div className="p-8 text-center text-ink-muted">
+                <Check className="w-8 h-8 mx-auto mb-2 text-verdict-safe opacity-60" />
+                <p className="font-bold text-ink text-xs">All Clear!</p>
                 <p className="text-[11px]">No incident cases or feedback alerts pending.</p>
               </div>
             ) : (
               filteredAlerts.map(alert => (
                 <div
                   key={alert.id}
-                  className="p-3 hover:bg-cyan-950/20 transition flex flex-col gap-1.5"
+                  className="p-3 hover:bg-[#0B1530] transition flex flex-col gap-1.5"
                 >
                   <div className="flex items-start justify-between gap-2">
-                    <div className="flex items-center gap-1.5 font-bold text-white text-xs">
+                    <div className="flex items-center gap-1.5 font-bold text-ink text-xs">
                       {alert.type === 'case_filed' ? (
-                        <span className="text-rose-400">🚨</span>
+                        <span className="text-verdict-danger">🚨</span>
                       ) : alert.type === 'user_feedback' ? (
-                        <span className="text-amber-400">💬</span>
+                        <span className="text-gold-400">💬</span>
                       ) : (
-                        <span className="text-cyan-400">⚠️</span>
+                        <span className="text-teal-400">⚠️</span>
                       )}
                       <span className="truncate">{alert.title}</span>
                     </div>
 
-                    <span className="text-[10px] text-slate-400 font-mono whitespace-nowrap">
+                    <span className="text-[10px] text-ink-muted font-mono whitespace-nowrap">
                       {alert.time_ago || 'Recent'}
                     </span>
                   </div>
 
                   {alert.content && (
-                    <p className="text-[11px] text-slate-300 line-clamp-2 bg-slate-900/60 p-1.5 rounded-lg border border-cyan-500/10 font-mono">
+                    <p className="text-[11px] text-ink-muted line-clamp-2 bg-[#070E22] p-1.5 rounded-lg border border-[#1E3A5F] font-mono">
                       {alert.content}
                     </p>
                   )}
 
                   {alert.comments && (
-                    <p className="text-[10px] text-slate-400 italic">
+                    <p className="text-[10px] text-ink-faint italic">
                       "{alert.comments}"
                     </p>
                   )}
@@ -362,12 +359,12 @@ export default function AdminAlarmBell({ onNavigateToDashboard }) {
                   <div className="flex items-center justify-between pt-1">
                     <span className={`px-1.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider ${
                       alert.severity === 'CRITICAL'
-                        ? 'bg-rose-500/20 text-rose-300 border border-rose-500/30'
+                        ? 'bg-verdict-danger/20 text-verdict-danger border border-verdict-danger/30'
                         : alert.severity === 'HIGH'
-                        ? 'bg-red-500/20 text-red-300 border border-red-500/30'
+                        ? 'bg-verdict-suspicious/20 text-verdict-suspicious border border-verdict-suspicious/30'
                         : alert.severity === 'WARNING'
-                        ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
-                        : 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/30'
+                        ? 'bg-gold-400/20 text-gold-300 border border-gold-400/30'
+                        : 'bg-teal-500/20 text-teal-300 border border-teal-500/30'
                     }`}>
                       {alert.status}
                     </span>
@@ -378,7 +375,7 @@ export default function AdminAlarmBell({ onNavigateToDashboard }) {
                           setIsOpen(false);
                           onNavigateToDashboard();
                         }}
-                        className="text-[10px] text-cyan-400 hover:text-cyan-200 font-bold flex items-center gap-1 hover:underline"
+                        className="text-[10px] text-teal-400 hover:text-teal-200 font-bold flex items-center gap-1 hover:underline"
                       >
                         Inspect in Dashboard <ArrowRight className="w-3 h-3" />
                       </button>
@@ -390,9 +387,9 @@ export default function AdminAlarmBell({ onNavigateToDashboard }) {
           </div>
 
           {/* Footer with Moderation Direct Link */}
-          <div className="p-2.5 bg-[#060919] border-t border-cyan-500/20 flex items-center justify-between text-[11px]">
-            <span className="text-slate-400 text-[10px] flex items-center gap-1">
-              <Radio className="w-3 h-3 text-cyan-400 animate-pulse" /> Live Polling (10s)
+          <div className="p-2.5 bg-[#0B1530] border-t border-[#1E3A5F] flex items-center justify-between text-[11px]">
+            <span className="text-ink-muted text-[10px] flex items-center gap-1">
+              <Radio className="w-3 h-3 text-teal-400 animate-pulse" /> Live Polling (10s)
             </span>
 
             {onNavigateToDashboard && (
@@ -401,7 +398,7 @@ export default function AdminAlarmBell({ onNavigateToDashboard }) {
                   setIsOpen(false);
                   onNavigateToDashboard();
                 }}
-                className="px-2.5 py-1 rounded-lg bg-cyan-500/20 border border-cyan-400/40 text-cyan-300 hover:bg-cyan-500/30 font-bold text-[10px] flex items-center gap-1 transition"
+                className="px-2.5 py-1 rounded-lg bg-gold-400/10 border border-gold-400/30 text-gold-300 hover:bg-gold-400/20 font-bold text-[10px] flex items-center gap-1 transition"
               >
                 Open Admin Moderation <ExternalLink className="w-3 h-3" />
               </button>
@@ -412,27 +409,27 @@ export default function AdminAlarmBell({ onNavigateToDashboard }) {
 
       {/* Floating Cyber Alert Toast (Pops up whenever a case or feedback arrives) */}
       {toastAlert && (
-        <div className="fixed bottom-6 right-6 z-50 max-w-sm w-full bg-[#080d22]/95 backdrop-blur-xl border border-rose-500/50 rounded-2xl p-4 shadow-[0_0_30px_rgba(244,63,94,0.4)] animate-in slide-in-from-bottom-5 duration-200">
+        <div className="fixed bottom-6 right-6 z-50 max-w-sm w-full bg-[#0F1D3A]/95 backdrop-blur-xl border border-verdict-danger/50 rounded-2xl p-4 shadow-[0_0_30px_rgba(244,63,94,0.4)] animate-in slide-in-from-bottom-5 duration-200">
           <div className="flex items-start gap-3">
-            <div className="p-2 rounded-xl bg-rose-500/20 text-rose-400 border border-rose-500/40 animate-pulse">
+            <div className="p-2 rounded-xl bg-verdict-danger/20 text-verdict-danger border border-verdict-danger/40 animate-pulse">
               <ShieldAlert className="w-5 h-5" />
             </div>
             <div className="flex-1 min-w-0">
               <div className="flex items-center justify-between">
-                <span className="text-[10px] font-black uppercase text-rose-400 tracking-wider">
+                <span className="text-[10px] font-black uppercase text-verdict-danger tracking-wider">
                   Live Admin Alarm
                 </span>
                 <button
                   onClick={() => setToastAlert(null)}
-                  className="text-slate-400 hover:text-white"
+                  className="text-ink-muted hover:text-ink"
                 >
                   <X className="w-3.5 h-3.5" />
                 </button>
               </div>
-              <h5 className="font-bold text-white text-xs truncate mt-0.5">
+              <h5 className="font-bold text-ink text-xs truncate mt-0.5">
                 {toastAlert.title}
               </h5>
-              <p className="text-[11px] text-slate-300 line-clamp-1 mt-0.5 font-mono">
+              <p className="text-[11px] text-ink-muted line-clamp-1 mt-0.5 font-mono">
                 {toastAlert.subtitle}
               </p>
               {onNavigateToDashboard && (
@@ -441,7 +438,7 @@ export default function AdminAlarmBell({ onNavigateToDashboard }) {
                     setToastAlert(null);
                     onNavigateToDashboard();
                   }}
-                  className="mt-2 text-[10px] font-bold text-cyan-400 hover:text-cyan-200 flex items-center gap-1 hover:underline"
+                  className="mt-2 text-[10px] font-bold text-teal-400 hover:text-teal-200 flex items-center gap-1 hover:underline"
                 >
                   Review incident in Admin Dashboard &rarr;
                 </button>

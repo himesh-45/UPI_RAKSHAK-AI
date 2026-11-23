@@ -53,7 +53,7 @@ export default function ModelHonestyPanel({ defaultOpen = false, className = '' 
   const currentGlossary = GLOSSARY_I18N[glossaryLang] || GLOSSARY_I18N.en;
 
   return (
-    <div className={`bg-slate-50 dark:bg-slate-900/60 rounded-3xl border border-slate-200 dark:border-slate-800 p-5 sm:p-6 transition ${className}`}>
+    <div className={`bg-[#0F1D3A]/90 rounded-3xl border border-[#1E3A5F] p-5 sm:p-6 transition text-[#F5F1E6] ${className}`}>
       
       {/* Header Button */}
       <button
@@ -62,48 +62,48 @@ export default function ModelHonestyPanel({ defaultOpen = false, className = '' 
         aria-expanded={isOpen}
       >
         <div className="flex items-center gap-3">
-          <div className="p-2 rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20">
+          <div className="p-2 rounded-xl bg-[#0B1530] text-[#35D0C8] border border-[#1E3A5F]">
             <Activity className="w-5 h-5" />
           </div>
           <div>
             <div className="flex flex-wrap items-center gap-2">
-              <h3 className="text-sm font-extrabold text-slate-900 dark:text-white group-hover:text-indigo-500 transition">
+              <h3 className="text-sm font-extrabold text-[#F5F1E6] group-hover:text-[#F5C96A] transition">
                 {title}
               </h3>
-              <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300 border border-amber-300 dark:border-amber-800">
+              <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#0B1530] text-[#F5C96A] border border-[#D9A441]/40">
                 {badgeText}
               </span>
             </div>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+            <p className="text-xs text-[#A9B4CC] mt-0.5">
               {subtitle}
             </p>
           </div>
         </div>
 
-        <div className="p-1.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-500 shrink-0">
+        <div className="p-1.5 rounded-xl bg-[#0B1530] border border-[#1E3A5F] text-[#A9B4CC] shrink-0">
           {isOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
         </div>
       </button>
 
       {/* Collapsible Content */}
       {isOpen && (
-        <div className="pt-5 mt-4 border-t border-slate-200 dark:border-slate-800 space-y-5 animate-fade-in">
+        <div className="pt-5 mt-4 border-t border-[#1E3A5F] space-y-5 animate-fade-in">
           
           {/* Plain Language Calibration Disclosure Banner */}
-          <div className="p-3.5 rounded-2xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900/40 text-xs text-amber-900 dark:text-amber-300 flex items-start gap-2.5">
-            <AlertCircle className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
+          <div className="p-3.5 rounded-2xl bg-[#FB923C]/10 border border-[#FB923C]/30 text-xs text-[#FB923C] flex items-start gap-2.5">
+            <AlertCircle className="w-4 h-4 text-[#FB923C] shrink-0 mt-0.5" />
             <div>
               <p className="font-bold">Honest Machine Learning Disclosure:</p>
-              <p className="text-amber-800 dark:text-amber-400/90 text-[11px] leading-relaxed mt-0.5">
+              <p className="text-[#A9B4CC] text-[11px] leading-relaxed mt-0.5">
                 {eceExplanation} Evaluated across frozen Gold Test Set v1 (untouched baseline benchmark) and Gold Test Set v2 (development set used for error analysis). High-confidence predictions on colloquial vernacular phrasing currently exhibit slight over-confidence.
               </p>
             </div>
           </div>
 
           {/* Quality Gates Table */}
-          <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800">
+          <div className="overflow-x-auto rounded-2xl border border-[#1E3A5F]">
             <table className="w-full text-xs text-left">
-              <thead className="bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 font-bold uppercase tracking-wider text-[10px]">
+              <thead className="bg-[#0B1530] text-[#A9B4CC] font-bold uppercase tracking-wider text-[10px]">
                 <tr>
                   <th className="p-3">Metric Dimension</th>
                   <th className="p-3 text-center">Benchmark Gate</th>
@@ -112,24 +112,24 @@ export default function ModelHonestyPanel({ defaultOpen = false, className = '' 
                   <th className="p-3 text-center">Status</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-200 dark:divide-slate-800/60 font-medium text-slate-700 dark:text-slate-300">
+              <tbody className="divide-y divide-[#1E3A5F]/60 font-medium text-[#F5F1E6]">
                 {gates.map((g, i) => (
-                  <tr key={g.id || i} className="hover:bg-slate-100/50 dark:hover:bg-slate-800/40 transition">
+                  <tr key={g.id || i} className="hover:bg-[#14254B]/40 transition">
                     <td className="p-3">
-                      <div className="font-bold text-slate-900 dark:text-white">{g.name}</div>
-                      <div className="text-[11px] text-slate-400">{g.desc}</div>
+                      <div className="font-bold text-[#F5F1E6]">{g.name}</div>
+                      <div className="text-[11px] text-[#7C89A6]">{g.desc}</div>
                     </td>
-                    <td className="p-3 text-center font-mono text-slate-500">{g.benchmark}</td>
-                    <td className="p-3 text-center font-mono font-bold text-slate-900 dark:text-white">{g.goldV1}</td>
-                    <td className="p-3 text-center font-mono font-bold text-slate-900 dark:text-white">{g.goldV2}</td>
+                    <td className="p-3 text-center font-mono text-[#A9B4CC]">{g.benchmark}</td>
+                    <td className="p-3 text-center font-mono font-bold text-[#F5F1E6]">{g.goldV1}</td>
+                    <td className="p-3 text-center font-mono font-bold text-[#F5F1E6]">{g.goldV2}</td>
                     <td className="p-3 text-center">
                       {g.status === 'PASSED' ? (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800">
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-[#34D399]/15 text-[#34D399] border border-[#34D399]/30">
                           <CheckCircle2 className="w-3 h-3" />
                           PASSED
                         </span>
                       ) : (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-amber-100 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300 border border-amber-300 dark:border-amber-800">
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-[#FB923C]/15 text-[#FB923C] border border-[#FB923C]/30">
                           <AlertCircle className="w-3 h-3" />
                           {g.status}
                         </span>
@@ -142,35 +142,35 @@ export default function ModelHonestyPanel({ defaultOpen = false, className = '' 
           </div>
 
           {/* Multilingual "What does this mean?" Accordion */}
-          <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 overflow-hidden">
+          <div className="rounded-2xl border border-[#1E3A5F] bg-[#0B1530] overflow-hidden">
             <button
               onClick={() => setGlossaryOpen(!glossaryOpen)}
-              className="w-full p-3.5 flex items-center justify-between text-left hover:bg-slate-50 dark:hover:bg-slate-900/50 transition"
+              className="w-full p-3.5 flex items-center justify-between text-left hover:bg-[#14254B]/50 transition"
               aria-expanded={glossaryOpen}
             >
               <div className="flex items-center gap-2">
-                <HelpCircle className="w-4 h-4 text-indigo-500" />
-                <span className="text-xs font-bold text-slate-900 dark:text-white">
+                <HelpCircle className="w-4 h-4 text-[#35D0C8]" />
+                <span className="text-xs font-bold text-[#F5F1E6]">
                   {currentGlossary.title}
                 </span>
-                <span className="text-[10px] text-slate-400 font-normal">
+                <span className="text-[10px] text-[#A9B4CC] font-normal">
                   (Recall, False Alarms, Calibration in EN / HI / TE)
                 </span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-[10px] font-mono uppercase text-slate-400">
+                <span className="text-[10px] font-mono uppercase text-[#A9B4CC]">
                   {glossaryLang}
                 </span>
-                {glossaryOpen ? <ChevronUp className="w-3.5 h-3.5 text-slate-400" /> : <ChevronDown className="w-3.5 h-3.5 text-slate-400" />}
+                {glossaryOpen ? <ChevronUp className="w-3.5 h-3.5 text-[#A9B4CC]" /> : <ChevronDown className="w-3.5 h-3.5 text-[#A9B4CC]" />}
               </div>
             </button>
 
             {glossaryOpen && (
-              <div className="p-4 pt-1 border-t border-slate-100 dark:border-slate-800/80 space-y-3.5 animate-fade-in">
+              <div className="p-4 pt-1 border-t border-[#1E3A5F] space-y-3.5 animate-fade-in">
                 
                 {/* Language Switcher Buttons */}
                 <div className="flex items-center gap-1.5 pt-1">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mr-1">Language:</span>
+                  <span className="text-[10px] font-bold text-[#A9B4CC] uppercase tracking-wider mr-1">Language:</span>
                   {[
                     { id: 'en', label: 'English' },
                     { id: 'hi', label: 'हिंदी (Hindi)' },
@@ -181,8 +181,8 @@ export default function ModelHonestyPanel({ defaultOpen = false, className = '' 
                       onClick={() => setGlossaryLang(lang.id)}
                       className={`px-2 py-0.5 rounded text-[10px] font-bold transition ${
                         glossaryLang === lang.id
-                          ? 'bg-indigo-600 text-white shadow-xs'
-                          : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
+                          ? 'bg-[#D9A441] text-[#050A18] shadow-xs'
+                          : 'bg-[#14254B] text-[#A9B4CC] hover:bg-[#1E3A5F] hover:text-[#F5F1E6]'
                       }`}
                     >
                       {lang.label}
@@ -192,61 +192,60 @@ export default function ModelHonestyPanel({ defaultOpen = false, className = '' 
 
                 {/* 3 Concepts: Recall, False Alarms, Calibration */}
                 <div className="space-y-2.5 text-xs">
-                  <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-100 dark:border-slate-800/60">
-                    <span className="font-bold text-slate-900 dark:text-white block text-[11px] text-indigo-600 dark:text-indigo-400 mb-0.5">
+                  <div className="p-2.5 rounded-xl bg-[#070E22] border border-[#1E3A5F]">
+                    <span className="font-bold text-[#35D0C8] block text-[11px] mb-0.5">
                       1. {currentGlossary.recall_term}:
                     </span>
-                    <p className="text-slate-600 dark:text-slate-300 text-[11px] leading-relaxed">
+                    <p className="text-[#A9B4CC] text-[11px] leading-relaxed">
                       {currentGlossary.recall_def}
                     </p>
                   </div>
 
-                  <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-100 dark:border-slate-800/60">
-                    <span className="font-bold text-slate-900 dark:text-white block text-[11px] text-emerald-600 dark:text-emerald-400 mb-0.5">
+                  <div className="p-2.5 rounded-xl bg-[#070E22] border border-[#1E3A5F]">
+                    <span className="font-bold text-[#34D399] block text-[11px] mb-0.5">
                       2. {currentGlossary.fpr_term}:
                     </span>
-                    <p className="text-slate-600 dark:text-slate-300 text-[11px] leading-relaxed">
+                    <p className="text-[#A9B4CC] text-[11px] leading-relaxed">
                       {currentGlossary.fpr_def}
                     </p>
                   </div>
 
-                  <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-100 dark:border-slate-800/60">
-                    <span className="font-bold text-slate-900 dark:text-white block text-[11px] text-amber-600 dark:text-amber-400 mb-0.5">
+                  <div className="p-2.5 rounded-xl bg-[#070E22] border border-[#1E3A5F]">
+                    <span className="font-bold text-[#F5C96A] block text-[11px] mb-0.5">
                       3. {currentGlossary.calib_term}:
                     </span>
-                    <p className="text-slate-600 dark:text-slate-300 text-[11px] leading-relaxed">
+                    <p className="text-[#A9B4CC] text-[11px] leading-relaxed">
                       {currentGlossary.calib_def}
                     </p>
                   </div>
                 </div>
-
               </div>
             )}
           </div>
 
           {/* Performance & Footprint Stats */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1 text-xs">
-            <div className="p-3 rounded-2xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center gap-3">
-              <Cpu className="w-5 h-5 text-indigo-500 shrink-0" />
+            <div className="p-3 rounded-2xl bg-[#0B1530] border border-[#1E3A5F] flex items-center gap-3">
+              <Cpu className="w-5 h-5 text-teal-400 shrink-0" />
               <div>
-                <p className="font-extrabold text-slate-900 dark:text-white">{reportData?.latency_p50_ms || '~32 ms (p50)'}</p>
-                <p className="text-[11px] text-slate-400">Multi-detector CPU latency</p>
+                <p className="font-extrabold text-ink">{reportData?.latency_p50_ms || '~32 ms (p50)'}</p>
+                <p className="text-[11px] text-ink-muted">Multi-detector CPU latency</p>
               </div>
             </div>
 
-            <div className="p-3 rounded-2xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center gap-3">
-              <Database className="w-5 h-5 text-emerald-500 shrink-0" />
+            <div className="p-3 rounded-2xl bg-[#0B1530] border border-[#1E3A5F] flex items-center gap-3">
+              <Database className="w-5 h-5 text-gold-400 shrink-0" />
               <div>
-                <p className="font-extrabold text-slate-900 dark:text-white">{reportData?.ram_mb || '< 45 MB RAM'}</p>
-                <p className="text-[11px] text-slate-400">Lightweight offline footprint</p>
+                <p className="font-extrabold text-ink">{reportData?.ram_mb || '< 45 MB RAM'}</p>
+                <p className="text-[11px] text-ink-muted">Lightweight offline footprint</p>
               </div>
             </div>
 
-            <div className="p-3 rounded-2xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center gap-3">
-              <ShieldCheck className="w-5 h-5 text-indigo-500 shrink-0" />
+            <div className="p-3 rounded-2xl bg-[#0B1530] border border-[#1E3A5F] flex items-center gap-3">
+              <ShieldCheck className="w-5 h-5 text-teal-400 shrink-0" />
               <div>
-                <p className="font-extrabold text-slate-900 dark:text-white">{reportData?.network_calls || 'Zero Socket Calls'}</p>
-                <p className="text-[11px] text-slate-400">Offline static analysis (runs without internet)</p>
+                <p className="font-extrabold text-ink">{reportData?.network_calls || 'Zero Socket Calls'}</p>
+                <p className="text-[11px] text-ink-muted">Offline static analysis (runs without internet)</p>
               </div>
             </div>
           </div>
