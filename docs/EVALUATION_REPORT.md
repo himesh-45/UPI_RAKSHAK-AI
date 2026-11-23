@@ -176,7 +176,7 @@ To eliminate circularity, the static URL scanner is benchmarked on two strictly 
 
 Measured on AMD Ryzen AI 5 340 (12 logical cores, AuthenticAMD):
 
-- **Pure Text Inference Latency (Median)**: **12.75 ms** per sample (~32 ms end-to-end multi-detector fusion).
+- **Pure Text Inference Latency (Median)**: **18.10 ms** per sample (~32 ms end-to-end multi-detector fusion).
 - **With SQLite Audit Logging**: **~100 ms** per request under synchronous disk commit.
 - **Under 50 Concurrent Clients**: Sustained throughput of **25.0 requests/second** with **0.00% error rate**.
 - **Process Memory Footprint**: ~45 MB runtime memory.
