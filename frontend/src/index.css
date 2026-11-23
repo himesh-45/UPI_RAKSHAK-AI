@@ -5,65 +5,110 @@
 :root {
   /* Midnight Navy + Gold + Teal Design Tokens (Dark Default) */
   --bg-deep: #050a18;
+  --bg-deep-rgb: 5 10 24;
   --bg: #070e22;
+  --bg-rgb: 7 14 34;
   --bg-raised: #0b1530;
+  --bg-raised-rgb: 11 21 48;
 
   --surface: #0f1d3a;
+  --surface-rgb: 15 29 58;
   --surface-raised: #14254b;
+  --surface-raised-rgb: 20 37 75;
   --surface-hover: #192d5c;
+  --surface-hover-rgb: 25 45 92;
   --border: #1e3a5f;
+  --border-rgb: 30 58 95;
   --border-hover: #35d0c8;
+  --border-hover-rgb: 53 208 200;
 
   --gold-300: #f3d58a;
+  --gold-300-rgb: 243 213 138;
   --gold-400: #f5c96a;
+  --gold-400-rgb: 245 201 106;
   --gold-500: #d9a441;
+  --gold-500-rgb: 217 164 65;
   --gold-600: #a87b1e;
+  --gold-600-rgb: 168 123 30;
   --gold-btn-text: #050a18;
 
   --teal-300: #5eead4;
+  --teal-300-rgb: 94 234 212;
   --teal-400: #35d0c8;
+  --teal-400-rgb: 53 208 200;
   --teal-500: #1fb5ad;
+  --teal-500-rgb: 31 181 173;
   --teal-600: #0e8f89;
+  --teal-600-rgb: 14 143 137;
 
   --text: #f5f1e6;
+  --text-rgb: 245 241 230;
   --text-muted: #a9b4cc;
+  --text-muted-rgb: 169 180 204;
   --text-faint: #7c89a6;
+  --text-faint-rgb: 124 137 166;
 
   --verdict-safe: #34d399;
+  --verdict-safe-rgb: 52 211 153;
   --verdict-suspicious: #fb923c;
+  --verdict-suspicious-rgb: 251 146 60;
   --verdict-danger: #f43f5e;
+  --verdict-danger-rgb: 244 63 94;
 }
 
+html.light,
 html:not(.dark) {
-  /* Light Theme (Ivory + Dark Navy + WCAG AA Gold/Teal) */
+  /* Light Theme (Ivory Page + White Cards + Deep Navy Text + WCAG AA Gold/Teal) */
   --bg-deep: #faf7f0;
+  --bg-deep-rgb: 250 247 240;
   --bg: #f4efe6;
+  --bg-rgb: 244 239 230;
   --bg-raised: #eae3d5;
+  --bg-raised-rgb: 234 227 213;
 
   --surface: #ffffff;
+  --surface-rgb: 255 255 255;
   --surface-raised: #f8f5ee;
+  --surface-raised-rgb: 248 245 238;
   --surface-hover: #efe9dc;
-  --border: #dcd3c1;
+  --surface-hover-rgb: 239 233 220;
+  --border: #dbe3ee; /* Subtle navy-tinted card border */
+  --border-rgb: 219 227 238;
   --border-hover: #0e8f89;
+  --border-hover-rgb: 14 143 137;
 
   --gold-300: #d9a441;
-  --gold-400: #c28b23;
-  --gold-500: #8a6410; /* Darkened for AA contrast on ivory/white */
+  --gold-300-rgb: 217 164 65;
+  --gold-400: #a87b1e;
+  --gold-400-rgb: 168 123 30;
+  --gold-500: #8a6410; /* Darkened for AA contrast on ivory/white (5.37:1) */
+  --gold-500-rgb: 138 100 16;
   --gold-600: #714e08;
-  --gold-btn-text: #ffffff;
+  --gold-600-rgb: 113 78 8;
+  --gold-btn-text: #050a18;
 
-  --teal-300: #1fb5ad;
-  --teal-400: #139c94;
-  --teal-500: #0e8f89;
-  --teal-600: #0a6b67;
+  --teal-300: #139c94;
+  --teal-300-rgb: 19 156 148;
+  --teal-400: #0e8f89; /* Darkened for AA contrast (6.08:1) */
+  --teal-400-rgb: 14 143 137;
+  --teal-500: #0b6e6a;
+  --teal-500-rgb: 11 110 106;
+  --teal-600: #08524f;
+  --teal-600-rgb: 8 82 79;
 
-  --text: #0b1530;
-  --text-muted: #475569;
-  --text-faint: #64748b;
+  --text: #0b1530; /* Deep Navy, 18.04:1 contrast on white */
+  --text-rgb: 11 21 48;
+  --text-muted: #4a5878; /* Muted Navy, 7.10:1 contrast on white */
+  --text-muted-rgb: 74 88 120;
+  --text-faint: #6b7a99; /* Faint Navy, 4.63:1 contrast on white */
+  --text-faint-rgb: 107 122 153;
 
-  --verdict-safe: #059669;
-  --verdict-suspicious: #ea580c;
-  --verdict-danger: #e11d48;
+  --verdict-safe: #047857; /* 5.48:1 contrast on white */
+  --verdict-safe-rgb: 4 120 87;
+  --verdict-suspicious: #c2410c; /* 5.18:1 contrast on white */
+  --verdict-suspicious-rgb: 194 65 12;
+  --verdict-danger: #be123c; /* 6.29:1 contrast on white */
+  --verdict-danger-rgb: 190 18 60;
 }
 
 @layer base {
@@ -77,7 +122,7 @@ html:not(.dark) {
   }
 
   /* Dark mode background: subtle vertical navy gradient + faint radial teal glow + low-opacity bokeh */
-  html.dark body, body {
+  html.dark body {
     background-color: #050a18;
     background-image:
       radial-gradient(ellipse 65% 45% at 80% 12%, rgba(53, 208, 200, 0.07) 0%, transparent 60%),
@@ -88,7 +133,8 @@ html:not(.dark) {
   }
 
   /* Light mode background */
-  html:not(.dark) body {
+  html:not(.dark) body,
+  html.light body {
     background-color: #faf7f0;
     background-image:
       radial-gradient(ellipse 65% 45% at 80% 12%, rgba(14, 143, 137, 0.05) 0%, transparent 60%),
@@ -143,16 +189,21 @@ html:not(.dark) {
 
   /* Light mode glass cards */
   html:not(.dark) .cyber-glass,
-  html:not(.dark) .glass-card {
-    background: rgba(255, 255, 255, 0.92);
-    border: 1px solid #dcd3c1;
-    box-shadow: 0 4px 20px rgba(11, 21, 48, 0.05);
+  html:not(.dark) .glass-card,
+  html.light .cyber-glass,
+  html.light .glass-card {
+    background: #ffffff;
+    border: 1px solid #dbe3ee;
+    box-shadow: 0 4px 20px rgba(11, 21, 48, 0.06), 0 1px 3px rgba(11, 21, 48, 0.04);
+    color: var(--text);
   }
 
   html:not(.dark) .cyber-glass:hover,
-  html:not(.dark) .glass-card:hover {
+  html:not(.dark) .glass-card:hover,
+  html.light .cyber-glass:hover,
+  html.light .glass-card:hover {
     border-color: #0e8f89;
-    box-shadow: 0 8px 24px rgba(14, 143, 137, 0.12);
+    box-shadow: 0 8px 24px rgba(14, 143, 137, 0.15);
   }
 
   /* Primary Gold Action Button */

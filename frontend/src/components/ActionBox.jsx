@@ -22,7 +22,7 @@ export default function ActionBox({
   return (
     <div className="space-y-4">
       {/* 1930 Emergency Helpline Banner */}
-      <div className="p-4 rounded-2xl bg-gradient-to-r from-[#0F1D3A] via-[#0B1530] to-[#050A18] text-ink shadow-md border border-[#1E3A5F] border-t-2 border-t-gold-400 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="p-4 rounded-2xl bg-gradient-to-r from-[#0F1D3A] via-[#0B1530] to-navy-deep text-ink shadow-md border border-border border-t-2 border-t-gold-400 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-3">
           <div className="p-2.5 rounded-xl bg-gold-400/10 border border-gold-400/30 text-gold-300">
             <PhoneCall className="w-5 h-5 animate-pulse" />
@@ -57,7 +57,7 @@ export default function ActionBox({
             href="https://cybercrime.gov.in"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-3 py-1.5 rounded-xl bg-[#070E22] hover:bg-[#0B1530] border border-[#1E3A5F] text-ink-muted hover:text-ink font-semibold text-xs transition"
+            className="px-3 py-1.5 rounded-xl bg-navy hover:bg-navy border border-border text-ink-muted hover:text-ink font-semibold text-xs transition"
           >
             cybercrime.gov.in
           </a>
@@ -80,7 +80,7 @@ export default function ActionBox({
 
           {showEmergencyChecklist && (
             <div className="p-4 border-t border-verdict-danger/20 space-y-4 text-xs text-ink-muted">
-              <div className="bg-[#0B1530] p-3 rounded-xl border border-verdict-danger/30 leading-relaxed text-ink">
+              <div className="bg-navy p-3 rounded-xl border border-verdict-danger/30 leading-relaxed text-ink">
                 <strong className="text-verdict-danger">The Golden Hour (First 2-3 Hours):</strong> Money transferred via UPI lands in a scammer's mule bank account before being laundered through ATM withdrawals. Calling <strong className="text-gold-300">1930</strong> immediately enables police to freeze the beneficiary account.
               </div>
 
@@ -99,7 +99,7 @@ export default function ActionBox({
                 <span className="font-bold text-ink block">Bank 24x7 Emergency Fraud Numbers:</span>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {BANK_FRAUD_DESKS.map((b, idx) => (
-                    <div key={idx} className="p-2.5 rounded-xl bg-[#070E22] border border-[#1E3A5F] flex items-center justify-between">
+                    <div key={idx} className="p-2.5 rounded-xl bg-navy border border-border flex items-center justify-between">
                       <div>
                         <span className="font-semibold text-ink block text-[11px]">{b.bank}</span>
                         <span className="text-[10px] text-ink-muted">{b.sms}</span>
@@ -120,7 +120,7 @@ export default function ActionBox({
       )}
 
       {/* Action items list */}
-      <div className="p-4 rounded-2xl bg-[#0F1D3A]/90 border border-[#1E3A5F] shadow-sm">
+      <div className="p-4 rounded-2xl bg-navy-surface/90 border border-border shadow-sm">
         <h4 className="text-xs font-bold uppercase tracking-wider text-teal-400 mb-3 flex items-center gap-1.5">
           <AlertOctagon className="w-4 h-4 text-teal-400" />
           Recommended Immediate Action Steps

@@ -79,48 +79,48 @@ export default function FeedbackModal({ isOpen, onClose, report, rawInput }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#050A18]/80 backdrop-blur-sm animate-fade-in">
-      <div className="bg-[#0F1D3A] border border-[#1E3A5F] border-t-2 border-t-[#D9A441] w-full max-w-md rounded-2xl shadow-2xl overflow-hidden p-6 text-sm text-[#F5F1E6]">
-        <div className="flex items-center justify-between mb-4 pb-2 border-b border-[#1E3A5F]">
-          <h3 className="text-base font-bold text-[#F5F1E6] flex items-center gap-2">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-navy-deep/80 backdrop-blur-sm animate-fade-in">
+      <div className="bg-navy-surface border border-border border-t-2 border-t-gold-500 w-full max-w-md rounded-2xl shadow-2xl overflow-hidden p-6 text-sm text-ink">
+        <div className="flex items-center justify-between mb-4 pb-2 border-b border-border">
+          <h3 className="text-base font-bold text-ink flex items-center gap-2">
             Model Evaluation Feedback
           </h3>
           <button
             onClick={onClose}
-            className="p-1 rounded-lg text-[#A9B4CC] hover:text-[#F5F1E6] hover:bg-[#14254B]"
+            className="p-1 rounded-lg text-ink-muted hover:text-ink hover:bg-navy-raised"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {error && (
-          <div className="mb-4 p-3 rounded-lg bg-[#F43F5E]/15 border border-[#F43F5E]/30 text-[#FDA4AF] text-xs flex items-center gap-2">
-            <AlertCircle className="w-4 h-4 shrink-0 text-[#F43F5E]" />
+          <div className="mb-4 p-3 rounded-lg bg-verdict-danger/15 border border-verdict-danger/30 text-rose-600 dark:text-rose-300 text-xs flex items-center gap-2">
+            <AlertCircle className="w-4 h-4 shrink-0 text-verdict-danger" />
             <span>{error}</span>
           </div>
         )}
 
         {step === 'initial' && (
           <div className="space-y-4">
-            <p className="text-[#A9B4CC] text-xs leading-relaxed">
-              Help make UPI Rakshak AI more accurate for millions of Indian digital payment users. Was our verdict (<strong className="text-[#F5F1E6]">{report.verdict}</strong>) correct for this sample?
+            <p className="text-ink-muted text-xs leading-relaxed">
+              Help make UPI Rakshak AI more accurate for millions of Indian digital payment users. Was our verdict (<strong className="text-ink">{report.verdict}</strong>) correct for this sample?
             </p>
 
             <div className="grid grid-cols-2 gap-3 pt-2">
               <button
                 onClick={handlePositive}
                 disabled={loading}
-                className="flex items-center justify-center gap-2 p-3 rounded-xl bg-[#34D399]/15 hover:bg-[#34D399]/25 text-[#34D399] border border-[#34D399]/30 font-semibold text-xs transition-all"
+                className="flex items-center justify-center gap-2 p-3 rounded-xl bg-verdict-safe/15 hover:bg-verdict-safe/25 text-verdict-safe border border-verdict-safe/30 font-semibold text-xs transition-all"
               >
-                <ThumbsUp className="w-4 h-4 text-[#34D399]" />
+                <ThumbsUp className="w-4 h-4 text-verdict-safe" />
                 Yes, Accurate
               </button>
               <button
                 onClick={() => setStep('correction')}
                 disabled={loading}
-                className="flex items-center justify-center gap-2 p-3 rounded-xl bg-[#F43F5E]/15 hover:bg-[#F43F5E]/25 text-[#F43F5E] border border-[#F43F5E]/30 font-semibold text-xs transition-all"
+                className="flex items-center justify-center gap-2 p-3 rounded-xl bg-verdict-danger/15 hover:bg-verdict-danger/25 text-verdict-danger border border-verdict-danger/30 font-semibold text-xs transition-all"
               >
-                <ThumbsDown className="w-4 h-4 text-[#F43F5E]" />
+                <ThumbsDown className="w-4 h-4 text-verdict-danger" />
                 Report Error
               </button>
             </div>
@@ -129,21 +129,21 @@ export default function FeedbackModal({ isOpen, onClose, report, rawInput }) {
 
         {step === 'correction' && (
           <form onSubmit={handleNegativeSubmit} className="space-y-4">
-            <p className="text-[#A9B4CC] text-xs">
+            <p className="text-ink-muted text-xs">
               What was the actual nature of this message?
             </p>
 
             <div>
-              <label className="text-[11px] text-[#A9B4CC] block mb-1 font-medium">
+              <label className="text-[11px] text-ink-muted block mb-1 font-medium">
                 Correct Category:
               </label>
               <select
                 value={correctCategory}
                 onChange={(e) => setCorrectCategory(e.target.value)}
-                className="w-full bg-[#0B1530] border border-[#1E3A5F] rounded-xl px-3 py-2 text-xs text-[#F5F1E6] focus:outline-none focus:border-[#35D0C8]"
+                className="w-full bg-navy border border-border rounded-xl px-3 py-2 text-xs text-ink focus:outline-none focus:border-teal"
               >
                 {CATEGORY_OPTIONS.map((opt) => (
-                  <option key={opt.value} value={opt.value} className="bg-[#0B1530] text-[#F5F1E6]">
+                  <option key={opt.value} value={opt.value} className="bg-navy text-ink">
                     {opt.label}
                   </option>
                 ))}
@@ -151,7 +151,7 @@ export default function FeedbackModal({ isOpen, onClose, report, rawInput }) {
             </div>
 
             <div>
-              <label className="text-[11px] text-[#A9B4CC] block mb-1 font-medium">
+              <label className="text-[11px] text-ink-muted block mb-1 font-medium">
                 Notes (Optional):
               </label>
               <textarea
@@ -159,7 +159,7 @@ export default function FeedbackModal({ isOpen, onClose, report, rawInput }) {
                 onChange={(e) => setNotes(e.target.value)}
                 rows={3}
                 placeholder="Why do you consider this verdict incorrect?"
-                className="w-full bg-[#0B1530] border border-[#1E3A5F] rounded-xl p-3 text-xs text-[#F5F1E6] focus:outline-none focus:border-[#35D0C8] resize-none placeholder-[#7C89A6]"
+                className="w-full bg-navy border border-border rounded-xl p-3 text-xs text-ink focus:outline-none focus:border-teal resize-none placeholder-[#7C89A6]"
               />
             </div>
 
@@ -167,7 +167,7 @@ export default function FeedbackModal({ isOpen, onClose, report, rawInput }) {
               <button
                 type="button"
                 onClick={() => setStep('initial')}
-                className="px-3 py-1.5 rounded-lg bg-[#14254B] hover:bg-[#1E3A5F] text-[#F5F1E6] border border-[#1E3A5F] text-xs"
+                className="px-3 py-1.5 rounded-lg bg-navy-raised hover:bg-border text-ink border border-border text-xs"
               >
                 Back
               </button>
@@ -184,11 +184,11 @@ export default function FeedbackModal({ isOpen, onClose, report, rawInput }) {
 
         {step === 'success' && (
           <div className="py-6 text-center space-y-2">
-            <div className="w-12 h-12 rounded-full bg-[#34D399]/20 text-[#34D399] border border-[#34D399]/30 mx-auto flex items-center justify-center">
+            <div className="w-12 h-12 rounded-full bg-verdict-safe/20 text-verdict-safe border border-verdict-safe/30 mx-auto flex items-center justify-center">
               <Check className="w-6 h-6" />
             </div>
-            <h4 className="font-bold text-[#F5F1E6] text-sm">Feedback Recorded!</h4>
-            <p className="text-xs text-[#A9B4CC]">
+            <h4 className="font-bold text-ink text-sm">Feedback Recorded!</h4>
+            <p className="text-xs text-ink-muted">
               Your feedback has been logged to the retraining queue.
             </p>
           </div>

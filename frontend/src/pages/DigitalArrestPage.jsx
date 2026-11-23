@@ -70,7 +70,7 @@ export default function DigitalArrestPage({ onOpenPreFilled1930 }) {
   return (
     <div className="max-w-4xl mx-auto px-4 py-8 space-y-8 animate-fade-in">
       {/* Top Banner: National Cybercrime Advisory */}
-      <div className="p-5 rounded-3xl bg-gradient-to-r from-[#0F1D3A] via-[#0B1530] to-[#050A18] border border-verdict-danger/40 border-t-2 border-t-gold-400 shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div className="p-5 rounded-3xl bg-gradient-to-r from-navy-surface via-navy to-navy-deep border border-verdict-danger/40 border-t-2 border-t-gold-400 shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="flex items-start gap-3.5">
           <div className="p-3 rounded-2xl bg-verdict-danger/20 text-verdict-danger border border-verdict-danger/30">
             <Scale className="w-6 h-6" />
@@ -121,7 +121,7 @@ export default function DigitalArrestPage({ onOpenPreFilled1930 }) {
             <button
               key={idx}
               onClick={() => handleSelectScenario(scen)}
-              className="p-3 text-left rounded-2xl bg-[#0F1D3A]/90 border border-[#1E3A5F] hover:border-teal-400/60 transition shadow-xs space-y-1 group"
+              className="p-3 text-left rounded-2xl bg-navy-surface/90 border border-border hover:border-teal-400/60 transition shadow-xs space-y-1 group"
             >
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold text-ink group-hover:text-gold-300 transition">
@@ -141,7 +141,7 @@ export default function DigitalArrestPage({ onOpenPreFilled1930 }) {
 
       {/* Input Form */}
       <form onSubmit={handleEvaluate} className="space-y-4">
-        <div className="p-4 rounded-3xl bg-[#0F1D3A]/90 border border-[#1E3A5F] shadow-sm space-y-2">
+        <div className="p-4 rounded-3xl bg-navy-surface/90 border border-border shadow-sm space-y-2">
           <label className="text-xs font-bold text-ink flex items-center justify-between">
             <span>Paste Call Transcript, SMS, or Voice Note Transcript:</span>
             <span className="text-[11px] text-teal-400 font-normal">English, हिंदी, తెలుగు, Hinglish</span>
@@ -151,7 +151,7 @@ export default function DigitalArrestPage({ onOpenPreFilled1930 }) {
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
             placeholder="e.g. This is Inspector Rathore from Mumbai Crime Branch. Your FedEx parcel containing MDMA drugs was seized. Stay on this Skype call..."
-            className="w-full bg-[#070E22] border border-[#1E3A5F] rounded-2xl p-3.5 text-sm text-ink placeholder:text-ink-faint focus:outline-hidden focus:border-teal-400 focus:ring-1 focus:ring-teal-400 leading-relaxed font-sans"
+            className="w-full bg-navy border border-border rounded-2xl p-3.5 text-sm text-ink placeholder:text-ink-faint focus:outline-hidden focus:border-teal-400 focus:ring-1 focus:ring-teal-400 leading-relaxed font-sans"
           />
         </div>
 
@@ -177,12 +177,12 @@ export default function DigitalArrestPage({ onOpenPreFilled1930 }) {
           {/* Main Verdict Card */}
           <div className={`p-6 rounded-3xl border shadow-lg ${
             result.verdict === 'HIGH RISK'
-              ? 'bg-[#0F1D3A]/95 border-verdict-danger/40 border-t-2 border-t-verdict-danger'
+              ? 'bg-navy-surface/95 border-verdict-danger/40 border-t-2 border-t-verdict-danger'
               : (result.verdict === 'SUSPICIOUS'
-                  ? 'bg-[#0F1D3A]/95 border-verdict-suspicious/40 border-t-2 border-t-verdict-suspicious'
-                  : 'bg-[#0F1D3A]/95 border-verdict-safe/40 border-t-2 border-t-verdict-safe')
+                  ? 'bg-navy-surface/95 border-verdict-suspicious/40 border-t-2 border-t-verdict-suspicious'
+                  : 'bg-navy-surface/95 border-verdict-safe/40 border-t-2 border-t-verdict-safe')
           }`}>
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#1E3A5F]">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-border">
               <div className="flex items-center gap-3">
                 <span className={`px-3.5 py-1.5 rounded-full text-xs font-black tracking-wider uppercase ${
                   result.verdict === 'HIGH RISK'
@@ -211,7 +211,7 @@ export default function DigitalArrestPage({ onOpenPreFilled1930 }) {
 
             {/* Legal Facts Box if High Risk */}
             {result.verdict === 'HIGH RISK' && (
-              <div className="mt-4 p-4 rounded-2xl bg-[#0B1530] border border-verdict-danger/30 space-y-2">
+              <div className="mt-4 p-4 rounded-2xl bg-navy border border-verdict-danger/30 space-y-2">
                 <div className="flex items-center gap-2 text-verdict-danger font-bold text-xs uppercase tracking-wider">
                   <Scale className="w-4 h-4" />
                   <span>Statutory Legal Protection Reality</span>
@@ -224,14 +224,14 @@ export default function DigitalArrestPage({ onOpenPreFilled1930 }) {
           </div>
 
           {/* Extracted Coercion Tactics */}
-          <div className="p-6 rounded-3xl bg-[#0F1D3A]/90 border border-[#1E3A5F] shadow-sm space-y-4">
+          <div className="p-6 rounded-3xl bg-navy-surface/90 border border-border shadow-sm space-y-4">
             <h3 className="text-sm font-bold text-ink uppercase tracking-wider flex items-center gap-2">
               <FileWarning className="w-4 h-4 text-verdict-danger" />
               <span>Extracted Coercion Tactics & Evidence Signals</span>
             </h3>
             <div className="space-y-2.5">
               {result.evidence.map((ev, i) => (
-                <div key={i} className="p-3 rounded-xl bg-[#0B1530] border border-[#1E3A5F] flex items-start gap-2.5 text-xs text-ink">
+                <div key={i} className="p-3 rounded-xl bg-navy border border-border flex items-start gap-2.5 text-xs text-ink">
                   <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase shrink-0 ${
                     ev.severity === 'CRITICAL' ? 'bg-verdict-danger/20 text-verdict-danger border border-verdict-danger/30' : 'bg-verdict-suspicious/20 text-verdict-suspicious border border-verdict-suspicious/30'
                   }`}>
@@ -244,7 +244,7 @@ export default function DigitalArrestPage({ onOpenPreFilled1930 }) {
           </div>
 
           {/* Actionable Emergency Guidance */}
-          <div className="p-6 rounded-3xl bg-[#0F1D3A]/90 border border-[#1E3A5F] shadow-sm space-y-4">
+          <div className="p-6 rounded-3xl bg-navy-surface/90 border border-border shadow-sm space-y-4">
             <h3 className="text-sm font-bold text-teal-400 uppercase tracking-wider flex items-center gap-2">
               <PhoneCall className="w-4 h-4 text-teal-400" />
               <span>Immediate Defense Actions</span>

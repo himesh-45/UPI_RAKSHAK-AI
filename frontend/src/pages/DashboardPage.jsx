@@ -60,22 +60,22 @@ export default function DashboardPage({ token, onOpenLogin }) {
     : [];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8 space-y-8 animate-fade-in text-[#F5F1E6]">
+    <div className="max-w-7xl mx-auto px-4 py-8 space-y-8 animate-fade-in text-ink">
       
       {/* Prominent Simulated Demo Notice Banner */}
-      <div className="p-4 rounded-2xl bg-[#0F1D3A]/90 border border-[#D9A441]/30 text-[#F5C96A] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs shadow-md">
+      <div className="p-4 rounded-2xl bg-navy-surface/90 border border-gold-500/30 text-gold-400 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs shadow-md">
         <div className="flex items-center gap-2.5">
-          <Database className="w-5 h-5 text-[#D9A441] shrink-0" />
+          <Database className="w-5 h-5 text-gold-500 shrink-0" />
           <div>
             <span className="font-extrabold tracking-wide uppercase">Notice:</span>{' '}
-            <span className="text-[#F5F1E6]">{t('dashboard.simulatedNotice')}</span>
+            <span className="text-ink">{t('dashboard.simulatedNotice')}</span>
           </div>
         </div>
         <div className="flex items-center gap-2 font-mono text-[11px] font-bold shrink-0">
-          <span className="px-2 py-0.5 rounded bg-[#14254B] text-[#35D0C8] border border-[#35D0C8]/30">
+          <span className="px-2 py-0.5 rounded bg-navy-raised text-teal border border-teal/30">
             Live: {stats?.seeded_vs_live?.live || 0}
           </span>
-          <span className="px-2 py-0.5 rounded bg-[#14254B] text-[#F5C96A] border border-[#D9A441]/30">
+          <span className="px-2 py-0.5 rounded bg-navy-raised text-gold-400 border border-gold-500/30">
             Simulated: {stats?.seeded_vs_live?.simulated || 0}
           </span>
         </div>
@@ -84,23 +84,23 @@ export default function DashboardPage({ token, onOpenLogin }) {
       {/* Header and Scope Selector */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#F5F1E6] font-display">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-ink font-display">
             {t('dashboard.title')}
           </h1>
-          <p className="text-xs text-[#A9B4CC] mt-1">
+          <p className="text-xs text-ink-muted mt-1">
             Aggregated threat intelligence, signal analytics, and audit logging.
           </p>
         </div>
 
         {/* Filter scope buttons */}
         <div className="flex items-center gap-2">
-          <div className="flex items-center bg-[#0B1530] p-1 rounded-xl border border-[#1E3A5F] text-xs font-bold">
+          <div className="flex items-center bg-navy p-1 rounded-xl border border-border text-xs font-bold">
             <button
               onClick={() => setScope('all')}
               className={`px-3 py-1.5 rounded-lg transition ${
                 scope === 'all'
-                  ? 'bg-gradient-to-r from-[#D9A441] to-[#F5C96A] text-[#050A18] shadow-xs'
-                  : 'text-[#A9B4CC] hover:text-[#F5F1E6]'
+                  ? 'bg-gradient-to-r from-gold-500 to-gold-400 text-navy-deep shadow-xs'
+                  : 'text-ink-muted hover:text-ink'
               }`}
             >
               {t('dashboard.filterAll')}
@@ -109,8 +109,8 @@ export default function DashboardPage({ token, onOpenLogin }) {
               onClick={() => setScope('live')}
               className={`px-3 py-1.5 rounded-lg transition ${
                 scope === 'live'
-                  ? 'bg-gradient-to-r from-[#D9A441] to-[#F5C96A] text-[#050A18] shadow-xs'
-                  : 'text-[#A9B4CC] hover:text-[#F5F1E6]'
+                  ? 'bg-gradient-to-r from-gold-500 to-gold-400 text-navy-deep shadow-xs'
+                  : 'text-ink-muted hover:text-ink'
               }`}
             >
               {t('dashboard.filterLive')}
@@ -119,8 +119,8 @@ export default function DashboardPage({ token, onOpenLogin }) {
               onClick={() => setScope('simulated')}
               className={`px-3 py-1.5 rounded-lg transition ${
                 scope === 'simulated'
-                  ? 'bg-gradient-to-r from-[#D9A441] to-[#F5C96A] text-[#050A18] shadow-xs'
-                  : 'text-[#A9B4CC] hover:text-[#F5F1E6]'
+                  ? 'bg-gradient-to-r from-gold-500 to-gold-400 text-navy-deep shadow-xs'
+                  : 'text-ink-muted hover:text-ink'
               }`}
             >
               {t('dashboard.filterSimulated')}
@@ -129,7 +129,7 @@ export default function DashboardPage({ token, onOpenLogin }) {
 
           <button
             onClick={() => fetchStats(scope)}
-            className="p-2 rounded-xl bg-[#0B1530] text-[#A9B4CC] hover:text-[#35D0C8] hover:bg-[#14254B] border border-[#1E3A5F] transition"
+            className="p-2 rounded-xl bg-navy text-ink-muted hover:text-teal hover:bg-navy-raised border border-border transition"
           >
             <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
           </button>
@@ -140,12 +140,12 @@ export default function DashboardPage({ token, onOpenLogin }) {
       {token ? (
         <AdminModerationPanel token={token} />
       ) : (
-        <div className="p-4 rounded-2xl bg-[#0F1D3A]/90 border border-[#1E3A5F] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs shadow-md">
+        <div className="p-4 rounded-2xl bg-navy-surface/90 border border-border flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs shadow-md">
           <div className="flex items-center gap-2.5">
-            <Lock className="w-5 h-5 text-[#35D0C8] shrink-0" />
+            <Lock className="w-5 h-5 text-teal shrink-0" />
             <div>
-              <span className="font-extrabold text-[#F5F1E6]">Admin Dispute Moderation & Research Export:</span>{' '}
-              <span className="text-[#A9B4CC]">
+              <span className="font-extrabold text-ink">Admin Dispute Moderation & Research Export:</span>{' '}
+              <span className="text-ink-muted">
                 Sign in as Admin to review community VPA reports, adjudicate merchant false positive appeals, and export study telemetry.
               </span>
             </div>
@@ -161,42 +161,42 @@ export default function DashboardPage({ token, onOpenLogin }) {
 
       {/* KPI Cards Row */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="p-5 rounded-2xl bg-[#0F1D3A]/90 border border-[#1E3A5F] shadow-sm space-y-1">
-          <span className="text-xs font-semibold text-[#A9B4CC] uppercase tracking-wider">{t('dashboard.totalAnalyses')}</span>
-          <div className="text-3xl font-extrabold text-[#F5C96A] font-mono">
+        <div className="p-5 rounded-2xl bg-navy-surface/90 border border-border shadow-sm space-y-1">
+          <span className="text-xs font-semibold text-ink-muted uppercase tracking-wider">{t('dashboard.totalAnalyses')}</span>
+          <div className="text-3xl font-extrabold text-gold-400 font-mono">
             {stats?.total_analyses || 0}
           </div>
-          <span className="text-[11px] text-[#35D0C8] font-semibold flex items-center gap-1 font-mono">
+          <span className="text-[11px] text-teal font-semibold flex items-center gap-1 font-mono">
             <Activity className="w-3 h-3" /> All Input Formats
           </span>
         </div>
 
-        <div className="p-5 rounded-2xl bg-[#0F1D3A]/90 border border-[#1E3A5F] shadow-sm space-y-1">
-          <span className="text-xs font-semibold text-[#A9B4CC] uppercase tracking-wider">{t('dashboard.highRiskCount')}</span>
-          <div className="text-3xl font-extrabold text-[#F43F5E] font-mono">
+        <div className="p-5 rounded-2xl bg-navy-surface/90 border border-border shadow-sm space-y-1">
+          <span className="text-xs font-semibold text-ink-muted uppercase tracking-wider">{t('dashboard.highRiskCount')}</span>
+          <div className="text-3xl font-extrabold text-verdict-danger font-mono">
             {stats?.high_risk_count || 0}
           </div>
-          <span className="text-[11px] text-[#F43F5E] font-semibold flex items-center gap-1 font-mono">
+          <span className="text-[11px] text-verdict-danger font-semibold flex items-center gap-1 font-mono">
             <ShieldAlert className="w-3 h-3" /> Score &ge; 70
           </span>
         </div>
 
-        <div className="p-5 rounded-2xl bg-[#0F1D3A]/90 border border-[#1E3A5F] shadow-sm space-y-1">
-          <span className="text-xs font-semibold text-[#A9B4CC] uppercase tracking-wider">{t('dashboard.suspiciousCount')}</span>
-          <div className="text-3xl font-extrabold text-[#FB923C] font-mono">
+        <div className="p-5 rounded-2xl bg-navy-surface/90 border border-border shadow-sm space-y-1">
+          <span className="text-xs font-semibold text-ink-muted uppercase tracking-wider">{t('dashboard.suspiciousCount')}</span>
+          <div className="text-3xl font-extrabold text-verdict-suspicious font-mono">
             {stats?.suspicious_count || 0}
           </div>
-          <span className="text-[11px] text-[#FB923C] font-semibold flex items-center gap-1 font-mono">
+          <span className="text-[11px] text-verdict-suspicious font-semibold flex items-center gap-1 font-mono">
             <AlertTriangle className="w-3 h-3" /> Score 35–69
           </span>
         </div>
 
-        <div className="p-5 rounded-2xl bg-[#0F1D3A]/90 border border-[#1E3A5F] shadow-sm space-y-1">
-          <span className="text-xs font-semibold text-[#A9B4CC] uppercase tracking-wider">{t('dashboard.safeCount')}</span>
-          <div className="text-3xl font-extrabold text-[#34D399] font-mono">
+        <div className="p-5 rounded-2xl bg-navy-surface/90 border border-border shadow-sm space-y-1">
+          <span className="text-xs font-semibold text-ink-muted uppercase tracking-wider">{t('dashboard.safeCount')}</span>
+          <div className="text-3xl font-extrabold text-verdict-safe font-mono">
             {stats?.safe_count || 0}
           </div>
-          <span className="text-[11px] text-[#34D399] font-semibold flex items-center gap-1 font-mono">
+          <span className="text-[11px] text-verdict-safe font-semibold flex items-center gap-1 font-mono">
             <ShieldCheck className="w-3 h-3" /> Score &le; 34
           </span>
         </div>
@@ -204,37 +204,37 @@ export default function DashboardPage({ token, onOpenLogin }) {
 
       {/* Omnichannel Distribution Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="p-4 rounded-2xl bg-[#0F1D3A]/90 border border-[#1E3A5F] flex items-center justify-between">
+        <div className="p-4 rounded-2xl bg-navy-surface/90 border border-border flex items-center justify-between">
           <div>
-            <div className="text-[11px] font-bold text-[#A9B4CC] uppercase tracking-wider">Web Portal Scans</div>
-            <div className="text-2xl font-extrabold text-[#F5F1E6] font-mono mt-0.5">
+            <div className="text-[11px] font-bold text-ink-muted uppercase tracking-wider">Web Portal Scans</div>
+            <div className="text-2xl font-extrabold text-ink font-mono mt-0.5">
               {stats?.channel_breakdown?.web || 0}
             </div>
-            <div className="text-[10px] text-[#7C89A6]">Desktop & Mobile Web</div>
+            <div className="text-[10px] text-ink-faint">Desktop & Mobile Web</div>
           </div>
-          <span className="text-2xl p-3 bg-[#0B1530] rounded-xl border border-[#1E3A5F]">🌐</span>
+          <span className="text-2xl p-3 bg-navy rounded-xl border border-border">🌐</span>
         </div>
 
-        <div className="p-4 rounded-2xl bg-[#0F1D3A]/90 border border-[#1E3A5F] flex items-center justify-between">
+        <div className="p-4 rounded-2xl bg-navy-surface/90 border border-border flex items-center justify-between">
           <div>
-            <div className="text-[11px] font-bold text-[#35D0C8] uppercase tracking-wider">Telegram Bot</div>
-            <div className="text-2xl font-extrabold text-[#F5F1E6] font-mono mt-0.5">
+            <div className="text-[11px] font-bold text-teal uppercase tracking-wider">Telegram Bot</div>
+            <div className="text-2xl font-extrabold text-ink font-mono mt-0.5">
               {stats?.channel_breakdown?.telegram || 0}
             </div>
-            <div className="text-[10px] text-[#7C89A6]">Salted SHA-256 Privacy</div>
+            <div className="text-[10px] text-ink-faint">Salted SHA-256 Privacy</div>
           </div>
-          <span className="text-2xl p-3 bg-[#0B1530] text-[#35D0C8] rounded-xl border border-[#1E3A5F]">✈️</span>
+          <span className="text-2xl p-3 bg-navy text-teal rounded-xl border border-border">✈️</span>
         </div>
 
-        <div className="p-4 rounded-2xl bg-[#0F1D3A]/90 border border-[#1E3A5F] flex items-center justify-between">
+        <div className="p-4 rounded-2xl bg-navy-surface/90 border border-border flex items-center justify-between">
           <div>
-            <div className="text-[11px] font-bold text-[#34D399] uppercase tracking-wider">WhatsApp Bot</div>
-            <div className="text-2xl font-extrabold text-[#F5F1E6] font-mono mt-0.5">
+            <div className="text-[11px] font-bold text-verdict-safe uppercase tracking-wider">WhatsApp Bot</div>
+            <div className="text-2xl font-extrabold text-ink font-mono mt-0.5">
               {stats?.channel_breakdown?.whatsapp || 0}
             </div>
-            <div className="text-[10px] text-[#7C89A6]">Twilio Sandbox & Meta Cloud API</div>
+            <div className="text-[10px] text-ink-faint">Twilio Sandbox & Meta Cloud API</div>
           </div>
-          <span className="text-2xl p-3 bg-[#0B1530] text-[#34D399] rounded-xl border border-[#1E3A5F]">💬</span>
+          <span className="text-2xl p-3 bg-navy text-verdict-safe rounded-xl border border-border">💬</span>
         </div>
       </div>
 
@@ -242,17 +242,17 @@ export default function DashboardPage({ token, onOpenLogin }) {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         
         {/* Scam Category Breakdown */}
-        <div className="p-6 rounded-3xl bg-[#0F1D3A]/90 border border-[#1E3A5F] shadow-sm space-y-4">
-          <h3 className="text-sm font-bold text-[#F5F1E6] uppercase tracking-wider">
+        <div className="p-6 rounded-3xl bg-navy-surface/90 border border-border shadow-sm space-y-4">
+          <h3 className="text-sm font-bold text-ink uppercase tracking-wider">
             {t('dashboard.categoryDist')}
           </h3>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={categoryChartData} layout="vertical" margin={{ left: 10, right: 20 }}>
                 <XAxis type="number" hide />
-                <YAxis dataKey="name" type="category" width={110} tick={{ fontSize: 11, fill: '#A9B4CC' }} />
+                <YAxis dataKey="name" type="category" width={110} tick={{ fontSize: 11, fill: 'var(--text-muted)' }} />
                 <Tooltip
-                  contentStyle={{ backgroundColor: '#0B1530', borderColor: '#1E3A5F', borderRadius: '12px', fontSize: '12px', color: '#F5F1E6' }}
+                  contentStyle={{ backgroundColor: 'var(--surface)', borderColor: 'var(--border)', borderRadius: '12px', fontSize: '12px', color: '#F5F1E6' }}
                 />
                 <Bar dataKey="count" fill="#D9A441" radius={[0, 8, 8, 0]} />
               </BarChart>
@@ -261,17 +261,17 @@ export default function DashboardPage({ token, onOpenLogin }) {
         </div>
 
         {/* 7-Day Timeline Trend */}
-        <div className="p-6 rounded-3xl bg-[#0F1D3A]/90 border border-[#1E3A5F] shadow-sm space-y-4">
-          <h3 className="text-sm font-bold text-[#F5F1E6] uppercase tracking-wider">
+        <div className="p-6 rounded-3xl bg-navy-surface/90 border border-border shadow-sm space-y-4">
+          <h3 className="text-sm font-bold text-ink uppercase tracking-wider">
             7-Day Threat Activity Trend
           </h3>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={stats?.timeline_trend || []}>
-                <XAxis dataKey="date" tick={{ fontSize: 11, fill: '#A9B4CC' }} />
-                <YAxis tick={{ fontSize: 11, fill: '#A9B4CC' }} />
+                <XAxis dataKey="date" tick={{ fontSize: 11, fill: 'var(--text-muted)' }} />
+                <YAxis tick={{ fontSize: 11, fill: 'var(--text-muted)' }} />
                 <Tooltip
-                  contentStyle={{ backgroundColor: '#0B1530', borderColor: '#1E3A5F', borderRadius: '12px', fontSize: '12px', color: '#F5F1E6' }}
+                  contentStyle={{ backgroundColor: 'var(--surface)', borderColor: 'var(--border)', borderRadius: '12px', fontSize: '12px', color: '#F5F1E6' }}
                 />
                 <Legend wrapperStyle={{ fontSize: '11px', paddingTop: '8px' }} />
                 <Area type="monotone" dataKey="high_risk" stackId="1" stroke="#F43F5E" fill="#F43F5E" fillOpacity={0.6} name="High Risk" />
@@ -283,8 +283,8 @@ export default function DashboardPage({ token, onOpenLogin }) {
         </div>
 
         {/* Language Breakdown */}
-        <div className="p-6 rounded-3xl bg-[#0F1D3A]/90 border border-[#1E3A5F] shadow-sm space-y-4">
-          <h3 className="text-sm font-bold text-[#F5F1E6] uppercase tracking-wider">
+        <div className="p-6 rounded-3xl bg-navy-surface/90 border border-border shadow-sm space-y-4">
+          <h3 className="text-sm font-bold text-ink uppercase tracking-wider">
             {t('dashboard.languageBreakdown')}
           </h3>
           <div className="h-60 flex items-center justify-center">
@@ -305,7 +305,7 @@ export default function DashboardPage({ token, onOpenLogin }) {
                   ))}
                 </Pie>
                 <Tooltip
-                  contentStyle={{ backgroundColor: '#0B1530', borderColor: '#1E3A5F', borderRadius: '12px', fontSize: '12px', color: '#F5F1E6' }}
+                  contentStyle={{ backgroundColor: 'var(--surface)', borderColor: 'var(--border)', borderRadius: '12px', fontSize: '12px', color: '#F5F1E6' }}
                 />
               </PieChart>
             </ResponsiveContainer>
@@ -313,17 +313,17 @@ export default function DashboardPage({ token, onOpenLogin }) {
         </div>
 
         {/* Risk Score Bucket Distribution */}
-        <div className="p-6 rounded-3xl bg-[#0F1D3A]/90 border border-[#1E3A5F] shadow-sm space-y-4">
-          <h3 className="text-sm font-bold text-[#F5F1E6] uppercase tracking-wider">
+        <div className="p-6 rounded-3xl bg-navy-surface/90 border border-border shadow-sm space-y-4">
+          <h3 className="text-sm font-bold text-ink uppercase tracking-wider">
             {t('dashboard.riskScoreDist')}
           </h3>
           <div className="h-60">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={scoreBucketData}>
-                <XAxis dataKey="bucket" tick={{ fontSize: 11, fill: '#A9B4CC' }} />
-                <YAxis tick={{ fontSize: 11, fill: '#A9B4CC' }} />
+                <XAxis dataKey="bucket" tick={{ fontSize: 11, fill: 'var(--text-muted)' }} />
+                <YAxis tick={{ fontSize: 11, fill: 'var(--text-muted)' }} />
                 <Tooltip
-                  contentStyle={{ backgroundColor: '#0B1530', borderColor: '#1E3A5F', borderRadius: '12px', fontSize: '12px', color: '#F5F1E6' }}
+                  contentStyle={{ backgroundColor: 'var(--surface)', borderColor: 'var(--border)', borderRadius: '12px', fontSize: '12px', color: '#F5F1E6' }}
                 />
                 <Bar dataKey="count" fill="#35D0C8" radius={[8, 8, 0, 0]} />
               </BarChart>
@@ -333,31 +333,31 @@ export default function DashboardPage({ token, onOpenLogin }) {
       </div>
 
       {/* Top Fraud Patterns / Signals Table */}
-      <div className="p-6 rounded-3xl bg-[#0F1D3A]/90 border border-[#1E3A5F] shadow-sm space-y-4">
-        <h3 className="text-sm font-bold text-[#F5F1E6] uppercase tracking-wider">
+      <div className="p-6 rounded-3xl bg-navy-surface/90 border border-border shadow-sm space-y-4">
+        <h3 className="text-sm font-bold text-ink uppercase tracking-wider">
           Top Triggered Fraud Patterns & Signals
         </h3>
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead>
-              <tr className="border-b border-[#1E3A5F] text-[#A9B4CC] font-semibold uppercase text-[10px]">
+              <tr className="border-b border-border text-ink-muted font-semibold uppercase text-[10px]">
                 <th className="py-2.5 px-3">Signal Name</th>
                 <th className="py-2.5 px-3">Severity</th>
                 <th className="py-2.5 px-3 text-right">Detection Count</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#1E3A5F]/60 font-medium text-[#F5F1E6]">
+            <tbody className="divide-y divide-border font-medium text-ink">
               {stats?.top_signals?.map((s, idx) => (
-                <tr key={idx} className="hover:bg-[#14254B]/30">
-                  <td className="py-3 px-3 font-semibold text-[#F5F1E6]">{s.signal}</td>
+                <tr key={idx} className="hover:bg-navy-raised/30">
+                  <td className="py-3 px-3 font-semibold text-ink">{s.signal}</td>
                   <td className="py-3 px-3">
                     <span className={`px-2 py-0.5 rounded text-[10px] font-bold tracking-wider uppercase ${
-                      s.severity === 'CRITICAL' ? 'bg-[#F43F5E]/15 text-[#F43F5E] border border-[#F43F5E]/40' : 'bg-[#FB923C]/15 text-[#FB923C] border border-[#FB923C]/40'
+                      s.severity === 'CRITICAL' ? 'bg-verdict-danger/15 text-verdict-danger border border-verdict-danger/40' : 'bg-verdict-suspicious/15 text-verdict-suspicious border border-verdict-suspicious/40'
                     }`}>
                       {s.severity}
                     </span>
                   </td>
-                  <td className="py-3 px-3 text-right font-mono font-bold text-[#F5F1E6]">
+                  <td className="py-3 px-3 text-right font-mono font-bold text-ink">
                     {s.count}
                   </td>
                 </tr>
@@ -368,19 +368,19 @@ export default function DashboardPage({ token, onOpenLogin }) {
       </div>
 
       {/* Recent Analysis History Table */}
-      <div className="p-6 rounded-3xl bg-[#0F1D3A]/90 border border-[#1E3A5F] shadow-sm space-y-4">
+      <div className="p-6 rounded-3xl bg-navy-surface/90 border border-border shadow-sm space-y-4">
         <div className="flex items-center justify-between">
-          <h3 className="text-sm font-bold text-[#F5F1E6] uppercase tracking-wider">
+          <h3 className="text-sm font-bold text-ink uppercase tracking-wider">
             {t('dashboard.recentHistory')}
           </h3>
-          <span className="text-xs font-semibold text-[#A9B4CC]">
+          <span className="text-xs font-semibold text-ink-muted">
             Masked PII for Consumer Privacy
           </span>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead>
-              <tr className="border-b border-[#1E3A5F] text-[#A9B4CC] font-semibold uppercase text-[10px]">
+              <tr className="border-b border-border text-ink-muted font-semibold uppercase text-[10px]">
                 <th className="py-2.5 px-3">Verdict</th>
                 <th className="py-2.5 px-3">Score</th>
                 <th className="py-2.5 px-3">Category</th>
@@ -391,37 +391,37 @@ export default function DashboardPage({ token, onOpenLogin }) {
                 <th className="py-2.5 px-3 text-right">Time</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#1E3A5F]/60 font-medium text-[#F5F1E6]">
+            <tbody className="divide-y divide-border font-medium text-ink">
               {stats?.recent_analyses?.map((item) => (
-                <tr key={item.id} className="hover:bg-[#14254B]/30">
+                <tr key={item.id} className="hover:bg-navy-raised/30">
                   <td className="py-3 px-3">
                     <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase ${
-                      item.verdict === 'HIGH RISK' ? 'bg-[#F43F5E]/15 text-[#F43F5E] border border-[#F43F5E]/40' : (item.verdict === 'SUSPICIOUS' ? 'bg-[#FB923C]/15 text-[#FB923C] border border-[#FB923C]/40' : 'bg-[#34D399]/15 text-[#34D399] border border-[#34D399]/40')
+                      item.verdict === 'HIGH RISK' ? 'bg-verdict-danger/15 text-verdict-danger border border-verdict-danger/40' : (item.verdict === 'SUSPICIOUS' ? 'bg-verdict-suspicious/15 text-verdict-suspicious border border-verdict-suspicious/40' : 'bg-verdict-safe/15 text-verdict-safe border border-verdict-safe/40')
                     }`}>
                       {item.verdict}
                     </span>
                   </td>
-                  <td className="py-3 px-3 font-mono font-bold text-[#F5F1E6]">{item.risk_score}</td>
-                  <td className="py-3 px-3 text-[#A9B4CC]">{item.detected_category.replace(/_/g, ' ')}</td>
-                  <td className="py-3 px-3 font-mono text-[11px] max-w-xs truncate text-[#A9B4CC]">{item.raw_input_masked}</td>
-                  <td className="py-3 px-3 uppercase text-[10px] text-[#7C89A6] font-bold">{item.input_type}</td>
+                  <td className="py-3 px-3 font-mono font-bold text-ink">{item.risk_score}</td>
+                  <td className="py-3 px-3 text-ink-muted">{item.detected_category.replace(/_/g, ' ')}</td>
+                  <td className="py-3 px-3 font-mono text-[11px] max-w-xs truncate text-ink-muted">{item.raw_input_masked}</td>
+                  <td className="py-3 px-3 uppercase text-[10px] text-ink-faint font-bold">{item.input_type}</td>
                   <td className="py-3 px-3">
                     <span className={`px-1.5 py-0.5 rounded text-[10px] font-bold uppercase ${
                       item.channel === 'telegram'
-                        ? 'bg-[#35D0C8]/15 text-[#35D0C8] border border-[#35D0C8]/30'
+                        ? 'bg-teal/15 text-teal border border-teal/30'
                         : (item.channel === 'whatsapp'
-                            ? 'bg-[#34D399]/15 text-[#34D399] border border-[#34D399]/30'
-                            : 'bg-[#14254B] text-[#A9B4CC] border border-[#1E3A5F]')
+                            ? 'bg-verdict-safe/15 text-verdict-safe border border-verdict-safe/30'
+                            : 'bg-navy-raised text-ink-muted border border-border')
                     }`}>
                       {item.channel || 'web'}
                     </span>
                   </td>
                   <td className="py-3 px-3">
-                    <span className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${item.is_simulated ? 'bg-[#0B1530] text-[#7C89A6]' : 'bg-[#D9A441]/15 text-[#F5C96A] border border-[#D9A441]/40'}`}>
+                    <span className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${item.is_simulated ? 'bg-navy text-ink-faint' : 'bg-gold-500/15 text-gold-400 border border-gold-500/40'}`}>
                       {item.is_simulated ? 'SIMULATED' : 'LIVE'}
                     </span>
                   </td>
-                  <td className="py-3 px-3 text-right text-[#7C89A6] font-mono text-[11px]">{item.created_at}</td>
+                  <td className="py-3 px-3 text-right text-ink-faint font-mono text-[11px]">{item.created_at}</td>
                 </tr>
               ))}
             </tbody>

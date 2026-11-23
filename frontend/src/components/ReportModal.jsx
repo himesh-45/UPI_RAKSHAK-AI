@@ -38,53 +38,53 @@ export default function ReportModal({ isOpen, onClose, analysisId, inputType, de
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#050A18]/80 backdrop-blur-sm animate-fade-in">
-      <div className="w-full max-w-md bg-[#0F1D3A] rounded-2xl border border-[#1E3A5F] border-t-2 border-t-[#D9A441] shadow-2xl p-6 relative text-[#F5F1E6]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-navy-deep/80 backdrop-blur-sm animate-fade-in">
+      <div className="w-full max-w-md bg-navy-surface rounded-2xl border border-border border-t-2 border-t-gold-500 shadow-2xl p-6 relative text-ink">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-1.5 rounded-lg text-[#A9B4CC] hover:text-[#F5F1E6] hover:bg-[#14254B]"
+          className="absolute top-4 right-4 p-1.5 rounded-lg text-ink-muted hover:text-ink hover:bg-navy-raised"
         >
           <X className="w-5 h-5" />
         </button>
 
-        <div className="flex items-center gap-2.5 mb-4 pb-2 border-b border-[#1E3A5F]">
-          <div className="p-2 rounded-lg bg-[#0B1530] text-[#F43F5E] border border-[#F43F5E]/30">
+        <div className="flex items-center gap-2.5 mb-4 pb-2 border-b border-border">
+          <div className="p-2 rounded-lg bg-navy text-verdict-danger border border-verdict-danger/30">
             <ShieldAlert className="w-5 h-5" />
           </div>
           <div>
-            <h3 className="font-bold text-[#F5F1E6] text-base">Report Threat Incident</h3>
-            <p className="text-xs text-[#A9B4CC]">Helps protect other citizens across India.</p>
+            <h3 className="font-bold text-ink text-base">Report Threat Incident</h3>
+            <p className="text-xs text-ink-muted">Helps protect other citizens across India.</p>
           </div>
         </div>
 
         {success ? (
-          <div className="py-8 text-center text-[#34D399]">
+          <div className="py-8 text-center text-verdict-safe">
             <CheckCircle className="w-12 h-12 mx-auto mb-2 animate-bounce" />
             <p className="font-bold">Threat Report Recorded!</p>
-            <p className="text-xs text-[#A9B4CC] mt-1">Thank you for helping safeguard digital payments.</p>
+            <p className="text-xs text-ink-muted mt-1">Thank you for helping safeguard digital payments.</p>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
             {error && (
-              <div className="p-2.5 text-xs rounded-lg bg-[#F43F5E]/15 text-[#FDA4AF] border border-[#F43F5E]/30">
+              <div className="p-2.5 text-xs rounded-lg bg-verdict-danger/15 text-rose-600 dark:text-rose-300 border border-verdict-danger/30">
                 {error}
               </div>
             )}
 
             <div>
-              <label className="block text-xs font-semibold text-[#A9B4CC] mb-1">
+              <label className="block text-xs font-semibold text-ink-muted mb-1">
                 Category
               </label>
               <input
                 type="text"
                 disabled
                 value={defaultCategory}
-                className="w-full px-3 py-2 text-xs rounded-lg bg-[#0B1530] border border-[#1E3A5F] text-[#F5F1E6]"
+                className="w-full px-3 py-2 text-xs rounded-lg bg-navy border border-border text-ink"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-[#A9B4CC] mb-1">
+              <label className="block text-xs font-semibold text-ink-muted mb-1">
                 Additional Observations / Comments (Optional)
               </label>
               <textarea
@@ -92,12 +92,12 @@ export default function ReportModal({ isOpen, onClose, analysisId, inputType, de
                 value={comments}
                 onChange={(e) => setComments(e.target.value)}
                 placeholder="E.g., received via WhatsApp from unknown number asking to verify SBI card..."
-                className="w-full px-3 py-2 text-xs rounded-lg bg-[#0B1530] border border-[#1E3A5F] text-[#F5F1E6] focus:border-[#35D0C8] placeholder-[#7C89A6]"
+                className="w-full px-3 py-2 text-xs rounded-lg bg-navy border border-border text-ink focus:border-teal placeholder-[#7C89A6]"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-[#A9B4CC] mb-1">
+              <label className="block text-xs font-semibold text-ink-muted mb-1">
                 Your Contact / Phone (Optional, will be masked)
               </label>
               <input
@@ -105,7 +105,7 @@ export default function ReportModal({ isOpen, onClose, analysisId, inputType, de
                 value={contact}
                 onChange={(e) => setContact(e.target.value)}
                 placeholder="+91-98XXXXXXXX"
-                className="w-full px-3 py-2 text-xs rounded-lg bg-[#0B1530] border border-[#1E3A5F] text-[#F5F1E6] focus:border-[#35D0C8] placeholder-[#7C89A6]"
+                className="w-full px-3 py-2 text-xs rounded-lg bg-navy border border-border text-ink focus:border-teal placeholder-[#7C89A6]"
               />
             </div>
 
@@ -113,7 +113,7 @@ export default function ReportModal({ isOpen, onClose, analysisId, inputType, de
               <button
                 type="button"
                 onClick={onClose}
-                className="px-4 py-2 text-xs font-semibold rounded-lg bg-[#14254B] hover:bg-[#1E3A5F] text-[#F5F1E6] border border-[#1E3A5F]"
+                className="px-4 py-2 text-xs font-semibold rounded-lg bg-navy-raised hover:bg-border text-ink border border-border"
               >
                 Cancel
               </button>

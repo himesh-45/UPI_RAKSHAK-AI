@@ -96,7 +96,7 @@ export default function JudgeTryPage() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
       
       {/* Top Banner & Title */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#1E3A5F] pb-6">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-border pb-6">
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-400/10 border border-gold-400/30 text-gold-300 text-xs font-bold uppercase tracking-wider mb-2">
             <Sparkles className="w-3.5 h-3.5" />
@@ -112,7 +112,7 @@ export default function JudgeTryPage() {
         <div className="flex items-center gap-3">
           <button
             onClick={() => window.print()}
-            className="px-4 py-2 rounded-xl bg-[#0B1530] hover:bg-[#070E22] border border-[#1E3A5F] text-ink text-xs font-bold flex items-center gap-2 transition shadow-sm"
+            className="px-4 py-2 rounded-xl bg-navy hover:bg-navy border border-border text-ink text-xs font-bold flex items-center gap-2 transition shadow-sm"
           >
             <Printer className="w-4 h-4 text-gold-300" />
             Print Judge Handout
@@ -135,13 +135,13 @@ export default function JudgeTryPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           
           {/* Card 1: Web Interface */}
-          <div className="bg-[#0F1D3A]/90 border border-[#1E3A5F] border-t-2 border-t-gold-400 rounded-3xl p-6 flex flex-col items-center text-center shadow-sm">
+          <div className="bg-navy-surface/90 border border-border border-t-2 border-t-gold-400 rounded-3xl p-6 flex flex-col items-center text-center shadow-sm">
             <div className="p-2 rounded-xl bg-teal-500/10 border border-teal-500/30 text-teal-300 mb-3">
               <QrCode className="w-5 h-5" />
             </div>
             <h3 className="font-bold text-ink text-sm">Web Application</h3>
             <p className="text-xs text-ink-muted mt-1 mb-4">Scan to open mobile responsive client</p>
-            <div className="bg-white p-2.5 rounded-2xl border border-[#1E3A5F] shadow-inner">
+            <div className="bg-white p-2.5 rounded-2xl border border-border shadow-inner">
               <img
                 src={`/api/report/generate-qr?text=${encodeURIComponent(originUrl)}`}
                 alt="Web App QR"
@@ -160,13 +160,13 @@ export default function JudgeTryPage() {
           </div>
 
           {/* Card 2: Telegram Bot */}
-          <div className="bg-[#0F1D3A]/90 border border-[#1E3A5F] border-t-2 border-t-teal-400 rounded-3xl p-6 flex flex-col items-center text-center shadow-sm">
+          <div className="bg-navy-surface/90 border border-border border-t-2 border-t-teal-400 rounded-3xl p-6 flex flex-col items-center text-center shadow-sm">
             <div className="p-2 rounded-xl bg-sky-500/10 border border-sky-500/30 text-sky-400 mb-3">
               <Send className="w-5 h-5" />
             </div>
             <h3 className="font-bold text-ink text-sm">Telegram Bot</h3>
             <p className="text-xs text-ink-muted mt-1 mb-4">Forward SMS or paste screenshots to @upi_rakshak_bot</p>
-            <div className="bg-white p-2.5 rounded-2xl border border-[#1E3A5F] shadow-inner">
+            <div className="bg-white p-2.5 rounded-2xl border border-border shadow-inner">
               <img
                 src={`/api/report/generate-qr?text=${encodeURIComponent(telegramBotUrl)}`}
                 alt="Telegram Bot QR"
@@ -185,13 +185,13 @@ export default function JudgeTryPage() {
           </div>
 
           {/* Card 3: WhatsApp Bot */}
-          <div className="bg-[#0F1D3A]/90 border border-[#1E3A5F] border-t-2 border-t-emerald-400 rounded-3xl p-6 flex flex-col items-center text-center shadow-sm">
+          <div className="bg-navy-surface/90 border border-border border-t-2 border-t-emerald-400 rounded-3xl p-6 flex flex-col items-center text-center shadow-sm">
             <div className="p-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 mb-3">
               <MessageSquare className="w-5 h-5" />
             </div>
             <h3 className="font-bold text-ink text-sm">WhatsApp Bot</h3>
             <p className="text-xs text-ink-muted mt-1 mb-4">Twilio Sandbox / Meta Cloud API webhook</p>
-            <div className="bg-white p-2.5 rounded-2xl border border-[#1E3A5F] shadow-inner">
+            <div className="bg-white p-2.5 rounded-2xl border border-border shadow-inner">
               <img
                 src={`/api/report/generate-qr?text=${encodeURIComponent(whatsappUrl)}`}
                 alt="WhatsApp Bot QR"
@@ -213,7 +213,7 @@ export default function JudgeTryPage() {
       </div>
 
       {/* Interactive 1-Click Evaluation Station */}
-      <div className="bg-[#0F1D3A]/90 border border-[#1E3A5F] rounded-3xl p-6 shadow-sm">
+      <div className="bg-navy-surface/90 border border-border rounded-3xl p-6 shadow-sm">
         <div className="flex items-center gap-2 mb-2">
           <Shield className="w-5 h-5 text-teal-400" />
           <h2 className="text-lg font-bold text-ink">
@@ -236,14 +236,14 @@ export default function JudgeTryPage() {
                   className={`p-3.5 rounded-2xl border cursor-pointer transition flex flex-col gap-1 text-left ${
                     isActive
                       ? 'bg-gold-400/10 border-gold-400 shadow-xs'
-                      : 'bg-[#0B1530] border-[#1E3A5F] hover:border-teal-400/50'
+                      : 'bg-navy border-border hover:border-teal-400/50'
                   }`}
                 >
                   <div className="flex items-center justify-between">
                     <span className="font-bold text-xs text-ink">
                       {test.title}
                     </span>
-                    <span className="text-[10px] px-2 py-0.5 rounded-md font-mono font-bold bg-[#070E22] text-gold-300 border border-[#1E3A5F]">
+                    <span className="text-[10px] px-2 py-0.5 rounded-md font-mono font-bold bg-navy text-gold-300 border border-border">
                       {test.lang}
                     </span>
                   </div>
@@ -262,9 +262,9 @@ export default function JudgeTryPage() {
           </div>
 
           {/* Real-Time Result Box */}
-          <div className="lg:col-span-7 bg-[#070E22] rounded-2xl p-5 border border-[#1E3A5F] flex flex-col justify-between">
+          <div className="lg:col-span-7 bg-navy rounded-2xl p-5 border border-border flex flex-col justify-between">
             <div>
-              <div className="flex items-center justify-between pb-3 border-b border-[#1E3A5F]">
+              <div className="flex items-center justify-between pb-3 border-b border-border">
                 <span className="text-xs font-extrabold uppercase tracking-wider text-ink-muted">
                   Live Execution Inspector
                 </span>
@@ -292,13 +292,13 @@ export default function JudgeTryPage() {
                 <div className="mt-4 space-y-4">
                   {/* Category & Confidence */}
                   <div className="grid grid-cols-2 gap-3 text-xs">
-                    <div className="bg-[#0B1530] p-2.5 rounded-xl border border-[#1E3A5F]">
+                    <div className="bg-navy p-2.5 rounded-xl border border-border">
                       <span className="text-ink-muted block text-[10px]">Detected Category</span>
                       <strong className="text-gold-300 font-mono">
                         {analysisResult.detected_category}
                       </strong>
                     </div>
-                    <div className="bg-[#0B1530] p-2.5 rounded-xl border border-[#1E3A5F]">
+                    <div className="bg-navy p-2.5 rounded-xl border border-border">
                       <span className="text-ink-muted block text-[10px]">Language Detected</span>
                       <strong className="text-teal-300 uppercase font-mono">
                         {analysisResult.language}
@@ -307,7 +307,7 @@ export default function JudgeTryPage() {
                   </div>
 
                   {/* Plain Language Explanation */}
-                  <div className="bg-[#0B1530] p-3.5 rounded-xl border border-[#1E3A5F]">
+                  <div className="bg-navy p-3.5 rounded-xl border border-border">
                     <span className="text-[10px] font-bold text-gold-300 uppercase tracking-wider block mb-1">
                       Plain Language Defense Explanation
                     </span>
@@ -325,9 +325,9 @@ export default function JudgeTryPage() {
                       {analysisResult.evidence?.map((ev, i) => (
                         <div
                           key={i}
-                          className="text-xs p-2 rounded-lg bg-[#0B1530] border border-[#1E3A5F] flex items-start gap-2"
+                          className="text-xs p-2 rounded-lg bg-navy border border-border flex items-start gap-2"
                         >
-                          <span className="px-1.5 py-0.5 rounded text-[9px] font-mono font-bold bg-[#070E22] text-teal-300 shrink-0">
+                          <span className="px-1.5 py-0.5 rounded text-[9px] font-mono font-bold bg-navy text-teal-300 shrink-0">
                             {ev.source_module}
                           </span>
                           <span className="text-ink-muted leading-snug">
@@ -346,11 +346,11 @@ export default function JudgeTryPage() {
             </div>
 
             {/* Input snippet display */}
-            <div className="mt-4 pt-3 border-t border-[#1E3A5F] flex items-center justify-between text-xs text-ink-muted">
+            <div className="mt-4 pt-3 border-t border-border flex items-center justify-between text-xs text-ink-muted">
               <span className="truncate max-w-md italic font-mono text-ink">"{selectedTest?.text}"</span>
               <button
                 onClick={() => copyToClipboard(selectedTest?.text, 'snippet')}
-                className="shrink-0 p-1.5 rounded-lg hover:bg-[#0B1530] text-ink-muted hover:text-ink transition"
+                className="shrink-0 p-1.5 rounded-lg hover:bg-navy text-ink-muted hover:text-ink transition"
                 title="Copy snippet"
               >
                 {copiedId === 'snippet' ? <Check className="w-3.5 h-3.5 text-verdict-safe" /> : <Copy className="w-3.5 h-3.5" />}
@@ -364,7 +364,7 @@ export default function JudgeTryPage() {
       <ModelHonestyPanel defaultOpen={true} />
 
       {/* Judge Cheat Sheet / Architecture Highlights */}
-      <div className="bg-[#0F1D3A]/90 border border-[#1E3A5F] rounded-3xl p-6 shadow-sm space-y-6">
+      <div className="bg-navy-surface/90 border border-border rounded-3xl p-6 shadow-sm space-y-6">
         <div>
           <div className="flex items-center gap-2 mb-1">
             <Scale className="w-5 h-5 text-gold-400" />
@@ -379,7 +379,7 @@ export default function JudgeTryPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs leading-relaxed">
           
-          <div className="p-4 rounded-2xl bg-[#0B1530] border border-[#1E3A5F] space-y-2">
+          <div className="p-4 rounded-2xl bg-navy border border-border space-y-2">
             <h3 className="font-bold text-sm text-ink flex items-center gap-1.5">
               <CheckCircle2 className="w-4 h-4 text-verdict-safe" />
               1. Why Evidence-Based Fusion over Pure LLM?
@@ -389,7 +389,7 @@ export default function JudgeTryPage() {
             </p>
           </div>
 
-          <div className="p-4 rounded-2xl bg-[#0B1530] border border-[#1E3A5F] space-y-2">
+          <div className="p-4 rounded-2xl bg-navy border border-border space-y-2">
             <h3 className="font-bold text-sm text-ink flex items-center gap-1.5">
               <CheckCircle2 className="w-4 h-4 text-verdict-safe" />
               2. How is Sub-50ms CPU Latency Achieved?
@@ -399,7 +399,7 @@ export default function JudgeTryPage() {
             </p>
           </div>
 
-          <div className="p-4 rounded-2xl bg-[#0B1530] border border-[#1E3A5F] space-y-2">
+          <div className="p-4 rounded-2xl bg-navy border border-border space-y-2">
             <h3 className="font-bold text-sm text-ink flex items-center gap-1.5">
               <CheckCircle2 className="w-4 h-4 text-verdict-safe" />
               3. Statutory Indian Legal Grounding
@@ -409,7 +409,7 @@ export default function JudgeTryPage() {
             </p>
           </div>
 
-          <div className="p-4 rounded-2xl bg-[#0B1530] border border-[#1E3A5F] space-y-2">
+          <div className="p-4 rounded-2xl bg-navy border border-border space-y-2">
             <h3 className="font-bold text-sm text-ink flex items-center gap-1.5">
               <CheckCircle2 className="w-4 h-4 text-verdict-safe" />
               4. Anti-Poisoning & Privacy Architecture

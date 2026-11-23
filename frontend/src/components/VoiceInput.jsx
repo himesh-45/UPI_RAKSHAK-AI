@@ -64,7 +64,7 @@ export default function VoiceInput({ onTranscript, selectedLang = 'en-IN', onLan
       <select
         value={selectedLang}
         onChange={(e) => onLangChange && onLangChange(e.target.value)}
-        className="text-[11px] font-semibold bg-[#0B1530] text-ink border border-[#1E3A5F] rounded-lg px-2 py-1 focus:border-teal-400 focus:ring-1 focus:ring-teal-400 focus:outline-hidden"
+        className="text-[11px] font-semibold bg-navy text-ink border border-border rounded-lg px-2 py-1 focus:border-teal-400 focus:ring-1 focus:ring-teal-400 focus:outline-hidden"
       >
         <option value="en-IN">English (India)</option>
         <option value="hi-IN">हिंदी (India)</option>
@@ -79,7 +79,7 @@ export default function VoiceInput({ onTranscript, selectedLang = 'en-IN', onLan
         className={`p-2 rounded-xl border transition flex items-center justify-center ${
           isListening
             ? 'bg-verdict-danger border-verdict-danger text-white animate-pulse shadow-lg ring-2 ring-verdict-danger/50'
-            : 'bg-[#0B1530] border-[#1E3A5F] text-ink-muted hover:text-ink hover:border-teal-400/50'
+            : 'bg-navy border-border text-ink-muted hover:text-ink hover:border-teal-400/50'
         }`}
       >
         {isListening ? <Mic className="w-4 h-4" /> : <MicOff className="w-4 h-4" />}

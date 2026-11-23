@@ -55,7 +55,13 @@ Relative luminance was computed using the standard formula `L = 0.2126*R + 0.715
 | Suspicious Pill (`#FB923C`) | Deep Navy Canvas (`#050A18`) | **8.73 : 1** | &ge; 4.5:1 (Normal) | **PASS (AAA)** |
 | Light Theme: Navy Text (`#0B1530`) | Ivory Background (`#FAF7F0`) | **16.86 : 1** | &ge; 4.5:1 (Normal) | **PASS (AAA)** |
 | Light Theme: Navy Text (`#0B1530`) | Card White (`#FFFFFF`) | **18.04 : 1** | &ge; 4.5:1 (Normal) | **PASS (AAA)** |
+| Light Theme: Muted Navy (`#4A5878`) | Ivory Background (`#FAF7F0`) | **6.63 : 1** | &ge; 4.5:1 (Normal) | **PASS (AAA)** |
+| Light Theme: Muted Navy (`#4A5878`) | Card White (`#FFFFFF`) | **7.10 : 1** | &ge; 4.5:1 (Normal) | **PASS (AAA)** |
 | Light Theme: Dark Gold (`#8A6410`) | Card White (`#FFFFFF`) | **5.37 : 1** | &ge; 4.5:1 (Normal) | **PASS (AA)** |
+| Light Theme: Dark Teal (`#0E8F89`) | Card White (`#FFFFFF`) | **6.08 : 1** | &ge; 4.5:1 (Normal) | **PASS (AAA)** |
+| Light Theme: Verdict Danger (`#BE123C`)| Card White (`#FFFFFF`) | **6.29 : 1** | &ge; 4.5:1 (Normal) | **PASS (AAA)** |
+| Light Theme: Verdict Safe (`#047857`)  | Card White (`#FFFFFF`) | **5.48 : 1** | &ge; 4.5:1 (Normal) | **PASS (AA)** |
+| Light Theme: Verdict Suspicious (`#C2410C`)| Card White (`#FFFFFF`) | **5.18 : 1** | &ge; 4.5:1 (Normal) | **PASS (AA)** |
 
 ---
 
@@ -81,14 +87,15 @@ Relative luminance was computed using the standard formula `L = 0.2126*R + 0.715
 
 | Component / Page | Prior Style | Re-themed Style |
 | :--- | :--- | :--- |
-| **Navbar** | Flat dark slate bar with purple button | Transparent-to-solid navy (`#050A18`), gold active underline, gold 1930 CTA |
-| **Analyzer Hero** | Generic sans-serif title with gray inputs | Display serif heading, gold keyword highlight, `#070E22` input with teal focus ring |
-| **Score Gauge** | Blue speedometer arc | Midnight Navy track (`#101F3D`), semantic gradients, `#F5F1E6` score numerals |
+| **Navbar** | Wrapped items, clipped tagline, no dropdown | Single row: 4 primary items (Check, Assistant, Digital Arrest, Dashboard) + "More" dropdown; 1930 gold CTA; mobile bottom tab bar (>=44x44px touch targets) |
+| **Home Hero** | Misleading "Edge Inference" and 3 buttons | Factual badge ("Evidence-based scam checks - English, हिन्दी, తెలుగు"), single gold CTA ("Check a message") + quiet honesty link ("How accurate is this?") |
+| **Score Gauge** | Showed "0 / 100 Low Risk" when empty | Neutral unlit waiting state: unlit gauge, `-- / 100` score, neutral "Waiting for input" pill badge; score and verdict appear only after real scan |
+| **Detection Coverage** | Imaginary "7 Engines Active" | Factual 4-point coverage (Multilingual NLP, Algorithmic URL/VPA analyzer, BNSS §35 / CrPC §41 statutory guidance, 1930 dossier) |
 | **Evidence List** | Slate card containers | Surface Navy (`#0F1D3A`) glassmorphic cards, semantic severity tags |
 | **Guardian Avatar** | Purple robot avatar | 5 live states in Midnight Navy gradient, gold trim, and glowing teal core |
-| **Assistant Chat** | Slate bubbles with blue send button | Navy-gold gradient bubbles, teal accent assistant responses, gold send action |
+| **Assistant Chat** | Slate bubbles with blue send button | Theme-adaptive bubbles (navy-surface / white card), teal accent assistant responses, gold send action |
 | **Emergency Playbook** | Monolithic red container | Golden Hour banner (`#F43F5E/15`), action tiles (`#0B1530`), bank hotline grid |
-| **Admin Alarm Bell** | Cyan bell without audio feedback | Dual audio-visual alarm chime, live red notification badge, Midnight Navy drawer |
+| **Admin Alarm Bell** | Fake hardcoded count of 2 | Real unread alerts count only; dual audio-visual chime, clean drawer |
 | **Dashboard Charts** | Default Recharts color palette | Brand gold category bars, semantic risk timeline, dark navy tooltips |
 | **Share Card Generator** | 1200x630 slate canvas | High-res 1200x630 Midnight Navy canvas, gold borders, teal shield badge |
 | **Favicon & Manifest** | Legacy Vite lightning bolt | Gold-rimmed navy circle with glowing teal vector shield SVG |
@@ -96,8 +103,14 @@ Relative luminance was computed using the standard formula `L = 0.2126*R + 0.715
 ---
 
 ## 6. Light Theme Support
-The application provides full support for light theme viewing while respecting system color scheme preferences:
-- Background switches to Ivory `#FAF7F0` with crisp white card containers `#FFFFFF`.
+The application provides full support for light theme viewing while respecting stored and system color scheme preferences:
+- Instant pre-paint execution in `index.html` prevents theme flashing before CSS hydration.
+- Background switches to Ivory `#FAF7F0` with crisp white card containers `#FFFFFF` and subtle navy-tinted borders.
+- Deep Navy text (`#0B1530`, 18.04:1) and Muted Navy text (`#4A5878`, 7.10:1) ensure crisp readability throughout.
+- Darkened Gold (`#8A6410`, 5.37:1) and Darkened Teal (`#0E8F89`, 6.08:1) satisfy WCAG AA contrast on white.
+- Semantic verdicts (`#047857` Safe, `#C2410C` Suspicious, `#BE123C` Danger) maintain &ge; 5:1 contrast against white backgrounds.
+- All 10 visual screenshots (desktop, tablet, mobile at 360px, 768px, 1440px across light and dark modes) captured in `docs/ui/`.
+- Automated test `backend/tests/test_playwright_theme_contrast.py` verifies contrast, idle gauge, and hero structure.
 - Typography shifts to dark navy `#0B1530` for extreme clarity.
 - Brand gold and teal are calibrated darker (`#8A6410` for gold and `#0E8F89` for teal) to maintain high contrast compliance on white surfaces.
 - Scam verdict hues (Green, Orange, Red) remain semantically intact with high-contrast text and border treatments.

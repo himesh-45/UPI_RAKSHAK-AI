@@ -5,7 +5,7 @@ export default function ScamTimeline({ story }) {
   if (!story || !story.steps || story.steps.length === 0) return null;
 
   return (
-    <div className="bg-[#0F1D3A]/90 rounded-2xl p-5 border border-[#1E3A5F]">
+    <div className="bg-navy-surface/90 rounded-2xl p-5 border border-border">
       <div className="flex items-center justify-between mb-2">
         <div className="flex items-center gap-2">
           <GitCommit className="w-5 h-5 text-gold-400" />
@@ -26,11 +26,11 @@ export default function ScamTimeline({ story }) {
         {story.steps.map((st) => (
           <div key={st.step_number} className="relative group">
             {/* Step dot */}
-            <div className="absolute -left-[27px] top-1 w-6 h-6 rounded-full bg-[#0B1530] border-2 border-gold-400 flex items-center justify-center text-[10px] font-bold text-gold-300 shadow-md">
+            <div className="absolute -left-[27px] top-1 w-6 h-6 rounded-full bg-navy border-2 border-gold-400 flex items-center justify-center text-[10px] font-bold text-gold-300 shadow-md">
               {st.step_number}
             </div>
 
-            <div className="bg-[#070E22]/90 p-4 rounded-xl border border-[#1E3A5F] group-hover:border-teal-400/60 transition-all">
+            <div className="bg-navy/90 p-4 rounded-xl border border-border group-hover:border-teal-400/60 transition-all">
               <div className="flex items-center justify-between gap-2 mb-1.5 flex-wrap">
                 <span className="text-[11px] font-bold uppercase tracking-wider text-gold-400">
                   {st.stage}

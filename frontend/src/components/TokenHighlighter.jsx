@@ -6,7 +6,7 @@ const SEVERITY_COLORS = {
   HIGH: 'bg-verdict-suspicious/20 text-verdict-suspicious border-verdict-suspicious/40 hover:bg-verdict-suspicious/30',
   MEDIUM: 'bg-gold-400/20 text-gold-300 border-gold-400/40 hover:bg-gold-400/30',
   LOW: 'bg-teal-500/20 text-teal-300 border-teal-500/40 hover:bg-teal-500/30',
-  INFO: 'bg-[#0B1530] text-ink-muted border-[#1E3A5F] hover:bg-[#0F1D3A]',
+  INFO: 'bg-navy text-ink-muted border-border hover:bg-navy-surface',
 };
 
 const LABEL_ICONS = {
@@ -59,7 +59,7 @@ export default function TokenHighlighter({ text, highlightSpans = [] }) {
   }
 
   return (
-    <div className="bg-[#070E22]/90 rounded-2xl p-4 border border-[#1E3A5F] text-sm font-mono leading-loose whitespace-pre-wrap">
+    <div className="bg-navy/90 rounded-2xl p-4 border border-border text-sm font-mono leading-loose whitespace-pre-wrap">
       {segments.map((seg) => {
         if (seg.type === 'text') {
           return <span key={seg.key} className="text-ink">{seg.content}</span>;

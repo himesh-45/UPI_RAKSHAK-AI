@@ -127,7 +127,7 @@ export default function StudyPage() {
   if (!hasConsented) {
     return (
       <div className="max-w-2xl mx-auto px-4 py-12 animate-fade-in">
-        <div className="bg-[#0F1D3A]/90 rounded-3xl border border-[#1E3A5F] border-t-2 border-t-gold-400 shadow-xl p-8 space-y-6">
+        <div className="bg-navy-surface/90 rounded-3xl border border-border border-t-2 border-t-gold-400 shadow-xl p-8 space-y-6">
           <div className="flex items-center gap-3">
             <div className="p-3 rounded-2xl bg-teal-500/10 border border-teal-500/30 text-teal-300">
               <BookOpen className="w-6 h-6" />
@@ -144,7 +144,7 @@ export default function StudyPage() {
             <p>
               Welcome to the <strong className="text-ink">UPI Rakshak AI Empirical Perception Study</strong>. This voluntary academic trial investigates how plain-language evidence and multi-layer indicators influence human fraud detection decisions.
             </p>
-            <div className="p-4 rounded-2xl bg-[#0B1530] border border-[#1E3A5F] space-y-2">
+            <div className="p-4 rounded-2xl bg-navy border border-border space-y-2">
               <h4 className="font-bold text-gold-300 text-xs">Trial Protocol:</h4>
               <ul className="list-disc pl-4 space-y-1 text-ink-muted">
                 <li>You will review <strong className="text-ink">10 short realistic messages</strong> (transaction alerts, refunds, SMS, and WhatsApp notices).</li>
@@ -175,7 +175,7 @@ export default function StudyPage() {
   if (completed) {
     return (
       <div className="max-w-xl mx-auto px-4 py-16 animate-fade-in text-center">
-        <div className="bg-[#0F1D3A]/90 rounded-3xl border border-[#1E3A5F] border-t-2 border-t-gold-400 shadow-xl p-8 space-y-6">
+        <div className="bg-navy-surface/90 rounded-3xl border border-border border-t-2 border-t-gold-400 shadow-xl p-8 space-y-6">
           <div className="w-16 h-16 mx-auto rounded-full bg-verdict-safe/20 border border-verdict-safe/30 text-verdict-safe flex items-center justify-center">
             <Award className="w-8 h-8" />
           </div>
@@ -185,7 +185,7 @@ export default function StudyPage() {
           <p className="text-xs text-ink-muted leading-relaxed max-w-md mx-auto">
             Thank you for participating! Your responses have been anonymously saved to the research database and will contribute to our statistical evaluation report.
           </p>
-          <div className="p-4 rounded-2xl bg-[#0B1530] border border-[#1E3A5F] text-xs text-ink-muted">
+          <div className="p-4 rounded-2xl bg-navy border border-border text-xs text-ink-muted">
             <p>Session ID: <code className="font-mono text-gold-300">{sessionId}</code></p>
             <p className="mt-1">Scenarios Completed: <strong className="text-ink">10 / 10</strong></p>
           </div>
@@ -194,7 +194,7 @@ export default function StudyPage() {
               setHasConsented(false);
               setCompleted(false);
             }}
-            className="py-3 px-6 rounded-2xl bg-[#0B1530] border border-[#1E3A5F] hover:bg-[#070E22] font-bold text-xs text-ink transition"
+            className="py-3 px-6 rounded-2xl bg-navy border border-border hover:bg-navy font-bold text-xs text-ink transition"
           >
             Return to Overview
           </button>
@@ -210,12 +210,12 @@ export default function StudyPage() {
       {/* Progress header */}
       <div className="flex items-center justify-between text-xs font-semibold text-ink-muted">
         <span>Scenario {currentIndex + 1} of {items.length}</span>
-        <span className="uppercase tracking-wider px-2 py-0.5 rounded-md bg-[#0B1530] border border-[#1E3A5F] text-gold-300">
+        <span className="uppercase tracking-wider px-2 py-0.5 rounded-md bg-navy border border-border text-gold-300">
           Lang: {currentItem.language}
         </span>
       </div>
 
-      <div className="w-full bg-[#0B1530] rounded-full h-1.5 overflow-hidden border border-[#1E3A5F]">
+      <div className="w-full bg-navy rounded-full h-1.5 overflow-hidden border border-border">
         <div
           className="bg-gold-400 h-1.5 transition-all duration-300"
           style={{ width: `${((currentIndex + 1) / items.length) * 100}%` }}
@@ -223,18 +223,18 @@ export default function StudyPage() {
       </div>
 
       {/* Message Card */}
-      <div className="bg-[#0F1D3A]/90 rounded-3xl border border-[#1E3A5F] shadow-md p-6 space-y-4">
+      <div className="bg-navy-surface/90 rounded-3xl border border-border shadow-md p-6 space-y-4">
         <div className="text-[11px] font-bold text-gold-300 uppercase tracking-wider">
           Incoming Communication to Review:
         </div>
-        <div className="p-4 rounded-2xl bg-[#070E22] border border-[#1E3A5F] font-sans text-sm text-ink leading-relaxed break-words">
+        <div className="p-4 rounded-2xl bg-navy border border-border font-sans text-sm text-ink leading-relaxed break-words">
           {currentItem.text}
         </div>
       </div>
 
       {/* Phase 1: Pre-tool user decision */}
       {!analysisResult ? (
-        <div className="bg-[#0F1D3A]/90 rounded-3xl border border-[#1E3A5F] shadow-md p-6 space-y-5 animate-fade-in">
+        <div className="bg-navy-surface/90 rounded-3xl border border-border shadow-md p-6 space-y-5 animate-fade-in">
           <div>
             <h3 className="text-sm font-bold text-ink">
               Step 1: Your Initial Assessment
@@ -249,7 +249,7 @@ export default function StudyPage() {
               className={`py-3 px-4 rounded-2xl border font-bold text-xs flex items-center justify-center gap-2 transition ${
                 userGuess === 'genuine'
                   ? 'bg-verdict-safe/10 border-verdict-safe text-verdict-safe shadow'
-                  : 'border-[#1E3A5F] bg-[#0B1530] hover:border-teal-400/50 text-ink-muted'
+                  : 'border-border bg-navy hover:border-teal-400/50 text-ink-muted'
               }`}
             >
               <CheckCircle className="w-4 h-4 text-verdict-safe" />
@@ -261,7 +261,7 @@ export default function StudyPage() {
               className={`py-3 px-4 rounded-2xl border font-bold text-xs flex items-center justify-center gap-2 transition ${
                 userGuess === 'scam'
                   ? 'bg-verdict-danger/10 border-verdict-danger text-verdict-danger shadow'
-                  : 'border-[#1E3A5F] bg-[#0B1530] hover:border-teal-400/50 text-ink-muted'
+                  : 'border-border bg-navy hover:border-teal-400/50 text-ink-muted'
               }`}
             >
               <AlertTriangle className="w-4 h-4 text-verdict-danger" />
@@ -270,7 +270,7 @@ export default function StudyPage() {
           </div>
 
           {userGuess && (
-            <div className="space-y-2 pt-2 border-t border-[#1E3A5F]">
+            <div className="space-y-2 pt-2 border-t border-border">
               <div className="flex justify-between items-center text-xs font-semibold text-ink-muted">
                 <span>Confidence Level:</span>
                 <span className="font-bold text-gold-300">
@@ -287,7 +287,7 @@ export default function StudyPage() {
                 max="5"
                 value={userConfidence}
                 onChange={(e) => setUserConfidence(parseInt(e.target.value))}
-                className="w-full h-1.5 bg-[#0B1530] rounded-lg appearance-none cursor-pointer accent-gold-400"
+                className="w-full h-1.5 bg-navy rounded-lg appearance-none cursor-pointer accent-gold-400"
               />
             </div>
           )}
@@ -302,8 +302,8 @@ export default function StudyPage() {
         </div>
       ) : (
         /* Phase 2: Post-tool evaluation & reflection */
-        <div className="bg-[#0F1D3A]/90 rounded-3xl border border-[#1E3A5F] shadow-md p-6 space-y-5 animate-fade-in">
-          <div className="flex items-center justify-between pb-3 border-b border-[#1E3A5F]">
+        <div className="bg-navy-surface/90 rounded-3xl border border-border shadow-md p-6 space-y-5 animate-fade-in">
+          <div className="flex items-center justify-between pb-3 border-b border-border">
             <div>
               <span className="text-[10px] uppercase font-bold text-ink-muted tracking-wider">UPI Rakshak AI Verdict</span>
               <div className="flex items-center gap-2 mt-0.5">
@@ -334,7 +334,7 @@ export default function StudyPage() {
             <span className="text-xs font-bold text-ink">Key Evidence Detected:</span>
             <div className="space-y-1.5">
               {analysisResult.top_evidence.map((ev, i) => (
-                <div key={i} className="p-2.5 rounded-xl bg-[#0B1530] border border-[#1E3A5F] text-xs flex items-start gap-2">
+                <div key={i} className="p-2.5 rounded-xl bg-navy border border-border text-xs flex items-start gap-2">
                   <span className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${
                     ev.severity === 'CRITICAL' || ev.severity === 'HIGH'
                       ? 'bg-verdict-danger/20 text-verdict-danger border border-verdict-danger/30'
@@ -352,7 +352,7 @@ export default function StudyPage() {
           </div>
 
           {/* Reflection */}
-          <div className="space-y-3 pt-3 border-t border-[#1E3A5F]">
+          <div className="space-y-3 pt-3 border-t border-border">
             <label className="block text-xs font-bold text-ink">
               Does this evidence change or strengthen your decision?
             </label>
@@ -363,7 +363,7 @@ export default function StudyPage() {
                 className={`py-2 px-2 rounded-xl border text-center font-semibold transition ${
                   wouldChange === 'already_agreed'
                     ? 'bg-gold-400/20 border-gold-400 text-gold-300'
-                    : 'border-[#1E3A5F] bg-[#0B1530] text-ink-muted hover:text-ink'
+                    : 'border-border bg-navy text-ink-muted hover:text-ink'
                 }`}
               >
                 Already Agreed
@@ -374,7 +374,7 @@ export default function StudyPage() {
                 className={`py-2 px-2 rounded-xl border text-center font-semibold transition ${
                   wouldChange === 'yes'
                     ? 'bg-gold-400/20 border-gold-400 text-gold-300'
-                    : 'border-[#1E3A5F] bg-[#0B1530] text-ink-muted hover:text-ink'
+                    : 'border-border bg-navy text-ink-muted hover:text-ink'
                 }`}
               >
                 Yes, Changed Mind
@@ -385,7 +385,7 @@ export default function StudyPage() {
                 className={`py-2 px-2 rounded-xl border text-center font-semibold transition ${
                   wouldChange === 'no'
                     ? 'bg-gold-400/20 border-gold-400 text-gold-300'
-                    : 'border-[#1E3A5F] bg-[#0B1530] text-ink-muted hover:text-ink'
+                    : 'border-border bg-navy text-ink-muted hover:text-ink'
                 }`}
               >
                 No, Keep Decision

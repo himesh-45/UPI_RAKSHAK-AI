@@ -45,7 +45,7 @@ export function playAdminChime() {
 export default function AdminAlarmBell({ onNavigateToDashboard }) {
   const [isOpen, setIsOpen] = useState(false);
   const [alerts, setAlerts] = useState([]);
-  const [unreadCount, setUnreadCount] = useState(2);
+  const [unreadCount, setUnreadCount] = useState(0);
   const [filter, setFilter] = useState('all'); // 'all', 'case_filed', 'user_feedback'
   const [isRinging, setIsRinging] = useState(false);
   const [toastAlert, setToastAlert] = useState(null);
@@ -80,7 +80,7 @@ export default function AdminAlarmBell({ onNavigateToDashboard }) {
         }
 
         previousCountRef.current = data.total_alerts;
-        setUnreadCount(lastReadTime === 0 ? Math.max(data.unread_count, 2) : newUnread);
+        setUnreadCount(lastReadTime === 0 ? (data.unread_count || 0) : newUnread);
       }
     } catch (err) {
       console.warn('Failed to fetch admin alerts:', err);
@@ -195,12 +195,12 @@ export default function AdminAlarmBell({ onNavigateToDashboard }) {
         onClick={() => {
           setIsOpen(!isOpen);
         }}
-        className={`relative p-2 rounded-xl bg-[#0B1530] border transition cursor-pointer select-none ${
+        className={`relative p-2 rounded-xl bg-navy border transition cursor-pointer select-none ${
           isRinging
             ? 'border-verdict-danger text-verdict-danger shadow-[0_0_20px_rgba(244,63,94,0.7)] animate-bounce'
             : unreadCount > 0
             ? 'border-verdict-danger/40 text-teal-400 hover:text-ink hover:border-teal-400/60'
-            : 'border-[#1E3A5F] text-teal-400 hover:text-ink hover:border-teal-400/50'
+            : 'border-border text-teal-400 hover:text-ink hover:border-teal-400/50'
         }`}
         title={`Admin Incident & Feedback Alarm (${unreadCount} unread)`}
         aria-label="Admin Alerts Alarm"
@@ -216,9 +216,9 @@ export default function AdminAlarmBell({ onNavigateToDashboard }) {
 
       {/* Interactive Cyber Alarm & Notification Dropdown */}
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-96 max-w-[90vw] bg-[#0F1D3A]/98 backdrop-blur-xl border border-[#1E3A5F] rounded-2xl shadow-[0_12px_40px_rgba(5,10,24,0.9)] z-50 overflow-hidden border-t-2 border-t-gold-400 animate-in fade-in zoom-in-95 duration-150">
+        <div className="absolute right-0 mt-2 w-96 max-w-[90vw] bg-navy-surface/98 backdrop-blur-xl border border-border rounded-2xl shadow-[0_12px_40px_rgba(5,10,24,0.9)] z-50 overflow-hidden border-t-2 border-t-gold-400 animate-in fade-in zoom-in-95 duration-150">
           {/* Header */}
-          <div className="p-3.5 border-b border-[#1E3A5F] bg-[#0B1530] flex items-center justify-between">
+          <div className="p-3.5 border-b border-border bg-navy flex items-center justify-between">
             <div className="flex items-center gap-2">
               <div className="p-1.5 rounded-lg bg-verdict-danger/10 border border-verdict-danger/30 text-verdict-danger">
                 <ShieldAlert className="w-4 h-4" />
@@ -242,7 +242,7 @@ export default function AdminAlarmBell({ onNavigateToDashboard }) {
                 className={`p-1.5 rounded-lg border text-xs transition ${
                   soundEnabled
                     ? 'border-teal-500/40 bg-teal-500/10 text-teal-300 hover:bg-teal-500/20'
-                    : 'border-[#1E3A5F] bg-[#070E22] text-ink-faint hover:text-ink'
+                    : 'border-border bg-navy text-ink-faint hover:text-ink'
                 }`}
                 title={soundEnabled ? 'Alarm Sound: Enabled' : 'Alarm Sound: Muted'}
               >
@@ -269,7 +269,7 @@ export default function AdminAlarmBell({ onNavigateToDashboard }) {
           </div>
 
           {/* Filter Pills & Actions */}
-          <div className="px-3 py-2 bg-[#070E22] border-b border-[#1E3A5F] flex items-center justify-between text-[11px]">
+          <div className="px-3 py-2 bg-navy border-b border-border flex items-center justify-between text-[11px]">
             <div className="flex items-center gap-1">
               <button
                 onClick={() => setFilter('all')}
@@ -314,7 +314,7 @@ export default function AdminAlarmBell({ onNavigateToDashboard }) {
           </div>
 
           {/* Scrollable Alerts List */}
-          <div className="max-h-80 overflow-y-auto divide-y divide-[#1E3A5F] text-xs">
+          <div className="max-h-80 overflow-y-auto divide-y divide-border text-xs">
             {filteredAlerts.length === 0 ? (
               <div className="p-8 text-center text-ink-muted">
                 <Check className="w-8 h-8 mx-auto mb-2 text-verdict-safe opacity-60" />
@@ -325,7 +325,7 @@ export default function AdminAlarmBell({ onNavigateToDashboard }) {
               filteredAlerts.map(alert => (
                 <div
                   key={alert.id}
-                  className="p-3 hover:bg-[#0B1530] transition flex flex-col gap-1.5"
+                  className="p-3 hover:bg-navy transition flex flex-col gap-1.5"
                 >
                   <div className="flex items-start justify-between gap-2">
                     <div className="flex items-center gap-1.5 font-bold text-ink text-xs">
@@ -345,7 +345,7 @@ export default function AdminAlarmBell({ onNavigateToDashboard }) {
                   </div>
 
                   {alert.content && (
-                    <p className="text-[11px] text-ink-muted line-clamp-2 bg-[#070E22] p-1.5 rounded-lg border border-[#1E3A5F] font-mono">
+                    <p className="text-[11px] text-ink-muted line-clamp-2 bg-navy p-1.5 rounded-lg border border-border font-mono">
                       {alert.content}
                     </p>
                   )}
@@ -387,7 +387,7 @@ export default function AdminAlarmBell({ onNavigateToDashboard }) {
           </div>
 
           {/* Footer with Moderation Direct Link */}
-          <div className="p-2.5 bg-[#0B1530] border-t border-[#1E3A5F] flex items-center justify-between text-[11px]">
+          <div className="p-2.5 bg-navy border-t border-border flex items-center justify-between text-[11px]">
             <span className="text-ink-muted text-[10px] flex items-center gap-1">
               <Radio className="w-3 h-3 text-teal-400 animate-pulse" /> Live Polling (10s)
             </span>
@@ -409,7 +409,7 @@ export default function AdminAlarmBell({ onNavigateToDashboard }) {
 
       {/* Floating Cyber Alert Toast (Pops up whenever a case or feedback arrives) */}
       {toastAlert && (
-        <div className="fixed bottom-6 right-6 z-50 max-w-sm w-full bg-[#0F1D3A]/95 backdrop-blur-xl border border-verdict-danger/50 rounded-2xl p-4 shadow-[0_0_30px_rgba(244,63,94,0.4)] animate-in slide-in-from-bottom-5 duration-200">
+        <div className="fixed bottom-6 right-6 z-50 max-w-sm w-full bg-navy-surface/95 backdrop-blur-xl border border-verdict-danger/50 rounded-2xl p-4 shadow-[0_0_30px_rgba(244,63,94,0.4)] animate-in slide-in-from-bottom-5 duration-200">
           <div className="flex items-start gap-3">
             <div className="p-2 rounded-xl bg-verdict-danger/20 text-verdict-danger border border-verdict-danger/40 animate-pulse">
               <ShieldAlert className="w-5 h-5" />

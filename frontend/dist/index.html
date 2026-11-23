@@ -7,14 +7,32 @@
     <meta name="theme-color" content="#050A18" />
     <meta name="description" content="UPI Rakshak AI — Multilingual Real-Time Digital-Payment Scam Detection & Prevention Platform for India" />
     <link rel="manifest" href="/manifest.json" />
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('theme');
+          var isDark = saved ? (saved === 'dark') : true;
+          var html = document.documentElement;
+          if (isDark) {
+            html.classList.add('dark');
+            html.classList.remove('light');
+          } else {
+            html.classList.remove('dark');
+            html.classList.add('light');
+            var meta = document.querySelector('meta[name="theme-color"]');
+            if (meta) meta.setAttribute('content', '#FAF7F0');
+          }
+        } catch (e) {}
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+Devanagari:wght@400;600;700&family=Noto+Sans+Telugu:wght@400;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
     <title>UPI Rakshak AI — Multilingual Scam Detection & Prevention</title>
-    <script type="module" crossorigin src="/assets/index-CxZ66IpM.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-Gf6PHyoP.css">
+    <script type="module" crossorigin src="/assets/index-CzywSYl0.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-Cp0VyR5r.css">
   </head>
-  <body class="bg-[#050A18] text-[#F5F1E6] min-h-screen antialiased selection:bg-[#35D0C8] selection:text-[#050A18]">
+  <body class="min-h-screen antialiased selection:bg-[#35D0C8] selection:text-[#050A18]">
     <div id="root"></div>
   </body>
 </html>

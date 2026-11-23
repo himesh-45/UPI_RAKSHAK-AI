@@ -47,18 +47,18 @@ export default function SecurityTipCard({ language = 'en', onOpenLearn = null })
   const l = labels[language] || labels.en;
 
   return (
-    <div className="p-3.5 bg-[#0F1D3A]/90 border border-[#1E3A5F] rounded-xl shadow-md text-[#F5F1E6] flex flex-col justify-between">
+    <div className="p-3.5 bg-navy-surface/90 border border-border rounded-xl shadow-md text-ink flex flex-col justify-between">
       <div>
-        <div className="flex items-center justify-between pb-2 border-b border-[#1E3A5F]">
-          <div className="flex items-center gap-2 text-[#F5C96A]">
-            <Lightbulb className="w-4 h-4 text-[#F5C96A]" />
+        <div className="flex items-center justify-between pb-2 border-b border-border">
+          <div className="flex items-center gap-2 text-gold-400">
+            <Lightbulb className="w-4 h-4 text-gold-400" />
             <span className="text-xs font-bold uppercase font-mono tracking-wider">
               {l.title}
             </span>
           </div>
           <button
             onClick={rotateTip}
-            className="flex items-center gap-1 text-[11px] text-[#A9B4CC] hover:text-[#35D0C8] transition-colors"
+            className="flex items-center gap-1 text-[11px] text-ink-muted hover:text-teal transition-colors"
             title="Rotate to next security tip"
           >
             <RefreshCw className="w-3 h-3" />
@@ -66,16 +66,16 @@ export default function SecurityTipCard({ language = 'en', onOpenLearn = null })
           </button>
         </div>
 
-        <p className="mt-2.5 text-xs text-[#F5F1E6] leading-relaxed italic">
+        <p className="mt-2.5 text-xs text-ink leading-relaxed italic">
           "{currentTip[language] || currentTip.en}"
         </p>
       </div>
 
       {onOpenLearn && (
-        <div className="mt-3 pt-2 border-t border-[#1E3A5F] flex justify-end">
+        <div className="mt-3 pt-2 border-t border-border flex justify-end">
           <button
             onClick={onOpenLearn}
-            className="inline-flex items-center gap-1.5 text-xs font-medium text-[#35D0C8] hover:text-[#35D0C8]/80 transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs font-medium text-teal hover:text-teal/80 transition-colors"
           >
             <BookOpen className="w-3.5 h-3.5" />
             <span>{l.learnMore} →</span>

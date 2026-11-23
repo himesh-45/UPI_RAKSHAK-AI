@@ -68,15 +68,15 @@ export default function EmergencyPlaybookCard({ language = 'en', onOpen1930Modal
   const text = content[language] || content.en;
 
   return (
-    <div className="mt-3 p-4 bg-[#0F1D3A]/95 border-2 border-[#F43F5E]/50 rounded-2xl shadow-2xl text-[#F5F1E6]">
+    <div className="mt-3 p-4 bg-navy-surface/95 border-2 border-verdict-danger/50 rounded-2xl shadow-2xl text-ink">
       {/* Golden Hour Urgency Banner */}
-      <div className="flex items-center gap-3 p-3 bg-[#F43F5E]/15 border border-[#F43F5E]/40 rounded-xl mb-4">
-        <Clock className="w-6 h-6 text-[#F43F5E] shrink-0 animate-pulse" />
+      <div className="flex items-center gap-3 p-3 bg-verdict-danger/15 border border-verdict-danger/40 rounded-xl mb-4">
+        <Clock className="w-6 h-6 text-verdict-danger shrink-0 animate-pulse" />
         <div>
-          <h4 className="text-xs font-bold text-[#FDA4AF] tracking-wider font-mono">
+          <h4 className="text-xs font-bold text-rose-600 dark:text-rose-300 tracking-wider font-mono">
             {text.bannerTitle}
           </h4>
-          <p className="text-[11px] text-[#FDA4AF]/90 mt-0.5">
+          <p className="text-[11px] text-rose-600 dark:text-rose-300/90 mt-0.5">
             {text.bannerSub}
           </p>
         </div>
@@ -85,27 +85,27 @@ export default function EmergencyPlaybookCard({ language = 'en', onOpen1930Modal
       {/* 4 Action Tiles */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {/* Tile 1: 1930 */}
-        <div className="p-3 bg-[#0B1530] border border-[#F43F5E]/30 rounded-xl flex flex-col justify-between">
+        <div className="p-3 bg-navy border border-verdict-danger/30 rounded-xl flex flex-col justify-between">
           <div>
-            <div className="flex items-center gap-2 text-xs font-bold text-[#F43F5E]">
+            <div className="flex items-center gap-2 text-xs font-bold text-verdict-danger">
               <PhoneCall className="w-4 h-4" />
               <span>{text.tile1Title}</span>
             </div>
-            <p className="text-[11px] text-[#A9B4CC] mt-1 leading-relaxed">
+            <p className="text-[11px] text-ink-muted mt-1 leading-relaxed">
               {text.tile1Desc}
             </p>
           </div>
           <div className="mt-3 flex items-center gap-2">
             <a
               href="tel:1930"
-              className="flex-1 py-1.5 px-3 rounded-lg bg-[#F43F5E] hover:bg-[#E11D48] text-white text-xs font-bold text-center flex items-center justify-center gap-1.5 transition-colors shadow-md shadow-rose-950/50"
+              className="flex-1 py-1.5 px-3 rounded-lg bg-verdict-danger hover:bg-[#E11D48] text-white text-xs font-bold text-center flex items-center justify-center gap-1.5 transition-colors shadow-md shadow-rose-950/50"
             >
               <PhoneCall className="w-3.5 h-3.5" /> {text.tile1Action}
             </a>
             {onOpen1930Modal && (
               <button
                 onClick={onOpen1930Modal}
-                className="py-1.5 px-2.5 rounded-lg bg-[#14254B] hover:bg-[#1E3A5F] text-[#F5F1E6] text-xs font-medium border border-[#1E3A5F] transition-colors"
+                className="py-1.5 px-2.5 rounded-lg bg-navy-raised hover:bg-border text-ink text-xs font-medium border border-border transition-colors"
                 title="Pre-fill 1930 incident sheet"
               >
                 Pre-fill
@@ -115,13 +115,13 @@ export default function EmergencyPlaybookCard({ language = 'en', onOpen1930Modal
         </div>
 
         {/* Tile 2: cybercrime.gov.in */}
-        <div className="p-3 bg-[#0B1530] border border-[#35D0C8]/30 rounded-xl flex flex-col justify-between">
+        <div className="p-3 bg-navy border border-teal/30 rounded-xl flex flex-col justify-between">
           <div>
-            <div className="flex items-center gap-2 text-xs font-bold text-[#35D0C8]">
+            <div className="flex items-center gap-2 text-xs font-bold text-teal">
               <ExternalLink className="w-4 h-4" />
               <span>{text.tile2Title}</span>
             </div>
-            <p className="text-[11px] text-[#A9B4CC] mt-1 leading-relaxed">
+            <p className="text-[11px] text-ink-muted mt-1 leading-relaxed">
               {text.tile2Desc}
             </p>
           </div>
@@ -130,7 +130,7 @@ export default function EmergencyPlaybookCard({ language = 'en', onOpen1930Modal
               href="https://cybercrime.gov.in"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full py-1.5 px-3 rounded-lg bg-[#1FB5AD] hover:bg-[#35D0C8] text-[#050A18] text-xs font-bold text-center flex items-center justify-center gap-1.5 transition-colors"
+              className="w-full py-1.5 px-3 rounded-lg bg-teal hover:bg-teal text-navy-deep text-xs font-bold text-center flex items-center justify-center gap-1.5 transition-colors"
             >
               <ExternalLink className="w-3.5 h-3.5" /> {text.tile2Action}
             </a>
@@ -138,19 +138,19 @@ export default function EmergencyPlaybookCard({ language = 'en', onOpen1930Modal
         </div>
 
         {/* Tile 3: Bank Freeze */}
-        <div className="p-3 bg-[#0B1530] border border-[#1E3A5F] rounded-xl flex flex-col justify-between">
+        <div className="p-3 bg-navy border border-border rounded-xl flex flex-col justify-between">
           <div>
-            <div className="flex items-center gap-2 text-xs font-bold text-[#F5C96A]">
+            <div className="flex items-center gap-2 text-xs font-bold text-gold-400">
               <Lock className="w-4 h-4" />
               <span>{text.tile3Title}</span>
             </div>
-            <p className="text-[11px] text-[#A9B4CC] mt-1 leading-relaxed">
+            <p className="text-[11px] text-ink-muted mt-1 leading-relaxed">
               {text.tile3Desc}
             </p>
           </div>
           <button
             onClick={() => setBankAccordionOpen(!bankAccordionOpen)}
-            className="mt-3 w-full py-1.5 px-2 rounded-lg bg-[#14254B] hover:bg-[#1E3A5F] text-[#A9B4CC] text-xs font-medium border border-[#1E3A5F] flex items-center justify-between transition-colors"
+            className="mt-3 w-full py-1.5 px-2 rounded-lg bg-navy-raised hover:bg-border text-ink-muted text-xs font-medium border border-border flex items-center justify-between transition-colors"
           >
             <span>{text.tile3Toggle}</span>
             {bankAccordionOpen ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
@@ -158,17 +158,17 @@ export default function EmergencyPlaybookCard({ language = 'en', onOpen1930Modal
         </div>
 
         {/* Tile 4: Evidence */}
-        <div className="p-3 bg-[#0B1530] border border-[#1E3A5F] rounded-xl flex flex-col justify-between">
+        <div className="p-3 bg-navy border border-border rounded-xl flex flex-col justify-between">
           <div>
-            <div className="flex items-center gap-2 text-xs font-bold text-[#35D0C8]">
+            <div className="flex items-center gap-2 text-xs font-bold text-teal">
               <Camera className="w-4 h-4" />
               <span>{text.tile4Title}</span>
             </div>
-            <p className="text-[11px] text-[#A9B4CC] mt-1 leading-relaxed">
+            <p className="text-[11px] text-ink-muted mt-1 leading-relaxed">
               {text.tile4Desc}
             </p>
           </div>
-          <div className="mt-3 text-[11px] text-[#F5C96A] font-mono bg-[#14254B] p-1.5 rounded border border-[#D9A441]/30 text-center">
+          <div className="mt-3 text-[11px] text-gold-400 font-mono bg-navy-raised p-1.5 rounded border border-gold-500/30 text-center">
             📸 Keep uncropped screenshots safe
           </div>
         </div>
@@ -176,17 +176,17 @@ export default function EmergencyPlaybookCard({ language = 'en', onOpen1930Modal
 
       {/* Accordion List for Top 10 Banks */}
       {bankAccordionOpen && (
-        <div className="mt-3.5 p-3 bg-[#0B1530] border border-[#1E3A5F] rounded-xl max-h-56 overflow-y-auto space-y-2 animate-fadeIn text-xs">
-          <span className="text-[11px] font-semibold text-[#A9B4CC] uppercase font-mono block mb-1">
+        <div className="mt-3.5 p-3 bg-navy border border-border rounded-xl max-h-56 overflow-y-auto space-y-2 animate-fadeIn text-xs">
+          <span className="text-[11px] font-semibold text-ink-muted uppercase font-mono block mb-1">
             Official 24x7 Bank Emergency Hotlines
           </span>
           {bankHelplines.map((b, i) => (
-            <div key={i} className="flex items-center justify-between p-2 rounded-lg bg-[#0F1D3A] border border-[#1E3A5F]">
+            <div key={i} className="flex items-center justify-between p-2 rounded-lg bg-navy-surface border border-border">
               <div>
-                <span className="font-semibold text-[#F5F1E6] block">{b.name}</span>
-                <span className="text-[10px] text-[#A9B4CC] font-mono">{b.sms}</span>
+                <span className="font-semibold text-ink block">{b.name}</span>
+                <span className="text-[10px] text-ink-muted font-mono">{b.sms}</span>
               </div>
-              <span className="text-xs font-mono font-bold text-[#35D0C8]">{b.num}</span>
+              <span className="text-xs font-mono font-bold text-teal">{b.num}</span>
             </div>
           ))}
         </div>

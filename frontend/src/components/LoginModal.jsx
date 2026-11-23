@@ -30,7 +30,7 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-navy-deep/80 backdrop-blur-md animate-fade-in">
-      <div className="w-full max-w-sm bg-[#0F1D3A]/95 rounded-3xl border border-[#1E3A5F] border-t-2 border-t-gold-400 shadow-2xl p-6 relative">
+      <div className="w-full max-w-sm bg-navy-surface/95 rounded-3xl border border-border border-t-2 border-t-gold-400 shadow-2xl p-6 relative">
         <button
           onClick={onClose}
           className="absolute top-4 right-4 p-1.5 rounded-lg text-ink-muted hover:text-ink transition"
@@ -67,7 +67,7 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }) {
               placeholder="admin@upirakshak.ai"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-3 py-2 text-xs rounded-xl bg-[#070E22] border border-[#1E3A5F] text-ink focus:border-teal-400 focus:ring-1 focus:ring-teal-400 focus:outline-hidden"
+              className="w-full px-3 py-2 text-xs rounded-xl bg-navy border border-border text-ink focus:border-teal-400 focus:ring-1 focus:ring-teal-400 focus:outline-hidden"
             />
           </div>
 
@@ -81,11 +81,11 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess }) {
               placeholder="Enter admin password from .env or console"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-3 py-2 text-xs rounded-xl bg-[#070E22] border border-[#1E3A5F] text-ink focus:border-teal-400 focus:ring-1 focus:ring-teal-400 focus:outline-hidden"
+              className="w-full px-3 py-2 text-xs rounded-xl bg-navy border border-border text-ink focus:border-teal-400 focus:ring-1 focus:ring-teal-400 focus:outline-hidden"
             />
           </div>
 
-          <div className="p-2.5 rounded-xl bg-[#0B1530] border border-[#1E3A5F] text-[11px] text-ink-muted">
+          <div className="p-2.5 rounded-xl bg-navy border border-border text-[11px] text-ink-muted">
             <p className="font-medium text-ink-muted">
               Admin password is in backend/data/.admin_secret (generated on first run)
             </p>

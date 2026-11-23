@@ -88,60 +88,60 @@ export default function JudgeModeModal({ isOpen, onClose, onSelectScenario }) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#050A18]/80 backdrop-blur-sm animate-fade-in">
-      <div className="bg-[#0F1D3A] rounded-3xl border border-[#1E3A5F] border-t-2 border-t-[#D9A441] shadow-2xl max-w-3xl w-full max-h-[90vh] flex flex-col overflow-hidden text-[#F5F1E6]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-navy-deep/80 backdrop-blur-sm animate-fade-in">
+      <div className="bg-navy-surface rounded-3xl border border-border border-t-2 border-t-gold-500 shadow-2xl max-w-3xl w-full max-h-[90vh] flex flex-col overflow-hidden text-ink">
         
         {/* Header */}
-        <div className="p-6 border-b border-[#1E3A5F] flex items-center justify-between bg-gradient-to-r from-[#D9A441]/10 via-[#35D0C8]/10 to-transparent">
+        <div className="p-6 border-b border-border flex items-center justify-between bg-gradient-to-r from-[#D9A441]/10 via-[#35D0C8]/10 to-transparent">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-2xl bg-[#0B1530] text-[#F5C96A] border border-[#D9A441]/30">
+            <div className="p-2.5 rounded-2xl bg-navy text-gold-400 border border-gold-500/30">
               <Award className="w-6 h-6" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="text-lg font-extrabold text-[#F5F1E6]">
+                <h3 className="text-lg font-extrabold text-ink">
                   Judge Mode — Guided Verification Scenarios
                 </h3>
-                <span className="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-[#D9A441] text-[#050A18]">
+                <span className="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gold-500 text-navy-deep">
                   Live Demo
                 </span>
               </div>
-              <p className="text-xs text-[#A9B4CC]">
+              <p className="text-xs text-ink-muted">
                 Click any challenge scenario below to load it into the engine and verify detection.
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-2 rounded-xl text-[#A9B4CC] hover:text-[#F5F1E6] hover:bg-[#14254B] transition"
+            className="p-2 rounded-xl text-ink-muted hover:text-ink hover:bg-navy-raised transition"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Scenarios Grid */}
-        <div className="p-6 overflow-y-auto space-y-3 divide-y divide-[#1E3A5F]/60">
+        <div className="p-6 overflow-y-auto space-y-3 divide-y divide-border">
           {JUDGE_SCENARIOS.map((s) => (
             <div
               key={s.id}
-              className="pt-3 first:pt-0 flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-3 rounded-2xl hover:bg-[#14254B]/40 transition group border border-transparent hover:border-[#1E3A5F]"
+              className="pt-3 first:pt-0 flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-3 rounded-2xl hover:bg-navy-raised/40 transition group border border-transparent hover:border-border"
             >
               <div className="space-y-1.5 flex-1">
                 <div className="flex items-center gap-2 flex-wrap">
-                  <span className="text-sm font-bold text-[#F5F1E6] group-hover:text-[#F5C96A] transition">
+                  <span className="text-sm font-bold text-ink group-hover:text-gold-400 transition">
                     {s.title}
                   </span>
                   <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${s.badgeColor}`}>
                     Expected: {s.expectedVerdict}
                   </span>
-                  <span className="text-[10px] text-[#7C89A6] font-mono">
+                  <span className="text-[10px] text-ink-faint font-mono">
                     [{s.lang}]
                   </span>
                 </div>
-                <p className="text-xs text-[#A9B4CC] leading-relaxed">
+                <p className="text-xs text-ink-muted leading-relaxed">
                   {s.description}
                 </p>
-                <p className="text-[11px] font-mono text-[#A9B4CC] line-clamp-1 italic bg-[#0B1530] p-1.5 rounded-lg border border-[#1E3A5F]">
+                <p className="text-[11px] font-mono text-ink-muted line-clamp-1 italic bg-navy p-1.5 rounded-lg border border-border">
                   "{s.input}"
                 </p>
               </div>
@@ -161,11 +161,11 @@ export default function JudgeModeModal({ isOpen, onClose, onSelectScenario }) {
         </div>
 
         {/* Footer */}
-        <div className="p-4 border-t border-[#1E3A5F] bg-[#0B1530] flex items-center justify-between text-xs text-[#A9B4CC]">
+        <div className="p-4 border-t border-border bg-navy flex items-center justify-between text-xs text-ink-muted">
           <span>All 8 test scenarios are verified against our programmatic test suite.</span>
           <button
             onClick={onClose}
-            className="px-4 py-1.5 rounded-xl text-xs font-bold bg-[#14254B] hover:bg-[#1E3A5F] text-[#F5F1E6] border border-[#1E3A5F] transition"
+            className="px-4 py-1.5 rounded-xl text-xs font-bold bg-navy-raised hover:bg-border text-ink border border-border transition"
           >
             Close
           </button>
