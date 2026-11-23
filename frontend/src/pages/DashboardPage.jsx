@@ -203,7 +203,7 @@ export default function DashboardPage({ token, onOpenLogin }) {
       </div>
 
       {/* Omnichannel Distribution Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="p-4 rounded-2xl bg-navy-surface/90 border border-border flex items-center justify-between">
           <div>
             <div className="text-[11px] font-bold text-ink-muted uppercase tracking-wider">Web Portal Scans</div>
@@ -224,17 +224,6 @@ export default function DashboardPage({ token, onOpenLogin }) {
             <div className="text-[10px] text-ink-faint">Salted SHA-256 Privacy</div>
           </div>
           <span className="text-2xl p-3 bg-navy text-teal rounded-xl border border-border">✈️</span>
-        </div>
-
-        <div className="p-4 rounded-2xl bg-navy-surface/90 border border-border flex items-center justify-between">
-          <div>
-            <div className="text-[11px] font-bold text-verdict-safe uppercase tracking-wider">WhatsApp Bot</div>
-            <div className="text-2xl font-extrabold text-ink font-mono mt-0.5">
-              {stats?.channel_breakdown?.whatsapp || 0}
-            </div>
-            <div className="text-[10px] text-ink-faint">Twilio Sandbox & Meta Cloud API</div>
-          </div>
-          <span className="text-2xl p-3 bg-navy text-verdict-safe rounded-xl border border-border">💬</span>
         </div>
       </div>
 
@@ -409,9 +398,7 @@ export default function DashboardPage({ token, onOpenLogin }) {
                     <span className={`px-1.5 py-0.5 rounded text-[10px] font-bold uppercase ${
                       item.channel === 'telegram'
                         ? 'bg-teal/15 text-teal border border-teal/30'
-                        : (item.channel === 'whatsapp'
-                            ? 'bg-verdict-safe/15 text-verdict-safe border border-verdict-safe/30'
-                            : 'bg-navy-raised text-ink-muted border border-border')
+                        : 'bg-navy-raised text-ink-muted border border-border'
                     }`}>
                       {item.channel || 'web'}
                     </span>

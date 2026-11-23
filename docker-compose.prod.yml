@@ -15,9 +15,6 @@ services:
       - ADMIN_EMAIL=${ADMIN_EMAIL:-admin@upirakshak.ai}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD:-}
       - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN:-}
-      - TWILIO_ACCOUNT_SID=${TWILIO_ACCOUNT_SID:-}
-      - TWILIO_AUTH_TOKEN=${TWILIO_AUTH_TOKEN:-}
-      - WHATSAPP_API_TOKEN=${WHATSAPP_API_TOKEN:-}
       - LOG_LEVEL=INFO
     volumes:
       - backend_data:/app/data

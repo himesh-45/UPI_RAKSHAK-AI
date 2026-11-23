@@ -12,7 +12,7 @@
 - **Multi-Engine Intelligence Fusion**: Fuses 7 independent detectors (Calibrated 15-Class NLP, Negation-Aware Rules, Static URL Scanner, OpenCV QR & UPI URI Parser, RapidOCR/Tesseract, Digital Arrest Extortion Engine, and 93-Entry Regulatory RAG).
 - **Intent-Guided Conversational Assistant**: 5-way hybrid router (`ANALYZE`, `HOW_TO`, `EMERGENCY`, `SMALL_TALK`, `UNCLEAR`) that provides relevant guidance for citizen inquiries instead of treating every query as a scam. Strict no-verdict policy for informational queries, 9 human-reviewed procedures ([KB_REVIEW.md](docs/KB_REVIEW.md)), typo tolerance, and measured 98.05% intent accuracy on our 205-sample fictional test set.
 - **Trilingual Native Support**: Full UI, Voice, and Explainability in **English**, **Hindi (हिंदी)**, and **Telugu (తెలుగు)** (including Hinglish and Romanized Telugu / Telugish).
-- **Omnichannel Protection**: Real-time triage on Web PWA, **Telegram Bot** (`@upi_rakshak_bot`), and **WhatsApp Webhooks** with salted SHA-256 privacy and `/delete_data` right-to-be-forgotten.
+- **Omnichannel Protection**: Real-time triage on Web PWA and **Telegram Bot** (`@upi_rakshak_bot`) with salted SHA-256 privacy and `/delete_data` right-to-be-forgotten. *(Note: WhatsApp integration is a planned future channel that requires Meta Business API approval).*
 - **Digital Arrest Coercion Detector**: Multi-vector interception of fake police/CBI video interrogation extortion, grounded in Indian statutory law (**CrPC Section 41 / BNSS Section 35**).
 - **Community Reputation Database**: Anti-poisoning consensus database (&ge; 2 reporters, 24h rate limits, 30-day half-life decay, immune bank handles) capped to protect against frivolous flags.
 - **Scientifically Defensible**: Evaluated on frozen 306-sample benchmark (Gold v1) and expanded 243-sample natural human dataset (Gold v2, including 105 legitimate messages). **98.55%–99.49% scam recall** with strictly validated low false positive rates (0.00% and 1.90%).
@@ -120,7 +120,7 @@ The repository ships with an exhaustive test suite covering all security asserti
 | `backend/tests/test_url_scanner.py` | 88 bank stems, typosquatting, shorteners, punycode, TLDs | **PASSED (10/10)** |
 | `backend/tests/test_fusion.py` | Evidence fusion, score waterfall, elder mode, 1930 summaries | **PASSED (7/7)** |
 | `backend/tests/test_extended_scenarios.py` | All 15 taxonomy classes, obfuscation normalizers, RAG retrieval | **PASSED (37/37)** |
-| `backend/tests/test_channels.py` | Telegram & WhatsApp webhooks, rate limits, sender hashing, purge | **PASSED (8/8)** |
+| `backend/tests/test_channels.py` | Telegram webhooks, rate limits, sender hashing, purge | **PASSED (8/8)** |
 | `backend/tests/test_community_reputation.py` | Consensus gating, 24h limits, decay, immune whitelists, disputes | **PASSED (7/7)** |
 | `backend/tests/test_digital_arrest.py` | Law enforcement impersonation, virtual confinement, CrPC truth | **PASSED (4/4)** |
 | `backend/tests/test_packaging.py` | Submission zip verification (no secrets, no .db, no venvs) | **PASSED (2/2)** |
@@ -182,7 +182,6 @@ All metrics are evaluated programmatically via `backend.app.scripts.evaluate_mod
 - [Hackathon Pitch Deck Outline & 90s Elevator Pitch](docs/PITCH_OUTLINE.md)
 - [29 Tough Judge Questions & Technical Answers](docs/JUDGE_QA.md)
 - [Telegram Bot Setup & Webhook Guide](docs/TELEGRAM_SETUP.md)
-- [WhatsApp Cloud API & Twilio Setup Guide](docs/WHATSAPP_SETUP.md)
 - [Gold v3 Blind Evaluation Protocol](docs/GOLD_V3.md)
 - [User Study Statistical Report](docs/USER_STUDY_REPORT.md)
 - [Architectural Decisions Log (DECISIONS.md)](DECISIONS.md)

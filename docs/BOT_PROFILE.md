@@ -1,8 +1,9 @@
-# Official Bot Profile & Configuration Guide (Telegram & WhatsApp)
+# Official Bot Profile & Configuration Guide (Telegram)
 
 > **Profile Identifier**: `@UPIRakshakBot`  
 > **Bot Name**: `UPI Rakshak Guardian`  
-> **Avatar Asset**: `docs/assets/guardian_avatar.png` (640x640 PNG, high-contrast cyber guardian emblem)
+> **Avatar Asset**: `docs/assets/guardian_avatar.png` (640x640 PNG, high-contrast cyber guardian emblem)  
+> **Roadmap Note**: WhatsApp integration is a planned future channel (requires Meta Business API approval).
 
 ---
 
@@ -95,22 +96,7 @@ delete_data - Permanently erase all analysis records linked to your hashed ID
 
 ---
 
-## 2. WhatsApp Business Profile Specifications
-
-For Cloud API (Meta for Developers) or Twilio WhatsApp Console:
-
-- **Business Display Name**: `UPI Rakshak Guardian`
-- **Category**: `Finance & Technology Security`
-- **Business Description**:  
-  `Evidence-based conversational safety brain helping Indian citizens detect UPI scams, block rogue handles, and file reports with the national 1930 helpline. Zero PII stored.`
-- **Official Website**: `https://upirakshak.ai`
-- **Support Email**: `help@upirakshak.ai`
-- **Profile Picture**: Use `docs/assets/guardian_avatar.png` (640x640px).
-
----
-
-## 3. Interactive Keyboards & Fallbacks
+## 2. Interactive Keyboards & Fallbacks
 
 - **Telegram**: Renders native inline buttons (`InlineKeyboardMarkup`) with callback data (`dial_1930`, `check_another`, `emergency_steps`, `lang_hi`, `lang_te`, `delete_data`).
-- **WhatsApp Cloud API**: Uses interactive Quick Reply Buttons and List Messages for supported business numbers.
-- **WhatsApp Fallback**: Emits clean formatted numbered lists when conversational buttons are not provisioned on the sender's carrier plan.
+- **Roadmap Channels**: WhatsApp integration is a planned future channel (requires Meta Business API approval).

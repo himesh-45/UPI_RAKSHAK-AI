@@ -201,6 +201,7 @@ export default function AboutPage() {
           <li><strong>Definition of "SAFE":</strong> A verdict of <code>SAFE</code> (0–34) means <em>"no strong scam patterns were detected"</em>. It does not certify that a completely novel attack is impossible.</li>
           <li><strong>Zero Network Resolution:</strong> Suspicious URLs are never opened, resolved, or requested. All URL signals are derived purely from static structural and lexical analysis.</li>
           <li><strong>Privacy First:</strong> Masking happens client-side and server-side before persistence. Phone numbers, credit cards, and OTPs are redacted into <code>[REDACTED]</code> tokens.</li>
+          <li><strong>Channel Roadmap:</strong> WhatsApp integration is a planned future channel (requires Meta Business API approval).</li>
         </ul>
       </div>
     </div>

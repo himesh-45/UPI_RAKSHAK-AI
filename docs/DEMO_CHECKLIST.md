@@ -77,7 +77,7 @@ This checklist provides a structured protocol for a smooth, resilient live techn
 
 4. **Omnichannel & Digital Arrest Demonstration (2:00 - 2:40)**:
    - Navigate to `/try` (Judge Evaluation Bench).
-   - Display the three real-time QR codes: Web App, Telegram Bot (`@upi_rakshak_bot`), and WhatsApp Sandbox.
+   - Display the real-time mobile QR codes: Web App and Telegram Bot (`@upi_rakshak_bot`).
    - Run a quick scenario on `/arrest` (Digital Arrest Extortion) and highlight statutory legal grounding (**CrPC Section 41 / BNSS Section 35**).
    - On any High Risk result, click **"1930 Incident Summary"** and copy the pre-filled legal complaint narrative.
 
@@ -96,7 +96,7 @@ This checklist provides a structured protocol for a smooth, resilient live techn
 | :--- | :--- | :--- |
 | **Port 8000 already in use** | Stray uvicorn daemon | Run `Get-Process python \| Stop-Process -Force` and restart. |
 | **Network disconnects during demo** | Wi-Fi drop | **No action required.** Core engine runs without internet; continues working offline (only omnichannel webhooks require internet). |
-| **Telegram / WhatsApp bot webhook offline** | No ngrok / public tunnel | Run offline simulation script: `python -m backend.app.channels.simulate_telegram` or `simulate_whatsapp`. |
+| **Telegram bot webhook offline** | No ngrok / public tunnel | Run offline simulation script: `python -m backend.app.channels.simulate_telegram`. |
 | **Microphone fails or background noise** | Web Speech API timeout | Fall back to typing text or clicking pre-loaded sample chips / Judge Mode buttons. |
 | **Screen projector resolution issue** | UI too small for judges | Toggle **"Family / Elder Mode"** (magnifies typography to accessible large font). |
 | **Tesseract missing on host** | Missing system binary | RapidOCR fallback automatically engages; if neither present, UI gracefully guides user to paste text without crashes. |

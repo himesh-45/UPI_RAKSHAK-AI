@@ -1,6 +1,6 @@
 """
 Server-Side Shareable 'Scam Alert' Card Generator (Pillow).
-Generates high-resolution 1200x630 OpenGraph/WhatsApp cards in < 50ms.
+Generates high-resolution 1200x630 OpenGraph / social share cards in < 50ms.
 Includes guardian branding, score badge, masked text snippet, key evidence,
 and statutory 1930 helpline guidance.
 """
@@ -19,7 +19,7 @@ def generate_scam_alert_card(
     language: str = "en"
 ) -> bytes:
     """
-    Renders a 1200x630 PNG image buffer suitable for WhatsApp/Telegram sharing.
+    Renders a 1200x630 PNG image buffer suitable for Telegram and web social sharing.
     """
     if reasons is None:
         reasons = [

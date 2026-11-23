@@ -37,6 +37,17 @@ def ensure_schema_migrations():
                     if "sender_hash" not in cols:
                         cur.execute("ALTER TABLE analysis_history ADD COLUMN sender_hash VARCHAR(64) DEFAULT NULL")
                         conn.commit()
+                    if "data_source" not in cols:
+                        cur.execute("ALTER TABLE analysis_history ADD COLUMN data_source VARCHAR(50) DEFAULT 'live_user'")
+                        conn.commit()
+
+                cur.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='threat_reports'")
+                if cur.fetchone():
+                    cur.execute("PRAGMA table_info(threat_reports)")
+                    cols_tr = [r[1] for r in cur.fetchall()]
+                    if "data_source" not in cols_tr:
+                        cur.execute("ALTER TABLE threat_reports ADD COLUMN data_source VARCHAR(50) DEFAULT 'live_user'")
+                        conn.commit()
                 conn.close()
             except Exception:
                 pass

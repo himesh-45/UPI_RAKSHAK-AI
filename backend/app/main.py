@@ -1,5 +1,5 @@
 import datetime
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from .config import settings
 from .database import engine, Base, SessionLocal
@@ -72,7 +72,6 @@ def health_check():
 
 from .routes import analyze, assistant, report, dashboard, history, auth, study, reputation
 from .channels.telegram import router as telegram_router
-from .channels.whatsapp import router as whatsapp_router
 from .database import get_db
 from fastapi import Depends
 
@@ -90,7 +89,6 @@ app.include_router(auth.router, prefix=settings.API_PREFIX)
 app.include_router(study.router, prefix=settings.API_PREFIX)
 app.include_router(reputation.router, prefix=settings.API_PREFIX)
 app.include_router(telegram_router, prefix=settings.API_PREFIX)
-app.include_router(whatsapp_router, prefix=settings.API_PREFIX)
 
 # Serve production frontend if frontend/dist exists
 import os
@@ -109,6 +107,8 @@ if os.path.exists(_FRONTEND_DIST):
 
     @app.get("/{full_path:path}", include_in_schema=False)
     async def serve_spa_frontend(full_path: str):
+        if full_path.startswith("api/") or full_path == "api":
+            raise HTTPException(status_code=404, detail="API route not found")
         target = os.path.join(_FRONTEND_DIST, full_path)
         if full_path and os.path.exists(target) and os.path.isfile(target):
             return FileResponse(target)

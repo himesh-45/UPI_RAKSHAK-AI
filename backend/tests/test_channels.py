@@ -60,7 +60,7 @@ def test_deduplication():
     assert is_duplicate_message("telegram", "update_1001") is False
     assert is_duplicate_message("telegram", "update_1001") is True
     assert is_duplicate_message("telegram", "update_1002") is False
-    assert is_duplicate_message("whatsapp", "update_1001") is False  # Separate channel
+    assert is_duplicate_message("web", "update_1001") is False  # Separate channel
 
 def test_channel_process_text_and_privacy_db():
     raw_phone = "+919123456789"
@@ -162,24 +162,13 @@ def test_telegram_webhook_secret_verification(monkeypatch):
     )
     assert res_ok.status_code == 200
 
-def test_meta_webhook_challenge():
-    # Valid challenge handshake
-    res = client.get("/api/channels/whatsapp/meta?hub.mode=subscribe&hub.challenge=115599&hub.verify_token=demo_token")
-    assert res.status_code == 200
-    assert res.text == "115599"
+def test_whatsapp_routes_removed():
+    """Verify that all legacy WhatsApp webhook endpoints have been removed."""
+    res_meta = client.get("/api/channels/whatsapp/meta?hub.mode=subscribe&hub.challenge=115599&hub.verify_token=demo_token")
+    assert res_meta.status_code == 404
 
-def test_twilio_webhook_endpoint():
-    form_payload = {
-        "MessageSid": "SM1234567890abcdef",
-        "From": "whatsapp:+919876543210",
-        "Body": "Your electricity connection will be disconnected today. Pay now.",
-        "NumMedia": "0"
-    }
-
-    res = client.post("/api/channels/whatsapp/twilio", data=form_payload)
-    assert res.status_code == 200
-    assert "xml" in res.headers["content-type"]
-    assert "<Response><Message>" in res.text
+    res_twilio = client.post("/api/channels/whatsapp/twilio", data={"MessageSid": "SM123"})
+    assert res_twilio.status_code in [404, 405]
 
 def test_share_card_generation_and_api():
     """Verify server-side 1200x630 shareable PNG card generation is fast and valid."""

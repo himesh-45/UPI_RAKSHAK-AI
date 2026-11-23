@@ -9,7 +9,7 @@ This document provides the definitive, second-by-second screen recording script 
 - **Resolution**: 1920x1080 (16:9), 60 FPS
 - **Audio**: Clean 48kHz microphone audio, studio voiceover
 - **Host**: `http://localhost:5173` (with clean browser profile, bookmarks bar hidden, 100% zoom)
-- **Live Channels**: Telegram Bot (`@upi_rakshak_bot`) and WhatsApp Sandbox open on side phone or desktop client
+- **Live Channels**: Telegram Bot (`@upi_rakshak_bot`) open on mobile phone or desktop client
 
 ---
 
@@ -25,13 +25,13 @@ This document provides the definitive, second-by-second screen recording script 
 
 ---
 
-### 0:30 – 1:15 | Omnichannel Protection: Telegram, WhatsApp & Live Mobile QR
-- **Visual**: Switch to the newly launched **"Judge / Try"** portal (`/try`). Show the three live QR codes: Web App, Telegram Bot, and WhatsApp.
+### 0:30 – 1:15 | Omnichannel Protection: Telegram Bot & Live Mobile QR
+- **Visual**: Switch to the **"Judge / Try"** portal (`/try`). Show the live QR codes: Web App and Telegram Bot.
 - **Action**: Pick up a smartphone on camera and scan the Telegram QR code. Forward a suspicious SMS:
   `"Dear Customer, your SBI account is blocked. Update PAN card at http://sbi-kyc-update.top"`
 - **Visual**: In under 1 second, Telegram replies with the detailed safety report: **HIGH RISK (100/100)**, listing brand typosquatting, phishing keywords, and actionable advice.
 - **Voiceover**:
-  > *"Real users don't copy-paste text into a web app when they're in panic. They live in WhatsApp and Telegram. Watch as I forward a phishing SMS to our Telegram bot on my phone.*
+  > *"Real users don't copy-paste text into a web app when they're in panic. They live in messaging apps. Watch as I forward a phishing SMS to our Telegram bot on my phone.*
   > 
   > *Instantly, it replies with a complete breakdown in their language. Notice that every sender identity is salted and hashed with SHA-256 before storage, and phone numbers are completely masked. If the user types `/delete_data`, their entire audit trail is permanently purged, honoring the Digital Personal Data Protection Act."*
 
@@ -65,7 +65,7 @@ This document provides the definitive, second-by-second screen recording script 
 - **Voiceover**:
   > *"When a victim is targeted, UPI Rakshak AI doesn't stop at an alert. It checks our crowd-consensus reputation database—protected against poisoning by consensus gating and immune whitelists—and pre-fills a formal cybercrime report for Helpline 1930.*
   > 
-  > *From WhatsApp to Telegram to air-gapped banking servers: UPI Rakshak AI brings digital trust and forensic protection to 1.4 billion Indians. Thank you."*
+  > *From mobile messaging to air-gapped banking servers: UPI Rakshak AI brings digital trust and forensic protection to 1.4 billion Indians. Thank you."*
 
 ---
 

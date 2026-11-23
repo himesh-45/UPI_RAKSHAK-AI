@@ -26,6 +26,7 @@ class AnalysisHistory(Base):
     evidence_json = Column(Text, default="[]")    # JSON serialized list of EvidenceItem
     actions_json = Column(Text, default="[]")     # JSON serialized list of strings
     is_simulated = Column(Boolean, default=False) # Distinguishes demo seed from real user queries
+    data_source = Column(String, default="live_user", index=True) # "live_user", "demo_seed", "test_traffic"
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
 
     reports = relationship("ThreatReport", back_populates="analysis")
@@ -56,6 +57,7 @@ class ThreatReport(Base):
     reporter_comments = Column(Text, nullable=True)
     reporter_contact_masked = Column(String, nullable=True)
     is_simulated = Column(Boolean, default=False)
+    data_source = Column(String, default="live_user", index=True) # "live_user", "demo_seed", "test_traffic"
     status = Column(String, default="PENDING_REVIEW")
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
 

@@ -59,7 +59,6 @@ export default function JudgeTryPage() {
 
   const originUrl = typeof window !== 'undefined' ? window.location.origin : 'http://localhost:5173';
   const telegramBotUrl = 'https://t.me/upi_rakshak_bot';
-  const whatsappUrl = 'https://wa.me/14155238886?text=join%20smooth-compass';
 
   const handleRunAnalysis = async (testItem) => {
     setSelectedTest(testItem);
@@ -132,7 +131,7 @@ export default function JudgeTryPage() {
           Judges can scan these QR codes using their iOS/Android camera to test the web interface or interact directly with the conversational bots.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           
           {/* Card 1: Web Interface */}
           <div className="bg-navy-surface/90 border border-border border-t-2 border-t-gold-400 rounded-3xl p-6 flex flex-col items-center text-center shadow-sm">
@@ -184,31 +183,11 @@ export default function JudgeTryPage() {
             </a>
           </div>
 
-          {/* Card 3: WhatsApp Bot */}
-          <div className="bg-navy-surface/90 border border-border border-t-2 border-t-emerald-400 rounded-3xl p-6 flex flex-col items-center text-center shadow-sm">
-            <div className="p-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 mb-3">
-              <MessageSquare className="w-5 h-5" />
-            </div>
-            <h3 className="font-bold text-ink text-sm">WhatsApp Bot</h3>
-            <p className="text-xs text-ink-muted mt-1 mb-4">Twilio Sandbox / Meta Cloud API webhook</p>
-            <div className="bg-white p-2.5 rounded-2xl border border-border shadow-inner">
-              <img
-                src={`/api/report/generate-qr?text=${encodeURIComponent(whatsappUrl)}`}
-                alt="WhatsApp Bot QR"
-                className="w-36 h-36 object-contain"
-              />
-            </div>
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-4 text-xs font-bold text-emerald-400 hover:text-emerald-300 flex items-center gap-1 hover:underline"
-            >
-              <span>Connect on WhatsApp</span>
-              <ExternalLink className="w-3.5 h-3.5" />
-            </a>
-          </div>
+        </div>
 
+        {/* Roadmap note */}
+        <div className="mt-4 px-4 py-3 rounded-2xl bg-navy-surface/60 border border-border text-center text-xs text-ink-muted">
+          💡 <strong className="text-ink">Channel Roadmap:</strong> WhatsApp integration is a planned future channel (requires Meta Business API approval).
         </div>
       </div>
 

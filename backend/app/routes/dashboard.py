@@ -110,7 +110,7 @@ def get_admin_alerts(
 
     return AdminAlertsResponse(
         total_alerts=len(alerts),
-        unread_count=max(unread_count, 2) if alerts else 0, # Default to at least 2 when alerts present
+        unread_count=unread_count,
         cases_count=cases_count,
         feedback_count=feedback_count,
         alerts=alerts
@@ -128,13 +128,22 @@ def mark_admin_alerts_read(db: Session = Depends(get_db)):
 @router.get("/stats", response_model=DashboardStatsResponse)
 def get_dashboard_stats(
     scope: str = Query("all", pattern="^(all|live|simulated)$"),
+    data_source: str = Query("live_user", pattern="^(all|live_user|demo_seed|test_traffic)$"),
     db: Session = Depends(get_db)
 ):
     query = db.query(AnalysisHistory)
-    if scope == "live":
-        query = query.filter(AnalysisHistory.is_simulated == False)
+
+    # Prioritize data_source filtering (Phase 2 truthfulness)
+    if data_source != "all":
+        query = query.filter(AnalysisHistory.data_source == data_source)
+    elif scope == "live":
+        query = query.filter(AnalysisHistory.data_source == "live_user")
     elif scope == "simulated":
-        query = query.filter(AnalysisHistory.is_simulated == True)
+        query = query.filter(AnalysisHistory.data_source.in_(["demo_seed", "test_traffic"]))
+
+    # By default, exclude legacy removed channels unless explicitly viewing all
+    if data_source != "all":
+        query = query.filter(AnalysisHistory.channel != "legacy_removed")
 
     all_records = query.all()
     total_analyses = len(all_records)
@@ -179,12 +188,11 @@ def get_dashboard_stats(
         for k, v in signal_counter.most_common(8)
     ]
 
-    # Channel breakdown (web vs telegram vs whatsapp)
-    channel_counter = Counter(r.channel or "web" for r in all_records)
+    # Channel breakdown (Web and Telegram only; legacy_removed excluded)
+    channel_counter = Counter(r.channel or "web" for r in all_records if r.channel != "legacy_removed")
     channel_breakdown = {
         "web": channel_counter.get("web", 0),
-        "telegram": channel_counter.get("telegram", 0),
-        "whatsapp": channel_counter.get("whatsapp", 0)
+        "telegram": channel_counter.get("telegram", 0)
     }
 
     # Timeline trend (last 7 days)
@@ -207,13 +215,15 @@ def get_dashboard_stats(
         for day, counts in trend_dict.items()
     ]
 
-    # Recent analyses
+    # Recent analyses matching query filters
     recent_query = db.query(AnalysisHistory)
-    if scope == "live":
-        recent_query = recent_query.filter(AnalysisHistory.is_simulated == False)
+    if data_source != "all":
+        recent_query = recent_query.filter(AnalysisHistory.data_source == data_source, AnalysisHistory.channel != "legacy_removed")
+    elif scope == "live":
+        recent_query = recent_query.filter(AnalysisHistory.data_source == "live_user", AnalysisHistory.channel != "legacy_removed")
     elif scope == "simulated":
-        recent_query = recent_query.filter(AnalysisHistory.is_simulated == True)
-    
+        recent_query = recent_query.filter(AnalysisHistory.data_source.in_(["demo_seed", "test_traffic"]))
+
     recent_records = recent_query.order_by(desc(AnalysisHistory.created_at)).limit(10).all()
     recent_analyses = [
         {
@@ -225,6 +235,7 @@ def get_dashboard_stats(
             "detected_category": r.detected_category,
             "language": r.language,
             "channel": r.channel or "web",
+            "data_source": r.data_source or "live_user",
             "is_simulated": r.is_simulated,
             "created_at": r.created_at.strftime("%H:%M %d-%b") if r.created_at else ""
         }
@@ -232,8 +243,8 @@ def get_dashboard_stats(
     ]
 
     total_threat_reports = db.query(ThreatReport).count()
-    live_total = db.query(AnalysisHistory).filter(AnalysisHistory.is_simulated == False).count()
-    sim_total = db.query(AnalysisHistory).filter(AnalysisHistory.is_simulated == True).count()
+    live_total = db.query(AnalysisHistory).filter(AnalysisHistory.data_source == "live_user").count()
+    sim_total = db.query(AnalysisHistory).filter(AnalysisHistory.data_source.in_(["demo_seed", "test_traffic"])).count()
 
     return DashboardStatsResponse(
         total_analyses=total_analyses,

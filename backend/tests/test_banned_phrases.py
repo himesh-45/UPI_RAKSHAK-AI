@@ -54,3 +54,28 @@ def test_no_banned_absolute_claims():
                         violations.append(f"{rel_path}:{line_no} matches '{pat.pattern}': {line.strip()[:100]}")
 
     assert not violations, f"Found absolute/unsupported claims in codebase:\n" + "\n".join(violations[:20])
+
+
+BANNED_WHATSAPP_PATTERNS = [
+    re.compile(r'(?i)\bwhatsapp\s+bot\b'),
+    re.compile(r'(?i)\bwhatsapp_webhook\b'),
+    re.compile(r'\bWHATSAPP_[A-Z0-9_]+'),
+]
+
+
+def test_no_whatsapp_bot_reintroduction():
+    files = get_files_to_scan()
+    violations = []
+
+    for fpath in files:
+        with open(fpath, 'r', encoding='utf-8', errors='ignore') as f:
+            for line_no, line in enumerate(f, 1):
+                if "BANNED" in line or "never claim" in line.lower() or "legacy_removed" in line:
+                    continue
+                for pat in BANNED_WHATSAPP_PATTERNS:
+                    if pat.search(line):
+                        rel_path = os.path.relpath(fpath)
+                        violations.append(f"{rel_path}:{line_no} matches '{pat.pattern}': {line.strip()[:100]}")
+
+    assert not violations, f"Found prohibited WhatsApp Bot or webhook references in codebase:\n" + "\n".join(violations[:20])
+

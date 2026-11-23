@@ -222,13 +222,14 @@
   4. **Immune Institution Whitelist**: Authorized banking handles (`@okaxis`, `@okhdfcbank`, `@paytm`), official telecom domains (`airtel.in`, `jio.com`), and government portals are cryptographically immune from community blacklisting.
   5. **Capped Risk Fusion**: Community reputation can add at most $+15$ points and can **never** single-handedly elevate an otherwise safe message to HIGH RISK (hard-capped at 49).
 
-### Q28: What privacy protections are enforced when users interact via WhatsApp or Telegram?
+### Q28: What privacy protections are enforced when users interact via Telegram or conversational channels?
 **Defense**:
 - Conversational channels are hardened for the Digital Personal Data Protection (DPDP) Act:
   1. **Salted SHA-256 Sender Hashing**: Raw phone numbers and Telegram chat IDs are never stored in plaintext; they are transformed via `hash_sender_id(raw_id)` using an application salt.
   2. **Automated PII Masking**: 100% of phone numbers, bank accounts, Aadhaar digits, and personal names are masked with `[MASKED_PHONE]`, `[MASKED_ACCOUNT]`, etc., before database persistence.
-  3. **Right-to-be-Forgotten**: When a user messages `/delete_data` on Telegram or WhatsApp, all associated analysis logs are permanently purged from the database immediately.
+  3. **Right-to-be-Forgotten**: When a user messages `/delete_data` on Telegram, all associated analysis logs are permanently purged from the database immediately.
   4. **Zero Group Chat Storage**: When added to Telegram groups, the bot strictly ignores non-mentions and never logs group conversation data.
+  5. **Channel Roadmap**: WhatsApp integration is a planned future channel (requires Meta Business API approval).
 
 ### Q29: What are your exact latency and throughput characteristics on CPU hardware?
 **Defense**:

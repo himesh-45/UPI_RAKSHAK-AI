@@ -28,7 +28,7 @@ _SEEN_TTL_SECONDS = 3600  # 1 hour deduplication window
 def hash_sender_id(sender_id: str) -> str:
     """
     Computes a one-way salted SHA-256 hash of the external sender ID
-    (Telegram user ID or WhatsApp phone number). Never stores raw identity.
+    (such as a Telegram user ID). Never stores raw identity.
     """
     salt = settings.SENDER_HASH_SALT.encode("utf-8")
     payload = str(sender_id).strip().encode("utf-8")
@@ -96,7 +96,7 @@ def purge_old_channel_history(days: int = 30) -> int:
     try:
         cutoff = datetime.datetime.utcnow() - datetime.timedelta(days=days)
         deleted = db.query(AnalysisHistory).filter(
-            AnalysisHistory.channel.in_(["telegram", "whatsapp"]),
+            AnalysisHistory.channel.in_(["telegram", "legacy_removed"]),
             AnalysisHistory.created_at < cutoff
         ).delete(synchronize_session=False)
         db.commit()

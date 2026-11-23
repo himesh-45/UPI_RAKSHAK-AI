@@ -65,7 +65,7 @@
   - **0.8994 15-Class NLP Macro-F1** (Gold v1) / **0.8624** (Gold v2).
   - **Median ~32 ms CPU Text Inference**: On AMD Ryzen AI 5 340 CPU (~100 ms with synchronous SQLite audit logging); 25.0 req/s under 50 sustained concurrent clients (0 errors).
   - **165+ passing unit, integration, property, security, and packaging tests**.
-  - **Omnichannel Protection**: Live Telegram Bot (`@upi_rakshak_bot`) and WhatsApp webhook with salted SHA-256 privacy.
+  - **Omnichannel Protection**: Live Telegram Bot (`@upi_rakshak_bot`) with salted SHA-256 privacy. (WhatsApp integration is a planned future channel requiring Meta Business API approval).
   - **Digital Arrest Extortion Engine**: Multi-factor coercion detection with CrPC 41 / BNSS 35 legal truth grounding.
   - **Live Mobile Judge Bench (`/try`)**: Instant QR codes for smartphones and 1-click adversary scenarios.
 
@@ -97,7 +97,7 @@
   - **UPI Rakshak AI**: **$40 / month** on standard commodity CPU (sub-$0.000002 per scan).
 - **Integration Vectors**:
   - **Direct Consumer PWA**: Zero installation, works on any smartphone browser.
-  - **SMS / WhatsApp Chatbot**: Automated triage bot for community groups and elder societies.
+  - **SMS / Messaging Chatbot**: Automated triage bot for community groups and elder societies (Telegram active; WhatsApp planned).
   - **In-App FinTech SDK**: On-device C++/WASM library embeddable directly inside NPCI apps, PhonePe, Google Pay, or Paytm.
   - **Law Enforcement Portal**: CFCFRMS batch triage for state cybercrime police cells.
 
