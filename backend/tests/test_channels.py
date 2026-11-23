@@ -72,7 +72,8 @@ def test_channel_process_text_and_privacy_db():
         channel="telegram",
         sender_id=raw_phone,
         content_type="text",
-        content=msg
+        content=msg,
+        data_source="test_traffic"
     ))
 
     assert res["verdict"] in ["HIGH RISK", "SUSPICIOUS"]
@@ -86,6 +87,7 @@ def test_channel_process_text_and_privacy_db():
         assert row is not None
         assert row.channel == "telegram"
         assert row.sender_hash == sender_hash
+        assert row.data_source == "test_traffic"
         # Raw phone number must be masked in raw_input_masked
         assert raw_phone not in row.raw_input_masked
         assert "[PHONE_REDACTED]" in row.raw_input_masked or "******" in row.raw_input_masked

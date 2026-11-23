@@ -67,10 +67,12 @@ class TextAnalysisRequest(BaseModel):
     text: str = Field(min_length=1, max_length=10000)
     language: Optional[str] = "auto"
     save_history: bool = True
+    data_source: Optional[str] = "live_user"
 
 class UrlAnalysisRequest(BaseModel):
     url: str = Field(min_length=3, max_length=2048)
     save_history: bool = True
+    data_source: Optional[str] = "live_user"
 
 class BatchAnalysisRequest(BaseModel):
     items: List[TextAnalysisRequest] = Field(min_length=1, max_length=50)

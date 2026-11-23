@@ -47,6 +47,7 @@ def analyze_text(req: TextAnalysisRequest, db: Session = Depends(get_db)):
 
     # 4. Persistence (if user consented to history logging)
     if req.save_history:
+        data_src = getattr(req, "data_source", "live_user") or "live_user"
         record = AnalysisHistory(
             input_type="text",
             raw_input_masked=masked,
@@ -56,7 +57,8 @@ def analyze_text(req: TextAnalysisRequest, db: Session = Depends(get_db)):
             language=report.language,
             evidence_json=json.dumps([e.model_dump() for e in report.evidence]),
             actions_json=json.dumps(report.recommended_actions),
-            is_simulated=False
+            is_simulated=False,
+            data_source=data_src
         )
         db.add(record)
         db.commit()
@@ -88,6 +90,7 @@ def analyze_url(req: UrlAnalysisRequest, db: Session = Depends(get_db)):
     report.masked_input = masked
 
     if req.save_history:
+        data_src = getattr(req, "data_source", "live_user") or "live_user"
         record = AnalysisHistory(
             input_type="url",
             raw_input_masked=masked,
@@ -97,7 +100,8 @@ def analyze_url(req: UrlAnalysisRequest, db: Session = Depends(get_db)):
             language=report.language,
             evidence_json=json.dumps([e.model_dump() for e in report.evidence]),
             actions_json=json.dumps(report.recommended_actions),
-            is_simulated=False
+            is_simulated=False,
+            data_source=data_src
         )
         db.add(record)
         db.commit()
@@ -111,6 +115,7 @@ async def analyze_image(
     file: UploadFile = File(...),
     save_history: bool = Form(True),
     language: str = Form("auto"),
+    data_source: str = Form("live_user"),
     db: Session = Depends(get_db)
 ):
     # Validate MIME type
@@ -161,7 +166,8 @@ async def analyze_image(
             language=report.language,
             evidence_json=json.dumps([e.model_dump() for e in report.evidence]),
             actions_json=json.dumps(report.recommended_actions),
-            is_simulated=False
+            is_simulated=False,
+            data_source=data_source or "live_user"
         )
         db.add(record)
         db.commit()

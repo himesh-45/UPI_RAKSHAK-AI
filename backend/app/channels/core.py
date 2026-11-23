@@ -225,7 +225,8 @@ async def process_channel_submission(
     content_type: str,
     content: Union[str, bytes],
     language_hint: Optional[str] = None,
-    is_group: bool = False
+    is_group: bool = False,
+    data_source: str = "live_user"
 ) -> Dict[str, Any]:
     """
     Channel-agnostic entry point for Telegram and WhatsApp messages.
@@ -416,7 +417,8 @@ async def process_channel_submission(
                 language=report.language,
                 evidence_json=json.dumps([e.model_dump() for e in report.evidence]),
                 actions_json=json.dumps(report.recommended_actions),
-                is_simulated=False
+                is_simulated=(data_source != "live_user"),
+                data_source=data_source
             )
             db.add(record)
             db.commit()

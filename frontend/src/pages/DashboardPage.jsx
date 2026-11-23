@@ -14,7 +14,7 @@ import AdminModerationPanel from '../components/AdminModerationPanel';
 export default function DashboardPage({ token, onOpenLogin }) {
   const { t } = useTranslation();
   const [stats, setStats] = useState(null);
-  const [scope, setScope] = useState('all'); // 'all', 'live', 'simulated'
+  const [scope, setScope] = useState('live'); // 'live' (default: Live users only), 'simulated', 'all'
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -22,7 +22,8 @@ export default function DashboardPage({ token, onOpenLogin }) {
     setLoading(true);
     setError('');
     try {
-      const data = await getDashboardStats(selectedScope);
+      const dataSrc = selectedScope === 'live' ? 'live_user' : (selectedScope === 'simulated' ? 'demo_seed' : 'all');
+      const data = await getDashboardStats(selectedScope, dataSrc);
       setStats(data);
     } catch (err) {
       setError(err.message || 'Failed to load intelligence metrics');
@@ -96,16 +97,6 @@ export default function DashboardPage({ token, onOpenLogin }) {
         <div className="flex items-center gap-2">
           <div className="flex items-center bg-navy p-1 rounded-xl border border-border text-xs font-bold">
             <button
-              onClick={() => setScope('all')}
-              className={`px-3 py-1.5 rounded-lg transition ${
-                scope === 'all'
-                  ? 'bg-gradient-to-r from-gold-500 to-gold-400 text-navy-deep shadow-xs'
-                  : 'text-ink-muted hover:text-ink'
-              }`}
-            >
-              {t('dashboard.filterAll')}
-            </button>
-            <button
               onClick={() => setScope('live')}
               className={`px-3 py-1.5 rounded-lg transition ${
                 scope === 'live'
@@ -113,7 +104,7 @@ export default function DashboardPage({ token, onOpenLogin }) {
                   : 'text-ink-muted hover:text-ink'
               }`}
             >
-              {t('dashboard.filterLive')}
+              Live users only
             </button>
             <button
               onClick={() => setScope('simulated')}
@@ -123,7 +114,17 @@ export default function DashboardPage({ token, onOpenLogin }) {
                   : 'text-ink-muted hover:text-ink'
               }`}
             >
-              {t('dashboard.filterSimulated')}
+              Demo Seed
+            </button>
+            <button
+              onClick={() => setScope('all')}
+              className={`px-3 py-1.5 rounded-lg transition ${
+                scope === 'all'
+                  ? 'bg-gradient-to-r from-gold-500 to-gold-400 text-navy-deep shadow-xs'
+                  : 'text-ink-muted hover:text-ink'
+              }`}
+            >
+              {t('dashboard.filterAll')}
             </button>
           </div>
 

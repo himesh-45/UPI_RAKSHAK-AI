@@ -1,10 +1,10 @@
 const BASE_URL = '/api';
 
-export async function analyzeText(text, language = 'auto', saveHistory = true) {
+export async function analyzeText(text, language = 'auto', saveHistory = true, dataSource = 'live_user') {
   const res = await fetch(`${BASE_URL}/analyze/text`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ text, language, save_history: saveHistory })
+    body: JSON.stringify({ text, language, save_history: saveHistory, data_source: dataSource })
   });
   if (!res.ok) {
     const err = await res.json().catch(() => ({}));
@@ -13,11 +13,11 @@ export async function analyzeText(text, language = 'auto', saveHistory = true) {
   return res.json();
 }
 
-export async function analyzeUrl(url, saveHistory = true) {
+export async function analyzeUrl(url, saveHistory = true, dataSource = 'live_user') {
   const res = await fetch(`${BASE_URL}/analyze/url`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ url, save_history: saveHistory })
+    body: JSON.stringify({ url, save_history: saveHistory, data_source: dataSource })
   });
   if (!res.ok) {
     const err = await res.json().catch(() => ({}));
@@ -97,8 +97,8 @@ export async function markAdminAlertsRead() {
   return res.json();
 }
 
-export async function getDashboardStats(scope = 'all') {
-  const res = await fetch(`${BASE_URL}/dashboard/stats?scope=${scope}`);
+export async function getDashboardStats(scope = 'all', dataSource = 'live_user') {
+  const res = await fetch(`${BASE_URL}/dashboard/stats?scope=${scope}&data_source=${dataSource}`);
   if (!res.ok) {
     const err = await res.json().catch(() => ({}));
     throw new Error(err.detail || 'Failed to load dashboard statistics');

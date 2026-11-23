@@ -72,7 +72,8 @@ export default function JudgeTryPage() {
         body: JSON.stringify({
           text: testItem.text,
           language: 'auto',
-          save_history: false
+          save_history: false,
+          data_source: 'test_traffic'
         })
       });
       if (!res.ok) throw new Error('Analysis failed');

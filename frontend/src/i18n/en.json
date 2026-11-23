@@ -54,7 +54,7 @@
     "totalAnalyses": "Total Analyses",
     "safeCount": "Safe Verdicts",
     "suspiciousCount": "Suspicious Alerts",
-    "highRiskCount": "High Risk Blocked",
+    "highRiskCount": "High-risk flagged",
     "categoryDist": "Scam Category Distribution",
     "languageBreakdown": "Language Breakdown",
     "riskScoreDist": "Risk Score Distribution",

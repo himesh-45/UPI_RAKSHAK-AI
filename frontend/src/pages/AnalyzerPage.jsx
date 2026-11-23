@@ -644,70 +644,7 @@ export default function AnalyzerPage() {
 
       </div>
 
-      {/* ------------------------------------------------------------------ */}
-      {/* 3. QUICK STAT COUNTERS (ROW OF 4 MATCHING MOCKUP)                   */}
-      {/* ------------------------------------------------------------------ */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        {/* Card 1: Messages Scanned */}
-        <div className="glass-card rounded-2xl p-4 border border-border flex items-center justify-between gap-3">
-          <div className="space-y-1">
-            <span className="text-2xl font-black text-gold-400 font-mono">1,248</span>
-            <p className="text-xs text-ink-muted font-semibold">Messages Scanned</p>
-            <span className="text-[11px] font-bold text-teal flex items-center gap-0.5">
-              <TrendingUp className="w-3 h-3" /> ↑ 12%
-            </span>
-          </div>
-          {/* Mini Sparkline SVG */}
-          <svg className="w-16 h-8 text-teal stroke-current shrink-0" fill="none" viewBox="0 0 64 32">
-            <path d="M0 24 Q16 10 32 18 T64 6" strokeWidth="2.5" strokeLinecap="round" />
-          </svg>
-        </div>
 
-        {/* Card 2: Threats Detected */}
-        <div className="glass-card rounded-2xl p-4 border border-border flex items-center justify-between gap-3">
-          <div className="space-y-1">
-            <span className="text-2xl font-black text-verdict-danger font-mono">92</span>
-            <p className="text-xs text-ink-muted font-semibold">Threats Detected</p>
-            <span className="text-[11px] font-bold text-verdict-danger flex items-center gap-0.5">
-              <TrendingUp className="w-3 h-3" /> ↑ 8%
-            </span>
-          </div>
-          {/* Mini Sparkline SVG */}
-          <svg className="w-16 h-8 text-verdict-danger stroke-current shrink-0" fill="none" viewBox="0 0 64 32">
-            <path d="M0 28 Q16 20 32 12 T64 4" strokeWidth="2.5" strokeLinecap="round" />
-          </svg>
-        </div>
-
-        {/* Card 3: Links Analysed */}
-        <div className="glass-card rounded-2xl p-4 border border-border flex items-center justify-between gap-3">
-          <div className="space-y-1">
-            <span className="text-2xl font-black text-teal font-mono">421</span>
-            <p className="text-xs text-ink-muted font-semibold">Links Analysed</p>
-            <span className="text-[11px] font-bold text-teal flex items-center gap-0.5">
-              <TrendingUp className="w-3 h-3" /> ↑ 15%
-            </span>
-          </div>
-          {/* Mini Sparkline SVG */}
-          <svg className="w-16 h-8 text-teal stroke-current shrink-0" fill="none" viewBox="0 0 64 32">
-            <path d="M0 26 Q16 8 32 20 T64 8" strokeWidth="2.5" strokeLinecap="round" />
-          </svg>
-        </div>
-
-        {/* Card 4: Safety Score */}
-        <div className="glass-card rounded-2xl p-4 border border-border flex items-center justify-between gap-3">
-          <div className="space-y-1">
-            <span className="text-2xl font-black text-verdict-safe font-mono">95%</span>
-            <p className="text-xs text-ink-muted font-semibold">Safety Score</p>
-            <span className="text-[11px] font-bold text-verdict-safe flex items-center gap-1">
-              <ShieldCheck className="w-3 h-3" /> Verified Healthy
-            </span>
-          </div>
-          {/* Mini Sparkline SVG */}
-          <svg className="w-16 h-8 text-verdict-safe stroke-current shrink-0" fill="none" viewBox="0 0 64 32">
-            <path d="M0 22 Q16 16 32 10 T64 2" strokeWidth="2.5" strokeLinecap="round" />
-          </svg>
-        </div>
-      </div>
 
       {/* ------------------------------------------------------------------ */}
       {/* 4. BOTTOM 3 CYBER GRID CARDS (RECENT SCANS, SCAM TYPES, TIP)       */}

@@ -53,7 +53,8 @@ async def main():
         content_type=content_type,
         content=content,
         language_hint=args.lang,
-        is_group=args.group
+        is_group=args.group,
+        data_source="test_traffic"
     )
 
     print("\n--- OUTBOUND TELEGRAM MESSAGE ---\n")
