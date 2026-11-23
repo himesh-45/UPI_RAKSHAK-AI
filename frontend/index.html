@@ -10,10 +10,20 @@
     <script>
       (function() {
         try {
+          var stored = localStorage.getItem('theme');
+          var isDark = stored ? (stored === 'dark') : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
           var html = document.documentElement;
-          html.classList.add('dark');
-          html.classList.remove('light');
-          localStorage.setItem('theme', 'dark');
+          if (isDark) {
+            html.classList.add('dark');
+            html.classList.remove('light');
+            var meta = document.querySelector('meta[name="theme-color"]');
+            if (meta) meta.setAttribute('content', '#050A18');
+          } else {
+            html.classList.remove('dark');
+            html.classList.add('light');
+            var meta = document.querySelector('meta[name="theme-color"]');
+            if (meta) meta.setAttribute('content', '#FAF7F0');
+          }
         } catch (e) {}
       })();
     </script>

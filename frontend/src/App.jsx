@@ -24,14 +24,36 @@ function AppContent() {
   const [loginModalOpen, setLoginModalOpen] = useState(false);
   const [llmModalOpen, setLlmModalOpen] = useState(false);
 
-  // Enforce Cyber Dark Theme permanently across the entire application
+  // Theme Management (Instant pre-paint switch, persistence, meta theme-color)
+  const [theme, setTheme] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const stored = localStorage.getItem('theme');
+      if (stored) return stored;
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'dark';
+    }
+    return 'dark';
+  });
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+  };
+
   useEffect(() => {
-    document.documentElement.classList.add('dark');
-    document.documentElement.classList.remove('light');
-    localStorage.setItem('theme', 'dark');
-    const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute('content', '#050A18');
-  }, []);
+    const root = document.documentElement;
+    if (theme === 'dark') {
+      root.classList.add('dark');
+      root.classList.remove('light');
+      localStorage.setItem('theme', 'dark');
+      const meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.setAttribute('content', '#050A18');
+    } else {
+      root.classList.remove('dark');
+      root.classList.add('light');
+      localStorage.setItem('theme', 'light');
+      const meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.setAttribute('content', '#FAF7F0');
+    }
+  }, [theme]);
 
   const handleLoginSuccess = (newToken) => {
     setToken(newToken);
@@ -49,6 +71,8 @@ function AppContent() {
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         token={token}
+        theme={theme}
+        toggleTheme={toggleTheme}
         onOpenLogin={() => setLoginModalOpen(true)}
         onLogout={handleLogout}
         onOpenLlmModal={() => setLlmModalOpen(true)}

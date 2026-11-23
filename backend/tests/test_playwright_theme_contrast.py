@@ -33,7 +33,7 @@ class SpaHandler(SimpleHTTPRequestHandler):
         return super().do_GET()
 
 def test_theme_wcag_contrast_and_elements():
-    """Verify permanent cyber dark theme contrast compliance, absence of toggle button, and key element visibility."""
+    """Verify dark and light theme WCAG AA contrast compliance and instant theme toggling."""
     dist_dir = os.path.abspath("frontend/dist")
     if not os.path.exists(dist_dir):
         pytest.skip("frontend/dist does not exist. Run npm run build first.")
@@ -52,39 +52,57 @@ def test_theme_wcag_contrast_and_elements():
             page.goto(f"http://127.0.0.1:{port}/", wait_until="networkidle", timeout=15000)
             page.wait_for_timeout(300)
 
-            # Ensure document has class 'dark'
-            has_dark = page.evaluate("document.documentElement.classList.contains('dark')")
-            assert has_dark, "Document element should have class 'dark' for permanent dark mode"
-
-            # 1. Headline visibility and contrast (Cyber Dark Theme)
+            # 1. Dark Mode Contrast Check
             h1 = page.locator("h1")
             assert h1.is_visible()
-            body_bg = page.evaluate("window.getComputedStyle(document.body).backgroundColor")
-            h1_color = page.evaluate("window.getComputedStyle(document.querySelector('h1')).color")
-            sub_color = page.evaluate("window.getComputedStyle(document.querySelector('h1 + p')).color")
+            body_bg_dark = page.evaluate("window.getComputedStyle(document.body).backgroundColor")
+            h1_color_dark = page.evaluate("window.getComputedStyle(document.querySelector('h1')).color")
+            sub_color_dark = page.evaluate("window.getComputedStyle(document.querySelector('h1 + p')).color")
 
-            ratio_h1 = contrast_ratio(parse_rgb(h1_color), parse_rgb(body_bg))
-            ratio_sub = contrast_ratio(parse_rgb(sub_color), parse_rgb(body_bg))
+            ratio_h1_dark = contrast_ratio(parse_rgb(h1_color_dark), parse_rgb(body_bg_dark))
+            ratio_sub_dark = contrast_ratio(parse_rgb(sub_color_dark), parse_rgb(body_bg_dark))
 
-            assert ratio_h1 >= 3.0, f"Dark H1 contrast {ratio_h1:.2f} failed 3.0:1 requirement"
-            assert ratio_sub >= 4.5, f"Dark Subtitle contrast {ratio_sub:.2f} failed 4.5:1 requirement"
+            assert ratio_h1_dark >= 3.0, f"Dark H1 contrast {ratio_h1_dark:.2f} failed 3.0:1 requirement"
+            assert ratio_sub_dark >= 4.5, f"Dark Subtitle contrast {ratio_sub_dark:.2f} failed 4.5:1 requirement"
 
-            # 2. Check that the theme toggle button has been removed
-            assert page.locator("button[aria-label*='light mode']").count() == 0, "Theme toggle button should be removed"
-            assert page.locator("button[aria-label*='dark mode']").count() == 0, "Theme toggle button should be removed"
-            assert page.locator("button:has(svg.lucide-sun)").count() == 0, "Sun icon should be removed"
-            assert page.locator("button:has(svg.lucide-moon)").count() == 0, "Moon icon should be removed"
+            # 2. Check Theme Toggle Button is present and functional
+            toggle_btn = page.locator("button[aria-label*='mode']").first
+            assert toggle_btn.is_visible(), "Theme toggle button must be present in Navbar"
 
-            # 3. Check idle gauge state
+            # Toggle to Light Mode
+            toggle_btn.click()
+            page.wait_for_timeout(300)
+
+            # Ensure document now has 'light' class
+            has_light = page.evaluate("document.documentElement.classList.contains('light')")
+            assert has_light, "Document element should have class 'light' after toggling"
+
+            body_bg_light = page.evaluate("window.getComputedStyle(document.body).backgroundColor")
+            h1_color_light = page.evaluate("window.getComputedStyle(document.querySelector('h1')).color")
+            sub_color_light = page.evaluate("window.getComputedStyle(document.querySelector('h1 + p')).color")
+
+            ratio_h1_light = contrast_ratio(parse_rgb(h1_color_light), parse_rgb(body_bg_light))
+            ratio_sub_light = contrast_ratio(parse_rgb(sub_color_light), parse_rgb(body_bg_light))
+
+            assert ratio_h1_light >= 3.0, f"Light H1 contrast {ratio_h1_light:.2f} failed 3.0:1 requirement"
+            assert ratio_sub_light >= 4.5, f"Light Subtitle contrast {ratio_sub_light:.2f} failed 4.5:1 requirement"
+
+            # 3. Toggle back to Dark Mode
+            toggle_btn.click()
+            page.wait_for_timeout(300)
+            has_dark = page.evaluate("document.documentElement.classList.contains('dark')")
+            assert has_dark, "Document element should return to class 'dark'"
+
+            # 4. Check idle gauge state
             assert page.locator("text=Waiting for input").first.is_visible()
             assert page.locator("text=--").first.is_visible()
 
-            # 4. Check hero CTA buttons
+            # 5. Check hero CTA buttons
             assert page.locator("button:has-text('Check a message')").is_visible()
             assert page.locator("button:has-text('How accurate is this?')").is_visible()
             assert page.locator("div.pt-2 >> text=Why Not Just Use an LLM?").count() == 0
 
-            # 5. Check factual coverage list
+            # 6. Check factual coverage list
             assert page.locator("text=Multilingual NLP classifier").first.is_visible()
             assert page.locator("text=7 Engines Active").count() == 0
 

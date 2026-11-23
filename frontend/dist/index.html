@@ -10,10 +10,20 @@
     <script>
       (function() {
         try {
+          var stored = localStorage.getItem('theme');
+          var isDark = stored ? (stored === 'dark') : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
           var html = document.documentElement;
-          html.classList.add('dark');
-          html.classList.remove('light');
-          localStorage.setItem('theme', 'dark');
+          if (isDark) {
+            html.classList.add('dark');
+            html.classList.remove('light');
+            var meta = document.querySelector('meta[name="theme-color"]');
+            if (meta) meta.setAttribute('content', '#050A18');
+          } else {
+            html.classList.remove('dark');
+            html.classList.add('light');
+            var meta = document.querySelector('meta[name="theme-color"]');
+            if (meta) meta.setAttribute('content', '#FAF7F0');
+          }
         } catch (e) {}
       })();
     </script>
@@ -21,8 +31,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+Devanagari:wght@400;600;700&family=Noto+Sans+Telugu:wght@400;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
     <title>UPI Rakshak AI — Multilingual Scam Detection & Prevention</title>
-    <script type="module" crossorigin src="/assets/index-DHlb4CHx.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-CtNcauwO.css">
+    <script type="module" crossorigin src="/assets/index-BhB4nTZ2.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BtXzw8iT.css">
   </head>
   <body class="min-h-screen antialiased selection:bg-[#35D0C8] selection:text-[#050A18]">
     <div id="root"></div>

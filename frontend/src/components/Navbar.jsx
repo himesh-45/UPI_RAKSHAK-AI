@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Shield, Sparkles, BarChart3, HelpCircle, Lock, LogOut, BookOpen, Scale, QrCode, MoreHorizontal, ChevronDown, Zap } from 'lucide-react';
+import { Shield, Sparkles, BarChart3, HelpCircle, Lock, LogOut, BookOpen, Scale, QrCode, MoreHorizontal, ChevronDown, Zap, Sun, Moon } from 'lucide-react';
 import { useTranslation } from '../i18n/useTranslation';
 import AdminAlarmBell from './AdminAlarmBell';
 
@@ -7,6 +7,8 @@ export default function Navbar({
   activeTab,
   setActiveTab,
   token,
+  theme,
+  toggleTheme,
   onOpenLogin,
   onLogout,
   onOpenLlmModal
@@ -257,6 +259,23 @@ export default function Navbar({
                 తెలుగు
               </button>
             </div>
+
+            {/* Theme Toggle Button */}
+            {toggleTheme && (
+              <button
+                type="button"
+                onClick={toggleTheme}
+                className="p-1.5 rounded-xl bg-navy hover:bg-navy-raised border border-border text-ink-muted hover:text-ink transition flex items-center justify-center cursor-pointer shadow-xs"
+                title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+                aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+              >
+                {theme === 'dark' ? (
+                  <Sun className="w-4 h-4 text-gold-400 hover:rotate-45 transition-transform" />
+                ) : (
+                  <Moon className="w-4 h-4 text-teal hover:-rotate-12 transition-transform" />
+                )}
+              </button>
+            )}
           </div>
         </div>
       </header>
