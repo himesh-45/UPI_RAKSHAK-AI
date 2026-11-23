@@ -68,7 +68,7 @@ function AppContent() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-navy-deep text-ink transition-colors duration-200">
+    <div className="min-h-screen flex flex-col bg-navy-deep text-ink transition-colors duration-200 overflow-x-hidden">
       <Navbar
         activeTab={activeTab}
         setActiveTab={setActiveTab}

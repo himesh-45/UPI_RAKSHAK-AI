@@ -87,6 +87,9 @@ export default function VpaCheckTab() {
           </label>
           <input
             type="text"
+            autoCapitalize="none"
+            autoCorrect="off"
+            spellCheck="false"
             value={vpa}
             onChange={(e) => setVpa(e.target.value)}
             placeholder="e.g. name@oksbi, phonepe-support@ybl, 9876543210@paytm"
@@ -114,6 +117,8 @@ export default function VpaCheckTab() {
             </label>
             <input
               type="number"
+              inputMode="numeric"
+              min="0"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
               placeholder="e.g. 5000"

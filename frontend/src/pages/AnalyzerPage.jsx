@@ -359,7 +359,11 @@ export default function AnalyzerPage() {
                   Suspicious Website / Payment Link URL
                 </span>
                 <input
-                  type="text"
+                  type="url"
+                  inputMode="url"
+                  autoCapitalize="none"
+                  autoCorrect="off"
+                  spellCheck="false"
                   value={urlInput}
                   onChange={(e) => setUrlInput(e.target.value)}
                   placeholder="e.g. https://sbi-kyc-verification.top/login or http://192.168.1.10/pay"
