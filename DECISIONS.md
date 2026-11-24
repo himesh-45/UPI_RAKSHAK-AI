@@ -332,3 +332,10 @@ This document records technical and design decisions made to keep the system rob
   4. *Render Cloud Deployment Guide*: Added **Option D: Render Cloud Deployment (Full-Stack Single Web Service)** detailing automated setup using `build.sh`, `render.yaml`, `Procfile`, and runtime environment configuration for admin authentication.
   5. *UI Idle Gauge State Test Alignment*: Fixed `test_playwright_theme_contrast.py` to match the improved truthful idle label (`Waiting for input`).
 - **Rationale**: Ensures complete transparency, scientific truthfulness, and operational clarity for evaluators, judges, and developers inspecting the project repository.
+
+### Decision 78: Publication of High-Fidelity Comprehensive Project Documentation in PDF Format
+- **Decision**: Implemented an automated headless Chromium document publication script (`backend/app/scripts/generate_pdf_docs.py`) generating a comprehensive 8-page technical documentation manual in PDF format (`docs/UPI_RAKSHAK_AI_DOCUMENTATION.pdf`):
+  1. *Complete Systems Coverage*: Covers Executive Summary, System Architecture, Deep Technical Breakdown of all 8 Detection Engines, 16 Fraud Categories, 5-Way Intent Router, PII Masking & Injection Immunity, Programmatic Empirical Benchmarks (Gold v1 / Gold v2), STRIDE Threat Modeling, 1930 Golden Hour Reporting, Local & Render Cloud Operations, and the full 234-test Automated Quality Gate Matrix.
+  2. *Print Typography & Layout*: Uses styled print media queries (`@page { size: A4 }`), running headers and footers with dynamic page numbering (`Page X of Y`), high-contrast typography, statutory callout containers, and structured architecture flowcharts.
+  3. *Zero Unsubstantiated Claims*: Fully compliant with `test_banned_phrases.py` and strict data truthfulness principles.
+- **Rationale**: Equips evaluators, enterprise security teams, and hackathon judges with a definitive, publication-ready PDF whitepaper for offline reading and regulatory review.
