@@ -94,7 +94,7 @@ def test_theme_wcag_contrast_and_elements():
             assert has_dark, "Document element should return to class 'dark'"
 
             # 4. Check idle gauge state
-            assert page.locator("text=Waiting for a message").first.is_visible()
+            assert page.locator("text=Waiting for input").first.is_visible()
             assert page.locator("text=--").first.is_visible()
 
             # 5. Check hero CTA buttons

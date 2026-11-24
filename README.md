@@ -9,13 +9,13 @@
 
 ## 📌 Key Highlights
 
-- **Multi-Engine Intelligence Fusion**: Fuses 7 independent detectors (Calibrated 15-Class NLP, Negation-Aware Rules, Static URL Scanner, OpenCV QR & UPI URI Parser, RapidOCR/Tesseract, Digital Arrest Extortion Engine, and 93-Entry Regulatory RAG).
+- **Multi-Engine Intelligence Fusion**: Fuses 8 independent detectors (Calibrated Multilingual NLP, Negation-Aware Rules, Callback Phishing Detector, Static URL Scanner, OpenCV QR & UPI URI Parser, RapidOCR/Tesseract, Digital Arrest Extortion Engine, and 93-Entry Regulatory RAG).
 - **Intent-Guided Conversational Assistant**: 5-way hybrid router (`ANALYZE`, `HOW_TO`, `EMERGENCY`, `SMALL_TALK`, `UNCLEAR`) that provides relevant guidance for citizen inquiries instead of treating every query as a scam. Strict no-verdict policy for informational queries, 9 human-reviewed procedures ([KB_REVIEW.md](docs/KB_REVIEW.md)), typo tolerance, and measured 98.05% intent accuracy on our 205-sample fictional test set.
 - **Trilingual Native Support**: Full UI, Voice, and Explainability in **English**, **Hindi (हिंदी)**, and **Telugu (తెలుగు)** (including Hinglish and Romanized Telugu / Telugish).
 - **Omnichannel Protection**: Real-time triage on Web PWA and **Telegram Bot** (`@upi_rakshak_bot`) with salted SHA-256 privacy and `/delete_data` right-to-be-forgotten. *(Note: WhatsApp integration is a planned future channel that requires Meta Business API approval).*
 - **Digital Arrest Coercion Detector**: Multi-vector interception of fake police/CBI video interrogation extortion, grounded in Indian statutory law (**CrPC Section 41 / BNSS Section 35**).
 - **Community Reputation Database**: Anti-poisoning consensus database (&ge; 2 reporters, 24h rate limits, 30-day half-life decay, immune bank handles) capped to protect against frivolous flags.
-- **Scientifically Defensible**: Evaluated on frozen 306-sample benchmark (Gold v1) and expanded 243-sample natural human dataset (Gold v2, including 105 legitimate messages). **98.55%–99.49% scam recall** with strictly validated low false positive rates (0.00% and 1.90%).
+- **Scientifically Defensible**: Evaluated on frozen 306-sample benchmark (Gold v1) and expanded 243-sample natural human dataset (Gold v2, including 105 legitimate messages). **97.83%–98.98% scam recall** with strictly validated low false positive rates (0.00% on Gold v1 and 0.95% on Gold v2).
 - **Judge Try Bench (`/try`)**: 1-click live mobile QR code testing, interactive adversarial scenarios, and printed technical handout.
 - **Sub-35ms Latency on CPU**: Tested under 650 concurrent requests with Locust (p50 = 32.22ms, p99 = 70.88ms, 0 errors).
 - **Golden Hour 1930 Citizen Complaint Generator**: Pre-formats technical evidence and suspect VPAs for instant submission to `cybercrime.gov.in`.
@@ -61,9 +61,20 @@ npm run dev
 docker compose up --build
 ```
 
-- **Web UI**: [http://localhost:5173](http://localhost:5173)
+### Option D: Render Cloud Deployment (Full-Stack Single Web Service)
+UPI Rakshak AI is pre-configured for automated deployment on [Render](https://render.com) using the root `build.sh` and `Procfile`:
+1. **Connect Repository**: Link your GitHub repository (`https://github.com/himesh-45/UPI_RAKSHAK-AI.git`).
+2. **Build Command**: `bash build.sh` (compiles React Vite frontend to `frontend/dist` and installs Python dependencies).
+3. **Start Command**: `uvicorn backend.app.main:app --host 0.0.0.0 --port $PORT`
+4. **Environment Variables**:
+   - `PYTHON_VERSION`: `3.11.9`
+   - `NODE_VERSION`: `20.18.0`
+   - `ADMIN_PASSWORD`: `<your-desired-password>` (or let the server generate a secure 16-character token logged at startup).
+   - `ADMIN_EMAIL`: `admin@upirakshak.ai`
+
+- **Web UI**: [http://localhost:5173](http://localhost:5173) (Local) or `https://<your-service>.onrender.com` (Render)
 - **Interactive API Docs**: [http://localhost:8000/docs](http://localhost:8000/docs)
-- **Admin Authentication**: Email `admin@upirakshak.ai`. Admin password is in backend/data/.admin_secret (generated on first run) or set via `ADMIN_PASSWORD` in `.env`.
+- **Admin Authentication**: Email `admin@upirakshak.ai`. Admin password is automatically generated and stored in `backend/data/.admin_secret` (or configured via `ADMIN_PASSWORD` in `.env` / Render environment).
 
 ---
 
@@ -77,8 +88,9 @@ docker compose up --build
              ▼                          ▼                          ▼
     [ NLP Classifier & ]       [ Static URL Scanner ]    [ Screenshot & QR Module ]
     [ Rule Safety Layer]       (Edit-dist, shorteners,   (RapidOCR / Tesseract,
-    (15 categories, TF-IDF,     Punycode, 88 bank stems,  UPI URI pa/pn/am/tn parser,
-     SOV syntax, negations)     zero network calls)       payee mismatch detection)
+    (16 categories, TF-IDF,     Punycode, 88 bank stems,  UPI URI pa/pn/am/tn parser,
+     SOV syntax, negations,     zero network calls)       payee mismatch detection)
+     callback scam detector)
              │                          │                          │
              └──────────────────────────┼──────────────────────────┘
                                         ▼
@@ -102,36 +114,47 @@ docker compose up --build
 
 ---
 
-## 🧪 Comprehensive Automated Testing (175+ Tests)
+## 🧪 Comprehensive Automated Testing (234 Tests)
 
 The repository ships with an exhaustive test suite covering all security assertions, regression gates, intent classifications, and mutation tests:
 
 ```bash
-.\.venv\Scripts\pytest.exe backend/tests -v
+.\.venv\Scripts\python.exe -m pytest backend/tests -v
 ```
 
 | Test Suite File | Coverage Scope | Status |
 | :--- | :--- | :---: |
-| `backend/tests/test_assistant_intent.py` | 5-way hybrid intent router, typos, emergency steps, RAG help, zero false verdicts | **PASSED (10/10)** |
-| `backend/tests/test_evaluation_report_consistency.py` | Programmatic gate validation (asserts metrics meet targets) | **PASSED (3/3)** |
-| `backend/tests/test_banned_phrases.py` | Strict prohibition against unsubstantiated marketing absolutes | **PASSED (1/1)** |
-| `backend/tests/test_mutations.py` | Prompt injection immunity, leetspeak, homoglyphs, zero-network audit | **PASSED (8/8)** |
-| `backend/tests/test_nlp_rules.py` | Multilingual NLP, SOV syntax, collect tricks, advisory negations | **PASSED (8/8)** |
+| `backend/tests/test_callback_scams.py` | Fake debit alert callback phishing, TOAD vectors, toll-free vs mobile checks, Hindi/Telugu | **PASSED (17/17)** |
+| `backend/tests/test_mutations.py` | Prompt injection resistance, leetspeak, homoglyphs, zero-network audit | **PASSED (42/42)** |
+| `backend/tests/test_extended_scenarios.py` | Full taxonomy classes, obfuscation normalizers, RAG retrieval | **PASSED (37/37)** |
+| `backend/tests/test_api.py` | REST API endpoints, JWT auth, analysis history, rate limits | **PASSED (12/12)** |
+| `backend/tests/test_assistant_intent.py` | 5-way hybrid intent router, typos, emergency steps, RAG help, zero false verdicts | **PASSED (11/11)** |
+| `backend/tests/test_assistant_generator.py` | PII redaction, prompt injection defense, groundedness verification, fallback circuits | **PASSED (11/11)** |
+| `backend/tests/test_assistant_tools.py` | Assistant tool calling, safety analyzer tool, safe/scam dispatch | **PASSED (9/9)** |
 | `backend/tests/test_url_scanner.py` | 88 bank stems, typosquatting, shorteners, punycode, TLDs | **PASSED (10/10)** |
-| `backend/tests/test_fusion.py` | Evidence fusion, score waterfall, elder mode, 1930 summaries | **PASSED (7/7)** |
-| `backend/tests/test_extended_scenarios.py` | All 15 taxonomy classes, obfuscation normalizers, RAG retrieval | **PASSED (37/37)** |
-| `backend/tests/test_channels.py` | Telegram webhooks, rate limits, sender hashing, purge | **PASSED (8/8)** |
+| `backend/tests/test_rag.py` | TF-IDF knowledge base cosine retrieval (93 entries, statutory metadata) | **PASSED (9/9)** |
+| `backend/tests/test_channels.py` | Telegram webhooks, rate limits, sender hashing, right-to-be-forgotten | **PASSED (8/8)** |
+| `backend/tests/test_nlp_rules.py` | Multilingual NLP, SOV syntax, collect tricks, advisory negations | **PASSED (8/8)** |
 | `backend/tests/test_community_reputation.py` | Consensus gating, 24h limits, decay, immune whitelists, disputes | **PASSED (7/7)** |
+| `backend/tests/test_fusion.py` | Evidence fusion, score waterfall, elder mode, 1930 summaries | **PASSED (6/6)** |
+| `backend/tests/test_admin.py` | Admin authentication, secret persistence, audit logs, 1930 export | **PASSED (6/6)** |
+| `backend/tests/test_phase2_features.py` | Pre-payment VPA safe-checks, batch text analysis, feedback loop | **PASSED (6/6)** |
+| `backend/tests/test_qr_ocr.py` | QR payment URI decoding, RapidOCR fallback pipeline | **PASSED (5/5)** |
 | `backend/tests/test_digital_arrest.py` | Law enforcement impersonation, virtual confinement, CrPC truth | **PASSED (4/4)** |
-| `backend/tests/test_packaging.py` | Submission zip verification (no secrets, no .db, no venvs) | **PASSED (2/2)** |
-| `backend/tests/test_api.py` | REST API endpoints, JWT auth, analysis history, rate limits | **PASSED (11/11)** |
-| `backend/tests/test_qr_ocr.py` | QR payment URI decoding, RapidOCR fallback pipeline | **PASSED (6/6)** |
 | `backend/tests/test_assistant.py` | Trilingual safety chat assistant, vernacular queries | **PASSED (4/4)** |
 | `backend/tests/test_masking.py` | PII regex redaction (Indian phones, card numbers, OTPs) | **PASSED (4/4)** |
-| `backend/tests/test_phase2_features.py` | Pre-payment VPA safe-checks, batch text analysis, feedback loop | **PASSED (6/6)** |
+| `backend/tests/test_evaluation_report_consistency.py` | Programmatic gate validation (asserts metrics meet targets) | **PASSED (4/4)** |
+| `backend/tests/test_banned_phrases.py` | Strict prohibition against unsubstantiated marketing absolutes | **PASSED (2/2)** |
+| `backend/tests/test_credential_hygiene.py` | Prevention of hardcoded secrets, API tokens, or private keys | **PASSED (2/2)** |
+| `backend/tests/test_demo_docs_consistency.py` | Asserts pitch docs agree with actual measured evaluation metrics | **PASSED (2/2)** |
+| `backend/tests/test_packaging.py` | Submission zip verification (no secrets, no .db, no venvs) | **PASSED (2/2)** |
+| `backend/tests/test_playwright_theme_contrast.py` | WCAG AA contrast compliance and light/dark theme toggling | **PASSED (1/1)** |
+| `backend/tests/test_playwright_responsive.py` | Cross-device viewport layout stability without horizontal overflow | **PASSED (1/1)** |
+| `backend/tests/test_playwright_e2e.py` | End-to-end full demo flow execution | **PASSED (1/1)** |
 | `backend/tests/test_health.py` | FastAPI health check & engine readiness check | **PASSED (1/1)** |
-| `backend/tests/test_rag.py` | TF-IDF knowledge base cosine retrieval (93 entries) | **PASSED (4/4)** |
-| **Total Automated Tests** | **Full Unit, Integration, Mutation, Security, Intent, and Packaging Coverage** | **175+ / 175+ PASSED** |
+| `backend/tests/test_url_model_domain_disjoint.py` | Strict disjoint domain split validation for URL model | **PASSED (1/1)** |
+| `backend/tests/test_submission_packaging.py` | Submission package integrity checks | **PASSED (1/1)** |
+| **Total Automated Tests** | **Full Unit, Integration, Mutation, Security, Intent, and Packaging Coverage** | **234 / 234 PASSED** |
 
 ---
 
@@ -141,17 +164,17 @@ All metrics are evaluated programmatically via `backend.app.scripts.evaluate_mod
 
 | Evaluation Gate | Target Benchmark | Measured (Frozen Gold v1) | Measured (Natural Gold v2) | Gate Status |
 | :--- | :---: | :---: | :---: | :---: |
-| **Risk Fusion Scam Recall** | >= 95.0% | **99.49%** (195/196) | **98.55%** (136/138) | **PASSED** |
-| **Legitimate False Positive Rate (FPR)** | <= 3.0% | **0.00%** (0/110) | **1.90%** (2/105) | **PASSED** |
-| **15-Class NLP Macro-F1** | >= 0.8500 | **0.8994** | **0.8624** | **PASSED** |
-| **Expected Calibration Error (ECE)** | < 0.1000 | **0.0992** | **0.1206** | **v1 PASSED / v2 FAILED** (Honest) |
+| **Risk Fusion Scam Recall** | >= 95.0% | **98.98%** (194/196) | **97.83%** (135/138) | **PASSED** |
+| **Legitimate False Positive Rate (FPR)** | <= 3.0% | **0.00%** (0/110) | **0.95%** (1/105) | **PASSED** |
+| **15-Class NLP Macro-F1** | >= 0.8500 | **0.8810** | **0.8233** | **v1 PASSED / v2 FAILED** (Honest) |
+| **Expected Calibration Error (ECE)** | < 0.1000 | **0.0601** | **0.1089** | **v1 PASSED / v2 FAILED** (Honest) |
 | **Static URL Scanner Phishing Recall** | >= 80.0% | **82.00%** (Real OpenPhish) | **98.60%** (Adversarial) | **PASSED** |
 | **Static URL Scanner Benign FPR** | <= 3.0% | **1.60%** (Tranco Top-1000) | **1.12%** (Disjoint Benign) | **PASSED** |
 | **Single-Thread CPU Latency (p50)** | < 40 ms | **32.22 ms** | **32.22 ms** | **PASSED** |
 
 ---
 
-## 🔍 The 15 Detected Fraud Categories
+## 🔍 The 16 Detected Fraud & Communication Categories
 
 1. **Fake Bank KYC Phishing**: Coercive account suspension ultimatums.
 2. **Electricity Disconnection Scam**: Power cut threats directing contact to personal mobile numbers.
@@ -167,7 +190,8 @@ All metrics are evaluated programmatically via `backend.app.scripts.evaluate_mod
 12. **Courier Narcotics & Digital Arrest**: Police impersonation via Skype alleging contraband parcels.
 13. **OLX / Marketplace QR Scam**: Fake army buyers claiming to "scan QR to receive advance payment".
 14. **Accidental Transfer Reversal Scam**: Claims of wrongly sent money demanding refund to different VPA.
-15. **Legitimate Notifications**: Genuine bank transaction debits and verified safety advisories (*"NEVER share OTP"*).
+15. **Fake Debit Alert Callback Phishing**: Telephone-Oriented Attack Delivery (TOAD) urging calls to fake support.
+16. **Legitimate Notifications**: Genuine bank transaction debits and verified safety advisories (*"NEVER share OTP"*).
 
 ---
 
