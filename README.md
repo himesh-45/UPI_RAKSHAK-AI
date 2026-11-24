@@ -1,214 +1,338 @@
-# 🛡️ UPI Rakshak AI (यूपीआई रक्षक / యూపీఐ రక్షక్)
+<div align="center">
 
-> **Real-Time, Multilingual (English, Hindi, Telugu) Digital Payment Scam Detection & Golden-Hour Prevention Platform.**
->
-> ⚡ **Edge Execution**: Core scam detection engine operates without internet access or external API keys (~32 ms median text inference on AMD Ryzen AI 5 340 CPU, ~100 ms with SQLite audit logging). Conversational bots require internet for webhooks.  
-> ⚖️ **Evidence-Based Multi-Signal Fusion**: Verdicts stem from independent mathematical detectors, NOT by asking an LLM "is this a scam?".
+# 🛡️ UPI Rakshak AI
+### यूपीआई रक्षक · యూపీఐ రక్షక్
+
+**Your digital payment safety shield: paste a suspicious message, link, screenshot or QR code, and get a clear verdict, the evidence behind it, and what to do next, in English, Hindi and Telugu.**
+
+[![Live Demo](https://img.shields.io/badge/Live_Demo-upi--rakshak--ai.onrender.com-1FB5AD?style=for-the-badge)](https://upi-rakshak-ai.onrender.com)
+[![Telegram Bot](https://img.shields.io/badge/Telegram-@upi__rakshak__bot-26A5E4?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/upi_rakshak_bot)
+[![Judge Bench](https://img.shields.io/badge/Judge_Bench-/try-D9A441?style=for-the-badge)](https://upi-rakshak-ai.onrender.com/try)
+
+![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-backend-009688?logo=fastapi&logoColor=white)
+![React](https://img.shields.io/badge/React-Vite_+_Tailwind-61DAFB?logo=react&logoColor=black)
+![Tests](https://img.shields.io/badge/automated_tests-234_passing-34D399)
+![Languages](https://img.shields.io/badge/languages-EN_·_HI_·_TE-F5C96A)
+
+**Theme: Cybersecurity, Fintech & Digital Trust**
+
+[Try it](#-try-it-in-60-seconds) · [How it works](#-how-it-works) · [Results](#-measured-results-and-how-to-read-them) · [Run it](#-quickstart) · [Limitations](#-honest-limitations) · [Docs](#-documentation)
+
+</div>
 
 ---
 
-## 📌 Key Highlights
+## 🎯 The problem
 
-- **Multi-Engine Intelligence Fusion**: Fuses 8 independent detectors (Calibrated Multilingual NLP, Negation-Aware Rules, Callback Phishing Detector, Static URL Scanner, OpenCV QR & UPI URI Parser, RapidOCR/Tesseract, Digital Arrest Extortion Engine, and 93-Entry Regulatory RAG).
-- **Intent-Guided Conversational Assistant**: 5-way hybrid router (`ANALYZE`, `HOW_TO`, `EMERGENCY`, `SMALL_TALK`, `UNCLEAR`) that provides relevant guidance for citizen inquiries instead of treating every query as a scam. Strict no-verdict policy for informational queries, 9 human-reviewed procedures ([KB_REVIEW.md](docs/KB_REVIEW.md)), typo tolerance, and measured 98.05% intent accuracy on our 205-sample fictional test set.
-- **Trilingual Native Support**: Full UI, Voice, and Explainability in **English**, **Hindi (हिंदी)**, and **Telugu (తెలుగు)** (including Hinglish and Romanized Telugu / Telugish).
-- **Omnichannel Protection**: Real-time triage on Web PWA and **Telegram Bot** (`@upi_rakshak_bot`) with salted SHA-256 privacy and `/delete_data` right-to-be-forgotten. *(Note: WhatsApp integration is a planned future channel that requires Meta Business API approval).*
-- **Digital Arrest Coercion Detector**: Multi-vector interception of fake police/CBI video interrogation extortion, grounded in Indian statutory law (**CrPC Section 41 / BNSS Section 35**).
-- **Community Reputation Database**: Anti-poisoning consensus database (&ge; 2 reporters, 24h rate limits, 30-day half-life decay, immune bank handles) capped to protect against frivolous flags.
-- **Scientifically Defensible**: Evaluated on frozen 306-sample benchmark (Gold v1) and expanded 243-sample natural human dataset (Gold v2, including 105 legitimate messages). **97.83%–98.98% scam recall** with strictly validated low false positive rates (0.00% on Gold v1 and 0.95% on Gold v2).
-- **Judge Try Bench (`/try`)**: 1-click live mobile QR code testing, interactive adversarial scenarios, and printed technical handout.
-- **Sub-35ms Latency on CPU**: Tested under 650 concurrent requests with Locust (p50 = 32.22ms, p99 = 70.88ms, 0 errors).
-- **Golden Hour 1930 Citizen Complaint Generator**: Pre-formats technical evidence and suspect VPAs for instant submission to `cybercrime.gov.in`.
+UPI fraud works because it hits people at a weak moment: a fake "account will be blocked" SMS, a "₹49,999 debited, call this number" alert, a "digital arrest" video call, or a collect request that says you must enter your PIN to *receive* money. Most people have no quick way to ask, **"Is this real?"**, and almost no tools do it in Telugu or Hindi.
+
+## 💡 The idea
+
+UPI Rakshak AI does not simply ask a chatbot whether a message is a scam. It runs the content through **independent detectors**, fuses their **evidence** into a risk score, and shows *why*: the exact phrases, link features and patterns that triggered the verdict, plus step-by-step guidance (including the 1930 helpline). A language model is **never** the judge of a verdict.
+
+| | |
+|---|---|
+| 🔍 **Evidence, not vibes** | Every verdict lists the signals behind it and which detector found them |
+| 🌐 **Built for India** | English, Hindi and Telugu across UI, explanations, voice input and assistant (including Hinglish and Romanised Telugu) |
+| 🔒 **Private by design** | Submitted links and QR targets are never opened; stored text is masked; users can delete their data |
+| 📏 **Honest metrics** | Our evaluation report publishes the failed checks too |
 
 ---
 
-## 🚀 Quickstart (Cross-Platform)
+## ✨ Features
 
-### Option A: Windows (PowerShell)
+| Area | What you get |
+|---|---|
+| **Threat Analyzer** | Check an **SMS/message**, **URL**, **UPI ID**, or **screenshot/QR**. Verdict (SAFE / SUSPICIOUS / HIGH RISK), 0–100 risk indicator, highlighted evidence, "why this score" breakdown, "how this scam works", and a "what to do now" checklist |
+| **Rakshak Assistant** | Chat guidance for questions such as *"How do I report to 1930?"*, *"I shared my OTP, what now?"*, *"What is digital arrest?"*. It tells questions apart from messages to scan, and never gives a scam verdict for a plain question |
+| **Digital Arrest Checker** | Paste a call transcript or voice-note transcript to detect police/CBI/customs impersonation and "stay on video call" coercion |
+| **Insights** | Public, aggregate-only dashboard: totals, categories, languages, channels, 7-day trend. Live data and simulated demo data are clearly separated |
+| **Admin Console** | Login-protected: system telemetry, moderation inbox, community entity registry, forensic audit log, and an exportable **1930 incident summary** built from masked data |
+| **Telegram bot** | Forward or paste a message to get the same checks in chat |
+| **Judge Bench (`/try`)** | Scan-to-test QR codes, one-click adversarial scenarios, and a printable technical handout |
+| **Accessibility** | Elder mode, read-aloud, voice input (where the browser supports it), light/dark themes, responsive layout, installable PWA |
+
+### 🧪 Try it in 60 seconds
+
+Open the [live demo](https://upi-rakshak-ai.onrender.com), pick a sample chip or paste one of these **fictional** messages:
+
+```text
+Your UPI account will be blocked. Click here to verify immediately and enter your OTP.
+```
+→ expected: **HIGH RISK** (urgency threat, verification link, OTP request)
+
+```text
+Alert: ₹49,999 debited from your account. If not done by you, call +91-XXXXXXXXXX immediately.
+```
+→ expected: **callback-phishing pattern** flagged (call-this-number instruction with no account or reference details)
+
+```text
+₹499 debited from A/c XX1234 at ABC Store. Ref 123456. If not you, call the number on your card.
+```
+→ expected: **not flagged as high risk** (genuine-style alert with account suffix and reference)
+
+Then switch the language to **తెలుగు** or **हिन्दी** and run the **Digital Arrest** samples.
+
+---
+
+## 🏛️ How it works
+
+```mermaid
+flowchart TD
+    U["User input<br/>message · URL · UPI ID · screenshot · QR · call transcript"] --> R{"Intent router<br/>(assistant)"}
+    R -->|"question / help / emergency"| KB["Reviewed knowledge base<br/>(retrieval)"]
+    R -->|"content to check"| D
+
+    subgraph D["Independent detectors"]
+        N["Multilingual NLP classifier<br/>+ negation-aware rules"]
+        C["Callback-phishing detector"]
+        L["Static URL scanner<br/>(no network calls)"]
+        Q["OCR + QR / UPI-URI parser"]
+        A["Digital-arrest extortion engine"]
+        V["Community reputation<br/>(capped weight)"]
+    end
+
+    D --> F["Risk fusion engine<br/>dominant-signal aggregation · hard-override rules · thresholds"]
+    F --> S["Safety report<br/>verdict · score · evidence · scam story · 1930 summary"]
+    KB --> AS["Assistant answer<br/>(en / hi / te)"]
+    S --> UI["React + Vite + Tailwind UI · Telegram bot"]
+    AS --> UI
+```
+
+**Design principles**
+
+1. **Detectors decide, the assistant explains.** No language model produces a scam verdict.
+2. **Nothing is opened.** URLs and QR payloads are analysed statically; a test fails if any network call is attempted during URL analysis.
+3. **"Safe" means "no strong scam signals found",** never a guarantee. Messages that ask you to act (call, click, pay, share) get a "verify through your bank's official app" nudge.
+4. **Precision matters as much as recall.** Genuine bank alerts, OTP messages with "do not share" warnings, and merchant receipts are used as hard negatives so real alerts are not flagged.
+
+<details>
+<summary><b>🔍 The 16 categories detected</b></summary>
+
+1. Fake bank KYC phishing
+2. Electricity disconnection scam
+3. Fake UPI refund / cashback
+4. UPI collect-request PIN fraud
+5. Lottery / advance-fee prize (KBC-style)
+6. Fake customer-care helpline
+7. Remote-access takeover (AnyDesk / TeamViewer / QuickSupport)
+8. OTP / UPI PIN theft
+9. Fake government schemes / subsidies
+10. Part-time task and crypto/investment scams
+11. Predatory loan-app blackmail
+12. Courier narcotics / digital arrest
+13. OLX / marketplace fake-QR scam
+14. Accidental-transfer reversal scam
+15. Fake debit alert with callback number (callback phishing)
+16. Legitimate notifications (genuine bank alerts and safety advisories)
+
+</details>
+
+---
+
+## 📊 Measured results (and how to read them)
+
+Metrics are generated by `backend.app.scripts.evaluate_models` and written to [`docs/EVALUATION_REPORT.md`](docs/EVALUATION_REPORT.md), which is the source of truth if numbers ever differ.
+
+| Check | Target | Gold v1 (306 msgs) | Gold v2 (243 msgs) | Status |
+|:---|:---:|:---:|:---:|:---:|
+| Scam recall (full fusion) | ≥ 95% | **98.98%** (194/196) | **97.83%** (135/138) | ✅ Passed |
+| False-positive rate on legitimate messages | ≤ 3% | **0.00%** (0/110) | **0.95%** (1/105) | ✅ Passed |
+| 15-class NLP macro-F1 | ≥ 0.85 | **0.8810** | **0.8233** | ✅ v1 · ❌ v2 |
+| Calibration error (ECE) | < 0.10 | **0.0601** | **0.1089** | ✅ v1 · ❌ v2 |
+| URL scanner phishing recall | ≥ 80% | **82.00%** (real OpenPhish hold-out) | **98.60%** (synthetic adversarial set) | ✅ Passed |
+| URL scanner benign FPR | ≤ 3% | **1.60%** (Tranco-based benign set) | **1.12%** (domain-disjoint benign) | ✅ Passed |
+
+**Please read these numbers carefully:**
+
+- ❌ **We publish what failed.** On the more natural Gold v2 set, macro-F1 and calibration did not meet their targets. We report that instead of changing the target.
+- Both gold sets were available while we built and tuned the system, so treat them as **development benchmarks, not independent proof**. A fully blind evaluation protocol is provided ([`docs/GOLD_V3.md`](docs/GOLD_V3.md), `make evaluate-blind`) and is the number that should be trusted once real, outside-the-team messages are collected.
+- A large share of training data is **synthetic** (generated templates plus public datasets), so real-world accuracy will differ.
+- The 98.60% adversarial URL figure comes from a generated set and is easier than real phishing; the real-feed hold-out figure (82%) is the more realistic one.
+- Small test sets mean wide confidence intervals; see the report for bootstrap intervals.
+
+### ⚡ Performance
+
+| Measure | Result |
+|:---|:---|
+| Median text inference (single thread, CPU only) | **~32 ms** on an AMD Ryzen AI 5 340 laptop |
+| With SQLite audit logging | **~100 ms** |
+| Load test (Locust, 650 requests) | p50 **32.22 ms**, p99 **70.88 ms**, **0 errors** |
+
+The core detection engine runs **without internet access or external API keys**. The optional AI-written explanations and the Telegram bot need a network connection. Full method and hardware in [`docs/LOAD_TEST.md`](docs/LOAD_TEST.md).
+
+---
+
+## 🔒 Privacy and safety by design
+
+- **Never opens links or QR targets.** Analysis is static.
+- **Masks sensitive data** (phone numbers, card/account numbers, OTP-like digits) before anything is stored; an "analyse without saving" path is available.
+- **Telegram privacy:** sender IDs are salted and hashed; a `/delete_data` command removes a user's records.
+- **Community reputation database** resists abuse: minimum distinct reporters, per-reporter rate limits, time decay, a cap on its weight in the final score, and an appeals path for wrongly flagged entities.
+- **Admin access is enforced on the backend** (JWT, role check, login rate limiting, audit log). Public pages show aggregates only.
+- **Credential hygiene is tested**, and a packaging test checks that submission zips contain no secrets, databases or virtual environments.
+- **The assistant is grounded:** answers come from a human-reviewed knowledge base ([`docs/KB_REVIEW.md`](docs/KB_REVIEW.md)); phone numbers and links not in that base are stripped; it declines requests to *create* scams.
+- Threat model: [`docs/SECURITY.md`](docs/SECURITY.md).
+
+> ⚖️ **Not legal advice.** Statutory references (for example CrPC 41 / BNSS 35 in the digital-arrest guidance) are informational. Verify with official sources.
+
+---
+
+## 🚀 Quickstart
+
+**Prerequisites:** Python 3.11+, Node.js 20+ (Docker optional).
+
+<details open>
+<summary><b>Windows (PowerShell)</b></summary>
+
 ```powershell
-# 1. Setup virtual environment and dependencies
+# 1. Backend setup
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 pip install -r backend/requirements.txt
 
-# 2. Start FastAPI Backend (Port 8000)
+# 2. Start the API (port 8000)
 .\.venv\Scripts\uvicorn.exe backend.app.main:app --host 127.0.0.1 --port 8000
 
-# 3. Start React+Vite Frontend (Port 5173, in a second terminal)
+# 3. In a second terminal: start the frontend (port 5173)
 cd frontend
 npm install
 npm run dev
 ```
+</details>
 
-### Option B: Linux / macOS (Bash / Zsh)
+<details>
+<summary><b>Linux / macOS</b></summary>
+
 ```bash
-# 1. Setup virtual environment and dependencies
-python3 -m venv .venv
-source .venv/bin/activate
+python3 -m venv .venv && source .venv/bin/activate
 pip install -r backend/requirements.txt
-
-# 2. Start FastAPI Backend (Port 8000)
 uvicorn backend.app.main:app --host 127.0.0.1 --port 8000
 
-# 3. Start React+Vite Frontend (Port 5173, in a second terminal)
-cd frontend
-npm install
-npm run dev
+# second terminal
+cd frontend && npm install && npm run dev
 ```
+</details>
 
-### Option C: Docker (Single Command)
+<details>
+<summary><b>Docker</b></summary>
+
 ```bash
 docker compose up --build
 ```
+</details>
 
-### Option D: Render Cloud Deployment (Full-Stack Single Web Service)
-UPI Rakshak AI is pre-configured for automated deployment on [Render](https://render.com) using the root `build.sh` and `Procfile`:
-1. **Connect Repository**: Link your GitHub repository (`https://github.com/himesh-45/UPI_RAKSHAK-AI.git`).
-2. **Build Command**: `bash build.sh` (compiles React Vite frontend to `frontend/dist` and installs Python dependencies).
-3. **Start Command**: `uvicorn backend.app.main:app --host 0.0.0.0 --port $PORT`
-4. **Environment Variables**:
-   - `PYTHON_VERSION`: `3.11.9`
-   - `NODE_VERSION`: `20.18.0`
-   - `ADMIN_PASSWORD`: `<your-desired-password>` (or let the server generate a secure 16-character token logged at startup).
-   - `ADMIN_EMAIL`: `admin@upirakshak.ai`
+<details>
+<summary><b>Deploy on Render (single web service)</b></summary>
 
-- **Web UI**: [http://localhost:5173](http://localhost:5173) (Local) or `https://<your-service>.onrender.com` (Render)
-- **Interactive API Docs**: [http://localhost:8000/docs](http://localhost:8000/docs)
-- **Admin Authentication**: Email `admin@upirakshak.ai`. Admin password is automatically generated and stored in `backend/data/.admin_secret` (or configured via `ADMIN_PASSWORD` in `.env` / Render environment).
+1. Connect your GitHub repository to [Render](https://render.com).
+2. **Build command:** `bash build.sh` (builds the React app and installs Python dependencies)
+3. **Start command:** `uvicorn backend.app.main:app --host 0.0.0.0 --port $PORT`
+4. **Environment variables:** `PYTHON_VERSION=3.11.9`, `NODE_VERSION=20.18.0`, and `ADMIN_PASSWORD` (set your own; never commit it).
 
----
+Details: [`docs/DEPLOY.md`](docs/DEPLOY.md).
+</details>
 
-## 🏛️ Multi-Layer Evidence-Based Architecture
+**URLs:** web app `http://localhost:5173` · API docs `http://localhost:8000/docs`
 
-```
-                                  [ User Input ]
-                   (Text / Suspicious URL / Screenshot / QR Code)
-                                        │
-             ┌──────────────────────────┼──────────────────────────┐
-             ▼                          ▼                          ▼
-    [ NLP Classifier & ]       [ Static URL Scanner ]    [ Screenshot & QR Module ]
-    [ Rule Safety Layer]       (Edit-dist, shorteners,   (RapidOCR / Tesseract,
-    (16 categories, TF-IDF,     Punycode, 88 bank stems,  UPI URI pa/pn/am/tn parser,
-     SOV syntax, negations,     zero network calls)       payee mismatch detection)
-     callback scam detector)
-             │                          │                          │
-             └──────────────────────────┼──────────────────────────┘
-                                        ▼
-                           [ Risk Fusion Engine ]
-                (Dominant-signal aggregation, score 0-100,
-                 hard-override safety rules, verdict thresholding)
-                                        │
-             ┌──────────────────────────┴──────────────────────────┐
-             ▼                                                     ▼
-     [ Safety Report API ]                               [ Multilingual Assistant ]
-   (Verdict, Score 0-100,                              (Chat, Voice Web Speech API,
-    Token Highlights, Waterfall,                        English / Hindi / Telugu,
-    Scam Story, 1930 Narrative)                         Grounded RAG Knowledge Base)
-             │                                                     │
-             └──────────────────────────┬──────────────────────────┘
-                                        ▼
-                           [ Responsive Frontend UI ]
-                  (React + Vite + Tailwind CSS + Recharts)
-                  (Judge Mode, Honesty Panel, Elder Mode, Admin Stats)
-```
+**Admin sign-in:** set `ADMIN_PASSWORD` in `.env` (see `.env.example`). If you leave it unset, a random password is generated on first start. Never share or screenshot it.
+
+**Optional settings** (all via `.env`, none required for the core engine): `TELEGRAM_BOT_TOKEN` for the bot ([`docs/TELEGRAM_SETUP.md`](docs/TELEGRAM_SETUP.md)); assistant backend/API key for AI-written answers (the offline template mode works without one).
 
 ---
 
-## 🧪 Comprehensive Automated Testing (234 Tests)
+## 🧪 Testing
 
-The repository ships with an exhaustive test suite covering all security assertions, regression gates, intent classifications, and mutation tests:
+**234 automated tests** cover detectors, API and auth, assistant intent routing, groundedness and prompt-injection defence, mutation/obfuscation robustness, privacy masking, packaging hygiene and end-to-end UI flows.
 
 ```bash
-.\.venv\Scripts\python.exe -m pytest backend/tests -v
+python -m pytest backend/tests -v
 ```
 
-| Test Suite File | Coverage Scope | Status |
-| :--- | :--- | :---: |
-| `backend/tests/test_callback_scams.py` | Fake debit alert callback phishing, TOAD vectors, toll-free vs mobile checks, Hindi/Telugu | **PASSED (17/17)** |
-| `backend/tests/test_mutations.py` | Prompt injection resistance, leetspeak, homoglyphs, zero-network audit | **PASSED (42/42)** |
-| `backend/tests/test_extended_scenarios.py` | Full taxonomy classes, obfuscation normalizers, RAG retrieval | **PASSED (37/37)** |
-| `backend/tests/test_api.py` | REST API endpoints, JWT auth, analysis history, rate limits | **PASSED (12/12)** |
-| `backend/tests/test_assistant_intent.py` | 5-way hybrid intent router, typos, emergency steps, RAG help, zero false verdicts | **PASSED (11/11)** |
-| `backend/tests/test_assistant_generator.py` | PII redaction, prompt injection defense, groundedness verification, fallback circuits | **PASSED (11/11)** |
-| `backend/tests/test_assistant_tools.py` | Assistant tool calling, safety analyzer tool, safe/scam dispatch | **PASSED (9/9)** |
-| `backend/tests/test_url_scanner.py` | 88 bank stems, typosquatting, shorteners, punycode, TLDs | **PASSED (10/10)** |
-| `backend/tests/test_rag.py` | TF-IDF knowledge base cosine retrieval (93 entries, statutory metadata) | **PASSED (9/9)** |
-| `backend/tests/test_channels.py` | Telegram webhooks, rate limits, sender hashing, right-to-be-forgotten | **PASSED (8/8)** |
-| `backend/tests/test_nlp_rules.py` | Multilingual NLP, SOV syntax, collect tricks, advisory negations | **PASSED (8/8)** |
-| `backend/tests/test_community_reputation.py` | Consensus gating, 24h limits, decay, immune whitelists, disputes | **PASSED (7/7)** |
-| `backend/tests/test_fusion.py` | Evidence fusion, score waterfall, elder mode, 1930 summaries | **PASSED (6/6)** |
-| `backend/tests/test_admin.py` | Admin authentication, secret persistence, audit logs, 1930 export | **PASSED (6/6)** |
-| `backend/tests/test_phase2_features.py` | Pre-payment VPA safe-checks, batch text analysis, feedback loop | **PASSED (6/6)** |
-| `backend/tests/test_qr_ocr.py` | QR payment URI decoding, RapidOCR fallback pipeline | **PASSED (5/5)** |
-| `backend/tests/test_digital_arrest.py` | Law enforcement impersonation, virtual confinement, CrPC truth | **PASSED (4/4)** |
-| `backend/tests/test_assistant.py` | Trilingual safety chat assistant, vernacular queries | **PASSED (4/4)** |
-| `backend/tests/test_masking.py` | PII regex redaction (Indian phones, card numbers, OTPs) | **PASSED (4/4)** |
-| `backend/tests/test_evaluation_report_consistency.py` | Programmatic gate validation (asserts metrics meet targets) | **PASSED (4/4)** |
-| `backend/tests/test_banned_phrases.py` | Strict prohibition against unsubstantiated marketing absolutes | **PASSED (2/2)** |
-| `backend/tests/test_credential_hygiene.py` | Prevention of hardcoded secrets, API tokens, or private keys | **PASSED (2/2)** |
-| `backend/tests/test_demo_docs_consistency.py` | Asserts pitch docs agree with actual measured evaluation metrics | **PASSED (2/2)** |
-| `backend/tests/test_packaging.py` | Submission zip verification (no secrets, no .db, no venvs) | **PASSED (2/2)** |
-| `backend/tests/test_playwright_theme_contrast.py` | WCAG AA contrast compliance and light/dark theme toggling | **PASSED (1/1)** |
-| `backend/tests/test_playwright_responsive.py` | Cross-device viewport layout stability without horizontal overflow | **PASSED (1/1)** |
-| `backend/tests/test_playwright_e2e.py` | End-to-end full demo flow execution | **PASSED (1/1)** |
-| `backend/tests/test_health.py` | FastAPI health check & engine readiness check | **PASSED (1/1)** |
-| `backend/tests/test_url_model_domain_disjoint.py` | Strict disjoint domain split validation for URL model | **PASSED (1/1)** |
-| `backend/tests/test_submission_packaging.py` | Submission package integrity checks | **PASSED (1/1)** |
-| **Total Automated Tests** | **Full Unit, Integration, Mutation, Security, Intent, and Packaging Coverage** | **234 / 234 PASSED** |
+Highlights:
+
+| Area | What is checked |
+|---|---|
+| **Detection** | Callback-phishing, URL typosquats and shorteners, QR/UPI URI parsing, digital arrest, 16-category taxonomy |
+| **Robustness** | Leetspeak, homoglyphs, spaced-out "O T P", prompt-injection text inside scam messages |
+| **Assistant** | Intent routing, no verdicts for plain questions, PII redaction, groundedness checks, fallback behaviour |
+| **Honesty gates** | Evaluation report statuses must match their numbers; banned absolute claims in docs/UI; demo docs must agree with measured metrics |
+| **Security & privacy** | No hardcoded credentials, masking, role-based admin access, packaging contains no secrets |
+| **UI** | Theme contrast (WCAG AA), responsive layout without horizontal overflow, end-to-end demo flow |
 
 ---
 
-## 📊 Measured Quality Gates (Programmatic Benchmark)
+## ⚠️ Honest limitations
 
-All metrics are evaluated programmatically via `backend.app.scripts.evaluate_models`:
+We would rather you hear these from us:
 
-| Evaluation Gate | Target Benchmark | Measured (Frozen Gold v1) | Measured (Natural Gold v2) | Gate Status |
-| :--- | :---: | :---: | :---: | :---: |
-| **Risk Fusion Scam Recall** | >= 95.0% | **98.98%** (194/196) | **97.83%** (135/138) | **PASSED** |
-| **Legitimate False Positive Rate (FPR)** | <= 3.0% | **0.00%** (0/110) | **0.95%** (1/105) | **PASSED** |
-| **15-Class NLP Macro-F1** | >= 0.8500 | **0.8810** | **0.8233** | **v1 PASSED / v2 FAILED** (Honest) |
-| **Expected Calibration Error (ECE)** | < 0.1000 | **0.0601** | **0.1089** | **v1 PASSED / v2 FAILED** (Honest) |
-| **Static URL Scanner Phishing Recall** | >= 80.0% | **82.00%** (Real OpenPhish) | **98.60%** (Adversarial) | **PASSED** |
-| **Static URL Scanner Benign FPR** | <= 3.0% | **1.60%** (Tranco Top-1000) | **1.12%** (Disjoint Benign) | **PASSED** |
-| **Single-Thread CPU Latency (p50)** | < 40 ms | **32.22 ms** | **32.22 ms** | **PASSED** |
-
----
-
-## 🔍 The 16 Detected Fraud & Communication Categories
-
-1. **Fake Bank KYC Phishing**: Coercive account suspension ultimatums.
-2. **Electricity Disconnection Scam**: Power cut threats directing contact to personal mobile numbers.
-3. **Fake UPI Refund & Cashback**: Bogus reward lures masking debit collect requests.
-4. **UPI Collect Request Fraud**: Deceptions claiming receiving money requires entering a secret PIN.
-5. **Lottery & Advance-Fee Prize**: Fake KBC/Lucky Draw wins requiring processing fees.
-6. **Fake Customer Support**: Unauthorized mobile numbers posing as bank helpdesks.
-7. **Remote Device Takeover**: Instructions to install AnyDesk/TeamViewer/QuickSupport.
-8. **Credential & OTP/PIN Theft**: Direct attempts to steal two-factor authentication codes.
-9. **Fake Government Subsidy Schemes**: Phony PM Yojana portals harvesting Aadhaar/PAN.
-10. **Part-Time Task & Investment Fraud**: Telegram VIP rating jobs and fake crypto multipliers.
-11. **Predatory Loan App Extortion**: Blackmail threatening to circulate morphed photos to contacts.
-12. **Courier Narcotics & Digital Arrest**: Police impersonation via Skype alleging contraband parcels.
-13. **OLX / Marketplace QR Scam**: Fake army buyers claiming to "scan QR to receive advance payment".
-14. **Accidental Transfer Reversal Scam**: Claims of wrongly sent money demanding refund to different VPA.
-15. **Fake Debit Alert Callback Phishing**: Telephone-Oriented Attack Delivery (TOAD) urging calls to fake support.
-16. **Legitimate Notifications**: Genuine bank transaction debits and verified safety advisories (*"NEVER share OTP"*).
+- **Not a guarantee of safety.** "No strong scam signals found" can be wrong, and new scams appear constantly.
+- **Two quality checks fail on the natural Gold v2 set** (15-class macro-F1 and calibration error). Confidence scores are risk indicators, not calibrated probabilities.
+- **Largely synthetic training data** and small gold sets; real-world performance will differ until blind testing is done.
+- **Telugu and Hindi quality needs native-speaker review** ([`docs/QA_LANGUAGE.md`](docs/QA_LANGUAGE.md)); OCR on poor-quality screenshots can fail.
+- **No live call interception.** Android does not allow normal apps to record calls; the digital-arrest checker works on pasted transcripts.
+- **Telegram only.** There is no WhatsApp bot (users can paste messages copied from any app).
+- **The community database can be gamed** despite safeguards; it is a prototype.
+- **This is not an official government or bank tool.** For real incidents call **1930** or report at [cybercrime.gov.in](https://cybercrime.gov.in), and contact your bank.
+- **User-study results are pending.** The study harness is built ([`docs/USER_STUDY_REPORT.md`](docs/USER_STUDY_REPORT.md)); we do not claim outcomes we have not measured.
 
 ---
 
-## 📚 Essential Documentation
+## 🗺️ Roadmap
 
-- [Programmatic Evaluation Report](docs/EVALUATION_REPORT.md)
-- [Human-Reviewed Knowledge Base Audit](docs/KB_REVIEW.md)
-- [Load Testing & Latency Benchmark Report](docs/LOAD_TEST.md)
-- [Production Deployment & Operations Guide](docs/DEPLOY.md)
-- [Pre-Flight Live Demo Checklist](docs/DEMO_CHECKLIST.md)
-- [3-Minute Video Demo & Screen Recording Script](docs/DEMO_VIDEO.md)
-- [Hackathon Pitch Deck Outline & 90s Elevator Pitch](docs/PITCH_OUTLINE.md)
-- [29 Tough Judge Questions & Technical Answers](docs/JUDGE_QA.md)
-- [Telegram Bot Setup & Webhook Guide](docs/TELEGRAM_SETUP.md)
-- [Gold v3 Blind Evaluation Protocol](docs/GOLD_V3.md)
-- [User Study Statistical Report](docs/USER_STUDY_REPORT.md)
-- [Architectural Decisions Log (DECISIONS.md)](DECISIONS.md)
-- [Multilingual Linguistic Quality Audit](docs/QA_LANGUAGE.md)
-- [STRIDE Threat Model & Security Posture](docs/SECURITY.md)
-- [Real Public Data Sources & Licensing](docs/DATA_SOURCES.md)
+- [ ] Blind **Gold v3** evaluation on real, consented, outside-the-team messages
+- [ ] Verified native-speaker review of Telugu and Hindi explanations
+- [ ] Voice-note / recorded-call analysis (on-device speech-to-text on user-provided recordings)
+- [ ] Android prototype with SMS/notification listener (sideloaded, privacy-first, on-device where possible)
+- [ ] WhatsApp channel (requires Meta Business API approval)
+- [ ] Browser extension and bank / UPI-app SDK integration
+- [ ] Retraining pipeline from reviewed user feedback
+
+---
+
+## 📚 Documentation
+
+| Topic | Link |
+|---|---|
+| Evaluation report (source of truth for metrics) | [`docs/EVALUATION_REPORT.md`](docs/EVALUATION_REPORT.md) |
+| Blind evaluation protocol | [`docs/GOLD_V3.md`](docs/GOLD_V3.md) |
+| Knowledge-base review checklist | [`docs/KB_REVIEW.md`](docs/KB_REVIEW.md) |
+| Load test | [`docs/LOAD_TEST.md`](docs/LOAD_TEST.md) |
+| Security and threat model | [`docs/SECURITY.md`](docs/SECURITY.md) |
+| Data sources and licences | [`docs/DATA_SOURCES.md`](docs/DATA_SOURCES.md) |
+| Language quality audit | [`docs/QA_LANGUAGE.md`](docs/QA_LANGUAGE.md) |
+| User study | [`docs/USER_STUDY_REPORT.md`](docs/USER_STUDY_REPORT.md) |
+| Deployment guide | [`docs/DEPLOY.md`](docs/DEPLOY.md) |
+| Telegram setup | [`docs/TELEGRAM_SETUP.md`](docs/TELEGRAM_SETUP.md) |
+| Demo checklist · video script · pitch outline | [`docs/DEMO_CHECKLIST.md`](docs/DEMO_CHECKLIST.md) · [`docs/DEMO_VIDEO.md`](docs/DEMO_VIDEO.md) · [`docs/PITCH_OUTLINE.md`](docs/PITCH_OUTLINE.md) |
+| Judge Q&A | [`docs/JUDGE_QA.md`](docs/JUDGE_QA.md) |
+| Architecture decisions | [`DECISIONS.md`](DECISIONS.md) |
+
+---
+
+## 🧰 Tech stack
+
+**Backend:** Python 3.11, FastAPI, SQLite · **ML/NLP:** scikit-learn (TF-IDF n-grams + calibrated linear models), rule engine, TF-IDF retrieval · **Vision:** OpenCV (QR), RapidOCR / Tesseract · **Frontend:** React, Vite, Tailwind CSS, Recharts · **Bots:** Telegram Bot API · **Testing:** pytest, Playwright, Locust · **Deploy:** Docker, Render
+
+---
+
+## 🤖 How this was built
+
+- **AI tools used for development:**  claude,gemini,chatgpt
+- **What the team did:** [IDEA AND SCOPE · SCAM CATEGORIES · DATA COLLECTION · REVIEWING AND CORRECTING AI OUTPUT · EVALUATION · TESTING · DEMO]
+- **How we checked the work:** automated tests, programmatic evaluation reports, honesty-gate tests, manual review of Telugu/Hindi text, and a planned blind evaluation.
+
+## 👥 Team
+
+NEURO SHIELD · Repository: https://github.com/himesh-45/UPI_RAKSHAK-AI
+
+
+
+<div align="center">
+
+**If you receive a suspicious message: don't click, don't share your OTP or PIN, and call 1930.**
+
+UPI Rakshak AI is a prototype built for a hackathon. It is an automated risk-check tool, not an official service, and can make mistakes.
+
+</div>
