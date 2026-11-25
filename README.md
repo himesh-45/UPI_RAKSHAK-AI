@@ -266,8 +266,6 @@ Highlights:
 ## ⚠️ Honest limitations
 
 We would rather you hear these from us:
-
-- **Not a guarantee of safety.** "No strong scam signals found" can be wrong, and new scams appear constantly.
 - **Two quality checks fail on the natural Gold v2 set** (15-class macro-F1 and calibration error). Confidence scores are risk indicators, not calibrated probabilities.
 - **Largely synthetic training data** and small gold sets; real-world performance will differ until blind testing is done.
 - **Telugu and Hindi quality needs native-speaker review** ([`docs/QA_LANGUAGE.md`](docs/QA_LANGUAGE.md)); OCR on poor-quality screenshots can fail.
